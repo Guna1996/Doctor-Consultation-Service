@@ -13,7 +13,10 @@ package com.ideas2it.doctorConsultancyService.dto;
 import com.ideas2it.doctorConsultancyService.common.Constants;
 import com.ideas2it.doctorConsultancyService.model.Appointment;
 import com.ideas2it.doctorConsultancyService.model.Vitals;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
@@ -34,6 +37,9 @@ import java.util.List;
  * @since   2022-10-10
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatientDto {
 
     private int id;
@@ -41,7 +47,7 @@ public class PatientDto {
     @Pattern(regexp = Constants.NAME_REGEX, message = "Please Enter Valid Name")
     private String name;
 
-    @Pattern(regexp = Constants.DATE_OF_BORTH_REGEX, message = "Please Enter Valid Date Of Birth")
+    @Pattern(regexp = Constants.DATE_REGEX, message = "Please Enter Valid Date Of Birth")
     private LocalDate dateOfBirth;
 
     @Pattern(regexp = Constants.GENDER_REGEX, message = "Please Enter Valid Gender")
