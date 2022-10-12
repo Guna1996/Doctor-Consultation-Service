@@ -10,7 +10,10 @@
  */
 package com.ideas2it.doctorConsultancyService.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,6 +44,9 @@ import java.util.List;
  */
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name="patient")
 public class Patient {
 
@@ -55,7 +61,7 @@ public class Patient {
     @Column(name="date_of_birth")
     private LocalDate dateOfBirth;
 
-    @Column(name="gender")
+    @Column(name = "gender")
     private String gender;
 
     @Column(name="mobile_number")
@@ -63,6 +69,9 @@ public class Patient {
 
     @Column(name="email")
     private String email;
+
+    @Column(name ="status")
+    private String status ="active";
 
     @OneToMany(mappedBy = "patient")
     private List<Feedback> feedback;
