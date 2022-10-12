@@ -25,15 +25,15 @@ import java.util.List;
  * vaidates clinic details
  * </p>
  *
- * @author  Gunaseelan K
- *
+ * @author Gunaseelan K
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Data
 @Builder
 public class ClinicDto {
+
+    private int id;
 
     @NotNull(message = "Name shouldn't be null")
     private String name;
@@ -57,7 +57,6 @@ public class ClinicDto {
 
     @Min(value = 1, message = "pin code cannot be negative or zero")
     @NotNull(message = "Pin code shouldn't be null")
-
     @Pattern(regexp = Constants.PINCODE_REGEX, message = "Please, Enter valid pin code")
     private int pinCode;
 

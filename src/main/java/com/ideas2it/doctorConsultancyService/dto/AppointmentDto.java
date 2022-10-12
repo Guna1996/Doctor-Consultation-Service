@@ -21,11 +21,9 @@ import java.time.LocalDateTime;
  * validates appointment details
  * </p>
  *
- * @author  Gunaseelan K
- *
+ * @author Gunaseelan K
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Data
 @Builder
@@ -33,9 +31,7 @@ public class AppointmentDto {
 
     private int id;
 
-    private String timeSlot;
-
-    private LocalDateTime createdAt;
+    private LocalDateTime scheduledOn;
 
     private PatientDto patientDto;
 
