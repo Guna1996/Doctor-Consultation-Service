@@ -47,15 +47,13 @@ public class DoctorClinic {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="doctor_id")
-    private Doctor doctorId;
+    private Doctor doctor;
 
     @ManyToOne(cascade =CascadeType.ALL)
     @JoinColumn(name="clinic_id")
-    private Clinic clinicId;
+    private Clinic clinic;
 
     @ManyToOne(cascade =CascadeType.ALL)
     @JoinColumn(name="timeslot_id")
-    private Timeslot timeslotId;
-
-
+    private Timeslot timeslot;
 }
