@@ -8,11 +8,13 @@
 package com.ideas2it.doctorConsultancyService.model;
 
 import jdk.jfr.Timestamp;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +24,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 
 /**
@@ -40,6 +43,7 @@ import javax.persistence.Table;
 @Entity
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "appointment")
 public class Appointment {
 
@@ -51,10 +55,9 @@ public class Appointment {
     @Column(name = "time_slot")
     private String timeSlot;
 
-    @CreationTimestamp
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreatedDate
     @Column(name = "created_date")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

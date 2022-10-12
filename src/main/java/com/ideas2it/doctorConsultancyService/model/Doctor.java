@@ -61,13 +61,13 @@ public class Doctor {
     @Column(name = "city")
     private String city;
 
-    @OneToMany(mappedBy = "feedback")
-    private List<Feedback> feedbacks;
+    @OneToMany(mappedBy = "doctor")
+    private List<FeedBack> feedbacks;
 
-    @OneToMany(mappedBy = "appointment")
+    @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "vitals")
+    @OneToMany(mappedBy = "doctor")
     private List<Vitals> vitals;
 
 }

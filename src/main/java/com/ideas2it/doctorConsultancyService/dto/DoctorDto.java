@@ -7,7 +7,10 @@
  */
 package com.ideas2it.doctorConsultancyService.dto;
 
+import com.ideas2it.doctorConsultancyService.model.Appointment;
+import com.ideas2it.doctorConsultancyService.model.FeedBack;
 import com.ideas2it.doctorConsultancyService.model.Specialization;
+import com.ideas2it.doctorConsultancyService.model.Vitals;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -61,7 +64,7 @@ public class DoctorDto {
     @NotNull(message = "City year is mandatory")
     private String city;
 
-    private List<Feedback> feedbacks;
+    private List<FeedBack> feedbacks;
 
     private List<Appointment> appointments;
 

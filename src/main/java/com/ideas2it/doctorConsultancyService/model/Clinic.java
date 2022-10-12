@@ -8,6 +8,7 @@
 package com.ideas2it.doctorConsultancyService.model;
 
 import com.ideas2it.doctorConsultancyService.common.Constants;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ import java.util.List;
 @Entity
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "clinic")
 public class Clinic {
 
@@ -65,16 +67,6 @@ public class Clinic {
     @Column(name = "pin_code")
     private int pinCode;
 
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "type only 10 numbers")
-    @NotNull(message = "mobile number shouldn't be null")
+    @Column(name = "contact_number")
     private String contactNumber;
-
-    @OneToMany(mappedBy = "clinic")
-    private List<DoctorClinic> doctorsInClinic;
-
-    @OneToMany(mappedBy = "clinic")
-    private List<Appointment> appointments;
-
-    @OneToMany(mappedBy = "clinic")
-    private List<Vitals> vitals;
 }
