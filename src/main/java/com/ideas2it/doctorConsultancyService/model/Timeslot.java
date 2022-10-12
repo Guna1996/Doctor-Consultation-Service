@@ -13,11 +13,25 @@ package com.ideas2it.doctorConsultancyService.model;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalTime;
+
+/**
+ * <p>
+ * This Timeslot class internally contains getter and setter
+ * methods because of using lombok dependency
+ * </p>
+ *
+ * @author  Bala Ashwanth.N
+ *
+ * @version 1
+ *
+ * @since   2022-10-10
+ */
 
 @Data
 @Entity
@@ -27,7 +41,9 @@ public class Timeslot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
     private LocalTime timeslot;
 
+    @Column
     private int status;
 }
