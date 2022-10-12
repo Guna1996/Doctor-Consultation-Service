@@ -7,7 +7,11 @@
  */
 package com.ideas2it.doctorConsultancyService.model;
 
+import com.ideas2it.doctorConsultancyService.common.Constants;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -28,6 +32,9 @@ import java.util.List;
  */
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "doctors")
 public class Doctor {
 
@@ -61,6 +68,8 @@ public class Doctor {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "status")
+    private String status = Constants.ACTIVE;
 
     @OneToMany(mappedBy = "doctor")
     private List<Feedback> feedbacks;
