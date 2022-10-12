@@ -27,7 +27,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {
+    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) throws NotFoundException{
         if (feedbackRepo.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
             return modelMapper.map(feedbackRepo.save(modelMapper.map(feedbackDto, Feedback.class)),FeedbackDto.class);
         }
@@ -59,7 +59,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public Boolean deleteFeedback(int id) {
+    public Boolean deleteFeedback(int id) throws NotFoundException {
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(new NotFoundException("feedback not found"));
         feedback.setStatus(Constants.INACTIVE);
