@@ -45,5 +45,7 @@ public class VitalsDto {
 
     private PatientDto patient;
 
+    private String status;
+
     private DoctorDto doctor;
 }
