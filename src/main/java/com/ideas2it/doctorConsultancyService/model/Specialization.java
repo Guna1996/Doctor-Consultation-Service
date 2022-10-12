@@ -8,7 +8,10 @@
 package com.ideas2it.doctorConsultancyService.model;
 
 import com.ideas2it.doctorConsultancyService.common.Constants;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -29,6 +32,9 @@ import java.util.List;
  */
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "specialization")
 public class Specialization {
 
