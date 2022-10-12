@@ -48,12 +48,12 @@ public class Doctor {
     @Column(name = "qualification")
     private String qualification;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "specialization_id", nullable = false)
-    private Specialization specialization;
+    private List<Specialization> specialization;
 
     @Column(name = "registration_year")
-    private int registrationYear;
+    private LocalDate registrationYear;
 
     @Column(name = "mobile_number")
     private long mobileNumber;
@@ -61,13 +61,17 @@ public class Doctor {
     @Column(name = "city")
     private String city;
 
+
     @OneToMany(mappedBy = "doctor")
-    private List<FeedBack> feedbacks;
+    private List<Feedback> feedbacks;
 
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
 
     @OneToMany(mappedBy = "doctor")
     private List<Vitals> vitals;
+
+    @OneToMany(mappedBy = "timeslot")
+    private List<Timeslot> timeslots;
 
 }
