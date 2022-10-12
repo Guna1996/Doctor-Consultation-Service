@@ -56,6 +56,4 @@ public class DoctorClinic {
     @ManyToOne(cascade =CascadeType.ALL)
     @JoinColumn(name="timeslot_id")
     private Timeslot timeslot;
-
-
 }

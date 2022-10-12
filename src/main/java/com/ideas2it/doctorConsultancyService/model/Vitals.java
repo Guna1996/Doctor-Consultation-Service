@@ -19,8 +19,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+/**
+ * <p>
+ * This Vitals class internally contains getter and setter
+ * methods because of using lombok dependency
+ * </p>
+ *
+ * @author  Bala Ashwanth.N
+ *
+ * @version 1
+ *
+ * @since   2022-10-10
+ */
 
 @Data
 @Entity
@@ -30,24 +42,28 @@ public class Vitals {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
     private float height;
 
+    @Column
     private float weight;
 
+    @Column
     private float pulse;
-
+    @Column
     private float diastolic;
 
+    @Column
     private float systolic;
 
     @Column(name = "sugar_level")
     private float sugarLevel;
 
-    @Column(name = "patient_id")
     @ManyToOne
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
-    @JoinColumn(name = "doctor_id")
     @ManyToOne
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 }
