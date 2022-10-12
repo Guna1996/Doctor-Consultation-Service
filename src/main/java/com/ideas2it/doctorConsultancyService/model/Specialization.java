@@ -7,9 +7,11 @@
  */
 package com.ideas2it.doctorConsultancyService.model;
 
+import com.ideas2it.doctorConsultancyService.common.Constants;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -36,11 +38,10 @@ public class Specialization {
     private int id;
 
     @Column(name = "name")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (Firstname Secondname) format")
     private String name;
 
     @Column(name = "status")
     private String status;
 
-    @OneToMany(mappedBy = "specialization")
-    private List<Doctor> doctors;
 }
