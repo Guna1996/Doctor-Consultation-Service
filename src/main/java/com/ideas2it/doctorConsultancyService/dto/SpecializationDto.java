@@ -8,7 +8,10 @@
 package com.ideas2it.doctorConsultancyService.dto;
 
 import com.ideas2it.doctorConsultancyService.model.Doctor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,6 +31,9 @@ import java.util.List;
  * @since   2022-10-10
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SpecializationDto {
 
     private int id;
@@ -39,5 +45,4 @@ public class SpecializationDto {
     @NotNull
     private String status;
 
-    private List<Doctor> doctors;
 }
