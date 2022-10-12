@@ -9,6 +9,7 @@ package com.ideas2it.doctorConsultancyService.dto;
 
 import com.ideas2it.doctorConsultancyService.common.Constants;
 import com.ideas2it.doctorConsultancyService.model.*;
+
 import lombok.Data;
 
 import javax.validation.constraints.*;
@@ -65,7 +66,7 @@ public class DoctorDto {
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Enter valid City name")
     private String city;
 
-    private List<FeedBack> feedbacks;
+    private List<Feedback> feedbacks;
 
     private List<Appointment> appointments;
 

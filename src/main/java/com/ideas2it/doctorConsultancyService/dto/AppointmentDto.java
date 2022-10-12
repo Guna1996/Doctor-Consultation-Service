@@ -8,6 +8,8 @@
 package com.ideas2it.doctorConsultancyService.dto;
 
 import com.ideas2it.doctorConsultancyService.model.Clinic;
+import com.ideas2it.doctorConsultancyService.model.Doctor;
+import com.ideas2it.doctorConsultancyService.model.Patient;
 import lombok.Builder;
 import lombok.Data;
 
@@ -35,9 +37,9 @@ public class AppointmentDto {
 
     private LocalDateTime createdAt;
 
-    private Patient patient;
+    private PatientDto patientDto;
 
-    private Doctor doctor;
+    private DoctorDto doctorDto;
 
-    private Clinic clinic;
+    private ClinicDto clinicDto;
 }
