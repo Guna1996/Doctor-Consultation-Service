@@ -52,8 +52,8 @@ public class Appointment {
     @Column(name="id")
     private int id;
 
-    @Column(name = "time_slot")
-    private String timeSlot;
+    @Column(name = "sceduled_on")
+    private LocalDateTime scheduledOn;
 
     @CreatedDate
     @Column(name = "created_date")

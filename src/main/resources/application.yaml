@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost/healthcare
     username: root
     password: Jubair@1999
-
+    
   jpa:
     hibernate.ddl-auto: update
 
