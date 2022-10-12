@@ -10,7 +10,10 @@ package com.ideas2it.doctorConsultancyService.dto;
 import com.ideas2it.doctorConsultancyService.common.Constants;
 import com.ideas2it.doctorConsultancyService.model.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -30,6 +33,9 @@ import java.util.List;
  * @since   2022-10-10
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DoctorDto {
 
     private int id;
@@ -45,13 +51,14 @@ public class DoctorDto {
     private LocalDate dateOfBirth;
 
     @NotNull(message = "Gender is mandatory")
+    @Pattern(regexp = Constants.GENDER_REGEX, message = "Enter Male or Female")
     private String gender;
 
     @NotNull(message = "Qualification is mandatory")
     @Pattern(regexp = Constants.QUALIFICATION_REGEX, message ="Don't enter numbers")
     private String qualification;
 
-    private List<Specialization> specialization;
+    private List<SpecializationDto> specializationDtos;
 
     @NotNull(message = "Registration year is mandatory")
     @Pattern(regexp = Constants.DATE_REGEX, message = "Enter Date of Birth in (YYYY-MM-DD) this format")
@@ -66,11 +73,11 @@ public class DoctorDto {
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Enter valid City name")
     private String city;
 
-    private List<Feedback> feedbacks;
+    private List<FeedbackDto> feedbackDtos;
 
-    private List<Appointment> appointments;
+    private List<AppointmentDto> appointmentDtos;
 
-    private List<Vitals> vitals;
+    private List<VitalsDto> vitalsDtos;
 
-    private List<Timeslot> timeslots;
+    private List<TimeslotDto> timeslotDtos;
 }
