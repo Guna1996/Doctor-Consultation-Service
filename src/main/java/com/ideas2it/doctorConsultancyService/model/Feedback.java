@@ -11,7 +11,10 @@
 
 package com.ideas2it.doctorConsultancyService.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +36,11 @@ import javax.persistence.ManyToOne;
  *
  * @since   2022-10-10
  */
+@Builder
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Feedback {
 
     @Id
@@ -50,6 +56,9 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
+
+    @Column
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")

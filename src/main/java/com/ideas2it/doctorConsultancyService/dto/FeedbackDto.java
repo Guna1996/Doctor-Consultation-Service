@@ -11,6 +11,7 @@
 
 package com.ideas2it.doctorConsultancyService.dto;
 
+import lombok.Builder;
 import lombok.Data;
 /**
  * <p>
@@ -25,7 +26,7 @@ import lombok.Data;
  * @since   2022-10-10
  */
 
-
+@Builder
 @Data
 public class FeedbackDto {
 
@@ -36,6 +37,8 @@ public class FeedbackDto {
     private float rating;
 
     private DoctorDto doctor;
+
+    private String status;
 
     private PatientDto patient;
 }

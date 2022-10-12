@@ -45,5 +45,5 @@ public class Timeslot {
     private LocalTime timeslot;
 
     @Column
-    private int status;
+    private status;
 }

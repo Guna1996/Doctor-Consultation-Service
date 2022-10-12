@@ -63,6 +63,8 @@ public class Vitals {
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
+    @Column
+    private String status;
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
