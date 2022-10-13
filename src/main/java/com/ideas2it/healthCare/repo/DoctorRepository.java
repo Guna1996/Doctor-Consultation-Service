@@ -7,7 +7,6 @@
  */
 package com.ideas2it.healthCare.repo;
 
-import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.model.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 

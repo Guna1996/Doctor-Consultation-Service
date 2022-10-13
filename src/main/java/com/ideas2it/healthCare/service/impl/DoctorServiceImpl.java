@@ -11,16 +11,16 @@ import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Doctor;
-import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 /**
  * <p>
@@ -38,9 +38,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
-    private DoctorRepository doctorRepository;
+    private final DoctorRepository doctorRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     /**
      * <p>
@@ -71,11 +71,9 @@ public class DoctorServiceImpl implements DoctorService {
     public List<DoctorDto> getAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
         if (!doctors.isEmpty()) {
-            List<DoctorDto> doctorDtos = new ArrayList<>();
-            for (Doctor doctor : doctors) {
-                doctorDtos.add(modelMapper.map(doctor, DoctorDto.class));
-            }
-            return doctorDtos;
+            return doctors.stream()
+                    .map(doctor -> modelMapper.map(doctor, DoctorDto.class))
+                    .collect(Collectors.toList());
         } else {
             throw new NotFoundException("No Doctor is Preset");
         }

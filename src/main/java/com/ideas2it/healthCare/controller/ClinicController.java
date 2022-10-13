@@ -8,9 +8,9 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.ClinicDto;
-import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.service.ClinicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +41,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ClinicController {
-    private ClinicService clinicService;
+
+    private final ClinicService clinicService;
 
     /**
      * Create new Transaction
@@ -59,7 +60,7 @@ public class ClinicController {
      *  @return ResponseEntity
      */
     @GetMapping
-    public ResponseEntity<List<ClinicDto>> getClinics() throws NotFoundException {
+    public ResponseEntity<List<ClinicDto>> getClinics() {
 
         return new ResponseEntity<>(clinicService.getClinics(), HttpStatus.OK);
     }

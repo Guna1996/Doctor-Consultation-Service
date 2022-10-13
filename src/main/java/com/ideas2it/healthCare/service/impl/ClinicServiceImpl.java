@@ -8,6 +8,7 @@ import com.ideas2it.healthCare.repo.ClinicRepository;
 import com.ideas2it.healthCare.service.ClinicService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClinicServiceImpl implements ClinicService {
 
-    private ClinicRepository clinicRepository;
+    private final ClinicRepository clinicRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public ClinicDto addClinic(ClinicDto clinicDto) {
         Clinic clinic = modelMapper.map(clinicDto, Clinic.class);

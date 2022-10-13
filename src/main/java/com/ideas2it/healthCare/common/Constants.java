@@ -4,7 +4,7 @@ public class Constants {
     public static final String ACTIVE = "active";
 
     public static final String INACTIVE = "inactive";
-    public static final String NAME_REGEX = "([A-Z][a-z]{3,30}\\s*)+";
+    public static final String NAME_REGEX = "^([A-Z][a-z]{3,30}\\s*)+$";
 
     public static final String DATE_REGEX = "^((?:18|20)[0-9][0-9])-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$";
 

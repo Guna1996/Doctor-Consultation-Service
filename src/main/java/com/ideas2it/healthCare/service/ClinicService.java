@@ -8,11 +8,11 @@ import java.util.List;
 public interface ClinicService {
     ClinicDto addClinic(ClinicDto clinicDto);
 
-    List<ClinicDto> getClinics() throws NotFoundException;
+    List<ClinicDto> getClinics();
 
-    ClinicDto getClinicById(int id) throws NotFoundException;
+    ClinicDto getClinicById(int id);
 
-    ClinicDto updateClinic(ClinicDto clinicDto) throws NotFoundException;
+    ClinicDto updateClinic(ClinicDto clinicDto);
 
     String deleteClinicById(int id) throws NotFoundException;
 

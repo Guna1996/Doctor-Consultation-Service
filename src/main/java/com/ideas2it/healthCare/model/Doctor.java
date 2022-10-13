@@ -8,14 +8,12 @@
 package com.ideas2it.healthCare.model;
 
 import com.ideas2it.healthCare.common.Constants;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -32,9 +30,6 @@ import java.util.List;
  */
 @Data
 @Entity
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "doctors")
 public class Doctor {
 
@@ -55,21 +50,23 @@ public class Doctor {
     @Column(name = "qualification")
     private String qualification;
 
-    @OneToMany
-    @JoinColumn(name = "specialization_id", nullable = false)
-    private List<Specialization> specializations;
+    @ManyToMany
+    @JoinTable(name = "doctor_specialization",
+    joinColumns = @JoinColumn(name = "doctor_id"),
+    inverseJoinColumns = @JoinColumn(name = "specialization_id"))
+    private Set<Specialization> specializations;
 
     @Column(name = "registration_year")
-    private LocalDate registrationYear;
+    private LocalDate dateOfRegistration;
 
     @Column(name = "mobile_number")
-    private long mobileNumber;
+    private String mobileNumber;
 
     @Column(name = "city")
     private String city;
 
     @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    private String status;
 
     @OneToMany(mappedBy = "doctor")
     private List<Feedback> feedbacks;
@@ -77,10 +74,6 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "doctor")
-    private List<Vitals> vitals;
 
-    @OneToMany(mappedBy = "timeslot")
-    private List<Timeslot> timeslots;
 
 }

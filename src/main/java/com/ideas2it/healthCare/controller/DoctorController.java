@@ -7,9 +7,10 @@
  */
 package com.ideas2it.healthCare.controller;
 
+import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.service.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,34 +31,40 @@ import java.util.List;
  *
  * @since   2022-10-10
  */
+
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/doctor")
 public class DoctorController {
 
-    @Autowired
-    private DoctorService doctorService;
+    private final DoctorService doctorService;
 
-    @PostMapping(value = "/addDoctor")
+    @PostMapping
     public ResponseEntity<DoctorDto> addDoctor(@Valid @RequestBody DoctorDto doctorDto){
+        doctorDto.setStatus(Constants.ACTIVE);
         return new ResponseEntity<>(doctorService.saveOrUpdate(doctorDto), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getAllDoctors")
+    @GetMapping
     public ResponseEntity<List<DoctorDto>>  getAllDoctors() {
         return new ResponseEntity<>(doctorService.getAllDoctors(),HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getDoctorById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DoctorDto> getDoctorById(@PathVariable int id) {
         return new ResponseEntity<>(doctorService.getDoctorById(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/updateDoctor/")
+    @PutMapping
     public ResponseEntity<DoctorDto> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
         return new ResponseEntity<>(doctorService.saveOrUpdate(doctorDto), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/deleteDoctorById/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
-        return new ResponseEntity<>(doctorService.deleteById(id), HttpStatus.OK);
+        DoctorDto doctorDto = doctorService.getDoctorById(id);
+        doctorDto.setStatus(Constants.INACTIVE);
+        doctorService.saveOrUpdate(doctorDto);
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
     }
 }
