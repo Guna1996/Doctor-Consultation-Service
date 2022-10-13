@@ -7,8 +7,6 @@ import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.PatientDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Appointment;
-import com.ideas2it.healthCare.model.Clinic;
-import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.repo.AppointmentRepository;
 import com.ideas2it.healthCare.service.AppointmentService;
 import com.ideas2it.healthCare.service.ClinicService;
@@ -35,6 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final ClinicService clinicService;
 
+    @Override
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
 
         if(doctorService.isDoctorAvailable(appointmentDto.getDoctorId()) && patientService.isPatientAvailable(appointmentDto.getPatientId())
@@ -52,6 +51,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    @Override
     public List<AppointmentDto> getAppointments() {
 
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
@@ -65,14 +65,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    @Override
     public AppointmentDto getAppointmentById(int id) {
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(appointment -> modelMapper.map(appointment, AppointmentDto.class)).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("NO clinic Found"));
+                orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
-
-
-
-
 }

@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * <p>
@@ -36,6 +37,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
+@Table(name = "vitals")
 public class Vitals {
 
     @Id

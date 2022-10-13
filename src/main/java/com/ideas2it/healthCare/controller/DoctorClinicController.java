@@ -11,9 +11,6 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
-import com.ideas2it.healthCare.dto.DoctorDto;
-import com.ideas2it.healthCare.model.Doctor;
-import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.service.DoctorClinicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,7 +27,6 @@ public class DoctorClinicController {
 
     private final DoctorClinicService doctorClinicService;
 
-    private final DoctorClinicDto doctorClinicDto;
     @PostMapping
     public ResponseEntity<DoctorClinicDto> assignDoctorToClinic (@RequestBody DoctorClinicDto doctorClinicDto) {
         DoctorClinicDto assignedDoctorClinicDto = doctorClinicService.assignDoctorToClinic(doctorClinicDto);

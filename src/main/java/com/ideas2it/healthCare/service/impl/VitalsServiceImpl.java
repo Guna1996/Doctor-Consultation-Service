@@ -6,20 +6,21 @@ import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Vitals;
 import com.ideas2it.healthCare.repo.VitalsRepo;
 import com.ideas2it.healthCare.service.VitalsService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class VitalsServiceImpl implements VitalsService {
 
     private final VitalsRepo vitalsRepo;
-    private final ModelMapper modelMapper;
 
-    public VitalsServiceImpl(VitalsRepo vitalsRepo, ModelMapper modelMapper) {
-        this.vitalsRepo = vitalsRepo;
-        this.modelMapper = modelMapper;
-    }
+    private final ModelMapper modelMapper;
 
     @Override
     public VitalsDto addVitals(VitalsDto vitalsDto) {
