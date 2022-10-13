@@ -5,7 +5,7 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vitals,Timeslot.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthCare.model;
@@ -35,42 +35,42 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author  Ramachandran
+ * @author Ramachandran
  *
  * @version 1
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="patient")
+@Table(name = "patient")
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="date_of_birth")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
     @Column(name = "gender")
     private String gender;
 
-    @Column(name="mobile_number")
-    private long mobileNumber;
+    @Column(name = "mobile_number")
+    private String mobileNumber;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name ="status")
-    private String status ="active";
+    @Column(name = "status")
+    private String status = "active";
 
     @OneToMany(mappedBy = "patient")
     private List<Feedback> feedback;
