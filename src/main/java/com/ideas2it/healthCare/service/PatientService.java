@@ -27,7 +27,8 @@ import java.util.List;
  *
  * @since   2022-07-18
  */
-public interface Patientservice {
+
+public interface PatientService {
 
     /**
      * <p>
@@ -52,7 +53,6 @@ public interface Patientservice {
      * @param id - id of the patient
      *
      * @return PatientDto
-     *
      */
     PatientDto getPatientById(Integer id);
 
@@ -64,7 +64,6 @@ public interface Patientservice {
      * @param patientDto - patient detail
      *
      * @return PatientDto
-     *
      */
     PatientDto updatePatient(PatientDto patientDto);
 
@@ -76,7 +75,6 @@ public interface Patientservice {
      * @param id - id of the patient
      *
      * @return String
-     *
      */
     String deletePatient(Integer id);
 
@@ -87,7 +85,6 @@ public interface Patientservice {
      * </p>
      *
      * @return list<PatientDto>
-     *
      */
     List<PatientDto> getPatients();
 }
