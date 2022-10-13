@@ -17,8 +17,13 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+<<<<<<< HEAD
+=======
+import java.util.stream.Collectors;
+
+>>>>>>> 606376bef19f605b9101590c1889ec75b4994348
 
 /**
  * <p>
@@ -36,9 +41,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
-    private DoctorRepository doctorRepository;
+    private final DoctorRepository doctorRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     /**
      * <p>
@@ -69,11 +74,9 @@ public class DoctorServiceImpl implements DoctorService {
     public List<DoctorDto> getAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
         if (!doctors.isEmpty()) {
-            List<DoctorDto> doctorDtos = new ArrayList<>();
-            for (Doctor doctor : doctors) {
-                doctorDtos.add(modelMapper.map(doctor, DoctorDto.class));
-            }
-            return doctorDtos;
+            return doctors.stream()
+                    .map(doctor -> modelMapper.map(doctor, DoctorDto.class))
+                    .collect(Collectors.toList());
         } else {
             throw new NotFoundException("No Doctor is Preset");
         }
@@ -113,5 +116,15 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.save(doctor);
         return "Deleted Successfully";
 
+    }
+
+    @Override
+    public boolean isDoctorAvailable(int id) {
+        Optional<Doctor> doctorFromDb = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(doctorFromDb.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

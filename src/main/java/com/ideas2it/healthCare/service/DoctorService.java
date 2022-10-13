@@ -71,4 +71,6 @@ public interface DoctorService {
      *@return {@link String}
      */
     String deleteById(int id);
+
+    boolean isDoctorAvailable(int id);
 }

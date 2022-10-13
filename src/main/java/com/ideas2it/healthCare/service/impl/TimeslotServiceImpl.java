@@ -67,4 +67,15 @@ public class TimeslotServiceImpl implements TimeslotService {
             throw new NotFoundException("Feedback not found");
         }
     }
+
+    @Override
+    public boolean isTimeslotAvailable(int id) {
+        Timeslot  timeslot = timeslotRepo.getById(id);
+        if(timeslot != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

@@ -45,8 +45,8 @@ public class DoctorClinic {
     @Column(name="id")
     private int id;
 
-    @Column(name="booked")
-    private int booked;
+    @Column(name="status")
+    private String status;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="doctor_id")

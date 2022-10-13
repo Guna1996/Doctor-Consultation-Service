@@ -15,7 +15,6 @@ import com.ideas2it.healthCare.dto.PatientDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.PatientRepository;
-
 import com.ideas2it.healthCare.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -112,6 +111,15 @@ public class PatientServiceImpl implements PatientService {
             return patients.stream()
                     .map(patient -> modelMapper.map(patient,PatientDto.class))
                     .collect(Collectors.toList());
+        }
+    }
+
+    public boolean isPatientAvailable(Integer id) {
+        Patient patientFromDb = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(patientFromDb != null) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

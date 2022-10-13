@@ -30,6 +30,12 @@ public class AppointmentDto {
 
     private LocalDateTime scheduledOn;
 
+    private int patientId;
+
+    private int doctorId;
+
+    private int clinicId;
+
     private PatientDto patient;
 
     private DoctorDto doctor;

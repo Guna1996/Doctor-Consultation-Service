@@ -41,9 +41,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SpecializationServiceImpl implements SpecializationService {
 
-    private SpecializationRepository specializationRepository;
+    private final SpecializationRepository specializationRepository;
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     /**
      * <p>
