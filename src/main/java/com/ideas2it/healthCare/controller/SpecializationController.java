@@ -7,10 +7,11 @@
  */
 package com.ideas2it.healthCare.controller;
 
+import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.service.SpecializationService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,33 +34,37 @@ import java.util.List;
  */
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/specialization")
 public class SpecializationController {
 
-    @Autowired
-    private SpecializationService specializationService;
+    private final SpecializationService specializationService;
 
-    @PostMapping(value = "/addSpecialization")
+    @PostMapping
     public ResponseEntity<SpecializationDto> addSpecialization(@Valid @RequestBody SpecializationDto specializationDto){
+        specializationDto.setStatus(Constants.ACTIVE);
         return new ResponseEntity<>(specializationService.saveOrUpdate(specializationDto), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getAllSpecializations")
+    @GetMapping
     public ResponseEntity<List<SpecializationDto>>  getAllSpecializations() {
         return new ResponseEntity<>(specializationService.getAllSpecializations(),HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getSpecializationById/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<SpecializationDto> getSpecializationById(@PathVariable int id) {
         return new ResponseEntity<>(specializationService.getSpecializationById(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/updateSpecialization/")
+    @PutMapping
     public ResponseEntity<SpecializationDto> updateSpecialization(@RequestBody SpecializationDto specializationDto) {
         return new ResponseEntity<>(specializationService.saveOrUpdate(specializationDto), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/deleteSpecializationById/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
-        return new ResponseEntity<>(specializationService.deleteById(id), HttpStatus.OK);
+        SpecializationDto specializationDto = specializationService.getSpecializationById(id);
+        specializationDto.setStatus(Constants.INACTIVE);
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
     }
 }
