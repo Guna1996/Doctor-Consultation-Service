@@ -34,6 +34,4 @@ public class TimeslotDto {
     private int id;
 
     private LocalTime timeslot;
-
-    private String status;
 }

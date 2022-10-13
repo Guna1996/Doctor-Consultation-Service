@@ -58,12 +58,12 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public Boolean deleteFeedback(int id) {
+    public String deleteFeedback(int id) {
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("Feedback not found"));
         feedback.setStatus(Constants.INACTIVE);
         feedbackRepo.save(feedback);
-        return true;
+        return "Deleted Successfully";
     }
 
 }
