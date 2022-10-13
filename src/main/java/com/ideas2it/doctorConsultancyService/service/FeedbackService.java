@@ -5,7 +5,7 @@ import com.ideas2it.doctorConsultancyService.exception.NotFoundException;
 
 import java.util.List;
 
-public interface FeedbackService {
+public interface  FeedbackService {
     FeedbackDto addFeedback(FeedbackDto feedbackDto);
 
     FeedbackDto updateFeedback(FeedbackDto feedbackDto) throws NotFoundException;

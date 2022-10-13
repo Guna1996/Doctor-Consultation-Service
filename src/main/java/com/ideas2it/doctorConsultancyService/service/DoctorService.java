@@ -8,6 +8,7 @@
 package com.ideas2it.doctorConsultancyService.service;
 
 import com.ideas2it.doctorConsultancyService.dto.DoctorDto;
+import com.ideas2it.doctorConsultancyService.exception.NotFoundException;
 
 import java.util.List;
 

@@ -9,6 +9,7 @@ package com.ideas2it.doctorConsultancyService.service;
 
 import com.ideas2it.doctorConsultancyService.dto.DoctorDto;
 import com.ideas2it.doctorConsultancyService.dto.SpecializationDto;
+import com.ideas2it.doctorConsultancyService.exception.NotFoundException;
 
 import java.util.List;
 
@@ -34,10 +35,10 @@ public interface SpecializationService {
      * Specialization model with the help of mapper class
      * </p>
      *
-     * @param doctorDto {@link SpecializationDto}
+     * @param specializationDto {@link SpecializationDto}
      *
      */
-    SpecializationDto saveOrUpdate(SpecializationDto pecializationDto);
+    SpecializationDto saveOrUpdate(SpecializationDto specializationDto);
 
     /**
      * <p>

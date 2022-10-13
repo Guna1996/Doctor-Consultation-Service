@@ -1,21 +1,50 @@
+/**
+ * <p>
+ * This is the base package for all the service implement classes
+ * which is for doctor, patient and clinic
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.doctorConsultancyService.service.impl;
 
 import com.ideas2it.doctorConsultancyService.common.Constants;
 import com.ideas2it.doctorConsultancyService.dto.DoctorDto;
+import com.ideas2it.doctorConsultancyService.exception.NotFoundException;
 import com.ideas2it.doctorConsultancyService.mapper.DoctorMapper;
 import com.ideas2it.doctorConsultancyService.model.Doctor;
 import com.ideas2it.doctorConsultancyService.repo.DoctorRepository;
 import com.ideas2it.doctorConsultancyService.service.DoctorService;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+/**
+ * <p>
+ * This DoctorServiceImpl class is a service class this class implements
+ * DoctorService which is an interface and get information from
+ * the repository and provided to controller through
+ * DoctorDto
+ * </p>
+ *
+ * @author  Mohamed Jubair
+ *
+ * @version 1
+ *
+ * @since   2022-10-10
+ */
 @Service
+@RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
-    @Autowired
     private DoctorRepository doctorRepository;
 
+    private ModelMapper modelMapper;
 
     /**
      * <p>
@@ -29,8 +58,9 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto saveOrUpdate(DoctorDto doctorDto) {
-        doctorRepository.save(DoctorMapper.fromDto(doctorDto));
-        return doctorDto;
+        Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
+        doctor = doctorRepository.save(doctor);
+        return modelMapper.map(doctor, DoctorDto.class);
     }
 
     /**
@@ -44,7 +74,17 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors() {
-        return (List<DoctorDto>) DoctorMapper.toDto((Doctor) doctorRepository.findAllAndStatus(Constants.ACTIVE));
+        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
+        if (!doctors.isEmpty()){
+            List<DoctorDto> doctorDtos = new ArrayList<>();
+            for (Doctor doctor : doctors){
+                doctorDtos.add(modelMapper.map(doctor, DoctorDto.class));
+            }
+            return doctorDtos;
+        } else {
+            throw new NotFoundException("No Doctor is Preset");
+        }
+
     }
 
     /**
@@ -59,7 +99,10 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto getDoctorById(int id) {
-        return DoctorMapper.toDto(doctorRepository.findByIdAndStatus(id,Constants.ACTIVE));
+        Doctor doctor = doctorRepository
+                .findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(()-> new NotFoundException("No Doctor Found"));
+        return modelMapper.map(doctor, DoctorDto.class);
     }
 
     /**
@@ -72,9 +115,12 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public String deleteById(int id) {
-        Doctor doctor = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        Doctor doctor = doctorRepository
+                .findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(() -> new NotFoundException("No Doctor Founded"));
         doctor.setStatus(Constants.INACTIVE);
         doctorRepository.save(doctor);
         return "Deleted Successfully";
+
     }
 }

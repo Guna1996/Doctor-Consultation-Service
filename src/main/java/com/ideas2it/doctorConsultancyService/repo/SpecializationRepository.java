@@ -7,8 +7,12 @@
  */
 package com.ideas2it.doctorConsultancyService.repo;
 
+import com.ideas2it.doctorConsultancyService.dto.DoctorDto;
 import com.ideas2it.doctorConsultancyService.model.Specialization;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -24,5 +28,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since   2022-10-10
  */
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
-    Specialization findByIdAndStatus(int id, String active);
+    Optional<Specialization> findByIdAndStatus(int id, String active);
+
+    List<Specialization> findAllByStatus(String active);
 }
