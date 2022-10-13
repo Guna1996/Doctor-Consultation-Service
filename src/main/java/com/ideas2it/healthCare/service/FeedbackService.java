@@ -13,6 +13,6 @@ public interface  FeedbackService {
 
     List<FeedbackDto> getFeedbacks();
 
-    Boolean deleteFeedback(int id);
+    String deleteFeedback(int id);
 
 }

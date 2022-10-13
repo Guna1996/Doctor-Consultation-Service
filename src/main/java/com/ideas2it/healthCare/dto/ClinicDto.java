@@ -26,7 +26,6 @@ import javax.validation.constraints.Pattern;
  * @since 2022-10-10
  */
 @Data
-@Builder
 public class ClinicDto {
 
     private int id;
@@ -36,11 +35,10 @@ public class ClinicDto {
 
     @Min(value = 1, message = "Door number cannot be negative or zero")
     @NotNull(message = "door number shouldn't be null")
-    @Pattern(regexp = Constants.STREET_REGEX, message = "Please, Enter valid door number")
     private int doorNumber;
 
     @NotNull(message = "Street name shouldn't be null")
-    @Pattern(regexp = Constants.STREET_REGEX, message = "Please, Enter valid street name")
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid street name")
     private String streetName;
 
     @NotNull(message = "city shouldn't be null")
@@ -54,7 +52,7 @@ public class ClinicDto {
     @Min(value = 1, message = "pin code cannot be negative or zero")
     @NotNull(message = "Pin code shouldn't be null")
     @Pattern(regexp = Constants.PINCODE_REGEX, message = "Please, Enter valid pin code")
-    private int pinCode;
+    private String pinCode;
 
     @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Type only 10 numbers")
     @NotNull(message = "Mobile number shouldn't be null")

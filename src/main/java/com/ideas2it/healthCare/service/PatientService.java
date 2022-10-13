@@ -27,6 +27,7 @@ import java.util.List;
  *
  * @since   2022-07-18
  */
+
 public interface PatientService {
 
     /**
@@ -52,8 +53,6 @@ public interface PatientService {
      * @param id - id of the patient
      *
      * @return PatientDto
-     *
-     * @throws NotFoundException
      */
     PatientDto getPatientById(Integer id);
 
@@ -65,8 +64,6 @@ public interface PatientService {
      * @param patientDto - patient detail
      *
      * @return PatientDto
-     *
-     * @throws NotFoundException
      */
     PatientDto updatePatient(PatientDto patientDto);
 
@@ -78,8 +75,6 @@ public interface PatientService {
      * @param id - id of the patient
      *
      * @return String
-     *
-     * @throws NotFoundException
      */
     String deletePatient(Integer id);
 
@@ -90,8 +85,6 @@ public interface PatientService {
      * </p>
      *
      * @return list<PatientDto>
-     *
-     * @throws NotFoundException
      */
     List<PatientDto> getPatients();
 }

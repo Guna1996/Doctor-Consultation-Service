@@ -16,8 +16,6 @@ import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.PatientRepository;
 import com.ideas2it.healthCare.service.PatientService;
-
-
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

@@ -32,9 +32,6 @@ import javax.persistence.Table;
  */
 @Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "clinic")
 public class Clinic {
 
@@ -59,7 +56,7 @@ public class Clinic {
     private String state;
 
     @Column(name = "pin_code")
-    private int pinCode;
+    private String pinCode;
 
     @Column(name = "contact_number")
     private String contactNumber;

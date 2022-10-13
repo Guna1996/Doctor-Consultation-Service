@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 public class AppointmentController {
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
     /**
      * Create new Transaction

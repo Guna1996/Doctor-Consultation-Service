@@ -5,6 +5,8 @@ import com.ideas2it.healthCare.dto.FeedbackDto;
 import com.ideas2it.healthCare.service.FeedbackService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,29 +26,29 @@ public class FeedbackController {
     private final FeedbackService feedbackService;
 
     @GetMapping
-    public List<FeedbackDto> getAllFeedbacks() {
-        return feedbackService.getFeedbacks();
+    public ResponseEntity<List<FeedbackDto>> getAllFeedbacks() {
+        return new ResponseEntity<>(feedbackService.getFeedbacks(), HttpStatus.OK);
     }
 
     @PutMapping
-    public FeedbackDto updateFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return feedbackService.updateFeedback(feedbackDto);
+    public ResponseEntity<FeedbackDto> updateFeedback(@RequestBody FeedbackDto feedbackDto) {
+        return new ResponseEntity<>(feedbackService.updateFeedback(feedbackDto),HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
-    public FeedbackDto getFeedbackById(@PathVariable("id") int id) {
-        return feedbackService.getFeedbackById(id);
+    public ResponseEntity<FeedbackDto> getFeedbackById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(feedbackService.getFeedbackById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public FeedbackDto insertFeedback(@RequestBody FeedbackDto feedbackDto) {
+    public ResponseEntity<FeedbackDto> insertFeedback(@RequestBody FeedbackDto feedbackDto) {
         feedbackDto.setStatus(Constants.ACTIVE);
-        return feedbackService.addFeedback(feedbackDto);
+        return new ResponseEntity<>(feedbackService.addFeedback(feedbackDto),HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
-    public Boolean deleteById(@PathVariable("id") int id) {
-        return feedbackService.deleteFeedback(id);
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
     }
 
 }
