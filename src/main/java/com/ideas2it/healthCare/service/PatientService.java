@@ -87,4 +87,6 @@ public interface PatientService {
      * @return list<PatientDto>
      */
     List<PatientDto> getPatients();
+
+    boolean isPatientAvailable(Integer id);
 }

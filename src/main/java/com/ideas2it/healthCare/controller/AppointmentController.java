@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@RequestMapping("/appointment")
 @RestController
+@RequestMapping("/appointment")
 @RequiredArgsConstructor
 public class AppointmentController {
     private final AppointmentService appointmentService;
@@ -29,5 +29,4 @@ public class AppointmentController {
     public ResponseEntity<AppointmentDto> add(@Valid @RequestBody AppointmentDto appointmentDto) {
         return new ResponseEntity<>(appointmentService.addAppointment(appointmentDto), HttpStatus.OK);
     }
-
 }

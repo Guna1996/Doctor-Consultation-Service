@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -113,5 +114,14 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.save(doctor);
         return "Deleted Successfully";
 
+    }
+
+    public boolean isDoctorAvailable(int id) {
+        Optional<Doctor> doctorFromDb = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(doctorFromDb.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

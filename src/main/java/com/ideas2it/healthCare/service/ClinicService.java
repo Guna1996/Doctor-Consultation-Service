@@ -15,4 +15,6 @@ public interface ClinicService {
     ClinicDto updateClinic(ClinicDto clinicDto);
 
     String deleteClinicById(int id);
+
+    boolean isAvailableClinic(int id);
 }

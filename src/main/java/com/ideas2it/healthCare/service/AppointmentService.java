@@ -1,7 +1,7 @@
 package com.ideas2it.healthCare.service;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
-
+import org.springframework.stereotype.Service;
 public interface AppointmentService {
 
     AppointmentDto addAppointment(AppointmentDto appointmentDto);
