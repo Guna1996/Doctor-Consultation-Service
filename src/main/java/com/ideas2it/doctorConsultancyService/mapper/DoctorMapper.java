@@ -45,9 +45,9 @@ public class DoctorMapper {
                 .mobileNumber(doctorDto.getMobileNumber())
                 .city(doctorDto.getCity())
                 .specialization(doctorDto.getSpecializationDtos().stream().map(SpecializationMapper::fromDto).collect(Collectors.toList()))
-                .feedbacks(doctorDto.getFeedbackDtos().stream().map(FeedbackMapper::fromDto).collect(Collectors.toList()))
+                /*.feedbacks(doctorDto.getFeedbackDtos().stream().map(FeedbackMapper::fromDto).collect(Collectors.toList()))*/
                 .appointments(doctorDto.getAppointmentDtos().stream().map(AppointmentMapper::fromDto).collect(Collectors.toList()))
-                .vitals(doctorDto.getVitalsDtos())
+                /*.vitals(doctorDto.getVitalsDtos())*/
                 .build();
     }
 
@@ -61,7 +61,6 @@ public class DoctorMapper {
                 .mobileNumber(doctor.getMobileNumber())
                 .city(doctor.getCity())
                 .specializationDtos(doctor.getSpecialization().stream().map(SpecializationMapper::toDto).collect(Collectors.toList()))
-                .feedbackDtos(doctor.getFeedbacks().stream().map(FeedbackMapper::toDto).collect(Collectors.toList()))
                 .appointmentDtos(doctor.getAppointments().stream().map(AppointmentMapper::toDto).collect(Collectors.toList()))
                 .build();
     }

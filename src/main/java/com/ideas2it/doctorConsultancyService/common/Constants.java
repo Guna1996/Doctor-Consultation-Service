@@ -19,6 +19,10 @@ public class Constants {
 
     public static final String GENDER_REGEX = "^male$|^female$";
 
+    public static final String VACANT = "vacant";
+
+    public static final String OCCUPIED = "occupied";
+
 
 }
 

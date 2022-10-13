@@ -45,6 +45,9 @@ public class DoctorClinic {
     @Column(name="id")
     private int id;
 
+    @Column(name="booked")
+    private int booked;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="doctor_id")
     private Doctor doctor;

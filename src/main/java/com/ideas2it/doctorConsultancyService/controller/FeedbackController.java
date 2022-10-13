@@ -3,6 +3,7 @@ package com.ideas2it.doctorConsultancyService.controller;
 import com.ideas2it.doctorConsultancyService.common.Constants;
 import com.ideas2it.doctorConsultancyService.dto.FeedbackDto;
 import com.ideas2it.doctorConsultancyService.service.FeedbackService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,14 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/feedback")
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
-
-    public FeedbackController(FeedbackService feedbackService) {
-        this.feedbackService = feedbackService;
-    }
 
     @GetMapping
     public List<FeedbackDto> getAllFeedbacks() {
