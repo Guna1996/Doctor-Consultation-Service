@@ -72,12 +72,10 @@ public class ClinicServiceImpl implements ClinicService {
 
     public boolean isAvailableClinic(int id) {
         Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if(clinic != null) {
+        if(clinic.isPresent()) {
             return true;
         } else {
             return false;
         }
-
     }
-
 }

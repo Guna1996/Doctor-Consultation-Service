@@ -14,7 +14,7 @@ public interface ClinicService {
 
     ClinicDto updateClinic(ClinicDto clinicDto);
 
-    String deleteClinicById(int id) throws NotFoundException;
+    String deleteClinicById(int id);
 
     boolean isAvailableClinic(int id);
 }
