@@ -2,8 +2,8 @@ package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.FeedbackDto;
-import com.ideas2it.healthCare.service.FeedbackService;
-
+import com.ideas2it.healthCare.dto.VitalsDto;
+import com.ideas2it.healthCare.service.VitalsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,36 +20,35 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/feedback")
-public class FeedbackController {
+@RequestMapping("/vitals")
+public class VitalsController {
 
-    private final FeedbackService feedbackService;
+    private final VitalsService vitalsService;
 
     @GetMapping
-    public ResponseEntity<List<FeedbackDto>> getAllFeedbacks() {
-        return new ResponseEntity<>(feedbackService.getFeedbacks(), HttpStatus.OK);
+    public ResponseEntity<List<VitalsDto>> getAllVitals() {
+        return new ResponseEntity<>(vitalsService.getVitals(), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<FeedbackDto> updateFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return new ResponseEntity<>(feedbackService.updateFeedback(feedbackDto),HttpStatus.OK);
+    public ResponseEntity<VitalsDto> updateVitals(@RequestBody VitalsDto vitalsDto) {
+        return new ResponseEntity<>(vitalsService.updateVitals(vitalsDto),HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<FeedbackDto> getFeedbackById(@PathVariable("id") int id) {
-        return new ResponseEntity<>(feedbackService.getFeedbackById(id), HttpStatus.OK);
+    public ResponseEntity<VitalsDto> getVitalById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(vitalsService.getVitalsById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<FeedbackDto> insertFeedback(@RequestBody FeedbackDto feedbackDto) {
+    public ResponseEntity<VitalsDto> insertFeedback(@RequestBody VitalsDto vitalsDto) {
         System.out.println("yes it's coming");
-        feedbackDto.setStatus(Constants.ACTIVE);
-        return new ResponseEntity<>(feedbackService.addFeedback(feedbackDto),HttpStatus.OK);
+        vitalsDto.setStatus(Constants.ACTIVE);
+        return new ResponseEntity<>(vitalsService.addVitals(vitalsDto),HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteFeedbackById(@PathVariable("id") int id) {
-        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
+        return new ResponseEntity<>(vitalsService.deleteVitals(id), HttpStatus.OK);
     }
-
 }

@@ -3,7 +3,7 @@
  * This is the package contains classes are DoctorClinicService,
  * PatientService, DoctorService, ClinicService,
  * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalsService.
+ * TimeslotControllerService, VitalsServiceImpl.
  * </p>
  *
  * Copyright 2022 - Ideas2it
