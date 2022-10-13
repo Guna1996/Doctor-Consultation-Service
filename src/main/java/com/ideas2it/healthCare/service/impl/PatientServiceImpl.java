@@ -15,7 +15,7 @@ import com.ideas2it.healthCare.dto.PatientDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.PatientRepository;
-import com.ideas2it.healthCare.service.Patientservice;
+import com.ideas2it.healthCare.service.PatientService;
 
 
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class PatientServiceImpl implements Patientservice {
+public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 

@@ -12,7 +12,7 @@ package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.PatientDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
-import com.ideas2it.healthCare.service.Patientservice;
+import com.ideas2it.healthCare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -43,7 +44,7 @@ import javax.validation.Valid;
 public class PatientController {
 
     @Autowired
-    private Patientservice patientservice;
+    private PatientService patientservice;
 
     /**
      * <p>

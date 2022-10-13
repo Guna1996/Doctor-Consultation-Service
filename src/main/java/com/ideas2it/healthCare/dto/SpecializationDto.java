@@ -7,12 +7,11 @@
  */
 package com.ideas2it.healthCare.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.ideas2it.healthCare.common.Constants;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -29,18 +28,15 @@ import javax.validation.constraints.Size;
  * @since   2022-10-10
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class SpecializationDto {
 
     private int id;
 
     @NotNull
     @Size(min = 2, message = "User name should have at least 2 characters")
+    //@Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (Firstname Secondname) format")
     private String name;
 
-    @NotNull
     private String status;
 
 }

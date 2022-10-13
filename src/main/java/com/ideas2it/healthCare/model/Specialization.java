@@ -7,14 +7,11 @@
  */
 package com.ideas2it.healthCare.model;
 
-import com.ideas2it.healthCare.common.Constants;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -31,9 +28,6 @@ import javax.validation.constraints.Pattern;
  */
 @Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "specialization")
 public class Specialization {
 
@@ -43,10 +37,11 @@ public class Specialization {
     private int id;
 
     @Column(name = "name")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (Firstname Secondname) format")
     private String name;
 
     @Column(name = "status")
     private String status;
 
+    @ManyToMany(mappedBy = "specializations")
+    private Set<Doctor> doctors;
 }
