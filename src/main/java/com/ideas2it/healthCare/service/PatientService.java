@@ -8,10 +8,9 @@
  *
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.doctorConsultancyService.service;
+package com.ideas2it.healthCare.service;
 
-import com.ideas2it.doctorConsultancyService.dto.PatientDto;
-import com.ideas2it.doctorConsultancyService.exception.NotFoundException;
+import com.ideas2it.healthCare.dto.PatientDto;
 
 import java.util.List;
 
@@ -28,7 +27,8 @@ import java.util.List;
  *
  * @since   2022-07-18
  */
-public interface Patientservice {
+
+public interface PatientService {
 
     /**
      * <p>
@@ -53,8 +53,6 @@ public interface Patientservice {
      * @param id - id of the patient
      *
      * @return PatientDto
-     *
-     * @throws NotFoundException
      */
     PatientDto getPatientById(Integer id);
 
@@ -66,8 +64,6 @@ public interface Patientservice {
      * @param patientDto - patient detail
      *
      * @return PatientDto
-     *
-     * @throws NotFoundException
      */
     PatientDto updatePatient(PatientDto patientDto);
 
@@ -79,8 +75,6 @@ public interface Patientservice {
      * @param id - id of the patient
      *
      * @return String
-     *
-     * @throws NotFoundException
      */
     String deletePatient(Integer id);
 
@@ -91,8 +85,6 @@ public interface Patientservice {
      * </p>
      *
      * @return list<PatientDto>
-     *
-     * @throws NotFoundException
      */
     List<PatientDto> getPatients();
 }

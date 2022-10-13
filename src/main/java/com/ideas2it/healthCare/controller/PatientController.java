@@ -11,12 +11,13 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.PatientDto;
-import com.ideas2it.healthCare.exception.NotFoundException;
-import com.ideas2it.healthCare.service.Patientservice;
+import com.ideas2it.healthCare.service.PatientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -40,10 +42,11 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/patient")
+@RequiredArgsConstructor
 public class PatientController {
 
-    @Autowired
-    private Patientservice patientservice;
+
+    private final PatientService patientService;
 
     /**
      * <p>
@@ -57,7 +60,7 @@ public class PatientController {
      */
     @PostMapping("/add")
     public ResponseEntity<PatientDto> addPatient(@Valid @RequestBody PatientDto patientDto) {
-        PatientDto addedPatient = patientservice.addPatient(patientDto);
+        PatientDto addedPatient = patientService.addPatient(patientDto);
         return new ResponseEntity<>(addedPatient, HttpStatus.OK);
     }
 
@@ -73,8 +76,8 @@ public class PatientController {
      * @return PatientDto
      */
     @GetMapping("/get/{id}")
-    public ResponseEntity<PatientDto> getPatientById(@RequestBody Integer id)  {
-        PatientDto getPatient = patientservice.getPatientById(id);
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable Integer id)  {
+        PatientDto getPatient = patientService.getPatientById(id);
         return  new ResponseEntity<>(getPatient, HttpStatus.OK);
     }
 
@@ -90,7 +93,7 @@ public class PatientController {
      */
     @PutMapping("/update/{id}")
     public ResponseEntity<PatientDto> updatePatient(@Valid @RequestBody PatientDto patientDto) {
-        PatientDto updatePatient = patientservice.updatePatient(patientDto);
+        PatientDto updatePatient = patientService.updatePatient(patientDto);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);
     }
 
@@ -106,8 +109,8 @@ public class PatientController {
      * @return String
      */
     @PutMapping("/delete/{id}")
-    public ResponseEntity<String> deletePatient(@RequestBody Integer id) {
-        String deletePatient = patientservice.deletePatient(id);
+    public ResponseEntity<String> deletePatient(@PathVariable Integer id) {
+        String deletePatient = patientService.deletePatient(id);
         return new ResponseEntity<>(deletePatient, HttpStatus.OK);
     }
 
@@ -121,6 +124,6 @@ public class PatientController {
      */
     @GetMapping("/getall")
     public ResponseEntity<List<PatientDto>> getPatients() {
-        return  new ResponseEntity<>(patientservice.getPatients(), HttpStatus.OK);
+        return  new ResponseEntity<>(patientService.getPatients(), HttpStatus.OK);
     }
 }
