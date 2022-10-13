@@ -19,11 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-<<<<<<< HEAD
-=======
 import java.util.stream.Collectors;
-
->>>>>>> 606376bef19f605b9101590c1889ec75b4994348
 
 /**
  * <p>

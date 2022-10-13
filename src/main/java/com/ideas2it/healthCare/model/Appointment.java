@@ -67,4 +67,6 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
+
+    private String status;
 }
