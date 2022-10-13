@@ -15,12 +15,12 @@ import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 /**
  * <p>
@@ -113,5 +113,15 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.save(doctor);
         return "Deleted Successfully";
 
+    }
+
+    @Override
+    public boolean isDoctorAvailable(int id) {
+        Optional<Doctor> doctorFromDb = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(doctorFromDb.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

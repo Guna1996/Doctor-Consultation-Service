@@ -69,4 +69,15 @@ public class ClinicServiceImpl implements ClinicService {
             throw new NotFoundException("No Clinic Found");
         }
     }
+
+    public boolean isAvailableClinic(int id) {
+        Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(clinic != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }
