@@ -57,7 +57,7 @@ public class Doctor {
 
     @OneToMany
     @JoinColumn(name = "specialization_id", nullable = false)
-    private List<Specialization> specialization;
+    private List<Specialization> specializations;
 
     @Column(name = "registration_year")
     private LocalDate registrationYear;

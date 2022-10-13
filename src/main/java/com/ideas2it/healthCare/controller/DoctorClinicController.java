@@ -10,6 +10,10 @@
  */
 package com.ideas2it.healthCare.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class DoctorClinicController {
+
 
 }

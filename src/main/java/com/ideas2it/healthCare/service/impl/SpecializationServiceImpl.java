@@ -1,20 +1,49 @@
+/**
+ * <p>
+ * This is the base package for all the service implement classes
+ * which is for doctor, patient and clinic
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
-import com.ideas2it.healthCare.mapper.SpecializationMapper;
+import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Specialization;
 import com.ideas2it.healthCare.repo.SpecializationRepository;
 import com.ideas2it.healthCare.service.SpecializationService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * <p>
+ * This SpecializationServiceImpl class is a service class this class implements
+ * SpecializationService which is an interface and get information from
+ * the repository and provided to controller through
+ * DoctorDto
+ * </p>
+ *
+ * @author  Mohamed Jubair
+ *
+ * @version 1
+ *
+ * @since   2022-10-10
+ */
+@Service
+@RequiredArgsConstructor
 public class SpecializationServiceImpl implements SpecializationService {
 
-    @Autowired
     private SpecializationRepository specializationRepository;
+
+    private ModelMapper modelMapper;
 
     /**
      * <p>
@@ -27,8 +56,9 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto saveOrUpdate(SpecializationDto specializationDto) {
-        specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
-        return specializationDto;
+        Specialization specialization =  modelMapper.map(specializationDto, Specialization.class);
+        specialization = specializationRepository.save(specialization);
+        return modelMapper.map(specialization, SpecializationDto.class);
     }
 
     /**
@@ -42,7 +72,16 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public List<SpecializationDto> getAllSpecializations() {
-        return (List<SpecializationDto>) SpecializationMapper.toDto((Specialization) specializationRepository.findAll());
+        List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE);
+        if (!specializations.isEmpty()) {
+            List<SpecializationDto> specializationDtos = new ArrayList<>();
+            for (Specialization specialization : specializations) {
+                specializationDtos.add(modelMapper.map(specialization, SpecializationDto.class));
+            }
+            return specializationDtos;
+        } else {
+            throw new NotFoundException("No Specialization is Present");
+        }
     }
 
     /**
@@ -56,7 +95,10 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto getSpecializationById(int id) {
-        return SpecializationMapper.toDto(specializationRepository.findById(id).get());
+        Specialization specialization = specializationRepository
+                .findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(()-> new NotFoundException("No Specialization Found"));
+        return modelMapper.map(specialization, SpecializationDto.class);
     }
 
     /**
@@ -69,7 +111,9 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public String deleteById(int id) {
-        Specialization specialization = specializationRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        Specialization specialization = specializationRepository
+                .findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(() -> new NotFoundException("No Specialization Founded"));
         specialization.setStatus(Constants.INACTIVE);
         specializationRepository.save(specialization);
         return "Deleted Successfully";

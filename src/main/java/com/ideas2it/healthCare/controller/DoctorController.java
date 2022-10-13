@@ -42,12 +42,12 @@ public class DoctorController {
     }
 
     @GetMapping(value = "/getAllDoctors")
-    public ResponseEntity<List<DoctorDto>>  getAllDoctors(){
+    public ResponseEntity<List<DoctorDto>>  getAllDoctors() {
         return new ResponseEntity<>(doctorService.getAllDoctors(),HttpStatus.OK);
     }
 
     @GetMapping(value = "/getDoctorById/{id}")
-    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable int id){
+    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable int id) {
         return new ResponseEntity<>(doctorService.getDoctorById(id), HttpStatus.OK);
     }
 
@@ -57,7 +57,7 @@ public class DoctorController {
     }
 
     @DeleteMapping(value = "/deleteDoctorById/{id}")
-    public ResponseEntity<String> deleteDoctorById(@PathVariable int id){
+    public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
         return new ResponseEntity<>(doctorService.deleteById(id), HttpStatus.OK);
     }
 }

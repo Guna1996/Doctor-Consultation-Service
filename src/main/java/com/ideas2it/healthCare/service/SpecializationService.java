@@ -33,10 +33,10 @@ public interface SpecializationService {
      * Specialization model with the help of mapper class
      * </p>
      *
-     * @param doctorDto {@link SpecializationDto}
+     * @param specializationDto {@link SpecializationDto}
      *
      */
-    SpecializationDto saveOrUpdate(SpecializationDto pecializationDto);
+    SpecializationDto saveOrUpdate(SpecializationDto specializationDto);
 
     /**
      * <p>

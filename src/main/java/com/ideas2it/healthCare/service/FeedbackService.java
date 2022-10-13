@@ -4,7 +4,7 @@ import com.ideas2it.healthCare.dto.FeedbackDto;
 
 import java.util.List;
 
-public interface FeedbackService {
+public interface  FeedbackService {
     FeedbackDto addFeedback(FeedbackDto feedbackDto);
 
     FeedbackDto updateFeedback(FeedbackDto feedbackDto);

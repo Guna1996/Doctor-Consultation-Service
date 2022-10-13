@@ -55,27 +55,72 @@ public class PatientController {
      *
      * @return String
      */
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<PatientDto> addPatient(@Valid @RequestBody PatientDto patientDto) {
         PatientDto addedPatient = patientservice.addPatient(patientDto);
         return new ResponseEntity<>(addedPatient, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PatientDto> getPatientById(@RequestBody Integer id) throws NotFoundException {
+    /**
+     * <p>
+     * This method used to get patient details
+     * from the database by  getting patient id
+     * from the user
+     * </p>
+     *
+     * @Param id - patient id
+     *
+     * @return PatientDto
+     */
+    @GetMapping("/get/{id}")
+    public ResponseEntity<PatientDto> getPatientById(@RequestBody Integer id)  {
         PatientDto getPatient = patientservice.getPatientById(id);
         return  new ResponseEntity<>(getPatient, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<PatientDto> updatePatient(@Valid @RequestBody PatientDto patientDto) throws NotFoundException {
+    /**
+     * <p>
+     * This method used to update patient details
+     * from the database
+     * </p>
+     *
+     * @Param patientDto
+     *
+     * @return PatientDto
+     */
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PatientDto> updatePatient(@Valid @RequestBody PatientDto patientDto) {
         PatientDto updatePatient = patientservice.updatePatient(patientDto);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<String> deletePatient(@RequestBody Integer id) throws NotFoundException {
-        PatientDto deletePatient = patientservice.deletPatient(id);
+    /**
+     * <p>
+     * This method used to delete patient details
+     * from the database by getting patient id
+     * from the user
+     * </p>
+     *
+     * @Param id - patient id
+     *
+     * @return String
+     */
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<String> deletePatient(@RequestBody Integer id) {
+        String deletePatient = patientservice.deletePatient(id);
         return new ResponseEntity<>(deletePatient, HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method used to get all patient details
+     * from the database
+     * </p>
+     *
+     * @return List<PatientDto>
+     */
+    @GetMapping("/getall")
+    public ResponseEntity<List<PatientDto>> getPatients() {
+        return  new ResponseEntity<>(patientservice.getPatients(), HttpStatus.OK);
     }
 }
