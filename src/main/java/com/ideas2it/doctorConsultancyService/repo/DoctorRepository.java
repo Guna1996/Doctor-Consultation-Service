@@ -12,6 +12,7 @@ import com.ideas2it.doctorConsultancyService.model.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -27,7 +28,7 @@ import java.util.List;
  * @since   2022-10-10
  */
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
-    Doctor findByIdAndStatus(int id, String active);
+    Optional<Doctor> findByIdAndStatus(int id, String active);
 
-    List<DoctorDto> findAllAndStatus(String active);
+    List<Doctor> findAllByStatus(String active);
 }

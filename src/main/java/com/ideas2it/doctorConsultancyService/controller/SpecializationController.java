@@ -9,6 +9,7 @@ package com.ideas2it.doctorConsultancyService.controller;
 
 import com.ideas2it.doctorConsultancyService.dto.DoctorDto;
 import com.ideas2it.doctorConsultancyService.dto.SpecializationDto;
+import com.ideas2it.doctorConsultancyService.exception.NotFoundException;
 import com.ideas2it.doctorConsultancyService.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,12 +45,12 @@ public class SpecializationController {
     }
 
     @GetMapping(value = "/getAllSpecializations")
-    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations(){
+    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations() {
         return new ResponseEntity<>(specializationService.getAllSpecializations(),HttpStatus.OK);
     }
 
     @GetMapping(value = "/getSpecializationById/{id}")
-    public ResponseEntity<SpecializationDto> getSpecializationById(@PathVariable int id){
+    public ResponseEntity<SpecializationDto> getSpecializationById(@PathVariable int id) {
         return new ResponseEntity<>(specializationService.getSpecializationById(id), HttpStatus.OK);
     }
 
@@ -59,7 +60,7 @@ public class SpecializationController {
     }
 
     @DeleteMapping(value = "/deleteSpecializationById/{id}")
-    public ResponseEntity<String> deleteSpecializationById(@PathVariable int id){
+    public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
         return new ResponseEntity<>(specializationService.deleteById(id), HttpStatus.OK);
     }
 }

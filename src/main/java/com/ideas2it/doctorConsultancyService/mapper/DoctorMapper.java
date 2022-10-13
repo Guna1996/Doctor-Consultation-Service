@@ -62,7 +62,7 @@ public class DoctorMapper {
                 .city(doctor.getCity())
                 .specializationDtos(doctor.getSpecialization().stream().map(SpecializationMapper::toDto).collect(Collectors.toList()))
                 .feedbackDtos(doctor.getFeedbacks().stream().map(FeedbackMapper::toDto).collect(Collectors.toList()))
-                .appointmentDtos(doctor.getAppointments().stream().map(AppointMapper::toDto).collect(Collectors.toList()))
+                .appointmentDtos(doctor.getAppointments().stream().map(AppointmentMapper::toDto).collect(Collectors.toList()))
                 .build();
     }
 }

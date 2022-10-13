@@ -58,7 +58,7 @@ public class DoctorDto {
     @Pattern(regexp = Constants.QUALIFICATION_REGEX, message ="Don't enter numbers")
     private String qualification;
 
-    private List<SpecializationDto> specializationDtos;
+    private List<SpecializationDto> specializations;
 
     @NotNull(message = "Registration year is mandatory")
     @Pattern(regexp = Constants.DATE_REGEX, message = "Enter Date of Birth in (YYYY-MM-DD) this format")
@@ -73,11 +73,11 @@ public class DoctorDto {
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Enter valid City name")
     private String city;
 
-    private List<FeedbackDto> feedbackDtos;
+    private List<FeedbackDto> feedbacks;
 
-    private List<AppointmentDto> appointmentDtos;
+    private List<AppointmentDto> appointments;
 
-    private List<VitalsDto> vitalsDtos;
+    private List<VitalsDto> vitals;
 
-    private List<TimeslotDto> timeslotDtos;
+    private List<TimeslotDto> timeslots;
 }
