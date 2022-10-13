@@ -13,6 +13,10 @@ package com.ideas2it.healthCare.dto;
 import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Timeslot;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -27,10 +31,18 @@ import com.ideas2it.healthCare.model.Timeslot;
  *
  * @since   2022-10-10
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DoctorClinicDto {
 
     private int id;
-    private Doctor doctor;
-    private Clinic clinic;
-    private Timeslot timeslot;
+    private int doctorId;
+    private int clinicId;
+    private int timeSlotId;
+    private String status;
+    private DoctorDto doctor;
+    private ClinicDto clinic;
+    private TimeslotDto timeslot;
 }

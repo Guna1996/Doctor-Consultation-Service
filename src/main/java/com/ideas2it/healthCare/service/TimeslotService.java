@@ -14,4 +14,6 @@ public interface TimeslotService {
     List<TimeslotDto> getTimeslots();
 
     String deleteTimeslot(int id);
+
+    boolean isTimeslotAvailable(int id);
 }

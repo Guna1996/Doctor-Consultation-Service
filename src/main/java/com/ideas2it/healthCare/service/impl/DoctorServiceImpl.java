@@ -11,6 +11,7 @@ import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Doctor;
+import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -113,5 +115,15 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.save(doctor);
         return "Deleted Successfully";
 
+    }
+
+    @Override
+    public boolean isDoctorAvailable(int id) {
+        Optional<Doctor> doctorFromDb = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(doctorFromDb.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

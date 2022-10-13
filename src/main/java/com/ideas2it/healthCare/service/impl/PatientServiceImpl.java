@@ -114,4 +114,13 @@ public class PatientServiceImpl implements PatientService {
                     .collect(Collectors.toList());
         }
     }
+
+    public boolean isPatientAvailable(Integer id) {
+        Patient patientFromDb = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(patientFromDb != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
