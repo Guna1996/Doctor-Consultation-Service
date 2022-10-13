@@ -11,8 +11,11 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.PatientDto;
+
+import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.service.PatientService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +48,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientController {
 
-
     private final PatientService patientService;
+
 
     /**
      * <p>
