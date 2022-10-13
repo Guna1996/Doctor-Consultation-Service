@@ -13,7 +13,5 @@ public interface VitalsRepo extends JpaRepository<Vitals, Integer> {
 
     List<Vitals> findAllByStatus(String status);
 
-    Boolean deleteByStatus()
-
     Boolean existsByIdAndStatus(int id, String status);
 }
