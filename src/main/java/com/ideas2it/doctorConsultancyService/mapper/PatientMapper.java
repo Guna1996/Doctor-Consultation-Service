@@ -18,9 +18,9 @@ public class PatientMapper {
                 .gender(patientDto.getGender())
                 .mobileNumber(patientDto.getMobileNumber())
                 .email(patientDto.getEmail())
-                .feedback(patientDto.getFeedback().stream().map(FeedbackMapper::fromDto).collect(Collectors.toList()))
+                /*.feedback(patientDto.getFeedback().stream().map(FeedbackMapper::fromDto).collect(Collectors.toList()))*/
                 .appointment(patientDto.getAppointment().stream().map(AppointmentMapper::fromDto).collect(Collectors.toList()))
-                .vitals(patientDto.getVitals().stream().map(VitalsMapper::fromDto).collect(Collectors.toList()))
+               /* .vitals(patientDto.getVitals().stream().map(VitalsMapper::fromDto).collect(Collectors.toList()))*/
                 .build();
     }
 
@@ -33,9 +33,9 @@ public class PatientMapper {
                 .gender(patient.getGender())
                 .mobileNumber(patient.getMobileNumber())
                 .email(patient.getEmail())
-                .feedback(patient.getFeedback().stream().map(FeedbackMapper::toDto).collect(Collectors.toList()))
+                /*.feedback(patient.getFeedback().stream().map(FeedbackMapper::toDto).collect(Collectors.toList()))*/
                 .appointment(patient.getAppointment().stream().map(AppointmentMapper::toDto).collect(Collectors.toList()))
-                .vitals(patient.getVitals().stream().map(VitalsMapper::toDto).collect(Collectors.toList()))
+                /*.vitals(patient.getVitals().stream().map(VitalsMapper::toDto).collect(Collectors.toList()))*/
                 .build();
     }
 }
