@@ -68,9 +68,6 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .collect(Collectors.toList());
         }
     }
-
-
-
    /* public DoctorClinicDto updateDoctorToClinic(DoctorClinicDto doctorClinicDto) {
         if(doctorService.isDoctorAvailable(doctorClinicDto.getDoctorId()) &&
                 clinicService.isAvailableClinic(doctorClinicDto.getClinicId()) &&
@@ -98,7 +95,5 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             throw new NotFoundException("doctor not found ");
         }
     }
-
-
 }
 

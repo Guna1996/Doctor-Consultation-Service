@@ -63,14 +63,15 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to delete the Doctor by id
+     * This method is used to find
+     * whether the doctor is delete is
+     * deleted or not by returning boolean
+     * to another services
      * </p>
      *
      * @param id {@link int}
      *
      *@return {@link String}
      */
-    String deleteById(int id);
-
     boolean isDoctorAvailable(int id);
 }

@@ -43,9 +43,6 @@ import java.util.List;
  */
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table(name = "patient")
 public class Patient {
 

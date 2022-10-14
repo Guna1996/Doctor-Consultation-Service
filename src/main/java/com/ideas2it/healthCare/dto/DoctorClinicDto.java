@@ -32,9 +32,6 @@ import lombok.NoArgsConstructor;
  * @since   2022-10-10
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class DoctorClinicDto {
 
     private int id;

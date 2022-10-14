@@ -50,7 +50,7 @@ public class Doctor {
     @Column(name = "qualification")
     private String qualification;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "doctor_specialization",
     joinColumns = @JoinColumn(name = "doctor_id"),
     inverseJoinColumns = @JoinColumn(name = "specialization_id"))
@@ -74,6 +74,7 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
 
-
+    @OneToMany(mappedBy = "doctor")
+    private List<Clinic> clinics;
 
 }

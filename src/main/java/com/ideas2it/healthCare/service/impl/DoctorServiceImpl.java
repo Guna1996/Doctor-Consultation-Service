@@ -52,6 +52,7 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto saveOrUpdate(DoctorDto doctorDto) {
+        System.out.println(doctorDto.getSpecializations().toString());
         Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
         doctor = doctorRepository.save(doctor);
         return modelMapper.map(doctor, DoctorDto.class);
@@ -98,22 +99,16 @@ public class DoctorServiceImpl implements DoctorService {
 
     /**
      * <p>
-     * This method is used to delete the Doctor by id
+     * This method is used to find
+     * whether the doctor is delete is
+     * deleted or not by returning boolean
+     * to another services
      * </p>
      *
      * @param id {@link int}
+     *
+     *@return {@link String}
      */
-    @Override
-    public String deleteById(int id) {
-        Doctor doctor = doctorRepository
-                .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("No Doctor Founded"));
-        doctor.setStatus(Constants.INACTIVE);
-        doctorRepository.save(doctor);
-        return "Deleted Successfully";
-
-    }
-
     @Override
     public boolean isDoctorAvailable(int id) {
         Optional<Doctor> doctorFromDb = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);

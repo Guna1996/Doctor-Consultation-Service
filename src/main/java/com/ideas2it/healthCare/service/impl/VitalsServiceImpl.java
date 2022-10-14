@@ -8,7 +8,6 @@ import com.ideas2it.healthCare.repo.VitalsRepo;
 import com.ideas2it.healthCare.service.VitalsService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
