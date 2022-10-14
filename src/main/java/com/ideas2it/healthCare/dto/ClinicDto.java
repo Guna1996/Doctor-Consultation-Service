@@ -57,4 +57,6 @@ public class ClinicDto {
     @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Type only 10 numbers")
     @NotNull(message = "Mobile number shouldn't be null")
     private String contactNumber;
+
+    private DoctorDto doctor;
 }

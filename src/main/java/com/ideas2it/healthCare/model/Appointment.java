@@ -46,7 +46,7 @@ public class Appointment {
     @Column(name="id")
     private int id;
 
-    @Column(name = "sceduled_on")
+    @Column(name = "scheduled_on")
     private LocalDateTime scheduledOn;
 
     @CreatedDate

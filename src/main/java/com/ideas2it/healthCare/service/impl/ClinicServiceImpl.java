@@ -33,11 +33,11 @@ public class ClinicServiceImpl implements ClinicService {
 
         if (clinics.isEmpty()) {
             throw new NotFoundException("No clinic Found");
-        } else {
-            return clinics.stream()
-                    .map(clinic -> modelMapper.map(clinic, ClinicDto.class))
-                    .collect(Collectors.toList());
         }
+        return clinics.stream()
+                .map(clinic -> modelMapper.map(clinic, ClinicDto.class))
+                .collect(Collectors.toList());
+
     }
 
     public ClinicDto getClinicById(int id) {
@@ -71,10 +71,6 @@ public class ClinicServiceImpl implements ClinicService {
 
     public boolean isAvailableClinic(int id) {
         Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if(clinic.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return clinic.isPresent();
     }
 }
