@@ -14,36 +14,43 @@ import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @Service
-@RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
 
-    private final AppointmentRepository appointmentRepository;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    private ModelMapper modelMapper;
 
-    private final DoctorService doctorService;
+    private DoctorService doctorService;
 
-    private final PatientService patientService;
+    private PatientService patientService;
 
-    private final ClinicService clinicService;
+    private ClinicService clinicService;
 
     @Override
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
 
-        if(doctorService.isDoctorAvailable(appointmentDto.getDoctorId()) && patientService.isPatientAvailable(appointmentDto.getPatientId())
-            && clinicService.isAvailableClinic(appointmentDto.getClinicId())) {
+        if (doctorService.isDoctorAvailable(appointmentDto.getDoctorId()) && patientService.isPatientAvailable(appointmentDto.getPatientId())
+                && clinicService.isAvailableClinic(appointmentDto.getClinicId()) && isAppointmentAvailable(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime())) {
+            LocalDateTime scheduledOn = LocalDateTime.of(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime());
             DoctorDto doctor = doctorService.getDoctorById(appointmentDto.getDoctorId());
             PatientDto patient = patientService.getPatientById(appointmentDto.getDoctorId());
             ClinicDto clinic = clinicService.getClinicById(appointmentDto.getClinicId());
             appointmentDto.setDoctor(doctor);
             appointmentDto.setPatient(patient);
             appointmentDto.setClinic(clinic);
+            appointmentDto.setScheduledOn(scheduledOn);
             Appointment appointment = modelMapper.map(appointmentDto, Appointment.class);
             return modelMapper.map(appointmentRepository.save(appointment), AppointmentDto.class);
         } else {
@@ -58,20 +65,46 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");
-        } else {
-            return appointments.stream()
-                    .map(appointment -> modelMapper.map(appointment, AppointmentDto.class))
-                    .collect(Collectors.toList());
         }
+        return appointments.stream()
+                .map(appointment -> modelMapper.map(appointment, AppointmentDto.class))
+                .collect(Collectors.toList());
+
     }
 
     @Override
     public AppointmentDto getAppointmentById(int id) {
+
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(appointment -> modelMapper.map(appointment, AppointmentDto.class)).
                 findFirst().
                 orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
 
+    @Override
+    public boolean isAppointmentAvailable(LocalDate date, LocalTime time) {
 
+        return appointmentRepository.findByScheduledOnAndStatus(LocalDateTime.of(date, time), Constants.ACTIVE).isEmpty();
+    }
+
+    @Override
+    public String deleteAppointmentById(int id) {
+
+        Optional<Appointment> appointmentById = appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if (appointmentById.isPresent()) {
+            Appointment appointment = appointmentById.get();
+            appointment.setStatus(Constants.INACTIVE);
+            appointmentRepository.save(appointment);
+            return "deleted successfully";
+        } else {
+            throw new NotFoundException("No Clinic Found");
+        }
+    }
+
+    public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
+
+        appointmentDto.setScheduledOn(LocalDateTime.of(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime()));
+        Appointment appointment = modelMapper.map(appointmentDto, Appointment.class);
+        return modelMapper.map(appointmentRepository.save(appointment), AppointmentDto.class);
+    }
 }
