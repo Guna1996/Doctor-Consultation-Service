@@ -8,11 +8,13 @@
 package com.ideas2it.healthCare.dto;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.model.Doctor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * <p>
@@ -38,5 +40,7 @@ public class SpecializationDto {
     private String name;
 
     private String status;
+
+    private Set<Doctor> doctors;
 
 }

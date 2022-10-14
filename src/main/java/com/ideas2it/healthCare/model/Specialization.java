@@ -41,6 +41,6 @@ public class Specialization {
     @Column(name = "status")
     private String status;
 
-    @ManyToMany(mappedBy = "specializations")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "specializations")
     private Set<Doctor> doctors;
 }

@@ -9,11 +9,13 @@ package com.ideas2it.healthCare.dto;
 
 import com.ideas2it.healthCare.common.Constants;
 
+import com.ideas2it.healthCare.model.Clinic;
 import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -51,7 +53,7 @@ public class DoctorDto {
     //@Pattern(regexp = Constants.QUALIFICATION_REGEX, message ="Don't enter numbers")
     private String qualification;
 
-    private List<SpecializationDto> specializations;
+    private Set<SpecializationDto> specializations;
 
     @NotNull(message = "Registration year is mandatory")
     //@Pattern(regexp = Constants.DATE_REGEX, message = "Enter Date of Birth in (YYYY-MM-DD) this format")
@@ -71,4 +73,6 @@ public class DoctorDto {
     private List<FeedbackDto> feedbacks;
 
     private List<AppointmentDto> appointments;
+
+    private List<ClinicDto> clinics;
 }
