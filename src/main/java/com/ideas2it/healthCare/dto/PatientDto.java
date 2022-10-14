@@ -34,9 +34,6 @@ import java.util.List;
  * @since   2022-10-10
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class PatientDto {
 
     private int id;

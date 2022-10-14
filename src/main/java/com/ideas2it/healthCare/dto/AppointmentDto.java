@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
  * @since 2022-10-10
  */
 @Data
-@Builder
 public class AppointmentDto {
 
     private int id;

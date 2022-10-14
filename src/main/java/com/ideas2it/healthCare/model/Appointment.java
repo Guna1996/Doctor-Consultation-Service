@@ -38,9 +38,6 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "appointment")
 public class Appointment {
 
@@ -49,7 +46,7 @@ public class Appointment {
     @Column(name="id")
     private int id;
 
-    @Column(name = "sceduled_on")
+    @Column(name = "scheduled_on")
     private LocalDateTime scheduledOn;
 
     @CreatedDate
