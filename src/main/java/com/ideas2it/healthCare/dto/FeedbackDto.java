@@ -26,7 +26,6 @@ import lombok.Data;
  * @since   2022-10-10
  */
 
-@Builder
 @Data
 public class FeedbackDto {
 

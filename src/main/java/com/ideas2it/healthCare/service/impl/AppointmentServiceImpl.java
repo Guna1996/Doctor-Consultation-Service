@@ -57,7 +57,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
 
         if (appointments.isEmpty()) {
-            throw new NotFoundException("No clinic Found");
+            throw new NotFoundException("No appointment Found");
         } else {
             return appointments.stream()
                     .map(appointment -> modelMapper.map(appointment, AppointmentDto.class))
@@ -72,4 +72,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                 findFirst().
                 orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
+
+
 }

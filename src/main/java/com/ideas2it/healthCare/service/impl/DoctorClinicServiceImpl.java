@@ -68,7 +68,5 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .collect(Collectors.toList());
         }
     }
-
-
 }
 
