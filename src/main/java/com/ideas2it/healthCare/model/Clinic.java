@@ -66,7 +66,7 @@ public class Clinic {
 
     @Column(name = "status")
     private String status = Constants.ACTIVE;
-    
+
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
