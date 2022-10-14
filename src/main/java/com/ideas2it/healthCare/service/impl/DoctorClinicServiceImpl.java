@@ -56,7 +56,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
        }
     }
 
-    public List<DoctorClinicDto> getAppointments() {
+    public List<DoctorClinicDto> getDoctorClinics() {
 
         List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE);
 
@@ -66,6 +66,33 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             return doctorClinics.stream()
                     .map(doctorClinic -> modelMapper.map(doctorClinic, DoctorClinicDto.class))
                     .collect(Collectors.toList());
+        }
+    }
+   /* public DoctorClinicDto updateDoctorToClinic(DoctorClinicDto doctorClinicDto) {
+        if(doctorService.isDoctorAvailable(doctorClinicDto.getDoctorId()) &&
+                clinicService.isAvailableClinic(doctorClinicDto.getClinicId()) &&
+                timeslotService.isTimeslotAvailable(doctorClinicDto.getTimeSlotId())) {
+            DoctorDto doctor = doctorService.getDoctorById(doctorClinicDto.getDoctorId());
+            ClinicDto clinic = clinicService.getClinicById(doctorClinicDto.getClinicId());
+            TimeslotDto timeslot = timeslotService.getTimeslotById(doctorClinicDto.getTimeSlotId());
+            doctorClinicDto.setDoctor(doctor);
+            doctorClinicDto.setClinic(clinic);
+            doctorClinicDto.setTimeslot(timeslot);
+            DoctorClinic doctorClinic = modelMapper.map(doctorClinicDto, DoctorClinic.class);
+            return modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
+        } else {
+            throw new NotFoundException("doctor not found to update");
+        }
+    }*/
+
+    public String deleteDoctorFromClinic(Integer id) { //----------
+        DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if(doctorClinic != null) {
+            doctorClinic.setStatus(Constants.INACTIVE);
+            doctorClinicRepository.save(doctorClinic);
+            return "deleted successfully";
+        } else {
+            throw new NotFoundException("doctor not found ");
         }
     }
 }

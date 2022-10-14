@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DoctorClinicRepository extends JpaRepository<DoctorClinic,Integer> {
+public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Integer> {
     List<DoctorClinic> findAllByStatus(String status);
+
+    DoctorClinic findByIdAndStatus(Integer id, String status);
 }
