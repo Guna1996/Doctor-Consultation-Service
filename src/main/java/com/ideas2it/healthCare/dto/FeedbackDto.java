@@ -13,6 +13,8 @@ package com.ideas2it.healthCare.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * <p>
  *This is a Dto class for Feedback
@@ -26,7 +28,6 @@ import lombok.Data;
  * @since   2022-10-10
  */
 
-@Builder
 @Data
 public class FeedbackDto {
 
