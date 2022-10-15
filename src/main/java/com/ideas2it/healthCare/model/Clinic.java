@@ -22,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * <p>
@@ -67,7 +68,7 @@ public class Clinic {
     @Column(name = "status")
     private String status = Constants.ACTIVE;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @OneToMany(mappedBy = "clinic")
+    private List<DoctorClinic> doctors;
+
 }

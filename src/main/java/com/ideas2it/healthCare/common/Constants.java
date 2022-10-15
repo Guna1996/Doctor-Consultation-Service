@@ -23,7 +23,5 @@ public class Constants {
     public static final String VACANT = "vacant";
 
     public static final String OCCUPIED = "occupied";
-
-
 }
 
