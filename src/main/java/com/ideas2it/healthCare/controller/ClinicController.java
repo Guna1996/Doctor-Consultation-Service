@@ -37,10 +37,10 @@ import java.util.List;
  */
 @RequestMapping("/clinic")
 @RestController
-@RequiredArgsConstructor
 public class ClinicController {
 
-    private final ClinicService clinicService;
+    @Autowired
+    private ClinicService clinicService;
 
     /**
      * add new clinics details

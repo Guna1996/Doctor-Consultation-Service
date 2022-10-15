@@ -20,6 +20,7 @@ public class ClinicServiceImpl implements ClinicService {
     @Autowired
     private ClinicRepository clinicRepository;
 
+    @Autowired
     private ModelMapper modelMapper;
 
     public ClinicDto addClinic(ClinicDto clinicDto) {

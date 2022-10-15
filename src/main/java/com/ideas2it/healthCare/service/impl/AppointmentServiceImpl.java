@@ -12,7 +12,6 @@ import com.ideas2it.healthCare.service.AppointmentService;
 import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,12 +29,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
     private DoctorService doctorService;
 
+    @Autowired
     private PatientService patientService;
 
+    @Autowired
     private ClinicService clinicService;
 
     @Override
