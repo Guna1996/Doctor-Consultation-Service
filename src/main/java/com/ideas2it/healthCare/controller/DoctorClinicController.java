@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ *
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/doctorclinic")
@@ -55,10 +58,5 @@ public class DoctorClinicController {
         String deletedDoctor = doctorClinicService.deleteDoctorFromClinic(id);
         return new ResponseEntity<>(deletedDoctor, HttpStatus.OK);
     }
-
-
-
-
-
 
 }
