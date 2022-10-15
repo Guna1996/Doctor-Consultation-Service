@@ -10,7 +10,6 @@ package com.ideas2it.healthCare.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -42,6 +41,6 @@ public class Specialization {
     @Column(name = "status")
     private String status;
 
-    @ManyToMany(mappedBy = "specializations")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "specializations")
     private Set<Doctor> doctors;
 }

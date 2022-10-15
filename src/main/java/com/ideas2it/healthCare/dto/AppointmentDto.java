@@ -10,7 +10,9 @@ package com.ideas2it.healthCare.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * <p>
@@ -23,7 +25,6 @@ import java.time.LocalDateTime;
  * @since 2022-10-10
  */
 @Data
-@Builder
 public class AppointmentDto {
 
     private int id;
@@ -43,4 +44,8 @@ public class AppointmentDto {
     private ClinicDto clinic;
 
     private String status;
+
+    private LocalDate scheduledDate;
+
+    private LocalTime scheduledTime;
 }

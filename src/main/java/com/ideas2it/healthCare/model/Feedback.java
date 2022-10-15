@@ -36,11 +36,8 @@ import javax.persistence.ManyToOne;
  *
  * @since   2022-10-10
  */
-@Builder
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Feedback {
 
     @Id
