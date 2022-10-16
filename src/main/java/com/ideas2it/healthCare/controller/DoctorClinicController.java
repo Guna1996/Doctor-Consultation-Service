@@ -55,10 +55,4 @@ public class DoctorClinicController {
         String deletedDoctor = doctorClinicService.deleteDoctorFromClinic(id);
         return new ResponseEntity<>(deletedDoctor, HttpStatus.OK);
     }
-
-
-
-
-
-
 }

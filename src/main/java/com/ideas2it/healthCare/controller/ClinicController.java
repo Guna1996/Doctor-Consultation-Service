@@ -95,8 +95,8 @@ public class ClinicController {
      * @return string
      */
     @DeleteMapping("/{id}")
-    public String deleteClinic(@PathVariable("id") int id) {
+    public ResponseEntity<String> deleteClinic(@PathVariable("id") int id) {
 
-        return clinicService.deleteClinicById(id);
+        return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK) ;
     }
 }

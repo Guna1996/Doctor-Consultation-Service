@@ -76,5 +76,4 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor")
     private List<DoctorClinic> clinics;
-
 }
