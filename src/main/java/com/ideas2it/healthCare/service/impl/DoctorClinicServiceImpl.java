@@ -41,7 +41,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     @Override
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
        if(doctorService.isDoctorAvailable(doctorClinicDto.getDoctorId()) &&
-               clinicService.isAvailableClinic(doctorClinicDto.getClinicId()) &&
+               clinicService.isClinicAvailable(doctorClinicDto.getClinicId()) &&
                timeslotService.isTimeslotAvailable(doctorClinicDto.getTimeSlotId())) {
            DoctorDto doctor = doctorService.getDoctorById(doctorClinicDto.getDoctorId());
            ClinicDto clinic = clinicService.getClinicById(doctorClinicDto.getClinicId());

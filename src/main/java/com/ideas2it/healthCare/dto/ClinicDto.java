@@ -14,6 +14,7 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * <p>
@@ -58,5 +59,5 @@ public class ClinicDto {
     @NotNull(message = "Mobile number shouldn't be null")
     private String contactNumber;
 
-    private DoctorDto doctor;
+    private List<DoctorClinicDto> doctors;
 }

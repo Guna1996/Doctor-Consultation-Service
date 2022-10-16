@@ -15,5 +15,5 @@ public interface ClinicService {
 
     String deleteClinicById(int id);
 
-    boolean isAvailableClinic(int id);
+    boolean isClinicAvailable(int id);
 }

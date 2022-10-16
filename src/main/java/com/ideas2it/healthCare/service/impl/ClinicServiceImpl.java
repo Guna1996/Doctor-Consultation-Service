@@ -53,28 +53,25 @@ public class ClinicServiceImpl implements ClinicService {
     public ClinicDto updateClinic(ClinicDto clinicDto) {
 
         Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(clinicDto.getId(), Constants.ACTIVE);
-        if (clinicById.isPresent()) {
-            Clinic clinic = modelMapper.map(clinicDto, Clinic.class);
-            return modelMapper.map(clinicRepository.save(clinic), ClinicDto.class);
-        } else {
+        if (clinicById.isEmpty()) {
             throw new NotFoundException("No Clinic Found");
         }
+        return modelMapper.map(clinicRepository.save(modelMapper.map(clinicDto, Clinic.class)), ClinicDto.class);
     }
 
     public String deleteClinicById(int id) {
 
-        Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (clinicById.isPresent()) {
-            Clinic clinic = clinicById.get();
-            clinic.setStatus(Constants.INACTIVE);
-            clinicRepository.save(clinic);
-            return "deleted successfully";
-        } else {
+        Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if (clinic.isEmpty()) {
             throw new NotFoundException("No Clinic Found");
         }
+        Clinic deletedClinic = clinic.get();
+        deletedClinic.setStatus(Constants.INACTIVE);
+        clinicRepository.save(deletedClinic);
+        return "deleted successfully";
     }
 
-    public boolean isAvailableClinic(int id) {
+    public boolean isClinicAvailable(int id) {
 
         Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
         return clinic.isPresent();
