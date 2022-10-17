@@ -11,4 +11,6 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     List<DoctorClinic> findAllByStatus(String status);
 
     DoctorClinic findByIdAndStatus(Integer id, String status);
+
+    Boolean existsByIdAndStatus(int id, String status);
 }
