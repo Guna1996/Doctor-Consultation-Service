@@ -1,10 +1,7 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
-import com.ideas2it.healthCare.dto.ClinicDto;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
-import com.ideas2it.healthCare.dto.DoctorDto;
-import com.ideas2it.healthCare.dto.TimeslotDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.repo.DoctorClinicRepository;
@@ -38,16 +35,18 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     private ModelMapper modelMapper;
 
 
-    @Override
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-
-       return doctorClinicDto;
+        if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
+                clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
+            DoctorClinic doctorClinic = modelMapper.map(doctorClinicDto, DoctorClinic.class);
+            return modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
+        } else {
+            throw new NotFoundException("doctor not found to assign");
+        }
     }
 
     public List<DoctorClinicDto> getDoctorClinics() {
-
         List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE);
-
         if (doctorClinics.isEmpty()) {
             throw new NotFoundException("No clinic Found");
         } else {
@@ -56,32 +55,24 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .collect(Collectors.toList());
         }
     }
-   /* public DoctorClinicDto updateDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if(doctorService.isDoctorAvailable(doctorClinicDto.getDoctorId()) &&
-                clinicService.isAvailableClinic(doctorClinicDto.getClinicId()) &&
-                timeslotService.isTimeslotAvailable(doctorClinicDto.getTimeSlotId())) {
-            DoctorDto doctor = doctorService.getDoctorById(doctorClinicDto.getDoctorId());
-            ClinicDto clinic = clinicService.getClinicById(doctorClinicDto.getClinicId());
-            TimeslotDto timeslot = timeslotService.getTimeslotById(doctorClinicDto.getTimeSlotId());
-            doctorClinicDto.setDoctor(doctor);
-            doctorClinicDto.setClinic(clinic);
-            doctorClinicDto.setTimeslot(timeslot);
-            DoctorClinic doctorClinic = modelMapper.map(doctorClinicDto, DoctorClinic.class);
-            return modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
-        } else {
-            throw new NotFoundException("doctor not found to update");
-        }
-    }*/
 
-    public String deleteDoctorFromClinic(Integer id) { //----------
+    public String deleteDoctorFromClinic(Integer id) {
         DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if(doctorClinic != null) {
+        if (doctorClinic != null) {
             doctorClinic.setStatus(Constants.INACTIVE);
             doctorClinicRepository.save(doctorClinic);
             return "deleted successfully";
         } else {
-            throw new NotFoundException("doctor not found ");
+            throw new NotFoundException("Doctor not found to delete");
         }
+    }
+
+    public DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
+        if (doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
+            return modelMapper.map(doctorClinicRepository
+                    .save(modelMapper.map(doctorClinicDto, DoctorClinic.class)), DoctorClinicDto.class);
+        }
+        throw new NotFoundException("Doctor id not found to update");
     }
 }
 

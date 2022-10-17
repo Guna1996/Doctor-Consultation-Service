@@ -11,8 +11,8 @@ public interface DoctorClinicService {
 
     List<DoctorClinicDto> getDoctorClinics();
 
-    // DoctorClinicDto updateDoctorToClinic(DoctorClinicDto doctorClinicDto);
-
     String deleteDoctorFromClinic(Integer id);
+
+    DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto);
 
 }

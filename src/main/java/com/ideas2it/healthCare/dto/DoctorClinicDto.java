@@ -39,10 +39,9 @@ import java.util.List;
  */
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinicDto {
 
-    private List<Integer> id;
+    private int id;
     private String status;
     private DoctorDto doctor;
     private ClinicDto clinic;

@@ -114,11 +114,6 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public boolean isDoctorAvailable(int id) {
-        Optional<Doctor> doctorFromDb = doctorRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if(doctorFromDb.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
+        return doctorRepository.existsByIdAndStatus(id, Constants.ACTIVE);
     }
 }
