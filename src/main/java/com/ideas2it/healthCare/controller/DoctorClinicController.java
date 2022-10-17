@@ -48,16 +48,8 @@ public class DoctorClinicController {
         return new ResponseEntity<>(doctorClinicService.getDoctorClinics(), HttpStatus.OK);
     }
 
-   // @PutMapping
-   /* public ResponseEntity<DoctorClinicDto> updateDoctorToClinic (@RequestBody DoctorClinicDto doctorClinicDto) {
-        DoctorClinicDto assignedDoctorClinicDto = doctorClinicService.updateDoctorToClinic(doctorClinicDto);
-        return new ResponseEntity<>(assignedDoctorClinicDto, HttpStatus.OK);
-    }*/
-
     @PutMapping
-    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable Integer id) {
-        String deletedDoctor = doctorClinicService.deleteDoctorFromClinic(id);
-        return new ResponseEntity<>(deletedDoctor, HttpStatus.OK);
+    public ResponseEntity<DoctorClinicDto> deleteDoctorFromClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
+        return new ResponseEntity<>(doctorClinicService.updateDoctorClinic(doctorClinicDto), HttpStatus.OK);
     }
-
 }

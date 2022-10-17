@@ -47,7 +47,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="doctor_clinic")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinic {
 
     @Id
@@ -58,11 +57,11 @@ public class DoctorClinic {
     @Column(name="status")
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
-    @ManyToOne(cascade =CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="clinic_id")
     private Clinic clinic;
 

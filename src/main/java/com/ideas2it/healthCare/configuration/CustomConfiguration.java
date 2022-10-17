@@ -46,14 +46,14 @@ public class CustomConfiguration {
                 skip(destination.getDoctor().getSpecializations());
                 skip(destination.getDoctor().getAppointments());
                 skip(destination.getDoctor().getFeedbacks());
-                skip(destination.getClinic());
+                //skip(destination.getClinic());
             }
         });
 
         modelMapper.addMappings(new PropertyMap<Doctor, DoctorDto>() {
             @Override
             protected void configure() {
-                skip(destination.getSpecializations());
+                //skip(destination.getSpecializations());
                 skip(destination.getClinics());
                 skip(destination.getFeedbacks());
                 skip(destination.getAppointments());
@@ -67,14 +67,14 @@ public class CustomConfiguration {
             }
         });
 
-/*
         modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
             @Override
             protected void configure() {
-                skip(destination.)
+                skip(destination.getDoctor());
+                skip(destination.getClinic());
+
             }
         });
-*/
         return modelMapper;
     }
 }

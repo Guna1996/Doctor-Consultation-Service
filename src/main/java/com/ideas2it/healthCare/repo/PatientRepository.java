@@ -13,6 +13,7 @@ package com.ideas2it.healthCare.repo;
 import com.ideas2it.healthCare.model.Patient;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -47,7 +48,8 @@ public interface PatientRepository extends JpaRepository<Patient,Integer> {
      *
      * @return Patient
      */
-    Patient deleteByIdAndStatus(Integer id, String status);
+    @Query("from patient where id IN ?1 and status IN ?2 ")
+    Patient deleteByIdStatus(Integer id, String status);
 
     /**
      * <p>
