@@ -2,13 +2,11 @@
 package com.ideas2it.healthCare.configuration;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
-import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.FeedbackDto;
 import com.ideas2it.healthCare.dto.VitalsDto;
 import com.ideas2it.healthCare.model.Appointment;
 import com.ideas2it.healthCare.model.Doctor;
-import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.model.Feedback;
 import com.ideas2it.healthCare.model.Vitals;
 import org.modelmapper.ModelMapper;
@@ -20,10 +18,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CustomConfiguration {
+
     @Bean
     public ModelMapper addModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.addMappings(new PropertyMap<Feedback, FeedbackDto>() {
+
+/*        modelMapper.addMappings(new PropertyMap<Feedback, FeedbackDto>() {
             @Override
             protected void configure() {
                 skip(destination.getDoctor().getFeedbacks());
@@ -65,7 +65,7 @@ public class CustomConfiguration {
             protected void configure() {
                 skip(destination.getPatient().getVitals());
             }
-        });
+        });*/
 
 /*
         modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
