@@ -3,19 +3,14 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.AppointmentDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
-import com.ideas2it.healthCare.mapper.AppointmentMapper;
-import com.ideas2it.healthCare.mapper.ClinicMapper;
 import com.ideas2it.healthCare.model.Appointment;
 import com.ideas2it.healthCare.repo.AppointmentRepository;
 import com.ideas2it.healthCare.service.AppointmentService;
 import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
-
 import org.modelmapper.ModelMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -33,6 +28,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentRepository appointmentRepository;
 
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private DoctorService doctorService;
 
     @Autowired
@@ -41,20 +39,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private ClinicService clinicService;
 
-    @Autowired
-    private AppointmentMapper appointmentMapper;
 
-
-
-    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper, DoctorService doctorService, PatientService patientService, ClinicService clinicService) {
-        this.appointmentRepository = appointmentRepository;
-        this.modelMapper = modelMapper;
-        this.doctorService = doctorService;
-        this.patientService = patientService;
-        this.clinicService = clinicService;
-    }
-
-    @Override
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
 
         if (doctorService.isDoctorAvailable(appointmentDto.getDoctorId()) && patientService.isPatientAvailable(appointmentDto.getPatientId())
@@ -64,8 +49,8 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentDto.getPatient().setId(appointmentDto.getPatientId());
             appointmentDto.getClinic().setId(appointmentDto.getClinicId());
             appointmentDto.setScheduledOn(scheduledOn);
-            Appointment appointment = appointmentMapper.fromDto(appointmentDto);
-            return appointmentMapper.toDto(appointmentRepository.save(appointment));
+            Appointment appointment = modelMapper.map(appointmentDto, Appointment.class);
+            return modelMapper.map(appointmentRepository.save(appointment), AppointmentDto.class);
         }
         throw new NotFoundException("doctor, clinic or patient not found");
     }
@@ -74,11 +59,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> getAppointments() {
         System.out.println("hi");
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
+        System.out.println("hey da");
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");
         }
         return appointments.stream()
-                .map(appointmentMapper::toDto)
+                .map(appointment -> modelMapper.map(appointment, AppointmentDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -86,9 +72,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto getAppointmentById(int id) {
 
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
-                map(appointmentMapper::toDto).
+                map(appointment -> modelMapper.map(appointment, AppointmentDto.class)).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("NO appointment Found"));
+                orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
 
 
@@ -113,7 +99,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
 
         appointmentDto.setScheduledOn(LocalDateTime.of(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime()));
-        Appointment appointment = appointmentMapper.fromDto(appointmentDto);
-        return appointmentMapper.toDto(appointmentRepository.save(appointment));
+        Appointment appointment = modelMapper.map(appointmentDto, Appointment.class);
+        return modelMapper.map(appointmentRepository.save(appointment), AppointmentDto.class);
     }
 }
