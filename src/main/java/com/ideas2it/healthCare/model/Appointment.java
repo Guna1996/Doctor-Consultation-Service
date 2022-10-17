@@ -34,11 +34,9 @@ import java.time.LocalDateTime;
  * cretaes entity for appointment in database
  * </p>
  *
- * @author  Gunaseelan K
- *
+ * @author Gunaseelan K
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter
@@ -49,7 +47,7 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "scheduled_on")

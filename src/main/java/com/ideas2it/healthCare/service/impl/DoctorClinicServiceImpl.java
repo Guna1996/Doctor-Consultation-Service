@@ -40,6 +40,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
 
     @Override
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
+
        return doctorClinicDto;
     }
 

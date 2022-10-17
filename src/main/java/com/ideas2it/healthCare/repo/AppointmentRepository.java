@@ -1,14 +1,19 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Appointment;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public interface AppointmentRepository extends CrudRepository<Appointment, Integer> {
+public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
     List<Appointment> findAllByStatus(String status);
 
-    Optional<Object> findByIdAndStatus(int id, String status);
+    Optional<Appointment> findByIdAndStatus(int id, String status);
+
+    Optional<Object> findByScheduledOnAndStatus(LocalDateTime scheduledOn, String status);
 }

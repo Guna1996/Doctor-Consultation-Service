@@ -73,7 +73,7 @@ public class Clinic {
 
     @Column(name = "status")
     private String status = Constants.ACTIVE;
-    
+
     @OneToMany(mappedBy = "clinic")
     private List<DoctorClinic> doctors;
 }

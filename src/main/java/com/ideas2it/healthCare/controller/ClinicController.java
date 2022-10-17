@@ -28,36 +28,36 @@ import java.util.List;
 /**
  * <p>
  * This ClinicController class is a Controller class and this
- * class is used to get input and display outputs
+ * class is used to get input and display outputs for clinics
  * </p>
  *
- * @author  Gunaseelan K
- *
+ * @author Gunaseelan K
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @RequestMapping("/clinic")
 @RestController
-@RequiredArgsConstructor
 public class ClinicController {
 
-    private final ClinicService clinicService;
+    @Autowired
+    private ClinicService clinicService;
 
     /**
-     * Create new Transaction
+     * add new clinics details
      *
      * @param clinicDto is clinic object
      * @return ResponseEntity
      */
     @PostMapping
-    public ResponseEntity<ClinicDto> add(@Valid @RequestBody ClinicDto clinicDto) {
+    public ResponseEntity<ClinicDto> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
+
         return new ResponseEntity<>(clinicService.addClinic(clinicDto), HttpStatus.OK);
     }
 
     /**
      * Get all the Clinics
-     *  @return ResponseEntity
+     *
+     * @return ResponseEntity
      */
     @GetMapping
     public ResponseEntity<List<ClinicDto>> getClinics() {
@@ -69,10 +69,10 @@ public class ClinicController {
      * Get the Clinic by id
      *
      * @param id is clinic id
-     *  @return ResponseEntity
+     * @return ResponseEntity
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ClinicDto> getById(@PathVariable("id") int id) {
+    public ResponseEntity<ClinicDto> getClinicById(@PathVariable("id") int id) {
 
         return new ResponseEntity<>(clinicService.getClinicById(id), HttpStatus.OK);
     }
@@ -83,7 +83,7 @@ public class ClinicController {
      * @param clinicDto is Loan object
      */
     @PutMapping
-    public ResponseEntity<ClinicDto> update(@Valid @RequestBody ClinicDto clinicDto) {
+    public ResponseEntity<ClinicDto> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
 
         return new ResponseEntity<>(clinicService.updateClinic(clinicDto), HttpStatus.OK);
     }
@@ -95,8 +95,8 @@ public class ClinicController {
      * @return string
      */
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        clinicService.deleteClinicById(id);
-        return "Deleted";
+    public ResponseEntity<String> deleteClinic(@PathVariable("id") int id) {
+
+        return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK) ;
     }
 }
