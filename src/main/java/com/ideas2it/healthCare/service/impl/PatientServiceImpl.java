@@ -87,7 +87,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String deletePatient(Integer id) {
-        Patient patient = patientRepository.deleteByIdStatus(id, Constants.ACTIVE);
+        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
         if (patient != null) {
             patient.setStatus(Constants.INACTIVE);
             patientRepository.save(patient);

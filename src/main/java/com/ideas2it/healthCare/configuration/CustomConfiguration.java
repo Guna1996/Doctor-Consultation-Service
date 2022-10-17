@@ -2,11 +2,13 @@
 package com.ideas2it.healthCare.configuration;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
+import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.FeedbackDto;
 import com.ideas2it.healthCare.dto.VitalsDto;
 import com.ideas2it.healthCare.model.Appointment;
 import com.ideas2it.healthCare.model.Doctor;
+import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.model.Feedback;
 import com.ideas2it.healthCare.model.Vitals;
 import org.modelmapper.ModelMapper;
@@ -67,14 +69,14 @@ public class CustomConfiguration {
             }
         });*/
 
-        modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
+/*        modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
             @Override
             protected void configure() {
                 skip(destination.getDoctor());
                 skip(destination.getClinic());
 
             }
-        });
+        });*/
         return modelMapper;
     }
 }

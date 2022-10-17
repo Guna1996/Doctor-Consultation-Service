@@ -41,22 +41,6 @@ public interface PatientRepository extends JpaRepository<Patient,Integer> {
      *  using patient id and patient status and send back to the
      *  PatientService
      * </p>
-     *
-     * @param id - id of the patient
-     *
-     * @param status - status of the patient
-     *
-     * @return Patient
-     */
-    @Query("from patient where id IN ?1 and status IN ?2 ")
-    Patient deleteByIdStatus(Integer id, String status);
-
-    /**
-     * <p>
-     *  This method is used to retrieve patient by
-     *  using patient id and patient status and send back to the
-     *  PatientService
-     * </p>
      * @param id - id of the patient
      *
      * @param status - status of the patient
