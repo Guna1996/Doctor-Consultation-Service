@@ -53,7 +53,7 @@ public class CustomConfiguration {
         modelMapper.addMappings(new PropertyMap<Doctor, DoctorDto>() {
             @Override
             protected void configure() {
-                skip(destination.getSpecializations());
+                //skip(destination.getSpecializations());
                 skip(destination.getClinics());
                 skip(destination.getFeedbacks());
                 skip(destination.getAppointments());

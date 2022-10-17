@@ -8,6 +8,7 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.dto.DoctorSpecializationDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.service.SpecializationService;
 
@@ -41,29 +42,29 @@ public class SpecializationController {
     private final SpecializationService specializationService;
 
     @PostMapping
-    public ResponseEntity<SpecializationDto> addSpecialization(@Valid @RequestBody SpecializationDto specializationDto){
+    public ResponseEntity<DoctorSpecializationDto> addSpecialization(@Valid @RequestBody DoctorSpecializationDto specializationDto){
         specializationDto.setStatus(Constants.ACTIVE);
         return new ResponseEntity<>(specializationService.saveOrUpdate(specializationDto), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations() {
+    public ResponseEntity<List<DoctorSpecializationDto>>  getAllSpecializations() {
         return new ResponseEntity<>(specializationService.getAllSpecializations(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SpecializationDto> getSpecializationById(@PathVariable int id) {
+    public ResponseEntity<DoctorSpecializationDto> getSpecializationById(@PathVariable int id) {
         return new ResponseEntity<>(specializationService.getSpecializationById(id), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<SpecializationDto> updateSpecialization(@RequestBody SpecializationDto specializationDto) {
+    public ResponseEntity<DoctorSpecializationDto> updateSpecialization(@RequestBody DoctorSpecializationDto specializationDto) {
         return new ResponseEntity<>(specializationService.saveOrUpdate(specializationDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
-        SpecializationDto specializationDto = specializationService.getSpecializationById(id);
+        DoctorSpecializationDto specializationDto = specializationService.getSpecializationById(id);
         specializationDto.setStatus(Constants.INACTIVE);
         return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
     }
