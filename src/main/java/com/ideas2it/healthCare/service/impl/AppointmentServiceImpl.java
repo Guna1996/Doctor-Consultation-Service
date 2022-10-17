@@ -12,7 +12,6 @@ import com.ideas2it.healthCare.service.AppointmentService;
 import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 
 
 @Service
-@RequiredArgsConstructor
 public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
@@ -32,6 +30,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final PatientService patientService;
 
     private final ClinicService clinicService;
+
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper, DoctorService doctorService, PatientService patientService, ClinicService clinicService) {
+        this.appointmentRepository = appointmentRepository;
+        this.modelMapper = modelMapper;
+        this.doctorService = doctorService;
+        this.patientService = patientService;
+        this.clinicService = clinicService;
+    }
 
     @Override
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
@@ -55,6 +61,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> getAppointments() {
 
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
+        System.out.println("hi its work");
 
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");

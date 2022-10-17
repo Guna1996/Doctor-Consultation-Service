@@ -7,13 +7,18 @@
  */
 package com.ideas2it.healthCare.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.common.Constants;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * <p>
@@ -25,7 +30,9 @@ import javax.validation.constraints.Pattern;
  * @version 1
  * @since 2022-10-10
  */
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ClinicDto {
 
     private int id;
@@ -58,5 +65,5 @@ public class ClinicDto {
     @NotNull(message = "Mobile number shouldn't be null")
     private String contactNumber;
 
-    private DoctorDto doctor;
+    private List<DoctorClinicDto> doctors;
 }

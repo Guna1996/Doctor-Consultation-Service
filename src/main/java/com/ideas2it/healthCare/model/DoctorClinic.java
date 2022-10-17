@@ -10,7 +10,11 @@
  */
 package com.ideas2it.healthCare.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +23,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * <p>
@@ -35,9 +41,11 @@ import javax.persistence.Table;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="doctor_clinic")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinic {
 
     @Id
@@ -56,7 +64,7 @@ public class DoctorClinic {
     @JoinColumn(name="clinic_id")
     private Clinic clinic;
 
-    @ManyToOne(cascade =CascadeType.ALL)
+    @ManyToMany(cascade =CascadeType.ALL)
     @JoinColumn(name="timeslot_id")
-    private Timeslot timeslot;
+    private List<Timeslot> timeslots;
 }

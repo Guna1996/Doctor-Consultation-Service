@@ -70,12 +70,9 @@ public class TimeslotServiceImpl implements TimeslotService {
 
     @Override
     public boolean isTimeslotAvailable(int id) {
-        Timeslot  timeslot = timeslotRepo.getById(id);
-        if(timeslot != null) {
-            return true;
-        } else {
-            return false;
-        }
+        Timeslot  timeslot = timeslotRepo.findById(id).orElseThrow(() -> new NotFoundException("id not found"));
+
+        return timeslot != null;
 
     }
 }

@@ -10,11 +10,15 @@
  */
 package com.ideas2it.healthCare.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.common.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
@@ -33,7 +37,9 @@ import java.util.List;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class PatientDto {
 
     private int id;

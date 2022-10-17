@@ -40,20 +40,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
 
     @Override
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-       if(doctorService.isDoctorAvailable(doctorClinicDto.getDoctorId()) &&
-               clinicService.isAvailableClinic(doctorClinicDto.getClinicId()) &&
-               timeslotService.isTimeslotAvailable(doctorClinicDto.getTimeSlotId())) {
-           DoctorDto doctor = doctorService.getDoctorById(doctorClinicDto.getDoctorId());
-           ClinicDto clinic = clinicService.getClinicById(doctorClinicDto.getClinicId());
-           TimeslotDto timeslot = timeslotService.getTimeslotById(doctorClinicDto.getTimeSlotId());
-           doctorClinicDto.setDoctor(doctor);
-           doctorClinicDto.setClinic(clinic);
-           doctorClinicDto.setTimeslot(timeslot);
-           DoctorClinic doctorClinic = modelMapper.map(doctorClinicDto, DoctorClinic.class);
-           return modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
-       } else {
-           throw new NotFoundException("clinic and doctor not found");
-       }
+       return doctorClinicDto;
     }
 
     public List<DoctorClinicDto> getDoctorClinics() {

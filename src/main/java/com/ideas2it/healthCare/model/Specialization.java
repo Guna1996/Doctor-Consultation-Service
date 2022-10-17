@@ -7,7 +7,13 @@
  */
 package com.ideas2it.healthCare.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,9 +31,12 @@ import java.util.Set;
  *
  * @since   2022-10-10
  */
-@Data
+
+@Getter
+@Setter
 @Entity
 @Table(name = "specialization")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Specialization {
 
     @Id
@@ -41,6 +50,6 @@ public class Specialization {
     @Column(name = "status")
     private String status;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "specializations")
+    @ManyToMany(mappedBy = "specializations")
     private Set<Doctor> doctors;
 }

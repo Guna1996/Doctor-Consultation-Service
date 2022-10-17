@@ -7,10 +7,14 @@
  */
 package com.ideas2it.healthCare.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Column;
@@ -36,9 +40,11 @@ import java.time.LocalDateTime;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "appointment")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Appointment {
 
     @Id

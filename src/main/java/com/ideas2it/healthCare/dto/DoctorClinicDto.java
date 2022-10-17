@@ -10,13 +10,19 @@
  */
 package com.ideas2it.healthCare.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Timeslot;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,15 +37,14 @@ import lombok.NoArgsConstructor;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinicDto {
 
-    private int id;
-    private int doctorId;
-    private int clinicId;
-    private int timeSlotId;
+    private List<Integer> id;
     private String status;
     private DoctorDto doctor;
     private ClinicDto clinic;
-    private TimeslotDto timeslot;
+    private List<TimeslotDto> timeslots;
 }

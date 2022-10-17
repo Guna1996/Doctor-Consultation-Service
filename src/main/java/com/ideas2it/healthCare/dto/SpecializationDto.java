@@ -7,9 +7,13 @@
  */
 package com.ideas2it.healthCare.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.model.Doctor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,7 +33,9 @@ import java.util.Set;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class SpecializationDto {
 
     private int id;
@@ -41,6 +47,6 @@ public class SpecializationDto {
 
     private String status;
 
-    private Set<Doctor> doctors;
+    private Set<DoctorDto> doctors;
 
 }

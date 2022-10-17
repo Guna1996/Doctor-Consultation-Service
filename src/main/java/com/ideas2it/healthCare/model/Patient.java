@@ -10,10 +10,14 @@
  */
 package com.ideas2it.healthCare.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,9 +45,11 @@ import java.util.List;
  *
  * @since 2022-10-10
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "patient")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Patient {
 
     @Id

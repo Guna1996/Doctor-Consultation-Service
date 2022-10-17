@@ -7,11 +7,15 @@
  */
 package com.ideas2it.healthCare.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.common.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +26,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * <p>
@@ -33,9 +38,11 @@ import javax.persistence.Table;
  * @version 1
  * @since 2022-10-10
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "clinic")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Clinic {
 
     @Id
@@ -67,7 +74,6 @@ public class Clinic {
     @Column(name = "status")
     private String status = Constants.ACTIVE;
     
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @OneToMany(mappedBy = "clinic")
+    private List<DoctorClinic> doctors;
 }

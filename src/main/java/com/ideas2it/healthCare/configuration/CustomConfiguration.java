@@ -1,22 +1,21 @@
 package com.ideas2it.healthCare.configuration;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
-import com.ideas2it.healthCare.dto.ClinicDto;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.FeedbackDto;
-import com.ideas2it.healthCare.dto.SpecializationDto;
+import com.ideas2it.healthCare.dto.VitalsDto;
 import com.ideas2it.healthCare.model.Appointment;
-import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.model.Feedback;
-import com.ideas2it.healthCare.model.Specialization;
+import com.ideas2it.healthCare.model.Vitals;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+
 
 @Configuration
 public class CustomConfiguration {
@@ -32,6 +31,8 @@ public class CustomConfiguration {
                 skip(destination.getDoctor().getAppointments());
                 skip(destination.getPatient().getAppointment());
                 skip(destination.getPatient().getVitals());
+                //skip(destination.);
+                skip(destination.getDoctor().getClinics());
             }
         });
 
@@ -44,17 +45,35 @@ public class CustomConfiguration {
                 skip(destination.getDoctor().getSpecializations());
                 skip(destination.getDoctor().getAppointments());
                 skip(destination.getDoctor().getFeedbacks());
+                skip(destination.getClinic());
             }
         });
 
-        modelMapper.addMappings(new PropertyMap<Specialization, SpecializationDto>() {
+        modelMapper.addMappings(new PropertyMap<Doctor, DoctorDto>() {
             @Override
             protected void configure() {
-
-                //destination.setVitals();
+                skip(destination.getSpecializations());
+                skip(destination.getClinics());
+                skip(destination.getFeedbacks());
+                skip(destination.getAppointments());
             }
         });
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        modelMapper.addMappings(new PropertyMap<Vitals, VitalsDto>() {
+            @Override
+            protected void configure() {
+                skip(destination.getPatient().getVitals());
+            }
+        });
+
+/*
+        modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
+            @Override
+            protected void configure() {
+                skip(destination.)
+            }
+        });
+*/
         return modelMapper;
     }
 }
