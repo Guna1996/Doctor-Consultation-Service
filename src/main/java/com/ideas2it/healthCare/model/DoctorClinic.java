@@ -58,11 +58,11 @@ public class DoctorClinic {
     @Column(name="status")
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
-    @ManyToOne(cascade =CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="clinic_id")
     private Clinic clinic;
 

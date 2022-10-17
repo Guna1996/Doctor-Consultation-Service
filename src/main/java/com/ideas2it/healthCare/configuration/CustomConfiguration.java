@@ -20,10 +20,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CustomConfiguration {
+
     @Bean
     public ModelMapper addModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.addMappings(new PropertyMap<Feedback, FeedbackDto>() {
+
+/*        modelMapper.addMappings(new PropertyMap<Feedback, FeedbackDto>() {
             @Override
             protected void configure() {
                 skip(destination.getDoctor().getFeedbacks());
@@ -46,7 +48,7 @@ public class CustomConfiguration {
                 skip(destination.getDoctor().getSpecializations());
                 skip(destination.getDoctor().getAppointments());
                 skip(destination.getDoctor().getFeedbacks());
-                skip(destination.getClinic());
+                //skip(destination.getClinic());
             }
         });
 
@@ -65,16 +67,16 @@ public class CustomConfiguration {
             protected void configure() {
                 skip(destination.getPatient().getVitals());
             }
-        });
+        });*/
 
-/*
-        modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
+/*        modelMapper.addMappings(new PropertyMap<DoctorClinic, DoctorClinicDto>() {
             @Override
             protected void configure() {
-                skip(destination.)
+                skip(destination.getDoctor());
+                skip(destination.getClinic());
+
             }
-        });
-*/
+        });*/
         return modelMapper;
     }
 }

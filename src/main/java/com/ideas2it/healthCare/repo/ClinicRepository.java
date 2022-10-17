@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
     Optional<Clinic> findByIdAndStatus(int id, String status);
 
+    Boolean existsByIdAndStatus(int id, String status);
+
     List<Clinic> findAllByStatus(String active);
 }
 

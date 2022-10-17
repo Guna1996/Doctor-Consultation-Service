@@ -13,6 +13,7 @@ package com.ideas2it.healthCare.repo;
 import com.ideas2it.healthCare.model.Patient;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,21 +34,6 @@ import java.util.Map;
  */
 @Repository
 public interface PatientRepository extends JpaRepository<Patient,Integer> {
-
-    /**
-     * <p>
-     *  This method is used to retrieve patient by
-     *  using patient id and patient status and send back to the
-     *  PatientService
-     * </p>
-     *
-     * @param id - id of the patient
-     *
-     * @param status - status of the patient
-     *
-     * @return Patient
-     */
-    Patient deleteByIdAndStatus(Integer id, String status);
 
     /**
      * <p>

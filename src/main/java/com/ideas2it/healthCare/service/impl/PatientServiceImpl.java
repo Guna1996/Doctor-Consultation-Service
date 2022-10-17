@@ -1,11 +1,11 @@
 /**
  * <p>
- * This is the package contains classes are DoctorClinicImpl,
+ * This package contains classes are DoctorClinicImpl,
  * PatientImpl, DoctorImpl, ClinicImpl,
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthCare.service.impl;
@@ -18,6 +18,7 @@ import com.ideas2it.healthCare.repo.PatientRepository;
 import com.ideas2it.healthCare.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,44 +26,43 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * PatientserviceImpl used to implements Patientservice
- * and it contains methods with helps of passing object to
- * PatientRepository class
+ * PatientserviceImpl class implements Patientservice
+ * and it contains methods and with helps of passing object to
+ * PatientRepository interface
  * </p>
  *
- * @author  Ramachandran
+ * @author Ramachandran
  *
  * @version 1
  *
- * @since   2022-07-18
+ * @since 2022-07-18
  */
 @Service
-@RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
 
-    private final PatientRepository patientRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
-    private final ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public PatientDto addPatient(PatientDto patientDto) {
         Patient patient = modelMapper.map(patientDto, Patient.class);
-        patient=patientRepository.save(patient);
-        patientDto = modelMapper.map(patient,PatientDto.class);
+        patient = patientRepository.save(patient);
+        patientDto = modelMapper.map(patient, PatientDto.class);
         return patientDto;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public PatientDto getPatientById(Integer id)  {
-        Patient patientFromDb = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if(patientFromDb != null) {
-            PatientDto patientDto =modelMapper.map(patientFromDb, PatientDto.class);
+    public PatientDto getPatientById(Integer id) {
+        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if (patient != null) {
+            PatientDto patientDto = modelMapper.map(patient, PatientDto.class);
             return patientDto;
         } else {
             throw new NotFoundException("Patient not found");
@@ -72,25 +72,23 @@ public class PatientServiceImpl implements PatientService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public PatientDto updatePatient(PatientDto patientDto) {
-        if(patientDto != null) {
-            Patient patient = modelMapper.map(patientDto,Patient.class);
+        if (patientDto != null) {
+            Patient patient = modelMapper.map(patientDto, Patient.class);
             patient = patientRepository.save(patient);
-            patientDto = modelMapper.map(patient,PatientDto.class);
+            patientDto = modelMapper.map(patient, PatientDto.class);
             return patientDto;
         } else {
-            throw new NotFoundException("Patient can't able tp update");
+            throw new NotFoundException("Patient can't able to update");
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public String deletePatient(Integer id) {
-        Patient patient = patientRepository.deleteByIdAndStatus(id, Constants.ACTIVE);
-        if(patient != null) {
+        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        if (patient != null) {
             patient.setStatus(Constants.INACTIVE);
             patientRepository.save(patient);
             return "deleted successfully";
@@ -102,24 +100,19 @@ public class PatientServiceImpl implements PatientService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<PatientDto> getPatients() {
         List<Patient> patients = patientRepository.findAllByStatus(Constants.ACTIVE);
-        if(patients.isEmpty()) {
+        if (patients.isEmpty()) {
             throw new NotFoundException("No Patients Found");
         } else {
             return patients.stream()
-                    .map(patient -> modelMapper.map(patient,PatientDto.class))
+                    .map(patient -> modelMapper.map(patient, PatientDto.class))
                     .collect(Collectors.toList());
         }
     }
 
     public boolean isPatientAvailable(Integer id) {
-        Patient patientFromDb = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if(patientFromDb != null) {
-            return true;
-        } else {
-            return false;
-        }
+        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        return patient != null;
     }
 }
