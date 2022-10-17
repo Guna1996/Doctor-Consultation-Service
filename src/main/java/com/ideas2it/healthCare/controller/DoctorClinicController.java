@@ -13,6 +13,7 @@ package com.ideas2it.healthCare.controller;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.service.DoctorClinicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,11 @@ import java.util.List;
  *
  */
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/doctorclinic")
 public class DoctorClinicController {
 
-    private final DoctorClinicService doctorClinicService;
+    @Autowired
+    private DoctorClinicService doctorClinicService;
 
     @PostMapping
     public ResponseEntity<DoctorClinicDto> assignDoctorToClinic (@RequestBody DoctorClinicDto doctorClinicDto) {

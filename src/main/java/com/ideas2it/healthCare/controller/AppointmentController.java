@@ -9,7 +9,6 @@ package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
 import com.ideas2it.healthCare.service.AppointmentService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -95,8 +94,8 @@ public class AppointmentController {
      * @return string
      */
     @DeleteMapping("/{id}")
-    public String deleteAppointment(@PathVariable("id") int id) {
+    public ResponseEntity<String> deleteAppointment(@PathVariable("id") int id) {
 
-        return appointmentService.deleteAppointmentById(id);
+        return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }
 }
