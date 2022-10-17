@@ -15,6 +15,7 @@ import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +38,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
-    private final DoctorRepository doctorRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
 
+    //@Autowired
     private final ModelMapper modelMapper;
 
     /**
