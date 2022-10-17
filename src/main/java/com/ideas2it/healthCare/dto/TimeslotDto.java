@@ -11,7 +11,11 @@
 
 package com.ideas2it.healthCare.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalTime;
 
@@ -28,7 +32,9 @@ import java.time.LocalTime;
  * @since   2022-10-10
  */
 
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class TimeslotDto {
 
     private int id;

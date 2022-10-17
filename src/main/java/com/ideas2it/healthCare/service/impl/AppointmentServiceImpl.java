@@ -11,7 +11,11 @@ import com.ideas2it.healthCare.service.AppointmentService;
 import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
+
+import org.modelmapper.ModelMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,6 +45,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentMapper appointmentMapper;
 
 
+
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, ModelMapper modelMapper, DoctorService doctorService, PatientService patientService, ClinicService clinicService) {
+        this.appointmentRepository = appointmentRepository;
+        this.modelMapper = modelMapper;
+        this.doctorService = doctorService;
+        this.patientService = patientService;
+        this.clinicService = clinicService;
+    }
+
+    @Override
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
 
         if (doctorService.isDoctorAvailable(appointmentDto.getDoctorId()) && patientService.isPatientAvailable(appointmentDto.getPatientId())
@@ -60,7 +74,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> getAppointments() {
         System.out.println("hi");
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
-        System.out.println("hey da");
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");
         }

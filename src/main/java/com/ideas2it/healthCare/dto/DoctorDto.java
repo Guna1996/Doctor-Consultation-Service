@@ -7,10 +7,12 @@
  */
 package com.ideas2it.healthCare.dto;
 
-import com.ideas2it.healthCare.common.Constants;
-
-import com.ideas2it.healthCare.model.Clinic;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ideas2it.healthCare.model.DoctorClinic;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -30,7 +32,9 @@ import java.util.Set;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorDto {
 
     private int id;
@@ -74,5 +78,5 @@ public class DoctorDto {
 
     private List<AppointmentDto> appointments;
 
-    private List<ClinicDto> clinics;
+    private List<DoctorClinic> clinics;
 }

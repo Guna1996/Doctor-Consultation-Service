@@ -7,8 +7,13 @@
  */
 package com.ideas2it.healthCare.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.common.Constants;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -28,9 +33,11 @@ import java.util.Set;
  *
  * @since   2022-10-10
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "doctors")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Doctor {
 
     @Id
@@ -50,7 +57,7 @@ public class Doctor {
     @Column(name = "qualification")
     private String qualification;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "doctor_specialization",
     joinColumns = @JoinColumn(name = "doctor_id"),
     inverseJoinColumns = @JoinColumn(name = "specialization_id"))
