@@ -9,6 +9,7 @@ package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
+import com.ideas2it.healthCare.dto.DoctorSpecializationDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Specialization;
@@ -55,10 +56,10 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @param specializationDto {@link SpecializationDto}
      */
     @Override
-    public SpecializationDto saveOrUpdate(SpecializationDto specializationDto) {
+    public DoctorSpecializationDto saveOrUpdate(DoctorSpecializationDto specializationDto) {
         Specialization specialization =  modelMapper.map(specializationDto, Specialization.class);
         specialization = specializationRepository.save(specialization);
-        return modelMapper.map(specialization, SpecializationDto.class);
+        return modelMapper.map(specialization, DoctorSpecializationDto.class);
     }
 
     /**
@@ -71,12 +72,12 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @return {@link List <DoctorDto>}
      */
     @Override
-    public List<SpecializationDto> getAllSpecializations() {
+    public List<DoctorSpecializationDto> getAllSpecializations() {
         List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE);
         if (!specializations.isEmpty()) {
-            List<SpecializationDto> specializationDtos = new ArrayList<>();
+            List<DoctorSpecializationDto> specializationDtos = new ArrayList<>();
             for (Specialization specialization : specializations) {
-                specializationDtos.add(modelMapper.map(specialization, SpecializationDto.class));
+                specializationDtos.add(modelMapper.map(specialization, DoctorSpecializationDto.class));
             }
             return specializationDtos;
         } else {
@@ -94,11 +95,11 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @return {@link DoctorDto}
      */
     @Override
-    public SpecializationDto getSpecializationById(int id) {
+    public DoctorSpecializationDto getSpecializationById(int id) {
         Specialization specialization = specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(()-> new NotFoundException("No Specialization Found"));
-        return modelMapper.map(specialization, SpecializationDto.class);
+        return modelMapper.map(specialization, DoctorSpecializationDto.class);
     }
 
     /**
