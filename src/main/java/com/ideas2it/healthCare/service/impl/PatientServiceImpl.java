@@ -5,7 +5,7 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthCare.service.impl;
@@ -16,7 +16,6 @@ import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.PatientRepository;
 import com.ideas2it.healthCare.service.PatientService;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,6 +110,9 @@ public class PatientServiceImpl implements PatientService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isPatientAvailable(Integer id) {
         Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
         return patient != null;

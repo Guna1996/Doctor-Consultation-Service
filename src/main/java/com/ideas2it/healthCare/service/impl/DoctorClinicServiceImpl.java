@@ -1,3 +1,13 @@
+/**
+ * <p>
+ * This package contains classes are DoctorClinicImpl,
+ * PatientImpl, DoctorImpl, ClinicImpl,
+ * AppointmentImpl, FeedbackImpl, SpecializationImpl,
+ * TimeslotImpl, VitalsImpl
+ * </p>
+ *
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
@@ -14,8 +24,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * <p>
+ * DoctorClinicServiceImpl class implements DoctorClinicService
+ * and it contains methods and with helps of passing object to
+ * DoctorClinicRepository interface
+ * </p>
+ *
+ * @author Ramachandran
+ *
+ * @version 1
+ *
+ * @since 2022-07-18
+ */
 @Service
 public class DoctorClinicServiceImpl implements DoctorClinicService {
 
@@ -34,17 +58,24 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     @Autowired
     private ModelMapper modelMapper;
 
-
+    /**
+     * {@inheritDoc}
+     */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
+        DoctorClinicDto toReturnDto = null;
+        if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId())&&
                 clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
             DoctorClinic doctorClinic = modelMapper.map(doctorClinicDto, DoctorClinic.class);
-            return modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
+            toReturnDto = modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
         } else {
             throw new NotFoundException("doctor not found to assign");
         }
+        return toReturnDto;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<DoctorClinicDto> getDoctorClinics() {
         List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE);
         if (doctorClinics.isEmpty()) {
@@ -56,17 +87,20 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String deleteDoctorFromClinic(Integer id) {
-        DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (doctorClinic != null) {
-            doctorClinic.setStatus(Constants.INACTIVE);
-            doctorClinicRepository.save(doctorClinic);
-            return "deleted successfully";
-        } else {
-            throw new NotFoundException("Doctor not found to delete");
-        }
+        DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(() ->  new NotFoundException("Doctor not found to delete"));
+        doctorClinic.setStatus(Constants.INACTIVE);
+        doctorClinicRepository.save(doctorClinic);
+        return "Deleted Successfully";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
         if (doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
             return modelMapper.map(doctorClinicRepository

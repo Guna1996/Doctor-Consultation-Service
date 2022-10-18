@@ -1,6 +1,6 @@
 /**
  * <p>
- * This is the package contains classes are DoctorClinicService,
+ * This package contains interfaces are DoctorClinicService,
  * PatientService, DoctorService, ClinicService,
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalsServiceImpl.
@@ -88,5 +88,17 @@ public interface PatientService {
      */
     List<PatientDto> getPatients();
 
+    /**
+     * <p>
+     * This isPatientAvailable abstract method is
+     * used to check wheather a patient is available or not
+     * on the patient table by using getting id from the
+     * patient
+     * </p>
+     *
+     * @param id - id of the patient
+     *
+     * @return boolean
+     */
     boolean isPatientAvailable(Integer id);
 }

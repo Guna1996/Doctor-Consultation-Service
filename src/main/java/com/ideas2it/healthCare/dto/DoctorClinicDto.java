@@ -12,14 +12,7 @@ package com.ideas2it.healthCare.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.ideas2it.healthCare.model.Clinic;
-import com.ideas2it.healthCare.model.Doctor;
-import com.ideas2it.healthCare.model.Timeslot;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -40,7 +33,6 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 public class DoctorClinicDto {
 
     private int id;
