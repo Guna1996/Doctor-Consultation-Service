@@ -78,5 +78,5 @@ public class DoctorDto {
 
     private List<AppointmentDto> appointments;
 
-    private List<DoctorClinic> clinics;
+    private List<DoctorClinicDto> clinics;
 }

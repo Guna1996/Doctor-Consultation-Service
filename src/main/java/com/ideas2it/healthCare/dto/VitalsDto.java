@@ -17,6 +17,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Transient;
+
 /**
  * <p>
  *This is a Dto class for Vitals
@@ -54,4 +56,6 @@ public class VitalsDto {
     private String status;
 
     private DoctorDto doctor;
+
+    private String bloodPressure;
 }

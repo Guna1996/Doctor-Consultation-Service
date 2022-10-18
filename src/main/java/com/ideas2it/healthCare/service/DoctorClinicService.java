@@ -4,6 +4,7 @@ import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.model.DoctorClinic;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DoctorClinicService {
 
@@ -14,5 +15,7 @@ public interface DoctorClinicService {
     String deleteDoctorFromClinic(Integer id);
 
     DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto);
+
+    DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId);
 
 }

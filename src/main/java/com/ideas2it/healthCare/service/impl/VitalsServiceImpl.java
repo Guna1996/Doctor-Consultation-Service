@@ -40,6 +40,14 @@ public class VitalsServiceImpl implements VitalsService {
     public VitalsDto getVitalsById(int id) {
         Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("feedback not found"));
+        if (vitals.getDiastolic() < 80 && vitals.getSystolic() < 120) {
+            vitals.setBloodPressure("Normal");
+        } else if (vitals.getSystolic() > 120 || vitals.getDiastolic() > 80) {
+            vitals.setBloodPressure("High");
+        }
+        else {
+            vitals.setBloodPressure("Low");
+        }
         return modelMapper.map(vitals, VitalsDto.class);
     }
 
@@ -49,6 +57,14 @@ public class VitalsServiceImpl implements VitalsService {
         if (!vitals.isEmpty()) {
             List<VitalsDto> vitalsDto = new ArrayList<>();
             for (Vitals vital : vitals) {
+                if (vital.getDiastolic() < 80 && vital.getSystolic() < 120) {
+                    vital.setBloodPressure("normal");
+                } else if (vital.getSystolic() > 120 || vital.getDiastolic() > 80) {
+                    vital.setBloodPressure("High");
+                }
+                else {
+                    vital.setBloodPressure("Low");
+                }
                 vitalsDto.add(modelMapper.map(vital, VitalsDto.class));
             }
             return vitalsDto;
