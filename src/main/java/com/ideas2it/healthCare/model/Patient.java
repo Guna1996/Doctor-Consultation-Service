@@ -5,18 +5,14 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vitals,Timeslot.
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthCare.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -73,10 +69,10 @@ public class Patient {
     private String email;
 
     @Column(name = "status")
-    private String status = "active";
+    private String status ;
 
     @OneToMany(mappedBy = "patient")
-    private List<Feedback> feedback;
+    private List<Feedback> feedbacks;
 
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointment;
