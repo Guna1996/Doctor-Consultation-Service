@@ -52,4 +52,10 @@ public class DoctorClinicController {
     public ResponseEntity<DoctorClinicDto> deleteDoctorFromClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
         return new ResponseEntity<>(doctorClinicService.updateDoctorClinic(doctorClinicDto), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/{doctorId}/{clinicId}")
+    public ResponseEntity<DoctorClinicDto> getByDoctorIdAndClinicId(@PathVariable("doctorId") int doctorId, @PathVariable("clinicId") int clinicId) {
+        System.out.println("hi");
+        return new ResponseEntity<>(doctorClinicService.getByDoctorIdAndClinicId(doctorId, clinicId), HttpStatus.OK);
+    }
 }

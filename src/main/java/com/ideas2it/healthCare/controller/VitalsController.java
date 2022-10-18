@@ -51,4 +51,5 @@ public class VitalsController {
     public ResponseEntity<String> deleteFeedbackById(@PathVariable("id") int id) {
         return new ResponseEntity<>(vitalsService.deleteVitals(id), HttpStatus.OK);
     }
+
 }
