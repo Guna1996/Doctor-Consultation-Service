@@ -108,5 +108,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         }
         throw new NotFoundException("Doctor id not found to update");
     }
+
+    @Override
+    public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
+        return modelMapper.map(doctorClinicRepository.findBlyDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+                .orElseThrow(() -> new NotFoundException("not found")), DoctorClinicDto.class);
+    }
 }
 

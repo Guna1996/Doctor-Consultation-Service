@@ -92,4 +92,10 @@ public class DoctorClinicController {
     public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable Integer id) {
         return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
     }
+
+    @GetMapping(path = "/{doctorId}/{clinicId}")
+    public ResponseEntity<DoctorClinicDto> getByDoctorIdAndClinicId(@PathVariable("doctorId") int doctorId, @PathVariable("clinicId") int clinicId) {
+        System.out.println("hi");
+        return new ResponseEntity<>(doctorClinicService.getByDoctorIdAndClinicId(doctorId, clinicId), HttpStatus.OK);
+    }
 }

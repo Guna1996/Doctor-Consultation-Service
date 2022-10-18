@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthCare.service;
 
+import com.ideas2it.healthCare.dto.DoctorSpecializationDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 
 import java.util.List;
@@ -33,10 +34,10 @@ public interface SpecializationService {
      * Specialization model with the help of mapper class
      * </p>
      *
-     * @param specializationDto {@link SpecializationDto}
+     * @param specializationDto {@link DoctorSpecializationDto}
      *
      */
-    SpecializationDto saveOrUpdate(SpecializationDto specializationDto);
+    DoctorSpecializationDto saveOrUpdate(DoctorSpecializationDto specializationDto);
 
     /**
      * <p>
@@ -47,7 +48,7 @@ public interface SpecializationService {
      *
      * @return {@link List <SpecializationDto>}
      */
-    List<SpecializationDto> getAllSpecializations();
+    List<DoctorSpecializationDto> getAllSpecializations();
 
     /**
      * <p>
@@ -59,7 +60,7 @@ public interface SpecializationService {
      *
      * @return {@link SpecializationDto}
      */
-    SpecializationDto getSpecializationById(int id);
+    DoctorSpecializationDto getSpecializationById(int id);
 
 
     /**

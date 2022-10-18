@@ -13,6 +13,7 @@ package com.ideas2it.healthCare.service;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DoctorClinicService {
 
@@ -65,5 +66,7 @@ public interface DoctorClinicService {
      * @return DoctorClinicDto
      */
     DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto);
+
+    DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId);
 
 }
