@@ -37,21 +37,9 @@ public class AppointmentDto {
 
     private LocalDateTime scheduledOn;
 
-    private int patientId;
-
-    private int doctorId;
-
-    private int clinicId;
-
     private PatientDto patient;
 
     private DoctorDto doctor;
 
     private ClinicDto clinic;
-
-    private String status;
-
-    private LocalDate scheduledDate;
-
-    private LocalTime scheduledTime;
 }
