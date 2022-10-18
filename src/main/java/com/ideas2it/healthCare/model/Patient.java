@@ -5,7 +5,7 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vitals,Timeslot.
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthCare.model;
