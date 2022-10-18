@@ -65,5 +65,5 @@ public class Feedback {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    Patient patient;
+    private Patient patient;
 }

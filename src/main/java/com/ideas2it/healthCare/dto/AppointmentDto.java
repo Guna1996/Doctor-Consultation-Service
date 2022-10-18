@@ -41,6 +41,8 @@ public class AppointmentDto {
 
     private int doctorId;
 
+    private LocalDateTime createdAt;
+
     private int clinicId;
 
     private PatientDto patient;

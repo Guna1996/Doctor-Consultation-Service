@@ -55,7 +55,9 @@ public class PatientDto {
     @Pattern(regexp = Constants.EMAIL_REGEX, message = "Please Enter Valid Email")
     private String email;
 
-    private List<FeedbackDto> feedback;
+    private String status;
+
+    private List<FeedbackDto> feedbacks;
 
     private List<AppointmentDto> appointment;
 
