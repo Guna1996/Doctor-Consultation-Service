@@ -47,6 +47,6 @@ public class SpecializationDto {
 
     private String status;
 
-    //private Set<DoctorDto> doctors;
+    private Set<DoctorDto> doctors;
 
 }
