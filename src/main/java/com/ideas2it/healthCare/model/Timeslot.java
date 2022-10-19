@@ -40,7 +40,6 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Timeslot {
 
     @Id

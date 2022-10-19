@@ -34,7 +34,6 @@ import javax.persistence.Transient;
 
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class VitalsDto {
 
     private int id;
