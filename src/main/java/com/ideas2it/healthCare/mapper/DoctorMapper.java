@@ -1,3 +1,11 @@
+/**
+ * <p>
+ * This is the base package for all the mapper classes
+ * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * classes
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.mapper;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
@@ -17,6 +25,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * <p>
+ * DoctorMapper is used convert Doctor object to
+ * DoctorDto and DoctorDto into Doctor
+ * </p>
+ *
+ * @author Mohamed Jubair
+ *
+ * @version 1
+ *
+ * @since 2022-07-18
+ */
 @Component
 public class DoctorMapper {
 
