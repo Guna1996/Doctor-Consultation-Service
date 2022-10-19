@@ -42,7 +42,6 @@ public class VitalsController {
 
     @PostMapping
     public ResponseEntity<VitalsDto> insertFeedback(@RequestBody VitalsDto vitalsDto) {
-        System.out.println("yes it's coming");
         vitalsDto.setStatus(Constants.ACTIVE);
         return new ResponseEntity<>(vitalsService.addVitals(vitalsDto),HttpStatus.OK);
     }

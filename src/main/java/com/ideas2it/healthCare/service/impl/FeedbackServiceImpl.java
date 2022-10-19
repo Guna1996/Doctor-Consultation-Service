@@ -21,44 +21,42 @@ public class FeedbackServiceImpl implements FeedbackService {
         this.feedbackRepo = feedbackRepo;
     }
 
-    @Override
     public FeedbackDto addFeedback(FeedbackDto feedbackDto) {
         return FeedbackMapper.toDto(feedbackRepo.save(FeedbackMapper.fromDto(feedbackDto)));
     }
 
-    @Override
     public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {
+        FeedbackDto feedbackDtoToReturn = null;
         if (feedbackRepo.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
-            return FeedbackMapper.toDto(feedbackRepo.save(FeedbackMapper.fromDto(feedbackDto)));
+            feedbackDtoToReturn = FeedbackMapper.toDto(feedbackRepo.save(FeedbackMapper.fromDto(feedbackDto)));
         }
         else {
             throw new NotFoundException("The data doesn't exist");
         }
+        return feedbackDtoToReturn;
     }
 
-    @Override
     public FeedbackDto getFeedbackById(int id){
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("feedback not found"));
         return FeedbackMapper.toDto(feedback);
     }
 
-    @Override
     public List<FeedbackDto> getFeedbacks() {
+        List<FeedbackDto> feedbacksDto = null;
         List<Feedback> feedbacks = feedbackRepo.findAllByStatus(Constants.ACTIVE);
         if (!feedbacks.isEmpty()) {
-            List<FeedbackDto> feedbacksDto = new ArrayList<>();
+            feedbacksDto = new ArrayList<>();
             for (Feedback feedback : feedbacks) {
                 feedbacksDto.add(FeedbackMapper.toDto(feedback));
             }
-            return feedbacksDto;
         }
         else {
             throw new NotFoundException("Data is empty");
         }
+        return feedbacksDto;
     }
 
-    @Override
     public String deleteFeedback(int id) {
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("Feedback not found"));

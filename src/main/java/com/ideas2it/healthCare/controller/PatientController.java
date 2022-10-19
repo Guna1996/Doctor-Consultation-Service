@@ -17,6 +17,7 @@ import com.ideas2it.healthCare.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -92,7 +93,7 @@ public class PatientController {
      *
      * @return PatientDto
      */
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<PatientDto> updatePatient(@Valid @RequestBody PatientDto patientDto) {
         PatientDto updatePatient = patientService.updatePatient(patientDto);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);
@@ -109,7 +110,7 @@ public class PatientController {
      *
      * @return String
      */
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable Integer id) {
         String deletePatient = patientService.deletePatient(id);
         return new ResponseEntity<>(deletePatient, HttpStatus.OK);

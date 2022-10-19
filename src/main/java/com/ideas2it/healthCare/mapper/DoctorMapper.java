@@ -37,7 +37,6 @@ import java.util.Set;
  *
  * @since 2022-07-18
  */
-@Component
 public class DoctorMapper {
 
     public static Doctor fromDto(DoctorDto doctorDto) {
