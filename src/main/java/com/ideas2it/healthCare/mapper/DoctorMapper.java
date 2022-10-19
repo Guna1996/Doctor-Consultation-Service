@@ -40,6 +40,14 @@ import java.util.Set;
 @Component
 public class DoctorMapper {
 
+    /**
+     * <p>
+     * This method is used to convert DoctorDto to
+     * Doctor model
+     * </p>
+     *
+     * @return {@link Doctor}
+     */
     public static Doctor fromDto(DoctorDto doctorDto) {
         Doctor doctor = new Doctor();
         if (doctorDto != null) {
@@ -103,6 +111,14 @@ public class DoctorMapper {
     return doctor;
     }
 
+    /**
+     * <p>
+     * This method is used to convert Doctor model to
+     * DoctorDto
+     * </p>
+     *
+     * @return {@link DoctorDto}
+     */
     public static DoctorDto toDto(Doctor doctor) {
         DoctorDto doctorDto = new DoctorDto();
         if (doctor != null) {
