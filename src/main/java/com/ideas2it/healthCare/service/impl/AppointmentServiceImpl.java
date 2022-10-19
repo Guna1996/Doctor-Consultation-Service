@@ -1,3 +1,13 @@
+/**
+ * <p>
+ * This package contains classes are DoctorClinicImpl,
+ * PatientImpl, DoctorImpl, ClinicImpl,
+ * AppointmentImpl, FeedbackImpl, SpecializationImpl,
+ * TimeslotImpl, VitalsImpl
+ * </p>
+ * <p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
@@ -21,6 +31,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+/**
+ * <p>
+ * AppointmentserviceImpl class implements Appointmentservice
+ * and it contains methods and with helps of passing object to
+ * AppointmentRepository interface
+ * </p>
+ *
+ * @author Gunaseelan K
+ *
+ * @version 1
+ *
+ * @since 2022-07-18
+ */
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
@@ -38,7 +61,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        System.out.println(appointmentDto.getScheduledOn());
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
         if (Period.between(date, currentDate).getDays() < 0) {
@@ -52,9 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public List<AppointmentDto> getAppointments() {
-        System.out.println("hi");
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
-        System.out.println("hey da");
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");
         }
@@ -92,8 +112,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
-        Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
-        return AppointmentMapper.toDto(appointmentRepository.save(appointment));
+        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        if (Period.between(date, currentDate).getDays() < 0) {
+            Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
+            return save(appointmentDto);
+        }
+        throw new NotFoundException("please enter valid date and time");
     }
 
     public AppointmentDto save(AppointmentDto appointmentDto) {
