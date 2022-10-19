@@ -7,7 +7,6 @@ import com.ideas2it.healthCare.mapper.ClinicMapper;
 import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.repo.ClinicRepository;
 import com.ideas2it.healthCare.service.ClinicService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,6 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Autowired
     private ClinicRepository clinicRepository;
-
 
     public ClinicDto addClinic(ClinicDto clinicDto) {
 
@@ -55,7 +53,7 @@ public class ClinicServiceImpl implements ClinicService {
         if (clinicById.isEmpty()) {
             throw new NotFoundException("No Clinic Found");
         }
-        return modelMapper.map(clinicRepository.save(modelMapper.map(clinicDto, Clinic.class)), ClinicDto.class);
+        return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
     }
 
     public String deleteClinicById(int id) {
@@ -71,6 +69,7 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     public boolean isClinicAvailable(int id) {
-       return clinicRepository.existsByIdAndStatus(id, Constants.ACTIVE);
+        return clinicRepository.existsByIdAndStatus(id, Constants.ACTIVE);
     }
 }
+

@@ -3,19 +3,19 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.AppointmentDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
+import com.ideas2it.healthCare.mapper.AppointmentMapper;
 import com.ideas2it.healthCare.model.Appointment;
 import com.ideas2it.healthCare.repo.AppointmentRepository;
 import com.ideas2it.healthCare.service.AppointmentService;
 import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,9 +28,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentRepository appointmentRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
     private DoctorService doctorService;
 
     @Autowired
@@ -41,23 +38,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-    return new AppointmentDto();
-    }
-
-
-      /*  if (doctorService.isDoctorAvailable(appointmentDto.getDoctor().getId()) && patientService.isPatientAvailable(appointmentDto.getPatientId())
-                && clinicService.isClinicAvailable(appointmentDto.getClinicId()) && isAppointmentAvailable(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime())) {
-            LocalDateTime scheduledOn = LocalDateTime.of(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime());
-            appointmentDto.getDoctor().setId(appointmentDto.getDoctorId());
-            appointmentDto.getPatient().setId(appointmentDto.getPatientId());
-            appointmentDto.getClinic().setId(appointmentDto.getClinicId());
-            appointmentDto.setScheduledOn(scheduledOn);
-            Appointment appointment = modelMapper.map(appointmentDto, Appointment.class);
-            return modelMapper.map(appointmentRepository.save(appointment), AppointmentDto.class);
+        System.out.println(appointmentDto.getScheduledOn());
+        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        if (Period.between(date, currentDate).getDays() < 0) {
+            if (doctorService.isDoctorAvailable(appointmentDto.getDoctor().getId()) && patientService.isPatientAvailable(appointmentDto.getPatient().getId())
+                    && clinicService.isClinicAvailable(appointmentDto.getClinic().getId())) {
+                return save(appointmentDto);
+            }
+            throw new NotFoundException("doctor, clinic or patient not found");
         }
-        throw new NotFoundException("doctor, clinic or patient not found");
-    }*/
-
+        throw new NotFoundException("please enter valid date and time");
+    }
 
     public List<AppointmentDto> getAppointments() {
         System.out.println("hi");
@@ -67,7 +59,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new NotFoundException("No appointment Found");
         }
         return appointments.stream()
-                .map(appointment -> modelMapper.map(appointment, AppointmentDto.class))
+                .map(AppointmentMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -75,15 +67,15 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto getAppointmentById(int id) {
 
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
-                map(appointment -> modelMapper.map(appointment, AppointmentDto.class)).
+                map(AppointmentMapper::toDto).
                 findFirst().
                 orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
 
 
-    public boolean isAppointmentAvailable(LocalDate date, LocalTime time) {
+    public boolean isAppointmentAvailable(int id, LocalDateTime dateTime) {
 
-        return appointmentRepository.findByScheduledOnAndStatus(LocalDateTime.of(date, time), Constants.ACTIVE).isEmpty();
+        return appointmentRepository.findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
 
@@ -100,10 +92,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
+        Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
+        return AppointmentMapper.toDto(appointmentRepository.save(appointment));
+    }
 
-        /*appointmentDto.setScheduledOn(LocalDateTime.of(appointmentDto.getScheduledDate(), appointmentDto.getScheduledTime()));
-        Appointment appointment = modelMapper.map(appointmentDto, Appointment.class);
-        return modelMapper.map(appointmentRepository.save(appointment), AppointmentDto.class);*/
-    return new AppointmentDto();
+    public AppointmentDto save(AppointmentDto appointmentDto) {
+        if (isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
+            Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
+            appointment.setStatus(Constants.ACTIVE);
+            return AppointmentMapper.toDto(appointmentRepository.save(appointment));
+        }
+        throw new NotFoundException("This schedule is unavailable. kindly choose other schedule");
     }
 }

@@ -44,7 +44,6 @@ public class PatientMapper {
                     Appointment appointment = new Appointment();
                     appointment.setId(appointmentDto.getId());
                     appointment.setScheduledOn(appointmentDto.getScheduledOn());
-                    appointment.setCreatedAt(appointmentDto.getCreatedAt());
                     appointment.setStatus(appointmentDto.getStatus());
                     appointments.add(appointment);
                 });
@@ -102,7 +101,6 @@ public class PatientMapper {
                     AppointmentDto appointmentDto = new AppointmentDto();
                     appointmentDto.setId(appointment.getId());
                     appointmentDto.setScheduledOn(appointment.getScheduledOn());
-                    appointmentDto.setCreatedAt(appointment.getCreatedAt());
                     appointmentDto.setStatus(appointment.getStatus());
                     appointmentsDtoList.add(appointmentDto);
                 });

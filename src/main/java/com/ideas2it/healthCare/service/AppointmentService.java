@@ -4,6 +4,7 @@ import com.ideas2it.healthCare.dto.AppointmentDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -14,9 +15,9 @@ public interface AppointmentService {
 
     AppointmentDto getAppointmentById(int id);
 
-    boolean isAppointmentAvailable(LocalDate date, LocalTime time );
+    boolean isAppointmentAvailable(int id, LocalDateTime dateTime);
 
     AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto);
 
-   String deleteAppointmentById(int id);
+    String deleteAppointmentById(int id);
 }

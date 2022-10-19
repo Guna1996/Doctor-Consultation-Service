@@ -46,5 +46,4 @@ public class AppointmentDto {
     private ClinicDto clinic;
 
     private String status;
-
 }
