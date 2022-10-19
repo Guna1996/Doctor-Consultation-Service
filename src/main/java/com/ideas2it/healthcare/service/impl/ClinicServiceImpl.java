@@ -50,6 +50,7 @@ public class ClinicServiceImpl implements ClinicService {
     public ClinicDto addClinic(ClinicDto clinicDto) {
 
         Clinic clinic = ClinicMapper.fromDto(clinicDto);
+        clinic.setStatus(Constants.ACTIVE);
         return ClinicMapper.toDto(clinicRepository.save(clinic));
     }
 
