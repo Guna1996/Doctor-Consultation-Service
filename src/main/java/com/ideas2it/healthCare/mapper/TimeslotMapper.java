@@ -8,7 +8,7 @@ public class TimeslotMapper {
     public static Timeslot fromDto(TimeslotDto timeslotDto) {
         Timeslot timeslot = new Timeslot();
         if(null != timeslotDto) {
-            timeslot.setId(timeslot.getId());
+            timeslot.setId(timeslotDto.getId());
             timeslot.setTimeslot(timeslotDto.getTimeslot());
         }
         return timeslot;

@@ -97,6 +97,7 @@ public class PatientController {
      * @return PatientDto
      */
     @PutMapping
+
     public ResponseEntity<PatientDto> updatePatient(@RequestBody PatientDto patientDto) {
         PatientDto updatePatient = patientService.updatePatient(patientDto);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);

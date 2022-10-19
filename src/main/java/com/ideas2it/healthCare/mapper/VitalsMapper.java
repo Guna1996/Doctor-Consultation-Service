@@ -16,8 +16,8 @@ public class VitalsMapper {
             vitals.setHeight(vitalsDto.getHeight());
             vitals.setWeight(vitalsDto.getWeight());
             vitals.setPulse(vitalsDto.getPulse());
-            vitals.setSystolic(vitals.getSystolic());
-            vitals.setDiastolic(vitals.getDiastolic());
+            vitals.setSystolic(vitalsDto.getSystolic());
+            vitals.setDiastolic(vitalsDto.getDiastolic());
             vitals.setSugarLevel(vitalsDto.getSugarLevel());
             vitals.setStatus(vitalsDto.getStatus());
             vitals.setBloodPressure(vitalsDto.getBloodPressure());
@@ -73,6 +73,7 @@ public class VitalsMapper {
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setMobileNumber(doctor.getMobileNumber());
                 doctorDto.setGender(doctor.getGender());
+                doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 vitalsDto.setDoctor(doctorDto);
             }

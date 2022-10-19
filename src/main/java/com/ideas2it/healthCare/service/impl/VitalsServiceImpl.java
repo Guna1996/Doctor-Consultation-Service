@@ -21,22 +21,21 @@ public class VitalsServiceImpl implements VitalsService {
         this.vitalsRepo = vitalsRepo;
     }
 
-    @Override
     public VitalsDto addVitals(VitalsDto vitalsDto) {
         return VitalsMapper.toDto(vitalsRepo.save(VitalsMapper.fromDto(vitalsDto)));
     }
 
-    @Override
     public VitalsDto updateVitals(VitalsDto vitalsDto) {
+        VitalsDto vitalsDtoToReturn = null;
         if (vitalsRepo.existsByIdAndStatus(vitalsDto.getId(), vitalsDto.getStatus())) {
-            return VitalsMapper.toDto(vitalsRepo.save(VitalsMapper.fromDto(vitalsDto)));
+            vitalsDtoToReturn =  VitalsMapper.toDto(vitalsRepo.save(VitalsMapper.fromDto(vitalsDto)));
         }
         else {
             throw new NotFoundException("The data doesn't exist");
         }
+        return vitalsDtoToReturn;
     }
 
-    @Override
     public VitalsDto getVitalsById(int id) {
         Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("feedback not found"));
@@ -51,11 +50,11 @@ public class VitalsServiceImpl implements VitalsService {
         return VitalsMapper.toDto(vitals);
     }
 
-    @Override
     public List<VitalsDto> getVitals() {
+        List<VitalsDto> vitalsDto = null;
         List<Vitals> vitals = vitalsRepo.findAllByStatus(Constants.ACTIVE);
         if (!vitals.isEmpty()) {
-            List<VitalsDto> vitalsDto = new ArrayList<>();
+            vitalsDto = new ArrayList<>();
             for (Vitals vital : vitals) {
                 if (vital.getDiastolic() < 80 && vital.getSystolic() < 120) {
                     vital.setBloodPressure("normal");
@@ -67,14 +66,13 @@ public class VitalsServiceImpl implements VitalsService {
                 }
                 vitalsDto.add(VitalsMapper.toDto(vital));
             }
-            return vitalsDto;
         }
         else {
             throw new NotFoundException("Data is empty");
         }
+        return vitalsDto;
     }
 
-    @Override
     public String deleteVitals(int id) {
         Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("Feedback not found"));
@@ -83,7 +81,6 @@ public class VitalsServiceImpl implements VitalsService {
         return "Deleted Successfully";
     }
 
-    @Override
     public List<VitalsDto> getVitalsByPatientId(int patientId) {
         List<VitalsDto> vitalsDto = null;
         List<Vitals> vitals = vitalsRepo.findByPatientId(patientId);

@@ -15,6 +15,7 @@ import com.ideas2it.healthCare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,8 +90,8 @@ public class DoctorClinicController {
      * @return String
      * 
      */
-    @PutMapping("/{id}")
-    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable("id") int id) {
         return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
     }
 

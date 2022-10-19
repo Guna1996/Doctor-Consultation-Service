@@ -20,55 +20,52 @@ public class TimeslotServiceImpl implements TimeslotService {
         this.timeslotRepo = timeslotRepo;
     }
 
-    @Override
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
         return TimeslotMapper.toDto(timeslotRepo.save(TimeslotMapper.fromDto(timeslotDto)));
     }
 
-    @Override
     public TimeslotDto updateTimeslot(TimeslotDto timeslotDto) {
+        TimeslotDto timeslotDtoToReturn = null;
         if (timeslotRepo.existsById(timeslotDto.getId())) {
-            return TimeslotMapper.toDto(timeslotRepo.save(TimeslotMapper.fromDto(timeslotDto)));
+            timeslotDtoToReturn = TimeslotMapper.toDto(timeslotRepo.save(TimeslotMapper.fromDto(timeslotDto)));
         }
         else {
             throw new NotFoundException("The data doesn't exist");
         }
+        return timeslotDtoToReturn;
     }
 
-    @Override
     public TimeslotDto getTimeslotById(int id) {
         Timeslot timeslot = timeslotRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Timeslot not found"));
         return TimeslotMapper.toDto(timeslot);
     }
 
-    @Override
     public List<TimeslotDto> getTimeslots() {
+        List<TimeslotDto> timeslotsDto = null;
         List<Timeslot> timeslots = timeslotRepo.findAll();
         if (!timeslots.isEmpty()) {
-            List<TimeslotDto> timeslotsDto = new ArrayList<>();
+            timeslotsDto = new ArrayList<>();
             for (Timeslot timeslot : timeslots) {
                 timeslotsDto.add(TimeslotMapper.toDto(timeslot));
             }
-            return timeslotsDto;
         }
         else {
             throw new NotFoundException("Data is empty");
         }
+        return timeslotsDto;
     }
 
-    @Override
     public String deleteTimeslot(int id) {
         if (timeslotRepo.existsById(id)) {
             timeslotRepo.deleteById(id);
-            return "Deleted Successfully";
         }
         else {
             throw new NotFoundException("Feedback not found");
         }
+        return "Deleted Successfully";
     }
 
-    @Override
     public boolean isTimeslotAvailable(int id) {
         Timeslot  timeslot = timeslotRepo.findById(id).orElseThrow(() -> new NotFoundException("id not found"));
 
