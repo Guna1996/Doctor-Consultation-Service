@@ -1,10 +1,10 @@
 spring.mvc.pathmatch.matching-strategy: ant_path_matcher
-server.port : 2015
+#server.port : 2015
 spring:
   datasource:
     url: jdbc:mysql://localhost/healthcare
     username: root
-
+    password: Guna@1996
   jpa:
     hibernate.ddl-auto: update
     database-platform=org:
