@@ -59,7 +59,7 @@ public class PatientController {
      *
      * @return String
      */
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<PatientDto> addPatient(@Valid @RequestBody PatientDto patientDto) {
         PatientDto addedPatient = patientService.addPatient(patientDto);
         return new ResponseEntity<>(addedPatient, HttpStatus.OK);
@@ -76,7 +76,7 @@ public class PatientController {
      *
      * @return PatientDto
      */
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable Integer id)  {
         PatientDto getPatient = patientService.getPatientById(id);
         return  new ResponseEntity<>(getPatient, HttpStatus.OK);
@@ -92,7 +92,7 @@ public class PatientController {
      *
      * @return PatientDto
      */
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PatientDto> updatePatient(@Valid @RequestBody PatientDto patientDto) {
         PatientDto updatePatient = patientService.updatePatient(patientDto);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);
@@ -109,7 +109,7 @@ public class PatientController {
      *
      * @return String
      */
-    @PutMapping("/delete/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable Integer id) {
         String deletePatient = patientService.deletePatient(id);
         return new ResponseEntity<>(deletePatient, HttpStatus.OK);
@@ -123,7 +123,7 @@ public class PatientController {
      *
      * @return List<PatientDto>
      */
-    @GetMapping("/getall")
+    @GetMapping
     public ResponseEntity<List<PatientDto>> getPatients() {
         return  new ResponseEntity<>(patientService.getPatients(), HttpStatus.OK);
     }
