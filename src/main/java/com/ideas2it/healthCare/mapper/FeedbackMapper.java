@@ -7,7 +7,7 @@ import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Feedback;
 import com.ideas2it.healthCare.model.Patient;
 
-public class FeedbakMapper {
+public class FeedbackMapper {
     public static Feedback fromDto(FeedbackDto feedbackDto) {
         Feedback feedback = new Feedback();
         if(null != feedbackDto) {
