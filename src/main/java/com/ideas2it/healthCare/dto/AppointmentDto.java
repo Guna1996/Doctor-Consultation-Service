@@ -42,4 +42,6 @@ public class AppointmentDto {
     private DoctorDto doctor;
 
     private ClinicDto clinic;
+
+    private String status;
 }

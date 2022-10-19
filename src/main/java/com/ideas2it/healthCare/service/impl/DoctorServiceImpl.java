@@ -10,7 +10,7 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
-import com.ideas2it.healthCare.helper.DoctorMapper;
+import com.ideas2it.healthCare.mapper.DoctorMapper;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;

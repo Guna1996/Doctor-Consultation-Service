@@ -15,5 +15,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     Optional<Appointment> findByIdAndStatus(int id, String status);
 
-    Optional<Object> findByScheduledOnAndStatus(LocalDateTime scheduledOn, String status);
+    Optional<Appointment> findByScheduledOnAndStatus(LocalDateTime scheduledOn, String status);
+
+    Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(int id, LocalDateTime dateTime, String active);
 }

@@ -1,28 +1,38 @@
-package com.ideas2it.healthCare.helper;
+package com.ideas2it.healthCare.mapper;
 
+import com.ideas2it.healthCare.dto.AppointmentDto;
 import com.ideas2it.healthCare.dto.ClinicDto;
-import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.dto.DoctorDto;
-import com.ideas2it.healthCare.dto.TimeslotDto;
+import com.ideas2it.healthCare.dto.PatientDto;
+import com.ideas2it.healthCare.model.Appointment;
 import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.Doctor;
-import com.ideas2it.healthCare.model.DoctorClinic;
-import com.ideas2it.healthCare.model.Timeslot;
+import com.ideas2it.healthCare.model.Patient;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
-public class DoctorClinicMapper {
+public class AppointmentMapper {
 
-    public static DoctorClinic fromDto(DoctorClinicDto doctorClinicDto) {
-        DoctorClinic doctorClinic = new DoctorClinic();
-        if (doctorClinicDto != null) {
-            doctorClinic.setId(doctorClinicDto.getId());
-            doctorClinic.setStatus(doctorClinicDto.getStatus());
+    public static Appointment fromDto(AppointmentDto appointmentDto) {
+        Appointment appointment = new Appointment();
+        if (appointmentDto != null) {
+            appointment.setId(appointmentDto.getId());
 
-            DoctorDto doctorDto = doctorClinicDto.getDoctor();
+            appointment.setScheduledOn(appointmentDto.getScheduledOn());
+
+            PatientDto patientDto = appointmentDto.getPatient();
+            if (patientDto != null) {
+                Patient patient = new Patient();
+                patient.setId(patientDto.getId());
+                patient.setName(patientDto.getName());
+                patient.setDateOfBirth(patientDto.getDateOfBirth());
+                patient.setGender(patientDto.getGender());
+                patient.setMobileNumber(patientDto.getMobileNumber());
+                patient.setEmail(patientDto.getEmail());
+                appointment.setPatient(patient);
+            }
+
+            DoctorDto doctorDto = appointmentDto.getDoctor();
             if (doctorDto != null) {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
@@ -34,10 +44,10 @@ public class DoctorClinicMapper {
                 doctor.setMobileNumber(doctorDto.getMobileNumber());
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
-                doctorClinic.setDoctor(doctor);
+                appointment.setDoctor(doctor);
             }
 
-            ClinicDto clinicDto = doctorClinicDto.getClinic();
+            ClinicDto clinicDto = appointmentDto.getClinic();
             if (clinicDto != null) {
                 Clinic clinic = new Clinic();
                 clinic.setId(clinicDto.getId());
@@ -48,31 +58,33 @@ public class DoctorClinicMapper {
                 clinic.setState(clinicDto.getState());
                 clinic.setPinCode(clinicDto.getPinCode());
                 clinic.setContactNumber(clinicDto.getContactNumber());
-                doctorClinic.setClinic(clinic);
+                appointment.setClinic(clinic);
             }
 
-            List<TimeslotDto> timeslotsDto = doctorClinicDto.getTimeslots();
-            if (timeslotsDto != null) {
-                List<Timeslot> timeslots = new ArrayList<>();
-                timeslotsDto.forEach(timeslotDto -> {
-                    Timeslot timeslot = new Timeslot();
-                    timeslot.setId(timeslotDto.getId());
-                    timeslot.setTimeslot(timeslotDto.getTimeslot());
-                    timeslots.add(timeslot);
-                });
-                doctorClinic.setTimeslots(timeslots);
-            }
         }
-        return doctorClinic;
+        return appointment;
     }
 
-    public static DoctorClinicDto toDto(DoctorClinic doctorClinic) {
-        DoctorClinicDto doctorClinicDto = new DoctorClinicDto();
-        if (doctorClinic != null) {
-            doctorClinicDto.setId(doctorClinic.getId());
-            doctorClinicDto.setStatus(doctorClinic.getStatus());
+    public static AppointmentDto toDto(Appointment appointment) {
+        AppointmentDto appointmentDto = new AppointmentDto();
+        if (appointment != null) {
+            appointmentDto.setId(appointment.getId());
 
-            Doctor doctor = doctorClinic.getDoctor();
+            appointmentDto.setScheduledOn(appointment.getScheduledOn());
+
+            Patient patient = appointment.getPatient();
+            if (patient != null) {
+                PatientDto patientDto = new PatientDto();
+                patientDto.setId(patient.getId());
+                patientDto.setName(patient.getName());
+                patientDto.setDateOfBirth(patient.getDateOfBirth());
+                patientDto.setGender(patient.getGender());
+                patientDto.setMobileNumber(patient.getMobileNumber());
+                patientDto.setEmail(patient.getEmail());
+                appointmentDto.setPatient(patientDto);
+            }
+
+            Doctor doctor = appointment.getDoctor();
             if (doctor != null) {
                 DoctorDto doctorDto = new DoctorDto();
                 doctorDto.setId(doctor.getId());
@@ -84,10 +96,10 @@ public class DoctorClinicMapper {
                 doctorDto.setMobileNumber(doctor.getMobileNumber());
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
-                doctorClinicDto.setDoctor(doctorDto);
+                appointmentDto.setDoctor(doctorDto);
             }
 
-            Clinic clinic = doctorClinic.getClinic();
+            Clinic clinic = appointment.getClinic();
             if (clinic != null) {
                 ClinicDto clinicDto = new ClinicDto();
                 clinicDto.setId(clinic.getId());
@@ -98,21 +110,11 @@ public class DoctorClinicMapper {
                 clinicDto.setState(clinic.getState());
                 clinicDto.setPinCode(clinic.getPinCode());
                 clinicDto.setContactNumber(clinic.getContactNumber());
-                doctorClinicDto.setClinic(clinicDto);
+                appointmentDto.setClinic(clinicDto);
             }
 
-            List<Timeslot> timeslots = doctorClinic.getTimeslots();
-            if (timeslots != null) {
-                List<TimeslotDto> timeslotsDto = new ArrayList<>();
-                timeslots.forEach(timeslot -> {
-                    TimeslotDto timeslotDto = new TimeslotDto();
-                    timeslotDto.setId(timeslot.getId());
-                    timeslotDto.setTimeslot(timeslot.getTimeslot());
-                    timeslotsDto.add(timeslotDto);
-                });
-                doctorClinicDto.setTimeslots(timeslotsDto);
-            }
+
         }
-        return doctorClinicDto;
+        return appointmentDto;
     }
 }
