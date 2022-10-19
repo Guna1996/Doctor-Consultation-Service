@@ -11,7 +11,7 @@ public interface  FeedbackService {
 
     FeedbackDto getFeedbackById(int id);
 
-    List<FeedbackDto> getFeedbacks();
+    List<FeedbackDto> getFeedbacks(int pageNumber, int totalRows);
 
     String deleteFeedback(int id);
 

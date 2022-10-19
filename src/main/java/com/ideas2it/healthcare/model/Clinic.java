@@ -32,7 +32,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Entity
+@Entity(name = "clinic")
 @Table(name = "clinic")
 public class Clinic {
 

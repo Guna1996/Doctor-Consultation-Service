@@ -40,9 +40,9 @@ public class TimeslotServiceImpl implements TimeslotService {
         return TimeslotMapper.toDto(timeslot);
     }
 
-    public List<TimeslotDto> getTimeslots() {
+    public List<TimeslotDto> getTimeslots(int pageNumber, int totalRows) {
         List<TimeslotDto> timeslotsDto = null;
-        List<Timeslot> timeslots = timeslotRepo.findAll();
+        List<Timeslot> timeslots = timeslotRepo.findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (!timeslots.isEmpty()) {
             timeslotsDto = new ArrayList<>();
             for (Timeslot timeslot : timeslots) {

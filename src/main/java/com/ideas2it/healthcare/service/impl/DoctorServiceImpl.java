@@ -15,6 +15,7 @@ import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repo.DoctorRepository;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +50,8 @@ public class DoctorServiceImpl implements DoctorService {
      * @param doctorDto {@link DoctorDto}
      */
     @Override
-    public DoctorDto saveOrUpdate(DoctorDto doctorDto) {
+    public DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto) {
+        doctorDto.setStatus(Constants.ACTIVE);
         Doctor doctor = doctorRepository.save(DoctorMapper.fromDto(doctorDto));
         return DoctorMapper.toDto(doctor);
     }
@@ -64,8 +66,9 @@ public class DoctorServiceImpl implements DoctorService {
      * @return {@link List<DoctorDto>}
      */
     @Override
-    public List<DoctorDto> getAllDoctors() {
-        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
+    public List<DoctorDto> getAllDoctors(int pageNumber, int totalRows) {
+        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE
+                , PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
             throw new NotFoundException("No Doctor is Preset");
         }
@@ -88,6 +91,24 @@ public class DoctorServiceImpl implements DoctorService {
                 .findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("No Doctor Found"));
         return DoctorMapper.toDto(doctor);
+    }
+
+    /**
+     * <p>
+     * This method is used to soft delete the Doctor by
+     * changing status from active to inactive
+     * using doctor id
+     * </p>
+     *
+     * @param id {@link int}
+     * @return {@link String}
+     */
+    @Override
+    public String deleteDoctorById(int id) {
+        if (doctorRepository.deleteDoctorById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.ideas2it.healthcare.mapper;
 
+<<<<<<< HEAD:src/main/java/com/ideas2it/healthcare/mapper/DoctorClinicMapper.java
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
@@ -8,6 +9,16 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.model.Timeslot;
+=======
+import com.ideas2it.healthCare.dto.ClinicDto;
+import com.ideas2it.healthCare.dto.DoctorClinicDto;
+import com.ideas2it.healthCare.dto.DoctorDto;
+import com.ideas2it.healthCare.dto.TimeslotDto;
+import com.ideas2it.healthCare.model.Clinic;
+import com.ideas2it.healthCare.model.Doctor;
+import com.ideas2it.healthCare.model.DoctorClinic;
+import com.ideas2it.healthCare.model.Timeslot;
+>>>>>>> 0ca24ebd26b8c6544fd9b5e1a2842c87732d1ed0:src/main/java/com/ideas2it/healthCare/mapper/DoctorClinicMapper.java
 
 import java.util.ArrayList;
 import java.util.List;

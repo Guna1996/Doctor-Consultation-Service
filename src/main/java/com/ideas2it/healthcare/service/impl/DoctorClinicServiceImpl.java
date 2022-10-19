@@ -21,6 +21,7 @@ import com.ideas2it.healthcare.service.DoctorClinicService;
 import com.ideas2it.healthcare.service.DoctorService;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,8 +73,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public List<DoctorClinicDto> getDoctorClinics() {
-        List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE);
+    public List<DoctorClinicDto> getDoctorClinics(int pageNumber, int totalRows) {
+        List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (doctorClinics.isEmpty()) {
             throw new NotFoundException("No clinic Found");
         } else {
@@ -87,11 +89,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String deleteDoctorFromClinic(Integer id) {
-        DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() ->  new NotFoundException("Doctor not found to delete"));
-        doctorClinic.setStatus(Constants.INACTIVE);
-        doctorClinicRepository.save(doctorClinic);
-        return "Deleted Successfully";
+        if (doctorClinicRepository.deleteDoctorClinicById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     /**

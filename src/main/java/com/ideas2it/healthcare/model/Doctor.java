@@ -30,7 +30,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
-@Entity
+@Entity(name = "doctor")
 @Table(name = "doctor")
 public class Doctor {
 

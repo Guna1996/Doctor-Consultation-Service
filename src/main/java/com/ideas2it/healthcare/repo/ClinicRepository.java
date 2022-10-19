@@ -10,10 +10,19 @@
  */
 package com.ideas2it.healthcare.repo;
 
+<<<<<<< HEAD:src/main/java/com/ideas2it/healthcare/repo/ClinicRepository.java
 import com.ideas2it.healthcare.model.Clinic;
+=======
+import com.ideas2it.healthCare.model.Clinic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+>>>>>>> 0ca24ebd26b8c6544fd9b5e1a2842c87732d1ed0:src/main/java/com/ideas2it/healthCare/repo/ClinicRepository.java
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +40,18 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
+@Transactional
 public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
     Optional<Clinic> findByIdAndStatus(int id, String status);
 
     Boolean existsByIdAndStatus(int id, String status);
 
     List<Clinic> findAllByStatus(String active);
+
+    @Modifying
+    @Query("update clinic set status='inactive' where id=?1")
+    Integer deleteClinicById(int id);
+    
+    Page<Clinic> findAllByStatus(String active, Pageable pageable);
 }
 

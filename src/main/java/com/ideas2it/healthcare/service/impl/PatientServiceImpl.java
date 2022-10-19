@@ -18,6 +18,7 @@ import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.repo.PatientRepository;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -80,18 +81,18 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String deletePatient(Integer id) {
-        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Patient not found") );
-            patient.setStatus(Constants.INACTIVE);
-            patientRepository.save(patient);
-            return "deleted successfully";
+        if (patientRepository.deletePatiendById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<PatientDto> getPatients() {
-        List<Patient> patients = patientRepository.findAllByStatus(Constants.ACTIVE);
+    public List<PatientDto> getPatients(int pageNumber, int totalRows) {
+        List<Patient> patients = patientRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (patients.isEmpty()) {
             throw new NotFoundException("No Patients Found");
         } else {

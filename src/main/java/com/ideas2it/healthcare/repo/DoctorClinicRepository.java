@@ -10,10 +10,19 @@
  */
 package com.ideas2it.healthcare.repo;
 
+<<<<<<< HEAD:src/main/java/com/ideas2it/healthcare/repo/DoctorClinicRepository.java
 import com.ideas2it.healthcare.model.DoctorClinic;
+=======
+import com.ideas2it.healthCare.model.DoctorClinic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+>>>>>>> 0ca24ebd26b8c6544fd9b5e1a2842c87732d1ed0:src/main/java/com/ideas2it/healthCare/repo/DoctorClinicRepository.java
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +40,7 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
+@Transactional
 public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Integer> {
 
     /**
@@ -44,7 +54,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      *
      * @return List<DoctorClinic>
      */
-    List<DoctorClinic> findAllByStatus(String status);
+    Page<DoctorClinic> findAllByStatus(String status, Pageable pageable);
 
     /**
      * <p>
@@ -78,4 +88,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     Boolean existsByIdAndStatus(int id, String status);
 
     Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId, String status);
+
+    @Modifying
+    @Query("update doctorClinic set status='inactive' where id=?1")
+    Integer deleteDoctorClinicById(int id);
 }

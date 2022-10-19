@@ -18,6 +18,7 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repo.ClinicRepository;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,9 +56,10 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public List<ClinicDto> getClinics() {
+    public List<ClinicDto> getClinics(int pageNumber, int totalRows) {
 
-        List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE);
+        List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
 
         if (clinics.isEmpty()) {
             throw new NotFoundException("No clinic Found");
@@ -96,14 +98,10 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public String deleteClinicById(int id) {
 
-        Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (clinic.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+        if (clinicRepository.deleteClinicById(id) == 1){
+            return "Deleted Successfully";
         }
-        Clinic deletedClinic = clinic.get();
-        deletedClinic.setStatus(Constants.INACTIVE);
-        clinicRepository.save(deletedClinic);
-        return "Deleted successfully";
+        return "Doctor is not Deleted";
     }
 
     /**

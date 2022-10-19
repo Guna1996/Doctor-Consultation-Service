@@ -10,10 +10,19 @@
  */
 package com.ideas2it.healthcare.repo;
 
+<<<<<<< HEAD:src/main/java/com/ideas2it/healthcare/repo/PatientRepository.java
 import com.ideas2it.healthcare.model.Patient;
+=======
+import com.ideas2it.healthCare.model.Patient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+>>>>>>> 0ca24ebd26b8c6544fd9b5e1a2842c87732d1ed0:src/main/java/com/ideas2it/healthCare/repo/PatientRepository.java
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +40,7 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
+@Transactional
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     /**
@@ -57,5 +67,10 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
      *
      * @return List<patient>
      */
-    List<Patient> findAllByStatus(String status);
+    Page<Patient> findAllByStatus(String status, Pageable pageable);
+    
+    @Modifying
+    @Query("update patient set status='inactive' where id=?1")
+    Integer deletePatiendById(int id);
+
 }

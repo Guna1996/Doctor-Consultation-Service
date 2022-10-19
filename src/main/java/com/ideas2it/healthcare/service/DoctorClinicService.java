@@ -38,7 +38,7 @@ public interface DoctorClinicService {
      *
      * @return List<DoctorClinicDto>
      */
-    List<DoctorClinicDto> getDoctorClinics();
+    List<DoctorClinicDto> getDoctorClinics(int pageNumber, int totalRows);
 
     /**
      * <p>

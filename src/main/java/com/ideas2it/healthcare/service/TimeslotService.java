@@ -11,7 +11,7 @@ public interface TimeslotService {
 
     TimeslotDto getTimeslotById(int id);
 
-    List<TimeslotDto> getTimeslots();
+    List<TimeslotDto> getTimeslots(int pageNumber, int totalRows);
 
     String deleteTimeslot(int id);
 

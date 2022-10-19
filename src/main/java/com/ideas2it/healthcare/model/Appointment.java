@@ -34,7 +34,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@Entity
+@Entity(name = "appointment")
 @Table(name = "appointment")
 public class Appointment {
 

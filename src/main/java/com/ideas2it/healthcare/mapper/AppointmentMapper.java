@@ -1,5 +1,6 @@
 package com.ideas2it.healthcare.mapper;
 
+<<<<<<< HEAD:src/main/java/com/ideas2it/healthcare/mapper/AppointmentMapper.java
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
@@ -8,6 +9,16 @@ import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
+=======
+import com.ideas2it.healthCare.dto.AppointmentDto;
+import com.ideas2it.healthCare.dto.ClinicDto;
+import com.ideas2it.healthCare.dto.DoctorDto;
+import com.ideas2it.healthCare.dto.PatientDto;
+import com.ideas2it.healthCare.model.Appointment;
+import com.ideas2it.healthCare.model.Clinic;
+import com.ideas2it.healthCare.model.Doctor;
+import com.ideas2it.healthCare.model.Patient;
+>>>>>>> 0ca24ebd26b8c6544fd9b5e1a2842c87732d1ed0:src/main/java/com/ideas2it/healthCare/mapper/AppointmentMapper.java
 
 public class AppointmentMapper {
 

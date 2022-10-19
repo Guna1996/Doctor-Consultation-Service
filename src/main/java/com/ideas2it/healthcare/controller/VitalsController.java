@@ -24,9 +24,10 @@ public class VitalsController {
 
     private final VitalsService vitalsService;
 
-    @GetMapping
-    public ResponseEntity<List<VitalsDto>> getAllVitals() {
-        return new ResponseEntity<>(vitalsService.getVitals(), HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<VitalsDto>> getAllVitals(@PathVariable("pageNumber") int pageNumber,
+                                                        @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(vitalsService.getVitals(pageNumber, totalRows), HttpStatus.OK);
     }
 
     @PutMapping
@@ -50,8 +51,11 @@ public class VitalsController {
         return new ResponseEntity<>(vitalsService.deleteVitals(id), HttpStatus.OK);
     }
 
-    @GetMapping("/patient/{patientId}")
-    public ResponseEntity<List<VitalsDto>> getVitalsByPatientId(@PathVariable("patientId") int patientId) {
-        return new ResponseEntity<>(vitalsService.getVitalsByPatientId(patientId), HttpStatus.OK);
+    @GetMapping("/patient/{patientId}/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<VitalsDto>> getVitalsByPatientId(@PathVariable("patientId") int patientId,
+                                                                @PathVariable("pageNumber") int pageNumber,
+                                                                @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(vitalsService
+                .getVitalsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK);
     }
 }

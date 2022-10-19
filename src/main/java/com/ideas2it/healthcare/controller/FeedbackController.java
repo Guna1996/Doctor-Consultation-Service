@@ -25,9 +25,10 @@ public class FeedbackController {
 
     private final FeedbackService feedbackService;
 
-    @GetMapping
-    public ResponseEntity<List<FeedbackDto>> getAllFeedbacks() {
-        return new ResponseEntity<>(feedbackService.getFeedbacks(), HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<FeedbackDto>> getAllFeedbacks(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(feedbackService.getFeedbacks(pageNumber, totalRows), HttpStatus.OK);
     }
 
     @PutMapping

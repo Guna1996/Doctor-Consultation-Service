@@ -50,9 +50,10 @@ public class VitalsServiceImpl implements VitalsService {
         return VitalsMapper.toDto(vitals);
     }
 
-    public List<VitalsDto> getVitals() {
+    public List<VitalsDto> getVitals(int pageNumber, int totalRows) {
         List<VitalsDto> vitalsDto = null;
-        List<Vitals> vitals = vitalsRepo.findAllByStatus(Constants.ACTIVE);
+        List<Vitals> vitals = vitalsRepo.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (!vitals.isEmpty()) {
             vitalsDto = new ArrayList<>();
             for (Vitals vital : vitals) {
@@ -74,16 +75,16 @@ public class VitalsServiceImpl implements VitalsService {
     }
 
     public String deleteVitals(int id) {
-        Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Feedback not found"));
-        vitals.setStatus(Constants.INACTIVE);
-        vitalsRepo.save(vitals);
-        return "Deleted Successfully";
+        if (vitalsRepo.deleteVitalsById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
-    public List<VitalsDto> getVitalsByPatientId(int patientId) {
+    public List<VitalsDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
         List<VitalsDto> vitalsDto = null;
-        List<Vitals> vitals = vitalsRepo.findByPatientId(patientId);
+        List<Vitals> vitals = vitalsRepo.findByPatientId(patientId,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (!(vitals.isEmpty())) {
             vitalsDto = vitals.stream()
                     .map(VitalsMapper::toDto).collect(Collectors.toList());

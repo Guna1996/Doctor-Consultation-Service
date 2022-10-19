@@ -37,32 +37,78 @@ public class DoctorController {
 
     private  DoctorService doctorService;
 
+    /**
+     * <p>
+     * This method is used to get details of doctor
+     * after validating it
+     * </p>
+     *
+     * @param doctorDto {@link DoctorDto}
+     *
+     * @return {@link ResponseEntity}
+     */
     @PostMapping
     public ResponseEntity<DoctorDto> addDoctor(@Valid @RequestBody DoctorDto doctorDto){
-        doctorDto.setStatus(Constants.ACTIVE);
-        return new ResponseEntity<>(doctorService.saveOrUpdate(doctorDto), HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.saveOrUpdateDoctor(doctorDto), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<DoctorDto>> getAllDoctors() {
-        return new ResponseEntity<>(doctorService.getAllDoctors(),HttpStatus.OK);
+
+    /**
+     * <p>
+     * This method is used to get All the details of
+     * doctor form the service through Doctor Dto
+     * </p>
+     *
+     * @return {@link ResponseEntity}
+     */
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<DoctorDto>> getAllDoctors(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(doctorService.getAllDoctors(pageNumber, totalRows),HttpStatus.OK);
     }
 
+    /**
+     * <p>
+     * This method is used to get details of doctor
+     * of a particular doctor by id
+     * </p>
+     *
+     * @param id {@link int}
+     *
+     * @return {@link ResponseEntity}
+     */
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDto> getDoctorById(@PathVariable int id) {
         return new ResponseEntity<>(doctorService.getDoctorById(id), HttpStatus.OK);
     }
 
+    /**
+     * <p>
+     * This method is used to update the details of
+     * doctor after validate
+     * </p>
+     *
+     * @param doctorDto {@link DoctorDto}
+     *
+     * @return {@link ResponseEntity}
+     */
     @PutMapping
     public ResponseEntity<DoctorDto> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return new ResponseEntity<>(doctorService.saveOrUpdate(doctorDto), HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.saveOrUpdateDoctor(doctorDto), HttpStatus.OK);
     }
 
+    /**
+     * <p>
+     * This method is used to delete the details of
+     * doctor by getting their id
+     * </p>
+     *
+     * @param id {@link int}
+     *
+     * @return {@link ResponseEntity}
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
-        DoctorDto doctorDto = doctorService.getDoctorById(id);
-        doctorDto.setStatus(Constants.INACTIVE);
-        doctorService.saveOrUpdate(doctorDto);
-        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.deleteDoctorById(id), HttpStatus.OK);
     }
 }

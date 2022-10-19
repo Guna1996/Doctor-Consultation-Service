@@ -9,8 +9,13 @@ package com.ideas2it.healthcare.repo;
 
 import com.ideas2it.healthcare.model.Specialization;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +32,14 @@ import java.util.Optional;
  *
  * @since   2022-10-10
  */
+@Transactional
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
     Optional<Specialization> findByIdAndStatus(int id, String active);
 
-    List<Specialization> findAllByStatus(String active);
+    Page<Specialization> findAllByStatus(String active, Pageable pageable);
+    
+    @Modifying
+    @Query("update specialization set status='inactive' where id=?1")
+    Integer deleteSpecializationById(int id);
+
 }

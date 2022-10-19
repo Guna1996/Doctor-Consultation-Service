@@ -23,9 +23,10 @@ public class TimeslotController {
     @Autowired
     private TimeslotService timeslotService;
 
-    @GetMapping
-    public ResponseEntity<List<TimeslotDto>> getAllTimeslots() {
-        return new ResponseEntity<>(timeslotService.getTimeslots(), HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<TimeslotDto>> getAllTimeslots(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(timeslotService.getTimeslots(pageNumber, totalRows), HttpStatus.OK);
     }
 
     @PutMapping

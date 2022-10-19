@@ -29,7 +29,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "specialization")
 @Table(name = "specialization")
 public class Specialization {
 
