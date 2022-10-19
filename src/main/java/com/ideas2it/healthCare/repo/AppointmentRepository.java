@@ -12,7 +12,10 @@ package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +33,7 @@ import java.util.Optional;
  *
  * @since 2022-07-18
  */
+@Transactional
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
     List<Appointment> findAllByStatus(String status);
@@ -39,4 +43,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     Optional<Appointment> findByScheduledOnAndStatus(LocalDateTime scheduledOn, String status);
 
     Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(int id, LocalDateTime dateTime, String active);
+
+    @Modifying
+    @Query("update appointment set status='inactive' where id=?1")
+    Integer deleteAppointmentById(int id);
 }

@@ -12,6 +12,7 @@ import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.DoctorMapper;
 import com.ideas2it.healthCare.model.Doctor;
+import com.ideas2it.healthCare.model.Specialization;
 import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,8 @@ public class DoctorServiceImpl implements DoctorService {
      * @param doctorDto {@link DoctorDto}
      */
     @Override
-    public DoctorDto saveOrUpdate(DoctorDto doctorDto) {
+    public DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto) {
+        doctorDto.setStatus(Constants.ACTIVE);
         Doctor doctor = doctorRepository.save(DoctorMapper.fromDto(doctorDto));
         return DoctorMapper.toDto(doctor);
     }
@@ -88,6 +90,24 @@ public class DoctorServiceImpl implements DoctorService {
                 .findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("No Doctor Found"));
         return DoctorMapper.toDto(doctor);
+    }
+
+    /**
+     * <p>
+     * This method is used to soft delete the Doctor by
+     * changing status from active to inactive
+     * using doctor id
+     * </p>
+     *
+     * @param id {@link int}
+     * @return {@link String}
+     */
+    @Override
+    public String deleteDoctorById(int id) {
+        if (doctorRepository.deleteDoctorById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     /**

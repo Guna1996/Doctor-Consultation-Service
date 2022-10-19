@@ -4,11 +4,9 @@ import com.ideas2it.healthCare.dto.ClinicDto;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.DoctorClinic;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class ClinicMapper {
 

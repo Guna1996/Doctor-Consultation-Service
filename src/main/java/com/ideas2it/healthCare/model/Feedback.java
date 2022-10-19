@@ -40,7 +40,7 @@ import javax.persistence.ManyToOne;
  *
  * @since   2022-10-10
  */
-@Entity
+@Entity(name = "feedback")
 @Getter
 @Setter
 public class Feedback {

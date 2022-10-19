@@ -8,7 +8,6 @@ import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.model.Timeslot;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;

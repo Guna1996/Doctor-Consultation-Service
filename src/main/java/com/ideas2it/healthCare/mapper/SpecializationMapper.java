@@ -12,7 +12,6 @@ import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Specialization;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -82,11 +82,10 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String deletePatient(Integer id) {
-        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Patient not found") );
-            patient.setStatus(Constants.INACTIVE);
-            patientRepository.save(patient);
-            return "deleted successfully";
+        if (patientRepository.deletePatiendById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     /**

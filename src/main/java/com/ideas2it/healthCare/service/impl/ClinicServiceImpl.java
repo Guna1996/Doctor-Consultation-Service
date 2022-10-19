@@ -96,14 +96,10 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public String deleteClinicById(int id) {
 
-        Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (clinic.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+        if (clinicRepository.deleteClinicById(id) == 1){
+            return "Deleted Successfully";
         }
-        Clinic deletedClinic = clinic.get();
-        deletedClinic.setStatus(Constants.INACTIVE);
-        clinicRepository.save(deletedClinic);
-        return "deleted successfully";
+        return "Doctor is not Deleted";
     }
 
     /**

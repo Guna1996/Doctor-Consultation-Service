@@ -43,7 +43,7 @@ import javax.persistence.Transient;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "vitals")
 @Table(name = "vitals")
 public class Vitals {
 

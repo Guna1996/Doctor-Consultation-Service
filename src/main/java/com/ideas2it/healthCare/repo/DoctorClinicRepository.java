@@ -12,8 +12,11 @@ package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.DoctorClinic;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,7 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
+@Transactional
 public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Integer> {
 
     /**
@@ -78,4 +82,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     Boolean existsByIdAndStatus(int id, String status);
 
     Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId, String status);
+
+    @Modifying
+    @Query("update doctorClinic set status='inactive' where id=?1")
+    Integer deleteDoctorClinicById(int id);
 }
