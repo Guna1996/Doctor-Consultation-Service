@@ -7,6 +7,7 @@ import com.ideas2it.healthcare.mapper.VitalsMapper;
 import com.ideas2it.healthcare.model.Vitals;
 import com.ideas2it.healthcare.repo.VitalsRepo;
 import com.ideas2it.healthcare.service.VitalsService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;

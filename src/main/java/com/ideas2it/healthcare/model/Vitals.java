@@ -14,6 +14,7 @@ package com.ideas2it.healthcare.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +42,6 @@ import javax.persistence.Transient;
 @Setter
 @Entity(name = "vitals")
 @Table(name = "vitals")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Vitals {
 
     @Id
