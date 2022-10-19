@@ -13,18 +13,17 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
+import com.ideas2it.healthCare.mapper.DoctorClinicMapper;
 import com.ideas2it.healthCare.model.DoctorClinic;
 import com.ideas2it.healthCare.repo.DoctorClinicRepository;
 import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.TimeslotService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -55,9 +54,6 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     @Autowired
     private TimeslotService timeslotService;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     /**
      * {@inheritDoc}
      */
@@ -65,8 +61,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         DoctorClinicDto toReturnDto = null;
         if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId())&&
                 clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
-            DoctorClinic doctorClinic = modelMapper.map(doctorClinicDto, DoctorClinic.class);
-            toReturnDto = modelMapper.map(doctorClinicRepository.save(doctorClinic), DoctorClinicDto.class);
+            DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
+            toReturnDto = DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
         } else {
             throw new NotFoundException("doctor not found to assign");
         }
@@ -82,7 +78,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             throw new NotFoundException("No clinic Found");
         } else {
             return doctorClinics.stream()
-                    .map(doctorClinic -> modelMapper.map(doctorClinic, DoctorClinicDto.class))
+                    .map(DoctorClinicMapper::toDto)
                     .collect(Collectors.toList());
         }
     }
@@ -103,16 +99,16 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
         if (doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
-            return modelMapper.map(doctorClinicRepository
-                    .save(modelMapper.map(doctorClinicDto, DoctorClinic.class)), DoctorClinicDto.class);
+            return DoctorClinicMapper.toDto(doctorClinicRepository
+                    .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
         }
         throw new NotFoundException("Doctor id not found to update");
     }
 
     @Override
     public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
-        return modelMapper.map(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("not found")), DoctorClinicDto.class);
+        return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+                .orElseThrow(() -> new NotFoundException("not found")));
     }
 }
 
