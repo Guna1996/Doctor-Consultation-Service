@@ -8,7 +8,6 @@ import com.ideas2it.healthCare.model.Appointment;
 import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Patient;
-import org.springframework.stereotype.Component;
 
 public class AppointmentMapper {
 

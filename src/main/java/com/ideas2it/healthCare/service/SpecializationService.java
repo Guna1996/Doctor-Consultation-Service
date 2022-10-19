@@ -36,7 +36,7 @@ public interface SpecializationService {
      * @param specializationDto {@link SpecializationDto}
      *
      */
-    SpecializationDto saveOrUpdate(SpecializationDto specializationDto);
+    SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto);
 
     /**
      * <p>
@@ -71,5 +71,5 @@ public interface SpecializationService {
      *
      *@return {@link String}
      */
-    String deleteById(int id);
+    String deleteSpecializationById(int id);
 }

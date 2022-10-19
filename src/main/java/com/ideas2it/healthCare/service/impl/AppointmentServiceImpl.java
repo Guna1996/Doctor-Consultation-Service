@@ -115,14 +115,10 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String deleteAppointmentById(int id) {
 
-        Optional<Appointment> appointmentById = appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (appointmentById.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+        if (appointmentRepository.deleteAppointmentById(id) == 1){
+            return "Deleted Successfully";
         }
-        Appointment appointment = appointmentById.get();
-        appointment.setStatus(Constants.INACTIVE);
-        appointmentRepository.save(appointment);
-        return "deleted successfully";
+        return "Doctor is not Deleted";
     }
 
     /**

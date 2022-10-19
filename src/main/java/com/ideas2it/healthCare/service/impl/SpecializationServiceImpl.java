@@ -53,7 +53,8 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @param specializationDto {@link SpecializationDto}
      */
     @Override
-    public SpecializationDto saveOrUpdate(SpecializationDto specializationDto) {
+    public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
+        specializationDto.setStatus(Constants.ACTIVE);
         Specialization specialization =  specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
         return SpecializationMapper.toDto(specialization);
     }
@@ -104,12 +105,10 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @return {@link String}
      */
     @Override
-    public String deleteById(int id) {
-        Specialization specialization = specializationRepository
-                .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("No Specialization Founded"));
-        specialization.setStatus(Constants.INACTIVE);
-        specializationRepository.save(specialization);
-        return "Deleted Successfully";
+    public String deleteSpecializationById(int id) {
+        if (specializationRepository.deleteSpecializationById(id) == 1) {
+            return "Deleted Successfully";
+        }
+        return "Specialization is Not Deleted";
     }
 }

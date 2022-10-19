@@ -76,11 +76,10 @@ public class VitalsServiceImpl implements VitalsService {
     }
 
     public String deleteVitals(int id) {
-        Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Feedback not found"));
-        vitals.setStatus(Constants.INACTIVE);
-        vitalsRepo.save(vitals);
-        return "Deleted Successfully";
+        if (vitalsRepo.deleteVitalsById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     public List<VitalsDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {

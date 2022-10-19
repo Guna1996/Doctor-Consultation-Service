@@ -43,7 +43,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Entity
+@Entity(name = "doctorClinic")
 @Table(name="doctor_clinic")
 public class DoctorClinic {
 

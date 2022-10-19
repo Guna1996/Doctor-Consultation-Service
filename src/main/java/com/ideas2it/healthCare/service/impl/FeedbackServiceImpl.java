@@ -61,11 +61,10 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     public String deleteFeedback(int id) {
-        Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Feedback not found"));
-        feedback.setStatus(Constants.INACTIVE);
-        feedbackRepo.save(feedback);
-        return "Deleted Successfully";
+        if (feedbackRepo.deleteSpecializationById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
 }

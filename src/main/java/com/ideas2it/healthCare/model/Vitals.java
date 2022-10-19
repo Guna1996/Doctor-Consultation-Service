@@ -43,7 +43,7 @@ import javax.persistence.Transient;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "vitals")
 @Table(name = "vitals")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Vitals {

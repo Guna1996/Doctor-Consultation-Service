@@ -7,12 +7,7 @@
  */
 package com.ideas2it.healthCare.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -34,7 +29,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "specialization")
 @Table(name = "specialization")
 public class Specialization {
 

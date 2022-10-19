@@ -90,11 +90,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String deleteDoctorFromClinic(Integer id) {
-        DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() ->  new NotFoundException("Doctor not found to delete"));
-        doctorClinic.setStatus(Constants.INACTIVE);
-        doctorClinicRepository.save(doctorClinic);
-        return "Deleted Successfully";
+        if (doctorClinicRepository.deleteDoctorClinicById(id) == 1){
+            return "Deleted Successfully";
+        }
+        return "Doctor is not Deleted";
     }
 
     /**
