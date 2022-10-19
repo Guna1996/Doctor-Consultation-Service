@@ -1,15 +1,34 @@
+/**
+ * <p>
+ * This is the base package for all the mapper classes
+ * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * classes
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.mapper;
 
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Specialization;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>
+ * SpecializationMapper is used convert Specialization object to
+ * SpecializationDto and SpecializationDto into Specialization
+ * </p>
+ *
+ * @author Mohamed Jubair
+ *
+ * @version 1
+ *
+ * @since 2022-07-18
+ */
 @Component
 public class SpecializationMapper {
 
