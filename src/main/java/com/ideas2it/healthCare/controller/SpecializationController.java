@@ -41,14 +41,15 @@ public class SpecializationController {
     private final SpecializationService specializationService;
 
     @PostMapping
-    public ResponseEntity<SpecializationDto> addSpecialization(@Valid @RequestBody SpecializationDto specializationDto){
+    public ResponseEntity<SpecializationDto> addSpecialization(@RequestBody SpecializationDto specializationDto){
         specializationDto.setStatus(Constants.ACTIVE);
         return new ResponseEntity<>(specializationService.saveOrUpdate(specializationDto), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations() {
-        return new ResponseEntity<>(specializationService.getAllSpecializations(),HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(specializationService.getAllSpecializations(pageNumber, totalRows),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

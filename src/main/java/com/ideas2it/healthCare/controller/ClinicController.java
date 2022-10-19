@@ -59,10 +59,11 @@ public class ClinicController {
      *
      * @return ResponseEntity
      */
-    @GetMapping
-    public ResponseEntity<List<ClinicDto>> getClinics() {
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<ClinicDto>> getClinics(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
 
-        return new ResponseEntity<>(clinicService.getClinics(), HttpStatus.OK);
+        return new ResponseEntity<>(clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK);
     }
 
     /**

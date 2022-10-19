@@ -46,7 +46,7 @@ public interface DoctorService {
      *
      * @return {@link List<DoctorDto>}
      */
-    List<DoctorDto> getAllDoctors();
+    List<DoctorDto> getAllDoctors(int pageNumber, int totalRows);
 
     /**
      * <p>

@@ -45,9 +45,10 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.saveOrUpdate(doctorDto), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<DoctorDto>> getAllDoctors() {
-        return new ResponseEntity<>(doctorService.getAllDoctors(),HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<DoctorDto>> getAllDoctors(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(doctorService.getAllDoctors(pageNumber, totalRows),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

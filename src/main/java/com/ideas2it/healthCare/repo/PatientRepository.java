@@ -11,6 +11,8 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Patient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -57,5 +59,5 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
      *
      * @return List<patient>
      */
-    List<Patient> findAllByStatus(String status);
+    Page<Patient> findAllByStatus(String status, Pageable pageable);
 }

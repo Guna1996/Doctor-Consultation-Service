@@ -13,9 +13,9 @@ public interface VitalsService {
 
     VitalsDto getVitalsById(int id);
 
-    List<VitalsDto> getVitals();
+    List<VitalsDto> getVitals(int pageNumber, int totalRows);
 
     String deleteVitals(int id);
 
-    List<VitalsDto> getVitalsByPatientId(int patientId);
+    List<VitalsDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows);
 }

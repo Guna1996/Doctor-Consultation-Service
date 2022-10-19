@@ -45,6 +45,7 @@ import javax.persistence.Transient;
 @Setter
 @Entity
 @Table(name = "vitals")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Vitals {
 
     @Id
@@ -59,22 +60,24 @@ public class Vitals {
 
     @Column
     private float pulse;
+
     @Column
     private float diastolic;
 
     @Column
     private float systolic;
 
-    @Column(name = "sugar_level")
+    @Column(name = "sugar_level")           
     private float sugarLevel;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
     @Column
     private String status;
-    @ManyToOne
+
+    @ManyToOne(targetEntity = Doctor.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 

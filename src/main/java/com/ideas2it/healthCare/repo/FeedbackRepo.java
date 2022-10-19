@@ -1,6 +1,8 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Feedback;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +14,7 @@ public interface FeedbackRepo extends JpaRepository<Feedback, Integer> {
 
     Optional<Feedback> findByIdAndStatus(int id, String status);
 
-    List<Feedback> findAllByStatus(String status);
+    Page<Feedback> findAllByStatus(String status, Pageable pageable);
 
     Boolean existsByIdAndStatus(int id, String status);
 

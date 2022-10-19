@@ -8,6 +8,8 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Doctor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -31,5 +33,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     Boolean existsByIdAndStatus(int id, String status);
 
-    List<Doctor> findAllByStatus(String active);
+    Page<Doctor> findAllByStatus(String active, Pageable pageable);
 }

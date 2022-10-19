@@ -8,8 +8,10 @@ import com.ideas2it.healthCare.model.Feedback;
 import com.ideas2it.healthCare.repo.FeedbackRepo;
 import com.ideas2it.healthCare.service.FeedbackService;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -42,9 +44,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         return FeedbackMapper.toDto(feedback);
     }
 
-    public List<FeedbackDto> getFeedbacks() {
+    public List<FeedbackDto> getFeedbacks(int pageNumber, int totalRows) {
         List<FeedbackDto> feedbacksDto = null;
-        List<Feedback> feedbacks = feedbackRepo.findAllByStatus(Constants.ACTIVE);
+        List<Feedback> feedbacks = feedbackRepo.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (!feedbacks.isEmpty()) {
             feedbacksDto = new ArrayList<>();
             for (Feedback feedback : feedbacks) {
