@@ -13,6 +13,7 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.PatientDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
+import com.ideas2it.healthCare.mapper.ClinicMapper;
 import com.ideas2it.healthCare.mapper.PatientMapper;
 import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.PatientRepository;
@@ -20,6 +21,7 @@ import com.ideas2it.healthCare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,13 +58,10 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public PatientDto getPatientById(Integer id) {
-        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (patient != null) {
-            PatientDto patientDto = PatientMapper.toDto(patient);
-            return patientDto;
-        } else {
-            throw new NotFoundException("Patient not found");
-        }
+        return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
+                map(PatientMapper::toDto).
+                findFirst().
+                orElseThrow(() -> new NotFoundException("Patient not Found"));
     }
 
     /**
@@ -83,14 +82,11 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String deletePatient(Integer id) {
-        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
-        if (patient != null) {
+        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(() -> new NotFoundException("Patient not found") );
             patient.setStatus(Constants.INACTIVE);
             patientRepository.save(patient);
             return "deleted successfully";
-        } else {
-            throw new NotFoundException("Patient not found");
-        }
     }
 
     /**
@@ -111,7 +107,8 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public boolean isPatientAvailable(Integer id) {
-        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE);
+        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE)
+                .orElseThrow(()-> new RuntimeException("not found"));
         return patient != null;
     }
 }

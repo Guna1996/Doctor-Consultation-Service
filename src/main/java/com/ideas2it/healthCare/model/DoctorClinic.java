@@ -64,7 +64,8 @@ public class DoctorClinic {
     private Clinic clinic;
 
     @ManyToMany
-    @JoinTable(name = "doctor_clinic_timeslot", joinColumns = @JoinColumn(name = "doctor_clinic_id"),
+    @JoinTable(name = "doctor_clinic_timeslot",
+            joinColumns = @JoinColumn(name = "doctor_clinic_id"),
             inverseJoinColumns = @JoinColumn(name = "timeslot_id"))
     private List<Timeslot> timeslots;
 }
