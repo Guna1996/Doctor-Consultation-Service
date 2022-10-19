@@ -1,3 +1,13 @@
+/**
+ * <p>
+ * This package contains classes are DoctorClinicImpl,
+ * PatientImpl, DoctorImpl, ClinicImpl,
+ * AppointmentImpl, FeedbackImpl, SpecializationImpl,
+ * TimeslotImpl, VitalsImpl
+ * </p>
+ * <p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
@@ -33,12 +43,18 @@ public class ClinicServiceImpl implements ClinicService {
     @Autowired
     private ClinicRepository clinicRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     public ClinicDto addClinic(ClinicDto clinicDto) {
 
         Clinic clinic = ClinicMapper.fromDto(clinicDto);
         return ClinicMapper.toDto(clinicRepository.save(clinic));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<ClinicDto> getClinics() {
 
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE);
@@ -52,6 +68,9 @@ public class ClinicServiceImpl implements ClinicService {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public ClinicDto getClinicById(int id) {
 
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
@@ -60,6 +79,9 @@ public class ClinicServiceImpl implements ClinicService {
                 orElseThrow(() -> new NotFoundException("NO clinic Found"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public ClinicDto updateClinic(ClinicDto clinicDto) {
 
         Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(clinicDto.getId(), Constants.ACTIVE);
@@ -69,6 +91,9 @@ public class ClinicServiceImpl implements ClinicService {
         return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String deleteClinicById(int id) {
 
         Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
@@ -81,6 +106,9 @@ public class ClinicServiceImpl implements ClinicService {
         return "deleted successfully";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isClinicAvailable(int id) {
         return clinicRepository.existsByIdAndStatus(id, Constants.ACTIVE);
     }

@@ -11,7 +11,6 @@
 package com.ideas2it.healthCare.service;
 
 import com.ideas2it.healthCare.dto.AppointmentDto;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,12 +31,68 @@ import java.util.List;
 
 public interface AppointmentService {
 
+    /**
+     * <p>
+     * This abstract method is used to add appointment details
+     * into data base by getting details from the
+     * user
+     * </p>
+     *
+     * @param appointmentDto - patient details
+     *
+     * @return patientDto
+     */
     AppointmentDto addAppointment(AppointmentDto appointmentDto);
+
+    /**
+     * <p>
+     *  This abstract method is used to get all appointments
+     *  from the database
+     *
+     * </p>
+     *
+     * @param id - id of the appointment
+     *
+     * @return appointmentDto
+     */
     List<AppointmentDto> getAppointments();
 
+    /**
+     * <p>
+     *  This abstract method is used to get appointments
+     *  from the database by getting the id and status
+     *  from the user to dispaly
+     * </p>
+     *
+     * @param id - id of the appointment
+     *
+     * @return appointmentDto
+     */
     AppointmentDto getAppointmentById(int id);
 
+    /**
+     * <p>
+     * This isAppointmentAvailable abstract method is
+     * used to check wheather a appointment is available or not
+     * based on the appointment for doctor in doctor database
+     *
+     * </p>
+     *
+     * @param id - id of the doctor
+     * @param dateTime - date and time of appointment
+     * @return boolean
+     */
     boolean isAppointmentAvailable(int id, LocalDateTime dateTime);
+
+    /**
+     * <p>
+     * This method is used to reschedule appointment and
+     * all details into the database
+     * </p>
+     * @param appointmentDto - appointment detail
+     *
+     * @return appointmentDto
+     */
 
     AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto);
 
