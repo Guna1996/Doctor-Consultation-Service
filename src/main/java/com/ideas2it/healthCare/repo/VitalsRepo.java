@@ -17,6 +17,8 @@ public interface VitalsRepo extends JpaRepository<Vitals, Integer> {
 
     Boolean existsByIdAndStatus(int id, String status);
 
+    List<Vitals> findByPatientId(int patientId);
+
 
 
 }

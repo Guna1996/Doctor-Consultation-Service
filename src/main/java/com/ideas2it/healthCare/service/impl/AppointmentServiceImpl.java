@@ -51,7 +51,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         throw new NotFoundException("please enter valid date and time");
     }
 
-
     public List<AppointmentDto> getAppointments() {
         System.out.println("hi");
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);

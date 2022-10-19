@@ -37,6 +37,8 @@ public class AppointmentDto {
 
     private LocalDateTime scheduledOn;
 
+    private LocalDateTime createdAt;
+
     private PatientDto patient;
 
     private DoctorDto doctor;

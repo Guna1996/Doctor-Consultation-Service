@@ -52,4 +52,8 @@ public class VitalsController {
         return new ResponseEntity<>(vitalsService.deleteVitals(id), HttpStatus.OK);
     }
 
+    @GetMapping("/patient/{patientId}")
+    public ResponseEntity<List<VitalsDto>> getVitalsByPatientId(@PathVariable("patientId") int patientId) {
+        return new ResponseEntity<>(vitalsService.getVitalsByPatientId(patientId), HttpStatus.OK);
+    }
 }

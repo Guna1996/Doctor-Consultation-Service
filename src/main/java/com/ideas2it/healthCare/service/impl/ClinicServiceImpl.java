@@ -20,9 +20,6 @@ public class ClinicServiceImpl implements ClinicService {
     @Autowired
     private ClinicRepository clinicRepository;
 
-    @Autowired
-    private ClinicMapper clinicMapper;
-
     public ClinicDto addClinic(ClinicDto clinicDto) {
 
         Clinic clinic = ClinicMapper.fromDto(clinicDto);

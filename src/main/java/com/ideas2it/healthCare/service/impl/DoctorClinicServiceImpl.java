@@ -111,7 +111,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
 
     @Override
     public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
-        return modelMapper.map(doctorClinicRepository.findBlyDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+        return modelMapper.map(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("not found")), DoctorClinicDto.class);
     }
 }

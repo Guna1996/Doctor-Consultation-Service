@@ -62,5 +62,4 @@ public class PatientDto {
     private List<AppointmentDto> appointment;
 
     private List<VitalsDto> vitals;
-
 }

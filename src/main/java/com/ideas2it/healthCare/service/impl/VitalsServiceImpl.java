@@ -9,9 +9,11 @@ import com.ideas2it.healthCare.service.VitalsService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import springfox.documentation.schema.ModelProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -81,5 +83,19 @@ public class VitalsServiceImpl implements VitalsService {
         vitals.setStatus(Constants.INACTIVE);
         vitalsRepo.save(vitals);
         return "Deleted Successfully";
+    }
+
+    @Override
+    public List<VitalsDto> getVitalsByPatientId(int patientId) {
+        List<VitalsDto> vitalsDto = null;
+        List<Vitals> vitals = vitalsRepo.findByPatientId(patientId);
+        if (!(vitals.isEmpty())) {
+            vitalsDto = vitals.stream()
+                    .map(vital -> modelMapper.map(vitals, VitalsDto.class)).toList();
+        }
+        else {
+            throw new NotFoundException("Vitals not found for patient");
+        }
+        return vitalsDto;
     }
 }
