@@ -10,16 +10,14 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
+import com.ideas2it.healthCare.mapper.DoctorMapper;
 import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -35,14 +33,11 @@ import java.util.stream.Collectors;
  * @since 2022-10-10
  */
 @Service
-@RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
 
-    //@Autowired
-    private final ModelMapper modelMapper;
 
     /**
      * <p>
@@ -55,10 +50,8 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto saveOrUpdate(DoctorDto doctorDto) {
-        System.out.println(doctorDto.getSpecializations().toString());
-        Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
-        doctor = doctorRepository.save(doctor);
-        return modelMapper.map(doctor, DoctorDto.class);
+        Doctor doctor = doctorRepository.save(DoctorMapper.fromDto(doctorDto));
+        return DoctorMapper.toDto(doctor);
     }
 
     /**
@@ -73,13 +66,10 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorDto> getAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
-        if (!doctors.isEmpty()) {
-            return doctors.stream()
-                    .map(doctor -> modelMapper.map(doctor, DoctorDto.class))
-                    .collect(Collectors.toList());
-        } else {
+        if (doctors.isEmpty()) {
             throw new NotFoundException("No Doctor is Preset");
         }
+        return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
 
     }
 
@@ -97,7 +87,7 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException("No Doctor Found"));
-        return modelMapper.map(doctor, DoctorDto.class);
+        return DoctorMapper.toDto(doctor);
     }
 
     /**
@@ -110,7 +100,7 @@ public class DoctorServiceImpl implements DoctorService {
      *
      * @param id {@link int}
      *
-     *@return {@link String}
+     *@return {@link boolean}
      */
     @Override
     public boolean isDoctorAvailable(int id) {

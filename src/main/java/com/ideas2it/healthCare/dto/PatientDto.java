@@ -13,11 +13,7 @@ package com.ideas2it.healthCare.dto;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.common.Constants;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
@@ -44,22 +40,24 @@ public class PatientDto {
 
     private int id;
 
-    //@Pattern(regexp = Constants.NAME_REGEX, message = "Please Enter Valid Name")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Please Enter Valid Name")
     private String name;
 
-    //@Pattern(regexp = Constants.DATE_REGEX, message = "Please Enter Valid Date Of Birth")
+    @Pattern(regexp = Constants.DATE_REGEX, message = "Please Enter Valid Date Of Birth")
     private LocalDate dateOfBirth;
 
-    //@Pattern(regexp = Constants.GENDER_REGEX, message = "Please Enter Valid Gender")
+    @Pattern(regexp = Constants.GENDER_REGEX, message = "Please Enter Valid Gender")
     private String gender;
 
-    //@Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Please Enter Valid Mobile Number")
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Please Enter Valid Mobile Number")
     private String mobileNumber;
 
-    //@Pattern(regexp = Constants.EMAIL_REGEX, message = "Please Enter Valid Email")
+    @Pattern(regexp = Constants.EMAIL_REGEX, message = "Please Enter Valid Email")
     private String email;
 
-    private List<FeedbackDto> feedback;
+    private String status;
+
+    private List<FeedbackDto> feedbacks;
 
     private List<AppointmentDto> appointment;
 
