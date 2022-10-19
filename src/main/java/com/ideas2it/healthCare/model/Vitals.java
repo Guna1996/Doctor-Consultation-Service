@@ -44,7 +44,6 @@ import javax.persistence.Transient;
 @Setter
 @Entity
 @Table(name = "vitals")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Vitals {
 
     @Id

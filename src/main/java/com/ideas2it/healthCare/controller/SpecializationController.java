@@ -65,6 +65,7 @@ public class SpecializationController {
     public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
         SpecializationDto specializationDto = specializationService.getSpecializationById(id);
         specializationDto.setStatus(Constants.INACTIVE);
+        specializationService.saveOrUpdate(specializationDto);
         return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
     }
 }

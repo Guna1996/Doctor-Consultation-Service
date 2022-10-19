@@ -32,6 +32,14 @@ import java.util.Set;
 @Component
 public class SpecializationMapper {
 
+    /**
+     * <p>
+     * This method is used to convert SpecializationDto to
+     * Specialization model
+     * </p>
+     *
+     * @return {@link Specialization}
+     */
     public static Specialization fromDto(SpecializationDto specializationDto) {
 
         Specialization specialization = new Specialization();
@@ -63,6 +71,14 @@ public class SpecializationMapper {
         return specialization;
     }
 
+    /**
+     * <p>
+     * This method is used to convert Specialization to
+     * SpecializationDto
+     * </p>
+     *
+     * @return {@link SpecializationDto}
+     */
     public static SpecializationDto toDto(Specialization specialization) {
 
         SpecializationDto specializationDto = new SpecializationDto();
