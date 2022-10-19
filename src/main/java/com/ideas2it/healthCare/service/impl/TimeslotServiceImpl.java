@@ -6,6 +6,7 @@ import com.ideas2it.healthCare.mapper.TimeslotMapper;
 import com.ideas2it.healthCare.model.Timeslot;
 import com.ideas2it.healthCare.repo.TimeslotRepo;
 import com.ideas2it.healthCare.service.TimeslotService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,9 +42,9 @@ public class TimeslotServiceImpl implements TimeslotService {
         return TimeslotMapper.toDto(timeslot);
     }
 
-    public List<TimeslotDto> getTimeslots() {
+    public List<TimeslotDto> getTimeslots(int pageNumber, int totalRows) {
         List<TimeslotDto> timeslotsDto = null;
-        List<Timeslot> timeslots = timeslotRepo.findAll();
+        List<Timeslot> timeslots = timeslotRepo.findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (!timeslots.isEmpty()) {
             timeslotsDto = new ArrayList<>();
             for (Timeslot timeslot : timeslots) {

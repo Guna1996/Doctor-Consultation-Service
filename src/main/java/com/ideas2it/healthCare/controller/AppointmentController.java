@@ -58,10 +58,11 @@ public class AppointmentController {
      *
      * @return ResponseEntity
      */
-    @GetMapping
-    public ResponseEntity<List<AppointmentDto>> getAppointments() {
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
 
-        return new ResponseEntity<>(appointmentService.getAppointments(), HttpStatus.OK);
+        return new ResponseEntity<>(appointmentService.getAppointments(pageNumber, totalRows), HttpStatus.OK);
     }
 
     /**

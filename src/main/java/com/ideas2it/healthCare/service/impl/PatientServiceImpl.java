@@ -19,6 +19,7 @@ import com.ideas2it.healthCare.model.Patient;
 import com.ideas2it.healthCare.repo.PatientRepository;
 import com.ideas2it.healthCare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -92,8 +93,9 @@ public class PatientServiceImpl implements PatientService {
     /**
      * {@inheritDoc}
      */
-    public List<PatientDto> getPatients() {
-        List<Patient> patients = patientRepository.findAllByStatus(Constants.ACTIVE);
+    public List<PatientDto> getPatients(int pageNumber, int totalRows) {
+        List<Patient> patients = patientRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (patients.isEmpty()) {
             throw new NotFoundException("No Patients Found");
         } else {

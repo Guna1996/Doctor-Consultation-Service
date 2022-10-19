@@ -49,7 +49,7 @@ public interface ClinicService {
      *
      * @return list<ClinicDto>
      */
-    List<ClinicDto> getClinics();
+    List<ClinicDto> getClinics(int pageNumber, int totalRows);
 
     /**
      * <p>

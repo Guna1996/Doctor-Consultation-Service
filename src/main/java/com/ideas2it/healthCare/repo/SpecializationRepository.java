@@ -9,6 +9,8 @@ package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Specialization;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -30,5 +32,5 @@ import java.util.Optional;
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
     Optional<Specialization> findByIdAndStatus(int id, String active);
 
-    List<Specialization> findAllByStatus(String active);
+    Page<Specialization> findAllByStatus(String active, Pageable pageable);
 }

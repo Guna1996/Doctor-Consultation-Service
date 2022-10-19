@@ -128,8 +128,9 @@ public class PatientController {
      *
      * @return List<PatientDto>
      */
-    @GetMapping
-    public ResponseEntity<List<PatientDto>> getPatients() {
-        return  new ResponseEntity<>(patientService.getPatients(), HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<PatientDto>> getPatients(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return  new ResponseEntity<>(patientService.getPatients(pageNumber, totalRows), HttpStatus.OK);
     }
 }

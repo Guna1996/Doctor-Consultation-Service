@@ -21,6 +21,7 @@ import com.ideas2it.healthCare.service.DoctorClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -73,8 +74,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public List<DoctorClinicDto> getDoctorClinics() {
-        List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE);
+    public List<DoctorClinicDto> getDoctorClinics(int pageNumber, int totalRows) {
+        List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (doctorClinics.isEmpty()) {
             throw new NotFoundException("No clinic Found");
         } else {

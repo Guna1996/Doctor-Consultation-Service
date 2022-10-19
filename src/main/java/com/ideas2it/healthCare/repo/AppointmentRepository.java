@@ -11,6 +11,8 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Appointment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -32,7 +34,7 @@ import java.util.Optional;
  */
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
-    List<Appointment> findAllByStatus(String status);
+    Page<Appointment> findAllByStatus(String status, Pageable pageable);
 
     Optional<Appointment> findByIdAndStatus(int id, String status);
 

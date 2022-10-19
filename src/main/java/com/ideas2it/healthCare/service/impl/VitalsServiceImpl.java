@@ -7,6 +7,7 @@ import com.ideas2it.healthCare.mapper.VitalsMapper;
 import com.ideas2it.healthCare.model.Vitals;
 import com.ideas2it.healthCare.repo.VitalsRepo;
 import com.ideas2it.healthCare.service.VitalsService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +51,10 @@ public class VitalsServiceImpl implements VitalsService {
         return VitalsMapper.toDto(vitals);
     }
 
-    public List<VitalsDto> getVitals() {
+    public List<VitalsDto> getVitals(int pageNumber, int totalRows) {
         List<VitalsDto> vitalsDto = null;
-        List<Vitals> vitals = vitalsRepo.findAllByStatus(Constants.ACTIVE);
+        List<Vitals> vitals = vitalsRepo.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (!vitals.isEmpty()) {
             vitalsDto = new ArrayList<>();
             for (Vitals vital : vitals) {
@@ -81,9 +83,10 @@ public class VitalsServiceImpl implements VitalsService {
         return "Deleted Successfully";
     }
 
-    public List<VitalsDto> getVitalsByPatientId(int patientId) {
+    public List<VitalsDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
         List<VitalsDto> vitalsDto = null;
-        List<Vitals> vitals = vitalsRepo.findByPatientId(patientId);
+        List<Vitals> vitals = vitalsRepo.findByPatientId(patientId,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (!(vitals.isEmpty())) {
             vitalsDto = vitals.stream()
                     .map(VitalsMapper::toDto).collect(Collectors.toList());
