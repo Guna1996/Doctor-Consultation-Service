@@ -10,7 +10,6 @@ import com.ideas2it.healthCare.model.Doctor;
 import com.ideas2it.healthCare.model.Patient;
 import org.springframework.stereotype.Component;
 
-@Component
 public class AppointmentMapper {
 
     public static Appointment fromDto(AppointmentDto appointmentDto) {

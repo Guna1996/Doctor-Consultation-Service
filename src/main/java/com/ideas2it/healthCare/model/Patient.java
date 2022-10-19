@@ -12,6 +12,7 @@ package com.ideas2it.healthCare.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ideas2it.healthCare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,7 +46,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "patient")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Patient {
 
     @Id

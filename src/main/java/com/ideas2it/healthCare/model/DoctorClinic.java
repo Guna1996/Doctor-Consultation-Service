@@ -45,7 +45,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="doctor_clinic")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinic {
 
     @Id
@@ -64,8 +63,9 @@ public class DoctorClinic {
     @JoinColumn(name="clinic_id")
     private Clinic clinic;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "doctor_clinic_timeslot", joinColumns = @JoinColumn(name = "doctor_clinic_id"),
+    @ManyToMany
+    @JoinTable(name = "doctor_clinic_timeslot",
+            joinColumns = @JoinColumn(name = "doctor_clinic_id"),
             inverseJoinColumns = @JoinColumn(name = "timeslot_id"))
     private List<Timeslot> timeslots;
 }

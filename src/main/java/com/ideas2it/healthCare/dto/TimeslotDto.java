@@ -34,7 +34,6 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class TimeslotDto {
 
     private int id;

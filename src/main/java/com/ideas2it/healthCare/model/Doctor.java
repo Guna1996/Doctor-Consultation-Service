@@ -37,7 +37,6 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "doctor")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Doctor {
 
     @Id
