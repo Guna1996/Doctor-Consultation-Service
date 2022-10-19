@@ -8,17 +8,10 @@
  */
 package com.ideas2it.healthcare.mapper;
 
-<<<<<<< HEAD:src/main/java/com/ideas2it/healthcare/mapper/SpecializationMapper.java
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Specialization;
-=======
-import com.ideas2it.healthCare.dto.DoctorDto;
-import com.ideas2it.healthCare.dto.SpecializationDto;
-import com.ideas2it.healthCare.model.Doctor;
-import com.ideas2it.healthCare.model.Specialization;
->>>>>>> 0ca24ebd26b8c6544fd9b5e1a2842c87732d1ed0:src/main/java/com/ideas2it/healthCare/mapper/SpecializationMapper.java
 
 import java.util.HashSet;
 import java.util.Set;

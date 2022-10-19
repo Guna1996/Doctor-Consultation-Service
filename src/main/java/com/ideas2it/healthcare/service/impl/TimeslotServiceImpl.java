@@ -7,6 +7,7 @@ import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repo.TimeslotRepo;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
