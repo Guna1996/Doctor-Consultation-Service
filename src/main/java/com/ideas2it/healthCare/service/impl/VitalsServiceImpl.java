@@ -3,35 +3,33 @@ package com.ideas2it.healthCare.service.impl;
 import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.VitalsDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
+import com.ideas2it.healthCare.mapper.VitalsMapper;
 import com.ideas2it.healthCare.model.Vitals;
 import com.ideas2it.healthCare.repo.VitalsRepo;
 import com.ideas2it.healthCare.service.VitalsService;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import springfox.documentation.schema.ModelProvider;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class VitalsServiceImpl implements VitalsService {
 
     private final VitalsRepo vitalsRepo;
 
-    private final ModelMapper modelMapper;
+    public VitalsServiceImpl(VitalsRepo vitalsRepo) {
+        this.vitalsRepo = vitalsRepo;
+    }
 
     @Override
     public VitalsDto addVitals(VitalsDto vitalsDto) {
-        return modelMapper.map(vitalsRepo.save(modelMapper.map(vitalsDto, Vitals.class)), VitalsDto.class);
+        return VitalsMapper.toDto(vitalsRepo.save(VitalsMapper.fromDto(vitalsDto)));
     }
 
     @Override
     public VitalsDto updateVitals(VitalsDto vitalsDto) {
         if (vitalsRepo.existsByIdAndStatus(vitalsDto.getId(), vitalsDto.getStatus())) {
-            return modelMapper.map(vitalsRepo.save(modelMapper.map(vitalsDto, Vitals.class)),VitalsDto.class);
+            return VitalsMapper.toDto(vitalsRepo.save(VitalsMapper.fromDto(vitalsDto)));
         }
         else {
             throw new NotFoundException("The data doesn't exist");
@@ -50,7 +48,7 @@ public class VitalsServiceImpl implements VitalsService {
         else {
             vitals.setBloodPressure("Low");
         }
-        return modelMapper.map(vitals, VitalsDto.class);
+        return VitalsMapper.toDto(vitals);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class VitalsServiceImpl implements VitalsService {
                 else {
                     vital.setBloodPressure("Low");
                 }
-                vitalsDto.add(modelMapper.map(vital, VitalsDto.class));
+                vitalsDto.add(VitalsMapper.toDto(vital));
             }
             return vitalsDto;
         }
@@ -91,7 +89,7 @@ public class VitalsServiceImpl implements VitalsService {
         List<Vitals> vitals = vitalsRepo.findByPatientId(patientId);
         if (!(vitals.isEmpty())) {
             vitalsDto = vitals.stream()
-                    .map(vital -> modelMapper.map(vitals, VitalsDto.class)).toList();
+                    .map(VitalsMapper::toDto).collect(Collectors.toList());
         }
         else {
             throw new NotFoundException("Vitals not found for patient");

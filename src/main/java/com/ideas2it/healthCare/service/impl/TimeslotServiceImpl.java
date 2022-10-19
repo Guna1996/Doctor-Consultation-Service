@@ -1,34 +1,34 @@
 package com.ideas2it.healthCare.service.impl;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ideas2it.healthCare.dto.TimeslotDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
+import com.ideas2it.healthCare.mapper.TimeslotMapper;
 import com.ideas2it.healthCare.model.Timeslot;
 import com.ideas2it.healthCare.repo.TimeslotRepo;
 import com.ideas2it.healthCare.service.TimeslotService;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class TimeslotServiceImpl implements TimeslotService {
 
     private final TimeslotRepo timeslotRepo;
-    private final ModelMapper modelMapper;
+
+    public TimeslotServiceImpl(TimeslotRepo timeslotRepo) {
+        this.timeslotRepo = timeslotRepo;
+    }
+
     @Override
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
-        return modelMapper.map(timeslotRepo.save(modelMapper.map(timeslotDto, Timeslot.class)), TimeslotDto.class);
+        return TimeslotMapper.toDto(timeslotRepo.save(TimeslotMapper.fromDto(timeslotDto)));
     }
 
     @Override
     public TimeslotDto updateTimeslot(TimeslotDto timeslotDto) {
         if (timeslotRepo.existsById(timeslotDto.getId())) {
-            return modelMapper.map(timeslotRepo.save(modelMapper.map(timeslotDto, Timeslot.class)),TimeslotDto.class);
+            return TimeslotMapper.toDto(timeslotRepo.save(TimeslotMapper.fromDto(timeslotDto)));
         }
         else {
             throw new NotFoundException("The data doesn't exist");
@@ -39,7 +39,7 @@ public class TimeslotServiceImpl implements TimeslotService {
     public TimeslotDto getTimeslotById(int id) {
         Timeslot timeslot = timeslotRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Timeslot not found"));
-        return modelMapper.map(timeslot, TimeslotDto.class);
+        return TimeslotMapper.toDto(timeslot);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         if (!timeslots.isEmpty()) {
             List<TimeslotDto> timeslotsDto = new ArrayList<>();
             for (Timeslot timeslot : timeslots) {
-                timeslotsDto.add(modelMapper.map(timeslot, TimeslotDto.class));
+                timeslotsDto.add(TimeslotMapper.toDto(timeslot));
             }
             return timeslotsDto;
         }
