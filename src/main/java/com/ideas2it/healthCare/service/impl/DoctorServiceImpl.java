@@ -16,6 +16,7 @@ import com.ideas2it.healthCare.model.Specialization;
 import com.ideas2it.healthCare.repo.DoctorRepository;
 import com.ideas2it.healthCare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,8 +67,9 @@ public class DoctorServiceImpl implements DoctorService {
      * @return {@link List<DoctorDto>}
      */
     @Override
-    public List<DoctorDto> getAllDoctors() {
-        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
+    public List<DoctorDto> getAllDoctors(int pageNumber, int totalRows) {
+        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE
+                , PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
             throw new NotFoundException("No Doctor is Preset");
         }

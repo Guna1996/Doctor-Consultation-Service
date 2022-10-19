@@ -18,6 +18,7 @@ import com.ideas2it.healthCare.model.Clinic;
 import com.ideas2it.healthCare.repo.ClinicRepository;
 import com.ideas2it.healthCare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,9 +56,10 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public List<ClinicDto> getClinics() {
+    public List<ClinicDto> getClinics(int pageNumber, int totalRows) {
 
-        List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE);
+        List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
 
         if (clinics.isEmpty()) {
             throw new NotFoundException("No clinic Found");

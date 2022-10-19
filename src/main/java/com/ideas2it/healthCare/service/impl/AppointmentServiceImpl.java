@@ -21,6 +21,7 @@ import com.ideas2it.healthCare.service.ClinicService;
 import com.ideas2it.healthCare.service.DoctorService;
 import com.ideas2it.healthCare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -78,8 +79,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public List<AppointmentDto> getAppointments() {
-        List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
+    public List<AppointmentDto> getAppointments(int pageNumber, int totalRows) {
+        List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");
         }

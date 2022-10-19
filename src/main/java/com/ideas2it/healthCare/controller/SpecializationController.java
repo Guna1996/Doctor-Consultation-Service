@@ -65,9 +65,10 @@ public class SpecializationController {
      *
      * @return {@link ResponseEntity}
      */
-    @GetMapping
-    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations() {
-        return new ResponseEntity<>(specializationService.getAllSpecializations(),HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<SpecializationDto>>  getAllSpecializations(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(specializationService.getAllSpecializations(pageNumber, totalRows),HttpStatus.OK);
     }
 
     /**

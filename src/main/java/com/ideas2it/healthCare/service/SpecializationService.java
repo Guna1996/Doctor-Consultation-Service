@@ -47,7 +47,7 @@ public interface SpecializationService {
      *
      * @return {@link List <SpecializationDto>}
      */
-    List<SpecializationDto> getAllSpecializations();
+    List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows);
 
     /**
      * <p>

@@ -86,7 +86,7 @@ public interface PatientService {
      *
      * @return list<PatientDto>
      */
-    List<PatientDto> getPatients();
+    List<PatientDto> getPatients(int pageNumber, int totalRows);
 
     /**
      * <p>

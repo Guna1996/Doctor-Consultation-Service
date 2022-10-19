@@ -17,6 +17,7 @@ import com.ideas2it.healthCare.repo.SpecializationRepository;
 import com.ideas2it.healthCare.service.SpecializationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,8 +69,9 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @return {@link List <DoctorDto>}
      */
     @Override
-    public List<SpecializationDto> getAllSpecializations() {
-        List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE);
+    public List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows) {
+        List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
             throw new NotFoundException("No Specialization is Present");
 

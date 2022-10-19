@@ -55,6 +55,7 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.saveOrUpdateDoctor(doctorDto), HttpStatus.OK);
     }
 
+
     /**
      * <p>
      * This method is used to get All the details of
@@ -63,9 +64,10 @@ public class DoctorController {
      *
      * @return {@link ResponseEntity}
      */
-    @GetMapping
-    public ResponseEntity<List<DoctorDto>> getAllDoctors() {
-        return new ResponseEntity<>(doctorService.getAllDoctors(),HttpStatus.OK);
+    @GetMapping("/{pageNumber}/{totalRows}")
+    public ResponseEntity<List<DoctorDto>> getAllDoctors(@PathVariable("pageNumber") int pageNumber
+            , @PathVariable("totalRows") int totalRows) {
+        return new ResponseEntity<>(doctorService.getAllDoctors(pageNumber, totalRows),HttpStatus.OK);
     }
 
     /**

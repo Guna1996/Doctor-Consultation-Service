@@ -11,6 +11,8 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.DoctorClinic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -48,7 +50,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      *
      * @return List<DoctorClinic>
      */
-    List<DoctorClinic> findAllByStatus(String status);
+    Page<DoctorClinic> findAllByStatus(String status, Pageable pageable);
 
     /**
      * <p>

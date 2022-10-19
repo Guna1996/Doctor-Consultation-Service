@@ -11,6 +11,8 @@
 package com.ideas2it.healthCare.repo;
 
 import com.ideas2it.healthCare.model.Clinic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -45,5 +47,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
     @Modifying
     @Query("update clinic set status='inactive' where id=?1")
     Integer deleteClinicById(int id);
+    
+    Page<Clinic> findAllByStatus(String active, Pageable pageable);
 }
 

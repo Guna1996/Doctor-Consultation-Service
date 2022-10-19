@@ -55,7 +55,7 @@ public interface AppointmentService {
      *
      * @return appointmentDto
      */
-    List<AppointmentDto> getAppointments();
+    List<AppointmentDto> getAppointments(int pageNumber, int totalRows);
 
     /**
      * <p>
