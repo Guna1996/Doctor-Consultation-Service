@@ -14,6 +14,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * <p>
+ * ClinicserviceImpl class implements Clinicservice
+ * and it contains methods and with helps of passing object to
+ * ClinicRepository interface
+ * </p>
+ *
+ * @author Gunaseelan K
+ *
+ * @version 1
+ *
+ * @since 2022-07-18
+ */
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
