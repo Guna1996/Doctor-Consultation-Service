@@ -69,7 +69,7 @@ public class Patient {
     private String email;
 
     @Column(name = "status")
-    private String status ;
+    private String status;
 
     @OneToMany(mappedBy = "patient")
     private List<Feedback> feedbacks;

@@ -11,19 +11,15 @@ import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
-import com.ideas2it.healthCare.helper.SpecializationMapper;
+import com.ideas2it.healthCare.mapper.SpecializationMapper;
 import com.ideas2it.healthCare.model.Specialization;
 import com.ideas2it.healthCare.repo.SpecializationRepository;
 import com.ideas2it.healthCare.service.SpecializationService;
 
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**

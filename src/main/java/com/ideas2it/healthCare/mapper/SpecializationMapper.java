@@ -1,4 +1,4 @@
-package com.ideas2it.healthCare.helper;
+package com.ideas2it.healthCare.mapper;
 
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
