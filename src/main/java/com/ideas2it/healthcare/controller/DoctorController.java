@@ -10,6 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.service.DoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ import java.util.List;
 @RequestMapping("/doctor")
 public class DoctorController {
 
+    @Autowired
     private  DoctorService doctorService;
 
     /**

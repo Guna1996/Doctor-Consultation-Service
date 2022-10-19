@@ -21,7 +21,6 @@ public class ClinicMapper {
             clinic.setState(clinicDto.getState());
             clinic.setPinCode(clinicDto.getPinCode());
             clinic.setContactNumber(clinicDto.getContactNumber());
-            clinic.setStatus(clinicDto.getState());
 
             List<DoctorClinicDto> doctorClinicsDto = clinicDto.getDoctors();
             if (doctorClinicsDto != null) {
