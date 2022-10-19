@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -34,18 +35,16 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     /**
      * <p>
-     *  This method is used to retrieve patient by
-     *  using patient id and patient status and send back to the
-     *  PatientService
+     * This method is used to retrieve patient by
+     * using patient id and patient status and send back to the
+     * PatientService
      * </p>
      *
-     * @param id - id of the patient
-     *
+     * @param id     - id of the patient
      * @param status - status of the patient in databse
-     *
      * @return patient
      */
-    Patient findByIdAndStatus(Integer id, String status);
+    Optional<Patient> findByIdAndStatus(Integer id, String status);
 
     /**
      * <p>

@@ -1,3 +1,13 @@
+/**
+ * <p>
+ * This package contains classes are DoctorClinicImpl,
+ * PatientImpl, DoctorImpl, ClinicImpl,
+ * AppointmentImpl, FeedbackImpl, SpecializationImpl,
+ * TimeslotImpl, VitalsImpl
+ * </p>
+ * <p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
@@ -21,6 +31,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+/**
+ * <p>
+ * AppointmentserviceImpl class implements Appointmentservice
+ * and it contains methods and with helps of passing object to
+ * AppointmentRepository interface
+ * </p>
+ *
+ * @author Gunaseelan K
+ *
+ * @version 1
+ *
+ * @since 2022-07-18
+ */
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
@@ -36,9 +59,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private ClinicService clinicService;
 
-
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        System.out.println(appointmentDto.getScheduledOn());
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
         if (Period.between(date, currentDate).getDays() < 0) {
@@ -51,10 +75,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         throw new NotFoundException("please enter valid date and time");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<AppointmentDto> getAppointments() {
-        System.out.println("hi");
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
-        System.out.println("hey da");
         if (appointments.isEmpty()) {
             throw new NotFoundException("No appointment Found");
         }
@@ -64,6 +89,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto getAppointmentById(int id) {
 
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
@@ -72,13 +100,17 @@ public class AppointmentServiceImpl implements AppointmentService {
                 orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public boolean isAppointmentAvailable(int id, LocalDateTime dateTime) {
 
         return appointmentRepository.findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public String deleteAppointmentById(int id) {
 
         Optional<Appointment> appointmentById = appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE);
@@ -91,11 +123,22 @@ public class AppointmentServiceImpl implements AppointmentService {
         return "deleted successfully";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
-        Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
-        return AppointmentMapper.toDto(appointmentRepository.save(appointment));
+        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        if (Period.between(date, currentDate).getDays() < 0) {
+            Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
+            return save(appointmentDto);
+        }
+        throw new NotFoundException("please enter valid date and time");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto save(AppointmentDto appointmentDto) {
         if (isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
             Appointment appointment = AppointmentMapper.fromDto(appointmentDto);

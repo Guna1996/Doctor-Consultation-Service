@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthCare.controller;
 
+import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.PatientDto;
 
 import com.ideas2it.healthCare.exception.NotFoundException;
@@ -61,8 +62,10 @@ public class PatientController {
      * @return String
      */
     @PostMapping
-    public ResponseEntity<PatientDto> addPatient(@Valid @RequestBody PatientDto patientDto) {
+    public ResponseEntity<PatientDto> addPatient(@RequestBody PatientDto patientDto) {
+        patientDto.setStatus(Constants.ACTIVE);
         PatientDto addedPatient = patientService.addPatient(patientDto);
+
         return new ResponseEntity<>(addedPatient, HttpStatus.OK);
     }
 
@@ -94,7 +97,8 @@ public class PatientController {
      * @return PatientDto
      */
     @PutMapping
-    public ResponseEntity<PatientDto> updatePatient(@Valid @RequestBody PatientDto patientDto) {
+
+    public ResponseEntity<PatientDto> updatePatient(@RequestBody PatientDto patientDto) {
         PatientDto updatePatient = patientService.updatePatient(patientDto);
         return new ResponseEntity<>(updatePatient, HttpStatus.OK);
     }

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -32,12 +33,12 @@ import java.util.List;
  */
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinicDto {
 
     private int id;
     private String status;
     private DoctorDto doctor;
     private ClinicDto clinic;
+    private LocalTime timeslot; //---
     private List<TimeslotDto> timeslots;
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ClinicMapper {
 
     public static Clinic fromDto(ClinicDto clinicDto) {

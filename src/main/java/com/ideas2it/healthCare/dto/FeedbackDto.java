@@ -34,7 +34,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class FeedbackDto {
 
     private int id;

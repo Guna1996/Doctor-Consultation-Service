@@ -42,7 +42,6 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "appointment")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Appointment {
 
     @Id

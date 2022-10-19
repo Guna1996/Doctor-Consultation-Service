@@ -17,6 +17,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +45,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="doctor_clinic")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinic {
 
     @Id
@@ -64,7 +64,8 @@ public class DoctorClinic {
     private Clinic clinic;
 
     @ManyToMany
-    @JoinTable(name = "doctor_clinic_timeslot", joinColumns = @JoinColumn(name = "doctor_clinic_id"),
+    @JoinTable(name = "doctor_clinic_timeslot",
+            joinColumns = @JoinColumn(name = "doctor_clinic_id"),
             inverseJoinColumns = @JoinColumn(name = "timeslot_id"))
     private List<Timeslot> timeslots;
 }
