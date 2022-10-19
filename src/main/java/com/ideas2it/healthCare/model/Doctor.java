@@ -36,7 +36,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "doctors")
+@Table(name = "doctor")
 public class Doctor {
 
     @Id

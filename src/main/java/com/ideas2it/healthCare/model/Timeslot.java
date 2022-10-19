@@ -19,10 +19,13 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * <p>
@@ -48,4 +51,7 @@ public class Timeslot {
 
     @Column
     private LocalTime timeslot;
+
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "timeslots")
+//    private List<DoctorClinic> doctorClinics;
 }

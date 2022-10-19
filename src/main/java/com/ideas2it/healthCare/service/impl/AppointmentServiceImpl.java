@@ -59,7 +59,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private ClinicService clinicService;
 
-
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
@@ -73,6 +75,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         throw new NotFoundException("please enter valid date and time");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<AppointmentDto> getAppointments() {
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
         if (appointments.isEmpty()) {
@@ -84,6 +89,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto getAppointmentById(int id) {
 
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
@@ -92,13 +100,17 @@ public class AppointmentServiceImpl implements AppointmentService {
                 orElseThrow(() -> new NotFoundException("NO appointments Found"));
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public boolean isAppointmentAvailable(int id, LocalDateTime dateTime) {
 
         return appointmentRepository.findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public String deleteAppointmentById(int id) {
 
         Optional<Appointment> appointmentById = appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE);
@@ -111,6 +123,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         return "deleted successfully";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
@@ -121,6 +136,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         throw new NotFoundException("please enter valid date and time");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public AppointmentDto save(AppointmentDto appointmentDto) {
         if (isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
             Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
