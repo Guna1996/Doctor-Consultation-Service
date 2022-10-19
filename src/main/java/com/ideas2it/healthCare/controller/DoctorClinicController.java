@@ -12,7 +12,6 @@ package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.service.DoctorClinicService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,6 +70,7 @@ public class DoctorClinicController {
      * </p>
      *
      * @return List<DoctorClinicDto>
+     *
      */
     @GetMapping
     public ResponseEntity<List<DoctorClinicDto>> getDoctorClinics() {
@@ -87,15 +87,15 @@ public class DoctorClinicController {
      * @param id - id of the doctor
      *
      * @return String
+     * 
      */
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable Integer id) {
         return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{doctorId}/{clinicId}")
     public ResponseEntity<DoctorClinicDto> getByDoctorIdAndClinicId(@PathVariable("doctorId") int doctorId, @PathVariable("clinicId") int clinicId) {
-        System.out.println("hi");
         return new ResponseEntity<>(doctorClinicService.getByDoctorIdAndClinicId(doctorId, clinicId), HttpStatus.OK);
     }
 }
