@@ -30,7 +30,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -45,7 +44,7 @@ import java.util.stream.Collectors;
  *
  * @version 1
  *
- * @since 2022-10-18
+ * @since 2022-10-10
  */
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -76,7 +75,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             throw new NotFoundException(ErrorConstants.DOCTOR_CLINIC_PATIENT_NOT_FOUND);
         }
-        throw new NotFoundException(ErrorConstants.VALID_DATE_TIME);
+        throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
     }
 
     /**
@@ -118,9 +117,9 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String deleteAppointmentById(int id) {
         if (appointmentRepository.deleteAppointmentById(id) == 1){
-            return "Deleted Successfully";
+            return UserConstants.DELETED_SUCCESSFULLY;
         }
-        return "Doctor is not Deleted";
+        return ErrorConstants.APPOINTMENT_NOT_FOUND;
     }
 
     /**
@@ -133,7 +132,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
             return saveAppointment(appointmentDto);
         }
-        throw new NotFoundException("please enter valid date and time");
+        throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
     }
 
     /**
@@ -145,6 +144,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setStatus(Constants.ACTIVE);
             return AppointmentMapper.toDto(appointmentRepository.save(appointment));
         }
-        throw new NotFoundException("");
+        throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
     }
 }

@@ -1,4 +1,4 @@
-package com.ideas2it.healthcare.util;
+package com.ideas2it.healthcare.configuration;
 
 import com.ideas2it.healthcare.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
