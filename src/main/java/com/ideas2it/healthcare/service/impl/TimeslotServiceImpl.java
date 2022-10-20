@@ -1,6 +1,5 @@
 package com.ideas2it.healthcare.service.impl;
 
-<<<<<<< HEAD:src/main/java/com/ideas2it/healthCare/service/impl/TimeslotServiceImpl.java
 import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -8,10 +7,8 @@ import com.ideas2it.healthcare.mapper.TimeslotMapper;
 import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repo.TimeslotRepo;
 import com.ideas2it.healthcare.service.TimeslotService;
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
->>>>>>> 22c361ef3eff0cafb24e90c0eecb0c16c506eefe:src/main/java/com/ideas2it/healthcare/service/impl/TimeslotServiceImpl.java
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -63,15 +60,11 @@ public class TimeslotServiceImpl implements TimeslotService {
     public String deleteTimeslot(int id) {
         if (timeslotRepo.existsById(id)) {
             timeslotRepo.deleteById(id);
-<<<<<<< HEAD:src/main/java/com/ideas2it/healthCare/service/impl/TimeslotServiceImpl.java
             return UserConstants.DELETED_SUCCESSFULLY;
-=======
->>>>>>> 22c361ef3eff0cafb24e90c0eecb0c16c506eefe:src/main/java/com/ideas2it/healthcare/service/impl/TimeslotServiceImpl.java
         }
         else {
             throw new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND);
         }
-        return "Deleted Successfully";
     }
 
     public boolean isTimeslotAvailable(int id) {
