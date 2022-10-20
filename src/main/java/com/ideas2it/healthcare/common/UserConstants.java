@@ -53,7 +53,7 @@ public class UserConstants {
 
     public static final String TIMESLOT_NOT_FOUND = "Timeslot not found";
 
-    public static final String VITALS_NOT_FOUND_FOR_PATIENT = "Vitals not found for patient";
+    public static final String VITALS_NOT_FOUND_FOR_PATIENT = "Vital not found for patient";
 
     public static final String HIGH = "High";
 

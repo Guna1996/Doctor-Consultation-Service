@@ -1,6 +1,6 @@
 package com.ideas2it.healthcare.filters;
 
-import com.ideas2it.healthcare.service.MyUserDetailsService;
+import com.ideas2it.healthcare.service.impl.MyUserDetailsService;
 import com.ideas2it.healthcare.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

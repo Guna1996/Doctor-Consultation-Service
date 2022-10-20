@@ -3,7 +3,7 @@
  * This package contains interfaces are DoctorClinicService,
  * PatientService, DoctorService, ClinicService,
  * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalsServiceImpl.
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  *
  * Copyright 2022 - Ideas2it
@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @version 1
  *
- * @since   2022-10-18
+ * @since   2022-10-10
  */
 
 public interface AppointmentService {
@@ -51,7 +51,8 @@ public interface AppointmentService {
      *
      * </p>
      *
-     * @param id - id of the appointment
+     * @param pageNumber - Page number of the page
+     * @param totalRows - number of rows required in
      *
      * @return appointmentDto
      */

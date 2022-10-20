@@ -3,11 +3,11 @@ package com.ideas2it.healthcare.mapper;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.dto.VitalsDto;
+import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
-import com.ideas2it.healthcare.model.Vitals;
+import com.ideas2it.healthcare.model.Vital;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +49,11 @@ public class PatientMapper {
                 });
                 patient.setAppointment(appointments);
             }
-            List<VitalsDto> vitalsDto = patientDto.getVitals();
+            List<VitalDto> vitalsDto = patientDto.getVitals();
             if(null != vitalsDto) {
-                List<Vitals> vitals = new ArrayList<>();
+                List<Vital> vitals = new ArrayList<>();
                 vitalsDto.forEach(vitalsdto -> {
-                    Vitals vital = new Vitals();
+                    Vital vital = new Vital();
                     vital.setId(vitalsdto.getId());
                     vital.setHeight(vitalsdto.getHeight());
                     vital.setWeight(vitalsdto.getWeight());
@@ -106,11 +106,11 @@ public class PatientMapper {
                 });
                 patientDto.setAppointment(appointmentsDtoList);
             }
-            List<Vitals> vitals = patient.getVitals();
+            List<Vital> vitals = patient.getVitals();
             if(null != vitals) {
-                List<VitalsDto> vitalsDtos = new ArrayList<>();
+                List<VitalDto> vitalsDtos = new ArrayList<>();
                 vitals.forEach(vital -> {
-                    VitalsDto vitalsdto = new VitalsDto();
+                    VitalDto vitalsdto = new VitalDto();
                     vitalsdto.setId(vital.getId());
                     vitalsdto.setHeight(vital.getHeight());
                     vitalsdto.setWeight(vital.getWeight());
