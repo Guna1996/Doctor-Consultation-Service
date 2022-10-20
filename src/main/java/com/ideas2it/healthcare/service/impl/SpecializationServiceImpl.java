@@ -45,13 +45,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     private SpecializationRepository specializationRepository;
 
     /**
-     * <p>
-     * This method is used to create and Update Specialization's record by
-     * getting SpecializationDto as an input and convert it in to
-     * Specialization model with the help of mapper class
-     * </p>
-     *
-     * @param specializationDto {@link SpecializationDto}
+     * {@inheritDoc}
      */
     @Override
     public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
@@ -61,13 +55,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     }
 
     /**
-     * <p>
-     * This method is used to get all Specialization's record by
-     * getting all Specializations from database and convert it in to
-     * SpecializationDto with the help of mapper class
-     * </p>
-     *
-     * @return {@link List <DoctorDto>}
+     * {@inheritDoc}
      */
     @Override
     public List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows) {
@@ -81,13 +69,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     }
 
     /**
-     * <p>
-     * This method is used to get the Specialization by id and
-     * convert it into SpecializationDto
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link DoctorDto}
+     * {@inheritDoc}
      */
     @Override
     public SpecializationDto getSpecializationById(int id) {
@@ -98,18 +80,13 @@ public class SpecializationServiceImpl implements SpecializationService {
     }
 
     /**
-     * <p>
-     * This method is used to delete the Specialization by id
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link String}
+     * {@inheritDoc}
      */
 
     public String deleteSpecializationById(int id) {
         if (specializationRepository.deleteSpecializationById(id) == 1) {
-            return "Deleted Successfully";
+            return UserConstants.DELETED_SUCCESSFULLY;
         }
-        return "Specialization is Not Deleted";
+        return UserConstants.NO_SPECIALIZATION_IS_PRESENT;
     }
 }

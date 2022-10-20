@@ -10,9 +10,9 @@ public class UserConstants {
 
     public static final String DOCTOR_NOT_FOUND_TO_DELETE ="Doctor not found to delete";
 
-    public static final String DOCTORID_NOT_FOUND_TO_UPDATE = "Doctor id not found to update";
+    public static final String DOCTOR_ID_NOT_FOUND_TO_UPDATE = "Doctor id not found to update";
 
-    public static final String DOCTORID_CLINICID_NOT_FOUND = "Doctor id and clinic id not found";
+    public static final String DOCTOR_ID_CLINICID_NOT_FOUND = "Doctor id and clinic id not found";
 
     public static final String DOCTORS_NOT_FOUND = "Doctors not found";
 
@@ -22,7 +22,7 @@ public class UserConstants {
 
     public static final String DATA_IS_EMPTY = "Data is empty";
 
-    public static final String FEEDBACK_NOT_FOUND = "Feebdack not found";
+    public static final String FEEDBACK_NOT_FOUND = "Feedback not found";
 
     public static final String PATIENT_NOT_FOUND = "Patient not found";
 
