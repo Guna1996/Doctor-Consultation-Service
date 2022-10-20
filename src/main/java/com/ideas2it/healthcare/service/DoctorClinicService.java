@@ -5,7 +5,7 @@
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -14,6 +14,19 @@ import com.ideas2it.healthcare.dto.DoctorClinicDto;
 
 import java.util.List;
 
+/**
+ * <p>
+ * Doctor clinic  interface is used for converting dto into entity
+ * class and also it helps to passing objects between controller
+ * to repository for CRUD operations
+ * </p>
+ *
+ * @author  Ramachandran
+ *
+ * @version 1
+ *
+ * @since 2022-10-10
+ */
 public interface DoctorClinicService {
 
     /**

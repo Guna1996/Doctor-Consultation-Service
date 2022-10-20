@@ -64,9 +64,21 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
      * @return List<patient>
      */
     Page<Patient> findAllByStatus(String status, Pageable pageable);
-    
+
+    /**
+     * <p>
+     *  This method is used to delete patient by
+     *  using patient id  and status .once we delet the
+     *  patient from database the status goes to
+     *  inactive.
+     * </p>
+     *
+     * @return Integer
+     *
+     * @return List<patient>
+     */
     @Modifying
-    @Query("update patient set status='inactive' where id=?1")
+    @Query("update patient set status='inactive' where id=?1 and status = 'active'")
     Integer deletePatiendById(int id);
 
 }
