@@ -1,3 +1,10 @@
+/**
+ * <p>
+ * This is the base package for all the util classes
+ * which is for jwt util
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.util;
 
 import io.jsonwebtoken.Claims;
@@ -11,6 +18,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * <p>
+ * JwtUtil class is used for generate and validate token for authentication and authorization
+ * </p>
+ *
+ * @author  Gunaseelan K
+ *
+ * @version 1
+ *
+ * @since   2022-10-10
+ */
 @Service
 public class JwtUtil {
 
