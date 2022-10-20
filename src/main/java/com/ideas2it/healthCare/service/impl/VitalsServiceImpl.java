@@ -87,13 +87,11 @@ public class VitalsServiceImpl implements VitalsService {
         List<VitalsDto> vitalsDto = null;
         List<Vitals> vitals = vitalsRepo.findByPatientId(patientId,
                 PageRequest.of(pageNumber, totalRows)).toList();
-        if (!(vitals.isEmpty())) {
-            vitalsDto = vitals.stream()
-                    .map(VitalsMapper::toDto).collect(Collectors.toList());
-        }
-        else {
+        if (vitals.isEmpty()) {
             throw new NotFoundException("Vitals not found for patient");
         }
+        vitalsDto = vitals.stream()
+                .map(VitalsMapper::toDto).collect(Collectors.toList());
         return vitalsDto;
     }
 }
