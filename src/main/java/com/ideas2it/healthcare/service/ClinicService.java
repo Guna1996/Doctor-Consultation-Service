@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @version 1
  *
- * @since   2022-10-18
+ * @since   2022-10-10
  */
 public interface ClinicService {
     /**
