@@ -8,6 +8,7 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.service.SpecializationService;
 
@@ -51,7 +52,7 @@ public class SpecializationController {
         return new ResponseEntity<>(specializationService.getAllSpecializations(),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(Constants.ID)
     public ResponseEntity<SpecializationDto> getSpecializationById(@PathVariable int id) {
         return new ResponseEntity<>(specializationService.getSpecializationById(id), HttpStatus.OK);
     }
@@ -61,10 +62,10 @@ public class SpecializationController {
         return new ResponseEntity<>(specializationService.saveOrUpdate(specializationDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(Constants.ID)
     public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
         SpecializationDto specializationDto = specializationService.getSpecializationById(id);
         specializationDto.setStatus(Constants.INACTIVE);
-        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+        return new ResponseEntity<>(UserConstants.DELETED_SUCCESSFULLY, HttpStatus.OK);
     }
 }

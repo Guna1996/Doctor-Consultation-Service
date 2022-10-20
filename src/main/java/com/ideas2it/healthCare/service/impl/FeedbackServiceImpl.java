@@ -1,6 +1,8 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.ErrorConstants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.FeedbackDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.FeedbackMapper;
@@ -32,14 +34,14 @@ public class FeedbackServiceImpl implements FeedbackService {
             return FeedbackMapper.toDto(feedbackRepo.save(FeedbackMapper.fromDto(feedbackDto)));
         }
         else {
-            throw new NotFoundException("The data doesn't exist");
+            throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
     }
 
     @Override
     public FeedbackDto getFeedbackById(int id){
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("feedback not found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
         return FeedbackMapper.toDto(feedback);
     }
 
@@ -54,17 +56,17 @@ public class FeedbackServiceImpl implements FeedbackService {
             return feedbacksDto;
         }
         else {
-            throw new NotFoundException("Data is empty");
+            throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
     }
 
     @Override
     public String deleteFeedback(int id) {
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Feedback not found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
         feedback.setStatus(Constants.INACTIVE);
         feedbackRepo.save(feedback);
-        return "Deleted Successfully";
+        return UserConstants.DELETED_SUCCESSFULLY;
     }
 
 }

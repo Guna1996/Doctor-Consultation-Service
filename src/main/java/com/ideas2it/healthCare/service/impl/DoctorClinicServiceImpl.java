@@ -11,6 +11,8 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.ErrorConstants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.DoctorClinicDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.DoctorClinicMapper;
@@ -38,7 +40,7 @@ import java.util.stream.Collectors;
  *
  * @version 1
  *
- * @since 2022-07-18
+ * @since 2022-10-10
  */
 @Service
 public class DoctorClinicServiceImpl implements DoctorClinicService {
@@ -65,7 +67,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
             toReturnDto = DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
         } else {
-            throw new NotFoundException("doctor not found to assign");
+            throw new NotFoundException(UserConstants.DOCTOR_NOT_FOUND_TO_ASSIGN);
         }
         return toReturnDto;
     }
@@ -76,12 +78,12 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     public List<DoctorClinicDto> getDoctorClinics() {
         List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE);
         if (doctorClinics.isEmpty()) {
-            throw new NotFoundException("No clinic Found");
-        } else {
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
+        }
             return doctorClinics.stream()
                     .map(DoctorClinicMapper::toDto)
                     .collect(Collectors.toList());
-        }
+
     }
 
     /**
@@ -89,10 +91,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public String deleteDoctorFromClinic(Integer id) {
         DoctorClinic doctorClinic = doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() ->  new NotFoundException("Doctor not found to delete"));
+                .orElseThrow(() ->  new NotFoundException(UserConstants.DOCTOR_NOT_FOUND_TO_DELETE));
         doctorClinic.setStatus(Constants.INACTIVE);
         doctorClinicRepository.save(doctorClinic);
-        return "Deleted Successfully";
+        return UserConstants.DELETED_SUCCESSFULLY;
     }
 
     /**
@@ -103,13 +105,13 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             return DoctorClinicMapper.toDto(doctorClinicRepository
                     .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
         }
-        throw new NotFoundException("Doctor id not found to update");
+        throw new NotFoundException(UserConstants.DOCTORID_NOT_FOUND_TO_UPDATE);
     }
 
     @Override
     public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("not found")));
+                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTORID_CLINICID_NOT_FOUND)));
     }
 }
 

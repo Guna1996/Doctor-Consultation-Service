@@ -8,6 +8,7 @@
 package com.ideas2it.healthCare.controller;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.service.DoctorService;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,7 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.getAllDoctors(),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(Constants.ID)
     public ResponseEntity<DoctorDto> getDoctorById(@PathVariable int id) {
         return new ResponseEntity<>(doctorService.getDoctorById(id), HttpStatus.OK);
     }
@@ -60,11 +61,11 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.saveOrUpdate(doctorDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(Constants.ID)
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
         DoctorDto doctorDto = doctorService.getDoctorById(id);
         doctorDto.setStatus(Constants.INACTIVE);
         doctorService.saveOrUpdate(doctorDto);
-        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+        return new ResponseEntity<>(UserConstants.DELETED_SUCCESSFULLY, HttpStatus.OK);
     }
 }

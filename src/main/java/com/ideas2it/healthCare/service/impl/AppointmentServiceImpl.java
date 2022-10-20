@@ -1,6 +1,8 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.ErrorConstants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.AppointmentDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.AppointmentMapper;
@@ -46,9 +48,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                     && clinicService.isClinicAvailable(appointmentDto.getClinic().getId())) {
                 return save(appointmentDto);
             }
-            throw new NotFoundException("doctor, clinic or patient not found");
+            throw new NotFoundException(ErrorConstants.DOCTOR_CLINIC_PATIENT_NOT_FOUND);
         }
-        throw new NotFoundException("please enter valid date and time");
+        throw new NotFoundException(ErrorConstants.VALID_DATE_TIME);
     }
 
     public List<AppointmentDto> getAppointments() {
@@ -56,7 +58,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE);
         System.out.println("hey da");
         if (appointments.isEmpty()) {
-            throw new NotFoundException("No appointment Found");
+            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
         }
         return appointments.stream()
                 .map(AppointmentMapper::toDto)
@@ -69,7 +71,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(AppointmentMapper::toDto).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("NO appointments Found"));
+                orElseThrow(() -> new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND));
     }
 
 
@@ -83,12 +85,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         Optional<Appointment> appointmentById = appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE);
         if (appointmentById.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
         Appointment appointment = appointmentById.get();
         appointment.setStatus(Constants.INACTIVE);
         appointmentRepository.save(appointment);
-        return "deleted successfully";
+        return UserConstants.DELETED_SUCCESSFULLY;
     }
 
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
@@ -102,6 +104,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setStatus(Constants.ACTIVE);
             return AppointmentMapper.toDto(appointmentRepository.save(appointment));
         }
-        throw new NotFoundException("This schedule is unavailable. kindly choose other schedule");
+        throw new NotFoundException("");
     }
 }

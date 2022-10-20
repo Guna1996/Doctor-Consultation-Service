@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthCare.controller;
 
+import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.AppointmentDto;
 import com.ideas2it.healthCare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yaml.snakeyaml.scanner.Constant;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -70,8 +72,8 @@ public class AppointmentController {
      * @param id is appointment id
      * @return ResponseEntity
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable("id") int id) {
+    @GetMapping(Constants.ID)
+    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable(Constants.PATH_ID) int id) {
 
         return new ResponseEntity<>(appointmentService.getAppointmentById(id), HttpStatus.OK);
     }
@@ -93,8 +95,8 @@ public class AppointmentController {
      * @param id is clinic id
      * @return string
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAppointment(@PathVariable("id") int id) {
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
 
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }

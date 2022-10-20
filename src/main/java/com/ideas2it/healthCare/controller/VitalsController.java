@@ -36,7 +36,7 @@ public class VitalsController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<VitalsDto> getVitalById(@PathVariable("id") int id) {
+    public ResponseEntity<VitalsDto> getVitalById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(vitalsService.getVitalsById(id), HttpStatus.OK);
     }
 
@@ -48,12 +48,12 @@ public class VitalsController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable("id") int id) {
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(vitalsService.deleteVitals(id), HttpStatus.OK);
     }
 
     @GetMapping("/patient/{patientId}")
-    public ResponseEntity<List<VitalsDto>> getVitalsByPatientId(@PathVariable("patientId") int patientId) {
+    public ResponseEntity<List<VitalsDto>> getVitalsByPatientId(@PathVariable(Constants.PATH_PATIENTID) int patientId) {
         return new ResponseEntity<>(vitalsService.getVitalsByPatientId(patientId), HttpStatus.OK);
     }
 }

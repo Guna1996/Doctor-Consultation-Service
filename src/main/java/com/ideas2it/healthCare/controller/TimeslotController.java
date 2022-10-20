@@ -1,5 +1,6 @@
 package com.ideas2it.healthCare.controller;
 
+import com.ideas2it.healthCare.common.Constants;
 import com.ideas2it.healthCare.dto.TimeslotDto;
 import com.ideas2it.healthCare.service.TimeslotService;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +35,8 @@ public class TimeslotController {
         return new ResponseEntity<>(timeslotService.updateTimeslot(timeslotDto),HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<TimeslotDto> getTimeslotById(@PathVariable("id") int id) {
+    @GetMapping(Constants.ID)
+    public ResponseEntity<TimeslotDto> getTimeslotById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(timeslotService.getTimeslotById(id), HttpStatus.OK);
     }
 
@@ -44,8 +45,8 @@ public class TimeslotController {
         return new ResponseEntity<>(timeslotService.addTimeslot(timeslotDto),HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteTimeslotById(@PathVariable("id") int id) {
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deleteTimeslotById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(timeslotService.deleteTimeslot(id), HttpStatus.OK);
     }
 

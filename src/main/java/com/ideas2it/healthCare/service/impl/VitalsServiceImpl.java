@@ -1,6 +1,7 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.VitalsDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.VitalsMapper;
@@ -32,21 +33,21 @@ public class VitalsServiceImpl implements VitalsService {
             return VitalsMapper.toDto(vitalsRepo.save(VitalsMapper.fromDto(vitalsDto)));
         }
         else {
-            throw new NotFoundException("The data doesn't exist");
+            throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
     }
 
     @Override
     public VitalsDto getVitalsById(int id) {
         Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("feedback not found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
         if (vitals.getDiastolic() < 80 && vitals.getSystolic() < 120) {
-            vitals.setBloodPressure("Normal");
+            vitals.setBloodPressure(UserConstants.NORMAL);
         } else if (vitals.getSystolic() > 120 || vitals.getDiastolic() > 80) {
-            vitals.setBloodPressure("High");
+            vitals.setBloodPressure(UserConstants.HIGH);
         }
         else {
-            vitals.setBloodPressure("Low");
+            vitals.setBloodPressure(UserConstants.LOW);
         }
         return VitalsMapper.toDto(vitals);
     }
@@ -58,29 +59,29 @@ public class VitalsServiceImpl implements VitalsService {
             List<VitalsDto> vitalsDto = new ArrayList<>();
             for (Vitals vital : vitals) {
                 if (vital.getDiastolic() < 80 && vital.getSystolic() < 120) {
-                    vital.setBloodPressure("normal");
+                    vital.setBloodPressure(UserConstants.NORMAL);
                 } else if (vital.getSystolic() > 120 || vital.getDiastolic() > 80) {
-                    vital.setBloodPressure("High");
+                    vital.setBloodPressure(UserConstants.HIGH);
                 }
                 else {
-                    vital.setBloodPressure("Low");
+                    vital.setBloodPressure(UserConstants.LOW);
                 }
                 vitalsDto.add(VitalsMapper.toDto(vital));
             }
             return vitalsDto;
         }
         else {
-            throw new NotFoundException("Data is empty");
+            throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
     }
 
     @Override
     public String deleteVitals(int id) {
         Vitals vitals = vitalsRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("Feedback not found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
         vitals.setStatus(Constants.INACTIVE);
         vitalsRepo.save(vitals);
-        return "Deleted Successfully";
+        return UserConstants.DELETED_SUCCESSFULLY;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class VitalsServiceImpl implements VitalsService {
                     .map(VitalsMapper::toDto).collect(Collectors.toList());
         }
         else {
-            throw new NotFoundException("Vitals not found for patient");
+            throw new NotFoundException(UserConstants.VITALS_NOT_FOUND_FOR_PATIENT);
         }
         return vitalsDto;
     }

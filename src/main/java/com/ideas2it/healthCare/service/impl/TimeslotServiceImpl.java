@@ -1,5 +1,6 @@
 package com.ideas2it.healthCare.service.impl;
 
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.TimeslotDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.TimeslotMapper;
@@ -31,14 +32,14 @@ public class TimeslotServiceImpl implements TimeslotService {
             return TimeslotMapper.toDto(timeslotRepo.save(TimeslotMapper.fromDto(timeslotDto)));
         }
         else {
-            throw new NotFoundException("The data doesn't exist");
+            throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
     }
 
     @Override
     public TimeslotDto getTimeslotById(int id) {
         Timeslot timeslot = timeslotRepo.findById(id)
-                .orElseThrow(() -> new NotFoundException("Timeslot not found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.TIMESLOT_NOT_FOUND));
         return TimeslotMapper.toDto(timeslot);
     }
 
@@ -53,7 +54,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             return timeslotsDto;
         }
         else {
-            throw new NotFoundException("Data is empty");
+            throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
     }
 
@@ -61,16 +62,16 @@ public class TimeslotServiceImpl implements TimeslotService {
     public String deleteTimeslot(int id) {
         if (timeslotRepo.existsById(id)) {
             timeslotRepo.deleteById(id);
-            return "Deleted Successfully";
+            return UserConstants.DELETED_SUCCESSFULLY;
         }
         else {
-            throw new NotFoundException("Feedback not found");
+            throw new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND);
         }
     }
 
     @Override
     public boolean isTimeslotAvailable(int id) {
-        Timeslot  timeslot = timeslotRepo.findById(id).orElseThrow(() -> new NotFoundException("id not found"));
+        Timeslot  timeslot = timeslotRepo.findById(id).orElseThrow(() -> new NotFoundException(UserConstants.ID_NOT_FOUND));
 
         return timeslot != null;
 

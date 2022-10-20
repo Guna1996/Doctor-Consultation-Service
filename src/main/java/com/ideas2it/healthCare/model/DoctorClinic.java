@@ -44,23 +44,22 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="doctor_clinic")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class DoctorClinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
     @ManyToOne
-    @JoinColumn(name="doctor_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name="clinic_id")
+    @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
     @ManyToMany

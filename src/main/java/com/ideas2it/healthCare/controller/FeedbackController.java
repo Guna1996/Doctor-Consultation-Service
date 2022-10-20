@@ -35,20 +35,19 @@ public class FeedbackController {
         return new ResponseEntity<>(feedbackService.updateFeedback(feedbackDto),HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<FeedbackDto> getFeedbackById(@PathVariable("id") int id) {
+    @GetMapping(Constants.ID)
+    public ResponseEntity<FeedbackDto> getFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(feedbackService.getFeedbackById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<FeedbackDto> insertFeedback(@RequestBody FeedbackDto feedbackDto) {
-        System.out.println("yes it's coming");
         feedbackDto.setStatus(Constants.ACTIVE);
         return new ResponseEntity<>(feedbackService.addFeedback(feedbackDto),HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable("id") int id) {
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
     }
 

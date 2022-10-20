@@ -1,6 +1,8 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.ErrorConstants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.ClinicDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.ClinicMapper;
@@ -31,7 +33,7 @@ public class ClinicServiceImpl implements ClinicService {
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE);
 
         if (clinics.isEmpty()) {
-            throw new NotFoundException("No clinic Found");
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
         return clinics.stream()
                 .map(ClinicMapper::toDto)
@@ -44,14 +46,14 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(ClinicMapper::toDto).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("NO clinic Found"));
+                orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
     }
 
     public ClinicDto updateClinic(ClinicDto clinicDto) {
 
         Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(clinicDto.getId(), Constants.ACTIVE);
         if (clinicById.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
         return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
     }
@@ -60,12 +62,12 @@ public class ClinicServiceImpl implements ClinicService {
 
         Optional<Clinic> clinic = clinicRepository.findByIdAndStatus(id, Constants.ACTIVE);
         if (clinic.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
         Clinic deletedClinic = clinic.get();
         deletedClinic.setStatus(Constants.INACTIVE);
         clinicRepository.save(deletedClinic);
-        return "deleted successfully";
+        return UserConstants.DELETED_SUCCESSFULLY;
     }
 
     public boolean isClinicAvailable(int id) {

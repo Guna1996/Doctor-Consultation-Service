@@ -8,6 +8,7 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.dto.SpecializationDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
@@ -70,7 +71,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public List<SpecializationDto> getAllSpecializations() {
         List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE);
         if (specializations.isEmpty()) {
-            throw new NotFoundException("No Specialization is Present");
+            throw new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT);
 
         }
         return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
@@ -89,7 +90,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public SpecializationDto getSpecializationById(int id) {
         Specialization specialization = specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(()-> new NotFoundException("No Specialization Found"));
+                .orElseThrow(()-> new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT));
         return SpecializationMapper.toDto(specialization);
     }
 
@@ -105,9 +106,9 @@ public class SpecializationServiceImpl implements SpecializationService {
     public String deleteById(int id) {
         Specialization specialization = specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("No Specialization Founded"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT));
         specialization.setStatus(Constants.INACTIVE);
         specializationRepository.save(specialization);
-        return "Deleted Successfully";
+        return UserConstants.DELETED_SUCCESSFULLY;
     }
 }

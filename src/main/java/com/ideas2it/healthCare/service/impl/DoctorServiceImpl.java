@@ -8,6 +8,7 @@
 package com.ideas2it.healthCare.service.impl;
 
 import com.ideas2it.healthCare.common.Constants;
+import com.ideas2it.healthCare.common.UserConstants;
 import com.ideas2it.healthCare.dto.DoctorDto;
 import com.ideas2it.healthCare.exception.NotFoundException;
 import com.ideas2it.healthCare.mapper.DoctorMapper;
@@ -67,7 +68,7 @@ public class DoctorServiceImpl implements DoctorService {
     public List<DoctorDto> getAllDoctors() {
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE);
         if (doctors.isEmpty()) {
-            throw new NotFoundException("No Doctor is Preset");
+            throw new NotFoundException(UserConstants.DOCTORS_NOT_FOUND);
         }
         return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
 
@@ -86,7 +87,7 @@ public class DoctorServiceImpl implements DoctorService {
     public DoctorDto getDoctorById(int id) {
         Doctor doctor = doctorRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("No Doctor Found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTOR_NOT_FOUND));
         return DoctorMapper.toDto(doctor);
     }
 
