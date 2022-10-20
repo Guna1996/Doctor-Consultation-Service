@@ -25,5 +25,33 @@ public class Constants {
     public static final String VACANT = "vacant";
 
     public static final String OCCUPIED = "occupied";
+
+    public static final String ID ="/{id}";
+
+    public static final String PATH_ID = "id";
+
+    public static final String PATH_DOCTORID = "doctorId";
+
+    public static final String PATH_CLINICID = "clinicId";
+
+    public static final String PATH_PATIENTID = "patientId";
+
+    public static final String PATIENTID_CLINICID = "/{doctorId}/{clinicId}";
+
+    public static final String name = "name";
+
+    public static final String DATE_OF_BIRHT = "date_of_birth";
+
+    public static final String GENDER = "gender";
+
+    public static final String MOBILE_NUMBER = "mobile_numbre";
+
+    public static final String EMAIL = "email";
+
+    public static final String STATUS = "status";
+
+    public static final String PATIENT = "patient";
+
+
 }
 

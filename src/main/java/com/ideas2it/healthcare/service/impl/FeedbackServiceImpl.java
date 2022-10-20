@@ -1,6 +1,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
@@ -11,7 +12,6 @@ import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -33,14 +33,14 @@ public class FeedbackServiceImpl implements FeedbackService {
             feedbackDtoToReturn = FeedbackMapper.toDto(feedbackRepo.save(FeedbackMapper.fromDto(feedbackDto)));
         }
         else {
-            throw new NotFoundException("The data doesn't exist");
+            throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
         return feedbackDtoToReturn;
     }
 
     public FeedbackDto getFeedbackById(int id){
         Feedback feedback = feedbackRepo.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException("feedback not found"));
+                .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
         return FeedbackMapper.toDto(feedback);
     }
 
@@ -55,7 +55,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             }
         }
         else {
-            throw new NotFoundException("Data is empty");
+            throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
         return feedbacksDto;
     }

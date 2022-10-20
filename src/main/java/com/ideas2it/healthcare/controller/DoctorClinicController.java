@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,10 @@ import java.util.List;
  *
  * @version 1
  *
- * @since 2022-10-18
+ *
+ * @since 2022-10-10
  */
+
 @RestController
 @RequestMapping("/doctor-clinic")
 public class DoctorClinicController {
@@ -87,15 +90,28 @@ public class DoctorClinicController {
      * @param id - id of the doctor
      *
      * @return String
-     * 
+     *
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable("id") int id) {
+
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{doctorId}/{clinicId}")
-    public ResponseEntity<DoctorClinicDto> getByDoctorIdAndClinicId(@PathVariable("doctorId") int doctorId, @PathVariable("clinicId") int clinicId) {
+    /**
+     * <p>
+     * This method is used to get doctor clinic object by
+     * getting doctor id and patient id from the user
+     * </p>
+     *
+     * @param doctorId
+     *
+     * @param clinicId
+     *
+     * @return DoctorClinicDto
+     */
+    @GetMapping(Constants.PATIENTID_CLINICID)
+    public ResponseEntity<DoctorClinicDto> getByDoctorIdAndClinicId(@PathVariable(Constants.PATH_DOCTORID) int doctorId, @PathVariable(Constants.PATH_CLINICID) int clinicId) {
         return new ResponseEntity<>(doctorClinicService.getByDoctorIdAndClinicId(doctorId, clinicId), HttpStatus.OK);
     }
 }

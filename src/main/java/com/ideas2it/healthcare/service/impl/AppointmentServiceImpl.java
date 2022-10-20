@@ -11,6 +11,8 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
@@ -72,9 +74,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                     && clinicService.isClinicAvailable(appointmentDto.getClinic().getId())) {
                 return saveAppointment(appointmentDto);
             }
-            throw new NotFoundException("doctor, clinic or patient not found");
+            throw new NotFoundException(ErrorConstants.DOCTOR_CLINIC_PATIENT_NOT_FOUND);
         }
-        throw new NotFoundException("please enter valid date and time");
+        throw new NotFoundException(ErrorConstants.VALID_DATE_TIME);
     }
 
     /**
@@ -84,7 +86,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (appointments.isEmpty()) {
-            throw new NotFoundException("No appointment Found");// constant application va
+            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
         }
         return appointments.stream()
                 .map(AppointmentMapper::toDto)
@@ -100,7 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(AppointmentMapper::toDto).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("NO appointments Found"));
+                orElseThrow(() -> new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND));
     }
 
     /**
@@ -115,7 +117,6 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String deleteAppointmentById(int id) {
-
         if (appointmentRepository.deleteAppointmentById(id) == 1){
             return "Deleted Successfully";
         }
@@ -144,6 +145,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setStatus(Constants.ACTIVE);
             return AppointmentMapper.toDto(appointmentRepository.save(appointment));
         }
-        throw new NotFoundException("This schedule is unavailable. kindly choose other schedule");
+        throw new NotFoundException("");
     }
 }

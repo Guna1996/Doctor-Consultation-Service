@@ -35,8 +35,9 @@ public class VitalsController {
         return new ResponseEntity<>(vitalsService.updateVitals(vitalsDto),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VitalsDto> getVitalById(@PathVariable("id") int id) {
+
+    @GetMapping(Constants.ID)
+    public ResponseEntity<VitalsDto> getVitalById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(vitalsService.getVitalsById(id), HttpStatus.OK);
     }
 
@@ -46,8 +47,8 @@ public class VitalsController {
         return new ResponseEntity<>(vitalsService.addVitals(vitalsDto),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable("id") int id) {
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
         return new ResponseEntity<>(vitalsService.deleteVitals(id), HttpStatus.OK);
     }
 

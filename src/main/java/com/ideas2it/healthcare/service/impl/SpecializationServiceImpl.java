@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -73,7 +74,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
-            throw new NotFoundException("No Specialization is Present");
+            throw new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT);
 
         }
         return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
@@ -92,7 +93,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public SpecializationDto getSpecializationById(int id) {
         Specialization specialization = specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(()-> new NotFoundException("No Specialization Found"));
+                .orElseThrow(()-> new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT));
         return SpecializationMapper.toDto(specialization);
     }
 
@@ -104,7 +105,7 @@ public class SpecializationServiceImpl implements SpecializationService {
      * @param id {@link int}
      * @return {@link String}
      */
-    @Override
+
     public String deleteSpecializationById(int id) {
         if (specializationRepository.deleteSpecializationById(id) == 1) {
             return "Deleted Successfully";
