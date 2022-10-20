@@ -10,5 +10,12 @@ public class ErrorConstants {
 
     public static final String CLINIC_NOT_FOUND = "Clinic not found";
 
+
+    public static final String Vital_NOT_FOUND = "Vital is not found";
+
+    public static final String TIMESLOT_NOT_FOUND = "Timeslot is not found";
+
+    public static final String FEEDBACK_NOT_FOUND = "Feedback is not found";
+    
     public  static final String APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE = "Appointment unavailable for this schedule. kindly choose other schedule";
 }

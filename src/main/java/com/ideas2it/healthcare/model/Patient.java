@@ -3,7 +3,7 @@
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
- * Vitals,Timeslot.
+ * Vital,Timeslot.
  * </p>
  *
  * Copyright 2022 - Ideas2it
@@ -75,5 +75,5 @@ public class Patient {
     private List<Appointment> appointment;
 
     @OneToMany(mappedBy = "patient")
-    private List<Vitals> vitals;
+    private List<Vital> vitals;
 }

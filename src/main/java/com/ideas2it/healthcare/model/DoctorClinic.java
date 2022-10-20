@@ -3,7 +3,7 @@
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
  * Clinic,DoctorClinic,appointment,Feedback,Patient,
- * Vitals,Timeslot.
+ * Vital,Timeslot.
  * </p>
  *
  * Copyright 2022 - Ideas2it
