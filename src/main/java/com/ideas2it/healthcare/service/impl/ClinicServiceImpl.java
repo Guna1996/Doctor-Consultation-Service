@@ -5,7 +5,6 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -29,15 +28,13 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * ClinicserviceImpl class implements Clinicservice
+ * Clinic serviceImpl class implements Clinic service
  * and it contains methods and with helps of passing object to
  * ClinicRepository interface
  * </p>
  *
  * @author Gunaseelan K
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Service
@@ -50,7 +47,6 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public ClinicDto addClinic(ClinicDto clinicDto) {
-
         Clinic clinic = ClinicMapper.fromDto(clinicDto);
         clinic.setStatus(Constants.ACTIVE);
         return ClinicMapper.toDto(clinicRepository.save(clinic));
@@ -60,7 +56,6 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public List<ClinicDto> getClinics(int pageNumber, int totalRows) {
-
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
 
@@ -77,7 +72,6 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public ClinicDto getClinicById(int id) {
-
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(ClinicMapper::toDto).
                 findFirst().
@@ -88,7 +82,6 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public ClinicDto updateClinic(ClinicDto clinicDto) {
-
         Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(clinicDto.getId(), Constants.ACTIVE);
         if (clinicById.isEmpty()) {
             throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
@@ -100,7 +93,7 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String deleteClinicById(int id) {
-        if (clinicRepository.deleteClinicById(id) == 1){
+        if (clinicRepository.deleteClinicById(id) == 1) {
             return UserConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;

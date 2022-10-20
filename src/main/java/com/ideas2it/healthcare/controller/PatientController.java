@@ -5,14 +5,12 @@
  * AppointmentController,FeedbackController,SpecializationController,
  * TimeslotController,VitalController
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.PatientDto;
-
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,14 +29,12 @@ import java.util.List;
 /**
  * <p>
  * PatientController class with the helps of getting inputs
- * from patient and passing to Patientservice to store the data's
+ * from patient and passing to Patient Service to store the data's
  * into the database and it help to do CRUD operation
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @RestController
@@ -48,16 +44,14 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-
     /**
      * <p>
      * This method used to add patient details
      * by getting inputs from the patient
      * </p>
      *
-     * @Param patient - patient detail
-     *
-     * @return String
+     * @param patientDto is patient detail
+     * @return String as ResponseEntity
      */
     @PostMapping
     public ResponseEntity<PatientDto> addPatient(@RequestBody PatientDto patientDto) {
@@ -72,12 +66,11 @@ public class PatientController {
      * from the user
      * </p>
      *
-     * @Param id - patient id
-     *
-     * @return PatientDto
+     * @param id is patient id
+     * @return PatientDto as ResponseEntity
      */
     @GetMapping(Constants.ID)
-    public ResponseEntity<PatientDto> getPatientById(@PathVariable int id)  {
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable int id) {
         PatientDto getPatient = patientService.getPatientById(id);
         return new ResponseEntity<>(getPatient, HttpStatus.OK);
     }
@@ -88,9 +81,8 @@ public class PatientController {
      * from the database
      * </p>
      *
-     * @Param patientDto
-     *
-     * @return PatientDto
+     * @param patientDto is detail of patient
+     * @return PatientDto as ResponseEntity
      */
     @PutMapping
     public ResponseEntity<PatientDto> updatePatient(@RequestBody PatientDto patientDto) {
@@ -105,9 +97,8 @@ public class PatientController {
      * from the user
      * </p>
      *
-     * @Param id - patient id
-     *
-     * @return String
+     * @param id is detail of patient
+     * @return String as ResponseEntity
      */
     @DeleteMapping(Constants.ID)
     public ResponseEntity<String> deletePatientById(@PathVariable int id) {
@@ -123,9 +114,9 @@ public class PatientController {
      *
      * @return List<PatientDto>
      */
-    @GetMapping("/{pageNumber}/{totalRows}")
-    public ResponseEntity<List<PatientDto>> getPatients(@PathVariable("pageNumber") int pageNumber
-            , @PathVariable("totalRows") int totalRows) {
-        return  new ResponseEntity<>(patientService.getPatients(pageNumber, totalRows), HttpStatus.OK);
+    @GetMapping(Constants.PAGE_PATH)
+    public ResponseEntity<List<PatientDto>> getPatients(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                        @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        return new ResponseEntity<>(patientService.getPatients(pageNumber, totalRows), HttpStatus.OK);
     }
 }

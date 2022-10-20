@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * <p>
  * This clinicDto class contains details of clinic
- * vaidates clinic details
+ * validates clinic details
  * </p>
  *
  * @author Gunaseelan K
@@ -33,6 +33,7 @@ public class ClinicDto {
     private int id;
 
     @NotNull(message = "Name shouldn't be null")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
     private String name;
 
     @Min(value = 1, message = "Door number cannot be negative or zero")
@@ -53,12 +54,14 @@ public class ClinicDto {
 
     @Min(value = 1, message = "pin code cannot be negative or zero")
     @NotNull(message = "Pin code shouldn't be null")
-    @Pattern(regexp = Constants.PINCODE_REGEX, message = "Please, Enter valid pin code")
+    @Pattern(regexp = Constants.PIN_CODE_REGEX, message = "Please, Enter valid pin code")
     private String pinCode;
 
     @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Type only 10 numbers")
     @NotNull(message = "Mobile number shouldn't be null")
     private String contactNumber;
+
+    private String status;
 
     private List<DoctorClinicDto> doctors;
 }

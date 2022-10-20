@@ -22,12 +22,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * </p>
  *
  * @author Gunaseelan K
+ *
  * @version 1
+ *
  * @since 2022-10-10
  */
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig { //spring open api
+public class SwaggerConfig {
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

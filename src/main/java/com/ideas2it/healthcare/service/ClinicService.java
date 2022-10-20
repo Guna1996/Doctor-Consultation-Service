@@ -5,7 +5,7 @@
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -21,11 +21,9 @@ import java.util.List;
  * to repository for CRUD operations
  * </p>
  *
- * @author  Gunaseelan K
- *
+ * @author Gunaseelan K
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 public interface ClinicService {
     /**
@@ -36,7 +34,6 @@ public interface ClinicService {
      * </p>
      *
      * @param clinicDto - clinic details
-     *
      * @return ClinicDto
      */
     ClinicDto addClinic(ClinicDto clinicDto);
@@ -53,13 +50,12 @@ public interface ClinicService {
 
     /**
      * <p>
-     *  This abstract method is used to get client
-     *  details from the database by getting the id and status
-     *  from the user to dispaly
+     * This abstract method is used to get client
+     * details from the database by getting the id and status
+     * from the user to display
      * </p>
      *
      * @param id - id of the clinic
-     *
      * @return ClinicDto
      */
     ClinicDto getClinicById(int id);
@@ -69,8 +65,8 @@ public interface ClinicService {
      * This method is used to update clinic
      * all details into the database
      * </p>
-     * @param clinicDto - clinic detail
      *
+     * @param clinicDto - clinic detail
      * @return ClinicDto
      */
     ClinicDto updateClinic(ClinicDto clinicDto);
@@ -80,8 +76,8 @@ public interface ClinicService {
      * This method is used to delete clinic details
      * by getting id from the user
      * </p>
-     * @param id - id of the clinic
      *
+     * @param id - id of the clinic
      * @return String
      */
     String deleteClinicById(int id);
@@ -89,13 +85,12 @@ public interface ClinicService {
     /**
      * <p>
      * This isClinicAvailable abstract method is
-     * used to check wheather a clinic is available or not
+     * used to check whether a clinic is available or not
      * on the clinic table by using getting id from the
      * clinic
      * </p>
      *
      * @param id - id of the clinic
-     *
      * @return boolean
      */
     boolean isClinicAvailable(int id);

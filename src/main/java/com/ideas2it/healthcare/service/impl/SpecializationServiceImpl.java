@@ -9,14 +9,12 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.UserConstants;
-import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
 import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.repo.SpecializationRepository;
 import com.ideas2it.healthcare.service.SpecializationService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -32,11 +30,9 @@ import java.util.stream.Collectors;
  * DoctorDto
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Service
 public class SpecializationServiceImpl implements SpecializationService {
@@ -50,7 +46,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     @Override
     public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
         specializationDto.setStatus(Constants.ACTIVE);
-        Specialization specialization =  specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
+        Specialization specialization = specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
         return SpecializationMapper.toDto(specialization);
     }
 
@@ -75,7 +71,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public SpecializationDto getSpecializationById(int id) {
         Specialization specialization = specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(()-> new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT));
+                .orElseThrow(() -> new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT));
         return SpecializationMapper.toDto(specialization);
     }
 

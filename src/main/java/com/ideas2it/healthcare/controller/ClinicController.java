@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+
 /**
  * <p>
  * This ClinicController class is a Controller class and this
@@ -43,61 +44,69 @@ public class ClinicController {
     private ClinicService clinicService;
 
     /**
+     * <p>
      * add new clinics details
+     * </p>
      *
      * @param clinicDto is clinic object
-     * @return ResponseEntity
+     * @return ClinicDto as ResponseEntity
      */
     @PostMapping
     public ResponseEntity<ClinicDto> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-
         return new ResponseEntity<>(clinicService.addClinic(clinicDto), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Get all the Clinics
+     * </p>
      *
-     * @return ResponseEntity
+     * @param pageNumber is page number to show
+     * @param totalRows  is a set of rows to be shown
+     * @return List<ClinicDto> as ResponseEntity
      */
-    @GetMapping("/{pageNumber}/{totalRows}")
-    public ResponseEntity<List<ClinicDto>> getClinics(@PathVariable("pageNumber") int pageNumber
-            , @PathVariable("totalRows") int totalRows) {
-
+    @GetMapping(Constants.PAGE_PATH)
+    public ResponseEntity<List<ClinicDto>> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return new ResponseEntity<>(clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Get the Clinic by id
+     * </p>
      *
      * @param id is clinic id
-     * @return ResponseEntity
+     * @return ClinicDto as ResponseEntity
      */
     @GetMapping(Constants.ID)
     public ResponseEntity<ClinicDto> getClinicById(@PathVariable(Constants.PATH_ID) int id) {
-
         return new ResponseEntity<>(clinicService.getClinicById(id), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Update clinic record by using it's id
+     * </p>
      *
      * @param clinicDto is Loan object
+     * @return ClinicDto as ResponseEntity
      */
     @PutMapping
     public ResponseEntity<ClinicDto> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-
         return new ResponseEntity<>(clinicService.updateClinic(clinicDto), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Delete clinic by Id
+     * </p>
      *
      * @param id is clinic id
-     * @return string
+     * @return String as ResponseEntity
      */
     @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deleteClinic(@PathVariable("id") int id) {
-
-        return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK) ;
+    public ResponseEntity<String> deleteClinic(@PathVariable(Constants.PATH_ID) int id) {
+        return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK);
     }
 }

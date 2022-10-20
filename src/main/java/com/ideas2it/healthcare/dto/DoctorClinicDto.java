@@ -5,7 +5,6 @@
  * ClinicDto,DoctorClinicDto,AppointmentDto,FeedbackDto,PatientDto,
  * VitalDto,TimeslotDto.
  * </p>
- *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.dto;
@@ -13,7 +12,6 @@ package com.ideas2it.healthcare.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -23,19 +21,21 @@ import java.util.List;
  * the assembler object was defined, but now we are using mappers for converting data.
  * </p>
  *
- * @author  Ramachandran
- *
+ * @author Ramachandran
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter
 public class DoctorClinicDto {
 
     private int id;
+
     private String status;
+
     private DoctorDto doctor;
+
     private ClinicDto clinic;
+
     private List<TimeslotDto> timeslots;
 }

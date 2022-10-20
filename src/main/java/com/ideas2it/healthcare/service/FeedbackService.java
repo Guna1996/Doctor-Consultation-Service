@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.FeedbackDto;
+
 import java.util.List;
 
 /**
@@ -17,75 +18,68 @@ import java.util.List;
  * class's methods
  * </p>
  *
- * @author  Bala Ashwanth
- *
- * @since   2022-10-10
+ * @author Bala Ashwanth
+ * @since 2022-10-10
  */
-public interface  FeedbackService {
+public interface FeedbackService {
 
     /**
      * <p>
-     *  This abstract method is used to add feedback
-     *  to the database
+     * This abstract method is used to add feedback
+     * to the database
      *
      * </p>
      *
      * @param feedbackDto {@link FeedbackDto}
-     *
      * @return {@link FeedbackDto}
      */
     FeedbackDto addFeedback(FeedbackDto feedbackDto);
 
     /**
      * <p>
-     *  This abstract method is used to update feedback
-     *  to the database
+     * This abstract method is used to update feedback
+     * to the database
      *
      * </p>
      *
      * @param feedbackDto {@link FeedbackDto}
-     *
      * @return {@link FeedbackDto}
      */
     FeedbackDto updateFeedback(FeedbackDto feedbackDto);
 
     /**
      * <p>
-     *  This abstract method is used to get feedback
-     *  from the database
+     * This abstract method is used to get feedback
+     * from the database
      *
      * </p>
      *
      * @param id {@link int}
-     *
      * @return {@link FeedbackDto}
      */
     FeedbackDto getFeedbackById(int id);
 
     /**
      * <p>
-     *  This abstract method is used to get all feedback
-     *  from the database
+     * This abstract method is used to get all feedback
+     * from the database
      *
      * </p>
      *
      * @param pageNumber {@link int}
-     *
-     * @param totalRows {@link int}
-     *
+     * @param totalRows  {@link int}
      * @return {@link List<FeedbackDto>}
      */
     List<FeedbackDto> getFeedbacks(int pageNumber, int totalRows);
 
     /**
      * <p>
-     *  This abstract method is used to delete feedback
-     *  from the database
+     * This abstract method is used to delete feedback
+     * from the database
      *
      * </p>
      *
      * @param id {@link int}
-     *
      * @return {@link String}
      */
     String deleteFeedback(int id);

@@ -18,11 +18,9 @@ import java.util.List;
  * class's methods
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 public interface DoctorService {
     /**
@@ -33,7 +31,6 @@ public interface DoctorService {
      * </p>
      *
      * @param doctorDto {@link DoctorDto}
-     *
      */
     DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto);
 
@@ -55,7 +52,6 @@ public interface DoctorService {
      * </p>
      *
      * @param id {@link int}
-     *
      * @return {@link DoctorDto}
      */
     DoctorDto getDoctorById(int id);
@@ -80,8 +76,7 @@ public interface DoctorService {
      * </p>
      *
      * @param id {@link int}
-     *
-     *@return {@link String}
+     * @return {@link String}
      */
     boolean isDoctorAvailable(int id);
 }

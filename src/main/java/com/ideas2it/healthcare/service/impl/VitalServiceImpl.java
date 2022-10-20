@@ -5,7 +5,7 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -21,6 +21,7 @@ import com.ideas2it.healthcare.repo.VitalsRepository;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,9 +33,9 @@ import java.util.stream.Collectors;
  * the repository
  * </p>
  *
- * @author  Bala Ashwanth
+ * @author Bala Ashwanth
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Service
 public class VitalServiceImpl implements VitalService {
@@ -58,9 +59,8 @@ public class VitalServiceImpl implements VitalService {
     public VitalDto updateVitals(VitalDto vitalsDto) {
         VitalDto vitalsDtoToReturn = null;
         if (vitalsRepository.existsByIdAndStatus(vitalsDto.getId(), vitalsDto.getStatus())) {
-            vitalsDtoToReturn =  VitalsMapper.toDto(vitalsRepository.save(VitalsMapper.fromDto(vitalsDto)));
-        }
-        else {
+            vitalsDtoToReturn = VitalsMapper.toDto(vitalsRepository.save(VitalsMapper.fromDto(vitalsDto)));
+        } else {
             throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
         return vitalsDtoToReturn;
@@ -76,8 +76,7 @@ public class VitalServiceImpl implements VitalService {
             vitals.setBloodPressure(UserConstants.NORMAL);
         } else if (vitals.getSystolic() > 120 || vitals.getDiastolic() > 80) {
             vitals.setBloodPressure(UserConstants.HIGH);
-        }
-        else {
+        } else {
             vitals.setBloodPressure(UserConstants.LOW);
         }
         return VitalsMapper.toDto(vitals);
@@ -97,14 +96,12 @@ public class VitalServiceImpl implements VitalService {
                     vital.setBloodPressure(UserConstants.NORMAL);
                 } else if (vital.getSystolic() > 120 || vital.getDiastolic() > 80) {
                     vital.setBloodPressure(UserConstants.HIGH);
-                }
-                else {
+                } else {
                     vital.setBloodPressure(UserConstants.LOW);
                 }
                 vitalsDto.add(VitalsMapper.toDto(vital));
             }
-        }
-        else {
+        } else {
             throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
         return vitalsDto;
@@ -114,7 +111,7 @@ public class VitalServiceImpl implements VitalService {
      * {@inheritDoc}
      */
     public String deleteVitals(int id) {
-        if (vitalsRepository.deleteVitalsById(id) == 1){
+        if (vitalsRepository.deleteVitalsById(id) == 1) {
             return "Deleted Successfully";
         }
         return ErrorConstants.Vital_NOT_FOUND;

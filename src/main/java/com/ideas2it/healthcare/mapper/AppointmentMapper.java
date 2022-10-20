@@ -1,3 +1,11 @@
+/**
+ * <p>
+ * This is the base package for all the mapper classes
+ * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * classes
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.mapper;
 
 import com.ideas2it.healthcare.dto.AppointmentDto;
@@ -8,8 +16,27 @@ import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
+
+/**
+ * <p>
+ * AppointmentMapper is used convert Appointment object to
+ * AppointmentDto and AppointmentDto into Appointment
+ * </p>
+ *
+ * @author Mohamed Jubair
+ * @version 1
+ * @since 2022-10-10
+ */
 public class AppointmentMapper {
 
+    /**
+     * <p>
+     * This method is used to convert AppointmentDto to
+     * Appointment model
+     * </p>
+     *
+     * @return {@link Appointment}
+     */
     public static Appointment fromDto(AppointmentDto appointmentDto) {
         Appointment appointment = new Appointment();
         if (appointmentDto != null) {
@@ -55,17 +82,26 @@ public class AppointmentMapper {
                 clinic.setContactNumber(clinicDto.getContactNumber());
                 appointment.setClinic(clinic);
             }
-
         }
         return appointment;
     }
 
+    /**
+     * <p>
+     * This method is used to convert VitalDto to
+     * Vital model
+     * </p>
+     *
+     * @return {@link AppointmentDto}
+     */
     public static AppointmentDto toDto(Appointment appointment) {
         AppointmentDto appointmentDto = new AppointmentDto();
         if (appointment != null) {
             appointmentDto.setId(appointment.getId());
 
             appointmentDto.setScheduledOn(appointment.getScheduledOn());
+            appointmentDto.setCreatedAt(appointment.getCreatedAt());
+            appointmentDto.setStatus(appointment.getStatus());
 
             Patient patient = appointment.getPatient();
             if (patient != null) {
@@ -107,8 +143,6 @@ public class AppointmentMapper {
                 clinicDto.setContactNumber(clinic.getContactNumber());
                 appointmentDto.setClinic(clinicDto);
             }
-
-
         }
         return appointmentDto;
     }

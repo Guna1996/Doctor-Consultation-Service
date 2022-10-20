@@ -1,3 +1,9 @@
+/**
+ * <p>
+ * This is the base package for all the Exception classes.
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.exception;
 
 import org.springframework.http.HttpStatus;
@@ -10,8 +16,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice
+/**
+ * <p>
+ * This is an custom exception handler it acts
+ * between dispatcher servlet and controller
+ * </p>
+ *
+ * @author Gunaseelan k
+ * @since 2022-10-10
+ */@RestControllerAdvice
 public class NotFoundExceptionHandler {
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleInvalidArgument(MethodArgumentNotValidException exception) {

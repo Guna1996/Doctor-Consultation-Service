@@ -5,13 +5,12 @@
  * AppointmentRepository, FeedbackRepository, SpecializationRepository,
  * TimeslotRepository, VitalsRepository.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.repo;
 
 import com.ideas2it.healthcare.model.Clinic;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,14 +30,13 @@ import java.util.Optional;
  * </p>
  *
  * @author Gunaseelan K
- *
  * @version 1
- *
  * @since 2022-07-18
  */
 @Repository
 @Transactional
 public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
+
     Optional<Clinic> findByIdAndStatus(int id, String status);
 
     Boolean existsByIdAndStatus(int id, String status);
@@ -48,7 +46,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
     @Modifying
     @Query("update clinic set status='inactive' where id=?1 and status = 'active' ")
     Integer deleteClinicById(int id);
-    
+
     Page<Clinic> findAllByStatus(String active, Pageable pageable);
 }
 

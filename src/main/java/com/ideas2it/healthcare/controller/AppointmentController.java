@@ -43,61 +43,68 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     /**
+     * <p>
      * fix new appointment
+     * </p>
      *
      * @param appointmentDto is appointment object
      * @return ResponseEntity
      */
     @PostMapping
     public ResponseEntity<AppointmentDto> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-
         return new ResponseEntity<>(appointmentService.addAppointment(appointmentDto), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Get all the Appointments
+     * </p>
      *
+     * @param pageNumber is page number to show
+     * @param totalRows  is a set of rows to be shown
      * @return ResponseEntity
      */
-    @GetMapping("/{pageNumber}/{totalRows}")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable("pageNumber") int pageNumber
-            , @PathVariable("totalRows") int totalRows) {
-
+    @GetMapping(Constants.PAGE_PATH)
+    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                                @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return new ResponseEntity<>(appointmentService.getAppointments(pageNumber, totalRows), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Get the Appointment by id
+     * </p>
      *
      * @param id is appointment id
      * @return ResponseEntity
      */
     @GetMapping(Constants.ID)
     public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable(Constants.PATH_ID) int id) {
-
         return new ResponseEntity<>(appointmentService.getAppointmentById(id), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Update reschedule appointment using appointment id
+     * </p>
      *
      * @param appointmentDto is Appointment object
      */
     @PutMapping
     public ResponseEntity<AppointmentDto> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-
         return new ResponseEntity<>(appointmentService.rescheduleAppointment(appointmentDto), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * Delete appointment by Id
+     * </p>
      *
      * @param id is appointment id
      * @return string
      */
     @DeleteMapping(Constants.ID)
     public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
-
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }
 }

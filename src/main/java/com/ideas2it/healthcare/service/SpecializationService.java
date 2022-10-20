@@ -18,11 +18,9 @@ import java.util.List;
  * class's methods
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 public interface SpecializationService {
 
@@ -34,7 +32,6 @@ public interface SpecializationService {
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}
-     *
      */
     SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto);
 
@@ -56,7 +53,6 @@ public interface SpecializationService {
      * </p>
      *
      * @param id {@link int}
-     *
      * @return {@link SpecializationDto}
      */
     SpecializationDto getSpecializationById(int id);
@@ -69,8 +65,7 @@ public interface SpecializationService {
      * </p>
      *
      * @param id {@link int}
-     *
-     *@return {@link String}
+     * @return {@link String}
      */
     String deleteSpecializationById(int id);
 }

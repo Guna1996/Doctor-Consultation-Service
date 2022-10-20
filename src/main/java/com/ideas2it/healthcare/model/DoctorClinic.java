@@ -40,8 +40,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Entity(name = "doctorClinic")
-@Table(name="doctor_clinic")
+@Entity(name = "doctor_clinic")
 public class DoctorClinic {
 
     @Id

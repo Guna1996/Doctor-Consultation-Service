@@ -33,7 +33,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "clinic")
-@Table(name = "clinic")
 public class Clinic {
 
     @Id

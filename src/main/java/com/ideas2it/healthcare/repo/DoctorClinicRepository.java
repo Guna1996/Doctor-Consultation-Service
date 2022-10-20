@@ -86,6 +86,6 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId, String status);
 
     @Modifying
-    @Query("update doctorClinic set status='inactive' where id=?1")
+    @Query("update doctor_clinic set status='inactive' where id=?1 and status = 'active'")
     Integer deleteDoctorClinicById(int id);
 }

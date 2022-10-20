@@ -13,7 +13,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -23,11 +22,9 @@ import java.util.Set;
  * layer
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter
@@ -36,11 +33,10 @@ public class SpecializationDto {
     private int id;
 
     @NotNull(message = "Name is mandatory")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (Firstname Secondname) format")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
     private String name;
 
     private String status;
 
     private Set<DoctorDto> doctors;
-
 }

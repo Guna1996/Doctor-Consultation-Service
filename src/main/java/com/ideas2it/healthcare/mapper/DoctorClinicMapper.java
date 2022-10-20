@@ -1,3 +1,11 @@
+/**
+ * <p>
+ * This is the base package for all the mapper classes
+ * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * classes
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.mapper;
 
 import com.ideas2it.healthcare.dto.ClinicDto;
@@ -8,17 +16,35 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.model.Timeslot;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * DoctorClinicMapper is used convert DoctorClinic object to
+ * DoctorClinicDto and DoctorClinicDto into DoctorClinic
+ * </p>
+ *
+ * @author Mohamed Jubair
+ * @version 1
+ * @since 2022-10-10
+ */
 public class DoctorClinicMapper {
 
+    /**
+     * <p>
+     * This method is used to convert Doctor Clinic to
+     * DoctorClinic model
+     * </p>
+     *
+     * @return {@link DoctorClinic}
+     */
     public static DoctorClinic fromDto(DoctorClinicDto doctorClinicDto) {
         DoctorClinic doctorClinic = new DoctorClinic();
         if (doctorClinicDto != null) {
             doctorClinic.setId(doctorClinicDto.getId());
             doctorClinic.setStatus(doctorClinicDto.getStatus());
-
             DoctorDto doctorDto = doctorClinicDto.getDoctor();
             if (doctorDto != null) {
                 Doctor doctor = new Doctor();
@@ -33,7 +59,6 @@ public class DoctorClinicMapper {
                 doctor.setStatus(doctorDto.getStatus());
                 doctorClinic.setDoctor(doctor);
             }
-
             ClinicDto clinicDto = doctorClinicDto.getClinic();
             if (clinicDto != null) {
                 Clinic clinic = new Clinic();
@@ -47,7 +72,6 @@ public class DoctorClinicMapper {
                 clinic.setContactNumber(clinicDto.getContactNumber());
                 doctorClinic.setClinic(clinic);
             }
-
             List<TimeslotDto> timeslotsDto = doctorClinicDto.getTimeslots();
             if (timeslotsDto != null) {
                 List<Timeslot> timeslots = new ArrayList<>();
@@ -63,12 +87,19 @@ public class DoctorClinicMapper {
         return doctorClinic;
     }
 
+    /**
+     * <p>
+     * This method is used to convert DoctorClinic to
+     * DoctorClinicDto
+     * </p>
+     *
+     * @return {@link DoctorClinicDto}
+     */
     public static DoctorClinicDto toDto(DoctorClinic doctorClinic) {
         DoctorClinicDto doctorClinicDto = new DoctorClinicDto();
         if (doctorClinic != null) {
             doctorClinicDto.setId(doctorClinic.getId());
             doctorClinicDto.setStatus(doctorClinic.getStatus());
-
             Doctor doctor = doctorClinic.getDoctor();
             if (doctor != null) {
                 DoctorDto doctorDto = new DoctorDto();
@@ -83,7 +114,6 @@ public class DoctorClinicMapper {
                 doctorDto.setStatus(doctor.getStatus());
                 doctorClinicDto.setDoctor(doctorDto);
             }
-
             Clinic clinic = doctorClinic.getClinic();
             if (clinic != null) {
                 ClinicDto clinicDto = new ClinicDto();
@@ -97,7 +127,6 @@ public class DoctorClinicMapper {
                 clinicDto.setContactNumber(clinic.getContactNumber());
                 doctorClinicDto.setClinic(clinicDto);
             }
-
             List<Timeslot> timeslots = doctorClinic.getTimeslots();
             if (timeslots != null) {
                 List<TimeslotDto> timeslotsDto = new ArrayList<>();

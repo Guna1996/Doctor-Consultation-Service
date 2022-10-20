@@ -5,7 +5,6 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -35,15 +34,13 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * AppointmentserviceImpl class implements Appointmentservice
+ * Appointment serviceImpl class implements Appointment service
  * and it contains methods and with helps of passing object to
  * AppointmentRepository interface
  * </p>
  *
  * @author Gunaseelan K
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Service
@@ -92,12 +89,10 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .collect(Collectors.toList());
     }
 
-
     /**
      * {@inheritDoc}
      */
     public AppointmentDto getAppointmentById(int id) {
-
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(AppointmentMapper::toDto).
                 findFirst().
@@ -108,7 +103,6 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public boolean isAppointmentAvailable(int id, LocalDateTime dateTime) {
-
         return appointmentRepository.findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
@@ -116,7 +110,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String deleteAppointmentById(int id) {
-        if (appointmentRepository.deleteAppointmentById(id) == 1){
+        if (appointmentRepository.deleteAppointmentById(id) == 1) {
             return UserConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
@@ -139,11 +133,15 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
+        AppointmentDto appointedDto = null;
         if (isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
             Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
             appointment.setStatus(Constants.ACTIVE);
-            return AppointmentMapper.toDto(appointmentRepository.save(appointment));
+            appointedDto = AppointmentMapper.toDto(appointmentRepository.save(appointment));
         }
-        throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
+        else {
+            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
+        }
+        return appointedDto;
     }
 }

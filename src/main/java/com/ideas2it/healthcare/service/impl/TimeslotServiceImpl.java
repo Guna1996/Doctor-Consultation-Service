@@ -5,7 +5,7 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -21,6 +21,7 @@ import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +32,9 @@ import java.util.List;
  * the repository
  * </p>
  *
- * @author  Bala Ashwanth
+ * @author Bala Ashwanth
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Service
 public class TimeslotServiceImpl implements TimeslotService {
@@ -55,8 +56,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         TimeslotDto timeslotDtoToReturn = null;
         if (timeslotRepository.existsById(timeslotDto.getId())) {
             timeslotDtoToReturn = TimeslotMapper.toDto(timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto)));
-        }
-        else {
+        } else {
             throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
         return timeslotDtoToReturn;
@@ -82,8 +82,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             for (Timeslot timeslot : timeslots) {
                 timeslotsDto.add(TimeslotMapper.toDto(timeslot));
             }
-        }
-        else {
+        } else {
             throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
         return timeslotsDto;

@@ -5,7 +5,6 @@
  * ClinicDto,DoctorClinicDto,AppointmentDto,FeedbackDto,PatientDto,
  * VitalDto,TimeslotDto.
  * </p>
- *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.dto;
@@ -14,6 +13,9 @@ import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
@@ -37,19 +39,23 @@ public class PatientDto {
 
     private int id;
 
-    //@Pattern(regexp = Constants.NAME_REGEX, message = "Please Enter Valid Name")
+    @NotNull(message = "Name is mandatory")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
     private String name;
 
-    //@Pattern(regexp = Constants.DATE_REGEX, message = "Please Enter Valid Date Of Birth")
+    @NotNull(message = "Registration year is mandatory")
+    @Past(message = "Entered Year is not valid")
     private LocalDate dateOfBirth;
 
-    //@Pattern(regexp = Constants.GENDER_REGEX, message = "Please Enter Valid Gender")
+    @NotNull(message = "Gender is mandatory")
+    @Pattern(regexp = Constants.GENDER_REGEX, message = "Enter Male or Female")
     private String gender;
 
-    //@Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Please Enter Valid Mobile Number")
+    @NotNull(message = "Mobile Number is mandatory")
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Enter valid Mobile Number")
     private String mobileNumber;
 
-    //@Pattern(regexp = Constants.EMAIL_REGEX, message = "Please Enter Valid Email")
+    @Email(message = "Enter valid mail id")
     private String email;
 
     private String status;
