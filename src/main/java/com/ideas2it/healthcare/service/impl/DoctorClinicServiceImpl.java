@@ -105,13 +105,13 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             return DoctorClinicMapper.toDto(doctorClinicRepository
                     .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
         }
-        throw new NotFoundException(UserConstants.DOCTORID_NOT_FOUND_TO_UPDATE);
+        throw new NotFoundException(UserConstants.DOCTOR_ID_NOT_FOUND_TO_UPDATE);
     }
 
     @Override
     public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTORID_CLINICID_NOT_FOUND)));
+                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTOR_ID_CLINICID_NOT_FOUND)));
     }
 }
 

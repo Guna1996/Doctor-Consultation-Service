@@ -63,6 +63,7 @@ public interface DoctorService {
     /**
      * <p>
      * This method is used to delete the Doctor by id
+     * by making status as inactive
      * </p>
      *
      * @param id {@link int}
@@ -73,8 +74,8 @@ public interface DoctorService {
     /**
      * <p>
      * This method is used to find
-     * whether the doctor is delete is
-     * deleted or not by returning boolean
+     * whether the doctor is deleted
+     * or not by returning boolean
      * to another services
      * </p>
      *

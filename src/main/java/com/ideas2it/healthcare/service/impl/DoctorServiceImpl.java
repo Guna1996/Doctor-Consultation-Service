@@ -42,13 +42,7 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     /**
-     * <p>
-     * This method is used to create and update Doctor's record by
-     * getting DoctorDto as an input and convert it in to
-     * Doctor model with the help of mapper class
-     * </p>
-     *
-     * @param doctorDto {@link DoctorDto}
+     * {@inheritDoc}
      */
     @Override
     public DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto) {
@@ -58,13 +52,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     /**
-     * <p>
-     * This method is used to get all Doctor's record by
-     * getting all Doctors from database and convert it in to
-     * DoctorDto with the help of mapper class
-     * </p>
-     *
-     * @return {@link List<DoctorDto>}
+     * {@inheritDoc}
      */
     @Override
     public List<DoctorDto> getAllDoctors(int pageNumber, int totalRows) {
@@ -78,13 +66,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     /**
-     * <p>
-     * This method is used to get the Doctor by id and
-     * convert it into DoctorDto
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link DoctorDto} the employee object
+     * {@inheritDoc}
      */
     @Override
     public DoctorDto getDoctorById(int id) {
@@ -95,34 +77,18 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     /**
-     * <p>
-     * This method is used to soft delete the Doctor by
-     * changing status from active to inactive
-     * using doctor id
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link String}
+     * {@inheritDoc}
      */
     @Override
     public String deleteDoctorById(int id) {
         if (doctorRepository.deleteDoctorById(id) == 1){
             return UserConstants.DELETED_SUCCESSFULLY;
         }
-        return "Doctor is not Deleted";
+        return UserConstants.DOCTOR_NOT_FOUND_TO_DELETE;
     }
 
     /**
-     * <p>
-     * This method is used to find
-     * whether the doctor is delete is
-     * deleted or not by returning boolean
-     * to another services
-     * </p>
-     *
-     * @param id {@link int}
-     *
-     *@return {@link boolean}
+     * {@inheritDoc}
      */
     @Override
     public boolean isDoctorAvailable(int id) {

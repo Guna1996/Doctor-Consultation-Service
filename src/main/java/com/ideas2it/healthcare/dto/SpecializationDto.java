@@ -7,10 +7,12 @@
  */
 package com.ideas2it.healthcare.dto;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -33,9 +35,8 @@ public class SpecializationDto {
 
     private int id;
 
-    @NotNull
-    @Size(min = 2, message = "User name should have at least 2 characters")
-    //@Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (Firstname Secondname) format")
+    @NotNull(message = "Name is mandatory")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (Firstname Secondname) format")
     private String name;
 
     private String status;

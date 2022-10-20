@@ -65,6 +65,7 @@ public interface SpecializationService {
     /**
      * <p>
      * This method is used to delete the Specialization by id
+     * by making status as inactive
      * </p>
      *
      * @param id {@link int}

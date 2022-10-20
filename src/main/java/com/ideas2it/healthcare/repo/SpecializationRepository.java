@@ -39,7 +39,7 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
     Page<Specialization> findAllByStatus(String active, Pageable pageable);
     
     @Modifying
-    @Query("update specialization set status='inactive' where id=?1")
+    @Query("update specialization set status='inactive' where id=?1 and status ='active'")
     Integer deleteSpecializationById(int id);
 
 }

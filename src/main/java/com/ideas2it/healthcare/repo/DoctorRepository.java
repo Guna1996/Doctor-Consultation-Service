@@ -40,7 +40,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     Page<Doctor> findAllByStatus(String active, Pageable pageable);
 
     @Modifying
-    @Query("update doctor set status='inactive' where id=?1")
+    @Query("update doctor set status='inactive' where id=?1 and status ='active'")
     Integer deleteDoctorById(int id);
 
 }
