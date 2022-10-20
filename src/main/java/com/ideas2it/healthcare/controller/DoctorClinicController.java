@@ -40,9 +40,8 @@ import java.util.List;
  *
  * @since 2022-10-10
  */
-
 @RestController
-@RequestMapping("/doctor-clinic")
+@RequestMapping("/doctor_clinic")
 public class DoctorClinicController {
 
     @Autowired
@@ -53,7 +52,6 @@ public class DoctorClinicController {
      * This method is used to assign doctor id into
      * Doctor-Clinic table by getting doctor id which are
      * active in the doctor table
-     *
      * </p>
      *
      * @param doctorClinicDto

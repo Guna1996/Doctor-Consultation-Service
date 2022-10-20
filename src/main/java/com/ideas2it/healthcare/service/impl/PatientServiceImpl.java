@@ -11,6 +11,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -80,9 +81,9 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public String deletePatient(Integer id) {
         if (patientRepository.deletePatiendById(id) == 1){
-            return "Deleted Successfully";
+            return UserConstants.DELETED_SUCCESSFULLY;
         }
-        return "Doctor is not Deleted";
+        return ErrorConstants.PATIENT_NOT_FOUND;
     }
 
     /**
@@ -103,7 +104,10 @@ public class PatientServiceImpl implements PatientService {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isPatientAvailable(Integer id) {
         return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).isPresent();
     }
+
+
 }

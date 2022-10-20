@@ -1,5 +1,26 @@
+/**
+ * <p>
+ * This package contains classes are constan constants
+ * and error constants  and user constants.
+ * </p>
+ *
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.common;
 
+/**
+ * <p>
+ * This Constants class contains static final string variable
+ * with values .we can access these variable any where in the
+ * global package by using class name and variable name
+ * </p>
+ *
+ * @author Ramachandran
+ *
+ * @version 1
+ *
+ * @since 2022-10-10
+ */
 public class Constants {
     public static final String ACTIVE = "active";
 
