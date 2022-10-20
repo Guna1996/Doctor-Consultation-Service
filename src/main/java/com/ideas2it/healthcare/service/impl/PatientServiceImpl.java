@@ -5,7 +5,7 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -75,12 +75,12 @@ public class PatientServiceImpl implements PatientService {
         if (patient.isEmpty()) {
             throw new NotFoundException(UserConstants.PATIENT_CANNOT_ABLE_TO_UPDATE);
         }
-            return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
+        return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
     }
 
     @Override
     public String deletePatient(Integer id) {
-        if (patientRepository.deletePatiendById(id) == 1){
+        if (patientRepository.deletePatientById(id) == 1) {
             return UserConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.PATIENT_NOT_FOUND;
@@ -95,9 +95,9 @@ public class PatientServiceImpl implements PatientService {
         if (patients.isEmpty()) {
             throw new NotFoundException(UserConstants.PATIENT_NOT_FOUND);
         }
-            return patients.stream()
-                    .map(PatientMapper::toDto)
-                    .collect(Collectors.toList());
+        return patients.stream()
+                .map(PatientMapper::toDto)
+                .collect(Collectors.toList());
 
     }
 

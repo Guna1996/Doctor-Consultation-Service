@@ -25,9 +25,7 @@ import java.util.ArrayList;
  * </p>
  *
  * @author Gunaseelan K
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Service

@@ -1,6 +1,6 @@
 /**
  * <p>
- * This package contains classes are constan constants
+ * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
  *
@@ -27,7 +27,7 @@ public class ErrorConstants {
 
     public static final String ENTER_VALID_DATE_TIME = "please enter valid date and time";
 
-    public  static final String APPOINTMENT_NOT_FOUND = "Appointment not found";
+    public static final String APPOINTMENT_NOT_FOUND = "Appointment not found";
 
     public static final String CLINIC_NOT_FOUND = "Clinic not found";
 
@@ -38,6 +38,9 @@ public class ErrorConstants {
     public static final String TIMESLOT_NOT_FOUND = "Timeslot is not found";
 
     public static final String FEEDBACK_NOT_FOUND = "Feedback is not found";
-    
-    public  static final String APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE = "Appointment unavailable for this schedule. kindly choose other schedule";
+
+    public static final String APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE =
+            "Appointment unavailable for this schedule. kindly choose other schedule";
+
+    public static final String INCORRECT_USERNAME_AND_PASSWORD = "Incorrect username or password";
 }

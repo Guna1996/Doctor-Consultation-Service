@@ -5,7 +5,7 @@
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -21,10 +21,8 @@ import java.util.List;
  * to repository for CRUD operations
  * </p>
  *
- * @author  Ramachandran
- *
+ * @author Ramachandran
  * @version 1
- *
  * @since 2022-10-10
  */
 public interface DoctorClinicService {
@@ -36,8 +34,7 @@ public interface DoctorClinicService {
      * from the user
      * </p>
      *
-     * @param doctorClinicDto
-     *
+     * @param doctorClinicDto is a dto class of doctor clinic
      * @return DoctorClinicDto
      */
     DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto);
@@ -56,12 +53,11 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to delete doctor id on the
-     * doctorclinic table which is it will InActive the status
-     * column in doctorclinic table in the database
+     * doctor clinic table which is it will InActive the status
+     * column in doctor clinic table in the database
      * </p>
      *
      * @param id - id of the doctor
-     *
      * @return String
      */
     String deleteDoctorFromClinic(Integer id);
@@ -69,12 +65,11 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This updateDoctorClinic method is used for
-     * updating doctor id into the doctorclinic table
+     * updating doctor id into the doctor clinic table
      * by getting input from the user
      * </p>
      *
-     * @param doctorClinicDto
-     *
+     * @param doctorClinicDto is a dto class of doctor clinic
      * @return DoctorClinicDto
      */
     DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto);

@@ -30,11 +30,9 @@ import java.util.Set;
  * DoctorDto and DoctorDto into Doctor
  * </p>
  *
- * @author Mohamed Jubair
- *
+ * @author Bala Ashwanth
  * @version 1
- *
- * @since 2022-07-18
+ * @since 2022-10-10
  */
 public class DoctorMapper {
 
@@ -57,12 +55,12 @@ public class DoctorMapper {
             Set<SpecializationDto> specializationsDto = doctorDto.getSpecializations();
             if (specializationsDto != null) {
                 Set<Specialization> specializations = new HashSet<>();
-                        specializationsDto.forEach(specializationDto -> {
-                            Specialization specialization = new Specialization();
-                            specialization.setId(specializationDto.getId());
-                            specialization.setName(specializationDto.getName());
-                            specialization.setStatus(specializationDto.getStatus());
-                            specializations.add(specialization);
+                specializationsDto.forEach(specializationDto -> {
+                    Specialization specialization = new Specialization();
+                    specialization.setId(specializationDto.getId());
+                    specialization.setName(specializationDto.getName());
+                    specialization.setStatus(specializationDto.getStatus());
+                    specializations.add(specialization);
                 });
                 doctor.setSpecializations(specializations);
             }
@@ -106,7 +104,7 @@ public class DoctorMapper {
                 doctor.setClinics(doctorClinics);
             }
         }
-    return doctor;
+        return doctor;
     }
 
     /**

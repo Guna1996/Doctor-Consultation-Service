@@ -1,6 +1,6 @@
 /**
  * <p>
- * This package contains classes are constan constants
+ * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
  *
@@ -25,15 +25,13 @@ public class UserConstants {
 
     public static final String DELETED_SUCCESSFULLY = "Deleted successfully";
 
-    public static final String SCHEDULE = "This schedule is unavailable, kindly choose another schedule";
-
     public static final String DOCTOR_NOT_FOUND_TO_ASSIGN = "Doctor not found to assign";
 
-    public static final String DOCTOR_NOT_FOUND_TO_DELETE ="Doctor not found to delete";
+    public static final String DOCTOR_NOT_FOUND_TO_DELETE = "Doctor not found to delete";
 
     public static final String DOCTOR_ID_NOT_FOUND_TO_UPDATE = "Doctor id not found to update";
 
-    public static final String DOCTOR_ID_CLINICID_NOT_FOUND = "Doctor id and clinic id not found";
+    public static final String DOCTOR_ID_CLINIC_ID_NOT_FOUND = "Doctor id and clinic id not found";
 
     public static final String DOCTORS_NOT_FOUND = "Doctors not found";
 
@@ -49,11 +47,7 @@ public class UserConstants {
 
     public static final String NO_SPECIALIZATION_IS_PRESENT = "No Specialization is Present";
 
-    public static final String ID_NOT_FOUND = "Id not found";
-
     public static final String TIMESLOT_NOT_FOUND = "Timeslot not found";
-
-    public static final String VITALS_NOT_FOUND_FOR_PATIENT = "Vital not found for patient";
 
     public static final String HIGH = "High";
 

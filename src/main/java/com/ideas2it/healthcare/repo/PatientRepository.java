@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,46 +38,12 @@ import java.util.Optional;
 @Transactional
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
-    /**
-     * <p>
-     * This method is used to retrieve patient by
-     * using patient id and patient status and send back to the
-     * PatientService
-     * </p>
-     *
-     * @param id     - id of the patient
-     * @param status - status of the patient in databse
-     * @return patient
-     */
     Optional<Patient> findByIdAndStatus(Integer id, String status);
 
-    /**
-     * <p>
-     *  This method is used to retrieve patients by
-     *  using patient status and send back to the
-     *  PatientService
-     * </p>
-     *
-     * @param status - status of the patient
-     *
-     * @return List<patient>
-     */
     Page<Patient> findAllByStatus(String status, Pageable pageable);
 
-    /**
-     * <p>
-     *  This method is used to delete patient by
-     *  using patient id  and status .once we delet the
-     *  patient from database the status goes to
-     *  inactive.
-     * </p>
-     *
-     * @return Integer
-     *
-     * @return List<patient>
-     */
     @Modifying
     @Query("update patient set status='inactive' where id=?1 and status = 'active'")
-    Integer deletePatiendById(int id);
+    Integer deletePatientById(int id);
 
 }

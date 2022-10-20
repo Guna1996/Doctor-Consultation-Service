@@ -42,7 +42,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "patient")
-@Table(name = "patient")
 public class Patient {
 
     @Id

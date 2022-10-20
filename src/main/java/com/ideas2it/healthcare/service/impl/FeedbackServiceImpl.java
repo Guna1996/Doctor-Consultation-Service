@@ -5,7 +5,6 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -21,6 +20,7 @@ import com.ideas2it.healthcare.repo.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +31,8 @@ import java.util.List;
  * the repository
  * </p>
  *
- * @author  Bala Ashwanth
- *
- * @since   2022-10-10
+ * @author Bala Ashwanth
+ * @since 2022-10-10
  */
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -58,8 +57,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         FeedbackDto feedbackDtoToReturn = null;
         if (feedbackRepository.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
             feedbackDtoToReturn = FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
-        }
-        else {
+        } else {
             throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
         }
         return feedbackDtoToReturn;
@@ -68,7 +66,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * {@inheritDoc}
      */
-    public FeedbackDto getFeedbackById(int id){
+    public FeedbackDto getFeedbackById(int id) {
         Feedback feedback = feedbackRepository.findByIdAndStatus(id, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
         return FeedbackMapper.toDto(feedback);
@@ -86,8 +84,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             for (Feedback feedback : feedbacks) {
                 feedbacksDto.add(FeedbackMapper.toDto(feedback));
             }
-        }
-        else {
+        } else {
             throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
         }
         return feedbacksDto;
@@ -97,7 +94,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     public String deleteFeedback(int id) {
-        if (feedbackRepository.deleteSpecializationById(id) == 1){
+        if (feedbackRepository.deleteSpecializationById(id) == 1) {
             return UserConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.FEEDBACK_NOT_FOUND;

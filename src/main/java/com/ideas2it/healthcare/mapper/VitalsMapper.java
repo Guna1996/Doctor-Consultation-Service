@@ -1,3 +1,11 @@
+/**
+ * <p>
+ * This is the base package for all the mapper classes
+ * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * classes
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.mapper;
 
 import com.ideas2it.healthcare.dto.DoctorDto;
@@ -7,11 +15,29 @@ import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.model.Vital;
 
+/**
+ * <p>
+ * VitalMapper is used convert Vital object to
+ * VitalDto and VitalDto into Vital
+ * </p>
+ *
+ * @author Ramachandran
+ * @version 1
+ * @since 2022-10-10
+ */
 public class VitalsMapper {
 
+    /**
+     * <p>
+     * This method is used to convert VitalDto to
+     * Vital model
+     * </p>
+     *
+     * @return {@link Vital}
+     */
     public static Vital fromDto(VitalDto vitalDto) {
         Vital vital = new Vital();
-        if(null != vitalDto) {
+        if (null != vitalDto) {
             vital.setId(vitalDto.getId());
             vital.setHeight(vitalDto.getHeight());
             vital.setWeight(vitalDto.getWeight());
@@ -36,9 +62,9 @@ public class VitalsMapper {
                 vital.setDoctor(doctor);
             }
             PatientDto patientDto = vitalDto.getPatient();
-            if(null != patientDto) {
+            if (null != patientDto) {
                 Patient patient = new Patient();
-                patient.setId(patient.getId());
+                patient.setId(patientDto.getId());
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
                 patient.setMobileNumber(patientDto.getMobileNumber());
@@ -50,9 +76,18 @@ public class VitalsMapper {
         }
         return vital;
     }
+
+    /**
+     * <p>
+     * This method is used to convert Vital to
+     * VitalDto
+     * </p>
+     *
+     * @return {@link VitalDto}
+     */
     public static VitalDto toDto(Vital vital) {
         VitalDto vitalDto = new VitalDto();
-        if(null != vital) {
+        if (null != vital) {
             vitalDto.setId(vital.getId());
             vitalDto.setHeight(vital.getHeight());
             vitalDto.setWeight(vital.getWeight());
@@ -63,8 +98,8 @@ public class VitalsMapper {
             vitalDto.setStatus(vital.getStatus());
             vitalDto.setBloodPressure(vital.getBloodPressure());
             Doctor doctor = vital.getDoctor();
-            if(null != doctor) {
-                DoctorDto doctorDto =new DoctorDto();
+            if (null != doctor) {
+                DoctorDto doctorDto = new DoctorDto();
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setGender(doctor.getGender());
@@ -78,7 +113,7 @@ public class VitalsMapper {
                 vitalDto.setDoctor(doctorDto);
             }
             Patient patient = vital.getPatient();
-            if(null != patient) {
+            if (null != patient) {
                 PatientDto patientDto = new PatientDto();
                 patientDto.setId(patient.getId());
                 patientDto.setName(patient.getName());

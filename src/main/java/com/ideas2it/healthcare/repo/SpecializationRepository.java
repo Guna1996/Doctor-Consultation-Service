@@ -34,6 +34,7 @@ import java.util.Optional;
  */
 @Transactional
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
+
     Optional<Specialization> findByIdAndStatus(int id, String active);
 
     Page<Specialization> findAllByStatus(String active, Pageable pageable);

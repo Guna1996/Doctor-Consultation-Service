@@ -5,7 +5,7 @@
  * AppointmentRepository, FeedbackRepository, SpecializationRepository,
  * TimeslotRepository, VitalsRepository.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.repo;
@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,9 +29,7 @@ import java.util.Optional;
  * </p>
  *
  * @author Gunaseelan K
- *
  * @version 1
- *
  * @since 2022-07-18
  */
 @Transactional
@@ -41,8 +38,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     Page<Appointment> findAllByStatus(String status, Pageable pageable);
 
     Optional<Appointment> findByIdAndStatus(int id, String status);
-
-    Optional<Appointment> findByScheduledOnAndStatus(LocalDateTime scheduledOn, String status);
 
     Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(int id, LocalDateTime dateTime, String active);
 

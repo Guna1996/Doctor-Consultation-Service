@@ -5,13 +5,14 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vital,Timeslot.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.model;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
@@ -29,14 +29,13 @@ import javax.persistence.Transient;
  * methods because of using lombok dependency
  * </p>
  *
- * @author  Bala Ashwanth.N
+ * @author Bala Ashwanth.N
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter
-@Entity(name = "vitals")
-@Table(name = "vitals")
+@Entity(name = "vital")
 public class Vital {
 
     @Id
@@ -58,7 +57,7 @@ public class Vital {
     @Column
     private float systolic;
 
-    @Column(name = "sugar_level")           
+    @Column(name = "sugar_level")
     private float sugarLevel;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -68,11 +67,10 @@ public class Vital {
     @Column
     private String status;
 
-    @ManyToOne(targetEntity = Doctor.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Doctor.class, cascade = CascadeType.MERGE)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 
     @Transient
     private String bloodPressure;
-
 }

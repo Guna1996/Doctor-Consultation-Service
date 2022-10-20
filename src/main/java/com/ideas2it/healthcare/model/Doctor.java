@@ -31,7 +31,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "doctor")
-@Table(name = "doctor")
 public class Doctor {
 
     @Id

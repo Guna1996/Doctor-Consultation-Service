@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.service.VitalService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,44 +21,62 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
+/**
+ * <p>
+ * This VitalController class is a Controller class and this
+ * class is used to get information and
+ * transfer it to VitalDto
+ * </p>
+ *
+ * @author Bala Ashwanth
+ * @version 1
+ * @since 2022-10-10
+ */
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = "/vital")
 public class VitalController {
 
-    private final VitalService vitalService;
+    @Autowired
+    private VitalService vitalService;
 
     /**
-     * gets all Vital details
+     * <p>
+     * Gets all Vital details
+     * </p>
      *
      * @param pageNumber - page number to show
-     * @param totalRows - a set of rows to be shown
-     * @return ResponseEntity
+     * @param totalRows  - a set of rows to be shown
+     * @return VitalDto as ResponseEntity
      */
-    @GetMapping("/{pageNumber}/{totalRows}")
-    public ResponseEntity<List<VitalDto>> getAllVitals(@PathVariable("pageNumber") int pageNumber,
-                                                       @PathVariable("totalRows") int totalRows) {
+    @GetMapping(Constants.PAGE_PATH)
+    public ResponseEntity<List<VitalDto>> getAllVitals(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                       @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return new ResponseEntity<>(vitalService.getVitals(pageNumber, totalRows), HttpStatus.OK);
     }
 
     /**
-     * update vital details
+     * <p>
+     * Update vital details
+     * </p>
      *
-     * @param vitalsDto - a dto that contains information to update
-     * @return ResponseEntity
+     * @param vitalsDto is a dto that contains information to update
+     * @return VitalDto as ResponseEntity
      */
     @PutMapping
     public ResponseEntity<VitalDto> updateVitals(@RequestBody VitalDto vitalsDto) {
-        return new ResponseEntity<>(vitalService.updateVitals(vitalsDto),HttpStatus.OK);
+        return new ResponseEntity<>(vitalService.updateVitals(vitalsDto), HttpStatus.OK);
     }
 
     /**
-     * get Vital details
+     * <p>
+     * Get Vital details
+     *</p>
      *
-     * @param id - an integer that refers id on the database
-     * @return ResponseEntity
+     * @param id is an integer that refers id on the database
+     * @return VitalDto as ResponseEntity
      */
     @GetMapping(Constants.ID)
     public ResponseEntity<VitalDto> getVitalById(@PathVariable(Constants.PATH_ID) int id) {
@@ -66,22 +84,26 @@ public class VitalController {
     }
 
     /**
-     * insert vitals details
+     * <p>
+     * Insert vitals details
+     *</p>
      *
-     * @param vitalsDto - a dto object that contains information
-     * @return ResponseEntity
+     * @param vitalsDto is a dto object that contains information
+     * @return VitalDto as ResponseEntity
      */
     @PostMapping
     public ResponseEntity<VitalDto> insertFeedback(@RequestBody VitalDto vitalsDto) {
         vitalsDto.setStatus(Constants.ACTIVE);
-        return new ResponseEntity<>(vitalService.addVitals(vitalsDto),HttpStatus.OK);
+        return new ResponseEntity<>(vitalService.addVitals(vitalsDto), HttpStatus.OK);
     }
 
     /**
+     * <p>
      * delete Vital details
+     * </p>
      *
-     * @param id - a integer that refer id in database
-     * @return ResponseEntity
+     * @param id is an integer that refer id in database
+     * @return String as ResponseEntity
      */
     @DeleteMapping(Constants.ID)
     public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
@@ -91,15 +113,15 @@ public class VitalController {
     /**
      * get Timeslot details
      *
-     * @param patientId - integer that refer patient_id in database
+     * @param patientId  - integer that refer patient_id in database
      * @param pageNumber - page number to show
-     * @param totalRows - a set of rows to be shown
-     * @return ResponseEntity
+     * @param totalRows  - a set of rows to be shown
+     * @return List<VitalDto> as ResponseEntity
      */
-    @GetMapping("/patient/{patientId}/{pageNumber}/{totalRows}")
-    public ResponseEntity<List<VitalDto>> getVitalsByPatientId(@PathVariable("patientId") int patientId,
-                                                               @PathVariable("pageNumber") int pageNumber,
-                                                               @PathVariable("totalRows") int totalRows) {
+    @GetMapping(Constants.GET_PATIENT_PATH)
+    public ResponseEntity<List<VitalDto>> getVitalsByPatientId(@PathVariable(Constants.PATIENT_ID) int patientId,
+                                                               @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                               @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return new ResponseEntity<>(vitalService
                 .getVitalsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK);
     }

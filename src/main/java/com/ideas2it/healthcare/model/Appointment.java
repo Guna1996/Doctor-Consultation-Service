@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 /**
  * <p>
  * This Appointment class contains details for doctors appointment with patient
- * cretaes entity for appointment in database
+ * creates entity for appointment in database
  * </p>
  *
  * @author Gunaseelan K
@@ -35,7 +35,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity(name = "appointment")
-@Table(name = "appointment")
 public class Appointment {
 
     @Id

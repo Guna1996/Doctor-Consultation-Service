@@ -5,7 +5,7 @@
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -22,11 +22,9 @@ import java.util.List;
  * to repository for CRUD operations
  * </p>
  *
- * @author  Gunaseelan K
- *
+ * @author Gunaseelan K
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 
 public interface AppointmentService {
@@ -39,34 +37,31 @@ public interface AppointmentService {
      * </p>
      *
      * @param appointmentDto - patient details
-     *
      * @return patientDto
      */
     AppointmentDto addAppointment(AppointmentDto appointmentDto);
 
     /**
      * <p>
-     *  This abstract method is used to get all appointments
-     *  from the database
+     * This abstract method is used to get all appointments
+     * from the database
      *
      * </p>
      *
      * @param pageNumber - Page number of the page
-     * @param totalRows - number of rows required in
-     *
+     * @param totalRows  - number of rows required in
      * @return appointmentDto
      */
     List<AppointmentDto> getAppointments(int pageNumber, int totalRows);
 
     /**
      * <p>
-     *  This abstract method is used to get appointments
-     *  from the database by getting the id and status
-     *  from the user to dispaly
+     * This abstract method is used to get appointments
+     * from the database by getting the id and status
+     * from the user to display
      * </p>
      *
      * @param id - id of the appointment
-     *
      * @return appointmentDto
      */
     AppointmentDto getAppointmentById(int id);
@@ -74,12 +69,11 @@ public interface AppointmentService {
     /**
      * <p>
      * This isAppointmentAvailable abstract method is
-     * used to check wheather a appointment is available or not
+     * used to check whether a appointment is available or not
      * based on the appointment for doctor in doctor database
-     *
      * </p>
      *
-     * @param id - id of the doctor
+     * @param id       - id of the doctor
      * @param dateTime - date and time of appointment
      * @return boolean
      */
@@ -90,12 +84,20 @@ public interface AppointmentService {
      * This method is used to reschedule appointment and
      * all details into the database
      * </p>
-     * @param appointmentDto - appointment detail
      *
+     * @param appointmentDto - appointment detail
      * @return appointmentDto
      */
-
     AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto);
 
+    /**
+     * <p>
+     * This method is used to reschedule appointment and
+     * all details into the database
+     * </p>
+     *
+     * @param id is an id for unknown
+     * @return String
+     */
     String deleteAppointmentById(int id);
 }

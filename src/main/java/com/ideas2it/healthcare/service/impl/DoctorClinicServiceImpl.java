@@ -5,7 +5,6 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -37,9 +36,7 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Service
@@ -61,15 +58,15 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        DoctorClinicDto toReturnDto = null;
-        if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId())&&
+        DoctorClinicDto clinicDoctor = null;
+        if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
                 clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
             DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
-            toReturnDto = DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
+            clinicDoctor = DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
         } else {
             throw new NotFoundException(UserConstants.DOCTOR_NOT_FOUND_TO_ASSIGN);
         }
-        return toReturnDto;
+        return clinicDoctor;
     }
 
     /**
@@ -81,9 +78,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         if (doctorClinics.isEmpty()) {
             throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
-            return doctorClinics.stream()
-                    .map(DoctorClinicMapper::toDto)
-                    .collect(Collectors.toList());
+        return doctorClinics.stream()
+                .map(DoctorClinicMapper::toDto)
+                .collect(Collectors.toList());
 
     }
 
@@ -91,7 +88,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String deleteDoctorFromClinic(Integer id) {
-        if (doctorClinicRepository.deleteDoctorClinicById(id) == 1){
+        if (doctorClinicRepository.deleteDoctorClinicById(id) == 1) {
             return "Deleted Successfully";
         }
         return "Doctor is not Deleted";
@@ -108,10 +105,13 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         throw new NotFoundException(UserConstants.DOCTOR_ID_NOT_FOUND_TO_UPDATE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTOR_ID_CLINICID_NOT_FOUND)));
+                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
     }
 }
 

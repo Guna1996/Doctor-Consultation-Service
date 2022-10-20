@@ -62,7 +62,6 @@ public class DoctorServiceImpl implements DoctorService {
             throw new NotFoundException(UserConstants.DOCTORS_NOT_FOUND);
         }
         return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
-
     }
 
     /**
@@ -81,7 +80,7 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public String deleteDoctorById(int id) {
-        if (doctorRepository.deleteDoctorById(id) == 1){
+        if (doctorRepository.deleteDoctorById(id) == 1) {
             return UserConstants.DELETED_SUCCESSFULLY;
         }
         return UserConstants.DOCTOR_NOT_FOUND_TO_DELETE;

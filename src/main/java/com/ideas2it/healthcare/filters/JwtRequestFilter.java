@@ -1,3 +1,9 @@
+/**
+ * <p>
+ * This is the base package for all filters
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.filters;
 
 import com.ideas2it.healthcare.service.impl.MyUserDetailsService;
@@ -16,6 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>
+ * This is an JWT request filter class and it Extends
+ * OncePerRequestFilter class
+ * </p>
+ *
+ * @author Gunaseelan k
+ * @since 2022-10-10
+ */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
@@ -30,22 +45,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String authorizationHeader = request.getHeader("Authorization");
-
         String username = null;
         String jwt = null;
-
         if (authorizationHeader != null && authorizationHeader.startsWith("ideas2it ")) {
             jwt = authorizationHeader.substring(9);
             username = jwtUtil.extractUsername(jwt);
         }
-
-
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
             if (jwtUtil.validateToken(jwt, userDetails)) {
-
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken
@@ -55,5 +63,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         chain.doFilter(request, response);
     }
-
 }

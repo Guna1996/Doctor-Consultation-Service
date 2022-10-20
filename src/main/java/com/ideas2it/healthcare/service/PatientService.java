@@ -5,7 +5,7 @@
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -21,10 +21,8 @@ import java.util.List;
  * to repository for CRUD operations
  * </p>
  *
- * @author  Ramachandran
- *
+ * @author Ramachandran
  * @version 1
- *
  * @since 2022-10-10
  */
 
@@ -38,20 +36,18 @@ public interface PatientService {
      * </p>
      *
      * @param patientDto - patient details
-     *
      * @return patientDto
      */
     PatientDto addPatient(PatientDto patientDto);
 
     /**
      * <p>
-     *  This abstract method is used to get patient
-     *  details from the database by getting the id and status
-     *  from the user to dispaly
+     * This abstract method is used to get patient
+     * details from the database by getting the id and status
+     * from the user to display
      * </p>
      *
      * @param id - id of the patient
-     *
      * @return PatientDto
      */
     PatientDto getPatientById(Integer id);
@@ -61,8 +57,8 @@ public interface PatientService {
      * This method is used to update Patient
      * all details into the database
      * </p>
-     * @param patientDto - patient detail
      *
+     * @param patientDto - patient detail
      * @return PatientDto
      */
     PatientDto updatePatient(PatientDto patientDto);
@@ -72,8 +68,8 @@ public interface PatientService {
      * This method is used to delete patient details
      * by getting id from the user
      * </p>
-     * @param id - id of the patient
      *
+     * @param id - id of the patient
      * @return String
      */
     String deletePatient(Integer id);
@@ -91,13 +87,12 @@ public interface PatientService {
     /**
      * <p>
      * This isPatientAvailable abstract method is
-     * used to check wheather a patient is available or not
+     * used to check whether a patient is available or not
      * on the patient table by using getting id from the
      * patient
      * </p>
      *
      * @param id - id of the patient
-     *
      * @return boolean
      */
     boolean isPatientAvailable(Integer id);

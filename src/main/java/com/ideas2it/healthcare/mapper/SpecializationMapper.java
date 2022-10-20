@@ -23,10 +23,8 @@ import java.util.Set;
  * </p>
  *
  * @author Mohamed Jubair
- *
  * @version 1
- *
- * @since 2022-07-18
+ * @since 2022-10-10
  */
 public class SpecializationMapper {
 
@@ -65,7 +63,6 @@ public class SpecializationMapper {
 
             }
         }
-
         return specialization;
     }
 
@@ -103,7 +100,6 @@ public class SpecializationMapper {
                 specializationDto.setDoctors(doctorsDto);
             }
         }
-
         return specializationDto;
     }
 }

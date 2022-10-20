@@ -33,6 +33,7 @@ import java.util.Optional;
  */
 @Transactional
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
+
     Optional<Doctor> findByIdAndStatus(int id, String active);
 
     Boolean existsByIdAndStatus(int id, String status);
