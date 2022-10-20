@@ -3,7 +3,7 @@
  * This is the base package for all the dto classes and
  * the dto package classes are DoctorDto,SpecializationDto,
  * ClinicDto,DoctorClinicDto,AppointmentDto,FeedbackDto,PatientDto,
- * VitalsDto,TimeslotDto.
+ * VitalDto,TimeslotDto.
  * </p>
  *
  * Copyright 2022 - Ideas2it

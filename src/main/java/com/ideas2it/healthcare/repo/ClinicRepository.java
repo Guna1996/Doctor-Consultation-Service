@@ -46,7 +46,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
     List<Clinic> findAllByStatus(String active);
 
     @Modifying
-    @Query("update clinic set status='inactive' where id=?1")
+    @Query("update clinic set status='inactive' where id=?1 and status = 'active' ")
     Integer deleteClinicById(int id);
     
     Page<Clinic> findAllByStatus(String active, Pageable pageable);

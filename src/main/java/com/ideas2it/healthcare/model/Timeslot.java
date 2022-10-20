@@ -3,17 +3,15 @@
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
- * Vitals,Timeslot.
+ * Vital,Timeslot.
  * </p>
  *
  * Copyright 2022 - Ideas2it
  */
-
 package com.ideas2it.healthcare.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,8 +27,6 @@ import java.time.LocalTime;
  *
  * @author  Bala Ashwanth.N
  *
- * @version 1
- *
  * @since   2022-10-10
  */
 
@@ -45,7 +41,4 @@ public class Timeslot {
 
     @Column
     private LocalTime timeslot;
-
-//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "timeslots")
-//    private List<DoctorClinic> doctorClinics;
 }

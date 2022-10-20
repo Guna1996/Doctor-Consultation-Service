@@ -3,7 +3,7 @@
  * This is the package contains classes are DoctorClinicController,
  * PatientController,DoctorController,ClinicController,
  * AppointmentController,FeedbackController,SpecializationController,
- * TimeslotController,VitalsController
+ * TimeslotController,VitalController
  * </p>
  * <p>
  * Copyright 2022 - Ideas2it

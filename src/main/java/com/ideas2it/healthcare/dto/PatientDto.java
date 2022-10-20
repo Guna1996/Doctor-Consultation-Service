@@ -3,16 +3,18 @@
  * This is the base package for all the dto classes and
  * the dto package classes are DoctorDto,SpecializationDto,
  * ClinicDto,DoctorClinicDto,AppointmentDto,FeedbackDto,PatientDto,
- * VitalsDto,TimeslotDto.
+ * VitalDto,TimeslotDto.
  * </p>
  *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.dto;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -56,5 +58,5 @@ public class PatientDto {
 
     private List<AppointmentDto> appointment;
 
-    private List<VitalsDto> vitals;
+    private List<VitalDto> vitals;
 }

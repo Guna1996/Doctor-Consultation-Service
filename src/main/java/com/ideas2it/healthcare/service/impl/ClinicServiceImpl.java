@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  *
  * @version 1
  *
- * @since 2022-10-18
+ * @since 2022-10-10
  */
 @Service
 public class ClinicServiceImpl implements ClinicService {
@@ -101,9 +101,9 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public String deleteClinicById(int id) {
         if (clinicRepository.deleteClinicById(id) == 1){
-            return "Deleted Successfully";
+            return UserConstants.DELETED_SUCCESSFULLY;
         }
-        return "Doctor is not Deleted";
+        return ErrorConstants.CLINIC_NOT_FOUND;
     }
 
     /**

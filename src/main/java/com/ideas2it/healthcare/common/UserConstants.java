@@ -1,5 +1,26 @@
+/**
+ * <p>
+ * This package contains classes are constan constants
+ * and error constants  and user constants.
+ * </p>
+ *
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.common;
 
+/**
+ * <p>
+ * This Constants class contains static final string variable
+ * with values .we can access these variable any where in the
+ * global package by using class name and variable name
+ * </p>
+ *
+ * @author Ramachandran
+ *
+ * @version 1
+ *
+ * @since 2022-10-10
+ */
 public class UserConstants {
 
     public static final String DELETED_SUCCESSFULLY = "Deleted successfully";
@@ -32,7 +53,7 @@ public class UserConstants {
 
     public static final String TIMESLOT_NOT_FOUND = "Timeslot not found";
 
-    public static final String VITALS_NOT_FOUND_FOR_PATIENT = "Vitals not found for patient";
+    public static final String VITALS_NOT_FOUND_FOR_PATIENT = "Vital not found for patient";
 
     public static final String HIGH = "High";
 
