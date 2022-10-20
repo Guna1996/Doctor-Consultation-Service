@@ -11,6 +11,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.PatientMapper;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +37,7 @@ import java.util.stream.Collectors;
  *
  * @version 1
  *
- * @since 2022-07-18
+ * @since 2022-10-10
  */
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -47,6 +49,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public PatientDto addPatient(PatientDto patientDto) {
+        patientDto.setStatus(Constants.ACTIVE);
         Patient patient = PatientMapper.fromDto(patientDto);
         patient = patientRepository.save(patient);
         patientDto = PatientMapper.toDto(patient);
@@ -60,26 +63,21 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(PatientMapper::toDto).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("Patient not Found"));
+                orElseThrow(() -> new NotFoundException(UserConstants.PATIENT_NOT_FOUND));
     }
 
     /**
      * {@inheritDoc}
      */
     public PatientDto updatePatient(PatientDto patientDto) {
-        if (patientDto != null) {
-            Patient patient = PatientMapper.fromDto(patientDto);
-            patient = patientRepository.save(patient);
-            patientDto = PatientMapper.toDto(patient);
-            return patientDto;
-        } else {
-            throw new NotFoundException("Patient can't able to update");
+        Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(), Constants.ACTIVE);
+        if (patient.isEmpty()) {
+            throw new NotFoundException(UserConstants.PATIENT_CANNOT_ABLE_TO_UPDATE);
         }
+            return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public String deletePatient(Integer id) {
         if (patientRepository.deletePatiendById(id) == 1){
             return "Deleted Successfully";
@@ -94,20 +92,18 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients = patientRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (patients.isEmpty()) {
-            throw new NotFoundException("No Patients Found");
-        } else {
+            throw new NotFoundException(UserConstants.PATIENT_NOT_FOUND);
+        }
             return patients.stream()
                     .map(PatientMapper::toDto)
                     .collect(Collectors.toList());
-        }
+
     }
 
     /**
      * {@inheritDoc}
      */
     public boolean isPatientAvailable(Integer id) {
-        Patient patient = patientRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(()-> new RuntimeException("not found"));
-        return patient != null;
+        return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).isPresent();
     }
 }

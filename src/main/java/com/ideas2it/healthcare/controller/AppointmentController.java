@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +72,8 @@ public class AppointmentController {
      * @param id is appointment id
      * @return ResponseEntity
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable("id") int id) {
+    @GetMapping(Constants.ID)
+    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable(Constants.PATH_ID) int id) {
 
         return new ResponseEntity<>(appointmentService.getAppointmentById(id), HttpStatus.OK);
     }
@@ -94,8 +95,8 @@ public class AppointmentController {
      * @param id is appointment id
      * @return string
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAppointment(@PathVariable("id") int id) {
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
 
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }

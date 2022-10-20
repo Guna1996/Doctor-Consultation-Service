@@ -3,7 +3,7 @@
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
  * Clinic,DoctorClinic,appointment,Feedback,Patient,
- * Vitals,Timeslot.
+ * Vital,Timeslot.
  * </p>
  *
  * Copyright 2022 - Ideas2it
@@ -46,18 +46,18 @@ public class DoctorClinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
     @ManyToOne
-    @JoinColumn(name="doctor_id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name="clinic_id")
+    @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
     @ManyToMany

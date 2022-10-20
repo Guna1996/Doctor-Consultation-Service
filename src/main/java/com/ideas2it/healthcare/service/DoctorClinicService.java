@@ -3,7 +3,7 @@
  * This package contains interfaces are DoctorClinicService,
  * PatientService, DoctorService, ClinicService,
  * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalsServiceImpl.
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  * <p>
  * Copyright 2022 - Ideas2it

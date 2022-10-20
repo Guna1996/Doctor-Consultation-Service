@@ -3,7 +3,7 @@
  * This is the package contains classes are DoctorClinicController,
  * PatientController,DoctorController,ClinicController,
  * AppointmentController,FeedbackController,SpecializationController,
- * TimeslotController,VitalsController
+ * TimeslotController,VitalController
  * </p>
  * <p>
  * Copyright 2022 - Ideas2it
@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.PatientDto;
 
 import com.ideas2it.healthcare.service.PatientService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,14 +39,14 @@ import java.util.List;
  *
  * @version 1
  *
- * @since 2022-07-18
+ * @since 2022-10-10
  */
 @RestController
 @RequestMapping("/patient")
-@RequiredArgsConstructor
 public class PatientController {
 
-    private final PatientService patientService;
+    @Autowired
+    private PatientService patientService;
 
 
     /**
@@ -61,9 +61,7 @@ public class PatientController {
      */
     @PostMapping
     public ResponseEntity<PatientDto> addPatient(@RequestBody PatientDto patientDto) {
-        patientDto.setStatus(Constants.ACTIVE);
         PatientDto addedPatient = patientService.addPatient(patientDto);
-
         return new ResponseEntity<>(addedPatient, HttpStatus.OK);
     }
 
@@ -78,8 +76,8 @@ public class PatientController {
      *
      * @return PatientDto
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<PatientDto> getPatientById(@PathVariable int id) {
+    @GetMapping(Constants.ID)
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable int id)  {
         PatientDto getPatient = patientService.getPatientById(id);
         return new ResponseEntity<>(getPatient, HttpStatus.OK);
     }
@@ -111,8 +109,8 @@ public class PatientController {
      *
      * @return String
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePatient(@PathVariable int id) {
+    @DeleteMapping(Constants.ID)
+    public ResponseEntity<String> deletePatientById(@PathVariable int id) {
         String deletePatient = patientService.deletePatient(id);
         return new ResponseEntity<>(deletePatient, HttpStatus.OK);
     }

@@ -11,6 +11,8 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.UserConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
@@ -63,7 +65,7 @@ public class ClinicServiceImpl implements ClinicService {
                 PageRequest.of(pageNumber, totalRows)).toList();
 
         if (clinics.isEmpty()) {
-            throw new NotFoundException("No clinic Found");
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
         return clinics.stream()
                 .map(ClinicMapper::toDto)
@@ -79,7 +81,7 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(ClinicMapper::toDto).
                 findFirst().
-                orElseThrow(() -> new NotFoundException("NO clinic Found"));
+                orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
     }
 
     /**
@@ -89,7 +91,7 @@ public class ClinicServiceImpl implements ClinicService {
 
         Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(clinicDto.getId(), Constants.ACTIVE);
         if (clinicById.isEmpty()) {
-            throw new NotFoundException("No Clinic Found");
+            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }
         return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
     }
@@ -98,7 +100,6 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String deleteClinicById(int id) {
-
         if (clinicRepository.deleteClinicById(id) == 1){
             return "Deleted Successfully";
         }

@@ -8,7 +8,6 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.model.Timeslot;
-
 import java.util.ArrayList;
 import java.util.List;
 

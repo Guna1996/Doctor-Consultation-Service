@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +72,8 @@ public class ClinicController {
      * @param id is clinic id
      * @return ResponseEntity
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<ClinicDto> getClinicById(@PathVariable("id") int id) {
+    @GetMapping(Constants.ID)
+    public ResponseEntity<ClinicDto> getClinicById(@PathVariable(Constants.PATH_ID) int id) {
 
         return new ResponseEntity<>(clinicService.getClinicById(id), HttpStatus.OK);
     }
@@ -94,7 +95,7 @@ public class ClinicController {
      * @param id is clinic id
      * @return string
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping(Constants.ID)
     public ResponseEntity<String> deleteClinic(@PathVariable("id") int id) {
 
         return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK) ;
