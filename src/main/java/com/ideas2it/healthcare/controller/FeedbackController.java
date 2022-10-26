@@ -33,19 +33,6 @@ public class FeedbackController {
 
     /**
      * <p>
-     * get feedback details
-     * </p>
-     *
-     * @param id - an integer that refers id on the database
-     * @return FeedbackDto
-     */
-    @GetMapping(Constants.ID)
-    public FeedbackDto getFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
-        return feedbackService.getFeedbackById(id);
-    }
-
-    /**
-     * <p>
      * insert Feedback details
      * </p>
      *

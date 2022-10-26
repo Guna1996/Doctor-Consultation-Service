@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -52,7 +53,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * {@inheritDoc}
      */
-    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {
+    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {  //Jubair need to add query to reduce repo calls
         FeedbackDto feedbackDtoToReturn = null;
         if (!feedbackRepository.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
             throw new NotFoundException(MessageConstants.DATA_DOES_NOT_EXIST);
@@ -79,6 +80,12 @@ public class FeedbackServiceImpl implements FeedbackService {
             return MessageConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.FEEDBACK_NOT_FOUND;
+    }
+
+    @Override
+    public List<FeedbackDto> getFeedbackByDoctorId(int doctorId, int pageNumber, int totalRows) {
+        return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
+                .of(pageNumber, totalRows)).toList().stream().map(FeedbackMapper::toDto).collect(Collectors.toList());
     }
 
 }

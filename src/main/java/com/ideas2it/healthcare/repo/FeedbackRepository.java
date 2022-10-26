@@ -17,7 +17,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     Optional<Feedback> findByIdAndStatus(int id, String status);
 
-    Page<Feedback> findAllByStatus(String status, Pageable pageable);
+    Page<Feedback> findByDoctorIdAndStatus(int doctorId, String status, Pageable pageable);
 
     Boolean existsByIdAndStatus(int id, String status);
 

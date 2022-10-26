@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -46,7 +45,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Query("update appointment set status='inactive' where id=?1 and status = 'active'")
     Integer deleteAppointmentById(int id);
 
-    Page<Appointment> findByDoctorId(int id, Pageable pageable);
+    Page<Appointment> findByDoctorIdAndStatus(int id, String status, Pageable pageable);
 
-    Page<Appointment> findByPatientId(int id, Pageable pageable);
+    Page<Appointment> findByPatientIdAndStatus(int id, String status, Pageable pageable);
 }
