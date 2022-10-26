@@ -92,7 +92,7 @@ public class TimeslotController {
      * @return TimeslotDto
      */
     @PostMapping
-    public TimeslotDto insertFeedback(@RequestBody TimeslotDto timeslotDto) {
+    public TimeslotDto insertTimeslot(@RequestBody TimeslotDto timeslotDto) {
         return timeslotService.addTimeslot(timeslotDto);
     }
 }

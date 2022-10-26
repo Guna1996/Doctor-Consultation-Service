@@ -126,7 +126,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     }
 
     public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
-        return doctorClinicRepository.findByClinicId(clinicId, PageRequest.of(pageNumber, totalRows)).toList().stream()
+        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
     }
 }

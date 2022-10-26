@@ -59,4 +59,6 @@ public interface FeedbackService {
      */
     String deleteFeedback(int id);
 
+    List<FeedbackDto> getFeedbackByDoctorId(int doctorId, int pageNumber, int totalRows);
+
 }

@@ -9,6 +9,7 @@ package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
+import com.ideas2it.healthcare.dto.FeedbackDto;
 
 import java.util.List;
 
@@ -81,5 +82,7 @@ public interface DoctorService {
      */
     boolean isDoctorAvailable(int id);
 
-    public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
+    List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
+
+    List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows);
 }
