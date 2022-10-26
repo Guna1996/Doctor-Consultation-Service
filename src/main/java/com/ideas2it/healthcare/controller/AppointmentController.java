@@ -11,9 +11,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * <p>
@@ -79,9 +75,5 @@ public class AppointmentController {
     @PutMapping(Constants.ID)
     public String deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
         return appointmentService.deleteAppointmentById(id);
-    }
-
-    public List<AppointmentDto> getAppointmentsByDoctorId() {
-        return null;
     }
 }

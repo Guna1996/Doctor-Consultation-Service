@@ -91,4 +91,6 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     @Modifying
     @Query("update doctor_clinic set status='inactive' where id=?1 and status = 'active'")
     Integer deleteDoctorClinicById(int id);
+
+    Page<DoctorClinic> findByClinicId(int clinicId, Pageable pageable);
 }

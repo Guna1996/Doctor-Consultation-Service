@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.model.Vital;
@@ -91,5 +92,12 @@ public class PatientController {
                                               @PathVariable(name = "pageNumber") int pageNumber,
                                               @PathVariable(name = "totalRows") int totalRows) {
         return patientService.getVitalsByPatientId(patientId, pageNumber, totalRows);
+    }
+
+    @GetMapping("/appointment/{patientId}/{pageNumber}/{totalRows}")
+    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = "patientId") int patientId,
+                                                           @PathVariable(name = "pageNumber") int pageNumber,
+                                                           @PathVariable(name = "totalRows") int totalRows) {
+        return patientService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
     }
 }
