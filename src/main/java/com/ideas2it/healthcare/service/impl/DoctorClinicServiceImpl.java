@@ -11,7 +11,7 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.UserConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
@@ -59,14 +59,13 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
         DoctorClinicDto clinicDoctor = null;
-        if (doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
+        if (!doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
                 clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
-            DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
-            clinicDoctor = DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
-        } else {
-            throw new NotFoundException(UserConstants.DOCTOR_NOT_FOUND_TO_ASSIGN);
+            throw new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND_TO_ASSIGN);
         }
-        return clinicDoctor;
+        DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
+        return DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
+
     }
 
     /**
@@ -89,29 +88,39 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public String deleteDoctorFromClinic(Integer id) {
         if (doctorClinicRepository.deleteDoctorClinicById(id) == 1) {
-            return "Deleted Successfully";
+            return MessageConstants.DELETED_SUCCESSFULLY;
         }
-        return "Doctor is not Deleted";
+        return MessageConstants.DOCTOR_NOT_FOUND_TO_DELETE;
     }
 
     /**
      * {@inheritDoc}
      */
     public DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
-        if (doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
-            return DoctorClinicMapper.toDto(doctorClinicRepository
-                    .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+        if (!doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
+            throw new NotFoundException(MessageConstants.DOCTOR_ID_NOT_FOUND_TO_UPDATE);
         }
-        throw new NotFoundException(UserConstants.DOCTOR_ID_NOT_FOUND_TO_UPDATE);
+        return DoctorClinicMapper.toDto(doctorClinicRepository
+                .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId) {
+    public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+                .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DoctorClinicDto getDoctorClinicById(int id) {
+        return doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
+                map(DoctorClinicMapper::toDto).
+                findFirst().
+                orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_CLINIC_NOT_FOUND));
     }
 }
 

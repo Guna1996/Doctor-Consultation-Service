@@ -7,10 +7,19 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -22,11 +31,9 @@ import java.util.Set;
  * layer
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter
@@ -50,13 +57,13 @@ public class Doctor {
     @Column(name = "qualification")
     private String qualification;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "doctor_specialization",
-    joinColumns = @JoinColumn(name = "doctor_id"),
-    inverseJoinColumns = @JoinColumn(name = "specialization_id"))
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialization_id"))
     private Set<Specialization> specializations;
 
-    @Column(name = "registration_year")
+    @Column(name = "date_of_registration")
     private LocalDate dateOfRegistration;
 
     @Column(name = "mobile_number")
@@ -66,14 +73,8 @@ public class Doctor {
     private String city;
 
     @Column(name = "status")
-    private String status;
+    private String status = Constants.ACTIVE;
 
-    @OneToMany(mappedBy = "doctor")
-    private List<Feedback> feedbacks;
-
-    @OneToMany(mappedBy = "doctor")
-    private List<Appointment> appointments;
-
-    @OneToMany(mappedBy = "doctor")
-    private List<DoctorClinic> clinics;
+    @Column(name = "consultation_fee")
+    private int consultationFee;
 }

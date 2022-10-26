@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.repo;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -84,6 +85,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     Boolean existsByIdAndStatus(int id, String status);
 
     Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId, String status);
+
+    Optional<DoctorClinic> findByIdAndStatus(int id, String status);
 
     @Modifying
     @Query("update doctor_clinic set status='inactive' where id=?1 and status = 'active'")

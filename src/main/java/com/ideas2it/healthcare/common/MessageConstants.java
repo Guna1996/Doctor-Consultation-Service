@@ -21,7 +21,7 @@ package com.ideas2it.healthcare.common;
  *
  * @since 2022-10-10
  */
-public class UserConstants {
+public class MessageConstants {
 
     public static final String DELETED_SUCCESSFULLY = "Deleted successfully";
 

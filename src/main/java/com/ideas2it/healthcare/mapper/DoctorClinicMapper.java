@@ -50,6 +50,7 @@ public class DoctorClinicMapper {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
                 doctor.setName(doctorDto.getName());
+                doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setDateOfBirth(doctorDto.getDateOfBirth());
                 doctor.setGender(doctorDto.getGender());
                 doctor.setQualification(doctorDto.getQualification());
@@ -107,6 +108,7 @@ public class DoctorClinicMapper {
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
                 doctorDto.setGender(doctor.getGender());
+                doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
                 doctorDto.setMobileNumber(doctor.getMobileNumber());

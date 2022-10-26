@@ -17,6 +17,8 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
  * AppointmentMapper is used convert Appointment object to
@@ -61,6 +63,7 @@ public class AppointmentMapper {
                 doctor.setName(doctorDto.getName());
                 doctor.setDateOfBirth(doctorDto.getDateOfBirth());
                 doctor.setGender(doctorDto.getGender());
+                doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
                 doctor.setMobileNumber(doctorDto.getMobileNumber());
@@ -98,11 +101,9 @@ public class AppointmentMapper {
         AppointmentDto appointmentDto = new AppointmentDto();
         if (appointment != null) {
             appointmentDto.setId(appointment.getId());
-
             appointmentDto.setScheduledOn(appointment.getScheduledOn());
             appointmentDto.setCreatedAt(appointment.getCreatedAt());
             appointmentDto.setStatus(appointment.getStatus());
-
             Patient patient = appointment.getPatient();
             if (patient != null) {
                 PatientDto patientDto = new PatientDto();
@@ -127,6 +128,7 @@ public class AppointmentMapper {
                 doctorDto.setMobileNumber(doctor.getMobileNumber());
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
+                doctorDto.setConsultationFee(doctor.getConsultationFee());
                 appointmentDto.setDoctor(doctorDto);
             }
 

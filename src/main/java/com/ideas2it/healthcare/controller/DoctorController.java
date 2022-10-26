@@ -51,11 +51,11 @@ public class DoctorController {
      * </p>
      *
      * @param doctorDto is details of doctor
-     * @return DoctorDto as ResponseEntity
+     * @return DoctorDto
      */
     @PostMapping
-    public ResponseEntity<DoctorDto> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return new ResponseEntity<>(doctorService.saveOrUpdateDoctor(doctorDto), HttpStatus.OK);
+    public DoctorDto addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
+        return doctorService.saveOrUpdateDoctor(doctorDto);
     }
 
 
@@ -66,12 +66,12 @@ public class DoctorController {
      * </p>
      * @param pageNumber is page number to show
      * @param totalRows  is a set of rows to be shown
-     * @return List<DoctorDto> as ResponseEntity
+     * @return List<DoctorDto>
      */
     @GetMapping(Constants.PAGE_PATH)
-    public ResponseEntity<List<DoctorDto>> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+    public List<DoctorDto> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                                          @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return new ResponseEntity<>(doctorService.getAllDoctors(pageNumber, totalRows), HttpStatus.OK);
+        return doctorService.getAllDoctors(pageNumber, totalRows);
     }
 
     /**
@@ -81,11 +81,11 @@ public class DoctorController {
      * </p>
      *
      * @param id is id of doctor
-     * @return DoctorDto as ResponseEntity
+     * @return DoctorDto
      */
     @GetMapping(Constants.ID)
-    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable int id) {
-        return new ResponseEntity<>(doctorService.getDoctorById(id), HttpStatus.OK);
+    public DoctorDto getDoctorById(@PathVariable int id) {
+        return doctorService.getDoctorById(id);
     }
 
     /**
@@ -95,11 +95,11 @@ public class DoctorController {
      * </p>
      *
      * @param doctorDto is details of doctor
-     * @return DoctorDto as ResponseEntity
+     * @return DoctorDto
      */
     @PutMapping
-    public ResponseEntity<DoctorDto> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return new ResponseEntity<>(doctorService.saveOrUpdateDoctor(doctorDto), HttpStatus.OK);
+    public DoctorDto updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
+        return doctorService.saveOrUpdateDoctor(doctorDto);
     }
 
     /**
@@ -109,10 +109,10 @@ public class DoctorController {
      * </p>
      *
      * @param id is id of doctor
-     * @return String as ResponseEntity
+     * @return String
      */
-    @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
-        return new ResponseEntity<>(doctorService.deleteDoctorById(id), HttpStatus.OK);
+    @PutMapping(Constants.ID)
+    public String deleteDoctorById(@PathVariable int id) {
+        return doctorService.deleteDoctorById(id);
     }
 }

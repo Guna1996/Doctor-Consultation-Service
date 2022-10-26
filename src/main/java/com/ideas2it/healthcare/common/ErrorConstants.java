@@ -43,4 +43,6 @@ public class ErrorConstants {
             "Appointment unavailable for this schedule. kindly choose other schedule";
 
     public static final String INCORRECT_USERNAME_AND_PASSWORD = "Incorrect username or password";
+
+    public static final String DOCTOR_CLINIC_NOT_FOUND = "Doctor or Clinic not found";
 }

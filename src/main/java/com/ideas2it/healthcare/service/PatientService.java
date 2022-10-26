@@ -11,6 +11,8 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.PatientDto;
+import com.ideas2it.healthcare.dto.VitalDto;
+import com.ideas2it.healthcare.model.Vital;
 
 import java.util.List;
 
@@ -65,27 +67,6 @@ public interface PatientService {
 
     /**
      * <p>
-     * This method is used to delete patient details
-     * by getting id from the user
-     * </p>
-     *
-     * @param id - id of the patient
-     * @return String
-     */
-    String deletePatient(Integer id);
-
-    /**
-     * <p>
-     * This method is used to get all the Patient details
-     * from the database
-     * </p>
-     *
-     * @return list<PatientDto>
-     */
-    List<PatientDto> getPatients(int pageNumber, int totalRows);
-
-    /**
-     * <p>
      * This isPatientAvailable abstract method is
      * used to check whether a patient is available or not
      * on the patient table by using getting id from the
@@ -96,4 +77,6 @@ public interface PatientService {
      * @return boolean
      */
     boolean isPatientAvailable(Integer id);
+
+    List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows);
 }

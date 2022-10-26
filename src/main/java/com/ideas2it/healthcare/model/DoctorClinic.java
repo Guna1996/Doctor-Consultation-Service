@@ -22,6 +22,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -51,15 +53,15 @@ public class DoctorClinic {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "doctor_clinic_timeslot",
             joinColumns = @JoinColumn(name = "doctor_clinic_id"),
             inverseJoinColumns = @JoinColumn(name = "timeslot_id"))

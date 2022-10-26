@@ -71,17 +71,4 @@ public interface TimeslotService {
      * @return {@link TimeslotDto}
      */
     List<TimeslotDto> getTimeslots(int pageNumber, int totalRows);
-
-    /**
-     * <p>
-     * This abstract method is used to delete timeslot
-     * from the database
-     *
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link String}
-     */
-    String deleteTimeslot(int id);
-
 }

@@ -50,7 +50,7 @@ public class PatientMapper {
             patient.setMobileNumber(patientDto.getMobileNumber());
             patient.setEmail(patientDto.getEmail());
             patient.setStatus(patientDto.getStatus());
-            List<FeedbackDto> feedbacksDto = patientDto.getFeedbacks();
+          /*  List<FeedbackDto> feedbacksDto = patientDto.getFeedbacks();
             if (null != feedbacksDto) {
                 List<Feedback> feedbacks = new ArrayList<>();
                 feedbacksDto.forEach(feedbackDto -> {
@@ -92,7 +92,7 @@ public class PatientMapper {
                     vitals.add(vital);
                 });
                 patient.setVitals(vitals);
-            }
+            }*/
         }
         return patient;
     }
@@ -115,7 +115,7 @@ public class PatientMapper {
             patientDto.setMobileNumber(patient.getMobileNumber());
             patientDto.setEmail(patient.getEmail());
             patientDto.setStatus(patient.getStatus());
-            List<Feedback> feedbacks = patient.getFeedbacks();
+            /*List<Feedback> feedbacks = patient.getFeedbacks();
             if (null != feedbacks) {
                 List<FeedbackDto> feedbacksDto = new ArrayList<>();
                 feedbacks.forEach(feedback -> {
@@ -157,7 +157,7 @@ public class PatientMapper {
                     vitalsDto.add(vitaldto);
                 });
                 patientDto.setVitals(vitalsDto);
-            }
+            }*/
         }
         return patientDto;
     }

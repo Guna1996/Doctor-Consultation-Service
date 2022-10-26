@@ -23,7 +23,7 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
 
     Page<Vital> findByPatientId(int patientId, Pageable pageable);
 
-    @Modifying
-    @Query("update vital set status='inactive' where id=?1 and status = 'active'")
-    Integer deleteVitalsById(int id);
+//    @Modifying
+//    @Query("update vital set status='inactive' where id=?1 and status = 'active'")
+//    Integer deleteVitalsById(int id);
 }

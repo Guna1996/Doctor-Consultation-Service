@@ -100,4 +100,8 @@ public interface AppointmentService {
      * @return String
      */
     String deleteAppointmentById(int id);
+
+    List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
+
+    List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
 }
