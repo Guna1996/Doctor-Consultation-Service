@@ -46,6 +46,7 @@ public class VitalsMapper {
             vital.setDiastolic(vitalDto.getDiastolic());
             vital.setSugarLevel(vitalDto.getSugarLevel());
             vital.setStatus(vitalDto.getStatus());
+            vital.setCreatedAt(vitalDto.getCreatedAt());
             vital.setBloodPressure(vitalDto.getBloodPressure());
             DoctorDto doctorDto = vitalDto.getDoctor();
             if (doctorDto != null) {
@@ -54,6 +55,7 @@ public class VitalsMapper {
                 doctor.setName(doctorDto.getName());
                 doctor.setDateOfBirth(doctorDto.getDateOfBirth());
                 doctor.setGender(doctorDto.getGender());
+                doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
                 doctor.setMobileNumber(doctorDto.getMobileNumber());
@@ -97,6 +99,7 @@ public class VitalsMapper {
             vitalDto.setSugarLevel(vital.getSugarLevel());
             vitalDto.setStatus(vital.getStatus());
             vitalDto.setBloodPressure(vital.getBloodPressure());
+            vitalDto.setCreatedAt(vital.getCreatedAt());
             Doctor doctor = vital.getDoctor();
             if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
@@ -109,6 +112,7 @@ public class VitalsMapper {
                 doctorDto.setMobileNumber(doctor.getMobileNumber());
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setCity(doctor.getCity());
+                doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setStatus(doctor.getStatus());
                 vitalDto.setDoctor(doctorDto);
             }

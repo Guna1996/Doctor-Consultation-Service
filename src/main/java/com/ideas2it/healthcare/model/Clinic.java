@@ -16,9 +16,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
 
 /**
  * <p>
@@ -63,7 +60,4 @@ public class Clinic {
 
     @Column(name = "status")
     private String status = Constants.ACTIVE;
-
-    @OneToMany(mappedBy = "clinic")
-    private List<DoctorClinic> doctors;
 }

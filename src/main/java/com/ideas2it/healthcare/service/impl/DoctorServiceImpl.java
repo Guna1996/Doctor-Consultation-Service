@@ -8,9 +8,11 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.UserConstants;
+import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repo.DoctorRepository;
@@ -46,9 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto) {
-        doctorDto.setStatus(Constants.ACTIVE);
-        Doctor doctor = doctorRepository.save(DoctorMapper.fromDto(doctorDto));
-        return DoctorMapper.toDto(doctor);
+        return DoctorMapper.toDto(doctorRepository.save(DoctorMapper.fromDto(doctorDto)));
     }
 
     /**
@@ -59,7 +59,7 @@ public class DoctorServiceImpl implements DoctorService {
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE
                 , PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
-            throw new NotFoundException(UserConstants.DOCTORS_NOT_FOUND);
+            throw new NotFoundException(MessageConstants.DOCTORS_NOT_FOUND);
         }
         return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
     }
@@ -69,10 +69,12 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto getDoctorById(int id) {
-        Doctor doctor = doctorRepository
+        return doctorRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(UserConstants.DOCTOR_NOT_FOUND));
-        return DoctorMapper.toDto(doctor);
+                .stream()
+                .map(DoctorMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND));
     }
 
     /**
@@ -81,9 +83,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public String deleteDoctorById(int id) {
         if (doctorRepository.deleteDoctorById(id) == 1) {
-            return UserConstants.DELETED_SUCCESSFULLY;
+            return MessageConstants.DELETED_SUCCESSFULLY;
         }
-        return UserConstants.DOCTOR_NOT_FOUND_TO_DELETE;
+        return MessageConstants.DOCTOR_NOT_FOUND_TO_DELETE;
     }
 
     /**

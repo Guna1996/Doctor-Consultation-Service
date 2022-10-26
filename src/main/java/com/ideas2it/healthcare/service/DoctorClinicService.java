@@ -74,6 +74,8 @@ public interface DoctorClinicService {
      */
     DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto);
 
-    DoctorClinicDto getByDoctorIdAndClinicId(int doctorId, int clinicId);
+    DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId);
+
+    DoctorClinicDto getDoctorClinicById(int id);
 
 }

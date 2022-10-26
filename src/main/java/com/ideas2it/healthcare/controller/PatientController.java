@@ -11,11 +11,10 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.PatientDto;
+import com.ideas2it.healthcare.dto.VitalDto;
+import com.ideas2it.healthcare.model.Vital;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,12 +50,11 @@ public class PatientController {
      * </p>
      *
      * @param patientDto is patient detail
-     * @return String as ResponseEntity
+     * @return String
      */
     @PostMapping
-    public ResponseEntity<PatientDto> addPatient(@RequestBody PatientDto patientDto) {
-        PatientDto addedPatient = patientService.addPatient(patientDto);
-        return new ResponseEntity<>(addedPatient, HttpStatus.OK);
+    public PatientDto addPatient(@RequestBody PatientDto patientDto) {
+        return patientService.addPatient(patientDto);
     }
 
     /**
@@ -67,12 +65,11 @@ public class PatientController {
      * </p>
      *
      * @param id is patient id
-     * @return PatientDto as ResponseEntity
+     * @return PatientDto
      */
     @GetMapping(Constants.ID)
-    public ResponseEntity<PatientDto> getPatientById(@PathVariable int id) {
-        PatientDto getPatient = patientService.getPatientById(id);
-        return new ResponseEntity<>(getPatient, HttpStatus.OK);
+    public PatientDto getPatientById(@PathVariable int id) {
+        return patientService.getPatientById(id);
     }
 
     /**
@@ -82,41 +79,17 @@ public class PatientController {
      * </p>
      *
      * @param patientDto is detail of patient
-     * @return PatientDto as ResponseEntity
+     * @return PatientDto
      */
     @PutMapping
-    public ResponseEntity<PatientDto> updatePatient(@RequestBody PatientDto patientDto) {
-        PatientDto updatePatient = patientService.updatePatient(patientDto);
-        return new ResponseEntity<>(updatePatient, HttpStatus.OK);
+    public PatientDto updatePatient(@RequestBody PatientDto patientDto) {
+        return  patientService.updatePatient(patientDto);
     }
 
-    /**
-     * <p>
-     * This method used to delete patient details
-     * from the database by getting patient id
-     * from the user
-     * </p>
-     *
-     * @param id is detail of patient
-     * @return String as ResponseEntity
-     */
-    @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deletePatientById(@PathVariable int id) {
-        String deletePatient = patientService.deletePatient(id);
-        return new ResponseEntity<>(deletePatient, HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * This method used to get all patient details
-     * from the database
-     * </p>
-     *
-     * @return List<PatientDto>
-     */
-    @GetMapping(Constants.PAGE_PATH)
-    public ResponseEntity<List<PatientDto>> getPatients(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                        @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return new ResponseEntity<>(patientService.getPatients(pageNumber, totalRows), HttpStatus.OK);
+    @GetMapping(Constants.VITAL_PATIENT_ID)
+    public List<VitalDto> getVitalByPatientId(@PathVariable(name = "patientId") int patientId,
+                                              @PathVariable(name = "pageNumber") int pageNumber,
+                                              @PathVariable(name = "totalRows") int totalRows) {
+        return patientService.getVitalsByPatientId(patientId, pageNumber, totalRows);
     }
 }

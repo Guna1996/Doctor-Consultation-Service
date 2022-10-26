@@ -10,18 +10,22 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 /**
  * <p>
@@ -60,17 +64,21 @@ public class Vital {
     @Column(name = "sugar_level")
     private float sugarLevel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
     @Column
-    private String status;
+    private String status = Constants.ACTIVE;
 
-    @ManyToOne(targetEntity = Doctor.class, cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 
-    @Transient
+    @Column(name = "blood_pressure")
     private String bloodPressure;
+
+    @CreationTimestamp
+    @Column(name = "created_date")
+    private LocalDateTime createdAt;
 }
