@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -65,14 +66,5 @@ public class Patient {
     private String email;
 
     @Column(name = "status")
-    private String status;
-
-    @OneToMany(mappedBy = "patient")
-    private List<Feedback> feedbacks;
-
-    @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointment;
-
-    @OneToMany(mappedBy = "patient")
-    private List<Vital> vitals;
+    private String status = Constants.ACTIVE;
 }

@@ -37,18 +37,6 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This abstract method is used to update feedback
-     * to the database
-     *
-     * </p>
-     *
-     * @param feedbackDto {@link FeedbackDto}
-     * @return {@link FeedbackDto}
-     */
-    FeedbackDto updateFeedback(FeedbackDto feedbackDto);
-
-    /**
-     * <p>
      * This abstract method is used to get feedback
      * from the database
      *
@@ -58,19 +46,6 @@ public interface FeedbackService {
      * @return {@link FeedbackDto}
      */
     FeedbackDto getFeedbackById(int id);
-
-    /**
-     * <p>
-     * This abstract method is used to get all feedback
-     * from the database
-     *
-     * </p>
-     *
-     * @param pageNumber {@link int}
-     * @param totalRows  {@link int}
-     * @return {@link List<FeedbackDto>}
-     */
-    List<FeedbackDto> getFeedbacks(int pageNumber, int totalRows);
 
     /**
      * <p>

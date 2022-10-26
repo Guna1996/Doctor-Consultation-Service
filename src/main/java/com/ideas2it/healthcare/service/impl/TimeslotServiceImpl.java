@@ -11,7 +11,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.UserConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.TimeslotMapper;
@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -53,13 +54,10 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public TimeslotDto updateTimeslot(TimeslotDto timeslotDto) {
-        TimeslotDto timeslotDtoToReturn = null;
-        if (timeslotRepository.existsById(timeslotDto.getId())) {
-            timeslotDtoToReturn = TimeslotMapper.toDto(timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto)));
-        } else {
-            throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
+        if (!timeslotRepository.existsById(timeslotDto.getId())) {
+            throw new NotFoundException(MessageConstants.DATA_DOES_NOT_EXIST);
         }
-        return timeslotDtoToReturn;
+        return TimeslotMapper.toDto(timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto)));
     }
 
     /**
@@ -67,7 +65,7 @@ public class TimeslotServiceImpl implements TimeslotService {
      */
     public TimeslotDto getTimeslotById(int id) {
         Timeslot timeslot = timeslotRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(UserConstants.TIMESLOT_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundException(MessageConstants.TIMESLOT_NOT_FOUND));
         return TimeslotMapper.toDto(timeslot);
     }
 
@@ -75,27 +73,10 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public List<TimeslotDto> getTimeslots(int pageNumber, int totalRows) {
-        List<TimeslotDto> timeslotsDto = null;
         List<Timeslot> timeslots = timeslotRepository.findAll(PageRequest.of(pageNumber, totalRows)).toList();
-        if (!timeslots.isEmpty()) {
-            timeslotsDto = new ArrayList<>();
-            for (Timeslot timeslot : timeslots) {
-                timeslotsDto.add(TimeslotMapper.toDto(timeslot));
-            }
-        } else {
-            throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
+        if (timeslots.isEmpty()) {
+            throw new NotFoundException(MessageConstants.DATA_IS_EMPTY);
         }
-        return timeslotsDto;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String deleteTimeslot(int id) {
-        if (timeslotRepository.existsById(id)) {
-            timeslotRepository.deleteById(id);
-            return UserConstants.DELETED_SUCCESSFULLY;
-        }
-        return ErrorConstants.TIMESLOT_NOT_FOUND;
+        return timeslots.stream().map(TimeslotMapper::toDto).collect(Collectors.toList());
     }
 }

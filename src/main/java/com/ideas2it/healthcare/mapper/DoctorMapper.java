@@ -68,7 +68,8 @@ public class DoctorMapper {
             doctor.setMobileNumber(doctorDto.getMobileNumber());
             doctor.setCity(doctorDto.getCity());
             doctor.setStatus(doctorDto.getStatus());
-            List<FeedbackDto> feedbacksDto = doctorDto.getFeedbacks();
+            doctor.setConsultationFee(doctorDto.getConsultationFee());
+           /* List<FeedbackDto> feedbacksDto = doctorDto.getFeedbacks();
             if (feedbacksDto != null) {
                 List<Feedback> feedbacks = new ArrayList<>();
                 feedbacksDto.forEach(feedbackDto -> {
@@ -102,7 +103,7 @@ public class DoctorMapper {
                     doctorClinics.add(doctorClinic);
                 });
                 doctor.setClinics(doctorClinics);
-            }
+            }*/
         }
         return doctor;
     }
@@ -123,6 +124,7 @@ public class DoctorMapper {
             doctorDto.setDateOfBirth(doctor.getDateOfBirth());
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
+            doctorDto.setConsultationFee(doctor.getConsultationFee());
             Set<Specialization> specializations = doctor.getSpecializations();
             if (specializations != null) {
                 Set<SpecializationDto> specializationsDto = new HashSet<>();
@@ -139,7 +141,7 @@ public class DoctorMapper {
             doctorDto.setMobileNumber(doctor.getMobileNumber());
             doctorDto.setCity(doctor.getCity());
             doctorDto.setStatus(doctor.getStatus());
-            List<Feedback> feedbacks = doctor.getFeedbacks();
+            /*List<Feedback> feedbacks = doctor.getFeedbacks();
             if (feedbacks != null) {
                 List<FeedbackDto> feedbacksDto = new ArrayList<>();
                 feedbacks.forEach(feedback -> {
@@ -173,7 +175,7 @@ public class DoctorMapper {
                     doctorClinicsDto.add(doctorClinicDto);
                 });
                 doctorDto.setClinics(doctorClinicsDto);
-            }
+            }*/
         }
         return doctorDto;
     }

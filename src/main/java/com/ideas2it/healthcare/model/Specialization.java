@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,8 +42,5 @@ public class Specialization {
     private String name;
 
     @Column(name = "status")
-    private String status;
-
-    @ManyToMany(mappedBy = "specializations")
-    private Set<Doctor> doctors;
+    private String status = Constants.ACTIVE;
 }

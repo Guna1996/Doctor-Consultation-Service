@@ -58,7 +58,7 @@ public class ClinicMapper {
                     doctorClinic.setStatus(doctorClinicDto.getStatus());
                     doctorClinics.add(doctorClinic);
                 });
-                clinic.setDoctors(doctorClinics);
+                //clinic.setDoctors(doctorClinics);
             }
         }
         return clinic;
@@ -85,7 +85,7 @@ public class ClinicMapper {
             clinicDto.setContactNumber(clinic.getContactNumber());
             clinicDto.setStatus(clinic.getState());
 
-            List<DoctorClinic> doctorClinics = clinic.getDoctors();
+            /*List<DoctorClinic> doctorClinics = clinic.getDoctors();
             if (doctorClinics != null) {
                 List<DoctorClinicDto> doctorClinicsDto = new ArrayList<>();
                 doctorClinics.forEach(doctorClinic -> {
@@ -95,7 +95,7 @@ public class ClinicMapper {
                     doctorClinicsDto.add(doctorClinicDto);
                 });
                 clinicDto.setDoctors(doctorClinicsDto);
-            }
+                }*/
         }
         return clinicDto;
     }

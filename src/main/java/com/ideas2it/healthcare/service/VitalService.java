@@ -37,55 +37,6 @@ public interface VitalService {
 
     /**
      * <p>
-     * This abstract method is used to update vital
-     * from the database
-     *
-     * </p>
-     *
-     * @param vitalsDto {@link VitalDto}
-     * @return {@link VitalDto}
-     */
-    VitalDto updateVitals(VitalDto vitalsDto);
-
-    /**
-     * <p>
-     * This abstract method is used to get vital
-     * from the database
-     *
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link VitalDto}
-     */
-    VitalDto getVitalsById(int id);
-
-    /**
-     * <p>
-     * This abstract method is used to get all vitals
-     * from the database
-     *
-     * </p>
-     *
-     * @param pageNumber {@link int}
-     * @param totalRows  {@link int}
-     * @return {@link List<VitalDto>}
-     */
-    List<VitalDto> getVitals(int pageNumber, int totalRows);
-
-    /**
-     * <p>
-     * This abstract method is used to delete vital
-     * from the database
-     *
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link String}
-     */
-    String deleteVitals(int id);
-
-    /**
-     * <p>
      * This abstract method is used to get all vitals
      * from the database using patient
      *

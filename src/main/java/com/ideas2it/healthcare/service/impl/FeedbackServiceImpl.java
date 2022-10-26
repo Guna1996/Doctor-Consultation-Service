@@ -11,13 +11,14 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.UserConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.repo.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -37,11 +38,9 @@ import java.util.List;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-    private final FeedbackRepository feedbackRepository;
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
-    public FeedbackServiceImpl(FeedbackRepository feedbackRepository) {
-        this.feedbackRepository = feedbackRepository;
-    }
 
     /**
      * {@inheritDoc}
@@ -55,39 +54,21 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {
         FeedbackDto feedbackDtoToReturn = null;
-        if (feedbackRepository.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
-            feedbackDtoToReturn = FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
-        } else {
-            throw new NotFoundException(UserConstants.DATA_DOES_NOT_EXIST);
+        if (!feedbackRepository.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
+            throw new NotFoundException(MessageConstants.DATA_DOES_NOT_EXIST);
         }
-        return feedbackDtoToReturn;
+        return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
     }
 
     /**
      * {@inheritDoc}
      */
     public FeedbackDto getFeedbackById(int id) {
-        Feedback feedback = feedbackRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(UserConstants.FEEDBACK_NOT_FOUND));
-        return FeedbackMapper.toDto(feedback);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<FeedbackDto> getFeedbacks(int pageNumber, int totalRows) {
-        List<FeedbackDto> feedbacksDto = null;
-        List<Feedback> feedbacks = feedbackRepository.findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
-        if (!feedbacks.isEmpty()) {
-            feedbacksDto = new ArrayList<>();
-            for (Feedback feedback : feedbacks) {
-                feedbacksDto.add(FeedbackMapper.toDto(feedback));
-            }
-        } else {
-            throw new NotFoundException(UserConstants.DATA_IS_EMPTY);
-        }
-        return feedbacksDto;
+        return feedbackRepository.findByIdAndStatus(id, Constants.ACTIVE)
+                .stream()
+                .map(FeedbackMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(MessageConstants.FEEDBACK_NOT_FOUND));
     }
 
     /**
@@ -95,7 +76,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     public String deleteFeedback(int id) {
         if (feedbackRepository.deleteSpecializationById(id) == 1) {
-            return UserConstants.DELETED_SUCCESSFULLY;
+            return MessageConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.FEEDBACK_NOT_FOUND;
     }

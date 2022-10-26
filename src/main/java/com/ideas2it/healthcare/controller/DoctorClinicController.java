@@ -10,13 +10,9 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +36,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/doctor_clinic")
+@RequestMapping("/doctor-clinic")
 public class DoctorClinicController {
 
     @Autowired
@@ -54,12 +50,11 @@ public class DoctorClinicController {
      * </p>
      *
      * @param doctorClinicDto is details of doctor clinic
-     * @return DoctorClinicDto as ResponseEntity
+     * @return DoctorClinicDto
      */
     @PostMapping
-    public ResponseEntity<DoctorClinicDto> assignDoctorToClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
-        DoctorClinicDto assignedDoctorClinicDto = doctorClinicService.assignDoctorToClinic(doctorClinicDto);
-        return new ResponseEntity<>(assignedDoctorClinicDto, HttpStatus.OK);
+    public DoctorClinicDto assignDoctorToClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
+        return doctorClinicService.assignDoctorToClinic(doctorClinicDto);
     }
 
     /**
@@ -70,12 +65,12 @@ public class DoctorClinicController {
      *
      * @param pageNumber is page number to show
      * @param totalRows  is a set of rows to be shown
-     * @return List<DoctorClinicDto> as ResponseEntity
+     * @return List<DoctorClinicDto>
      */
-    @GetMapping("/{pageNumber}/{totalRows}")
-    public ResponseEntity<List<DoctorClinicDto>> getDoctorClinics(@PathVariable("pageNumber") int pageNumber,
-                                                                  @PathVariable("totalRows") int totalRows) {
-        return new ResponseEntity<>(doctorClinicService.getDoctorClinics(pageNumber, totalRows), HttpStatus.OK);
+    @GetMapping(Constants.PAGE_PATH)
+    public List<DoctorClinicDto> getDoctorClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                                  @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        return doctorClinicService.getDoctorClinics(pageNumber, totalRows);
     }
 
     /**
@@ -85,12 +80,12 @@ public class DoctorClinicController {
      * </p>
      *
      * @param id - id of the doctor object
-     * @return String as ResponseEntity
+     * @return String
      */
 
-    @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
+    @PutMapping(Constants.ID)
+    public String deleteDoctorFromClinic(@PathVariable(Constants.PATH_ID) int id) {
+        return doctorClinicService.deleteDoctorFromClinic(id);
     }
 
     /**
@@ -101,11 +96,12 @@ public class DoctorClinicController {
      *
      * @param doctorId is id of doctor object
      * @param clinicId is id of clinic object
-     * @return DoctorClinicDto as ResponseEntity
+     * @return DoctorClinicDto
      */
     @GetMapping(Constants.PATIENT_ID_CLINIC_ID)
-    public ResponseEntity<DoctorClinicDto> getByDoctorIdAndClinicId(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId, @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
-        return new ResponseEntity<>(doctorClinicService.getByDoctorIdAndClinicId(doctorId, clinicId), HttpStatus.OK);
+    public DoctorClinicDto getTimeslots
+    (@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId, @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
+        return doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId);
     }
 
     /**
@@ -116,10 +112,23 @@ public class DoctorClinicController {
      * </p>
      *
      * @param doctorClinicDto is details of doctor clinic
-     * @return DoctorClinicDto as ResponseEntity
+     * @return DoctorClinicDto
      */
     @PutMapping
-    public ResponseEntity<DoctorClinicDto> updateClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return new ResponseEntity<>(doctorClinicService.updateDoctorClinic(doctorClinicDto), HttpStatus.OK);
+    public DoctorClinicDto updateClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
+        return doctorClinicService.updateDoctorClinic(doctorClinicDto);
+    }
+
+    /**
+     * <p>
+     * Get the Doctor Clinic by id
+     * </p>
+     *
+     * @param id is doctorClinic id
+     * @return DoctorClinicDto
+     */
+    @GetMapping(Constants.ID)
+    public DoctorClinicDto getDoctorClinicById(@PathVariable(Constants.PATH_ID) int id) {
+        return doctorClinicService.getDoctorClinicById(id);
     }
 }

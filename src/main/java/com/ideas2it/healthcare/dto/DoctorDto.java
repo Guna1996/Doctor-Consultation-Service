@@ -37,7 +37,7 @@ public class DoctorDto {
     private int id;
 
     @NotNull(message = "Name is mandatory")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter Your Name in this (FirstName SecondName) format")
     private String name;
 
     @NotNull(message = "Date Of Birth is mandatory")
@@ -73,4 +73,6 @@ public class DoctorDto {
     private List<AppointmentDto> appointments;
 
     private List<DoctorClinicDto> clinics;
+
+    private int consultationFee;
 }

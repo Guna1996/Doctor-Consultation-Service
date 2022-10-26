@@ -8,7 +8,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.UserConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
@@ -45,9 +45,7 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
-        specializationDto.setStatus(Constants.ACTIVE);
-        Specialization specialization = specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
-        return SpecializationMapper.toDto(specialization);
+        return SpecializationMapper.toDto(specializationRepository.save(SpecializationMapper.fromDto(specializationDto)));
     }
 
     /**
@@ -58,7 +56,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
-            throw new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT);
+            throw new NotFoundException(MessageConstants.NO_SPECIALIZATION_IS_PRESENT);
 
         }
         return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
@@ -69,10 +67,12 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto getSpecializationById(int id) {
-        Specialization specialization = specializationRepository
+        return specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(UserConstants.NO_SPECIALIZATION_IS_PRESENT));
-        return SpecializationMapper.toDto(specialization);
+                .stream()
+                .map(SpecializationMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(MessageConstants.NO_SPECIALIZATION_IS_PRESENT));
     }
 
     /**
@@ -81,8 +81,8 @@ public class SpecializationServiceImpl implements SpecializationService {
 
     public String deleteSpecializationById(int id) {
         if (specializationRepository.deleteSpecializationById(id) == 1) {
-            return UserConstants.DELETED_SUCCESSFULLY;
+            return MessageConstants.DELETED_SUCCESSFULLY;
         }
-        return UserConstants.NO_SPECIALIZATION_IS_PRESENT;
+        return MessageConstants.NO_SPECIALIZATION_IS_PRESENT;
     }
 }

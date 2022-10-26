@@ -11,6 +11,7 @@
 
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * <p>
@@ -48,14 +50,14 @@ public class Feedback {
     @Column
     private float rating;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 
     @Column
-    private String status;
+    private String status = Constants.ACTIVE;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 }

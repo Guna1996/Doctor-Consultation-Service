@@ -13,7 +13,6 @@ import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,39 +47,11 @@ public class AppointmentController {
      * </p>
      *
      * @param appointmentDto is appointment object
-     * @return ResponseEntity
+     * @return AppointmentDto
      */
     @PostMapping
-    public ResponseEntity<AppointmentDto> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return new ResponseEntity<>(appointmentService.addAppointment(appointmentDto), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * Get all the Appointments
-     * </p>
-     *
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return ResponseEntity
-     */
-    @GetMapping(Constants.PAGE_PATH)
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                                @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return new ResponseEntity<>(appointmentService.getAppointments(pageNumber, totalRows), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * Get the Appointment by id
-     * </p>
-     *
-     * @param id is appointment id
-     * @return ResponseEntity
-     */
-    @GetMapping(Constants.ID)
-    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(appointmentService.getAppointmentById(id), HttpStatus.OK);
+    public AppointmentDto addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
+        return appointmentService.addAppointment(appointmentDto);
     }
 
     /**
@@ -88,11 +59,13 @@ public class AppointmentController {
      * Update reschedule appointment using appointment id
      * </p>
      *
-     * @param appointmentDto is Appointment object
+     * @param appointmentDto is details of appointment
+     * @return AppointmentDto
+     *
      */
     @PutMapping
-    public ResponseEntity<AppointmentDto> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return new ResponseEntity<>(appointmentService.rescheduleAppointment(appointmentDto), HttpStatus.OK);
+    public AppointmentDto rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
+        return appointmentService.rescheduleAppointment(appointmentDto);
     }
 
     /**
@@ -103,8 +76,12 @@ public class AppointmentController {
      * @param id is appointment id
      * @return string
      */
-    @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
+    @PutMapping(Constants.ID)
+    public String deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
+        return appointmentService.deleteAppointmentById(id);
+    }
+
+    public List<AppointmentDto> getAppointmentsByDoctorId() {
+        return null;
     }
 }

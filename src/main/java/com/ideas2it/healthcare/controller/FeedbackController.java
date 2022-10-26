@@ -33,43 +33,15 @@ public class FeedbackController {
 
     /**
      * <p>
-     * gets all Feedback details
-     * </p>
-     *
-     * @param pageNumber - page number to show
-     * @param totalRows  - a set of rows to be shown
-     * @return List<FeedbackDto> as ResponseEntity
-     */
-    @GetMapping(Constants.PAGE_PATH)
-    public ResponseEntity<List<FeedbackDto>> getAllFeedbacks(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return new ResponseEntity<>(feedbackService.getFeedbacks(pageNumber, totalRows), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * update feedback details
-     * </p>
-     *
-     * @param feedbackDto - a dto that contains information to update
-     * @return FeedbackDto as ResponseEntity
-     */
-    @PutMapping
-    public ResponseEntity<FeedbackDto> updateFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return new ResponseEntity<>(feedbackService.updateFeedback(feedbackDto), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
      * get feedback details
      * </p>
      *
      * @param id - an integer that refers id on the database
-     * @return FeedbackDto as ResponseEntity
+     * @return FeedbackDto
      */
     @GetMapping(Constants.ID)
-    public ResponseEntity<FeedbackDto> getFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(feedbackService.getFeedbackById(id), HttpStatus.OK);
+    public FeedbackDto getFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
+        return feedbackService.getFeedbackById(id);
     }
 
     /**
@@ -78,12 +50,11 @@ public class FeedbackController {
      * </p>
      *
      * @param feedbackDto - a dto object that contains information
-     * @return FeedbackDto as ResponseEntity
+     * @return FeedbackDto
      */
     @PostMapping
-    public ResponseEntity<FeedbackDto> insertFeedback(@RequestBody FeedbackDto feedbackDto) {
-        feedbackDto.setStatus(Constants.ACTIVE);
-        return new ResponseEntity<>(feedbackService.addFeedback(feedbackDto), HttpStatus.OK);
+    public FeedbackDto insertFeedback(@RequestBody FeedbackDto feedbackDto) {
+        return feedbackService.addFeedback(feedbackDto);
     }
 
     /**
@@ -92,10 +63,10 @@ public class FeedbackController {
      * </p>
      *
      * @param id is an integer that refer id in database
-     * @return String as ResponseEntity
+     * @return String
      */
-    @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
+    @PutMapping(Constants.ID)
+    public String deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
+        return feedbackService.deleteFeedback(id);
     }
 }

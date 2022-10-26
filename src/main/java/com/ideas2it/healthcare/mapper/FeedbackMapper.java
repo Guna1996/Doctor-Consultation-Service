@@ -47,6 +47,7 @@ public class FeedbackMapper {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
                 doctor.setName(doctorDto.getName());
+                doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setDateOfBirth(doctorDto.getDateOfBirth());
                 doctor.setGender(doctorDto.getGender());
                 doctor.setQualification(doctorDto.getQualification());
@@ -93,6 +94,7 @@ public class FeedbackMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setGender(doctor.getGender());
+                doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
                 doctorDto.setQualification(doctor.getQualification());

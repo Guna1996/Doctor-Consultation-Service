@@ -7,9 +7,10 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +18,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
-
+import java.util.Calendar;
 
 /**
  * <p>
@@ -45,21 +47,22 @@ public class Appointment {
     @Column(name = "scheduled_on")
     private LocalDateTime scheduledOn;
 
-    @CreatedDate
-    @Column(name = "created_date")
-    private LocalDateTime createdAt;
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
-    private String status;
+    @Column(name = "status")
+    private String status = Constants.ACTIVE;
+
+    @CreationTimestamp
+    @Column(name = "created_date")
+    private LocalDateTime createdAt;
 }

@@ -11,7 +11,7 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.UserConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
@@ -21,6 +21,7 @@ import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.service.DoctorService;
 import com.ideas2it.healthcare.service.PatientService;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -64,15 +65,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        if (Period.between(date, currentDate).getDays() < 0) {
-            if (doctorService.isDoctorAvailable(appointmentDto.getDoctor().getId())
-                    && patientService.isPatientAvailable(appointmentDto.getPatient().getId())
-                    && clinicService.isClinicAvailable(appointmentDto.getClinic().getId())) {
-                return saveAppointment(appointmentDto);
-            }
-            throw new NotFoundException(ErrorConstants.DOCTOR_CLINIC_PATIENT_NOT_FOUND);
+        if (Period.between(date, currentDate).getDays() > 0) {
+            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
-        throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
+        return saveAppointment(appointmentDto);
     }
 
     /**
@@ -111,9 +107,19 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String deleteAppointmentById(int id) {
         if (appointmentRepository.deleteAppointmentById(id) == 1) {
-            return UserConstants.DELETED_SUCCESSFULLY;
+            return MessageConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
+        return null;
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
+        return null;
     }
 
     /**
@@ -122,26 +128,20 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        if (Period.between(date, currentDate).getDays() < 0) {
-            Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
-            return saveAppointment(appointmentDto);
+        if (Period.between(date, currentDate).getDays() > 0) {
+            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
-        throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
+        return saveAppointment(appointmentDto);
     }
 
     /**
      * {@inheritDoc}
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
-        AppointmentDto appointedDto = null;
-        if (isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
-            Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
-            appointment.setStatus(Constants.ACTIVE);
-            appointedDto = AppointmentMapper.toDto(appointmentRepository.save(appointment));
-        }
-        else {
+        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
             throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
         }
-        return appointedDto;
+        Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
+        return AppointmentMapper.toDto(appointmentRepository.save(appointment));
     }
 }

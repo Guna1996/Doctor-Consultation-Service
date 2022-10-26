@@ -49,12 +49,12 @@ public class TimeslotController {
      *
      * @param pageNumber - page number to show
      * @param totalRows  - a set of rows to be shown
-     * @return TimeslotDto as ResponseEntity
+     * @return List<TimeslotDto>
      */
     @GetMapping(Constants.PAGE_PATH)
-    public ResponseEntity<List<TimeslotDto>> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+    public List<TimeslotDto> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                                              @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return new ResponseEntity<>(timeslotService.getTimeslots(pageNumber, totalRows), HttpStatus.OK);
+        return timeslotService.getTimeslots(pageNumber, totalRows);
     }
 
     /**
@@ -63,11 +63,11 @@ public class TimeslotController {
      * </p>
      *
      * @param timeslotDto is a dto that contains information to update
-     * @return TimeslotDto as ResponseEntity
+     * @return TimeslotDto
      */
     @PutMapping
-    public ResponseEntity<TimeslotDto> updateTimeslot(@RequestBody TimeslotDto timeslotDto) {
-        return new ResponseEntity<>(timeslotService.updateTimeslot(timeslotDto), HttpStatus.OK);
+    public TimeslotDto updateTimeslot(@RequestBody TimeslotDto timeslotDto) {
+        return timeslotService.updateTimeslot(timeslotDto);
     }
 
     /**
@@ -76,11 +76,11 @@ public class TimeslotController {
      * </p>
      *
      * @param id is an integer that refers id on the database
-     * @return TimeslotDto as ResponseEntity
+     * @return TimeslotDto
      */
     @GetMapping(Constants.ID)
-    public ResponseEntity<TimeslotDto> getTimeslotById(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(timeslotService.getTimeslotById(id), HttpStatus.OK);
+    public TimeslotDto getTimeslotById(@PathVariable(Constants.PATH_ID) int id) {
+        return timeslotService.getTimeslotById(id);
     }
 
     /**
@@ -89,23 +89,10 @@ public class TimeslotController {
      * </p>
      *
      * @param timeslotDto is a dto object that contains information
-     * @return TimeslotDto as ResponseEntity
+     * @return TimeslotDto
      */
     @PostMapping
-    public ResponseEntity<TimeslotDto> insertFeedback(@RequestBody TimeslotDto timeslotDto) {
-        return new ResponseEntity<>(timeslotService.addTimeslot(timeslotDto), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * Delete Timeslot details
-     * </p>
-     *
-     * @param id is an integer that refer id in database
-     * @return String as ResponseEntity
-     */
-    @DeleteMapping(Constants.ID)
-    public ResponseEntity<String> deleteTimeslotById(@PathVariable(Constants.PATH_ID) int id) {
-        return new ResponseEntity<>(timeslotService.deleteTimeslot(id), HttpStatus.OK);
+    public TimeslotDto insertFeedback(@RequestBody TimeslotDto timeslotDto) {
+        return timeslotService.addTimeslot(timeslotDto);
     }
 }
