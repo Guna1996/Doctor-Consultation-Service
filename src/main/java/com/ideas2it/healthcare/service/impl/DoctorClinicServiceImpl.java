@@ -23,7 +23,9 @@ import com.ideas2it.healthcare.service.DoctorService;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -121,6 +123,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 map(DoctorClinicMapper::toDto).
                 findFirst().
                 orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_CLINIC_NOT_FOUND));
+    }
+
+    public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
+        return doctorClinicRepository.findByClinicId(clinicId, PageRequest.of(pageNumber, totalRows)).toList().stream()
+                .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
     }
 }
 

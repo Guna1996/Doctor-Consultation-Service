@@ -13,6 +13,7 @@ package com.ideas2it.healthcare.service.impl;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -20,6 +21,7 @@ import com.ideas2it.healthcare.mapper.PatientMapper;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.model.Vital;
 import com.ideas2it.healthcare.repo.PatientRepository;
+import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.PatientService;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private VitalService vitalService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     /**
      * {@inheritDoc}
@@ -92,5 +97,10 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
         return vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows);
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
+        return appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
     }
 }

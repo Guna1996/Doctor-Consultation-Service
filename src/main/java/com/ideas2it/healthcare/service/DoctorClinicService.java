@@ -78,4 +78,6 @@ public interface DoctorClinicService {
 
     DoctorClinicDto getDoctorClinicById(int id);
 
+    public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
+
 }

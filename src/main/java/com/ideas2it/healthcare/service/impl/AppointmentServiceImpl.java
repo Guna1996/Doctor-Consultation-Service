@@ -114,12 +114,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
-        return null;
+        return appointmentRepository.findByPatientId(patientId, PageRequest.of(pageNumber, totalRows)).toList().stream()
+                .map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
-        return null;
+        return appointmentRepository.findByDoctorId(doctorId, PageRequest.of(pageNumber, totalRows)).toList().stream()
+                .map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
     /**
