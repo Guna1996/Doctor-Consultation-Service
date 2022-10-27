@@ -11,9 +11,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +24,8 @@ import java.util.List;
 
 /**
  * <p>
- * This SpecializationController class is a Controller class and this
- * class is used to get information from the specialization and
- * transfer it to SpecializationDto
+ * This SpecializationController class is used to
+ * assign specializations to doctors.
  * </p>
  *
  * @author Mohamed Jubair
@@ -46,7 +42,7 @@ public class SpecializationController {
     /**
      * <p>
      * This method is used to get details of Specialization
-     * after validating it
+     * after validating it.
      * </p>
      *
      * @param specializationDto is details of specialization
@@ -59,8 +55,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to get All the details of
-     * Specialization form the service through Specialization Dto
+     * This getAllSpecializations method is used to get
+     * All the details of Specialization.
      * </p>
      *
      * @param pageNumber is page number to show
@@ -76,7 +72,7 @@ public class SpecializationController {
     /**
      * <p>
      * This method is used to get details of Specialization
-     * of a particular doctor by id
+     * of a particular doctor by id.
      * </p>
      *
      * @param id is id of Specialization
@@ -90,7 +86,7 @@ public class SpecializationController {
     /**
      * <p>
      * This method is used to update the details of
-     * Specialization after validate
+     * Specialization after validating it.
      * </p>
      *
      * @param specializationDto is details of SpecializationDto
@@ -103,8 +99,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to delete the details of
-     * Specialization by getting the id
+     * This deleteSpecializationById method is used to
+     * remove the details of Specialization.
      * </p>
      *
      * @param id is id of Specialization

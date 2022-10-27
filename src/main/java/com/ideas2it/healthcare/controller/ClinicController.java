@@ -8,15 +8,10 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.service.ClinicService;
-import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +26,8 @@ import java.util.List;
 
 /**
  * <p>
- * This ClinicController class is a Controller class and this
- * class is used to get input and display outputs for clinics
+ * This ClinicController class is used to add,
+ * update, delete and get specific clinic.
  * </p>
  *
  * @author Gunaseelan K
@@ -48,7 +43,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * add new clinics details
+     * This method is used to add clinic by getting
+     * information from a doctor after validating it.
      * </p>
      *
      * @param clinicDto is clinic object
@@ -61,7 +57,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * Get all the Clinics
+     * This method is used to get all the details
+     * of available clinics.
      * </p>
      *
      * @param pageNumber is page number to show
@@ -76,7 +73,9 @@ public class ClinicController {
 
     /**
      * <p>
-     * Get the Clinic by id
+     * This method is used to get a particular
+     * clinic to assign to a particular
+     * doctor.
      * </p>
      *
      * @param id is clinic id
@@ -89,7 +88,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * Update clinic record by using it's id
+     * This method is used to correct the recorded
+     * details of a clinic after validating it.
      * </p>
      *
      * @param clinicDto is Loan object
@@ -102,7 +102,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * Delete clinic by Id
+     * This method is used to remove the unwanted
+     * details of a clinic
      * </p>
      *
      * @param id is clinic id
@@ -111,12 +112,5 @@ public class ClinicController {
     @PutMapping(Constants.ID)
     public String deleteClinic(@PathVariable(Constants.PATH_ID) int id) {
         return clinicService.deleteClinicById(id);
-    }
-
-    @GetMapping("/appointment/{doctorId}/{pageNumber}/{totalRows}")
-    public List<DoctorClinicDto> getAppointmentsByPatientId(@PathVariable(name = "doctorId") int doctorId,
-                                                            @PathVariable(name = "pageNumber") int pageNumber,
-                                                            @PathVariable(name = "totalRows") int totalRows) {
-        return clinicService.getDoctorsByClinicId(doctorId, pageNumber, totalRows);
     }
 }

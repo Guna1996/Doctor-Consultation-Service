@@ -11,10 +11,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,8 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+/**
+ * <p>
+ * This FeedbackController class is used to get feedback
+ * from the users.
+ * </p>
+ *
+ * @author Bala Ashwanth
+ * @version 1
+ * @since 2022-10-10
+ */
 @RestController
 @RequestMapping("/feedback")
 public class FeedbackController {
@@ -33,10 +37,11 @@ public class FeedbackController {
 
     /**
      * <p>
-     * insert Feedback details
+     * This insertFeedback method is used to get
+     * a feedback from a patient.
      * </p>
      *
-     * @param feedbackDto - a dto object that contains information
+     * @param feedbackDto is dto object that contains information
      * @return FeedbackDto
      */
     @PostMapping
@@ -46,7 +51,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * delete Feedback details
+     * This deleteFeedbackById method is used to remove
+     * unwanted feedback from the clinic.
      * </p>
      *
      * @param id is an integer that refer id in database
