@@ -6,7 +6,7 @@
  */
 package com.ideas2it.healthcare.filters;
 
-import com.ideas2it.healthcare.service.impl.MyUserDetailsService;
+import com.ideas2it.healthcare.service.impl.AuthenticationService;
 import com.ideas2it.healthcare.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,7 +35,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private AuthenticationService authenticationService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -52,7 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             username = jwtUtil.extractUsername(jwt);
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.authenticationService.loadUserByUsername(username);
             if (jwtUtil.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());

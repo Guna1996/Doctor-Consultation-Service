@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the service interfaces
- * which is for doctor, patient and clinic
+ * This package contains interfaces of DoctorClinicService,
+ * PatientService, DoctorService, ClinicService,
+ * AppointmentService, FeedbackService, SpecializationService,
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -13,9 +15,9 @@ import java.util.List;
 
 /**
  * <p>
- * This Vital interface is a service interface and this
- * interface is used to contain the body of VitalServiceImpl
- * class's methods
+ * VitalsService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Bala Ashwanth
@@ -25,9 +27,8 @@ public interface VitalService {
 
     /**
      * <p>
-     * This abstract method is used to add vital
-     * to the database
-     *
+     * This abstract method is used to add vital details
+     * into the database
      * </p>
      *
      * @param vitalsDto {@link VitalDto}
@@ -38,8 +39,7 @@ public interface VitalService {
     /**
      * <p>
      * This abstract method is used to get all vitals
-     * from the database using patient
-     *
+     * from the database using patient id
      * </p>
      *
      * @param patientId  {@link int}

@@ -17,9 +17,9 @@ import java.util.List;
 
 /**
  * <p>
- * ClinicService interface is used for converting dto into entity
- * class and also it helps to passing objects between controller
- * to repository for CRUD operations
+ * ClinicService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Gunaseelan K
@@ -87,8 +87,7 @@ public interface ClinicService {
      * <p>
      * This isClinicAvailable abstract method is
      * used to check whether a clinic is available or not
-     * on the clinic table by using getting id from the
-     * clinic
+     * on the clinic table by using clinic id
      * </p>
      *
      * @param id - id of the clinic
@@ -96,5 +95,16 @@ public interface ClinicService {
      */
     boolean isClinicAvailable(int id);
 
+    /**
+     * <p>
+     * This method is used to get doctors of a particular clinic
+     * by clinic id
+     * </p>
+     *
+     * @param clinicId is id of clinic
+     * @param pageNumber is page number of doctor clinics
+     * @param totalRows is required number of rows to be displayed
+     * @return List<DoctorClinicDto>
+     */
     List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
 }
