@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.service;
 
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.model.Vital;
@@ -79,4 +80,6 @@ public interface PatientService {
     boolean isPatientAvailable(Integer id);
 
     List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows);
+
+    List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
 }

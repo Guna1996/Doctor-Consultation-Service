@@ -21,7 +21,6 @@ import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.service.DoctorService;
 import com.ideas2it.healthcare.service.PatientService;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -114,12 +113,16 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
-        return null;
+        return appointmentRepository.findByPatientIdAndStatus(
+                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().
+                map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
-        return null;
+        return appointmentRepository.findByDoctorIdAndStatus(
+                doctorId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().
+                map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
     /**

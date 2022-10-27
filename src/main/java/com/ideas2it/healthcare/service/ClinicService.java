@@ -11,6 +11,7 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.dto.DoctorClinicDto;
 
 import java.util.List;
 
@@ -94,4 +95,6 @@ public interface ClinicService {
      * @return boolean
      */
     boolean isClinicAvailable(int id);
+
+    List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
 }

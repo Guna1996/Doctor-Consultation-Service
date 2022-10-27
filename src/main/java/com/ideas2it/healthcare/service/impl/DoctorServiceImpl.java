@@ -10,13 +10,17 @@ package com.ideas2it.healthcare.service.impl;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
+import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repo.DoctorRepository;
+import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.DoctorService;
+import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -41,6 +45,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+    @Autowired
+    private AppointmentService appointmentService;
+
+    @Autowired
+    private FeedbackService feedbackService;
 
 
     /**
@@ -94,5 +104,15 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public boolean isDoctorAvailable(int id) {
         return doctorRepository.existsByIdAndStatus(id, Constants.ACTIVE);
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
+        return appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
+    }
+
+    @Override
+    public List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows) {
+        return feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows);
     }
 }

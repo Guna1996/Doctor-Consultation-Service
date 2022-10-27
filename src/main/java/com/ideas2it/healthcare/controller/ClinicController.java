@@ -8,8 +8,11 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.service.ClinicService;
+import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -108,5 +111,12 @@ public class ClinicController {
     @PutMapping(Constants.ID)
     public String deleteClinic(@PathVariable(Constants.PATH_ID) int id) {
         return clinicService.deleteClinicById(id);
+    }
+
+    @GetMapping("/appointment/{doctorId}/{pageNumber}/{totalRows}")
+    public List<DoctorClinicDto> getAppointmentsByPatientId(@PathVariable(name = "doctorId") int doctorId,
+                                                            @PathVariable(name = "pageNumber") int pageNumber,
+                                                            @PathVariable(name = "totalRows") int totalRows) {
+        return clinicService.getDoctorsByClinicId(doctorId, pageNumber, totalRows);
     }
 }

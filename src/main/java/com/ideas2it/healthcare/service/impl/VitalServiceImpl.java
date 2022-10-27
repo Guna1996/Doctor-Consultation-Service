@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.service.impl;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.VitalDto;
@@ -60,13 +61,13 @@ public class VitalServiceImpl implements VitalService {
      */
     public List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
         List<VitalDto> vitalDto = null;
-        List<Vital> vitals = vitalsRepository.findByPatientId(patientId,
-                PageRequest.of(pageNumber, totalRows)).toList();
+        List<Vital> vitals = vitalsRepository.findByPatientIdAndStatus(patientId,
+                Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList();
         if (vitals.isEmpty()) {
             throw new NotFoundException(ErrorConstants.Vital_NOT_FOUND);
         }
-        vitalDto = vitals.stream()
+        return vitals.stream()
                 .map(VitalsMapper::toDto).collect(Collectors.toList());
-        return vitalDto;
+
     }
 }

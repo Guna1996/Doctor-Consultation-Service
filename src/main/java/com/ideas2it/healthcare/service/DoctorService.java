@@ -7,7 +7,9 @@
  */
 package com.ideas2it.healthcare.service;
 
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
+import com.ideas2it.healthcare.dto.FeedbackDto;
 
 import java.util.List;
 
@@ -79,4 +81,8 @@ public interface DoctorService {
      * @return {@link String}
      */
     boolean isDoctorAvailable(int id);
+
+    List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
+
+    List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows);
 }

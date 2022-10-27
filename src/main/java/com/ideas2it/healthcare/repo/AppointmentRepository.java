@@ -44,4 +44,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Modifying
     @Query("update appointment set status='inactive' where id=?1 and status = 'active'")
     Integer deleteAppointmentById(int id);
+
+    Page<Appointment> findByDoctorIdAndStatus(int id, String status, Pageable pageable);
+
+    Page<Appointment> findByPatientIdAndStatus(int id, String status, Pageable pageable);
 }
