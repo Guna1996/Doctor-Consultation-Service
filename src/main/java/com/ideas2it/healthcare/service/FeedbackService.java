@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the service interfaces
- * which is for doctor, patient and clinic
+ * This package contains interfaces of DoctorClinicService,
+ * PatientService, DoctorService, ClinicService,
+ * AppointmentService, FeedbackService, SpecializationService,
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -13,9 +15,9 @@ import java.util.List;
 
 /**
  * <p>
- * This Feedback interface is a service interface and this
- * interface is used to contain the body of FeedbackServiceImpl
- * class's methods
+ * FeedbackService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Bala Ashwanth
@@ -26,7 +28,7 @@ public interface FeedbackService {
     /**
      * <p>
      * This abstract method is used to add feedback
-     * to the database
+     * of user to the database
      *
      * </p>
      *
@@ -38,7 +40,7 @@ public interface FeedbackService {
     /**
      * <p>
      * This abstract method is used to get feedback
-     * from the database
+     * from the database by feedback id
      *
      * </p>
      *
@@ -50,7 +52,7 @@ public interface FeedbackService {
     /**
      * <p>
      * This abstract method is used to delete feedback
-     * from the database
+     * from the database by feedback id
      *
      * </p>
      *

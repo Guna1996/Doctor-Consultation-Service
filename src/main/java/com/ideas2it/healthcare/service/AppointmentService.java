@@ -1,11 +1,10 @@
 /**
  * <p>
- * This package contains interfaces are DoctorClinicService,
+ * This package contains interfaces of DoctorClinicService,
  * PatientService, DoctorService, ClinicService,
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -17,9 +16,9 @@ import java.util.List;
 
 /**
  * <p>
- * AppointmentService interface is used for converting dto into entity
- * class and also it helps to passing objects between controller
- * to repository for CRUD operations
+ * AppointmentService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Gunaseelan K
@@ -32,27 +31,13 @@ public interface AppointmentService {
     /**
      * <p>
      * This abstract method is used to add appointment details
-     * into data base by getting details from the
-     * user
+     * into data base by getting details from the user
      * </p>
      *
      * @param appointmentDto - patient details
      * @return patientDto
      */
     AppointmentDto addAppointment(AppointmentDto appointmentDto);
-
-    /**
-     * <p>
-     * This abstract method is used to get all appointments
-     * from the database
-     *
-     * </p>
-     *
-     * @param pageNumber - Page number of the page
-     * @param totalRows  - number of rows required in
-     * @return appointmentDto
-     */
-    List<AppointmentDto> getAppointments(int pageNumber, int totalRows);
 
     /**
      * <p>
@@ -101,7 +86,27 @@ public interface AppointmentService {
      */
     String deleteAppointmentById(int id);
 
+    /**
+     * <p>
+     * This abstract method is used to get appointments
+     * from the database by patient Id
+     * </p>
+     *
+     * @param pageNumber - Page number of the page
+     * @param totalRows  - number of rows required
+     * @return List<appointmentDto>
+     */
     List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
 
+    /**
+     * <p>
+     * This abstract method is used to get appointments
+     * from the database by doctor Id
+     * </p>
+     *
+     * @param pageNumber - Page number of the page
+     * @param totalRows  - number of rows required
+     * @return List<appointmentDto>
+     */
     List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
 }
