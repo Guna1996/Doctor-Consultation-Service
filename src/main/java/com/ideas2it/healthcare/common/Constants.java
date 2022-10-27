@@ -57,5 +57,8 @@ public class Constants {
     public static final String PATIENT_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
 
     public static final String VITAL_PATIENT_ID = "/vital/{patientId}";
+
+    public static final String GET_DOCTOR_BY_CLINIC_ID_PATH = "/doctor/{doctorId}/{pageNumber}/{totalRows}";
+
 }
 

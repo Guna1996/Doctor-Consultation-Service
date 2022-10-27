@@ -102,12 +102,18 @@ public class AppointmentServiceImpl implements AppointmentService {
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
                 patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
         return appointmentRepository.findByDoctorIdAndStatus(

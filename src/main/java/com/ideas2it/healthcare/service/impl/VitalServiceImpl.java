@@ -60,14 +60,8 @@ public class VitalServiceImpl implements VitalService {
      * {@inheritDoc}
      */
     public List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
-        List<VitalDto> vitalDto = null;
-        List<Vital> vitals = vitalsRepository.findByPatientIdAndStatus(patientId,
-                Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList();
-        if (vitals.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.Vital_NOT_FOUND);
-        }
-        return vitals.stream()
+        return vitalsRepository.findByPatientIdAndStatus(patientId,
+                Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(VitalsMapper::toDto).collect(Collectors.toList());
-
     }
 }

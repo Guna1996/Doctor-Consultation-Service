@@ -43,7 +43,6 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
         return SpecializationMapper.toDto(specializationRepository.save(SpecializationMapper.fromDto(specializationDto)));
     }
@@ -51,7 +50,6 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows) {
         List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
@@ -65,7 +63,6 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public SpecializationDto getSpecializationById(int id) {
         return specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
@@ -78,7 +75,6 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-
     public String deleteSpecializationById(int id) {
         if (specializationRepository.deleteSpecializationById(id) == 1) {
             return MessageConstants.DELETED_SUCCESSFULLY;

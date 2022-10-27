@@ -69,19 +69,6 @@ public interface DoctorService {
      */
     String deleteDoctorById(int id);
 
-    /**
-     * <p>
-     * This method is used to find
-     * whether the doctor is deleted
-     * or not by returning boolean
-     * to another services
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link String}
-     */
-    boolean isDoctorAvailable(int id);
-
     List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
 
     List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows);

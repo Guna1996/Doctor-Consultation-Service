@@ -94,11 +94,17 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).isPresent();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
         return vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
         return appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
