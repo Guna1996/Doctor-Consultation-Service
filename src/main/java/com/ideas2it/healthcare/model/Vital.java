@@ -79,6 +79,6 @@ public class Vital {
     private String bloodPressure;
 
     @CreationTimestamp
-    @Column(name = "created_date")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

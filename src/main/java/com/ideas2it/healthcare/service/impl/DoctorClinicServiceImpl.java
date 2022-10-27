@@ -50,24 +50,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     @Autowired
     private DoctorService doctorService;
 
-    @Autowired
-    private ClinicService clinicService;
-
-    @Autowired
-    private TimeslotService timeslotService;
-
     /**
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        DoctorClinicDto clinicDoctor = null;
-        if (!doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
-                clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
-            throw new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND_TO_ASSIGN);
-        }
-        DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
-        return DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
-
+        return DoctorClinicMapper.toDto(DoctorClinicMapper.fromDto(doctorClinicDto));
     }
 
     /**

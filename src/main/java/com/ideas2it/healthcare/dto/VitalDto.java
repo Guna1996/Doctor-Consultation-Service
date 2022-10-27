@@ -9,6 +9,7 @@
  */
 package com.ideas2it.healthcare.dto;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -48,7 +49,7 @@ public class VitalDto {
 
     private PatientDto patient;
 
-    private String status;
+    private String status = Constants.ACTIVE;
 
     private DoctorDto doctor;
 
