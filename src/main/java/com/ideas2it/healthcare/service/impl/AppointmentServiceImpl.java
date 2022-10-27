@@ -49,15 +49,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    @Autowired
-    private DoctorService doctorService;
-
-    @Autowired
-    private PatientService patientService;
-
-    @Autowired
-    private ClinicService clinicService;
-
     /**
      * {@inheritDoc}
      */
@@ -114,8 +105,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
-                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().
-                map(AppointmentMapper::toDto).collect(Collectors.toList());
+                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override

@@ -63,6 +63,6 @@ public class Appointment {
     private String status = Constants.ACTIVE;
 
     @CreationTimestamp
-    @Column(name = "created_date")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

@@ -58,7 +58,7 @@ public class PatientDto {
     @Email(message = "Enter valid mail id")
     private String email;
 
-    private String status;
+    private String status = Constants.ACTIVE;
 
     private List<FeedbackDto> feedbacks;
 

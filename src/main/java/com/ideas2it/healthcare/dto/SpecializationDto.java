@@ -36,7 +36,7 @@ public class SpecializationDto {
     @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
     private String name;
 
-    private String status;
+    private String status = Constants.ACTIVE;
 
     private Set<DoctorDto> doctors;
 }
