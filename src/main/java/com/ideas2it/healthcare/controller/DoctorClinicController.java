@@ -63,8 +63,8 @@ public class DoctorClinicController {
      * @return String
      */
 
-    @PutMapping(Constants.ID)
-    public String deleteDoctorFromClinic(@PathVariable(Constants.PATH_ID) int id) {
+    @PutMapping(Constants.PATH_ID)
+    public String deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
         return doctorClinicService.deleteDoctorFromClinic(id);
     }
 

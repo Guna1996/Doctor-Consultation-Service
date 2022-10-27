@@ -66,7 +66,7 @@ public class PatientController {
      * @param id is patient id
      * @return PatientDto
      */
-    @GetMapping(Constants.ID)
+    @GetMapping(Constants.PATH_ID)
     public PatientDto getPatientById(@PathVariable int id) {
         return patientService.getPatientById(id);
     }
@@ -98,9 +98,9 @@ public class PatientController {
      * @return List<VitalDto>
      */
     @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
-    public List<VitalDto> getVitalByPatientId(@PathVariable(name = "patientId") int patientId,
-                                              @PathVariable(name = "pageNumber") int pageNumber,
-                                              @PathVariable(name = "totalRows") int totalRows) {
+    public List<VitalDto> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+                                              @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                              @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
         return patientService.getVitalsByPatientId(patientId, pageNumber, totalRows);
     }
 
@@ -115,10 +115,10 @@ public class PatientController {
      * @param totalRows
      * @return List<AppointmentDto>
      */
-    @GetMapping("/appointment/{patientId}/{pageNumber}/{totalRows}")
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = "patientId") int patientId,
-                                                           @PathVariable(name = "pageNumber") int pageNumber,
-                                                           @PathVariable(name = "totalRows") int totalRows) {
+    @GetMapping(Constants.PATIENT_APPOINTMENT)
+    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
         return patientService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
     }
 }

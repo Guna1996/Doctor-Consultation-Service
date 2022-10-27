@@ -34,30 +34,30 @@ public class Clinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = Constants.NAME)
     private String name;
 
-    @Column(name = "door_number")
+    @Column(name = Constants.DOOR_NUMBER)
     private int doorNumber;
 
-    @Column(name = "street_name")
+    @Column(name = Constants.STREET_NAME)
     private String streetName;
 
-    @Column(name = "city")
+    @Column(name = Constants.CITY)
     private String city;
 
-    @Column(name = "state")
+    @Column(name = Constants.STATE)
     private String state;
 
-    @Column(name = "pin_code")
+    @Column(name = Constants.PIN_CODE)
     private String pinCode;
 
-    @Column(name = "contact_number")
+    @Column(name = Constants.CONTACT_NUMBER)
     private String contactNumber;
 
-    @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    @Column(name = Constants.STATUS)
+    private String status;
 }
