@@ -36,12 +36,12 @@ public class Specialization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = Constants.NAME)
     private String name;
 
-    @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    @Column(name = Constants.STATUS)
+    private String status;
 }

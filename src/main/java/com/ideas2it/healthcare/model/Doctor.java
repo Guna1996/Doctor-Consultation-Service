@@ -42,39 +42,39 @@ public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = Constants.NAME)
     private String name;
 
-    @Column(name = "date_of_birth")
+    @Column(name = Constants.DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
-    @Column(name = "gender")
+    @Column(name = Constants.GENDER)
     private String gender;
 
-    @Column(name = "qualification")
+    @Column(name = Constants.QUALIFICATION)
     private String qualification;
 
     @ManyToMany
-    @JoinTable(name = "doctor_specialization",
-            joinColumns = @JoinColumn(name = "doctor_id"),
-            inverseJoinColumns = @JoinColumn(name = "specialization_id"))
+    @JoinTable(name = Constants.DOCTOR_SPECIALIZATION,
+            joinColumns = @JoinColumn(name = Constants.DOCTOR_ID),
+            inverseJoinColumns = @JoinColumn(name = Constants.SPECIALIZATION_ID))
     private Set<Specialization> specializations;
 
-    @Column(name = "date_of_registration")
+    @Column(name = Constants.DATE_OF_REGISTRATION)
     private LocalDate dateOfRegistration;
 
-    @Column(name = "mobile_number")
+    @Column(name = Constants.MOBILE_NUMBER)
     private String mobileNumber;
 
-    @Column(name = "city")
+    @Column(name = Constants.CITY)
     private String city;
 
-    @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    @Column(name = Constants.STATUS)
+    private String status;
 
-    @Column(name = "consultation_fee")
+    @Column(name = Constants.CONSULTATION_FEE)
     private int consultationFee;
 }
