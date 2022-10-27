@@ -75,8 +75,8 @@ public class AppointmentController {
      * @param id is appointment id
      * @return string
      */
-    @PutMapping(Constants.ID)
-    public String deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
+    @PutMapping(Constants.PATH_ID)
+    public String deleteAppointment(@PathVariable(Constants.ID) int id) {
         return appointmentService.deleteAppointmentById(id);
     }
 }

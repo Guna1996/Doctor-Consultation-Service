@@ -58,8 +58,8 @@ public class FeedbackController {
      * @param id is an integer that refer id in database
      * @return String
      */
-    @PutMapping(Constants.ID)
-    public String deleteFeedbackById(@PathVariable(Constants.PATH_ID) int id) {
+    @PutMapping(Constants.PATH_ID)
+    public String deleteFeedbackById(@PathVariable(Constants.ID) int id) {
         return feedbackService.deleteFeedback(id);
     }
 }

@@ -9,7 +9,6 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,7 +66,7 @@ public class ClinicController {
      */
     @GetMapping(Constants.PAGE_PATH)
     public List<ClinicDto> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return clinicService.getClinics(pageNumber, totalRows);
     }
 
@@ -81,8 +80,8 @@ public class ClinicController {
      * @param id is clinic id
      * @return ClinicDto
      */
-    @GetMapping(Constants.ID)
-    public ClinicDto getClinicById(@PathVariable(Constants.PATH_ID) int id) {
+    @GetMapping(Constants.PATH_ID)
+    public ClinicDto getClinicById(@PathVariable(Constants.ID) int id) {
         return clinicService.getClinicById(id);
     }
 
@@ -109,8 +108,8 @@ public class ClinicController {
      * @param id is clinic id
      * @return String
      */
-    @PutMapping(Constants.ID)
-    public String deleteClinic(@PathVariable(Constants.PATH_ID) int id) {
+    @PutMapping(Constants.PATH_ID)
+    public String deleteClinic(@PathVariable(Constants.ID) int id) {
         return clinicService.deleteClinicById(id);
     }
 }

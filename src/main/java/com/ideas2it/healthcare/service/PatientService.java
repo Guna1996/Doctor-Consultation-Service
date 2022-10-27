@@ -93,7 +93,7 @@ public interface PatientService {
 
     /**
      * <p>
-     *     
+     *
      * </p>
      *
      * @param patientId
