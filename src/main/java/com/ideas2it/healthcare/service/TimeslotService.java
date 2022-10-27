@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the service interfaces
- * which is for doctor, patient and clinic
+ * This package contains interfaces of DoctorClinicService,
+ * PatientService, DoctorService, ClinicService,
+ * AppointmentService, FeedbackService, SpecializationService,
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -13,9 +15,9 @@ import java.util.List;
 
 /**
  * <p>
- * This Timeslot interface is a service interface and this
- * interface is used to contain the body of TimeslotServiceImpl
- * class's methods
+ * TimeslotService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Bala Ashwanth
@@ -27,7 +29,6 @@ public interface TimeslotService {
      * <p>
      * This abstract method is used to add timeslot
      * to the database
-     *
      * </p>
      *
      * @param timeslotDto {@link TimeslotDto}
@@ -39,7 +40,6 @@ public interface TimeslotService {
      * <p>
      * This abstract method is used to update timeslot
      * to the database
-     *
      * </p>
      *
      * @param timeslotDto {@link TimeslotDto}
@@ -50,8 +50,7 @@ public interface TimeslotService {
     /**
      * <p>
      * This abstract method is used to get timeslot
-     * from the database
-     *
+     * from the database by timeslot id
      * </p>
      *
      * @param id {@link int}
@@ -63,7 +62,6 @@ public interface TimeslotService {
      * <p>
      * This abstract method is used to get timeslots
      * from the database
-     *
      * </p>
      *
      * @param pageNumber {@link int}

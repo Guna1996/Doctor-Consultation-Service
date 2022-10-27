@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 /**
  * <p>
- * MyUserDetailsService class implements UserDetailsService
+ * AuthenticationService class implements UserDetailsService
  * and it contains method which is used to authenticate user by loading his details
  * </p>
  *
@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * @since 2022-10-10
  */
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class AuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {

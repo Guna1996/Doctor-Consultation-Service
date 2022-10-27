@@ -64,20 +64,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public List<AppointmentDto> getAppointments(int pageNumber, int totalRows) {
-        List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
-        if (appointments.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
-        }
-        return appointments.stream()
-                .map(AppointmentMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public AppointmentDto getAppointmentById(int id) {
         return appointmentRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(AppointmentMapper::toDto).

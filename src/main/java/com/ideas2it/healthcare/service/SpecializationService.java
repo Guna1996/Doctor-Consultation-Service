@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the service interfaces
- * which is for doctor, patient and clinic
+ * This package contains interfaces of DoctorClinicService,
+ * PatientService, DoctorService, ClinicService,
+ * AppointmentService, FeedbackService, SpecializationService,
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -13,9 +15,9 @@ import java.util.List;
 
 /**
  * <p>
- * This SpecializationService interface is a service interface and this
- * interface is used to contain the body of SpecializationServiceImpl
- * class's methods
+ * SpecializationService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Mohamed Jubair
@@ -26,8 +28,8 @@ public interface SpecializationService {
 
     /**
      * <p>
-     * This method is used to create and Update Specialization's record by
-     * getting SpecializationDto as an input and convert it in to
+     * This method is used to create or Update Specialization's record by
+     * getting SpecializationDto as an input and convert it into
      * Specialization model with the help of mapper class
      * </p>
      *
@@ -38,7 +40,7 @@ public interface SpecializationService {
     /**
      * <p>
      * This method is used to get all Specialization's record by
-     * getting all Specializations from database and convert it in to
+     * getting all Specializations from database and convert it into
      * SpecializationDto with the help of mapper class
      * </p>
      *
@@ -48,8 +50,8 @@ public interface SpecializationService {
 
     /**
      * <p>
-     * This method is used to get the Specialization by id and
-     * convert it into SpecializationDto
+     * This method is used to get the Specialization from the
+     * database by specialization id
      * </p>
      *
      * @param id {@link int}

@@ -78,7 +78,7 @@ public class SpecializationController {
      * @param id is id of Specialization
      * @return SpecializationDto
      */
-    @GetMapping(Constants.ID)
+    @GetMapping(Constants.PATH_ID)
     public SpecializationDto getSpecializationById(@PathVariable int id) {
         return specializationService.getSpecializationById(id);
     }
@@ -106,7 +106,7 @@ public class SpecializationController {
      * @param id is id of Specialization
      * @return String
      */
-    @PutMapping(Constants.ID)
+    @PutMapping(Constants.PATH_ID)
     public String deleteSpecializationById(@PathVariable int id) {
         return specializationService.deleteSpecializationById(id);
     }
