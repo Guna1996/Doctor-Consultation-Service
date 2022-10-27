@@ -13,7 +13,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.VitalDto;
-import com.ideas2it.healthcare.model.Vital;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +27,9 @@ import java.util.List;
 
 /**
  * <p>
- * PatientController class with the helps of getting inputs
- * from patient and passing to Patient Service to store the data's
- * into the database and it help to do CRUD operation
+ * This PatientController class is used to get and update
+ * information from the patient and also used to get
+ * their vitals and appointments.
  * </p>
  *
  * @author Ramachandran
@@ -46,8 +45,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This method used to add patient details
-     * by getting inputs from the patient
+     * This addPatient method is used to add patient details
+     * by getting inputs from the patient.
      * </p>
      *
      * @param patientDto is patient detail
@@ -60,9 +59,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This method used to get patient details
-     * from the database by  getting patient id
-     * from the user
+     * This getPatientById method is used to get
+     * a details of a patient.
      * </p>
      *
      * @param id is patient id
@@ -75,8 +73,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This method used to update patient details
-     * from the database
+     * This updatePatient method is used to update patient
+     * detail after validating it.
      * </p>
      *
      * @param patientDto is detail of patient
@@ -87,6 +85,18 @@ public class PatientController {
         return  patientService.updatePatient(patientDto);
     }
 
+
+    /**
+     * <p>
+     * This getVitalByPatientId method is used to
+     * get vitals of patient.
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<VitalDto>
+     */
     @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
     public List<VitalDto> getVitalByPatientId(@PathVariable(name = "patientId") int patientId,
                                               @PathVariable(name = "pageNumber") int pageNumber,
@@ -94,6 +104,17 @@ public class PatientController {
         return patientService.getVitalsByPatientId(patientId, pageNumber, totalRows);
     }
 
+    /**
+     * <p>
+     * This getAppointmentsByPatientId method is used
+     * to get list of appointments of a patient.
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<AppointmentDto>
+     */
     @GetMapping("/appointment/{patientId}/{pageNumber}/{totalRows}")
     public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = "patientId") int patientId,
                                                            @PathVariable(name = "pageNumber") int pageNumber,

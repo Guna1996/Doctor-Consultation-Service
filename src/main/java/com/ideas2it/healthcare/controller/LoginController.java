@@ -26,9 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * This Login Controller class is a Controller class and this
- * class is used to Authenticate the user and allow to access
- * other operations
+ * This Login Controller class is used to Authenticate
+ * the user and allow to access other operations.
  * </p>
  *
  * @author Gunaseelan K

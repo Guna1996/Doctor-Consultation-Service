@@ -70,7 +70,7 @@ public interface PatientService {
      * <p>
      * This isPatientAvailable abstract method is
      * used to check whether a patient is available or not
-     * on the patient table by using getting id from the
+     * on the patient table by  getting id from the
      * patient
      * </p>
      *
@@ -79,7 +79,27 @@ public interface PatientService {
      */
     boolean isPatientAvailable(Integer id);
 
+    /**
+     * <p>
+     *
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return
+     */
     List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows);
 
+    /**
+     * <p>
+     *     
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return
+     */
     List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
 }
