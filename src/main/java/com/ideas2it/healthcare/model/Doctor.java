@@ -57,7 +57,7 @@ public class Doctor {
     @Column(name = "qualification")
     private String qualification;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "doctor_specialization",
             joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "specialization_id"))

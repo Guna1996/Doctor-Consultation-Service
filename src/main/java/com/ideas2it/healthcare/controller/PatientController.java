@@ -87,7 +87,7 @@ public class PatientController {
         return  patientService.updatePatient(patientDto);
     }
 
-    @GetMapping(Constants.VITAL_PATIENT_ID)
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
     public List<VitalDto> getVitalByPatientId(@PathVariable(name = "patientId") int patientId,
                                               @PathVariable(name = "pageNumber") int pageNumber,
                                               @PathVariable(name = "totalRows") int totalRows) {

@@ -43,26 +43,6 @@ public class SpecializationMapper {
             specialization.setId(specializationDto.getId());
             specialization.setName(specializationDto.getName());
             specialization.setStatus(specializationDto.getStatus());
-            /*Set<DoctorDto> doctorsDto = specializationDto.getDoctors();
-            if (doctorsDto != null) {
-                Set<Doctor> doctors = new HashSet<>();
-                doctorsDto.forEach(doctorDto -> {
-                    Doctor doctor = new Doctor();
-                    doctor.setId(doctorDto.getId());
-                    doctor.setName(doctorDto.getName());
-                    doctor.setGender(doctorDto.getGender());
-                    doctor.setDateOfBirth(doctorDto.getDateOfBirth());
-                    doctor.setConsultationFee(doctorDto.getConsultationFee());
-                    doctor.setQualification(doctorDto.getQualification());
-                    doctor.setMobileNumber(doctorDto.getMobileNumber());
-                    doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                    doctor.setCity(doctorDto.getCity());
-                    doctor.setStatus(doctorDto.getStatus());
-                    doctors.add(doctor);
-                });
-                specialization.setDoctors(doctors);
-
-            }*/
         }
         return specialization;
     }
@@ -82,25 +62,6 @@ public class SpecializationMapper {
             specializationDto.setId(specialization.getId());
             specializationDto.setName(specialization.getName());
             specializationDto.setStatus(specialization.getStatus());
-            /*Set<Doctor> doctors = specialization.getDoctors();
-            if (doctors != null) {
-                Set<DoctorDto> doctorsDto = new HashSet<>();
-                doctors.forEach(doctor -> {
-                    DoctorDto doctorDto = new DoctorDto();
-                    doctorDto.setId(doctor.getId());
-                    doctorDto.setName(doctor.getName());
-                    doctorDto.setGender(doctor.getGender());
-                    doctorDto.setConsultationFee(doctor.getConsultationFee());
-                    doctorDto.setDateOfBirth(doctor.getDateOfBirth());
-                    doctorDto.setQualification(doctor.getQualification());
-                    doctorDto.setMobileNumber(doctor.getMobileNumber());
-                    doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                    doctorDto.setCity(doctor.getCity());
-                    doctorDto.setStatus(doctor.getStatus());
-                    doctorsDto.add(doctorDto);
-                });
-                specializationDto.setDoctors(doctorsDto);
-            }*/
         }
         return specializationDto;
     }
