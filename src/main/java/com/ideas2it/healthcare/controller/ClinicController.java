@@ -112,4 +112,22 @@ public class ClinicController {
     public String deleteClinic(@PathVariable(Constants.ID) int id) {
         return clinicService.deleteClinicById(id);
     }
+
+    /**
+     * <p>
+     * This method is used to all doctors
+     * who are worked in a clinic.
+     * </p>
+     *
+     * @param doctorId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<DoctorClinicDto>
+     */
+    @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
+    public List<DoctorClinicDto> getDoctorsByClinicId(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
+                                                      @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows){
+        return clinicService.getDoctorsByClinicId(doctorId, pageNumber, totalRows);
+    }
 }

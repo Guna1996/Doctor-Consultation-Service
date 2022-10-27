@@ -73,19 +73,6 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to find
-     * whether the doctor is deleted
-     * or not by returning boolean
-     * to another services
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link String}
-     */
-    boolean isDoctorAvailable(int id);
-
-    /**
-     * <p>
      * This method is used to get appointments of a particular doctor
      * by doctor id
      * </p>

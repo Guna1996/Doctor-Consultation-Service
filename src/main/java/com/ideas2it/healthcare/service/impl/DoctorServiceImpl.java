@@ -102,15 +102,13 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public boolean isDoctorAvailable(int id) {
-        return doctorRepository.existsByIdAndStatus(id, Constants.ACTIVE);
-    }
-
-    @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
         return appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows) {
         return feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows);

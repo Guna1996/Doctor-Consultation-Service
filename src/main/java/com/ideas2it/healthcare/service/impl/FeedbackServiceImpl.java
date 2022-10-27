@@ -53,11 +53,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * {@inheritDoc}
      */
-    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {  //Jubair need to add query to reduce repo calls
-        FeedbackDto feedbackDtoToReturn = null;
-        if (!feedbackRepository.existsByIdAndStatus(feedbackDto.getId(), feedbackDto.getStatus())) {
-            throw new NotFoundException(MessageConstants.DATA_DOES_NOT_EXIST);
-        }
+    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {
         return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
     }
 
@@ -82,6 +78,9 @@ public class FeedbackServiceImpl implements FeedbackService {
         return ErrorConstants.FEEDBACK_NOT_FOUND;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<FeedbackDto> getFeedbackByDoctorId(int doctorId, int pageNumber, int totalRows) {
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
