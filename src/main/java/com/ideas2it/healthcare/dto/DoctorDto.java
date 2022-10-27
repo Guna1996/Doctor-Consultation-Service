@@ -68,11 +68,5 @@ public class DoctorDto {
 
     private String status = Constants.ACTIVE;
 
-    private List<FeedbackDto> feedbacks;
-
-    private List<AppointmentDto> appointments;
-
-    private List<DoctorClinicDto> clinics;
-
     private int consultationFee;
 }

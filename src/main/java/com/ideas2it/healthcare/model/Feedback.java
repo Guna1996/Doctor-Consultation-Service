@@ -14,8 +14,12 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.engine.internal.Cascade;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,13 +55,13 @@ public class Feedback {
     private float rating;
 
     @OneToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @Column
     private String status = Constants.ACTIVE;
 
-    @OneToOne
-    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 }

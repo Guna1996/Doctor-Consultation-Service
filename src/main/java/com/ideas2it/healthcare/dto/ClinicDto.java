@@ -62,6 +62,4 @@ public class ClinicDto {
     private String contactNumber;
 
     private String status = Constants.ACTIVE;
-
-    private List<DoctorClinicDto> doctors;
 }

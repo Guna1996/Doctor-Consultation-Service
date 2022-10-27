@@ -85,6 +85,7 @@ public class PatientController {
         return  patientService.updatePatient(patientDto);
     }
 
+
     /**
      * <p>
      * This getVitalByPatientId method is used to
@@ -96,7 +97,7 @@ public class PatientController {
      * @param totalRows
      * @return List<VitalDto>
      */
-    @GetMapping(Constants.VITAL_PATIENT_ID)
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
     public List<VitalDto> getVitalByPatientId(@PathVariable(name = "patientId") int patientId,
                                               @PathVariable(name = "pageNumber") int pageNumber,
                                               @PathVariable(name = "totalRows") int totalRows) {

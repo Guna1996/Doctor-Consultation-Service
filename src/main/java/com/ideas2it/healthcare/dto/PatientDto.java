@@ -59,10 +59,4 @@ public class PatientDto {
     private String email;
 
     private String status = Constants.ACTIVE;
-
-    private List<FeedbackDto> feedbacks;
-
-    private List<AppointmentDto> appointment;
-
-    private List<VitalDto> vitals;
 }

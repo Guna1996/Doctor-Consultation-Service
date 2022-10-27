@@ -48,19 +48,7 @@ public class ClinicMapper {
             clinic.setPinCode(clinicDto.getPinCode());
             clinic.setContactNumber(clinicDto.getContactNumber());
             clinic.setStatus(clinicDto.getStatus());
-
-            List<DoctorClinicDto> doctorClinicsDto = clinicDto.getDoctors();
-            if (doctorClinicsDto != null) {
-                List<DoctorClinic> doctorClinics = new ArrayList<>();
-                doctorClinicsDto.forEach(doctorClinicDto -> {
-                    DoctorClinic doctorClinic = new DoctorClinic();
-                    doctorClinic.setId(doctorClinicDto.getId());
-                    doctorClinic.setStatus(doctorClinicDto.getStatus());
-                    doctorClinics.add(doctorClinic);
-                });
-                //clinic.setDoctors(doctorClinics);
             }
-        }
         return clinic;
     }
 
@@ -83,19 +71,7 @@ public class ClinicMapper {
             clinicDto.setState(clinic.getState());
             clinicDto.setPinCode(clinic.getPinCode());
             clinicDto.setContactNumber(clinic.getContactNumber());
-            clinicDto.setStatus(clinic.getState());
-
-            /*List<DoctorClinic> doctorClinics = clinic.getDoctors();
-            if (doctorClinics != null) {
-                List<DoctorClinicDto> doctorClinicsDto = new ArrayList<>();
-                doctorClinics.forEach(doctorClinic -> {
-                    DoctorClinicDto doctorClinicDto = new DoctorClinicDto();
-                    doctorClinicDto.setId(doctorClinic.getId());
-                    doctorClinicDto.setStatus(doctorClinic.getStatus());
-                    doctorClinicsDto.add(doctorClinicDto);
-                });
-                clinicDto.setDoctors(doctorClinicsDto);
-                }*/
+            clinicDto.setStatus(clinic.getStatus());
         }
         return clinicDto;
     }

@@ -69,41 +69,6 @@ public class DoctorMapper {
             doctor.setCity(doctorDto.getCity());
             doctor.setStatus(doctorDto.getStatus());
             doctor.setConsultationFee(doctorDto.getConsultationFee());
-           /* List<FeedbackDto> feedbacksDto = doctorDto.getFeedbacks();
-            if (feedbacksDto != null) {
-                List<Feedback> feedbacks = new ArrayList<>();
-                feedbacksDto.forEach(feedbackDto -> {
-                    Feedback feedback = new Feedback();
-                    feedback.setId(feedbackDto.getId());
-                    feedback.setComment(feedbackDto.getComment());
-                    feedback.setRating(feedbackDto.getRating());
-                    feedback.setStatus(feedbackDto.getStatus());
-                    feedbacks.add(feedback);
-                });
-                doctor.setFeedbacks(feedbacks);
-            }
-            List<AppointmentDto> appointmentsDto = doctorDto.getAppointments();
-            if (appointmentsDto != null) {
-                List<Appointment> appointments = new ArrayList<>();
-                appointmentsDto.forEach(appointmentDto -> {
-                    Appointment appointment = new Appointment();
-                    appointment.setId(appointmentDto.getId());
-                    appointment.setScheduledOn(appointmentDto.getScheduledOn());
-                    appointments.add(appointment);
-                });
-                doctor.setAppointments(appointments);
-            }
-            List<DoctorClinicDto> doctorClinicsDto = doctorDto.getClinics();
-            if (doctorClinicsDto != null) {
-                List<DoctorClinic> doctorClinics = new ArrayList<>();
-                doctorClinicsDto.forEach(doctorClinicDto -> {
-                    DoctorClinic doctorClinic = new DoctorClinic();
-                    doctorClinic.setId(doctorClinicDto.getId());
-                    doctorClinic.setStatus(doctorClinicDto.getStatus());
-                    doctorClinics.add(doctorClinic);
-                });
-                doctor.setClinics(doctorClinics);
-            }*/
         }
         return doctor;
     }
@@ -141,41 +106,6 @@ public class DoctorMapper {
             doctorDto.setMobileNumber(doctor.getMobileNumber());
             doctorDto.setCity(doctor.getCity());
             doctorDto.setStatus(doctor.getStatus());
-            /*List<Feedback> feedbacks = doctor.getFeedbacks();
-            if (feedbacks != null) {
-                List<FeedbackDto> feedbacksDto = new ArrayList<>();
-                feedbacks.forEach(feedback -> {
-                    FeedbackDto feedbackDto = new FeedbackDto();
-                    feedbackDto.setId(feedback.getId());
-                    feedbackDto.setComment(feedback.getComment());
-                    feedbackDto.setRating(feedback.getRating());
-                    feedbackDto.setStatus(feedback.getStatus());
-                    feedbacksDto.add(feedbackDto);
-                });
-                doctorDto.setFeedbacks(feedbacksDto);
-            }
-            List<Appointment> appointments = doctor.getAppointments();
-            if (appointments != null) {
-                List<AppointmentDto> appointmentsDto = new ArrayList<>();
-                appointments.forEach(appointment -> {
-                    AppointmentDto appointmentDto = new AppointmentDto();
-                    appointmentDto.setId(appointment.getId());
-                    appointmentDto.setScheduledOn(appointment.getScheduledOn());
-                    appointmentsDto.add(appointmentDto);
-                });
-                doctorDto.setAppointments(appointmentsDto);
-            }
-            List<DoctorClinic> doctorClinics = doctor.getClinics();
-            if (doctorClinics != null) {
-                List<DoctorClinicDto> doctorClinicsDto = new ArrayList<>();
-                doctorClinics.forEach(doctorClinic -> {
-                    DoctorClinicDto doctorClinicDto = new DoctorClinicDto();
-                    doctorClinicDto.setId(doctorClinic.getId());
-                    doctorClinicDto.setStatus(doctorClinic.getStatus());
-                    doctorClinicsDto.add(doctorClinicDto);
-                });
-                doctorDto.setClinics(doctorClinicsDto);
-            }*/
         }
         return doctorDto;
     }
