@@ -19,9 +19,9 @@ import java.util.List;
 
 /**
  * <p>
- * This VitalController class is a Controller class and this
- * class is used to get information and
- * transfer it to VitalDto
+ * This VitalController class is used to manage
+ * the vitals information of a patient from a
+ * doctor.
  * </p>
  *
  * @author Bala Ashwanth
@@ -37,7 +37,8 @@ public class VitalController {
 
     /**
      * <p>
-     * Insert vitals details
+     * This insertVitals method is used to add vitals
+     * of a patient.
      *</p>
      *
      * @param vitalsDto is a dto object that contains information
