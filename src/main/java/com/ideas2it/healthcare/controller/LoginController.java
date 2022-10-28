@@ -55,7 +55,7 @@ public class LoginController {
                             authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new NotFoundException(ErrorConstants.INCORRECT_USERNAME_AND_PASSWORD);
+            throw new NotFoundException(ErrorConstants.INCORRECT_USERNAME_OR_PASSWORD);
         }
         final UserDetails userDetails = authenticationService
                 .loadUserByUsername(authenticationRequest.getUsername());

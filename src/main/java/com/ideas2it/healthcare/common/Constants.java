@@ -8,8 +8,6 @@
  */
 package com.ideas2it.healthcare.common;
 
-import javax.servlet.http.PushBuilder;
-
 /**
  * <p>
  * This Constants class contains static final string variable
@@ -34,17 +32,18 @@ public class Constants {
     public static final String MOBILE_NUMBER_REGEX = "^(0/91)?[7-9][0-9]{9}$";
 
     public static final String PIN_CODE_REGEX = "^[1-9][0-9]{5}$";
+
     public static final String COUNTRY_REGEX = "[a-zA-Z]{2,}";
 
     public static final String GENDER_REGEX = "^male$|^female$";
 
-    public static final String PATH_ID = "/{id}";
+    public static final String URL_ID = "/{id}";
 
     public static final String ID = "id";
 
-    public static final String PATH_DOCTOR_ID = "doctorId";
+    public static final String URL_DOCTOR_ID = "doctorId";
 
-    public static final String PATH_CLINIC_ID = "clinicId";
+    public static final String URL_CLINIC_ID = "clinicId";
 
     public static final String PATIENT_ID = "patient_id";
 
@@ -95,12 +94,14 @@ public class Constants {
     public static final String BLOOD_PRESSURE = "blood_pressure";
 
     public static final String SUGAR_LEVEL = "sugar_level";
+
     public static final String CONSULTATION_FEE = "consultation_fee";
+
     public static final String PAGE_NUMBER = "pageNumber";
 
     public static final String TOTAL_ROWS = "totalRows";
 
-    public static final String PAGE_PATH = "/{pageNumber}/{totalRows}";
+    public static final String PAGINATION = "/{pageNumber}/{totalRows}";
 
     public static final String GET_PATIENT_PATH = "/patient/{patientId}/{pageNumber}/{totalRows}";
 
@@ -119,5 +120,41 @@ public class Constants {
     public static final String PATH_PATIENT_ID = "patientId";
 
     public static final String PATIENT_APPOINTMENT = "/appointment/{patientId}/{pageNumber}/{totalRows}";
+
+    public static final String APPOINTMENT = "appointment";
+
+    public static final String CLINIC = "clinic";
+
+    public static final String DOCTOR = "doctor";
+
+    public static final String DOCTOR_CLINIC = "doctor_clinic";
+
+    public static final String FEEDBACK = "feedback";
+
+    public static final String PATIENT = "patient";
+
+    public static final String SPECIALIZATION = "specialization";
+
+    public static final String TIMESLOT = "timeslot";
+
+    public static final String VITAL = "vital";
+
+    public static final String URL_APPOINTMENT = "/appointment";
+
+    public static final String URL_CLINIC = "/clinic";
+
+    public static final String URL_DOCTOR_CLINIC = "/doctor-clinic";
+
+    public static final String URL_DOCTOR = "/doctor";
+
+    public static final String URL_FEEDBACK = "/feedback";
+
+    public static final String  URL_PATIENT= "/patient";
+
+    public static final String URL_SPECIALIZATION = "/specialization";
+
+    public static final String URL_TIMESLOT = "/timeslot";
+
+    public static final String URL_VITAL= "/vital";
 }
 

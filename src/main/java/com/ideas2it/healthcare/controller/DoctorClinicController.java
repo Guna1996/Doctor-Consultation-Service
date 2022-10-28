@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/doctor-clinic")
+@RequestMapping(Constants.URL_DOCTOR_CLINIC)
 public class DoctorClinicController {
 
     @Autowired
@@ -63,7 +63,7 @@ public class DoctorClinicController {
      * @return String
      */
 
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public String deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
         return doctorClinicService.deleteDoctorFromClinic(id);
     }
@@ -79,8 +79,8 @@ public class DoctorClinicController {
      * @return DoctorClinicDto
      */
     @GetMapping(Constants.PATIENT_ID_CLINIC_ID)
-    public DoctorClinicDto getTimeslots(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
-                                        @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
+    public DoctorClinicDto getTimeslots(@PathVariable(Constants.URL_DOCTOR_ID) int doctorId,
+                                        @PathVariable(Constants.URL_CLINIC_ID) int clinicId) {
         return doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId);
     }
 }

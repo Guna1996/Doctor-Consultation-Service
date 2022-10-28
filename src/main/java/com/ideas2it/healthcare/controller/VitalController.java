@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * <p>
@@ -29,7 +28,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping(value = "/vital")
+@RequestMapping(Constants.URL_VITAL)
 public class VitalController {
 
     @Autowired

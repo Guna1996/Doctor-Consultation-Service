@@ -37,7 +37,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/doctor")
+@RequestMapping(Constants.URL_DOCTOR)
 public class DoctorController {
 
     @Autowired
@@ -68,7 +68,7 @@ public class DoctorController {
      * @param totalRows  is a set of rows to be shown
      * @return List<DoctorDto>
      */
-    @GetMapping(Constants.PAGE_PATH)
+    @GetMapping(Constants.PAGINATION)
     public List<DoctorDto> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                          @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return doctorService.getAllDoctors(pageNumber, totalRows);
@@ -83,7 +83,7 @@ public class DoctorController {
      * @param id is id of doctor
      * @return DoctorDto
      */
-    @GetMapping(Constants.PATH_ID)
+    @GetMapping(Constants.URL_ID)
     public DoctorDto getDoctorById(@PathVariable int id) {
         return doctorService.getDoctorById(id);
     }
@@ -111,7 +111,7 @@ public class DoctorController {
      * @param id is id of doctor
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public String deleteDoctorById(@PathVariable int id) {
         return doctorService.deleteDoctorById(id);
     }
@@ -128,7 +128,7 @@ public class DoctorController {
      * @return List<AppointmentDto>
      */
     @GetMapping(Constants.PATH_APPOINTMENT_ID)
-    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.URL_DOCTOR_ID) int doctorId,
                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
         return doctorService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
@@ -146,7 +146,7 @@ public class DoctorController {
      * @return List<FeedbackDto>
      */
     @GetMapping(Constants.PATH_FEEDBACK_ID)
-    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.URL_DOCTOR_ID) int doctorId,
                                                     @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                                     @PathVariable(name = Constants.TOTAL_ROWS) int totalRows){
         return doctorService.getFeedbacks(doctorId, pageNumber, totalRows);

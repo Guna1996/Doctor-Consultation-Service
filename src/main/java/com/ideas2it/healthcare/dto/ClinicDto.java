@@ -8,13 +8,14 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 
 /**
  * <p>
@@ -32,33 +33,33 @@ public class ClinicDto {
 
     private int id;
 
-    @NotNull(message = "Name shouldn't be null")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
+    @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
     private String name;
 
-    @Min(value = 1, message = "Door number cannot be negative or zero")
-    @NotNull(message = "door number shouldn't be null")
+    @Min(value = 1, message = ErrorConstants.DOOR_NUMBER_CANNOT_BE_NEGATIVE_OR_NULL)
+    @NotNull(message = ErrorConstants.DOOR_NUMBER_SHOULD_NOT_BE_NULL)
     private int doorNumber;
 
-    @NotNull(message = "Street name shouldn't be null")
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid street name")
+    @NotNull(message = ErrorConstants.STREET_NAME_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_STREET_NAME)
     private String streetName;
 
-    @NotNull(message = "city shouldn't be null")
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid city name")
+    @NotNull(message = ErrorConstants.CITY_NAME_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_CITY_NAME)
     private String city;
 
-    @NotNull(message = "state shouldn't be null")
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid state name")
+    @NotNull(message = ErrorConstants.STATE_SHOULD_NOT_NE_NULL)
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_STATE_NAME)
     private String state;
 
-    @Min(value = 1, message = "pin code cannot be negative or zero")
-    @NotNull(message = "Pin code shouldn't be null")
-    @Pattern(regexp = Constants.PIN_CODE_REGEX, message = "Please, Enter valid pin code")
+    @Min(value = 1, message = ErrorConstants.PIN_CODE_CANNOT_BE_NEGATIVE_OR_ZERO)
+    @NotNull(message = ErrorConstants.PIN_CODE_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.PIN_CODE_REGEX, message = MessageConstants.ENTER_VALID_PIN_CODE)
     private String pinCode;
 
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Type only 10 numbers")
-    @NotNull(message = "Mobile number shouldn't be null")
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.INPUT_CONTAINS_TEN_NUMBERS_ONLY)
+    @NotNull(message = MessageConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
     private String contactNumber;
 
     private String status = Constants.ACTIVE;

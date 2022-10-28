@@ -73,7 +73,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     public String deleteFeedback(int id) {
         if (feedbackRepository.deleteSpecializationById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.FEEDBACK_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.FEEDBACK_NOT_FOUND;
     }
