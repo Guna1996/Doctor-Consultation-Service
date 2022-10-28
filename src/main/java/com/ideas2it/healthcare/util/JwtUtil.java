@@ -32,23 +32,58 @@ public class JwtUtil {
 
     private final String SECRET_KEY = "secret";
 
+    /**
+     * <p>
+     * This method is used to extract username
+     * </p>
+     *
+     * @parm token is token for the session
+     */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
+    /**
+     * <p>
+     * This method is used to extract expiration
+     * </p>
+     *
+     * @parm token is token for the session
+     */
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    /**
+     * <p>
+     * This method is used to extract claim
+     * </p>
+     *
+     * @parm token is token for the session
+     */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
+    /**
+     * <p>
+     * This method is used to extract all claims
+     * </p>
+     *
+     * @parm token is token for the session
+     */
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
+    /**
+     * <p>
+     * This method is used to check wheather token is expired
+     * </p>
+     *
+     * @parm token is token for the session
+     */
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -58,6 +93,14 @@ public class JwtUtil {
         return createToken(claims, userDetails.getUsername());
     }
 
+    /**
+     * <p>
+     * This method is used to create token
+     * </p>
+     *
+     * @parm claims
+     * @parm subject
+     */
     private String createToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
@@ -65,6 +108,14 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
+    /**
+     * <p>
+     * This method is used to validate token
+     * </p>
+     *
+     * @parm token is token for the session
+     * @parm userDetails contains username and password of the user
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

@@ -39,17 +39,39 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    /**
+     * <p>
+     * This method is used to create bean for authentication using
+     * Authentication Manager
+     * </p>
+     *
+     */
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * <p>
+     * This method is used to create bean for password encoding using
+     * password Encoder
+     * </p>
+     *
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    /**
+     * <p>
+     * This method is used to restrict and allow access for urls in controller
+     * based on authentication
+     * </p>
+     *
+     * @param httpSecurity allows configuring web based security
+     */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()

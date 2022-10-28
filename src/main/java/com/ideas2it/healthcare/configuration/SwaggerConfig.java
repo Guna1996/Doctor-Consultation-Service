@@ -31,6 +31,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * <p>
+     * This method is used to document process of the project
+     * </p>
+     *
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

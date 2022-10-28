@@ -27,6 +27,14 @@ import java.util.Map;
  */@RestControllerAdvice
 public class NotFoundExceptionHandler {
 
+    /**
+     * <p>
+     * This method is used to handle exception occured during validation
+     * of user inputs
+     * </p>
+     *
+     * @parm exception is caught exception
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleInvalidArgument(MethodArgumentNotValidException exception) {
@@ -37,6 +45,14 @@ public class NotFoundExceptionHandler {
         return new ResponseEntity<>(errorMap, HttpStatus.OK);
     }
 
+    /**
+     * <p>
+     * This method is used to handle exception occured while performing
+     * CRUD operation in database
+     * </p>
+     *
+     * @parm exception is caught exception
+     */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, String>> handleBusinessException(NotFoundException exception) {

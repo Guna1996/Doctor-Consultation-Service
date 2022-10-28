@@ -109,7 +109,7 @@ public class Constants {
 
     public static final String VITAL_PATIENT_ID = "/vital/{patientId}";
 
-    public static final String GET_DOCTOR_BY_CLINIC_ID_PATH = "/doctor/{doctorId}/{pageNumber}/{totalRows}";
+    public static final String GET_DOCTOR_BY_CLINIC_ID_PATH = "/doctor/{clinicId}/{pageNumber}/{totalRows}";
 
     public static final String SCHEDULED_ON = "scheduled_on";
 
