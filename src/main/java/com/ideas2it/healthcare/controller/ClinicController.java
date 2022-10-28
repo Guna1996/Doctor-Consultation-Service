@@ -45,8 +45,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to add clinic by getting
-     * information from a doctor after validating it.
+     * This method is used to add clinic details into database
+     * after validating it.
      * </p>
      *
      * @param clinicDto is clinic object
@@ -80,8 +80,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to get a particular
-     * clinic to assign to a particular
-     * doctor.
+     * clinic detail by clinic id
      * </p>
      *
      * @param id is clinic id
@@ -112,7 +111,7 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to remove the unwanted
+     * This method is used to remove the clinic
      * details of a clinic
      * </p>
      *

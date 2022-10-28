@@ -43,7 +43,7 @@ public class TimeslotController {
 
     /**
      * <p>
-     * This getAllTimeslots method is used to get
+     * This method is used to get
      * timeslots.
      * </p>
      *
@@ -61,15 +61,14 @@ public class TimeslotController {
 
     /**
      * <p>
-     * This insertTimeslot method is used to add
-     * timeslot.
+     * This method is used to add timeslot.
      * </p>
      *
      * @param timeslotDto is a dto object that contains information
      * @return TimeslotDto
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> insertTimeslot(@RequestBody TimeslotDto timeslotDto) {
+    public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {
         return Response.responseEntity("Success",
                 timeslotService.addTimeslot(timeslotDto),
                 HttpStatus.OK);

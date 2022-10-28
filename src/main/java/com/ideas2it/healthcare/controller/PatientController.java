@@ -10,9 +10,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,8 +46,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This addPatient method is used to add patient details
-     * by getting inputs from the patient.
+     * This method is used to add patient details
+     * after validating it
      * </p>
      *
      * @param patientDto is patient detail
@@ -63,8 +60,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This getPatientById method is used to get
-     * a details of a patient.
+     * This method is used to get a details of a patient
+     * by patient id
      * </p>
      *
      * @param id is patient id
@@ -77,7 +74,7 @@ public class PatientController {
 
     /**
      * <p>
-     * This updatePatient method is used to update patient
+     * This method is used to update patient
      * detail after validating it.
      * </p>
      *
@@ -92,8 +89,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This getVitalByPatientId method is used to
-     * get vitals of patient.
+     * This method is used to get vitals of patient
+     * by patient id.
      * </p>
      *
      * @param patientId is id of patient
@@ -112,8 +109,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This getAppointmentsByPatientId method is used
-     * to get list of appointments of a patient.
+     * This method is used to get list of appointments of a patient
+     * by patient id
      * </p>
      *
      * @param patientId is id of patient

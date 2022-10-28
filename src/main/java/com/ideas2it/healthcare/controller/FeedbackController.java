@@ -42,15 +42,15 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This insertFeedback method is used to get
-     * a feedback from a patient.
+     * This method is used to add a feedback from a patient
+     * into the database
      * </p>
      *
      * @param feedbackDto is dto object that contains information
      * @return FeedbackDto
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> insertFeedback(@RequestBody FeedbackDto feedbackDto) {
+    public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
         return Response.responseEntity("Succes",
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
@@ -58,8 +58,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This deleteFeedbackById method is used to remove
-     * unwanted feedback from the clinic.
+     * This method is used to remove feedback from the database
+     * by feedback id
      * </p>
      *
      * @param id is an integer that refer id in database
