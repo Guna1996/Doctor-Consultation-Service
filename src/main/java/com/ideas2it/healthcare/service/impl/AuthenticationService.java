@@ -31,6 +31,13 @@ import java.util.ArrayList;
 @Service
 public class AuthenticationService implements UserDetailsService {
 
+    /**
+     * <p>
+     * This method is used to load default username and password for authentication
+     * and authorization
+     * </p>
+     *
+     */
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         return new User("admin", "ideas2it",
