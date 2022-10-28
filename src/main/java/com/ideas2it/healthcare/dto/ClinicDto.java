@@ -61,7 +61,5 @@ public class ClinicDto {
     @NotNull(message = "Mobile number shouldn't be null")
     private String contactNumber;
 
-    private String status;
-
-    private List<DoctorClinicDto> doctors;
+    private String status = Constants.ACTIVE;
 }

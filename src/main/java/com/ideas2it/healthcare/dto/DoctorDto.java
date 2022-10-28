@@ -66,13 +66,7 @@ public class DoctorDto {
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Enter valid City name")
     private String city;
 
-    private String status;
-
-    private List<FeedbackDto> feedbacks;
-
-    private List<AppointmentDto> appointments;
-
-    private List<DoctorClinicDto> clinics;
+    private String status = Constants.ACTIVE;
 
     private int consultationFee;
 }

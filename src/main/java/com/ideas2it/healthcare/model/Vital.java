@@ -61,24 +61,24 @@ public class Vital {
     @Column
     private float systolic;
 
-    @Column(name = "sugar_level")
+    @Column(name = Constants.SUGAR_LEVEL)
     private float sugarLevel;
 
     @OneToOne
-    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    @JoinColumn(name = Constants.PATIENT_ID, referencedColumnName = Constants.ID)
     private Patient patient;
 
     @Column
     private String status = Constants.ACTIVE;
 
     @OneToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+    @JoinColumn(name = Constants.DOCTOR_ID, referencedColumnName = Constants.ID)
     private Doctor doctor;
 
-    @Column(name = "blood_pressure")
+    @Column(name = Constants.BLOOD_PRESSURE)
     private String bloodPressure;
 
     @CreationTimestamp
-    @Column(name = "created_date")
+    @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
 }

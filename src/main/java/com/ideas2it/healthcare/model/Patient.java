@@ -47,24 +47,24 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = Constants.NAME)
     private String name;
 
-    @Column(name = "date_of_birth")
+    @Column(name = Constants.DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
-    @Column(name = "gender")
+    @Column(name = Constants.GENDER)
     private String gender;
 
-    @Column(name = "mobile_number")
+    @Column(name = Constants.MOBILE_NUMBER)
     private String mobileNumber;
 
-    @Column(name = "email")
+    @Column(name = Constants.EMAIL)
     private String email;
 
-    @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    @Column(name = Constants.STATUS)
+    private String status;
 }

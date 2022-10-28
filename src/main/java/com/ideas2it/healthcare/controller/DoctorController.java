@@ -12,11 +12,7 @@ import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.service.DoctorService;
-import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +26,9 @@ import java.util.List;
 
 /**
  * <p>
- * This DoctorController class is a Controller class and this
- * class is used to get information from the doctor and
- * transfer it to doctor Dto
+ * This DoctorController class is used to get and store information from a
+ * doctor, update and delete doctors and get appointment, feedback of a
+ * doctor
  * </p>
  *
  * @author Mohamed Jubair
@@ -49,8 +45,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to get details of doctor
-     * after validating it
+     * This addDoctor method is used to get details of doctor
+     * after validating it.
      * </p>
      *
      * @param doctorDto is details of doctor
@@ -64,37 +60,38 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to get All the details of
-     * doctor form the service through Doctor Dto
+     * This getAllDoctors method is used to get All the
+     * details of doctors.
      * </p>
+     *
      * @param pageNumber is page number to show
      * @param totalRows  is a set of rows to be shown
      * @return List<DoctorDto>
      */
     @GetMapping(Constants.PAGE_PATH)
     public List<DoctorDto> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                         @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+                                         @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return doctorService.getAllDoctors(pageNumber, totalRows);
     }
 
     /**
      * <p>
-     * This method is used to get details of doctor
-     * of a particular doctor by id
+     * This getDoctorById method is used to get details
+     * of a particular doctor.
      * </p>
      *
      * @param id is id of doctor
      * @return DoctorDto
      */
-    @GetMapping(Constants.ID)
+    @GetMapping(Constants.PATH_ID)
     public DoctorDto getDoctorById(@PathVariable int id) {
         return doctorService.getDoctorById(id);
     }
 
     /**
      * <p>
-     * This method is used to update the details of
-     * doctor after validate
+     * This updateDoctor method is used to update the details of
+     * doctor after validating it.
      * </p>
      *
      * @param doctorDto is details of doctor
@@ -107,29 +104,51 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to delete the details of
-     * doctor by getting the id
+     * This deleteDoctorById method is used
+     * to remove a doctor.
      * </p>
      *
      * @param id is id of doctor
      * @return String
      */
-    @PutMapping(Constants.ID)
+    @PutMapping(Constants.PATH_ID)
     public String deleteDoctorById(@PathVariable int id) {
         return doctorService.deleteDoctorById(id);
     }
 
-    @GetMapping("/appointment/{doctorId}/{pageNumber}/{totalRows}")
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = "doctorId") int doctorId,
-                                                           @PathVariable(name = "pageNumber") int pageNumber,
-                                                           @PathVariable(name = "totalRows") int totalRows) {
+    /**
+     * <p>
+     * This method is used to get appointments
+     * of a doctor.
+     * </p>
+     *
+     * @param doctorId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<AppointmentDto>
+     */
+    @GetMapping(Constants.PATH_APPOINTMENT_ID)
+    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+                                                          @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                                          @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
         return doctorService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
     }
 
-    @GetMapping("/feedbacks/{doctorId}/{pageNumber}/{totalRows}")
-    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = "doctorId") int doctorId,
-                                                    @PathVariable(name = "pageNumber") int pageNumber,
-                                                    @PathVariable(name = "totalRows") int totalRows){
+    /**
+     * <p>
+     * This method is used to get feedbacks
+     * of a doctor.
+     * </p>
+     *
+     * @param doctorId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<FeedbackDto>
+     */
+    @GetMapping(Constants.PATH_FEEDBACK_ID)
+    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+                                                    @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                                    @PathVariable(name = Constants.TOTAL_ROWS) int totalRows){
         return doctorService.getFeedbacks(doctorId, pageNumber, totalRows);
     }
 }

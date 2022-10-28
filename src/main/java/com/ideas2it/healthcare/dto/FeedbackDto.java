@@ -9,6 +9,7 @@
  */
 package com.ideas2it.healthcare.dto;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +36,7 @@ public class FeedbackDto {
 
     private DoctorDto doctor;
 
-    private String status;
+    private String status = Constants.ACTIVE;
 
     private PatientDto patient;
 }

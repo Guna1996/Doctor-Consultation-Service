@@ -11,7 +11,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.model.AuthenticationRequest;
 import com.ideas2it.healthcare.model.AuthenticationResponse;
-import com.ideas2it.healthcare.service.impl.MyUserDetailsService;
+import com.ideas2it.healthcare.service.impl.AuthenticationService;
 import com.ideas2it.healthcare.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * This Login Controller class is a Controller class and this
- * class is used to Authenticate the user and allow to access
- * other operations
+ * This Login Controller class is used to Authenticate
+ * the user and allow to access other operations.
  * </p>
  *
  * @author Gunaseelan K
@@ -45,7 +44,7 @@ public class LoginController {
     private JwtUtil jwtTokenUtil;
 
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private AuthenticationService authenticationService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
@@ -58,7 +57,7 @@ public class LoginController {
         } catch (BadCredentialsException e) {
             throw new NotFoundException(ErrorConstants.INCORRECT_USERNAME_AND_PASSWORD);
         }
-        final UserDetails userDetails = userDetailsService
+        final UserDetails userDetails = authenticationService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));

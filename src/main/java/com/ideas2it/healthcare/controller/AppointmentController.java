@@ -22,8 +22,8 @@ import javax.validation.Valid;
 
 /**
  * <p>
- * This AppointmentController class is a Controller class and this
- * class is used to get input and display outputs for appointments
+ * This AppointmentController class is used to fix, reschedule and cancel
+ * appointment by patient.
  * </p>
  *
  * @author Gunaseelan K
@@ -39,7 +39,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * fix new appointment
+     * This method is used to add appointment of a
+     * patient after validating it.
      * </p>
      *
      * @param appointmentDto is appointment object
@@ -52,7 +53,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * Update reschedule appointment using appointment id
+     * This method is used to reschedule appointment
+     * of a patient after validating it.
      * </p>
      *
      * @param appointmentDto is details of appointment
@@ -66,14 +68,15 @@ public class AppointmentController {
 
     /**
      * <p>
-     * Delete appointment by Id
+     * This method is used to cancel the appointment
+     * of a patient.
      * </p>
      *
      * @param id is appointment id
      * @return string
      */
-    @PutMapping(Constants.ID)
-    public String deleteAppointment(@PathVariable(Constants.PATH_ID) int id) {
+    @PutMapping(Constants.PATH_ID)
+    public String deleteAppointment(@PathVariable(Constants.ID) int id) {
         return appointmentService.deleteAppointmentById(id);
     }
 }

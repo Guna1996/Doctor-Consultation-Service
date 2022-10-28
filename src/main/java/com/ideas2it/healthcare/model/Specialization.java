@@ -11,8 +11,11 @@ import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * <p>
@@ -21,11 +24,9 @@ import java.util.Set;
  * layer
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 
 @Getter
@@ -35,12 +36,12 @@ public class Specialization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = Constants.NAME)
     private String name;
 
-    @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    @Column(name = Constants.STATUS)
+    private String status;
 }

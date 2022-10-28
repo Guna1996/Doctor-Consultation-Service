@@ -87,10 +87,6 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public ClinicDto updateClinic(ClinicDto clinicDto) {
-        Optional<Clinic> clinicById = clinicRepository.findByIdAndStatus(clinicDto.getId(), Constants.ACTIVE);
-        if (clinicById.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
-        }
         return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
     }
 
@@ -111,6 +107,9 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.existsByIdAndStatus(id, Constants.ACTIVE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
         return doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows);
     }

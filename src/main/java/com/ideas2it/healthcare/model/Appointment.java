@@ -41,28 +41,28 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "scheduled_on")
+    @Column(name = Constants.SCHEDULED_ON)
     private LocalDateTime scheduledOn;
 
     @OneToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = Constants.PATIENT_ID)
     private Patient patient;
 
     @OneToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = Constants.DOCTOR_ID)
     private Doctor doctor;
 
     @OneToOne
-    @JoinColumn(name = "clinic_id")
+    @JoinColumn(name = Constants.CLINIC_ID)
     private Clinic clinic;
 
-    @Column(name = "status")
-    private String status = Constants.ACTIVE;
+    @Column(name = Constants.STATUS)
+    private String status;
 
     @CreationTimestamp
-    @Column(name = "created_date")
+    @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
 }

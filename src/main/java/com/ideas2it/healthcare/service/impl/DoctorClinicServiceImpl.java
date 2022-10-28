@@ -50,24 +50,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     @Autowired
     private DoctorService doctorService;
 
-    @Autowired
-    private ClinicService clinicService;
-
-    @Autowired
-    private TimeslotService timeslotService;
-
     /**
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        DoctorClinicDto clinicDoctor = null;
-        if (!doctorService.isDoctorAvailable(doctorClinicDto.getDoctor().getId()) &&
-                clinicService.isClinicAvailable(doctorClinicDto.getClinic().getId())) {
-            throw new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND_TO_ASSIGN);
-        }
-        DoctorClinic doctorClinic = DoctorClinicMapper.fromDto(doctorClinicDto);
-        return DoctorClinicMapper.toDto(doctorClinicRepository.save(doctorClinic));
-
+        return DoctorClinicMapper.toDto(DoctorClinicMapper.fromDto(doctorClinicDto));
     }
 
     /**
@@ -109,7 +96,6 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
@@ -125,6 +111,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_CLINIC_NOT_FOUND));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
         return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());

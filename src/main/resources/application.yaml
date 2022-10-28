@@ -1,9 +1,11 @@
 spring.mvc.pathmatch.matching-strategy: ant_path_matcher
 spring:
   datasource:
-    url: jdbc:mysql://localhost/care
+    url: jdbc:mysql://localhost/healthcare
     username: root
-    password : 098098
+    password : rama
+  main:
+     allow-circular-references: true
 
   jpa:
     hibernate.ddl-auto: update

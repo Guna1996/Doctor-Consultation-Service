@@ -7,11 +7,11 @@
  */
 package com.ideas2it.healthcare.dto;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 /**
  * <p>
@@ -39,5 +39,5 @@ public class AppointmentDto {
 
     private ClinicDto clinic;
 
-    private String status;
+    private String status = Constants.ACTIVE;
 }

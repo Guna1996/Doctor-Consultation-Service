@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,11 +21,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -47,23 +45,23 @@ public class DoctorClinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = "status")
+    @Column(name = Constants.STATUS)
     private String status;
 
     @OneToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = Constants.DOCTOR_ID)
     private Doctor doctor;
 
     @OneToOne
-    @JoinColumn(name = "clinic_id")
+    @JoinColumn(name = Constants.CLINIC_ID)
     private Clinic clinic;
 
     @OneToMany
-    @JoinTable(name = "doctor_clinic_timeslot",
-            joinColumns = @JoinColumn(name = "doctor_clinic_id"),
-            inverseJoinColumns = @JoinColumn(name = "timeslot_id"))
+    @JoinTable(name = Constants.DOCTOR_CLINIC_TIMESLOT,
+            joinColumns = @JoinColumn(name = Constants.DOCTOR_CLINIC_ID),
+            inverseJoinColumns = @JoinColumn(name = Constants.TIMESLOT_ID))
     private List<Timeslot> timeslots;
 }

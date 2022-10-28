@@ -11,9 +11,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +23,8 @@ import java.util.List;
 
 /**
  * <p>
- * This TimeslotController class is a Controller class and this
- * class is used to get information and
- * transfer it to TimeslotDto
+ * This TimeslotController class is used to manage
+ * all the timeslots of clinics and doctors.
  * </p>
  *
  * @author Bala Ashwanth
@@ -44,7 +40,8 @@ public class TimeslotController {
 
     /**
      * <p>
-     * Gets all timeslot details
+     * This getAllTimeslots method is used to get
+     * timeslots.
      * </p>
      *
      * @param pageNumber - page number to show
@@ -53,39 +50,14 @@ public class TimeslotController {
      */
     @GetMapping(Constants.PAGE_PATH)
     public List<TimeslotDto> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+                                             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return timeslotService.getTimeslots(pageNumber, totalRows);
     }
 
     /**
      * <p>
-     * Update timeslot details
-     * </p>
-     *
-     * @param timeslotDto is a dto that contains information to update
-     * @return TimeslotDto
-     */
-    @PutMapping
-    public TimeslotDto updateTimeslot(@RequestBody TimeslotDto timeslotDto) {
-        return timeslotService.updateTimeslot(timeslotDto);
-    }
-
-    /**
-     * <p>
-     * Get Timeslot details
-     * </p>
-     *
-     * @param id is an integer that refers id on the database
-     * @return TimeslotDto
-     */
-    @GetMapping(Constants.ID)
-    public TimeslotDto getTimeslotById(@PathVariable(Constants.PATH_ID) int id) {
-        return timeslotService.getTimeslotById(id);
-    }
-
-    /**
-     * <p>
-     * Insert Timeslot details
+     * This insertTimeslot method is used to add
+     * timeslot.
      * </p>
      *
      * @param timeslotDto is a dto object that contains information

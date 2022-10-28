@@ -49,15 +49,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    @Autowired
-    private DoctorService doctorService;
-
-    @Autowired
-    private PatientService patientService;
-
-    @Autowired
-    private ClinicService clinicService;
-
     /**
      * {@inheritDoc}
      */
@@ -68,20 +59,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<AppointmentDto> getAppointments(int pageNumber, int totalRows) {
-        List<Appointment> appointments = appointmentRepository.findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
-        if (appointments.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
-        }
-        return appointments.stream()
-                .map(AppointmentMapper::toDto)
-                .collect(Collectors.toList());
     }
 
     /**
@@ -111,13 +88,18 @@ public class AppointmentServiceImpl implements AppointmentService {
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
-                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().
-                map(AppointmentMapper::toDto).collect(Collectors.toList());
+                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().map(AppointmentMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
         return appointmentRepository.findByDoctorIdAndStatus(

@@ -21,14 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
-
 /**
  * <p>
- * Doctor Clinic Controller class with the helps of getting inputs
- * from doctor and passing it to Doctor Clinic Service to store the data's
- * into the database and it help to do CRUD operation
+ * Doctor Clinic Controller class is used to assign and delete
+ * doctors from clinic and used to get timeslot of a doctor
+ * in a clinic.
  * </p>
  *
  * @author Ramachandran
@@ -44,9 +41,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used to assign doctor id into
-     * Doctor-Clinic table by getting doctor id which are
-     * active in the doctor table
+     * This method is used to assign doctor to
+     * a clinic.
      * </p>
      *
      * @param doctorClinicDto is details of doctor clinic
@@ -59,39 +55,23 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used to get all the doctor
-     * which are active in the clinic table
-     * </p>
-     *
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<DoctorClinicDto>
-     */
-    @GetMapping(Constants.PAGE_PATH)
-    public List<DoctorClinicDto> getDoctorClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                                  @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return doctorClinicService.getDoctorClinics(pageNumber, totalRows);
-    }
-
-    /**
-     * <p>
-     * This deleteDoctorFromClinic method is used to InActive the
-     * doctor column in DoctorClinic table
+     * This deleteDoctorFromClinic method is used to remove
+     * doctor from a clinic.
      * </p>
      *
      * @param id - id of the doctor object
      * @return String
      */
 
-    @PutMapping(Constants.ID)
-    public String deleteDoctorFromClinic(@PathVariable(Constants.PATH_ID) int id) {
+    @PutMapping(Constants.PATH_ID)
+    public String deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
         return doctorClinicService.deleteDoctorFromClinic(id);
     }
 
     /**
      * <p>
-     * This method is used to get doctor clinic object by
-     * getting doctor id and patient id from the user
+     * This method is used get timeslot of a doctor
+     * to the clinics.
      * </p>
      *
      * @param doctorId is id of doctor object
@@ -99,36 +79,8 @@ public class DoctorClinicController {
      * @return DoctorClinicDto
      */
     @GetMapping(Constants.PATIENT_ID_CLINIC_ID)
-    public DoctorClinicDto getTimeslots
-    (@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId, @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
+    public DoctorClinicDto getTimeslots(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
+                                        @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
         return doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId);
-    }
-
-    /**
-     * <p>
-     * This method is used to update doctor id into
-     * Doctor-Clinic table by getting doctor id which are
-     * active in the doctor table
-     * </p>
-     *
-     * @param doctorClinicDto is details of doctor clinic
-     * @return DoctorClinicDto
-     */
-    @PutMapping
-    public DoctorClinicDto updateClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return doctorClinicService.updateDoctorClinic(doctorClinicDto);
-    }
-
-    /**
-     * <p>
-     * Get the Doctor Clinic by id
-     * </p>
-     *
-     * @param id is doctorClinic id
-     * @return DoctorClinicDto
-     */
-    @GetMapping(Constants.ID)
-    public DoctorClinicDto getDoctorClinicById(@PathVariable(Constants.PATH_ID) int id) {
-        return doctorClinicService.getDoctorClinicById(id);
     }
 }

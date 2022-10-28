@@ -50,49 +50,6 @@ public class PatientMapper {
             patient.setMobileNumber(patientDto.getMobileNumber());
             patient.setEmail(patientDto.getEmail());
             patient.setStatus(patientDto.getStatus());
-          /*  List<FeedbackDto> feedbacksDto = patientDto.getFeedbacks();
-            if (null != feedbacksDto) {
-                List<Feedback> feedbacks = new ArrayList<>();
-                feedbacksDto.forEach(feedbackDto -> {
-                    Feedback feedback = new Feedback();
-                    feedback.setId(feedbackDto.getId());
-                    feedback.setComment(feedbackDto.getComment());
-                    feedback.setRating(feedbackDto.getRating());
-                    feedback.setStatus(feedbackDto.getStatus());
-                    feedbacks.add(feedback);
-                });
-                patient.setFeedbacks(feedbacks);
-            }
-            List<AppointmentDto> appointmentsDto = patientDto.getAppointment();
-            if (null != appointmentsDto) {
-                List<Appointment> appointments = new ArrayList<>();
-                appointmentsDto.forEach(appointmentDto -> {
-                    Appointment appointment = new Appointment();
-                    appointment.setId(appointmentDto.getId());
-                    appointment.setScheduledOn(appointmentDto.getScheduledOn());
-                    appointment.setStatus(appointmentDto.getStatus());
-                    appointments.add(appointment);
-                });
-                patient.setAppointment(appointments);
-            }
-            List<VitalDto> vitalsDto = patientDto.getVitals();
-            if (null != vitalsDto) {
-                List<Vital> vitals = new ArrayList<>();
-                vitalsDto.forEach(vitalDto -> {
-                    Vital vital = new Vital();
-                    vital.setId(vitalDto.getId());
-                    vital.setHeight(vitalDto.getHeight());
-                    vital.setWeight(vitalDto.getWeight());
-                    vital.setPulse(vitalDto.getPulse());
-                    vital.setDiastolic(vitalDto.getDiastolic());
-                    vital.setSystolic(vitalDto.getSystolic());
-                    vital.setSugarLevel(vitalDto.getSugarLevel());
-                    vital.setStatus(vitalDto.getStatus());
-                    vital.setBloodPressure(vitalDto.getBloodPressure());
-                    vitals.add(vital);
-                });
-                patient.setVitals(vitals);
-            }*/
         }
         return patient;
     }
@@ -115,49 +72,6 @@ public class PatientMapper {
             patientDto.setMobileNumber(patient.getMobileNumber());
             patientDto.setEmail(patient.getEmail());
             patientDto.setStatus(patient.getStatus());
-            /*List<Feedback> feedbacks = patient.getFeedbacks();
-            if (null != feedbacks) {
-                List<FeedbackDto> feedbacksDto = new ArrayList<>();
-                feedbacks.forEach(feedback -> {
-                    FeedbackDto feedbackDto = new FeedbackDto();
-                    feedbackDto.setId(feedback.getId());
-                    feedbackDto.setComment(feedback.getComment());
-                    feedbackDto.setRating(feedback.getRating());
-                    feedbackDto.setStatus(feedback.getStatus());
-                    feedbacksDto.add(feedbackDto);
-                });
-                patientDto.setFeedbacks(feedbacksDto);
-            }
-            List<Appointment> appointments = patient.getAppointment();
-            if (null != appointments) {
-                List<AppointmentDto> appointmentsDtoList = new ArrayList<>();
-                appointments.forEach(appointment -> {
-                    AppointmentDto appointmentDto = new AppointmentDto();
-                    appointmentDto.setId(appointment.getId());
-                    appointmentDto.setScheduledOn(appointment.getScheduledOn());
-                    appointmentDto.setStatus(appointment.getStatus());
-                    appointmentsDtoList.add(appointmentDto);
-                });
-                patientDto.setAppointment(appointmentsDtoList);
-            }
-            List<Vital> vitals = patient.getVitals();
-            if (null != vitals) {
-                List<VitalDto> vitalsDto = new ArrayList<>();
-                vitals.forEach(vital -> {
-                    VitalDto vitaldto = new VitalDto();
-                    vitaldto.setId(vital.getId());
-                    vitaldto.setHeight(vital.getHeight());
-                    vitaldto.setWeight(vital.getWeight());
-                    vitaldto.setPulse(vital.getPulse());
-                    vitaldto.setDiastolic(vital.getDiastolic());
-                    vitaldto.setSystolic(vital.getSystolic());
-                    vitaldto.setSugarLevel(vital.getSugarLevel());
-                    vitaldto.setStatus(vital.getStatus());
-                    vitaldto.setBloodPressure(vitaldto.getBloodPressure());
-                    vitalsDto.add(vitaldto);
-                });
-                patientDto.setVitals(vitalsDto);
-            }*/
         }
         return patientDto;
     }

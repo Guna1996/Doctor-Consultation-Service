@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the service interfaces
- * which is for doctor, patient and clinic
+ * This package contains interfaces of DoctorClinicService,
+ * PatientService, DoctorService, ClinicService,
+ * AppointmentService, FeedbackService, SpecializationService,
+ * TimeslotControllerService, VitalServiceImpl.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -15,9 +17,9 @@ import java.util.List;
 
 /**
  * <p>
- * This DoctorService interface is a service interface and this
- * interface is used to contain the body of DoctorServiceImpl
- * class's methods
+ * DoctorService interface consists of abstract methods which is used
+ * for performing CRUD operation. it is used to transfer objects between
+ * controller and repository
  * </p>
  *
  * @author Mohamed Jubair
@@ -71,18 +73,27 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to find
-     * whether the doctor is deleted
-     * or not by returning boolean
-     * to another services
+     * This method is used to get appointments of a particular doctor
+     * by doctor id
      * </p>
      *
-     * @param id {@link int}
-     * @return {@link String}
+     * @param doctorId is id of doctor
+     * @param pageNumber is page number of appointments
+     * @param totalRows is required number of rows to be displayed
+     * @return List<AppointmentDto>
      */
-    boolean isDoctorAvailable(int id);
-
     List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
 
+    /**
+     * <p>
+     * This method is used to get feedbacks of a particular doctor
+     * by doctor id
+     * </p>
+     *
+     * @param doctorId is id of doctor
+     * @param pageNumber is page number of feedbacks
+     * @param totalRows is required number of rows to be displayed
+     * @return List<FeedbackDto>
+     */
     List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows);
 }

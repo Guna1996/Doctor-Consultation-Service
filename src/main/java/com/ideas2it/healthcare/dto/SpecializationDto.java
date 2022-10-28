@@ -32,11 +32,8 @@ public class SpecializationDto {
 
     private int id;
 
-    @NotNull(message = "Name is mandatory")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
+    @NotNull(message = "Specialization name is mandatory")
     private String name;
 
-    private String status;
-
-    private Set<DoctorDto> doctors;
+    private String status = Constants.ACTIVE;
 }
