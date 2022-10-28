@@ -56,7 +56,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto) {
+    public DoctorDto saveDoctor(DoctorDto doctorDto) {
         return DoctorMapper.toDto(doctorRepository.save(DoctorMapper.fromDto(doctorDto)));
     }
 
@@ -84,6 +84,11 @@ public class DoctorServiceImpl implements DoctorService {
                 .map(DoctorMapper::toDto)
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND));
+    }
+
+    @Override
+    public DoctorDto updateDoctor(DoctorDto doctorDto){
+        return this.saveDoctor(doctorDto);
     }
 
     /**

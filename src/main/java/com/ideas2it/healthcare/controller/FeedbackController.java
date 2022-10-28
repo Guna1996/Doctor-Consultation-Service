@@ -9,14 +9,19 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -45,8 +50,10 @@ public class FeedbackController {
      * @return FeedbackDto
      */
     @PostMapping
-    public FeedbackDto insertFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return feedbackService.addFeedback(feedbackDto);
+    public ResponseEntity<Map<String, Object>> insertFeedback(@RequestBody FeedbackDto feedbackDto) {
+        return Response.responseEntity("Succes",
+                feedbackService.addFeedback(feedbackDto),
+                HttpStatus.OK);
     }
 
     /**
@@ -58,8 +65,8 @@ public class FeedbackController {
      * @param id is an integer that refer id in database
      * @return String
      */
-    @PutMapping(Constants.URL_ID)
-    public String deleteFeedbackById(@PathVariable(Constants.ID) int id) {
-        return feedbackService.deleteFeedback(id);
+    @PutMapping(Constants.PATH_ID)
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) int id) {
+        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
     }
 }
