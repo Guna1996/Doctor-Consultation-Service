@@ -13,8 +13,11 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.VitalDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,7 +41,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/patient")
+@RequestMapping(Constants.URL_PATIENT)
 public class PatientController {
 
     @Autowired
@@ -53,8 +57,8 @@ public class PatientController {
      * @return String
      */
     @PostMapping
-    public PatientDto addPatient(@RequestBody PatientDto patientDto) {
-        return patientService.addPatient(patientDto);
+    public ResponseEntity<Map<String, Object>> addPatient(@RequestBody PatientDto patientDto) {
+        return Response.responseEntity("Success", patientService.addPatient(patientDto), HttpStatus.OK);
     }
 
     /**
@@ -66,9 +70,9 @@ public class PatientController {
      * @param id is patient id
      * @return PatientDto
      */
-    @GetMapping(Constants.PATH_ID)
-    public PatientDto getPatientById(@PathVariable int id) {
-        return patientService.getPatientById(id);
+    @GetMapping(Constants.URL_ID)
+    public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable int id) {
+        return Response.responseEntity("Success", patientService.getPatientById(id), HttpStatus.OK);
     }
 
     /**
@@ -81,8 +85,8 @@ public class PatientController {
      * @return PatientDto
      */
     @PutMapping
-    public PatientDto updatePatient(@RequestBody PatientDto patientDto) {
-        return  patientService.updatePatient(patientDto);
+    public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
+        return Response.responseEntity("Success", patientService.updatePatient(patientDto), HttpStatus.OK);
     }
 
 
@@ -97,11 +101,13 @@ public class PatientController {
      * @param totalRows
      * @return List<VitalDto>
      */
-    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
-    public List<VitalDto> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGINATION)
+    public ResponseEntity<Map<String, Object>> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
                                               @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                               @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return patientService.getVitalsByPatientId(patientId, pageNumber, totalRows);
+        return Response.responseEntity("Success",
+                patientService.getVitalsByPatientId(patientId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 
     /**
@@ -116,9 +122,11 @@ public class PatientController {
      * @return List<AppointmentDto>
      */
     @GetMapping(Constants.PATIENT_APPOINTMENT)
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+    public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
                                                            @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                                            @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return patientService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
+        return Response.responseEntity("Success",
+                patientService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 }

@@ -11,14 +11,12 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repo.ClinicRepository;
-import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -95,7 +92,7 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public String deleteClinicById(int id) {
         if (clinicRepository.deleteClinicById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.CLINIC_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;
     }

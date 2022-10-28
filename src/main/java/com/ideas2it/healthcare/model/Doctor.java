@@ -37,7 +37,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
-@Entity(name = "doctor")
+@Entity(name = Constants.DOCTOR)
 public class Doctor {
 
     @Id

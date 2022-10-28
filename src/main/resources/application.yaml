@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/healthcare
     username: root
-    password : rama
+    password : Jubair@1999
   main:
      allow-circular-references: true
 

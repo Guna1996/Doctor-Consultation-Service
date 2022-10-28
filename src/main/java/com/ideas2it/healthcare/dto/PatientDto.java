@@ -10,6 +10,8 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,23 +41,23 @@ public class PatientDto {
 
     private int id;
 
-    @NotNull(message = "Name is mandatory")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
+    @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
     private String name;
 
-    @NotNull(message = "Registration year is mandatory")
-    @Past(message = "Entered Year is not valid")
+    @NotNull(message = ErrorConstants.DATE_OF_BIRTH_SHOULD_NOT_BE_NULL)
+    @Past(message = MessageConstants.ENTER_VALID_DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
-    @NotNull(message = "Gender is mandatory")
-    @Pattern(regexp = Constants.GENDER_REGEX, message = "Enter Male or Female")
+    @NotNull(message = ErrorConstants.GENDER_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.GENDER_REGEX, message = MessageConstants.ENTER_MALE_OR_FEMALE)
     private String gender;
 
-    @NotNull(message = "Mobile Number is mandatory")
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Enter valid Mobile Number")
+    @NotNull(message = ErrorConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = MessageConstants.ENTER_VALID_MOBILE_NUMBER)
     private String mobileNumber;
 
-    @Email(message = "Enter valid mail id")
+    @Email(message = MessageConstants.ENTER_VALID_EMAIL)
     private String email;
 
     private String status = Constants.ACTIVE;

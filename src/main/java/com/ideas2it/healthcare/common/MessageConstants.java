@@ -23,13 +23,11 @@ package com.ideas2it.healthcare.common;
  */
 public class MessageConstants {
 
-    public static final String DELETED_SUCCESSFULLY = "Deleted successfully";
-
     public static final String DOCTOR_NOT_FOUND_TO_ASSIGN = "Doctor not found to assign";
 
-    public static final String DOCTOR_NOT_FOUND_TO_DELETE = "Doctor not found to delete";
+    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
 
-    public static final String DOCTOR_ID_NOT_FOUND_TO_UPDATE = "Doctor id not found to update";
+    public static final String DOCTOR_UNABLE_TO_UPDATE = "Doctor unable to update";
 
     public static final String DOCTOR_ID_CLINIC_ID_NOT_FOUND = "Doctor id and clinic id not found";
 
@@ -39,13 +37,15 @@ public class MessageConstants {
 
     public static final String DATA_DOES_NOT_EXIST = "The data doesn't exist";
 
-    public static final String DATA_IS_EMPTY = "Data is empty";
+    public static final String TIMESLOT_IS_EMPTY = "Timeslot is empty";
 
     public static final String FEEDBACK_NOT_FOUND = "Feedback not found";
 
     public static final String PATIENT_NOT_FOUND = "Patient not found";
 
-    public static final String NO_SPECIALIZATION_IS_PRESENT = "No Specialization is Present";
+    public static final String SPECIALIZATIONS_NOT_FOUND = "Specialization not found";
+
+    public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
 
     public static final String TIMESLOT_NOT_FOUND = "Timeslot not found";
 
@@ -55,5 +55,30 @@ public class MessageConstants {
 
     public static final String LOW = "Low";
 
-    public static final String PATIENT_CANNOT_ABLE_TO_UPDATE = "Patient can't able to update";
+    public static final String PATIENT_UNABLE_TO_UPDATE = "Patient unable to update";
+
+    public static final String NAME_FORMAT = "Enter Your name in this format Jubair";
+
+    public static final String ENTER_VALID_STREET_NAME = "Please enter valid street name";
+
+    public static final String ENTER_VALID_CITY_NAME = "Please enter valid city name";
+
+    public static final String ENTER_VALID_STATE_NAME = "Please enter valid state name";
+
+    public static final String ENTER_VALID_PIN_CODE = "Please enter valid pin code";
+
+    public static final String MOBILE_NUMBER_SHOULD_NOT_BE_NULL = "Mobile number should not be null";
+
+    public static final String ENTER_VALID_DATE_OF_BIRTH = "Please enter valid date of birth";
+
+    public static final String ENTER_MALE_OR_FEMALE = "Please enter Male or Female";
+
+    public static final String ENTER_VALID_QUALIFICATION = "Please enter valid qualification";
+
+    public static final String ENTER_VALID_REGISTRATION_YEAR = "Please enter valid registration year";
+
+    public static final String ENTER_VALID_MOBILE_NUMBER = "Please enter valid mobile number";
+
+    public static final String ENTER_VALID_EMAIL = "Please enter valid email";
+
 }

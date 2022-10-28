@@ -31,7 +31,7 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-@Entity(name = "specialization")
+@Entity(name = Constants.SPECIALIZATION)
 public class Specialization {
 
     @Id

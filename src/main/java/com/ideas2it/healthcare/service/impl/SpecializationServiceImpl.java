@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -43,7 +44,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
+    public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
         return SpecializationMapper.toDto(specializationRepository.save(SpecializationMapper.fromDto(specializationDto)));
     }
 
@@ -54,7 +55,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
-            throw new NotFoundException(MessageConstants.NO_SPECIALIZATION_IS_PRESENT);
+            throw new NotFoundException(MessageConstants.SPECIALIZATIONS_NOT_FOUND);
 
         }
         return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
@@ -69,7 +70,15 @@ public class SpecializationServiceImpl implements SpecializationService {
                 .stream()
                 .map(SpecializationMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(MessageConstants.NO_SPECIALIZATION_IS_PRESENT));
+                .orElseThrow(() -> new NotFoundException(MessageConstants.SPECIALIZATION_NOT_FOUND));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SpecializationDto updateSpecialization(SpecializationDto specializationDto) {
+        return this.saveSpecialization(specializationDto);
     }
 
     /**
@@ -77,8 +86,8 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     public String deleteSpecializationById(int id) {
         if (specializationRepository.deleteSpecializationById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
         }
-        return MessageConstants.NO_SPECIALIZATION_IS_PRESENT;
+        return MessageConstants.SPECIALIZATION_NOT_FOUND;
     }
 }

@@ -9,17 +9,20 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,7 +35,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/timeslot")
+@RequestMapping(Constants.URL_TIMESLOT)
 public class TimeslotController {
 
     @Autowired
@@ -48,10 +51,12 @@ public class TimeslotController {
      * @param totalRows  - a set of rows to be shown
      * @return List<TimeslotDto>
      */
-    @GetMapping(Constants.PAGE_PATH)
-    public List<TimeslotDto> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return timeslotService.getTimeslots(pageNumber, totalRows);
+    @GetMapping(Constants.PAGINATION)
+    public ResponseEntity<Map<String, Object>> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                               @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        return Response.responseEntity("Success",
+                timeslotService.getTimeslots(pageNumber, totalRows),
+                HttpStatus.OK);
     }
 
     /**
@@ -64,7 +69,9 @@ public class TimeslotController {
      * @return TimeslotDto
      */
     @PostMapping
-    public TimeslotDto insertTimeslot(@RequestBody TimeslotDto timeslotDto) {
-        return timeslotService.addTimeslot(timeslotDto);
+    public ResponseEntity<Map<String, Object>> insertTimeslot(@RequestBody TimeslotDto timeslotDto) {
+        return Response.responseEntity("Success",
+                timeslotService.addTimeslot(timeslotDto),
+                HttpStatus.OK);
     }
 }

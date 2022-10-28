@@ -9,8 +9,12 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.dto.DoctorClinicDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -33,7 +38,7 @@ import java.util.List;
  * @version 1
  * @since 2022-10-10
  */
-@RequestMapping("/clinic")
+@RequestMapping(Constants.URL_CLINIC)
 @RestController
 public class ClinicController {
 
@@ -50,8 +55,10 @@ public class ClinicController {
      * @return ClinicDto
      */
     @PostMapping
-    public ClinicDto addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return clinicService.addClinic(clinicDto);
+    public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
+        return Response.responseEntity("Success",
+                clinicService.addClinic(clinicDto),
+                HttpStatus.OK);
     }
 
     /**
@@ -64,10 +71,12 @@ public class ClinicController {
      * @param totalRows  is a set of rows to be shown
      * @return List<ClinicDto>
      */
-    @GetMapping(Constants.PAGE_PATH)
-    public List<ClinicDto> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+    @GetMapping(Constants.PAGINATION)
+    public ResponseEntity<Map<String, Object>> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                       @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return clinicService.getClinics(pageNumber, totalRows);
+        return Response.responseEntity("Success",
+                clinicService.getClinics(pageNumber, totalRows),
+                HttpStatus.OK);
     }
 
     /**
@@ -80,9 +89,11 @@ public class ClinicController {
      * @param id is clinic id
      * @return ClinicDto
      */
-    @GetMapping(Constants.PATH_ID)
-    public ClinicDto getClinicById(@PathVariable(Constants.ID) int id) {
-        return clinicService.getClinicById(id);
+    @GetMapping(Constants.URL_ID)
+    public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) int id) {
+        return Response.responseEntity("Success",
+                clinicService.getClinicById(id),
+                HttpStatus.OK);
     }
 
     /**
@@ -95,8 +106,10 @@ public class ClinicController {
      * @return ClinicDto
      */
     @PutMapping
-    public ClinicDto updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return clinicService.updateClinic(clinicDto);
+    public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
+        return Response.responseEntity("Success",
+                clinicService.updateClinic(clinicDto),
+                HttpStatus.OK);
     }
 
     /**
@@ -108,9 +121,9 @@ public class ClinicController {
      * @param id is clinic id
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
-    public String deleteClinic(@PathVariable(Constants.ID) int id) {
-        return clinicService.deleteClinicById(id);
+    @PutMapping(Constants.URL_ID)
+    public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) int id) {
+        return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK);
     }
 
     /**
@@ -125,9 +138,11 @@ public class ClinicController {
      * @return List<DoctorClinicDto>
      */
     @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
-    public List<DoctorClinicDto> getDoctorsByClinicId(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
+    public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
                                                       @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                                       @PathVariable(Constants.TOTAL_ROWS) int totalRows){
-        return clinicService.getDoctorsByClinicId(doctorId, pageNumber, totalRows);
+        return Response.responseEntity("Success",
+                clinicService.getDoctorsByClinicId(doctorId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 }
