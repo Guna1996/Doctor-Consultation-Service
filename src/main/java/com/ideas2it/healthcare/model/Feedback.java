@@ -36,7 +36,7 @@ import javax.persistence.OneToOne;
  *
  * @since   2022-10-10
  */
-@Entity(name = "feedback")
+@Entity(name = Constants.FEEDBACK)
 @Getter
 @Setter
 public class Feedback {

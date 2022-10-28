@@ -31,7 +31,7 @@ import javax.validation.Valid;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping(Constants.URL_APPOINTMENT)
 public class AppointmentController {
 
     @Autowired
@@ -75,7 +75,7 @@ public class AppointmentController {
      * @param id is appointment id
      * @return string
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public String deleteAppointment(@PathVariable(Constants.ID) int id) {
         return appointmentService.deleteAppointmentById(id);
     }

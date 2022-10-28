@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping(Constants.URL_FEEDBACK)
 public class FeedbackController {
 
     @Autowired
@@ -58,7 +58,7 @@ public class FeedbackController {
      * @param id is an integer that refer id in database
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public String deleteFeedbackById(@PathVariable(Constants.ID) int id) {
         return feedbackService.deleteFeedback(id);
     }
