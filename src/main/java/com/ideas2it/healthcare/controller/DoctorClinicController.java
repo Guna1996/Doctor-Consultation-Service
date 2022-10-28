@@ -62,7 +62,7 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This deleteDoctorFromClinic method is used to remove
+     * This method is used to remove
      * doctor from a clinic.
      * </p>
      *

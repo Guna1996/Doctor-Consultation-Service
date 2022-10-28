@@ -46,7 +46,7 @@ public class DoctorController {
 
     /**
      * <p>
-     * This addDoctor method is used to get details of doctor
+     * This method is used to add details of doctor
      * after validating it.
      * </p>
      *
@@ -97,7 +97,7 @@ public class DoctorController {
 
     /**
      * <p>
-     * This updateDoctor method is used to update the details of
+     * This method is used to update the details of
      * doctor after validating it.
      * </p>
      *
@@ -113,8 +113,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This deleteDoctorById method is used
-     * to remove a doctor.
+     * This method is used to remove a doctor details
+     * by doctor id
      * </p>
      *
      * @param id is id of doctor
@@ -128,7 +128,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to get appointments
-     * of a doctor.
+     * of a doctor by doctor id
      * </p>
      *
      * @param doctorId is id of doctor
@@ -148,7 +148,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to get feedbacks
-     * of a doctor.
+     * of a doctor by doctor id
      * </p>
      *
      * @param doctorId is id of doctor
@@ -157,7 +157,7 @@ public class DoctorController {
      * @return List<FeedbackDto>
      */
     @GetMapping(Constants.PATH_FEEDBACK_ID)
-    public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(@PathVariable(name = Constants.URL_CLINIC_ID) int doctorId,
+    public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(@PathVariable(name = Constants.URL_DOCTOR_ID) int doctorId,
                                                     @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                                     @PathVariable(name = Constants.TOTAL_ROWS) int totalRows){
         return Response.responseEntity("Success",

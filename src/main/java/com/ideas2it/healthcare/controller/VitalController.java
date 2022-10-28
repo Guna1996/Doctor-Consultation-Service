@@ -42,15 +42,16 @@ public class VitalController {
 
     /**
      * <p>
-     * This insertVitals method is used to add vitals
-     * of a patient.
+     * This method is used to add vitals
+     * of a patient into database
+     * 
      *</p>
      *
      * @param vitalsDto is a dto object that contains information
      * @return VitalDto
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> insertVitals(@RequestBody VitalDto vitalsDto) {
+    public ResponseEntity<Map<String, Object>> addVitals(@RequestBody VitalDto vitalsDto) {
         return Response.responseEntity("Success",
                 vitalService.addVitals(vitalsDto),
                 HttpStatus.OK);

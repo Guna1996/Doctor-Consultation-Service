@@ -45,7 +45,7 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to get details of Specialization
+     * This method is used to add details of Specialization
      * after validating it.
      * </p>
      *
@@ -61,8 +61,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This getAllSpecializations method is used to get
-     * All the details of Specialization.
+     * This method is used to get All the details
+     * of Specialization.
      * </p>
      *
      * @param pageNumber is page number to show
@@ -79,8 +79,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to get details of Specialization
-     * of a particular doctor by id.
+     * This method is used to get details of a particular specialization
+     * by particular specialization id.
      * </p>
      *
      * @param id is id of Specialization
@@ -111,8 +111,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This deleteSpecializationById method is used to
-     * remove the details of Specialization.
+     * This method is used to remove the Specialization
+     *  by specialization id
      * </p>
      *
      * @param id is id of Specialization
