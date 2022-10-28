@@ -41,7 +41,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/patient")
+@RequestMapping(Constants.URL_PATIENT)
 public class PatientController {
 
     @Autowired
@@ -70,7 +70,7 @@ public class PatientController {
      * @param id is patient id
      * @return PatientDto
      */
-    @GetMapping(Constants.PATH_ID)
+    @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable int id) {
         return Response.responseEntity("Success", patientService.getPatientById(id), HttpStatus.OK);
     }
@@ -101,7 +101,7 @@ public class PatientController {
      * @param totalRows
      * @return List<VitalDto>
      */
-    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGINATION)
     public ResponseEntity<Map<String, Object>> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
                                               @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                               @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {

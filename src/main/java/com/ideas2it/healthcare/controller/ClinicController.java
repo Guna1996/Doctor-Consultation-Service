@@ -38,7 +38,7 @@ import java.util.Map;
  * @version 1
  * @since 2022-10-10
  */
-@RequestMapping("/clinic")
+@RequestMapping(Constants.URL_CLINIC)
 @RestController
 public class ClinicController {
 
@@ -71,7 +71,7 @@ public class ClinicController {
      * @param totalRows  is a set of rows to be shown
      * @return List<ClinicDto>
      */
-    @GetMapping(Constants.PAGE_PATH)
+    @GetMapping(Constants.PAGINATION)
     public ResponseEntity<Map<String, Object>> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                       @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return Response.responseEntity("Success",
@@ -89,7 +89,7 @@ public class ClinicController {
      * @param id is clinic id
      * @return ClinicDto
      */
-    @GetMapping(Constants.PATH_ID)
+    @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) int id) {
         return Response.responseEntity("Success",
                 clinicService.getClinicById(id),
@@ -121,7 +121,7 @@ public class ClinicController {
      * @param id is clinic id
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) int id) {
         return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK);
     }

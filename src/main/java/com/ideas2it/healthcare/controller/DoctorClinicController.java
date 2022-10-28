@@ -38,7 +38,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/doctor-clinic")
+@RequestMapping(Constants.URL_DOCTOR_CLINIC)
 public class DoctorClinicController {
 
     @Autowired
@@ -69,8 +69,7 @@ public class DoctorClinicController {
      * @param id - id of the doctor object
      * @return String
      */
-
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
         return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
     }

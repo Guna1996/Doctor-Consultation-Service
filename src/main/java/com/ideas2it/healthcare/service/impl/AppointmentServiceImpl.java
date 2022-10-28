@@ -83,7 +83,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String deleteAppointmentById(int id) {
         if (appointmentRepository.deleteAppointmentById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
     }

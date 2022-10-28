@@ -38,7 +38,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/doctor")
+@RequestMapping(Constants.URL_DOCTOR)
 public class DoctorController {
 
     @Autowired

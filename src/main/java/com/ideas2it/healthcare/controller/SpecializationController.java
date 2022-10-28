@@ -37,7 +37,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/specialization")
+@RequestMapping(Constants.URL_SPECIALIZATION)
 public class SpecializationController {
 
     @Autowired
@@ -69,7 +69,7 @@ public class SpecializationController {
      * @param totalRows  is a set of rows to be shown
      * @return List<SpecializationDto>
      */
-    @GetMapping(Constants.PAGE_PATH)
+    @GetMapping(Constants.PAGINATION)
     public ResponseEntity<Map<String, Object>> getAllSpecializations(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                                          @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return Response.responseEntity("Success",
@@ -86,7 +86,7 @@ public class SpecializationController {
      * @param id is id of Specialization
      * @return SpecializationDto
      */
-    @GetMapping(Constants.PATH_ID)
+    @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable int id) {
         return Response.responseEntity("Sucess",
                 specializationService.getSpecializationById(id),
@@ -118,7 +118,7 @@ public class SpecializationController {
      * @param id is id of Specialization
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
         return new ResponseEntity<>(specializationService.deleteSpecializationById(id), HttpStatus.OK);
     }

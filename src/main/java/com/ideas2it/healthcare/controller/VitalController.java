@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.VitalService;
@@ -33,7 +34,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping(value = "/vital")
+@RequestMapping(Constants.URL_VITAL)
 public class VitalController {
 
     @Autowired

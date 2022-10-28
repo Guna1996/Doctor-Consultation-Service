@@ -35,7 +35,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping(Constants.URL_APPOINTMENT)
 public class AppointmentController {
 
     @Autowired
@@ -83,7 +83,7 @@ public class AppointmentController {
      * @param id is appointment id
      * @return string
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) int id) {
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }

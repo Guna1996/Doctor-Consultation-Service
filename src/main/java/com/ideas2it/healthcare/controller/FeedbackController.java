@@ -34,7 +34,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping(Constants.URL_FEEDBACK)
 public class FeedbackController {
 
     @Autowired
