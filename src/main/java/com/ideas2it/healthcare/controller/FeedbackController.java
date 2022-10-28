@@ -65,7 +65,7 @@ public class FeedbackController {
      * @param id is an integer that refer id in database
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
+    @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) int id) {
         return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
     }

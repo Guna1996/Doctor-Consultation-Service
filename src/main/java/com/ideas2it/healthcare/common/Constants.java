@@ -105,7 +105,7 @@ public class Constants {
 
     public static final String GET_PATIENT_PATH = "/patient/{patientId}/{pageNumber}/{totalRows}";
 
-    public static final String PATIENT_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
+    public static final String DOCTOR_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
 
     public static final String VITAL_PATIENT_ID = "/vital/{patientId}";
 

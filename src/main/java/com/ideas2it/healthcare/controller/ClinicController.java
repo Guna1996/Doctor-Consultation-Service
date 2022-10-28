@@ -130,9 +130,9 @@ public class ClinicController {
      * who are worked in a clinic.
      * </p>
      *
-     * @param clinicId
-     * @param pageNumber
-     * @param totalRows
+     * @param clinicId is id of clinic
+     * @param pageNumber is page number to show
+     * @param totalRows  is a set of rows to be shown
      * @return List<DoctorClinicDto>
      */
     @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
