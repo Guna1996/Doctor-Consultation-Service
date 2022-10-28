@@ -96,9 +96,9 @@ public class PatientController {
      * get vitals of patient.
      * </p>
      *
-     * @param patientId
-     * @param pageNumber
-     * @param totalRows
+     * @param patientId is id of patient
+     * @param pageNumber is page number to show
+     * @param totalRows  is a set of rows to be shown
      * @return List<VitalDto>
      */
     @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGINATION)
@@ -116,9 +116,9 @@ public class PatientController {
      * to get list of appointments of a patient.
      * </p>
      *
-     * @param patientId
-     * @param pageNumber
-     * @param totalRows
+     * @param patientId is id of patient
+     * @param pageNumber is page number to show
+     * @param totalRows  is a set of rows to be shown
      * @return List<AppointmentDto>
      */
     @GetMapping(Constants.PATIENT_APPOINTMENT)
