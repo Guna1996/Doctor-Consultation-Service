@@ -11,8 +11,11 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -49,8 +54,10 @@ public class DoctorClinicController {
      * @return DoctorClinicDto
      */
     @PostMapping
-    public DoctorClinicDto assignDoctorToClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
-        return doctorClinicService.assignDoctorToClinic(doctorClinicDto);
+    public ResponseEntity<Map<String, Object>> assignDoctorToClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
+        return Response.responseEntity("Success",
+                doctorClinicService.assignDoctorToClinic(doctorClinicDto),
+                HttpStatus.OK);
     }
 
     /**
@@ -64,8 +71,8 @@ public class DoctorClinicController {
      */
 
     @PutMapping(Constants.PATH_ID)
-    public String deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
-        return doctorClinicService.deleteDoctorFromClinic(id);
+    public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
+        return new ResponseEntity<>(doctorClinicService.deleteDoctorFromClinic(id), HttpStatus.OK);
     }
 
     /**
@@ -79,8 +86,10 @@ public class DoctorClinicController {
      * @return DoctorClinicDto
      */
     @GetMapping(Constants.PATIENT_ID_CLINIC_ID)
-    public DoctorClinicDto getTimeslots(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
-                                        @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
-        return doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId);
+    public ResponseEntity<Map<String, Object>> getTimeslots(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
+                                                            @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
+        return Response.responseEntity("Success",
+                doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
+                HttpStatus.OK);
     }
 }

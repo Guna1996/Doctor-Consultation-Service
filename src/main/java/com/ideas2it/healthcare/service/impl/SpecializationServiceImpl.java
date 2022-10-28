@@ -43,7 +43,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public SpecializationDto saveOrUpdateSpecialization(SpecializationDto specializationDto) {
+    public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
         return SpecializationMapper.toDto(specializationRepository.save(SpecializationMapper.fromDto(specializationDto)));
     }
 
@@ -70,6 +70,14 @@ public class SpecializationServiceImpl implements SpecializationService {
                 .map(SpecializationMapper::toDto)
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException(MessageConstants.NO_SPECIALIZATION_IS_PRESENT));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SpecializationDto updateSpecialization(SpecializationDto specializationDto) {
+        return this.saveSpecialization(specializationDto);
     }
 
     /**

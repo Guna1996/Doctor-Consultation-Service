@@ -8,11 +8,12 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.dto.FeedbackDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -53,8 +54,10 @@ public class DoctorController {
      * @return DoctorDto
      */
     @PostMapping
-    public DoctorDto addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return doctorService.saveOrUpdateDoctor(doctorDto);
+    public ResponseEntity<Map<String,Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
+        return Response.responseEntity("Success",
+                doctorService.saveDoctor(doctorDto),
+                HttpStatus.OK);
     }
 
 
@@ -69,9 +72,11 @@ public class DoctorController {
      * @return List<DoctorDto>
      */
     @GetMapping(Constants.PAGE_PATH)
-    public List<DoctorDto> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                         @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return doctorService.getAllDoctors(pageNumber, totalRows);
+    public ResponseEntity<Map<String, Object>> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        return Response.responseEntity("Success",
+                doctorService.getAllDoctors(pageNumber, totalRows),
+                HttpStatus.OK);
     }
 
     /**
@@ -84,8 +89,10 @@ public class DoctorController {
      * @return DoctorDto
      */
     @GetMapping(Constants.PATH_ID)
-    public DoctorDto getDoctorById(@PathVariable int id) {
-        return doctorService.getDoctorById(id);
+    public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable int id) {
+        return Response.responseEntity("Success",
+                doctorService.getDoctorById(id),
+                HttpStatus.OK);
     }
 
     /**
@@ -98,8 +105,10 @@ public class DoctorController {
      * @return DoctorDto
      */
     @PutMapping
-    public DoctorDto updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return doctorService.saveOrUpdateDoctor(doctorDto);
+    public ResponseEntity<Map<String,Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
+        return Response.responseEntity("Success",
+                doctorService.updateDoctor(doctorDto),
+                HttpStatus.OK);
     }
 
     /**
@@ -112,8 +121,8 @@ public class DoctorController {
      * @return String
      */
     @PutMapping(Constants.PATH_ID)
-    public String deleteDoctorById(@PathVariable int id) {
-        return doctorService.deleteDoctorById(id);
+    public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
+        return new ResponseEntity<>(doctorService.deleteDoctorById(id), HttpStatus.OK);
     }
 
     /**
@@ -128,10 +137,12 @@ public class DoctorController {
      * @return List<AppointmentDto>
      */
     @GetMapping(Constants.PATH_APPOINTMENT_ID)
-    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+    public ResponseEntity<Map<String, Object>> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return doctorService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
+        return Response.responseEntity("Success",
+                doctorService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 
     /**
@@ -146,9 +157,11 @@ public class DoctorController {
      * @return List<FeedbackDto>
      */
     @GetMapping(Constants.PATH_FEEDBACK_ID)
-    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+    public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
                                                     @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
                                                     @PathVariable(name = Constants.TOTAL_ROWS) int totalRows){
-        return doctorService.getFeedbacks(doctorId, pageNumber, totalRows);
+        return Response.responseEntity("Success",
+                doctorService.getFeedbacks(doctorId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 }
