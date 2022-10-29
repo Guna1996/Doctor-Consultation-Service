@@ -8,17 +8,8 @@
  */
 package com.ideas2it.healthcare.mapper;
 
-import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.dto.VitalDto;
-import com.ideas2it.healthcare.model.Appointment;
-import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
-import com.ideas2it.healthcare.model.Vital;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>

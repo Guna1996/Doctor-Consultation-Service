@@ -45,8 +45,7 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to add clinic details into database
-     * after validating it.
+     * This method is used to add clinic details into database.
      * </p>
      *
      * @param clinicDto is clinic object
@@ -54,7 +53,7 @@ public class ClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.CLINIC_ADDED_SUCCESSFULLY,
                 clinicService.addClinic(clinicDto),
                 HttpStatus.OK);
     }
@@ -72,7 +71,7 @@ public class ClinicController {
     @GetMapping(Constants.PAGINATION)
     public ResponseEntity<Map<String, Object>> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                       @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -88,7 +87,7 @@ public class ClinicController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) int id) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_CLINIC,
                 clinicService.getClinicById(id),
                 HttpStatus.OK);
     }
@@ -104,7 +103,7 @@ public class ClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.CLINIC_UPDATED_SUCCESSFULLY,
                 clinicService.updateClinic(clinicDto),
                 HttpStatus.OK);
     }
@@ -136,8 +135,8 @@ public class ClinicController {
      */
     @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
     public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(@PathVariable(Constants.URL_CLINIC_ID) int clinicId,
-                                                      @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows){
+                                                                    @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                                    @PathVariable(Constants.TOTAL_ROWS) int totalRows){
         return Response.responseEntity("Success",
                 clinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK);

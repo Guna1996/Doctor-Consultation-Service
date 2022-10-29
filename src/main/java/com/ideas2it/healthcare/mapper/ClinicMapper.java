@@ -9,12 +9,7 @@
 package com.ideas2it.healthcare.mapper;
 
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.model.Clinic;
-import com.ideas2it.healthcare.model.DoctorClinic;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -38,7 +33,7 @@ public class ClinicMapper {
      */
     public static Clinic fromDto(ClinicDto clinicDto) {
         Clinic clinic = new Clinic();
-        if (clinicDto != null) {
+        if (null != clinicDto) {
             clinic.setId(clinicDto.getId());
             clinic.setName(clinicDto.getName());
             clinic.setDoorNumber(clinicDto.getDoorNumber());
@@ -62,7 +57,7 @@ public class ClinicMapper {
      */
     public static ClinicDto toDto(Clinic clinic) {
         ClinicDto clinicDto = new ClinicDto();
-        if (clinic != null) {
+        if (null != clinic) {
             clinicDto.setId(clinic.getId());
             clinicDto.setName(clinic.getName());
             clinicDto.setDoorNumber(clinic.getDoorNumber());

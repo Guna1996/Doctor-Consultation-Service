@@ -49,7 +49,7 @@ public class VitalsMapper {
             vital.setCreatedAt(vitalDto.getCreatedAt());
             vital.setBloodPressure(vitalDto.getBloodPressure());
             DoctorDto doctorDto = vitalDto.getDoctor();
-            if (doctorDto != null) {
+            if (null != doctorDto) {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
                 doctor.setName(doctorDto.getName());
