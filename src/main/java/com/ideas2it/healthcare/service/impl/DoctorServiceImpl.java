@@ -48,7 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto) {
+    public DoctorDto saveDoctor(DoctorDto doctorDto) {
         return DoctorMapper.toDto(doctorRepository.save(DoctorMapper.fromDto(doctorDto)));
     }
 
@@ -78,14 +78,19 @@ public class DoctorServiceImpl implements DoctorService {
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND));
     }
 
+    @Override
+    public DoctorDto updateDoctor(DoctorDto doctorDto){
+        return this.saveDoctor(doctorDto);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String deleteDoctorById(int id) {
         if (doctorRepository.deleteDoctorById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.DOCTOR_DELETED_SUCCESSFULLY;
         }
-        return MessageConstants.DOCTOR_NOT_FOUND_TO_DELETE;
+        return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
     }
 }

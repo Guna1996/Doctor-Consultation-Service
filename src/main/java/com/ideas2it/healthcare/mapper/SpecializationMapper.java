@@ -32,9 +32,8 @@ public class SpecializationMapper {
      * @return {@link Specialization}
      */
     public static Specialization fromDto(SpecializationDto specializationDto) {
-
         Specialization specialization = new Specialization();
-        if (specializationDto != null) {
+        if (null != specializationDto) {
             specialization.setId(specializationDto.getId());
             specialization.setName(specializationDto.getName());
             specialization.setStatus(specializationDto.getStatus());
@@ -51,9 +50,8 @@ public class SpecializationMapper {
      * @return {@link SpecializationDto}
      */
     public static SpecializationDto toDto(Specialization specialization) {
-
         SpecializationDto specializationDto = new SpecializationDto();
-        if (specialization != null) {
+        if (null != specialization) {
             specializationDto.setId(specialization.getId());
             specializationDto.setName(specialization.getName());
             specializationDto.setStatus(specialization.getStatus());

@@ -9,9 +9,12 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,7 +36,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping(Constants.URL_FEEDBACK)
 public class FeedbackController {
 
     @Autowired
@@ -40,30 +44,32 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This insertFeedback method is used to get
-     * a feedback from a patient.
+     * This method is used to add a feedback from a patient
+     * into the database
      * </p>
      *
      * @param feedbackDto is dto object that contains information
      * @return FeedbackDto
      */
     @PostMapping
-    public FeedbackDto insertFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return feedbackService.addFeedback(feedbackDto);
+    public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
+        return Response.responseEntity("Succes",
+                feedbackService.addFeedback(feedbackDto),
+                HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This deleteFeedbackById method is used to remove
-     * unwanted feedback from the clinic.
+     * This method is used to remove feedback from the database
+     * by feedback id
      * </p>
      *
      * @param id is an integer that refer id in database
      * @return String
      */
-    @PutMapping(Constants.PATH_ID)
-    public String deleteFeedbackById(@PathVariable(Constants.ID) int id) {
-        return feedbackService.deleteFeedback(id);
+    @PutMapping(Constants.URL_ID)
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) int id) {
+        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
     }
 
     /**

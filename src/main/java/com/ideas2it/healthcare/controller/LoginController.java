@@ -46,6 +46,14 @@ public class LoginController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    /**
+     * <p>
+     * This method is used to perform authentication by generating token while the user login
+     * by username and password. This token can be further used for authorization
+     * </p>
+     *
+     * @parm authenticationRequest contains username and password
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
             throws Exception {
@@ -55,7 +63,7 @@ public class LoginController {
                             authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new NotFoundException(ErrorConstants.INCORRECT_USERNAME_AND_PASSWORD);
+            throw new NotFoundException(ErrorConstants.INCORRECT_USERNAME_OR_PASSWORD);
         }
         final UserDetails userDetails = authenticationService
                 .loadUserByUsername(authenticationRequest.getUsername());

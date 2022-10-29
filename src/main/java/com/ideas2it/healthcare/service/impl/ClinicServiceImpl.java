@@ -11,7 +11,6 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -90,7 +89,7 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public String deleteClinicById(int id) {
         if (clinicRepository.deleteClinicById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.CLINIC_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;
     }

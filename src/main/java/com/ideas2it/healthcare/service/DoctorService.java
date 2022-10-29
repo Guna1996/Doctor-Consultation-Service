@@ -30,14 +30,14 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to create and Update Doctor's record by
+     * This method is used to create Doctor's record by
      * getting DoctorDto as an input and convert it in to
      * Doctor model with the help of mapper class
      * </p>
      *
      * @param doctorDto {@link DoctorDto}
      */
-    DoctorDto saveOrUpdateDoctor(DoctorDto doctorDto);
+    DoctorDto saveDoctor(DoctorDto doctorDto);
 
     /**
      * <p>
@@ -60,6 +60,17 @@ public interface DoctorService {
      * @return {@link DoctorDto}
      */
     DoctorDto getDoctorById(int id);
+
+    /**
+     * <p>
+     * This method is used to update Doctor's record by
+     * getting DoctorDto as an input and convert it in to
+     * Doctor model with the help of mapper class
+     * </p>
+     *
+     * @param doctorDto {@link DoctorDto}
+     */
+    DoctorDto updateDoctor(DoctorDto doctorDto);
 
     /**
      * <p>

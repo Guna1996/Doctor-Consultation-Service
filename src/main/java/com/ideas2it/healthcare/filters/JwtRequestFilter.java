@@ -40,6 +40,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
 
+    /**
+     * <p>
+     * This method is used to filter the user request by authorizing the token
+     * passed using header
+     * </p>
+     *
+     * @parm request
+     * @parm response
+     * @parm chain
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {

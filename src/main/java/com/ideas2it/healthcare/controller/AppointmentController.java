@@ -9,9 +9,12 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
+import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-
+import java.util.Map;
 /**
  * <p>
  * This AppointmentController class is used to fix, reschedule and cancel
@@ -33,7 +36,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping(Constants.URL_APPOINTMENT)
 public class AppointmentController {
 
     @Autowired
@@ -42,29 +45,33 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to add appointment of a
-     * patient after validating it.
+     * patient.
      * </p>
      *
      * @param appointmentDto is appointment object
      * @return AppointmentDto
      */
     @PostMapping
-    public AppointmentDto addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return appointmentService.addAppointment(appointmentDto);
+    public ResponseEntity<Map<String, Object>> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
+        return Response.responseEntity(Constants.APPOINTMENT_ADDED_SUCCESSFULLY,
+                appointmentService.addAppointment(appointmentDto),
+                HttpStatus.OK);
     }
 
     /**
      * <p>
      * This method is used to reschedule appointment
-     * of a patient after validating it.
+     * of a patient.
      * </p>
      *
      * @param appointmentDto is details of appointment
      * @return AppointmentDto
      */
     @PutMapping
-    public AppointmentDto rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return appointmentService.rescheduleAppointment(appointmentDto);
+    public ResponseEntity<Map<String, Object>> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
+        return Response.responseEntity(Constants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
+                appointmentService.rescheduleAppointment(appointmentDto),
+                HttpStatus.OK);
     }
 
     /**
@@ -76,9 +83,9 @@ public class AppointmentController {
      * @param id is appointment id
      * @return string
      */
-    @PutMapping(Constants.PATH_ID)
-    public String deleteAppointment(@PathVariable(Constants.ID) int id) {
-        return appointmentService.deleteAppointmentById(id);
+    @PutMapping(Constants.URL_ID)
+    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) int id) {
+        return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }
 
     /**

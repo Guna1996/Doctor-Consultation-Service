@@ -38,7 +38,7 @@ import java.time.LocalDate;
  */
 @Getter
 @Setter
-@Entity(name = "patient")
+@Entity(name = Constants.PATIENT)
 public class Patient {
 
     @Id

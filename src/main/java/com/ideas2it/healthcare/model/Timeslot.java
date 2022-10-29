@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.model;
 
+import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,7 +34,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = Constants.TIMESLOT)
 public class Timeslot {
 
     @Id

@@ -30,7 +30,7 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This abstract method is used to add appointment details
+     * This method is used to add appointment details
      * into data base by getting details from the user
      * </p>
      *
@@ -41,13 +41,25 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This isAppointmentAvailable abstract method is
-     * used to check whether a appointment is available or not
-     * based on the appointment for doctor in doctor database
+     * This method is used to get appointments
+     * from the database by getting the id and status
+     * from the user to display
      * </p>
      *
-     * @param id       - id of the doctor
-     * @param dateTime - date and time of appointment
+     * @param id is id of the appointment
+     * @return appointmentDto
+     */
+    AppointmentDto getAppointmentById(int id);
+
+    /**
+     * <p>
+     * This method is used to check whether a appointment
+     * is available or not based on the appointment for
+     * doctor in doctor database
+     * </p>
+     *
+     * @param id is id of the doctor
+     * @param dateTime is date and time of appointment
      * @return boolean
      */
     boolean isAppointmentAvailable(int id, LocalDateTime dateTime);
@@ -58,7 +70,7 @@ public interface AppointmentService {
      * all details into the database
      * </p>
      *
-     * @param appointmentDto - appointment detail
+     * @param appointmentDto is appointment detail
      * @return appointmentDto
      */
     AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto);
@@ -76,24 +88,24 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This abstract method is used to get appointments
+     * This method is used to get appointments
      * from the database by patient Id
      * </p>
      *
-     * @param pageNumber - Page number of the page
-     * @param totalRows  - number of rows required
+     * @param pageNumber is Page number of the page
+     * @param totalRows is number of rows required
      * @return List<appointmentDto>
      */
     List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
 
     /**
      * <p>
-     * This abstract method is used to get appointments
+     * This method is used to get appointments
      * from the database by doctor Id
      * </p>
      *
-     * @param pageNumber - Page number of the page
-     * @param totalRows  - number of rows required
+     * @param pageNumber is Page number of the page
+     * @param totalRows is number of rows required
      * @return List<appointmentDto>
      */
     List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);

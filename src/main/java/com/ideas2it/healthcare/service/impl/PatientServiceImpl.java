@@ -75,7 +75,7 @@ public class PatientServiceImpl implements PatientService {
     public PatientDto updatePatient(PatientDto patientDto) {
         Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(), Constants.ACTIVE);
         if (patient.isEmpty()) {
-            throw new NotFoundException(MessageConstants.PATIENT_CANNOT_ABLE_TO_UPDATE);
+            throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
         }
         return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
     }

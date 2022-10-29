@@ -38,14 +38,14 @@ public class DoctorMapper {
      */
     public static Doctor fromDto(DoctorDto doctorDto) {
         Doctor doctor = new Doctor();
-        if (doctorDto != null) {
+        if (null != doctorDto) {
             doctor.setId(doctorDto.getId());
             doctor.setName(doctorDto.getName());
             doctor.setDateOfBirth(doctorDto.getDateOfBirth());
             doctor.setGender(doctorDto.getGender());
             doctor.setQualification(doctorDto.getQualification());
             Set<SpecializationDto> specializationsDto = doctorDto.getSpecializations();
-            if (specializationsDto != null) {
+            if (null != specializationsDto) {
                 Set<Specialization> specializations = new HashSet<>();
                 specializationsDto.forEach(specializationDto -> {
                     Specialization specialization = new Specialization();
@@ -75,7 +75,7 @@ public class DoctorMapper {
      */
     public static DoctorDto toDto(Doctor doctor) {
         DoctorDto doctorDto = new DoctorDto();
-        if (doctor != null) {
+        if (null != doctor) {
             doctorDto.setId(doctor.getId());
             doctorDto.setName(doctor.getName());
             doctorDto.setDateOfBirth(doctor.getDateOfBirth());
@@ -83,7 +83,7 @@ public class DoctorMapper {
             doctorDto.setQualification(doctor.getQualification());
             doctorDto.setConsultationFee(doctor.getConsultationFee());
             Set<Specialization> specializations = doctor.getSpecializations();
-            if (specializations != null) {
+            if (null != specializations) {
                 Set<SpecializationDto> specializationsDto = new HashSet<>();
                 specializations.forEach(specialization -> {
                     SpecializationDto specializationDto = new SpecializationDto();

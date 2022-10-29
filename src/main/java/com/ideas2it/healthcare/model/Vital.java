@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@Entity(name = "vital")
+@Entity(name = Constants.VITAL)
 public class Vital {
 
     @Id

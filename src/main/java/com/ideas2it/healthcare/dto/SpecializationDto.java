@@ -8,6 +8,8 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +32,8 @@ public class SpecializationDto {
 
     private int id;
 
-    @NotNull(message = "Specialization name is mandatory")
+    @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
+    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
     private String name;
 
     private String status = Constants.ACTIVE;

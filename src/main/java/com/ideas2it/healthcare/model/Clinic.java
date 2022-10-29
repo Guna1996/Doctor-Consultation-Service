@@ -29,7 +29,7 @@ import javax.persistence.Id;
  */
 @Getter
 @Setter
-@Entity(name = "clinic")
+@Entity(name = Constants.CLINIC)
 public class Clinic {
 
     @Id

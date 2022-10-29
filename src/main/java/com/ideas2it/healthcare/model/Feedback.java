@@ -36,7 +36,7 @@ import javax.persistence.OneToOne;
  *
  * @since 2022-10-10
  */
-@Entity(name = "feedback")
+@Entity(name = Constants.FEEDBACK)
 @Getter
 @Setter
 public class Feedback {
@@ -45,17 +45,17 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = Constants.COMMENT)
     private String comment;
 
-    @Column
+    @Column(name = Constants.RATING)
     private float rating;
 
     @OneToOne
     @JoinColumn(name = Constants.DOCTOR_ID)
     private Doctor doctor;
 
-    @Column
+    @Column(name = Constants.STATUS)
     private String status;
 
     @OneToOne(cascade = CascadeType.ALL)

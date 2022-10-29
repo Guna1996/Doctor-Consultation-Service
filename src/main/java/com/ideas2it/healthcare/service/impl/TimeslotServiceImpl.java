@@ -53,7 +53,7 @@ public class TimeslotServiceImpl implements TimeslotService {
     public List<TimeslotDto> getTimeslots(int pageNumber, int totalRows) {
         List<Timeslot> timeslots = timeslotRepository.findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (timeslots.isEmpty()) {
-            throw new NotFoundException(MessageConstants.DATA_IS_EMPTY);
+            throw new NotFoundException(MessageConstants.TIMESLOT_IS_EMPTY);
         }
         return timeslots.stream().map(TimeslotMapper::toDto).collect(Collectors.toList());
     }

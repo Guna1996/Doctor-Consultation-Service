@@ -35,13 +35,13 @@ public class Constants {
 
     public static final String GENDER_REGEX = "^male$|^female$";
 
-    public static final String PATH_ID = "/{id}";
+    public static final String URL_ID = "/{id}";
 
     public static final String ID = "id";
 
-    public static final String PATH_DOCTOR_ID = "doctorId";
+    public static final String URL_DOCTOR_ID = "doctorId";
 
-    public static final String PATH_CLINIC_ID = "clinicId";
+    public static final String URL_CLINIC_ID = "clinicId";
 
     public static final String PATIENT_ID = "patient_id";
 
@@ -99,15 +99,13 @@ public class Constants {
 
     public static final String TOTAL_ROWS = "totalRows";
 
-    public static final String PAGE_PATH = "/{pageNumber}/{totalRows}";
+    public static final String PAGINATION = "/{pageNumber}/{totalRows}";
 
-    public static final String GET_PATIENT_PATH = "/patient/{patientId}/{pageNumber}/{totalRows}";
-
-    public static final String PATIENT_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
+    public static final String DOCTOR_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
 
     public static final String VITAL_PATIENT_ID = "/vital/{patientId}";
 
-    public static final String GET_DOCTOR_BY_CLINIC_ID_PATH = "/doctor/{doctorId}/{pageNumber}/{totalRows}";
+    public static final String GET_DOCTOR_BY_CLINIC_ID_PATH = "/doctor/{clinicId}/{pageNumber}/{totalRows}";
 
     public static final String SCHEDULED_ON = "scheduled_on";
 
@@ -118,5 +116,57 @@ public class Constants {
     public static final String PATH_PATIENT_ID = "patientId";
 
     public static final String PATIENT_APPOINTMENT = "/appointment/{patientId}/{pageNumber}/{totalRows}";
+
+    public static final String APPOINTMENT = "appointment";
+
+    public static final String CLINIC = "clinic";
+
+    public static final String DOCTOR = "doctor";
+
+    public static final String RATING = "rating";
+
+    public static final String COMMENT = "comment";
+
+    public static final String DOCTOR_CLINIC = "doctor_clinic";
+
+    public static final String FEEDBACK = "feedback";
+
+    public static final String PATIENT = "patient";
+
+    public static final String SPECIALIZATION = "specialization";
+
+    public static final String TIMESLOT = "timeslot";
+
+    public static final String VITAL = "vital";
+
+    public static final String URL_APPOINTMENT = "/appointment";
+
+    public static final String URL_CLINIC = "/clinic";
+
+    public static final String URL_DOCTOR_CLINIC = "/doctor-clinic";
+
+    public static final String URL_DOCTOR = "/doctor";
+
+    public static final String URL_FEEDBACK = "/feedback";
+
+    public static final String URL_PATIENT = "/patient";
+
+    public static final String URL_SPECIALIZATION = "/specialization";
+
+    public static final String URL_TIMESLOT = "/timeslot";
+
+    public static final String URL_VITAL = "/vital";
+
+    public static final String APPOINTMENT_ADDED_SUCCESSFULLY = "Appointment added successfully";
+
+    public static final String APPOINTMENT_RESCHEDULED_SUCCESSFULLY = "Appointment rescheduled successfully";
+
+    public static final String CLINIC_ADDED_SUCCESSFULLY = "Clinic added successfully";
+
+    public static final String CLINIC_UPDATED_SUCCESSFULLY = "Clinic updated successfully";
+
+    public static final String SUCCESSFULLY_RETRIEVED_CLINICS = "Successfully retrieved clinics";
+
+    public static final String SUCCESSFULLY_RETRIEVED_CLINIC = "Successfully retrieved clinic";
 }
 

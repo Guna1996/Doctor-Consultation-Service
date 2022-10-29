@@ -55,9 +55,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public String deleteDoctorFromClinic(Integer id) {
         if (doctorClinicRepository.deleteDoctorClinicById(id) == 1) {
-            return MessageConstants.DELETED_SUCCESSFULLY;
+            return ErrorConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
         }
-        return MessageConstants.DOCTOR_NOT_FOUND_TO_DELETE;
+        return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
     }
 
     /**
@@ -65,7 +65,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
         if (!doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
-            throw new NotFoundException(MessageConstants.DOCTOR_ID_NOT_FOUND_TO_UPDATE);
+            throw new NotFoundException(MessageConstants.DOCTOR_UNABLE_TO_UPDATE);
         }
         return DoctorClinicMapper.toDto(doctorClinicRepository
                 .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
@@ -87,7 +87,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         return doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(DoctorClinicMapper::toDto).
                 findFirst().
-                orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_CLINIC_NOT_FOUND));
+                orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_OR_CLINIC_NOT_FOUND));
     }
 
     /**

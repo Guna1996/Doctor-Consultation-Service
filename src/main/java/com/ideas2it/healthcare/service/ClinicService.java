@@ -29,12 +29,12 @@ import java.util.List;
 public interface ClinicService {
     /**
      * <p>
-     * This abstract method is used to add appointment details
+     * This method is used to add appointment details
      * into data base by getting details from the
      * user
      * </p>
      *
-     * @param clinicDto - clinic details
+     * @param clinicDto is clinic details
      * @return ClinicDto
      */
     ClinicDto addClinic(ClinicDto clinicDto);
@@ -46,6 +46,8 @@ public interface ClinicService {
      * </p>
      *
      * @return list<ClinicDto>
+     * @param pageNumber
+     * @param totalRows
      */
     List<ClinicDto> getClinics(int pageNumber, int totalRows);
 

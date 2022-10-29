@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@Entity(name = "appointment")
+@Entity(name = Constants.APPOINTMENT)
 public class Appointment {
 
     @Id
