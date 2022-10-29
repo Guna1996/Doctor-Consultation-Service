@@ -67,7 +67,7 @@ public class Doctor {
     private LocalDate dateOfRegistration;
 
     @Column(name = Constants.MOBILE_NUMBER)
-    private String mobileNumber;
+    private Long mobileNumber;
 
     @Column(name = Constants.CITY)
     private String city;

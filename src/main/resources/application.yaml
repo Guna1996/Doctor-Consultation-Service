@@ -4,8 +4,6 @@ spring:
     url: jdbc:mysql://localhost/healthcare
     username: root
     password : Jubair@1999
-  main:
-     allow-circular-references: true
 
   jpa:
     hibernate.ddl-auto: update

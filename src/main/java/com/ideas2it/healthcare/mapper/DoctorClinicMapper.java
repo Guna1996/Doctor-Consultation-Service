@@ -55,7 +55,7 @@ public class DoctorClinicMapper {
                 doctor.setGender(doctorDto.getGender());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(doctorDto.getMobileNumber());
+                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
                 doctorClinic.setDoctor(doctor);
@@ -111,7 +111,7 @@ public class DoctorClinicMapper {
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                doctorDto.setMobileNumber(doctor.getMobileNumber());
+                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorClinicDto.setDoctor(doctorDto);

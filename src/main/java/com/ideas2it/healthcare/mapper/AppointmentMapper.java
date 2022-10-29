@@ -51,7 +51,7 @@ public class AppointmentMapper {
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
                 patient.setGender(patientDto.getGender());
-                patient.setMobileNumber(patientDto.getMobileNumber());
+                patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
                 patient.setEmail(patientDto.getEmail());
                 appointment.setPatient(patient);
             }
@@ -66,7 +66,7 @@ public class AppointmentMapper {
                 doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(doctorDto.getMobileNumber());
+                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
                 appointment.setDoctor(doctor);
@@ -111,7 +111,7 @@ public class AppointmentMapper {
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
                 patientDto.setGender(patient.getGender());
-                patientDto.setMobileNumber(patient.getMobileNumber());
+                patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
                 patientDto.setEmail(patient.getEmail());
                 appointmentDto.setPatient(patientDto);
             }
@@ -125,7 +125,7 @@ public class AppointmentMapper {
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                doctorDto.setMobileNumber(doctor.getMobileNumber());
+                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());

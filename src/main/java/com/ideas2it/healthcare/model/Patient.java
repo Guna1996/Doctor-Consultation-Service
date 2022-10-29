@@ -60,7 +60,7 @@ public class Patient {
     private String gender;
 
     @Column(name = Constants.MOBILE_NUMBER)
-    private String mobileNumber;
+    private Long mobileNumber;
 
     @Column(name = Constants.EMAIL)
     private String email;

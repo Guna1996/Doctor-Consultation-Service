@@ -47,7 +47,7 @@ public class PatientMapper {
             patient.setName(patientDto.getName());
             patient.setDateOfBirth(patientDto.getDateOfBirth());
             patient.setGender(patientDto.getGender());
-            patient.setMobileNumber(patientDto.getMobileNumber());
+            patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
             patient.setEmail(patientDto.getEmail());
             patient.setStatus(patientDto.getStatus());
         }
@@ -69,7 +69,7 @@ public class PatientMapper {
             patientDto.setName(patient.getName());
             patientDto.setDateOfBirth(patient.getDateOfBirth());
             patientDto.setGender(patient.getGender());
-            patientDto.setMobileNumber(patient.getMobileNumber());
+            patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
             patientDto.setEmail(patient.getEmail());
             patientDto.setStatus(patient.getStatus());
         }
