@@ -7,9 +7,12 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,13 +42,31 @@ public class VitalController {
      * <p>
      * This insertVitals method is used to add vitals
      * of a patient.
-     *</p>
+     * </p>
      *
      * @param vitalsDto is a dto object that contains information
      * @return VitalDto
      */
     @PostMapping
-    public VitalDto insertVitals(@RequestBody VitalDto vitalsDto) {
+    public VitalDto addVitals(@RequestBody VitalDto vitalsDto) {
         return vitalService.addVitals(vitalsDto);
+    }
+
+    /**
+     * <p>
+     * This getVitalByPatientId method is used to
+     * get vitals of patient.
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<VitalDto>
+     */
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
+    public List<VitalDto> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+                                              @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                              @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
+        return vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows);
     }
 }

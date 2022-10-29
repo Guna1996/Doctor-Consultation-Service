@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +57,6 @@ public class DoctorController {
     public DoctorDto addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
         return doctorService.saveOrUpdateDoctor(doctorDto);
     }
-
 
     /**
      * <p>
@@ -114,41 +114,5 @@ public class DoctorController {
     @PutMapping(Constants.PATH_ID)
     public String deleteDoctorById(@PathVariable int id) {
         return doctorService.deleteDoctorById(id);
-    }
-
-    /**
-     * <p>
-     * This method is used to get appointments
-     * of a doctor.
-     * </p>
-     *
-     * @param doctorId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<AppointmentDto>
-     */
-    @GetMapping(Constants.PATH_APPOINTMENT_ID)
-    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
-                                                          @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                          @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return doctorService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
-    }
-
-    /**
-     * <p>
-     * This method is used to get feedbacks
-     * of a doctor.
-     * </p>
-     *
-     * @param doctorId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<FeedbackDto>
-     */
-    @GetMapping(Constants.PATH_FEEDBACK_ID)
-    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
-                                                    @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                    @PathVariable(name = Constants.TOTAL_ROWS) int totalRows){
-        return doctorService.getFeedbacks(doctorId, pageNumber, totalRows);
     }
 }

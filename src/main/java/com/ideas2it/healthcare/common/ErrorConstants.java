@@ -3,7 +3,7 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -16,16 +16,14 @@ package com.ideas2it.healthcare.common;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 public class ErrorConstants {
 
     public static final String DOCTOR_CLINIC_PATIENT_NOT_FOUND = "Doctor or clinic or patient not found";
 
-    public static final String ENTER_VALID_DATE_TIME = "please enter valid date and time";
+    public static final String ENTER_VALID_DATE_TIME = "Please enter valid date and time";
 
     public static final String APPOINTMENT_NOT_FOUND = "Appointment not found";
 
@@ -46,3 +44,4 @@ public class ErrorConstants {
 
     public static final String DOCTOR_CLINIC_NOT_FOUND = "Doctor or Clinic not found";
 }
+

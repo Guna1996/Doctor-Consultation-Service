@@ -8,13 +8,11 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repo.DoctorRepository;
@@ -45,13 +43,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
-
-    @Autowired
-    private AppointmentService appointmentService;
-
-    @Autowired
-    private FeedbackService feedbackService;
-
 
     /**
      * {@inheritDoc}
@@ -96,21 +87,5 @@ public class DoctorServiceImpl implements DoctorService {
             return MessageConstants.DELETED_SUCCESSFULLY;
         }
         return MessageConstants.DOCTOR_NOT_FOUND_TO_DELETE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
-        return appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows) {
-        return feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows);
     }
 }

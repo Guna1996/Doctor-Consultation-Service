@@ -5,7 +5,7 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vital,Timeslot.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.model;
@@ -14,16 +14,12 @@ import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * <p>

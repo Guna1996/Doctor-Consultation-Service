@@ -8,20 +8,12 @@
  */
 package com.ideas2it.healthcare.mapper;
 
-import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.dto.SpecializationDto;
-import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Doctor;
-import com.ideas2it.healthcare.model.DoctorClinic;
-import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Specialization;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

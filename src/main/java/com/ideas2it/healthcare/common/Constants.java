@@ -3,12 +3,10 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
-
-import javax.servlet.http.PushBuilder;
 
 /**
  * <p>
@@ -18,9 +16,7 @@ import javax.servlet.http.PushBuilder;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 public class Constants {
@@ -34,6 +30,7 @@ public class Constants {
     public static final String MOBILE_NUMBER_REGEX = "^(0/91)?[7-9][0-9]{9}$";
 
     public static final String PIN_CODE_REGEX = "^[1-9][0-9]{5}$";
+
     public static final String COUNTRY_REGEX = "[a-zA-Z]{2,}";
 
     public static final String GENDER_REGEX = "^male$|^female$";
@@ -95,7 +92,9 @@ public class Constants {
     public static final String BLOOD_PRESSURE = "blood_pressure";
 
     public static final String SUGAR_LEVEL = "sugar_level";
+
     public static final String CONSULTATION_FEE = "consultation_fee";
+
     public static final String PAGE_NUMBER = "pageNumber";
 
     public static final String TOTAL_ROWS = "totalRows";
@@ -112,7 +111,7 @@ public class Constants {
 
     public static final String SCHEDULED_ON = "scheduled_on";
 
-    public static final String  PATH_APPOINTMENT_ID= "/appointment/{doctorId}/{pageNumber}/{totalRows}";
+    public static final String PATH_APPOINTMENT_ID = "/appointment/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String PATH_FEEDBACK_ID = "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
 

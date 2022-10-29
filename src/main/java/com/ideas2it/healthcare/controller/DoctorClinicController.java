@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * <p>
  * Doctor Clinic Controller class is used to assign and delete
@@ -62,7 +64,6 @@ public class DoctorClinicController {
      * @param id - id of the doctor object
      * @return String
      */
-
     @PutMapping(Constants.PATH_ID)
     public String deleteDoctorFromClinic(@PathVariable(Constants.ID) int id) {
         return doctorClinicService.deleteDoctorFromClinic(id);
@@ -82,5 +83,12 @@ public class DoctorClinicController {
     public DoctorClinicDto getTimeslots(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
                                         @PathVariable(Constants.PATH_CLINIC_ID) int clinicId) {
         return doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId);
+    }
+
+    @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
+    public List<DoctorClinicDto> getDoctorsByClinicId(@PathVariable(Constants.PATH_CLINIC_ID) int clinicId,
+                                                      @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        return doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows);
     }
 }

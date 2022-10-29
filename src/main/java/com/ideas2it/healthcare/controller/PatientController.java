@@ -82,43 +82,6 @@ public class PatientController {
      */
     @PutMapping
     public PatientDto updatePatient(@RequestBody PatientDto patientDto) {
-        return  patientService.updatePatient(patientDto);
-    }
-
-
-    /**
-     * <p>
-     * This getVitalByPatientId method is used to
-     * get vitals of patient.
-     * </p>
-     *
-     * @param patientId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<VitalDto>
-     */
-    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
-    public List<VitalDto> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
-                                              @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                              @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return patientService.getVitalsByPatientId(patientId, pageNumber, totalRows);
-    }
-
-    /**
-     * <p>
-     * This getAppointmentsByPatientId method is used
-     * to get list of appointments of a patient.
-     * </p>
-     *
-     * @param patientId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<AppointmentDto>
-     */
-    @GetMapping(Constants.PATIENT_APPOINTMENT)
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
-                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return patientService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
+        return patientService.updatePatient(patientDto);
     }
 }

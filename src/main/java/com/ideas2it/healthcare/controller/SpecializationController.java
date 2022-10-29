@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -41,7 +40,7 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to get details of Specialization
+     * This method is used to add details of Specialization
      * after validating it.
      * </p>
      *
@@ -49,14 +48,14 @@ public class SpecializationController {
      * @return specializationDto
      */
     @PostMapping
-    public SpecializationDto addSpecialization(@Valid @RequestBody SpecializationDto specializationDto) {
+    public SpecializationDto addSpecialization(@RequestBody SpecializationDto specializationDto) {
         return specializationService.saveOrUpdateSpecialization(specializationDto);
     }
 
     /**
      * <p>
-     * This getAllSpecializations method is used to get
-     * All the details of Specialization.
+     * This method is used to get
+     * all the details of Specialization.
      * </p>
      *
      * @param pageNumber is page number to show
@@ -72,7 +71,7 @@ public class SpecializationController {
     /**
      * <p>
      * This method is used to get details of Specialization
-     * of a particular doctor by id.
+     * of a particular Specialization by id.
      * </p>
      *
      * @param id is id of Specialization

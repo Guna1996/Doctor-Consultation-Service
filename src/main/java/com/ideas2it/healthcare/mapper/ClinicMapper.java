@@ -9,12 +9,7 @@
 package com.ideas2it.healthcare.mapper;
 
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.model.Clinic;
-import com.ideas2it.healthcare.model.DoctorClinic;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -48,7 +43,7 @@ public class ClinicMapper {
             clinic.setPinCode(clinicDto.getPinCode());
             clinic.setContactNumber(clinicDto.getContactNumber());
             clinic.setStatus(clinicDto.getStatus());
-            }
+        }
         return clinic;
     }
 

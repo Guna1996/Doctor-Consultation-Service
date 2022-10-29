@@ -14,7 +14,6 @@ import lombok.Setter;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 
 /**
  * <p>
@@ -33,7 +32,7 @@ public class ClinicDto {
     private int id;
 
     @NotNull(message = "Name shouldn't be null")
-    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter You Name in this (FirstName SecondName) format")
+    @Pattern(regexp = Constants.NAME_REGEX, message = "Enter Your Name in this (FirstName SecondName) format")
     private String name;
 
     @Min(value = 1, message = "Door number cannot be negative or zero")
@@ -44,20 +43,20 @@ public class ClinicDto {
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid street name")
     private String streetName;
 
-    @NotNull(message = "city shouldn't be null")
+    @NotNull(message = "City shouldn't be null")
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid city name")
     private String city;
 
-    @NotNull(message = "state shouldn't be null")
+    @NotNull(message = "State shouldn't be null")
     @Pattern(regexp = Constants.COUNTRY_REGEX, message = "Please, Enter valid state name")
     private String state;
 
-    @Min(value = 1, message = "pin code cannot be negative or zero")
+    @Min(value = 1, message = "Pin code cannot be negative or zero")
     @NotNull(message = "Pin code shouldn't be null")
     @Pattern(regexp = Constants.PIN_CODE_REGEX, message = "Please, Enter valid pin code")
     private String pinCode;
 
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Type only 10 numbers")
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = "Enter 10 numbers")
     @NotNull(message = "Mobile number shouldn't be null")
     private String contactNumber;
 

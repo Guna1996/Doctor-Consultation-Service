@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * <p>
@@ -27,11 +26,9 @@ import java.util.List;
  * the assembler object was defined, but now we are using mappers for converting data.
  * </p>
  *
- * @author  Ramachandran
- *
+ * @author Ramachandran
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter

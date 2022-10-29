@@ -41,18 +41,6 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This abstract method is used to get appointments
-     * from the database by getting the id and status
-     * from the user to display
-     * </p>
-     *
-     * @param id - id of the appointment
-     * @return appointmentDto
-     */
-    AppointmentDto getAppointmentById(int id);
-
-    /**
-     * <p>
      * This isAppointmentAvailable abstract method is
      * used to check whether a appointment is available or not
      * based on the appointment for doctor in doctor database

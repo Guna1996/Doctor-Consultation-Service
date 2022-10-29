@@ -9,6 +9,7 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-
 
 /**
  * <p>
@@ -111,23 +111,5 @@ public class ClinicController {
     @PutMapping(Constants.PATH_ID)
     public String deleteClinic(@PathVariable(Constants.ID) int id) {
         return clinicService.deleteClinicById(id);
-    }
-
-    /**
-     * <p>
-     * This method is used to all doctors
-     * who are worked in a clinic.
-     * </p>
-     *
-     * @param doctorId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<DoctorClinicDto>
-     */
-    @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
-    public List<DoctorClinicDto> getDoctorsByClinicId(@PathVariable(Constants.PATH_DOCTOR_ID) int doctorId,
-                                                      @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows){
-        return clinicService.getDoctorsByClinicId(doctorId, pageNumber, totalRows);
     }
 }

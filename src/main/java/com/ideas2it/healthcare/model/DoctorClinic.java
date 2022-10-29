@@ -5,7 +5,7 @@
  * Clinic,DoctorClinic,appointment,Feedback,Patient,
  * Vital,Timeslot.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.model;
@@ -32,11 +32,11 @@ import java.util.List;
  * clinic class can get the doctor availability.
  * </p>
  *
- * @author  Ramachandran
+ * @author Ramachandran
  *
  * @version 1
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Getter
 @Setter

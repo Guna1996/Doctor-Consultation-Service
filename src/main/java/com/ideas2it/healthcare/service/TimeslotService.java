@@ -38,28 +38,6 @@ public interface TimeslotService {
 
     /**
      * <p>
-     * This abstract method is used to update timeslot
-     * to the database
-     * </p>
-     *
-     * @param timeslotDto {@link TimeslotDto}
-     * @return {@link TimeslotDto}
-     */
-    TimeslotDto updateTimeslot(TimeslotDto timeslotDto);
-
-    /**
-     * <p>
-     * This abstract method is used to get timeslot
-     * from the database by timeslot id
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link TimeslotDto}
-     */
-    TimeslotDto getTimeslotById(int id);
-
-    /**
-     * <p>
      * This abstract method is used to get timeslots
      * from the database
      * </p>

@@ -11,12 +11,15 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -61,5 +64,23 @@ public class FeedbackController {
     @PutMapping(Constants.PATH_ID)
     public String deleteFeedbackById(@PathVariable(Constants.ID) int id) {
         return feedbackService.deleteFeedback(id);
+    }
+
+    /**
+     * <p>
+     * This method is used to get feedbacks
+     * of a doctor.
+     * </p>
+     *
+     * @param doctorId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<FeedbackDto>
+     */
+    @GetMapping(Constants.PATH_FEEDBACK_ID)
+    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+                                                    @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                                    @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
+        return feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows);
     }
 }

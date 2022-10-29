@@ -3,9 +3,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/healthcare
     username: root
-    password : rama
-  main:
-     allow-circular-references: true
+    password : 098098
 
   jpa:
     hibernate.ddl-auto: update

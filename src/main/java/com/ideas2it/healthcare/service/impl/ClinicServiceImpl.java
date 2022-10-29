@@ -18,7 +18,6 @@ import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repo.ClinicRepository;
-import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -45,9 +43,6 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Autowired
     private ClinicRepository clinicRepository;
-
-    @Autowired
-    private DoctorClinicService doctorClinicService;
 
     /**
      * {@inheritDoc}
@@ -98,20 +93,6 @@ public class ClinicServiceImpl implements ClinicService {
             return MessageConstants.DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isClinicAvailable(int id) {
-        return clinicRepository.existsByIdAndStatus(id, Constants.ACTIVE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
-        return doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows);
     }
 }
 
