@@ -44,7 +44,7 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to add appointment of a
-     * patient after validating it.
+     * patient.
      * </p>
      *
      * @param appointmentDto is appointment object
@@ -52,7 +52,7 @@ public class AppointmentController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.APPOINTMENT_ADDED_SUCCESSFULLY,
                 appointmentService.addAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -60,7 +60,7 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to reschedule appointment
-     * of a patient after validating it.
+     * of a patient.
      * </p>
      *
      * @param appointmentDto is details of appointment
@@ -69,7 +69,7 @@ public class AppointmentController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
                 appointmentService.rescheduleAppointment(appointmentDto),
                 HttpStatus.OK);
     }

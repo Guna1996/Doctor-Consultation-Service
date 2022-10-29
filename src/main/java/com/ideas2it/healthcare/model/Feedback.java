@@ -45,17 +45,17 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = Constants.COMMENT)
     private String comment;
 
-    @Column
+    @Column(name = Constants.RATING)
     private float rating;
 
     @OneToOne
     @JoinColumn(name = Constants.DOCTOR_ID)
     private Doctor doctor;
 
-    @Column
+    @Column(name = Constants.STATUS)
     private String status;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -103,8 +103,6 @@ public class Constants {
 
     public static final String PAGINATION = "/{pageNumber}/{totalRows}";
 
-    public static final String GET_PATIENT_PATH = "/patient/{patientId}/{pageNumber}/{totalRows}";
-
     public static final String DOCTOR_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
 
     public static final String VITAL_PATIENT_ID = "/vital/{patientId}";
@@ -113,7 +111,7 @@ public class Constants {
 
     public static final String SCHEDULED_ON = "scheduled_on";
 
-    public static final String  PATH_APPOINTMENT_ID= "/appointment/{doctorId}/{pageNumber}/{totalRows}";
+    public static final String PATH_APPOINTMENT_ID = "/appointment/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String PATH_FEEDBACK_ID = "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
 
@@ -126,6 +124,10 @@ public class Constants {
     public static final String CLINIC = "clinic";
 
     public static final String DOCTOR = "doctor";
+
+    public static final String RATING = "rating";
+
+    public static final String COMMENT = "comment";
 
     public static final String DOCTOR_CLINIC = "doctor_clinic";
 
@@ -149,12 +151,24 @@ public class Constants {
 
     public static final String URL_FEEDBACK = "/feedback";
 
-    public static final String  URL_PATIENT= "/patient";
+    public static final String URL_PATIENT = "/patient";
 
     public static final String URL_SPECIALIZATION = "/specialization";
 
     public static final String URL_TIMESLOT = "/timeslot";
 
-    public static final String URL_VITAL= "/vital";
+    public static final String URL_VITAL = "/vital";
+
+    public static final String APPOINTMENT_ADDED_SUCCESSFULLY = "Appointment added successfully";
+
+    public static final String APPOINTMENT_RESCHEDULED_SUCCESSFULLY = "Appointment rescheduled successfully";
+
+    public static final String CLINIC_ADDED_SUCCESSFULLY = "Clinic added successfully";
+
+    public static final String CLINIC_UPDATED_SUCCESSFULLY = "Clinic updated successfully";
+
+    public static final String SUCCESSFULLY_RETRIEVED_CLINICS = "Successfully retrieved clinics";
+
+    public static final String SUCCESSFULLY_RETRIEVED_CLINIC = "Successfully retrieved clinic";
 }
 

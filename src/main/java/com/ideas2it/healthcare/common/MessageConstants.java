@@ -23,8 +23,6 @@ package com.ideas2it.healthcare.common;
  */
 public class MessageConstants {
 
-    public static final String DOCTOR_NOT_FOUND_TO_ASSIGN = "Doctor not found to assign";
-
     public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
 
     public static final String DOCTOR_UNABLE_TO_UPDATE = "Doctor unable to update";
@@ -80,5 +78,4 @@ public class MessageConstants {
     public static final String ENTER_VALID_MOBILE_NUMBER = "Please enter valid mobile number";
 
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
-
 }
