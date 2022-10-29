@@ -58,7 +58,7 @@ public class VitalsMapper {
                 doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(doctorDto.getMobileNumber());
+                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
                 vital.setDoctor(doctor);
@@ -69,7 +69,7 @@ public class VitalsMapper {
                 patient.setId(patientDto.getId());
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
-                patient.setMobileNumber(patientDto.getMobileNumber());
+                patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
                 patient.setGender(patientDto.getGender());
                 patient.setEmail(patientDto.getEmail());
                 patient.setStatus(patientDto.getStatus());
@@ -109,7 +109,7 @@ public class VitalsMapper {
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
                 doctorDto.setQualification(doctor.getQualification());
-                doctorDto.setMobileNumber(doctor.getMobileNumber());
+                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
@@ -122,7 +122,7 @@ public class VitalsMapper {
                 patientDto.setId(patient.getId());
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
-                patientDto.setMobileNumber(patient.getMobileNumber());
+                patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
                 patientDto.setGender(patient.getGender());
                 patientDto.setEmail(patient.getEmail());
                 patientDto.setStatus(patient.getStatus());

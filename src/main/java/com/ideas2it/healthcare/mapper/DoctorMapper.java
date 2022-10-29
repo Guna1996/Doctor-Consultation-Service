@@ -57,7 +57,7 @@ public class DoctorMapper {
                 doctor.setSpecializations(specializations);
             }
             doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-            doctor.setMobileNumber(doctorDto.getMobileNumber());
+            doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
             doctor.setCity(doctorDto.getCity());
             doctor.setStatus(doctorDto.getStatus());
             doctor.setConsultationFee(doctorDto.getConsultationFee());
@@ -95,7 +95,7 @@ public class DoctorMapper {
                 doctorDto.setSpecializations(specializationsDto);
             }
             doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-            doctorDto.setMobileNumber(doctor.getMobileNumber());
+            doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
             doctorDto.setCity(doctor.getCity());
             doctorDto.setStatus(doctor.getStatus());
         }
