@@ -8,9 +8,9 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.dto.AuthenticationRequest;
+import com.ideas2it.healthcare.dto.AuthenticationResponse;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.model.AuthenticationRequest;
-import com.ideas2it.healthcare.model.AuthenticationResponse;
 import com.ideas2it.healthcare.service.impl.AuthenticationService;
 import com.ideas2it.healthcare.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -16,13 +16,7 @@ import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -46,84 +40,49 @@ public class PatientController {
 
     /**
      * <p>
-     * This method is used to add patient details
-     * after validating it
+     * This method is used to add the
+     * details of a patient.
      * </p>
      *
-     * @param patientDto is patient detail
-     * @return String
+     * @param patientDto {@link PatientDto} is patient detail
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addPatient(@RequestBody PatientDto patientDto) {
-        return Response.responseEntity("Success", patientService.addPatient(patientDto), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * This method is used to get a details of a patient
-     * by patient id
-     * </p>
-     *
-     * @param id is patient id
-     * @return PatientDto
-     */
-    @GetMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable int id) {
-        return Response.responseEntity("Success", patientService.getPatientById(id), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * This method is used to update patient
-     * detail after validating it.
-     * </p>
-     *
-     * @param patientDto is detail of patient
-     * @return PatientDto
-     */
-    @PutMapping
-    public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
-        return Response.responseEntity("Success", patientService.updatePatient(patientDto), HttpStatus.OK);
-    }
-
-
-    /**
-     * <p>
-     * This method is used to get vitals of patient
-     * by patient id.
-     * </p>
-     *
-     * @param patientId is id of patient
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<VitalDto>
-     */
-    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGINATION)
-    public ResponseEntity<Map<String, Object>> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
-                                              @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                              @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity("Success",
-                patientService.getVitalsByPatientId(patientId, pageNumber, totalRows),
+        return Response.responseEntity(Constants.PATIENT_ADDED_SUCCESSFULLY,
+                patientService.addPatient(patientDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to get list of appointments of a patient
-     * by patient id
+     * This method is used to get the
+     * details of a patient.
      * </p>
      *
-     * @param patientId is id of patient
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<AppointmentDto>
+     * @param id {@link Integer} is patient id
+     * @return ResponseEntity<Map<String, Object>>
      */
-    @GetMapping(Constants.PATIENT_APPOINTMENT)
-    public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
-                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity("Success",
-                patientService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
+    @GetMapping(Constants.URL_ID)
+    public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_PATIENT,
+                patientService.getPatientById(id),
+                HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method is used to update the
+     * details of a patient.
+     * </p>
+     *
+     * @param patientDto {@link PatientDto} is detail of patient
+     * @return ResponseEntity<Map<String, Object>>
+     */
+    @PutMapping
+    public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
+        return Response.responseEntity(Constants.PATIENT_UPDATED_SUCCESSFULLY,
+                patientService.updatePatient(patientDto),
                 HttpStatus.OK);
     }
 }

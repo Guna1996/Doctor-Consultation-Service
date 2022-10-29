@@ -12,13 +12,11 @@ package com.ideas2it.healthcare.service.impl;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repo.ClinicRepository;
 import com.ideas2it.healthcare.service.ClinicService;
-import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,7 +55,6 @@ public class ClinicServiceImpl implements ClinicService {
     public List<ClinicDto> getClinics(int pageNumber, int totalRows) {
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
-
         if (clinics.isEmpty()) {
             throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         }

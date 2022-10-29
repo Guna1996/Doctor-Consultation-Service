@@ -45,14 +45,16 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
-        return SpecializationMapper.toDto(specializationRepository.save(SpecializationMapper.fromDto(specializationDto)));
+        return SpecializationMapper.toDto(specializationRepository
+                .save(SpecializationMapper.fromDto(specializationDto)));
     }
 
     /**
      * {@inheritDoc}
      */
     public List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows) {
-        List<Specialization> specializations = specializationRepository.findAllByStatus(Constants.ACTIVE,
+        List<Specialization> specializations = specializationRepository
+                .findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
             throw new NotFoundException(MessageConstants.SPECIALIZATIONS_NOT_FOUND);

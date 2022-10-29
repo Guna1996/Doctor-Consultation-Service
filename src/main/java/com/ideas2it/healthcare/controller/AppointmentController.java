@@ -12,18 +12,11 @@ import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 /**
  * <p>
@@ -48,8 +41,8 @@ public class AppointmentController {
      * patient.
      * </p>
      *
-     * @param appointmentDto is appointment object
-     * @return AppointmentDto
+     * @param appointmentDto {@link AppointmentDto} is appointment object
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
@@ -64,8 +57,8 @@ public class AppointmentController {
      * of a patient.
      * </p>
      *
-     * @param appointmentDto is details of appointment
-     * @return AppointmentDto
+     * @param appointmentDto {@link AppointmentDto} is details of appointment
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
@@ -80,11 +73,11 @@ public class AppointmentController {
      * of a patient.
      * </p>
      *
-     * @param id is appointment id
-     * @return string
+     * @param id {@link Integer} is appointment id
+     * @return ResponseEntity<String>
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) int id) {
+    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) Integer id) {
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
     }
 
@@ -94,33 +87,39 @@ public class AppointmentController {
      * of a doctor.
      * </p>
      *
-     * @param doctorId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<AppointmentDto>
+     * @param doctorId {@link Integer}
+     * @param pageNumber {@link Integer}
+     * @param totalRows {@link Integer}
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.PATH_APPOINTMENT_ID)
-    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
-                                                          @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                          @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
+    public ResponseEntity<Map<String, Object>> getAppointmentsByDoctorId(
+            @PathVariable(name = Constants.URL_DOCTOR_ID) Integer doctorId,
+            @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_APPOINTMENT,
+                appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This getAppointmentsByPatientId method is used
-     * to get list of appointments of a patient.
+     * This method is used to get
+     * list of appointments of a patient.
      * </p>
      *
-     * @param patientId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<AppointmentDto>
+     * @param patientId {@link Integer}
+     * @param pageNumber {@link Integer}
+     * @param totalRows {@link Integer}
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.PATIENT_APPOINTMENT)
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
-                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
+    public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(
+            @PathVariable(name = Constants.PATH_PATIENT_ID) Integer patientId,
+            @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_APPOINTMENT,
+                appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 }

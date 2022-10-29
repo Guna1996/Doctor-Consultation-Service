@@ -11,9 +11,7 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.repo.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
@@ -63,7 +61,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDto> getFeedbackByDoctorId(int doctorId, int pageNumber, int totalRows) {
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                .of(pageNumber, totalRows)).toList().stream().map(FeedbackMapper::toDto).collect(Collectors.toList());
+                .of(pageNumber, totalRows)).toList()
+                .stream().map(FeedbackMapper::toDto)
+                .collect(Collectors.toList());
     }
 
 }

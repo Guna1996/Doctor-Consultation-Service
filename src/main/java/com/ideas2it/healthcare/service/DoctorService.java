@@ -9,9 +9,7 @@
  */
 package com.ideas2it.healthcare.service;
 
-import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.dto.FeedbackDto;
 
 import java.util.List;
 

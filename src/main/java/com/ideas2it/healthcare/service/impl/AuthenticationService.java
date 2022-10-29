@@ -34,7 +34,7 @@ public class AuthenticationService implements UserDetailsService {
     /**
      * <p>
      * This method is used to load default username and password for authentication
-     * and authorization
+     * and authorization.
      * </p>
      *
      */

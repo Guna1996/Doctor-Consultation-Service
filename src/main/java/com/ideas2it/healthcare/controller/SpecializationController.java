@@ -14,15 +14,9 @@ import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -44,81 +38,81 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to add details of Specialization
-     * after validating it.
+     * This method is used to add details
+     * of a Specialization.
      * </p>
      *
-     * @param specializationDto is details of specialization
-     * @return specializationDto
+     * @param specializationDto {@link SpecializationDto}is details of specialization
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addSpecialization(@Valid @RequestBody SpecializationDto specializationDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.SPECIALIZATION_ADDED_SUCCESSFULLY,
                 specializationService.saveSpecialization(specializationDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to get All the details
+     * This method is used to get all the details
      * of Specialization.
      * </p>
      *
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<SpecializationDto>
+     * @param pageNumber {@link Integer} is page number to show
+     * @param totalRows  {@link Integer} is a set of rows to be shown
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.PAGINATION)
-    public ResponseEntity<Map<String, Object>> getAllSpecializations(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                         @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity("Success",
+    public ResponseEntity<Map<String, Object>> getAllSpecializations(@PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
+                                                                     @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to get details of a particular specialization
-     * by particular specialization id.
+     * This method is used to get details of a
+     * particular specialization.
      * </p>
      *
-     * @param id is id of Specialization
-     * @return SpecializationDto
+     * @param id {@link Integer} is id of Specialization
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable int id) {
-        return Response.responseEntity("Sucess",
+    public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable Integer id) {
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
                 specializationService.getSpecializationById(id),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to update the details of
-     * Specialization after validating it.
+     * This method is used to update the details
+     * of a Specialization.
      * </p>
      *
-     * @param specializationDto is details of SpecializationDto
-     * @return SpecializationDto
+     * @param specializationDto {@link SpecializationDto} is details of SpecializationDto
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateSpecialization(@RequestBody SpecializationDto specializationDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
                 specializationService.updateSpecialization(specializationDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to remove the Specialization
-     *  by specialization id
+     * This method is used to remove the
+     * details of a Specialization.
      * </p>
      *
-     * @param id is id of Specialization
-     * @return String
+     * @param id {@link Integer} is id of Specialization
+     * @return ResponseEntity<String>
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteSpecializationById(@PathVariable int id) {
+    public ResponseEntity<String> deleteSpecializationById(@PathVariable Integer id) {
         return new ResponseEntity<>(specializationService.deleteSpecializationById(id), HttpStatus.OK);
     }
 }

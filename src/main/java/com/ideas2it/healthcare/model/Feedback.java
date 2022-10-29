@@ -12,17 +12,9 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * <p>
@@ -37,8 +29,7 @@ import javax.persistence.OneToOne;
  * @since 2022-10-10
  */
 @Entity(name = Constants.FEEDBACK)
-@Getter
-@Setter
+@Data
 public class Feedback {
 
     @Id
