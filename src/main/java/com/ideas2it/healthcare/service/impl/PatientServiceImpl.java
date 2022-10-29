@@ -36,9 +36,7 @@ import java.util.Optional;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Service
@@ -80,29 +78,5 @@ public class PatientServiceImpl implements PatientService {
             throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
         }
         return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isPatientAvailable(Integer id) {
-        return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).isPresent();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
-        return vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
-        return appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
     }
 }

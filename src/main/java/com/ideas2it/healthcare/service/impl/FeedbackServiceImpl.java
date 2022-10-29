@@ -15,14 +15,12 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
-import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.repo.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,30 +40,11 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Autowired
     private FeedbackRepository feedbackRepository;
 
-
     /**
      * {@inheritDoc}
      */
     public FeedbackDto addFeedback(FeedbackDto feedbackDto) {
         return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public FeedbackDto updateFeedback(FeedbackDto feedbackDto) {
-        return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public FeedbackDto getFeedbackById(int id) {
-        return feedbackRepository.findByIdAndStatus(id, Constants.ACTIVE)
-                .stream()
-                .map(FeedbackMapper::toDto)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException(MessageConstants.FEEDBACK_NOT_FOUND));
     }
 
     /**

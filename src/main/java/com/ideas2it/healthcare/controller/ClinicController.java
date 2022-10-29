@@ -9,6 +9,7 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Map;
-
 
 /**
  * <p>
@@ -120,25 +120,5 @@ public class ClinicController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) int id) {
         return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * This method is used to all doctors
-     * who are worked in a clinic.
-     * </p>
-     *
-     * @param clinicId is id of clinic
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<DoctorClinicDto>
-     */
-    @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
-    public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(@PathVariable(Constants.URL_CLINIC_ID) int clinicId,
-                                                                    @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                                    @PathVariable(Constants.TOTAL_ROWS) int totalRows){
-        return Response.responseEntity("Success",
-                clinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
-                HttpStatus.OK);
     }
 }

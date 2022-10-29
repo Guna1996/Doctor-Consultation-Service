@@ -42,6 +42,7 @@ public class AppointmentMapper {
         if (null != appointmentDto) {
             appointment.setId(appointmentDto.getId());
             appointment.setScheduledOn(appointmentDto.getScheduledOn());
+            appointment.setStatus(appointmentDto.getStatus());
             PatientDto patientDto = appointmentDto.getPatient();
             if ( null != patientDto) {
                 Patient patient = new Patient();

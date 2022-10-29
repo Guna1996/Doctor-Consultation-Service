@@ -15,21 +15,18 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
  * <p>
  * This DoctorRepository interface is a repository interface and this
  * interface extends JpaRepository which has all the methods for
- * CRUD operation 
+ * CRUD operation
  * </p>
  *
- * @author  Mohamed Jubair
- *
+ * @author Mohamed Jubair
  * @version 1
- *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Transactional
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
@@ -37,7 +34,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     Optional<Doctor> findByIdAndStatus(int id, String active);
 
     Boolean existsByIdAndStatus(int id, String status);
-    
+
     Page<Doctor> findAllByStatus(String active, Pageable pageable);
 
     @Modifying

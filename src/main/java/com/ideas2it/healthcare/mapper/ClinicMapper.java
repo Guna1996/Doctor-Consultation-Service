@@ -43,7 +43,7 @@ public class ClinicMapper {
             clinic.setPinCode(clinicDto.getPinCode());
             clinic.setContactNumber(clinicDto.getContactNumber());
             clinic.setStatus(clinicDto.getStatus());
-            }
+        }
         return clinic;
     }
 

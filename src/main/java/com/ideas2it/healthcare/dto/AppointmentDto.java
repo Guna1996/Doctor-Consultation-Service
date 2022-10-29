@@ -8,7 +8,10 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -23,8 +26,7 @@ import java.time.LocalDateTime;
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class AppointmentDto {
 
     private int id;

@@ -43,29 +43,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     @Autowired
     private DoctorClinicRepository doctorClinicRepository;
 
-    @Autowired
-    private DoctorService doctorService;
-
     /**
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
         return DoctorClinicMapper.toDto(DoctorClinicMapper.fromDto(doctorClinicDto));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<DoctorClinicDto> getDoctorClinics(int pageNumber, int totalRows) {
-        List<DoctorClinic> doctorClinics = doctorClinicRepository.findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
-        if (doctorClinics.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
-        }
-        return doctorClinics.stream()
-                .map(DoctorClinicMapper::toDto)
-                .collect(Collectors.toList());
-
     }
 
     /**
@@ -93,7 +75,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId) {
-        return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+        return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId
+                        , clinicId, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
     }
 
@@ -111,7 +94,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
-        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
+        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE
+                        , PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
     }
 }

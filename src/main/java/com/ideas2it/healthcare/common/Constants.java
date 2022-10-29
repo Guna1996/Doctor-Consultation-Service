@@ -3,7 +3,7 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -16,9 +16,7 @@ package com.ideas2it.healthcare.common;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 public class Constants {

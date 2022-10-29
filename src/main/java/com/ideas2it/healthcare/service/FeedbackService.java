@@ -39,18 +39,6 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This abstract method is used to get feedback
-     * from the database by feedback id
-     *
-     * </p>
-     *
-     * @param id {@link int}
-     * @return {@link FeedbackDto}
-     */
-    FeedbackDto getFeedbackById(int id);
-
-    /**
-     * <p>
      * This abstract method is used to delete feedback
      * from the database by feedback id
      *
