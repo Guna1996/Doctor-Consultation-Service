@@ -41,17 +41,6 @@ public interface DoctorClinicService {
 
     /**
      * <p>
-     * This getDoctorClinics method is used to
-     * get all the doctors from the clinic which are
-     * in active state in the DoctorClinic table
-     * </p>
-     *
-     * @return List<DoctorClinicDto>
-     */
-    List<DoctorClinicDto> getDoctorClinics(int pageNumber, int totalRows);
-
-    /**
-     * <p>
      * This method is used to delete doctor id on the
      * doctor clinic table which is it will InActive the status
      * column in doctor clinic table in the database
@@ -61,18 +50,6 @@ public interface DoctorClinicService {
      * @return String
      */
     String deleteDoctorFromClinic(Integer id);
-
-    /**
-     * <p>
-     * This updateDoctorClinic method is used for
-     * updating doctor id into the doctor clinic table
-     * by getting input from the user
-     * </p>
-     *
-     * @param doctorClinicDto is a dto class of doctor clinic
-     * @return DoctorClinicDto
-     */
-    DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto);
 
     /**
      * <p>
@@ -88,25 +65,14 @@ public interface DoctorClinicService {
 
     /**
      * <p>
-     * This method is used to get doctor clinic
-     * by doctor clinic id
-     * </p>
-     *
-     * @param id is id of doctor clinic
-     * @return DoctorClinicDto
-     */
-    DoctorClinicDto getDoctorClinicById(int id);
-
-    /**
-     * <p>
      * This method is used to get Doctors of a particular clinic
      * by clinic id
      * </p>
      *
-     * @param clinicId is id of clinic
+     * @param clinicId   is id of clinic
      * @param pageNumber is page number of appointments
-     * @param totalRows is required number of rows to be displayed
+     * @param totalRows  is required number of rows to be displayed
      * @return List<DoctorClinicDto>
      */
-    public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
+    List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
 }

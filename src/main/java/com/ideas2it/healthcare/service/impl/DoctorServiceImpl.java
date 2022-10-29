@@ -8,7 +8,6 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
@@ -44,13 +43,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
-
-    @Autowired
-    private AppointmentService appointmentService;
-
-    @Autowired
-    private FeedbackService feedbackService;
-
 
     /**
      * {@inheritDoc}
@@ -100,21 +92,5 @@ public class DoctorServiceImpl implements DoctorService {
             return ErrorConstants.DOCTOR_DELETED_SUCCESSFULLY;
         }
         return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
-        return appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows) {
-        return feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows);
     }
 }

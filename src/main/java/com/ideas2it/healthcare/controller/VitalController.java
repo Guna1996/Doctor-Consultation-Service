@@ -12,6 +12,8 @@ import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +57,23 @@ public class VitalController {
         return Response.responseEntity("Success",
                 vitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This getVitalByPatientId method is used to
+     * get vitals of patient.
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<VitalDto>
+     */
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
+    public List<VitalDto> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+                                              @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                              @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
+        return vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows);
     }
 }

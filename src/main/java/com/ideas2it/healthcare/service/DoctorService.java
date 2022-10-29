@@ -27,6 +27,7 @@ import java.util.List;
  * @since 2022-10-10
  */
 public interface DoctorService {
+
     /**
      * <p>
      * This method is used to create Doctor's record by
@@ -81,30 +82,4 @@ public interface DoctorService {
      * @return {@link String}
      */
     String deleteDoctorById(int id);
-
-    /**
-     * <p>
-     * This method is used to get appointments of a particular doctor
-     * by doctor id
-     * </p>
-     *
-     * @param doctorId is id of doctor
-     * @param pageNumber is page number of appointments
-     * @param totalRows is required number of rows to be displayed
-     * @return List<AppointmentDto>
-     */
-    List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
-
-    /**
-     * <p>
-     * This method is used to get feedbacks of a particular doctor
-     * by doctor id
-     * </p>
-     *
-     * @param doctorId is id of doctor
-     * @param pageNumber is page number of feedbacks
-     * @param totalRows is required number of rows to be displayed
-     * @return List<FeedbackDto>
-     */
-    List<FeedbackDto> getFeedbacks(int doctorId, int pageNumber, int totalRows);
 }

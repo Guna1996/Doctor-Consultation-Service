@@ -17,8 +17,6 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 
-import java.time.LocalDateTime;
-
 /**
  * <p>
  * AppointmentMapper is used convert Appointment object to
@@ -41,11 +39,12 @@ public class AppointmentMapper {
      */
     public static Appointment fromDto(AppointmentDto appointmentDto) {
         Appointment appointment = new Appointment();
-        if (appointmentDto != null) {
+        if (null != appointmentDto) {
             appointment.setId(appointmentDto.getId());
             appointment.setScheduledOn(appointmentDto.getScheduledOn());
+            appointment.setStatus(appointmentDto.getStatus());
             PatientDto patientDto = appointmentDto.getPatient();
-            if (patientDto != null) {
+            if ( null != patientDto) {
                 Patient patient = new Patient();
                 patient.setId(patientDto.getId());
                 patient.setName(patientDto.getName());
@@ -57,7 +56,7 @@ public class AppointmentMapper {
             }
 
             DoctorDto doctorDto = appointmentDto.getDoctor();
-            if (doctorDto != null) {
+            if (null != doctorDto) {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
                 doctor.setName(doctorDto.getName());
@@ -73,7 +72,7 @@ public class AppointmentMapper {
             }
 
             ClinicDto clinicDto = appointmentDto.getClinic();
-            if (clinicDto != null) {
+            if (null != clinicDto) {
                 Clinic clinic = new Clinic();
                 clinic.setId(clinicDto.getId());
                 clinic.setName(clinicDto.getName());
@@ -99,13 +98,13 @@ public class AppointmentMapper {
      */
     public static AppointmentDto toDto(Appointment appointment) {
         AppointmentDto appointmentDto = new AppointmentDto();
-        if (appointment != null) {
+        if (null != appointment) {
             appointmentDto.setId(appointment.getId());
             appointmentDto.setScheduledOn(appointment.getScheduledOn());
             appointmentDto.setCreatedAt(appointment.getCreatedAt());
             appointmentDto.setStatus(appointment.getStatus());
             Patient patient = appointment.getPatient();
-            if (patient != null) {
+            if (null != patient) {
                 PatientDto patientDto = new PatientDto();
                 patientDto.setId(patient.getId());
                 patientDto.setName(patient.getName());
@@ -117,7 +116,7 @@ public class AppointmentMapper {
             }
 
             Doctor doctor = appointment.getDoctor();
-            if (doctor != null) {
+            if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
@@ -133,7 +132,7 @@ public class AppointmentMapper {
             }
 
             Clinic clinic = appointment.getClinic();
-            if (clinic != null) {
+            if (null != clinic) {
                 ClinicDto clinicDto = new ClinicDto();
                 clinicDto.setId(clinic.getId());
                 clinicDto.setName(clinic.getName());

@@ -42,11 +42,11 @@ public class DoctorClinicMapper {
      */
     public static DoctorClinic fromDto(DoctorClinicDto doctorClinicDto) {
         DoctorClinic doctorClinic = new DoctorClinic();
-        if (doctorClinicDto != null) {
+        if (null != doctorClinicDto) {
             doctorClinic.setId(doctorClinicDto.getId());
             doctorClinic.setStatus(doctorClinicDto.getStatus());
             DoctorDto doctorDto = doctorClinicDto.getDoctor();
-            if (doctorDto != null) {
+            if (null != doctorDto) {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
                 doctor.setName(doctorDto.getName());
@@ -61,7 +61,7 @@ public class DoctorClinicMapper {
                 doctorClinic.setDoctor(doctor);
             }
             ClinicDto clinicDto = doctorClinicDto.getClinic();
-            if (clinicDto != null) {
+            if (null != clinicDto) {
                 Clinic clinic = new Clinic();
                 clinic.setId(clinicDto.getId());
                 clinic.setName(clinicDto.getName());
@@ -74,7 +74,7 @@ public class DoctorClinicMapper {
                 doctorClinic.setClinic(clinic);
             }
             List<TimeslotDto> timeslotsDto = doctorClinicDto.getTimeslots();
-            if (timeslotsDto != null) {
+            if (null != timeslotsDto) {
                 List<Timeslot> timeslots = new ArrayList<>();
                 timeslotsDto.forEach(timeslotDto -> {
                     Timeslot timeslot = new Timeslot();
@@ -98,11 +98,11 @@ public class DoctorClinicMapper {
      */
     public static DoctorClinicDto toDto(DoctorClinic doctorClinic) {
         DoctorClinicDto doctorClinicDto = new DoctorClinicDto();
-        if (doctorClinic != null) {
+        if (null != doctorClinic) {
             doctorClinicDto.setId(doctorClinic.getId());
             doctorClinicDto.setStatus(doctorClinic.getStatus());
             Doctor doctor = doctorClinic.getDoctor();
-            if (doctor != null) {
+            if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
@@ -117,7 +117,7 @@ public class DoctorClinicMapper {
                 doctorClinicDto.setDoctor(doctorDto);
             }
             Clinic clinic = doctorClinic.getClinic();
-            if (clinic != null) {
+            if (null != clinic) {
                 ClinicDto clinicDto = new ClinicDto();
                 clinicDto.setId(clinic.getId());
                 clinicDto.setName(clinic.getName());
@@ -130,7 +130,7 @@ public class DoctorClinicMapper {
                 doctorClinicDto.setClinic(clinicDto);
             }
             List<Timeslot> timeslots = doctorClinic.getTimeslots();
-            if (timeslots != null) {
+            if (null != timeslots) {
                 List<TimeslotDto> timeslotsDto = new ArrayList<>();
                 timeslots.forEach(timeslot -> {
                     TimeslotDto timeslotDto = new TimeslotDto();

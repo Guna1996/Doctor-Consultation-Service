@@ -11,12 +11,9 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.VitalDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.VitalsMapper;
-import com.ideas2it.healthcare.model.Vital;
 import com.ideas2it.healthcare.repo.VitalsRepository;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +44,11 @@ public class VitalServiceImpl implements VitalService {
      */
     public VitalDto addVitals(VitalDto vitalsDto) {
         if (vitalsDto.getDiastolic() <= 80 && vitalsDto.getSystolic() <= 120) {
-            vitalsDto.setBloodPressure(MessageConstants.NORMAL);
+            vitalsDto.setBPRiskLevel(MessageConstants.NORMAL);
         } else if (vitalsDto.getSystolic() > 120 || vitalsDto.getDiastolic() > 80) {
-            vitalsDto.setBloodPressure(MessageConstants.HIGH);
+            vitalsDto.setBPRiskLevel(MessageConstants.HIGH);
         } else {
-            vitalsDto.setBloodPressure(MessageConstants.LOW);
+            vitalsDto.setBPRiskLevel(MessageConstants.LOW);
         }
         return VitalsMapper.toDto(vitalsRepository.save(VitalsMapper.fromDto(vitalsDto)));
     }
@@ -61,7 +58,7 @@ public class VitalServiceImpl implements VitalService {
      */
     public List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
         return vitalsRepository.findByPatientIdAndStatus(patientId,
-                Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
+                        Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(VitalsMapper::toDto).collect(Collectors.toList());
     }
 }

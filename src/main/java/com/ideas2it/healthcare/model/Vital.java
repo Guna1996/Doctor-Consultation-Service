@@ -22,10 +22,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 /**
  * <p>
@@ -34,7 +31,6 @@ import java.util.Calendar;
  * </p>
  *
  * @author Bala Ashwanth.N
- *
  * @since 2022-10-10
  */
 @Getter
@@ -65,18 +61,18 @@ public class Vital {
     private float sugarLevel;
 
     @OneToOne
-    @JoinColumn(name = Constants.PATIENT_ID, referencedColumnName = Constants.ID)
+    @JoinColumn(name = Constants.PATIENT_ID)
     private Patient patient;
 
     @Column
     private String status = Constants.ACTIVE;
 
     @OneToOne
-    @JoinColumn(name = Constants.DOCTOR_ID, referencedColumnName = Constants.ID)
+    @JoinColumn(name = Constants.DOCTOR_ID)
     private Doctor doctor;
 
     @Column(name = Constants.BLOOD_PRESSURE)
-    private String bloodPressure;
+    private String BPRiskLevel;
 
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)

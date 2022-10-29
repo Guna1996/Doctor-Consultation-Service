@@ -5,7 +5,7 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vital,Timeslot.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.model;
@@ -13,6 +13,7 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,9 +27,9 @@ import java.time.LocalTime;
  * methods because of using lombok dependency
  * </p>
  *
- * @author  Bala Ashwanth.N
+ * @author Bala Ashwanth.N
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 
 @Getter

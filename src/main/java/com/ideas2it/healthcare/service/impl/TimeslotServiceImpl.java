@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author Bala Ashwanth
- *
  * @since 2022-10-10
  */
 @Service
@@ -46,25 +45,6 @@ public class TimeslotServiceImpl implements TimeslotService {
      */
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
         return TimeslotMapper.toDto(timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public TimeslotDto updateTimeslot(TimeslotDto timeslotDto) {
-        if (!timeslotRepository.existsById(timeslotDto.getId())) {
-            throw new NotFoundException(MessageConstants.DATA_DOES_NOT_EXIST);
-        }
-        return TimeslotMapper.toDto(timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public TimeslotDto getTimeslotById(int id) {
-        Timeslot timeslot = timeslotRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(MessageConstants.TIMESLOT_NOT_FOUND));
-        return TimeslotMapper.toDto(timeslot);
     }
 
     /**

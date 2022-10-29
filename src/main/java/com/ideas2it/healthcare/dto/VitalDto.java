@@ -12,11 +12,8 @@ package com.ideas2it.healthcare.dto;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 /**
  * <p>
@@ -53,7 +50,7 @@ public class VitalDto {
 
     private DoctorDto doctor;
 
-    private String bloodPressure;
+    private String BPRiskLevel;
 
     private LocalDateTime createdAt;
 }

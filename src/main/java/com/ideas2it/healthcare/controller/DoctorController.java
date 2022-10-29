@@ -60,7 +60,6 @@ public class DoctorController {
                 HttpStatus.OK);
     }
 
-
     /**
      * <p>
      * This getAllDoctors method is used to get All the
@@ -123,45 +122,5 @@ public class DoctorController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
         return new ResponseEntity<>(doctorService.deleteDoctorById(id), HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * This method is used to get appointments
-     * of a doctor by doctor id
-     * </p>
-     *
-     * @param doctorId is id of doctor
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<AppointmentDto>
-     */
-    @GetMapping(Constants.PATH_APPOINTMENT_ID)
-    public ResponseEntity<Map<String, Object>> getAppointmentsByDoctorId(@PathVariable(name = Constants.URL_DOCTOR_ID) int doctorId,
-                                                          @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                          @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity("Success",
-                doctorService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
-                HttpStatus.OK);
-    }
-
-    /**
-     * <p>
-     * This method is used to get feedbacks
-     * of a doctor by doctor id
-     * </p>
-     *
-     * @param doctorId is id of doctor
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<FeedbackDto>
-     */
-    @GetMapping(Constants.PATH_FEEDBACK_ID)
-    public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(@PathVariable(name = Constants.URL_DOCTOR_ID) int doctorId,
-                                                    @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                    @PathVariable(name = Constants.TOTAL_ROWS) int totalRows){
-        return Response.responseEntity("Success",
-                doctorService.getFeedbacks(doctorId, pageNumber, totalRows),
-                HttpStatus.OK);
     }
 }

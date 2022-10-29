@@ -43,9 +43,6 @@ public class ClinicServiceImpl implements ClinicService {
     @Autowired
     private ClinicRepository clinicRepository;
 
-    @Autowired
-    private DoctorClinicService doctorClinicService;
-
     /**
      * {@inheritDoc}
      */
@@ -95,20 +92,6 @@ public class ClinicServiceImpl implements ClinicService {
             return ErrorConstants.CLINIC_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isClinicAvailable(int id) {
-        return clinicRepository.existsByIdAndStatus(id, Constants.ACTIVE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
-        return doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows);
     }
 }
 

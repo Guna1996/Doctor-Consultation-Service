@@ -3,7 +3,7 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -16,14 +16,10 @@ package com.ideas2it.healthcare.common;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 public class MessageConstants {
-
-    public static final String DOCTOR_NOT_FOUND_TO_ASSIGN = "Doctor not found to assign";
 
     public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
 
@@ -42,10 +38,6 @@ public class MessageConstants {
     public static final String FEEDBACK_NOT_FOUND = "Feedback not found";
 
     public static final String PATIENT_NOT_FOUND = "Patient not found";
-
-    public static final String SPECIALIZATIONS_NOT_FOUND = "Specialization not found";
-
-    public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
 
     public static final String TIMESLOT_NOT_FOUND = "Timeslot not found";
 
@@ -80,5 +72,4 @@ public class MessageConstants {
     public static final String ENTER_VALID_MOBILE_NUMBER = "Please enter valid mobile number";
 
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
-
 }

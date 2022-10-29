@@ -12,7 +12,6 @@ package com.ideas2it.healthcare.service;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.VitalDto;
-import com.ideas2it.healthcare.model.Vital;
 
 import java.util.List;
 
@@ -62,43 +61,4 @@ public interface PatientService {
      * @return PatientDto
      */
     PatientDto updatePatient(PatientDto patientDto);
-
-    /**
-     * <p>
-     * This isPatientAvailable abstract method is
-     * used to check whether a patient is available or not
-     * on the patient table by  getting id from the
-     * patient
-     * </p>
-     *
-     * @param id - id of the patient
-     * @return boolean
-     */
-    boolean isPatientAvailable(Integer id);
-
-    /**
-     * <p>
-     * This method is used to get vitals of a particular patient
-     * by patient id
-     * </p>
-     *
-     * @param patientId is id of patient
-     * @param pageNumber is page number of vitals
-     * @param totalRows is required number of rows to be displayed
-     * @return List<VitalDto>
-     */
-    List<VitalDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows);
-
-    /**
-     * <p>
-     * This method is used to get appointments of a particular patient
-     * by patient id
-     * </p>
-     *
-     * @param patientId is id of patient
-     * @param pageNumber is page number of appointments
-     * @param totalRows is required number of rows to be displayed
-     * @return List<AppointmentDto>
-     */
-    List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
 }

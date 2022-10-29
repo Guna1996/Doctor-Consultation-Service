@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
-
 /**
  * <p>
  * This AppointmentController class is used to fix, reschedule and cancel
@@ -44,7 +45,7 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to add appointment of a
-     * patient after validating it.
+     * patient.
      * </p>
      *
      * @param appointmentDto is appointment object
@@ -52,7 +53,7 @@ public class AppointmentController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.APPOINTMENT_ADDED_SUCCESSFULLY,
                 appointmentService.addAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -60,16 +61,15 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to reschedule appointment
-     * of a patient after validating it.
+     * of a patient.
      * </p>
      *
      * @param appointmentDto is details of appointment
      * @return AppointmentDto
-     *
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
                 appointmentService.rescheduleAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -86,5 +86,41 @@ public class AppointmentController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) int id) {
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method is used to get appointments
+     * of a doctor.
+     * </p>
+     *
+     * @param doctorId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<AppointmentDto>
+     */
+    @GetMapping(Constants.PATH_APPOINTMENT_ID)
+    public List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
+                                                          @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                                          @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
+        return appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows);
+    }
+
+    /**
+     * <p>
+     * This getAppointmentsByPatientId method is used
+     * to get list of appointments of a patient.
+     * </p>
+     *
+     * @param patientId
+     * @param pageNumber
+     * @param totalRows
+     * @return List<AppointmentDto>
+     */
+    @GetMapping(Constants.PATIENT_APPOINTMENT)
+    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
+                                                           @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
+                                                           @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
+        return appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows);
     }
 }

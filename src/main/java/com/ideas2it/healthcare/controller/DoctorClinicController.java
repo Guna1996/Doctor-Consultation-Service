@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,5 +91,12 @@ public class DoctorClinicController {
         return Response.responseEntity("Success",
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);
+    }
+
+    @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
+    public List<DoctorClinicDto> getDoctorsByClinicId(@PathVariable(Constants.PATH_CLINIC_ID) int clinicId,
+                                                      @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+                                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        return doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows);
     }
 }

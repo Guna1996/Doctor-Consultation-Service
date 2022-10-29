@@ -24,7 +24,8 @@ import java.util.Map;
  *
  * @author Gunaseelan k
  * @since 2022-10-10
- */@RestControllerAdvice
+ */
+@RestControllerAdvice
 public class NotFoundExceptionHandler {
 
     /**

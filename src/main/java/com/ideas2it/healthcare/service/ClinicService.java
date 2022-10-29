@@ -29,12 +29,12 @@ import java.util.List;
 public interface ClinicService {
     /**
      * <p>
-     * This abstract method is used to add appointment details
+     * This method is used to add appointment details
      * into data base by getting details from the
      * user
      * </p>
      *
-     * @param clinicDto - clinic details
+     * @param clinicDto is clinic details
      * @return ClinicDto
      */
     ClinicDto addClinic(ClinicDto clinicDto);
@@ -46,6 +46,8 @@ public interface ClinicService {
      * </p>
      *
      * @return list<ClinicDto>
+     * @param pageNumber
+     * @param totalRows
      */
     List<ClinicDto> getClinics(int pageNumber, int totalRows);
 
@@ -82,29 +84,4 @@ public interface ClinicService {
      * @return String
      */
     String deleteClinicById(int id);
-
-    /**
-     * <p>
-     * This isClinicAvailable abstract method is
-     * used to check whether a clinic is available or not
-     * on the clinic table by using clinic id
-     * </p>
-     *
-     * @param id - id of the clinic
-     * @return boolean
-     */
-    boolean isClinicAvailable(int id);
-
-    /**
-     * <p>
-     * This method is used to get doctors of a particular clinic
-     * by clinic id
-     * </p>
-     *
-     * @param clinicId is id of clinic
-     * @param pageNumber is page number of doctor clinics
-     * @param totalRows is required number of rows to be displayed
-     * @return List<DoctorClinicDto>
-     */
-    List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
 }

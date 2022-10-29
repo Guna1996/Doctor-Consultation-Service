@@ -5,7 +5,7 @@
  * Clinic,DoctorClinic,Appointment,Feedback,Patient,
  * Vital,Timeslot.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 
@@ -30,11 +30,11 @@ import javax.persistence.OneToOne;
  * methods because of using lombok dependency
  * </p>
  *
- * @author  Bala Ashwanth.N
+ * @author Bala Ashwanth.N
  *
  * @version 1
  *
- * @since   2022-10-10
+ * @since 2022-10-10
  */
 @Entity(name = Constants.FEEDBACK)
 @Getter
@@ -45,17 +45,17 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = Constants.COMMENT)
     private String comment;
 
-    @Column
+    @Column(name = Constants.RATING)
     private float rating;
 
     @OneToOne
     @JoinColumn(name = Constants.DOCTOR_ID)
     private Doctor doctor;
 
-    @Column
+    @Column(name = Constants.STATUS)
     private String status;
 
     @OneToOne(cascade = CascadeType.ALL)

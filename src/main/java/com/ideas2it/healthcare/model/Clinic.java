@@ -20,7 +20,7 @@ import javax.persistence.Id;
 /**
  * <p>
  * This clinic class contains details of clinic
- * cretaes entity for clinic in database
+ * creates entity for clinic in database
  * </p>
  *
  * @author Gunaseelan K
