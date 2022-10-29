@@ -12,16 +12,10 @@ import com.ideas2it.healthcare.dto.VitalDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,35 +39,36 @@ public class VitalController {
     /**
      * <p>
      * This method is used to add vitals
-     * of a patient into database
-     * 
+     * of a patient.
      *</p>
      *
-     * @param vitalsDto is a dto object that contains information
-     * @return VitalDto
+     * @param vitalsDto {@link VitalDto} is a dto object that contains information
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addVitals(@RequestBody VitalDto vitalsDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.VITALS_ADDED_SUCCESSFULLY,
                 vitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This getVitalByPatientId method is used to
-     * get vitals of patient.
+     * This method is used to get
+     * vitals of a patient.
      * </p>
      *
-     * @param patientId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<VitalDto>
+     * @param patientId {@link Integer}
+     * @param pageNumber {@link Integer}
+     * @param totalRows {@link Integer}
+     * @return ResponseEntity<Map<String, Object>>
      */
-    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGE_PATH)
-    public List<VitalDto> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) int patientId,
-                                              @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                              @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows);
+    @GetMapping(Constants.VITAL_PATIENT_ID + Constants.PAGINATION)
+    public ResponseEntity<Map<String, Object>> getVitalByPatientId(@PathVariable(name = Constants.PATH_PATIENT_ID) Integer patientId,
+                                              @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
+                                              @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+        return Response.responseEntity(Constants.VITAL_ADDED_SUCCESSFULLY,
+                vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 }

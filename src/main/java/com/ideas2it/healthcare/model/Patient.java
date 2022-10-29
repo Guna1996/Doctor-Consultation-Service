@@ -11,14 +11,9 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -36,8 +31,7 @@ import java.time.LocalDate;
  *
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 @Entity(name = Constants.PATIENT)
 public class Patient {
 

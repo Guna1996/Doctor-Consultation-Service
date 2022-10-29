@@ -11,11 +11,9 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
-import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.repo.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +60,9 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public boolean isAppointmentAvailable(int id, LocalDateTime dateTime) {
-        return appointmentRepository.findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
+        return appointmentRepository
+                .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE)
+                .isEmpty();
     }
 
     /**
@@ -81,8 +81,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
-                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream()
-                .map(AppointmentMapper::toDto).collect(Collectors.toList());
+                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+                .toList().stream()
+                .map(AppointmentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -90,9 +92,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
-        return appointmentRepository.findByDoctorIdAndStatus(
-                        doctorId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows)).toList().stream().
-                map(AppointmentMapper::toDto).collect(Collectors.toList());
+        return appointmentRepository
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+                .toList().stream()
+                .map(AppointmentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -111,10 +115,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
-        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(), appointmentDto.getScheduledOn())) {
+        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+                appointmentDto.getScheduledOn())) {
             throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
         }
-        Appointment appointment = AppointmentMapper.fromDto(appointmentDto);
-        return AppointmentMapper.toDto(appointmentRepository.save(appointment));
+        return AppointmentMapper
+                .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
     }
 }

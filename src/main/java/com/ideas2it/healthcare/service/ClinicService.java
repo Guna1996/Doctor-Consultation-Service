@@ -11,7 +11,6 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 
 import java.util.List;
 

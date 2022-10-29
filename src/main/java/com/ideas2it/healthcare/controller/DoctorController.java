@@ -14,13 +14,7 @@ import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -46,34 +40,34 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to add details of doctor
-     * after validating it.
+     * This method is used to add details of
+     * a doctor.
      * </p>
      *
-     * @param doctorDto is details of doctor
-     * @return DoctorDto
+     * @param doctorDto {@link DoctorDto} is details of doctor
+     * @return ResponseEntity<Map<String,Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String,Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.DOCTOR_ADDED_SUCCESSFULLY,
                 doctorService.saveDoctor(doctorDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This getAllDoctors method is used to get All the
+     * This method is used to get All the
      * details of doctors.
      * </p>
      *
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<DoctorDto>
+     * @param pageNumber {@link Integer} is page number to show
+     * @param totalRows  {@link Integer} is a set of rows to be shown
+     * @return ResponseEntity<Map<String,Object>>
      */
     @GetMapping(Constants.PAGINATION)
     public ResponseEntity<Map<String, Object>> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                                 @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -81,43 +75,43 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to get details
-     * of a particular doctor by id
+     * of a particular doctor.
      * </p>
      *
-     * @param id is id of doctor
-     * @return DoctorDto
+     * @param id {@link Integer} is id of doctor
+     * @return ResponseEntity<Map<String,Object>>
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable int id) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_DOCTOR,
                 doctorService.getDoctorById(id),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to update the details of
-     * doctor after validating it.
+     * This method is used to update the
+     * details of doctor.
      * </p>
      *
-     * @param doctorDto is details of doctor
-     * @return DoctorDto
+     * @param doctorDto {@link DoctorDto} is details of doctor
+     * @return ResponseEntity<Map<String,Object>>
      */
     @PutMapping
     public ResponseEntity<Map<String,Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return Response.responseEntity("Success",
+        return Response.responseEntity(Constants.DOCTOR_UPDATED_SUCCESSFULLY,
                 doctorService.updateDoctor(doctorDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to remove a doctor details
-     * by doctor id
+     * This method is used to remove
+     * the details of a doctor.
      * </p>
      *
-     * @param id is id of doctor
-     * @return String
+     * @param id {@link Integer} is id of doctor
+     * @return ResponseEntity<String>
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {

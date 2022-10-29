@@ -8,17 +8,14 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
-import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repo.DoctorRepository;
-import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.DoctorService;
-import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -78,6 +75,9 @@ public class DoctorServiceImpl implements DoctorService {
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DoctorDto updateDoctor(DoctorDto doctorDto){
         return this.saveDoctor(doctorDto);

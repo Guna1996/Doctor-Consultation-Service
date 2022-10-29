@@ -12,17 +12,10 @@ import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,31 +37,31 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to add a feedback from a patient
-     * into the database
+     * This method is used to add a feedback
+     * from a patient.
      * </p>
      *
-     * @param feedbackDto is dto object that contains information
-     * @return FeedbackDto
+     * @param feedbackDto {@link FeedbackDto} is dto object that contains information
+     * @return ResponseEntity<Map<String,Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return Response.responseEntity("Succes",
+        return Response.responseEntity(Constants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
 
     /**
      * <p>
-     * This method is used to remove feedback from the database
-     * by feedback id
+     * This method is used to remove feedback of
+     * a patient.
      * </p>
      *
-     * @param id is an integer that refer id in database
+     * @param id {@link Integer} is an integer that refer id in database
      * @return String
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) int id) {
+    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
         return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
     }
 
@@ -78,15 +71,18 @@ public class FeedbackController {
      * of a doctor.
      * </p>
      *
-     * @param doctorId
-     * @param pageNumber
-     * @param totalRows
-     * @return List<FeedbackDto>
+     * @param doctorId {@link Integer}
+     * @param pageNumber {@link Integer}
+     * @param totalRows {@link Integer}
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.PATH_FEEDBACK_ID)
-    public List<FeedbackDto> getFeedbacksByDoctorId(@PathVariable(name = Constants.PATH_DOCTOR_ID) int doctorId,
-                                                    @PathVariable(name = Constants.PAGE_NUMBER) int pageNumber,
-                                                    @PathVariable(name = Constants.TOTAL_ROWS) int totalRows) {
-        return feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows);
+    public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(
+            @PathVariable(name = Constants.URL_DOCTOR_ID) Integer doctorId,
+            @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR,
+                feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
+                HttpStatus.OK);
     }
 }

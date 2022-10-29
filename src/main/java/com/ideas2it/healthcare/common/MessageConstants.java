@@ -72,4 +72,8 @@ public class MessageConstants {
     public static final String ENTER_VALID_MOBILE_NUMBER = "Please enter valid mobile number";
 
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
+
+    public static final String SPECIALIZATIONS_NOT_FOUND = "Specializations not found";
+
+    public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
 }

@@ -15,10 +15,8 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
-import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.repo.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
-import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -63,31 +61,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public DoctorClinicDto updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
-        if (!doctorClinicRepository.existsByIdAndStatus(doctorClinicDto.getId(), Constants.ACTIVE)) {
-            throw new NotFoundException(MessageConstants.DOCTOR_UNABLE_TO_UPDATE);
-        }
-        return DoctorClinicMapper.toDto(doctorClinicRepository
-                .save(DoctorClinicMapper.fromDto(doctorClinicDto)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId
                         , clinicId, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public DoctorClinicDto getDoctorClinicById(int id) {
-        return doctorClinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
-                map(DoctorClinicMapper::toDto).
-                findFirst().
-                orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_OR_CLINIC_NOT_FOUND));
     }
 
     /**

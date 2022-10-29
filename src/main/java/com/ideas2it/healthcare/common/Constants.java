@@ -161,12 +161,54 @@ public class Constants {
 
     public static final String APPOINTMENT_RESCHEDULED_SUCCESSFULLY = "Appointment rescheduled successfully";
 
+    public static final String SUCCESSFULLY_RETRIEVED_APPOINTMENT = "Successfully retrieved appointment";
+
     public static final String CLINIC_ADDED_SUCCESSFULLY = "Clinic added successfully";
+
+    public static final String SPECIALIZATION_ADDED_SUCCESSFULLY = "Specialization added successfully";
+
+    public static final String DOCTOR_ADDED_SUCCESSFULLY = "Doctor added successfully";
+
+    public static final String VITALS_ADDED_SUCCESSFULLY = "Vitals added successfully";
+
+    public static final String VITAL_ADDED_SUCCESSFULLY = "Vital added successfully";
+
+    public static final String FEEDBACK_ADDED_SUCCESSFULLY = "Feedback added successfully";
+
+    public static final String PATIENT_ADDED_SUCCESSFULLY = "Patient added successfully";
+
+    public static final String TIMESLOTS_ADDED_SUCCESSFULLY = "Patient added successfully";
 
     public static final String CLINIC_UPDATED_SUCCESSFULLY = "Clinic updated successfully";
 
+    public static final String DOCTOR_UPDATED_SUCCESSFULLY = "Doctor updated successfully";
+
+    public static final String SPECIALIZATION_UPDATED_SUCCESSFULLY = "Specialization updated successfully";
+
+    public static final String PATIENT_UPDATED_SUCCESSFULLY = "Doctor updated successfully";
+
     public static final String SUCCESSFULLY_RETRIEVED_CLINICS = "Successfully retrieved clinics";
 
+    public static final String SUCCESSFULLY_RETRIEVED_TIMESLOTS = "Successfully retrieved timeslots";
+
+    public static final String SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS = "Successfully retrieved specializations";
+
+    public static final String SUCCESSFULLY_RETRIEVED_SPECIALIZATION = "Successfully retrieved specialization";
+
+    public static final String SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR = "Successfully retrieved feedback to doctor";
+
+    public static final String SUCCESSFULLY_RETRIEVED_DOCTORS = "Successfully retrieved doctors";
+
+    public static final String SUCCESSFULLY_RETRIEVED_DOCTOR = "Successfully retrieved doctor";
+
+    public static final String SUCCESSFULLY_RETRIEVED_PATIENT = "Successfully retrieved patient";
+
     public static final String SUCCESSFULLY_RETRIEVED_CLINIC = "Successfully retrieved clinic";
+
+    public static final String DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY  = "Doctor assigned to clinic successfully";
+
+    public static final String SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS  = "Successfully retrieved all timeslots";
+
+    public static final String SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC  = "Successfully retrieved all doctors in clinic";
 }
 

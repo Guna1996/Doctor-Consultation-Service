@@ -9,19 +9,12 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -45,11 +38,12 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to add clinic details into database.
+     * This method is used to add clinic
+     * details.
      * </p>
      *
-     * @param clinicDto is clinic object
-     * @return ClinicDto
+     * @param clinicDto {@link ClinicDto} is clinic object
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
@@ -64,13 +58,14 @@ public class ClinicController {
      * of available clinics.
      * </p>
      *
-     * @param pageNumber is page number to show
-     * @param totalRows  is a set of rows to be shown
-     * @return List<ClinicDto>
+     * @param pageNumber {@link Integer} is page number to show
+     * @param totalRows  {@link Integer} is a set of rows to be shown
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.PAGINATION)
-    public ResponseEntity<Map<String, Object>> getClinics(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                      @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+    public ResponseEntity<Map<String, Object>> getClinics(
+            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows),
                 HttpStatus.OK);
@@ -79,14 +74,14 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to get a particular
-     * clinic detail by clinic id
+     * clinic detail.
      * </p>
      *
-     * @param id is clinic id
-     * @return ClinicDto
+     * @param id {@link Integer} is clinic id
+     * @return ResponseEntity<Map<String, Object>>
      */
     @GetMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) int id) {
+    public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
         return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_CLINIC,
                 clinicService.getClinicById(id),
                 HttpStatus.OK);
@@ -95,11 +90,11 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to correct the recorded
-     * details of a clinic after validating it.
+     * details of a clinic.
      * </p>
      *
-     * @param clinicDto is Loan object
-     * @return ClinicDto
+     * @param clinicDto {@link ClinicDto} is Loan object
+     * @return ResponseEntity<Map<String, Object>>
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
@@ -111,14 +106,14 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to remove the clinic
-     * details of a clinic
+     * details of a clinic.
      * </p>
      *
-     * @param id is clinic id
-     * @return String
+     * @param id {@link Integer} is clinic id
+     * @return ResponseEntity<String>
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) int id) {
+    public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) Integer id) {
         return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK);
     }
 }

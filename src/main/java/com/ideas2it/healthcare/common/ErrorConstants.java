@@ -8,8 +8,6 @@
  */
 package com.ideas2it.healthcare.common;
 
-import org.springframework.security.core.parameters.P;
-
 /**
  * <p>
  * This Constants class contains static final string variable

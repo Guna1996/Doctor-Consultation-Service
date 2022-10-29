@@ -11,17 +11,10 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -33,8 +26,7 @@ import java.time.LocalDateTime;
  * @author Bala Ashwanth.N
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 @Entity(name = Constants.VITAL)
 public class Vital {
 

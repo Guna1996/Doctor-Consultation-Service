@@ -44,17 +44,20 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
-        return TimeslotMapper.toDto(timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto)));
+        return TimeslotMapper.toDto(timeslotRepository
+                .save(TimeslotMapper.fromDto(timeslotDto)));
     }
 
     /**
      * {@inheritDoc}
      */
     public List<TimeslotDto> getTimeslots(int pageNumber, int totalRows) {
-        List<Timeslot> timeslots = timeslotRepository.findAll(PageRequest.of(pageNumber, totalRows)).toList();
+        List<Timeslot> timeslots = timeslotRepository
+                .findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (timeslots.isEmpty()) {
             throw new NotFoundException(MessageConstants.TIMESLOT_IS_EMPTY);
         }
-        return timeslots.stream().map(TimeslotMapper::toDto).collect(Collectors.toList());
+        return timeslots.stream().map(TimeslotMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
