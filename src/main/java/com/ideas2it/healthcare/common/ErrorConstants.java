@@ -38,7 +38,8 @@ public class ErrorConstants {
 
     public static final String NAME_SHOULD_NOT_BE_NULL = "Name should not be null";
 
-    public static final String DOOR_NUMBER_CANNOT_BE_NEGATIVE_OR_NULL = "Door number cannot be negative or zero";
+    public static final String DOOR_NUMBER_CANNOT_BE_NEGATIVE_OR_NULL =
+            "Door number cannot be negative or zero";
 
     public static final String DOOR_NUMBER_SHOULD_NOT_BE_NULL = "Door number should not be null";
 
@@ -50,11 +51,13 @@ public class ErrorConstants {
 
     public static final String MOBILE_NUMBER_SHOULD_NOT_BE_NULL = "Mobile Number should not be null";
 
-    public static final String PIN_CODE_CANNOT_BE_NEGATIVE_OR_ZERO = "Pin code cannot be negative or zero";
+    public static final String PIN_CODE_CANNOT_BE_NEGATIVE_OR_ZERO =
+            "Pin code cannot be negative or zero";
 
     public static final String PIN_CODE_SHOULD_NOT_BE_NULL = "Pin code shouldn't be null";
 
-    public static final String MOBILE_NUMBER_MUST_CONTAIN_TEN_NUMBERS_ONLY = " Mobile Number must contain ten numbers only";
+    public static final String MOBILE_NUMBER_MUST_CONTAIN_TEN_NUMBERS_ONLY =
+            "Mobile Number must contain ten numbers only";
 
     public static final String DATE_OF_BIRTH_SHOULD_NOT_BE_NULL = "Date of birth should not be null";
 
@@ -62,6 +65,7 @@ public class ErrorConstants {
 
     public static final String QUALIFICATION_SHOULD_NOT_BE_NULL = "Qualification should not be null";
 
-    public static final String REGISTRATION_YEAR_SHOULD_NOT_BE_NULL = "Registration year should not be null";
+    public static final String REGISTRATION_YEAR_SHOULD_NOT_BE_NULL =
+            "Registration year should not be null";
 }
 

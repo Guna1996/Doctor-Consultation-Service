@@ -34,19 +34,19 @@ public class Vital {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = Constants.HEIGHT)
     private float height;
 
-    @Column
+    @Column(name = Constants.WEIGHT)
     private float weight;
 
-    @Column
+    @Column(name = Constants.PULSE)
     private float pulse;
 
-    @Column
+    @Column(name = Constants.DIASTOLIC)
     private float diastolic;
 
-    @Column
+    @Column(name = Constants.SYSTOLIC)
     private float systolic;
 
     @Column(name = Constants.SUGAR_LEVEL)
