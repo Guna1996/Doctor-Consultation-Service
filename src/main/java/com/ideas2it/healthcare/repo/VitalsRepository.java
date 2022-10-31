@@ -6,20 +6,31 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public interface VitalsRepository extends JpaRepository<Vital, Integer> {
 
-    Optional<Vital> findByIdAndStatus(int id, String status);
+    /**
+     * <p>
+     * This method is used to find active vital by vital id
+     * </p>
+     *
+     * @param id {@link Integer} is id of the vital
+     * @param status {@link String} is status of vital
+     * @return {@link Optional<Vital>}
+     */
+    Optional<Vital> findByIdAndStatus(Integer id, String status);
 
-    Page<Vital> findAllByStatus(String status, Pageable pageable);
-
-    Page<Vital> findByPatientIdAndStatus(int patientId, String status, Pageable pageable);
-
-//    @Modifying
-//    @Query("update vital set status='inactive' where id=?1 and status = 'active'")
-//    Integer deleteVitalsById(int id);
+    /**
+     * <p>
+     * This method is used to find active vitals by patient id
+     * </p>
+     *
+     * @param patientId {@link Integer} is id of the patient
+     * @param status {@link String} is status of vital
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<Vital>}
+     */
+    Page<Vital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
 }

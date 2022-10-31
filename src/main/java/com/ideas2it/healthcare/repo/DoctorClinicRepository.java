@@ -29,9 +29,7 @@ import java.util.Optional;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Repository
@@ -40,55 +38,65 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
 
     /**
      * <p>
-     * This findAllByStatus abstract method is used for
-     * get all the active doctor from the DoctorClinic
+     * This method is used for get all the
+     * active doctor from the DoctorClinic
      * table
      * </p>
      *
-     * @param status - status of the doctor in clinic side
-     *
-     * @return List<DoctorClinic>
+     * @param status is status of the doctorClinic
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<DoctorClinic>}
      */
     Page<DoctorClinic> findAllByStatus(String status, Pageable pageable);
 
     /**
      * <p>
-     * This findByIdAndStatus abstract method is used to
-     * getting doctor object in the doctorclinic table by getting
-     * doctor id from the user and also it will return only the
-     * active doctor in the doctorclinic table
+     * This method is used to find active doctorClinic
+     * by doctorClinic id
      * </p>
      *
-     * @param id - id of the doctor in DoctorClinic table
-     *
-     * @param status - status of the doctor
-     *
-     * @return DoctorClinic
+     * @param id {@link Integer} is id of the doctorClinic in DoctorClinic table
+     * @param status {@link String} is status of the doctorClinic
+     * @return {@link Optional<DoctorClinic>}
      */
     Optional<DoctorClinic> findByIdAndStatus(Integer id, String status);
 
     /**
      * <p>
-     * This existsByIdAndStatus abstract method is used to
-     * check wheather a doctor is available or not in clinic
-     * side by getting id and status
+     * This method is used to find active doctor
+     * clinic by doctor id and clinic id
      * </p>
      *
-     * @param id - id of the doctor are clinic side
-     *
-     * @param status - status of the doctor
-     *
-     * @return boolean
+     * @param clinicId {@link Integer} is id of clinic
+     * @param doctorId {@link Integer} is id of doctor
+     * @param status {@link String} is status of doctorClinic
+     * @return {@link Optional<DoctorClinic>}
      */
-    Boolean existsByIdAndStatus(int id, String status);
+    Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(Integer doctorId, Integer clinicId, String status);
 
-    Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId, String status);
-
-    Optional<DoctorClinic> findByIdAndStatus(int id, String status);
-
+    /**
+     * <p>
+     * This method is used to delete doctor clinic by id
+     * and set the status as inactive using query
+     * </p>
+     *
+     * @param id {@link Integer} is id of the doctorClinic
+     * @return {@link Integer}
+     */
     @Modifying
     @Query("update doctor_clinic set status='inactive' where id=?1 and status = 'active'")
-    Integer deleteDoctorClinicById(int id);
+    Integer deleteDoctorClinicById(Integer id);
 
-    Page<DoctorClinic> findByClinicIdAndStatus(int clinicId, String status, Pageable pageable);
+    /**
+     * <p>
+     * This method is used to find active doctor clinic
+     * by clinic id
+     * </p>
+     *
+     * @param clinicId {@link Integer} is id of clinic
+     * @param status {@link String} is status of doctorClinic
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<DoctorClinic>}
+     */
+    Page<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status, Pageable pageable);
 }
