@@ -51,7 +51,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        if (Period.between(date, currentDate).getDays() > 0) {
+        if (0 < Period.between(date, currentDate).getDays()) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
@@ -69,7 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String deleteAppointmentById(Integer id) {
-        if (appointmentRepository.deleteAppointmentById(id) == 1) {
+        if (1 <= appointmentRepository.deleteAppointmentById(id)) {
             return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
@@ -108,7 +108,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        if (Period.between(date, currentDate).getDays() > 0) {
+        if (0 < Period.between(date, currentDate).getDays()) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);

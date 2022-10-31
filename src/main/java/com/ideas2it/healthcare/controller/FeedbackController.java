@@ -62,8 +62,9 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
+        return SuccessResponse.responseEntity(feedbackService.deleteFeedback(id),
+                null, HttpStatus.OK);
     }
 
     /**
@@ -82,7 +83,7 @@ public class FeedbackController {
             @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK);
     }

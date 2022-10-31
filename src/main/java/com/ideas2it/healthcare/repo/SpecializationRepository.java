@@ -31,12 +31,39 @@ import java.util.Optional;
 @Transactional
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
 
-    Optional<Specialization> findByIdAndStatus(int id, String active);
+    /**
+     * <p>
+     * This method is used to find active specialization
+     * by specialization id
+     * </p>
+     *
+     * @param id     {@link Integer} is id of the specialization
+     * @param status {@link String} is status of specialization
+     * @return {@link Optional<Specialization>}
+     */
+    Optional<Specialization> findByIdAndStatus(Integer id, String status);
 
-    Page<Specialization> findAllByStatus(String active, Pageable pageable);
+    /**
+     * <p>
+     * This method is used to find all active specializations
+     * </p>
+     *
+     * @param status   {@link String} is status of specialization
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<Specialization>}
+     */
+    Page<Specialization> findAllByStatus(String status, Pageable pageable);
 
+    /**
+     * <p>
+     * This method is used to delete specialization by id
+     * and set the status as inactive using query
+     * </p>
+     *
+     * @param id {@link Integer} is id of the specialization
+     * @return {@link Integer}
+     */
     @Modifying
-    @Query("update specialization set status='inactive' where id=?1 and status ='active'")
-    Integer deleteSpecializationById(int id);
-
+    @Query("update specialization set status = 'inactive' where id=?1 and status ='active'")
+    Integer deleteSpecializationById(Integer id);
 }

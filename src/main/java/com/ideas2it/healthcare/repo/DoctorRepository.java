@@ -31,14 +31,38 @@ import java.util.Optional;
 @Transactional
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
-    Optional<Doctor> findByIdAndStatus(int id, String active);
+    /**
+     * <p>
+     * This method is used to find active doctor by doctor id
+     * </p>
+     *
+     * @param id {@link Integer} is id of the doctor
+     * @param status {@link String} is status of doctor
+     * @return {@link Optional<Doctor>}
+     */
+    Optional<Doctor> findByIdAndStatus(Integer id, String status);
 
-    Boolean existsByIdAndStatus(int id, String status);
+    /**
+     * <p>
+     * This method is used to find all active doctors
+     * </p>
+     *
+     * @param status {@link String} is status of doctor
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<Doctor>}
+     */
+    Page<Doctor> findAllByStatus(String status, Pageable pageable);
 
-    Page<Doctor> findAllByStatus(String active, Pageable pageable);
-
+    /**
+     * <p>
+     * This method is used to delete doctor by id
+     * and set the status as inactive using query
+     * </p>
+     *
+     * @param id {@link Integer} is id of the doctor
+     * @return {@link Integer}
+     */
     @Modifying
-    @Query("update doctor set status='inactive' where id=?1 and status ='active'")
-    Integer deleteDoctorById(int id);
-
+    @Query("update doctor set status = 'inactive' where id=?1 and status ='active'")
+    Integer deleteDoctorById(Integer id);
 }
