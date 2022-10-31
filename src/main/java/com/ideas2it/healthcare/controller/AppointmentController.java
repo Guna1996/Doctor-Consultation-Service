@@ -46,7 +46,8 @@ public class AppointmentController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
+    public ResponseEntity<Map<String, Object>> addAppointment(
+            @Valid @RequestBody AppointmentDto appointmentDto) {
         return SuccessResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
                 appointmentService.addAppointment(appointmentDto),
                 HttpStatus.OK);
@@ -62,10 +63,10 @@ public class AppointmentController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
+    public ResponseEntity<Map<String, Object>> rescheduleAppointment(
+            @Valid @RequestBody AppointmentDto appointmentDto) {
         return SuccessResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
-                appointmentService.rescheduleAppointment(appointmentDto),
-                HttpStatus.OK);
+                appointmentService.rescheduleAppointment(appointmentDto), HttpStatus.OK);
     }
 
     /**
@@ -75,7 +76,7 @@ public class AppointmentController {
      * </p>
      *
      * @param id {@link Integer} is appointment id
-     * @return {@link ResponseEntity<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) Integer id) {
@@ -91,7 +92,7 @@ public class AppointmentController {
      * @param doctorId {@link Integer} is id of doctor
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_APPOINTMENTS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getAppointmentsByDoctorId(
@@ -112,7 +113,7 @@ public class AppointmentController {
      * @param patientId {@link Integer} is id of patient
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_PATIENT_APPOINTMENT)
     public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(

@@ -39,7 +39,8 @@ public class NotFoundExceptionHandler {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleInvalidArgument(MethodArgumentNotValidException exception) {
+    public ResponseEntity<Map<String, String>> handleInvalidArgument(
+            MethodArgumentNotValidException exception) {
         Map<String, String> errorMap = new HashMap<>();
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
@@ -57,7 +58,8 @@ public class NotFoundExceptionHandler {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleBusinessException(NotFoundException exception) {
+    public ResponseEntity<Map<String, String>> handleBusinessException(
+            NotFoundException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put(ErrorConstants.ERROR_MESSAGE, exception.getMessage());
         return new ResponseEntity<>(errorMap, HttpStatus.OK);

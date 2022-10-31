@@ -74,5 +74,6 @@ public interface DoctorClinicService {
      * @param totalRows {@link Integer} is required number of rows to be displayed
      * @return {@link List<DoctorClinicDto>}
      */
-    List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber, Integer totalRows);
+    List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
+                                               Integer totalRows);
 }

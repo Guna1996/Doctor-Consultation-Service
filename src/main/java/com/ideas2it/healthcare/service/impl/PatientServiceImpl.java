@@ -60,17 +60,19 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public PatientDto getPatientById(Integer id) {
-        return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
-                map(PatientMapper::toDto).
-                findFirst().
-                orElseThrow(() -> new NotFoundException(MessageConstants.PATIENT_NOT_FOUND));
+        return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream()
+                .map(PatientMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(MessageConstants.PATIENT_NOT_FOUND));
+
     }
 
     /**
      * {@inheritDoc}
      */
     public PatientDto updatePatient(PatientDto patientDto) {
-        Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(), Constants.ACTIVE);
+        Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
+                Constants.ACTIVE);
         if (patient.isEmpty()) {
             throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
         }

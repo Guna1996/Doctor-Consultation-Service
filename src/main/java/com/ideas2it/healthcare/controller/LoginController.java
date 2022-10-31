@@ -56,7 +56,8 @@ public class LoginController {
      * @parm authenticationRequest {@link AuthenticationRequest} contains username and password
      */
     @RequestMapping(value = Constants.URL_LOGIN, method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
+    public ResponseEntity<?> createAuthenticationToken(
+            @RequestBody AuthenticationRequest authenticationRequest)
             throws Exception {
         try {
             authenticationManager.authenticate(

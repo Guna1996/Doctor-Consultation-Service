@@ -44,7 +44,7 @@ public class VitalController {
      *</p>
      *
      * @param vitalsDto {@link VitalsDto} is a dto object that contains information
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addVitals(@RequestBody VitalsDto vitalsDto) {
@@ -62,13 +62,15 @@ public class VitalController {
      * @param patientId {@link Integer} is id of patient
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_VITALS_BY_PATIENT_ID + Constants.URL_PAGINATION)
-    public ResponseEntity<Map<String, Object>> getVitalByPatientId(@PathVariable(name = Constants.PATIENT_ID) Integer patientId,
-                                              @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
-                                              @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+    public ResponseEntity<Map<String, Object>> getVitalByPatientId(
+            @PathVariable(name = Constants.PATIENT_ID) Integer patientId,
+            @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.VITAL_ADDED_SUCCESSFULLY,
+
                 vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK);
     }

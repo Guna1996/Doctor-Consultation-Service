@@ -44,13 +44,12 @@ public class ClinicController {
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic object
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
         return SuccessResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
-                clinicService.addClinic(clinicDto),
-                HttpStatus.OK);
+                clinicService.addClinic(clinicDto), HttpStatus.OK);
     }
 
     /**
@@ -61,15 +60,14 @@ public class ClinicController {
      *
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_PAGINATION)
     public ResponseEntity<Map<String, Object>> getClinics(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
-                clinicService.getClinics(pageNumber, totalRows),
-                HttpStatus.OK);
+                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK);
     }
 
     /**
@@ -79,13 +77,12 @@ public class ClinicController {
      * </p>
      *
      * @param id {@link Integer} is clinic id
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
-                clinicService.getClinicById(id),
-                HttpStatus.OK);
+                clinicService.getClinicById(id), HttpStatus.OK);
     }
 
     /**
@@ -94,14 +91,13 @@ public class ClinicController {
      * details of a clinic.
      * </p>
      *
-     * @param clinicDto {@link ClinicDto} is Loan object
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @param clinicDto {@link ClinicDto} is contains clinic details
+     * @return {@link ResponseEntity}
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
         return SuccessResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
-                clinicService.updateClinic(clinicDto),
-                HttpStatus.OK);
+                clinicService.updateClinic(clinicDto), HttpStatus.OK);
     }
 
     /**
@@ -111,7 +107,7 @@ public class ClinicController {
      * </p>
      *
      * @param id {@link Integer} is clinic id
-     * @return {@link ResponseEntity<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) Integer id) {

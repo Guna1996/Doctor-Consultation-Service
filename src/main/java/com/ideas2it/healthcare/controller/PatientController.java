@@ -46,7 +46,7 @@ public class PatientController {
      * </p>
      *
      * @param patientDto {@link PatientDto} is patient detail
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addPatient(@RequestBody PatientDto patientDto) {
@@ -62,7 +62,7 @@ public class PatientController {
      * </p>
      *
      * @param id {@link Integer} is patient id
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
@@ -78,7 +78,7 @@ public class PatientController {
      * </p>
      *
      * @param patientDto {@link PatientDto} is detail of patient
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {

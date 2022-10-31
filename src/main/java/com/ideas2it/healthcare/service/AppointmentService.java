@@ -83,7 +83,8 @@ public interface AppointmentService {
      * @param totalRows {@link Integer} is number of rows required
      * @return {@link List<AppointmentDto>}
      */
-    List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
+    List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
+                                                    Integer totalRows);
 
     /**
      * <p>
@@ -95,5 +96,6 @@ public interface AppointmentService {
      * @param totalRows {@link Integer} is number of rows required
      * @return {@link List<AppointmentDto>}
      */
-    List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
+    List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
+                                                   Integer totalRows);
 }

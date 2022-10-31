@@ -62,7 +62,6 @@ public class ClinicServiceImpl implements ClinicService {
         return clinics.stream()
                 .map(ClinicMapper::toDto)
                 .collect(Collectors.toList());
-
     }
 
     /**
@@ -70,9 +69,9 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public ClinicDto getClinicById(Integer id) {
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
-                map(ClinicMapper::toDto).
-                findFirst().
-                orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
+                map(ClinicMapper::toDto)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
     }
 
     /**

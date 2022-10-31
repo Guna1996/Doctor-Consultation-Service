@@ -42,8 +42,8 @@ public class FeedbackController {
      * from a patient.
      * </p>
      *
-     * @param feedbackDto {@link FeedbackDto} is dto object that contains information
-     * @return {@link ResponseEntity<Map<String,Object>>}
+     * @param feedbackDto {@link FeedbackDto} is contains details of feedback
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
@@ -59,7 +59,7 @@ public class FeedbackController {
      * </p>
      *
      * @param id {@link Integer} is an integer that refer id in database
-     * @return {@link ResponseEntity<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
@@ -75,7 +75,7 @@ public class FeedbackController {
      * @param doctorId {@link Integer} is id of doctor
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(
