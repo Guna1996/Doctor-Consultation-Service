@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +47,7 @@ public class FeedbackController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return Response.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
@@ -82,7 +82,7 @@ public class FeedbackController {
             @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK);
     }

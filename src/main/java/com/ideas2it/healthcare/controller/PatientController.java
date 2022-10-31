@@ -12,7 +12,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,7 +50,7 @@ public class PatientController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addPatient(@RequestBody PatientDto patientDto) {
-        return Response.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
                 patientService.addPatient(patientDto),
                 HttpStatus.OK);
     }
@@ -66,7 +66,7 @@ public class PatientController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
                 patientService.getPatientById(id),
                 HttpStatus.OK);
     }
@@ -82,7 +82,7 @@ public class PatientController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
-        return Response.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
                 patientService.updatePatient(patientDto),
                 HttpStatus.OK);
     }
