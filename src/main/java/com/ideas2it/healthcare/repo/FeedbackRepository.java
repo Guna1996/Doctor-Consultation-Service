@@ -1,5 +1,6 @@
 package com.ideas2it.healthcare.repo;
 
+import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Feedback;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,14 +16,39 @@ import java.util.Optional;
 @Transactional
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
-    Optional<Feedback> findByIdAndStatus(int id, String status);
+    /**
+     * <p>
+     * This method is used to find active feedback by feedback id
+     * </p>
+     *
+     * @param id {@link Integer} is id of the feedback
+     * @param status {@link String} is status of feedback
+     * @return {@link Optional<Feedback>}
+     */
+    Optional<Feedback> findByIdAndStatus(Integer id, String status);
 
-    Page<Feedback> findByDoctorIdAndStatus(int doctorId, String status, Pageable pageable);
+    /**
+     * <p>
+     * This method is used to find active feedback by doctor id
+     * </p>
+     *
+     * @param doctorId {@link Integer} is id of the doctor
+     * @param status {@link String} is status of feedback
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<Feedback>}
+     */
+    Page<Feedback> findByDoctorIdAndStatus(Integer doctorId, String status, Pageable pageable);
 
-    Boolean existsByIdAndStatus(int id, String status);
-
+    /**
+     * <p>
+     * This method is used to delete feedback by id
+     * and set the status as inactive using query
+     * </p>
+     *
+     * @param id {@link Integer} is id of the feedback
+     * @return {@link Integer}
+     */
     @Modifying
-    @Query("update feedback set status='inactive' where id=?1")
-    Integer deleteSpecializationById(int id);
-
+    @Query("update feedback set status = 'inactive' where id=?1")
+    Integer deleteSpecializationById(Integer id);
 }

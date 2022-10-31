@@ -113,7 +113,7 @@ public class MessageConstants {
 
     public static final String SUCCESSFULLY_RETRIEVED_SPECIALIZATION = "Successfully retrieved specialization";
 
-    public static final String SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR = "Successfully retrieved feedback to doctor";
+    public static final String SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR = "Successfully retrieved feedback to doctor";
 
     public static final String SUCCESSFULLY_RETRIEVED_DOCTORS = "Successfully retrieved doctors";
 

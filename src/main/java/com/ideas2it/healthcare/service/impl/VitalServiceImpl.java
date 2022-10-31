@@ -56,7 +56,7 @@ public class VitalServiceImpl implements VitalService {
     /**
      * {@inheritDoc}
      */
-    public List<VitalsDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows) {
+    public List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
         return vitalsRepository
                 .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))

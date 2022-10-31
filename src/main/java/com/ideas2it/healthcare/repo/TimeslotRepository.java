@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TimeslotRepository extends JpaRepository<Timeslot, Integer> {
-
 }

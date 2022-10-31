@@ -51,7 +51,7 @@ public class TimeslotServiceImpl implements TimeslotService {
     /**
      * {@inheritDoc}
      */
-    public List<TimeslotDto> getTimeslots(int pageNumber, int totalRows) {
+    public List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows) {
         List<Timeslot> timeslots = timeslotRepository
                 .findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (timeslots.isEmpty()) {

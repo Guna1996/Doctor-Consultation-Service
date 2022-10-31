@@ -47,5 +47,5 @@ public interface VitalService {
      * @param totalRows {@link Integer} is required number of rows to be displayed
      * @return {@link List< VitalsDto >}
      */
-    List<VitalsDto> getVitalsByPatientId(int patientId, int pageNumber, int totalRows);
+    List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
 }

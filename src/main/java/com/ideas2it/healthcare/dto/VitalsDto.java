@@ -13,6 +13,8 @@ import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 /**
@@ -32,7 +34,9 @@ public class VitalsDto {
 
     private int id;
 
+    @Min(value = 0, message = "Height shouldn't be negative")
     private float height;
+
 
     private float weight;
 

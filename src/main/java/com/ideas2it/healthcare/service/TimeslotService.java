@@ -46,5 +46,5 @@ public interface TimeslotService {
      * @param totalRows {@link Integer} is required number of rows to be displayed
      * @return {@link TimeslotDto}
      */
-    List<TimeslotDto> getTimeslots(int pageNumber, int totalRows);
+    List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows);
 }
