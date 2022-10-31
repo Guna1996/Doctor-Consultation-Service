@@ -79,8 +79,9 @@ public class AppointmentController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteAppointment(@PathVariable(Constants.ID) Integer id) {
-        return new ResponseEntity<>(appointmentService.deleteAppointmentById(id), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> deleteAppointment(@PathVariable(Constants.ID) Integer id) {
+        return SuccessResponse.responseEntity(appointmentService.deleteAppointmentById(id),
+                null, HttpStatus.OK);
     }
 
     /**

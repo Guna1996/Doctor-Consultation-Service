@@ -22,7 +22,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
     Boolean existsByIdAndStatus(int id, String status);
 
     @Modifying
-    @Query("update feedback set status='inactive' where id=?1")
+    @Query("update feedback set status='inactive' where id=?1 and status = 'active'")
     Integer deleteSpecializationById(int id);
 
 }

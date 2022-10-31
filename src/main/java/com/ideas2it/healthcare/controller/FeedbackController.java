@@ -62,8 +62,9 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return new ResponseEntity<>(feedbackService.deleteFeedback(id), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
+        return SuccessResponse.responseEntity(feedbackService.deleteFeedback(id),
+                null, HttpStatus.OK);
     }
 
     /**

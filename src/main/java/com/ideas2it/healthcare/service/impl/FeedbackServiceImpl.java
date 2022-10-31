@@ -50,7 +50,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     public String deleteFeedback(Integer id) {
-        if (feedbackRepository.deleteSpecializationById(id) >= 1) {
+        if (1 <= feedbackRepository.deleteSpecializationById(id)) {
             return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.FEEDBACK_NOT_FOUND;

@@ -110,7 +110,8 @@ public class ClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteClinic(@PathVariable(Constants.ID) Integer id) {
-        return new ResponseEntity<>(clinicService.deleteClinicById(id), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> deleteClinic(@PathVariable(Constants.ID) Integer id) {
+        return SuccessResponse.responseEntity(clinicService.deleteClinicById(id),
+                null, HttpStatus.OK);
     }
 }
