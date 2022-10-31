@@ -19,7 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -37,16 +36,39 @@ import java.util.Optional;
 @Transactional
 public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
 
-    Optional<Clinic> findByIdAndStatus(int id, String status);
+    /**
+     * <p>
+     * This method is used to find active clinic by clinic id
+     * </p>
+     *
+     * @param id {@link Integer} is id of the clinic
+     * @param status {@link String} is status of clinic table
+     * @return {@link Optional<Clinic>}
+     */
+    Optional<Clinic> findByIdAndStatus(Integer id, String status);
 
-    Boolean existsByIdAndStatus(int id, String status);
-
-    List<Clinic> findAllByStatus(String active);
-
+    /**
+     * <p>
+     * This method is used to delete clinic by id
+     * and set the status as inactive using query
+     * </p>
+     *
+     * @param id {@link Integer} is id of the clinic
+     * @return {@link Integer}
+     */
     @Modifying
-    @Query("update clinic set status='inactive' where id=?1 and status = 'active'")
-    Integer deleteClinicById(int id);
+    @Query("update clinic set status = 'inactive' where id=?1 and status = 'active'")
+    Integer deleteClinicById(Integer id);
 
-    Page<Clinic> findAllByStatus(String active, Pageable pageable);
+    /**
+     * <p>
+     * This method is used to find all active clinics
+     * </p>
+     *
+     * @param status {@link String} is status of clinic table
+     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @return {@link Page<Clinic>}
+     */
+    Page<Clinic> findAllByStatus(String status, Pageable pageable);
 }
 

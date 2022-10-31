@@ -44,13 +44,17 @@ public class Constants {
 
     public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patientId}";
 
-    public static final String URL_GET_DOCTORS_BY_CLINIC_ID = "/doctor/{clinicId}/{pageNumber}/{totalRows}";
+    public static final String URL_GET_DOCTORS_BY_CLINIC_ID =
+            "/doctor/{clinicId}/{pageNumber}/{totalRows}";
 
-    public static final String URL_GET_APPOINTMENTS_BY_DOCTOR_ID = "/appointment/{doctorId}/{pageNumber}/{totalRows}";
+    public static final String URL_GET_APPOINTMENTS_BY_DOCTOR_ID =
+            "/appointment/{doctorId}/{pageNumber}/{totalRows}";
 
-    public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID = "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
+    public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID =
+            "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
 
-    public static final String URL_PATIENT_APPOINTMENT = "/appointment/{patientId}/{pageNumber}/{totalRows}";
+    public static final String URL_PATIENT_APPOINTMENT =
+            "/appointment/{patientId}/{pageNumber}/{totalRows}";
 
     public static final String URL_APPOINTMENT = "/appointment";
 
@@ -169,5 +173,15 @@ public class Constants {
     public static final String ENTITY_LIST = "Low";
 
     public static final String RESPONSE_CODE = "responseCode";
+
+    public static final String HEIGHT = "height";
+
+    public static final String WEIGHT = "weight";
+
+    public static final String PULSE = "pulse";
+
+    public static final String DIASTOLIC = "diastolic";
+
+    public static final String SYSTOLIC = "systolic";
 }
 
