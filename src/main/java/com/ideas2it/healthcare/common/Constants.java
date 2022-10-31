@@ -166,6 +166,14 @@ public class Constants {
 
     public static final String LOW = "Low";
 
+    public static final String MESSAGE = "message";
+
+    public static final String ENTITY = "entity";
+
+    public static final String ENTITY_LIST = "Low";
+
+    public static final String RESPONSE_CODE = "responseCode";
+
     public static final String HEIGHT = "height";
 
     public static final String WEIGHT = "weight";

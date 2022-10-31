@@ -45,6 +45,10 @@ public class DoctorDto {
     @Past(message = MessageConstants.ENTER_VALID_DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
+    private int age;
+
+    private int experience;
+
     @NotNull(message = ErrorConstants.GENDER_SHOULD_NOT_BE_NULL)
     @Pattern(regexp = Constants.GENDER_REGEX, message = MessageConstants.ENTER_MALE_OR_FEMALE)
     private String gender;

@@ -116,8 +116,8 @@ public class SpecializationController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<String> deleteSpecializationById(@PathVariable Integer id) {
-        return new ResponseEntity<>(specializationService.deleteSpecializationById(id),
-                HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> deleteSpecializationById(@PathVariable Integer id) {
+        return SuccessResponse.responseEntity(specializationService.deleteSpecializationById(id),
+                null, HttpStatus.OK);
     }
 }

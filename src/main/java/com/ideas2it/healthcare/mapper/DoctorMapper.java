@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Specialization;
+import com.ideas2it.healthcare.util.DateUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -80,7 +81,7 @@ public class DoctorMapper {
         if (null != doctor) {
             doctorDto.setId(doctor.getId());
             doctorDto.setName(doctor.getName());
-            doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+            doctorDto.setAge(DateUtil.getDifferenceBetweenDates(doctor.getDateOfBirth()));
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
             doctorDto.setConsultationFee(doctor.getConsultationFee());
@@ -96,7 +97,7 @@ public class DoctorMapper {
                 });
                 doctorDto.setSpecializations(specializationsDto);
             }
-            doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+            doctorDto.setExperience(DateUtil.getDifferenceBetweenDates(doctor.getDateOfRegistration()));
             doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
             doctorDto.setCity(doctor.getCity());
             doctorDto.setStatus(doctor.getStatus());
