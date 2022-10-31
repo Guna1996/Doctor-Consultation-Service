@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class ClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return Response.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
                 clinicService.addClinic(clinicDto),
                 HttpStatus.OK);
     }
@@ -67,7 +67,7 @@ public class ClinicController {
     public ResponseEntity<Map<String, Object>> getClinics(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -83,7 +83,7 @@ public class ClinicController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
                 clinicService.getClinicById(id),
                 HttpStatus.OK);
     }
@@ -99,7 +99,7 @@ public class ClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return Response.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
                 clinicService.updateClinic(clinicDto),
                 HttpStatus.OK);
     }

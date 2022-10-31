@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.VitalsDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class VitalController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addVitals(@RequestBody VitalsDto vitalsDto) {
-        return Response.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
                 vitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
     }
@@ -68,7 +68,7 @@ public class VitalController {
     public ResponseEntity<Map<String, Object>> getVitalByPatientId(@PathVariable(name = Constants.PATIENT_ID) Integer patientId,
                                               @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
                                               @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(MessageConstants.VITAL_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.VITAL_ADDED_SUCCESSFULLY,
                 vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK);
     }
