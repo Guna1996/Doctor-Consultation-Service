@@ -11,6 +11,7 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
@@ -52,7 +53,7 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public List<ClinicDto> getClinics(int pageNumber, int totalRows) {
+    public List<ClinicDto> getClinics(Integer pageNumber, Integer totalRows) {
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (clinics.isEmpty()) {
@@ -67,7 +68,7 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public ClinicDto getClinicById(int id) {
+    public ClinicDto getClinicById(Integer id) {
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(ClinicMapper::toDto).
                 findFirst().
@@ -84,9 +85,9 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public String deleteClinicById(int id) {
+    public String deleteClinicById(Integer id) {
         if (clinicRepository.deleteClinicById(id) == 1) {
-            return ErrorConstants.CLINIC_DELETED_SUCCESSFULLY;
+            return MessageConstants.CLINIC_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;
     }

@@ -11,6 +11,7 @@ package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
@@ -59,18 +60,17 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public boolean isAppointmentAvailable(int id, LocalDateTime dateTime) {
+    public Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime) {
         return appointmentRepository
-                .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE)
-                .isEmpty();
+                .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
     /**
      * {@inheritDoc}
      */
-    public String deleteAppointmentById(int id) {
+    public String deleteAppointmentById(Integer id) {
         if (appointmentRepository.deleteAppointmentById(id) == 1) {
-            return ErrorConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
+            return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.APPOINTMENT_NOT_FOUND;
     }
@@ -79,7 +79,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     @Override
-    public List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows) {
+    public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
                 patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
@@ -91,7 +91,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     @Override
-    public List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows) {
+    public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows) {
         return appointmentRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()

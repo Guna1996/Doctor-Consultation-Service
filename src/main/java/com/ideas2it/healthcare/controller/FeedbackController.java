@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.FeedbackService;
@@ -42,11 +43,11 @@ public class FeedbackController {
      * </p>
      *
      * @param feedbackDto {@link FeedbackDto} is dto object that contains information
-     * @return ResponseEntity<Map<String,Object>>
+     * @return {@link ResponseEntity<Map<String,Object>>}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return Response.responseEntity(Constants.FEEDBACK_ADDED_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
@@ -58,7 +59,7 @@ public class FeedbackController {
      * </p>
      *
      * @param id {@link Integer} is an integer that refer id in database
-     * @return String
+     * @return {@link ResponseEntity<String>}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
@@ -71,17 +72,17 @@ public class FeedbackController {
      * of a doctor.
      * </p>
      *
-     * @param doctorId {@link Integer}
-     * @param pageNumber {@link Integer}
-     * @param totalRows {@link Integer}
-     * @return ResponseEntity<Map<String, Object>>
+     * @param doctorId {@link Integer} is id of doctor
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is number of row to be shown
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
-    @GetMapping(Constants.PATH_FEEDBACK_ID)
+    @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(
-            @PathVariable(name = Constants.URL_DOCTOR_ID) Integer doctorId,
+            @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK);
     }

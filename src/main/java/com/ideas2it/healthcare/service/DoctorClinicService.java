@@ -29,13 +29,13 @@ public interface DoctorClinicService {
 
     /**
      * <p>
-     * This assignDoctorToClinic abstract method is used to assign
+     * This method is used to assign
      * doctor into clinic table by getting doctor and clinic id
      * from the user
      * </p>
      *
-     * @param doctorClinicDto is a dto class of doctor clinic
-     * @return DoctorClinicDto
+     * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
+     * @return {@link DoctorClinicDto}
      */
     DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto);
 
@@ -46,8 +46,8 @@ public interface DoctorClinicService {
      * column in doctor clinic table in the database
      * </p>
      *
-     * @param id - id of the doctor
-     * @return String
+     * @param id {@link Integer} id of the doctor
+     * @return {@link String}
      */
     String deleteDoctorFromClinic(Integer id);
 
@@ -57,11 +57,11 @@ public interface DoctorClinicService {
      * by doctor and clinic id
      * </p>
      *
-     * @param clinicId is id of clinic
-     * @param doctorId is id of doctor
-     * @return DoctorClinicDto
+     * @param clinicId {@link Integer} is id of clinic
+     * @param doctorId {@link Integer} is id of doctor
+     * @return {@link DoctorClinicDto}
      */
-    DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId);
+    DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId);
 
     /**
      * <p>
@@ -69,10 +69,10 @@ public interface DoctorClinicService {
      * by clinic id
      * </p>
      *
-     * @param clinicId   is id of clinic
-     * @param pageNumber is page number of appointments
-     * @param totalRows  is required number of rows to be displayed
-     * @return List<DoctorClinicDto>
+     * @param clinicId {@link Integer} is id of clinic
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is required number of rows to be displayed
+     * @return {@link List<DoctorClinicDto>}
      */
-    List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows);
+    List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber, Integer totalRows);
 }

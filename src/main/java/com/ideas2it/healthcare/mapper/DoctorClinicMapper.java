@@ -38,6 +38,7 @@ public class DoctorClinicMapper {
      * DoctorClinic model
      * </p>
      *
+     * @param doctorClinicDto {@link DoctorClinicDto} contains doctor assigned to clinic details
      * @return {@link DoctorClinic}
      */
     public static DoctorClinic fromDto(DoctorClinicDto doctorClinicDto) {
@@ -94,6 +95,7 @@ public class DoctorClinicMapper {
      * DoctorClinicDto
      * </p>
      *
+     * @param doctorClinic {@link DoctorClinic} contains doctor assigned to clinic details
      * @return {@link DoctorClinicDto}
      */
     public static DoctorClinicDto toDto(DoctorClinic doctorClinic) {

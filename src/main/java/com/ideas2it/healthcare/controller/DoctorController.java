@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.DoctorService;
@@ -45,11 +46,11 @@ public class DoctorController {
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
-     * @return ResponseEntity<Map<String,Object>>
+     * @return {@link ResponseEntity<Map<String,Object>>}
      */
     @PostMapping
     public ResponseEntity<Map<String,Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return Response.responseEntity(Constants.DOCTOR_ADDED_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
                 doctorService.saveDoctor(doctorDto),
                 HttpStatus.OK);
     }
@@ -60,14 +61,14 @@ public class DoctorController {
      * details of doctors.
      * </p>
      *
-     * @param pageNumber {@link Integer} is page number to show
-     * @param totalRows  {@link Integer} is a set of rows to be shown
-     * @return ResponseEntity<Map<String,Object>>
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is number of row to be shown
+     * @return {@link ResponseEntity<Map<String,Object>>}
      */
-    @GetMapping(Constants.PAGINATION)
+    @GetMapping(Constants.URL_PAGINATION)
     public ResponseEntity<Map<String, Object>> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
                                                 @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_DOCTORS,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -79,11 +80,11 @@ public class DoctorController {
      * </p>
      *
      * @param id {@link Integer} is id of doctor
-     * @return ResponseEntity<Map<String,Object>>
+     * @return {@link ResponseEntity<Map<String,Object>>}
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable int id) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_DOCTOR,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTOR,
                 doctorService.getDoctorById(id),
                 HttpStatus.OK);
     }
@@ -95,11 +96,11 @@ public class DoctorController {
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
-     * @return ResponseEntity<Map<String,Object>>
+     * @return {@link ResponseEntity<Map<String,Object>>}
      */
     @PutMapping
     public ResponseEntity<Map<String,Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return Response.responseEntity(Constants.DOCTOR_UPDATED_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
                 doctorService.updateDoctor(doctorDto),
                 HttpStatus.OK);
     }
@@ -111,7 +112,7 @@ public class DoctorController {
      * </p>
      *
      * @param id {@link Integer} is id of doctor
-     * @return ResponseEntity<String>
+     * @return {@link ResponseEntity<String>}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {

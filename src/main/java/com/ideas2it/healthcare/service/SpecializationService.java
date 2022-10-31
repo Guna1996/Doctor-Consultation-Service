@@ -46,7 +46,7 @@ public interface SpecializationService {
      *
      * @return {@link List <SpecializationDto>}
      */
-    List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows);
+    List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows);
 
     /**
      * <p>
@@ -57,7 +57,7 @@ public interface SpecializationService {
      * @param id {@link int}
      * @return {@link SpecializationDto}
      */
-    SpecializationDto getSpecializationById(int id);
+    SpecializationDto getSpecializationById(Integer id);
 
     /**
      * <p>
@@ -76,8 +76,8 @@ public interface SpecializationService {
      * by making status as inactive
      * </p>
      *
-     * @param id {@link int}
+     * @param id {@link Integer}
      * @return {@link String}
      */
-    String deleteSpecializationById(int id);
+    String deleteSpecializationById(Integer id);
 }

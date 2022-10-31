@@ -34,8 +34,8 @@ public interface AppointmentService {
      * into data base by getting details from the user
      * </p>
      *
-     * @param appointmentDto - patient details
-     * @return patientDto
+     * @param appointmentDto {@link AppointmentDto} contains appointment details
+     * @return {@link AppointmentDto}
      */
     AppointmentDto addAppointment(AppointmentDto appointmentDto);
 
@@ -46,20 +46,19 @@ public interface AppointmentService {
      * doctor in doctor database
      * </p>
      *
-     * @param id is id of the doctor
-     * @param dateTime is date and time of appointment
-     * @return boolean
+     * @param id {@link Integer} is id of the doctor
+     * @param dateTime {@link LocalDateTime} is date and time of appointment
+     * @return {@link Boolean}
      */
-    boolean isAppointmentAvailable(int id, LocalDateTime dateTime);
-
+    Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime);
     /**
      * <p>
      * This method is used to reschedule appointment and
      * all details into the database
      * </p>
      *
-     * @param appointmentDto is appointment detail
-     * @return appointmentDto
+     * @param appointmentDto {@link AppointmentDto} is appointment detail
+     * @return {@link AppointmentDto}
      */
     AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto);
 
@@ -69,10 +68,10 @@ public interface AppointmentService {
      * all details into the database
      * </p>
      *
-     * @param id is an id for unknown
-     * @return String
+     * @param id {@link Integer} is an id for unknown
+     * @return {@link String}
      */
-    String deleteAppointmentById(int id);
+    String deleteAppointmentById(Integer id);
 
     /**
      * <p>
@@ -80,11 +79,11 @@ public interface AppointmentService {
      * from the database by patient Id
      * </p>
      *
-     * @param pageNumber is Page number of the page
-     * @param totalRows is number of rows required
-     * @return List<appointmentDto>
+     * @param pageNumber {@link Integer} is Page number
+     * @param totalRows {@link Integer} is number of rows required
+     * @return {@link List<AppointmentDto>}
      */
-    List<AppointmentDto> getAppointmentsByPatientId(int patientId, int pageNumber, int totalRows);
+    List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
 
     /**
      * <p>
@@ -92,9 +91,9 @@ public interface AppointmentService {
      * from the database by doctor Id
      * </p>
      *
-     * @param pageNumber is Page number of the page
-     * @param totalRows is number of rows required
-     * @return List<appointmentDto>
+     * @param pageNumber {@link Integer} is Page number
+     * @param totalRows {@link Integer} is number of rows required
+     * @return {@link List<AppointmentDto>}
      */
-    List<AppointmentDto> getAppointmentsByDoctorId(int doctorId, int pageNumber, int totalRows);
+    List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
 }

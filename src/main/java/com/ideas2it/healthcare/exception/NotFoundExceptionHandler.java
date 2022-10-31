@@ -6,6 +6,7 @@
  */
 package com.ideas2it.healthcare.exception;
 
+import com.ideas2it.healthcare.common.ErrorConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -58,7 +59,7 @@ public class NotFoundExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, String>> handleBusinessException(NotFoundException exception) {
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage", exception.getMessage());
+        errorMap.put(ErrorConstants.ERROR_MESSAGE, exception.getMessage());
         return new ResponseEntity<>(errorMap, HttpStatus.OK);
     }
 }

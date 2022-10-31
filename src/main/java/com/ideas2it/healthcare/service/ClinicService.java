@@ -33,8 +33,8 @@ public interface ClinicService {
      * user
      * </p>
      *
-     * @param clinicDto is clinic details
-     * @return ClinicDto
+     * @param clinicDto {@link ClinicDto} is clinic details
+     * @return {@link ClinicDto}
      */
     ClinicDto addClinic(ClinicDto clinicDto);
 
@@ -44,11 +44,11 @@ public interface ClinicService {
      * from the database
      * </p>
      *
-     * @return list<ClinicDto>
-     * @param pageNumber
-     * @param totalRows
+     * @param pageNumber {@link Integer} is Page number
+     * @param totalRows {@link Integer} is number of rows required
+     * @return {@link List<ClinicDto>}
      */
-    List<ClinicDto> getClinics(int pageNumber, int totalRows);
+    List<ClinicDto> getClinics(Integer pageNumber, Integer totalRows);
 
     /**
      * <p>
@@ -57,10 +57,10 @@ public interface ClinicService {
      * from the user to display
      * </p>
      *
-     * @param id - id of the clinic
-     * @return ClinicDto
+     * @param id {@link Integer} id of the clinic
+     * @return {@link ClinicDto}
      */
-    ClinicDto getClinicById(int id);
+    ClinicDto getClinicById(Integer id);
 
     /**
      * <p>
@@ -68,8 +68,8 @@ public interface ClinicService {
      * all details into the database
      * </p>
      *
-     * @param clinicDto - clinic detail
-     * @return ClinicDto
+     * @param clinicDto {@link ClinicDto} clinic detail
+     * @return {@link ClinicDto}
      */
     ClinicDto updateClinic(ClinicDto clinicDto);
 
@@ -79,8 +79,8 @@ public interface ClinicService {
      * by getting id from the user
      * </p>
      *
-     * @param id - id of the clinic
-     * @return String
+     * @param id {@link Integer} id of the clinic
+     * @return {@link String}
      */
-    String deleteClinicById(int id);
+    String deleteClinicById(Integer id);
 }

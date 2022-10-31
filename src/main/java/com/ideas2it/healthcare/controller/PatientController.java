@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.PatientService;
@@ -45,11 +46,11 @@ public class PatientController {
      * </p>
      *
      * @param patientDto {@link PatientDto} is patient detail
-     * @return ResponseEntity<Map<String, Object>>
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addPatient(@RequestBody PatientDto patientDto) {
-        return Response.responseEntity(Constants.PATIENT_ADDED_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
                 patientService.addPatient(patientDto),
                 HttpStatus.OK);
     }
@@ -61,11 +62,11 @@ public class PatientController {
      * </p>
      *
      * @param id {@link Integer} is patient id
-     * @return ResponseEntity<Map<String, Object>>
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_PATIENT,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
                 patientService.getPatientById(id),
                 HttpStatus.OK);
     }
@@ -77,11 +78,11 @@ public class PatientController {
      * </p>
      *
      * @param patientDto {@link PatientDto} is detail of patient
-     * @return ResponseEntity<Map<String, Object>>
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
-        return Response.responseEntity(Constants.PATIENT_UPDATED_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
                 patientService.updatePatient(patientDto),
                 HttpStatus.OK);
     }

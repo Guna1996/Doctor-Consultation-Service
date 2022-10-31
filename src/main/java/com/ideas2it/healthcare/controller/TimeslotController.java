@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.TimeslotService;
@@ -41,14 +42,14 @@ public class TimeslotController {
      * timeslots.
      * </p>
      *
-     * @param pageNumber {@link Integer} page number to show
-     * @param totalRows  {@link Integer} a set of rows to be shown
-     * @return ResponseEntity<Map<String, Object>>
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is number of row to be shown
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
-    @GetMapping(Constants.PAGINATION)
+    @GetMapping(Constants.URL_PAGINATION)
     public ResponseEntity<Map<String, Object>> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
                                                                @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -59,11 +60,11 @@ public class TimeslotController {
      * </p>
      *
      * @param timeslotDto {@link TimeslotDto}is a dto object that contains information
-     * @return ResponseEntity<Map<String, Object>>
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {
-        return Response.responseEntity(Constants.TIMESLOTS_ADDED_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
                 timeslotService.addTimeslot(timeslotDto),
                 HttpStatus.OK);
     }

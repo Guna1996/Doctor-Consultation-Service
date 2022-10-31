@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.controller;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.dto.AuthenticationRequest;
 import com.ideas2it.healthcare.dto.AuthenticationResponse;
@@ -52,9 +53,9 @@ public class LoginController {
      * by username and password. This token can be further used for authorization
      * </p>
      *
-     * @parm authenticationRequest contains username and password
+     * @parm authenticationRequest {@link AuthenticationRequest} contains username and password
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = Constants.URL_LOGIN, method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
             throws Exception {
         try {

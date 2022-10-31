@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class VitalDto {
+public class VitalsDto {
 
     private int id;
 

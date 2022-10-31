@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.configuration;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -70,14 +71,15 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * based on authentication
      * </p>
      *
-     * @param httpSecurity allows configuring web based security
+     * @param httpSecurity {@link HttpSecurity} allows configuring web based security
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/login").permitAll().
-                anyRequest().authenticated().and().
-                exceptionHandling().and().sessionManagement()
+                .authorizeRequests()
+                .antMatchers(Constants.URL_LOGIN).permitAll()
+                .anyRequest().authenticated().and()
+                .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

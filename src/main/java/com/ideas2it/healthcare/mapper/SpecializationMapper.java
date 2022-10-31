@@ -8,6 +8,7 @@
  */
 package com.ideas2it.healthcare.mapper;
 
+import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.model.Specialization;
 
@@ -29,6 +30,7 @@ public class SpecializationMapper {
      * Specialization model
      * </p>
      *
+     * @param specializationDto {@link SpecializationDto} contains specialization details
      * @return {@link Specialization}
      */
     public static Specialization fromDto(SpecializationDto specializationDto) {
@@ -47,6 +49,7 @@ public class SpecializationMapper {
      * SpecializationDto
      * </p>
      *
+     * @param specialization {@link Specialization} contains specialization details
      * @return {@link SpecializationDto}
      */
     public static SpecializationDto toDto(Specialization specialization) {

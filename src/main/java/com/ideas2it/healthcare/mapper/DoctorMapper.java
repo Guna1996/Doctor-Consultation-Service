@@ -34,6 +34,7 @@ public class DoctorMapper {
      * Doctor model
      * </p>
      *
+     * @param doctorDto {@link DoctorDto} contains doctor details
      * @return {@link Doctor}
      */
     public static Doctor fromDto(DoctorDto doctorDto) {
@@ -71,6 +72,7 @@ public class DoctorMapper {
      * DoctorDto
      * </p>
      *
+     * @param doctor {@link Doctor} contains doctor details
      * @return {@link DoctorDto}
      */
     public static DoctorDto toDto(Doctor doctor) {
