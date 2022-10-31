@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public interface VitalsRepository extends JpaRepository<Vital, Integer> {
 
     Optional<Vital> findByIdAndStatus(int id, String status);
@@ -18,8 +17,4 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
     Page<Vital> findAllByStatus(String status, Pageable pageable);
 
     Page<Vital> findByPatientIdAndStatus(int patientId, String status, Pageable pageable);
-
-//    @Modifying
-//    @Query("update vital set status='inactive' where id=?1 and status = 'active'")
-//    Integer deleteVitalsById(int id);
 }

@@ -44,11 +44,12 @@ public class TimeslotController {
      *
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_PAGINATION)
-    public ResponseEntity<Map<String, Object>> getAllTimeslots(@PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
-                                                               @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+    public ResponseEntity<Map<String, Object>> getAllTimeslots(
+            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
                 HttpStatus.OK);
@@ -59,8 +60,8 @@ public class TimeslotController {
      * This method is used to add timeslot.
      * </p>
      *
-     * @param timeslotDto {@link TimeslotDto}is a dto object that contains information
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @param timeslotDto {@link TimeslotDto} is a dto object that contains information
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {

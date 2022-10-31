@@ -82,7 +82,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      */
     Boolean existsByIdAndStatus(int id, String status);
 
-    Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId, String status);
+    Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(int doctorId, int clinicId,
+                                                              String status);
 
     Optional<DoctorClinic> findByIdAndStatus(int id, String status);
 

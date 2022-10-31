@@ -46,13 +46,13 @@ public class DoctorClinicController {
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is details of doctor clinic
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> assignDoctorToClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
+    public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
+            @RequestBody DoctorClinicDto doctorClinicDto) {
         return Response.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
-                doctorClinicService.assignDoctorToClinic(doctorClinicDto),
-                HttpStatus.OK);
+                doctorClinicService.assignDoctorToClinic(doctorClinicDto), HttpStatus.OK);
     }
 
     /**
@@ -62,7 +62,7 @@ public class DoctorClinicController {
      * </p>
      *
      * @param id {@link Integer} id of the doctor object
-     * @return {@link Response<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable(Constants.ID) Integer id) {
@@ -77,7 +77,7 @@ public class DoctorClinicController {
      *
      * @param doctorId {@link Integer} is id of doctor object
      * @param clinicId {@link Integer} is id of clinic object
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_TIMESLOTS)
     public ResponseEntity<Map<String, Object>> getTimeslots(
@@ -97,7 +97,7 @@ public class DoctorClinicController {
      * @param clinicId {@link Integer}
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_DOCTORS_BY_CLINIC_ID)
     public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(

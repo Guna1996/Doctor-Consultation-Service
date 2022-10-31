@@ -46,7 +46,7 @@ public class DoctorController {
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
-     * @return {@link ResponseEntity<Map<String,Object>>}
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String,Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
@@ -63,11 +63,12 @@ public class DoctorController {
      *
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String,Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_PAGINATION)
-    public ResponseEntity<Map<String, Object>> getAllDoctors(@PathVariable(Constants.PAGE_NUMBER) int pageNumber,
-                                                @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+    public ResponseEntity<Map<String, Object>> getAllDoctors(
+            @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
+            @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
                 HttpStatus.OK);
@@ -80,7 +81,7 @@ public class DoctorController {
      * </p>
      *
      * @param id {@link Integer} is id of doctor
-     * @return {@link ResponseEntity<Map<String,Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable int id) {
@@ -96,7 +97,7 @@ public class DoctorController {
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
-     * @return {@link ResponseEntity<Map<String,Object>>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping
     public ResponseEntity<Map<String,Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
@@ -112,7 +113,7 @@ public class DoctorController {
      * </p>
      *
      * @param id {@link Integer} is id of doctor
-     * @return {@link ResponseEntity<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorById(@PathVariable int id) {
