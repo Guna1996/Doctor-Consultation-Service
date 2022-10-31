@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +47,7 @@ public class AppointmentController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return Response.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
                 appointmentService.addAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -63,7 +63,7 @@ public class AppointmentController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(@Valid @RequestBody AppointmentDto appointmentDto) {
-        return Response.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
                 appointmentService.rescheduleAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -98,7 +98,7 @@ public class AppointmentController {
             @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
                 appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -119,7 +119,7 @@ public class AppointmentController {
             @PathVariable(name = Constants.PATIENT_ID) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
                 appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK);
     }
