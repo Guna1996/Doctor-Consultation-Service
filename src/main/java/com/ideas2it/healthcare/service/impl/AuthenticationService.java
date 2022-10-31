@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.service.impl;
 
+import com.ideas2it.healthcare.common.Constants;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,7 +41,7 @@ public class AuthenticationService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        return new User("admin", "ideas2it",
+        return new User(Constants.USER_NAME, Constants.PASSWORD,
                 new ArrayList<>());
     }
 }

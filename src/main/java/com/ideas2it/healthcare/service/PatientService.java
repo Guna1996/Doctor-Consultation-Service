@@ -27,23 +27,23 @@ public interface PatientService {
 
     /**
      * <p>
-     * This abstract method is used to add patient details
+     * This method is used to add patient details
      * into data base by getting details from the user
      * </p>
      *
-     * @param patientDto - patient details
-     * @return patientDto
+     * @param patientDto {@link PatientDto} contains patient details
+     * @return {@link PatientDto}
      */
     PatientDto addPatient(PatientDto patientDto);
 
     /**
      * <p>
-     * This abstract method is used to get patient
+     * This method is used to get patient
      * details from the database by patient id
      * </p>
      *
-     * @param id - id of the patient
-     * @return PatientDto
+     * @param id {@link Integer} id of the patient
+     * @return {@link PatientDto}
      */
     PatientDto getPatientById(Integer id);
 
@@ -53,8 +53,8 @@ public interface PatientService {
      * all details into the database
      * </p>
      *
-     * @param patientDto - patient detail
-     * @return PatientDto
+     * @param patientDto {@link PatientDto} patient detail
+     * @return {@link PatientDto}
      */
     PatientDto updatePatient(PatientDto patientDto);
 }

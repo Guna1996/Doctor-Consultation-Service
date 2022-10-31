@@ -35,6 +35,7 @@ public class AppointmentMapper {
      * Appointment model
      * </p>
      *
+     * @parm appointmentDto {@link AppointmentDto} contains appointment details
      * @return {@link Appointment}
      */
     public static Appointment fromDto(AppointmentDto appointmentDto) {
@@ -44,7 +45,7 @@ public class AppointmentMapper {
             appointment.setScheduledOn(appointmentDto.getScheduledOn());
             appointment.setStatus(appointmentDto.getStatus());
             PatientDto patientDto = appointmentDto.getPatient();
-            if ( null != patientDto) {
+            if (null != patientDto) {
                 Patient patient = new Patient();
                 patient.setId(patientDto.getId());
                 patient.setName(patientDto.getName());
@@ -94,6 +95,7 @@ public class AppointmentMapper {
      * Vital model
      * </p>
      *
+     * @param appointment {@link Appointment} contains appointment details
      * @return {@link AppointmentDto}
      */
     public static AppointmentDto toDto(Appointment appointment) {

@@ -52,7 +52,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public List<SpecializationDto> getAllSpecializations(int pageNumber, int totalRows) {
+    public List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows) {
         List<Specialization> specializations = specializationRepository
                 .findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
@@ -66,7 +66,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public SpecializationDto getSpecializationById(int id) {
+    public SpecializationDto getSpecializationById(Integer id) {
         return specializationRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
                 .stream()
@@ -86,9 +86,9 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public String deleteSpecializationById(int id) {
+    public String deleteSpecializationById(Integer id) {
         if (specializationRepository.deleteSpecializationById(id) == 1) {
-            return ErrorConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
+            return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
         }
         return MessageConstants.SPECIALIZATION_NOT_FOUND;
     }

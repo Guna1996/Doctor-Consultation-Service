@@ -33,6 +33,7 @@ public class FeedbackMapper {
      * Feedback model
      * </p>
      *
+     * @param feedbackDto {@link FeedbackDto} contains feedback details
      * @return {@link Feedback}
      */
     public static Feedback fromDto(FeedbackDto feedbackDto) {
@@ -79,6 +80,7 @@ public class FeedbackMapper {
      * FeedbackDto model
      * </p>
      *
+     * @param feedback {@link Feedback} contains feedback details
      * @return {@link FeedbackDto}
      */
     public static FeedbackDto toDto(Feedback feedback) {

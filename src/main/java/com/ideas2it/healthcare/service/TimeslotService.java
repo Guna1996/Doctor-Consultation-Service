@@ -31,7 +31,7 @@ public interface TimeslotService {
      * to the database
      * </p>
      *
-     * @param timeslotDto {@link TimeslotDto}
+     * @param timeslotDto {@link TimeslotDto} contains timeslots
      * @return {@link TimeslotDto}
      */
     TimeslotDto addTimeslot(TimeslotDto timeslotDto);
@@ -42,8 +42,8 @@ public interface TimeslotService {
      * from the database
      * </p>
      *
-     * @param pageNumber {@link int}
-     * @param totalRows  {@link int}
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is required number of rows to be displayed
      * @return {@link TimeslotDto}
      */
     List<TimeslotDto> getTimeslots(int pageNumber, int totalRows);

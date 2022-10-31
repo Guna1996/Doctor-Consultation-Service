@@ -53,7 +53,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public String deleteDoctorFromClinic(Integer id) {
         if (doctorClinicRepository.deleteDoctorClinicById(id) == 1) {
-            return ErrorConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+            return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
         }
         return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
     }
@@ -61,7 +61,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(int doctorId, int clinicId) {
+    public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId
                         , clinicId, Constants.ACTIVE)
                 .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
@@ -70,7 +70,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public List<DoctorClinicDto> getDoctorsByClinicId(int clinicId, int pageNumber, int totalRows) {
+    public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber, Integer totalRows) {
         return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE
                         , PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());

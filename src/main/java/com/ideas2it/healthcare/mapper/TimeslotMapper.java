@@ -8,6 +8,7 @@
  */
 package com.ideas2it.healthcare.mapper;
 
+import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.model.Timeslot;
 
@@ -29,6 +30,7 @@ public class TimeslotMapper {
      * Timeslot model
      * </p>
      *
+     * @param timeslotDto {@link TimeslotDto} contains timeslot details
      * @return {@link Timeslot}
      */
     public static Timeslot fromDto(TimeslotDto timeslotDto) {
@@ -46,6 +48,7 @@ public class TimeslotMapper {
      * TimeslotDto
      * </p>
      *
+     * @param timeslot {@link Timeslot} contains timeslot details
      * @return {@link TimeslotDto}
      */
     public static TimeslotDto toDto(Timeslot timeslot) {

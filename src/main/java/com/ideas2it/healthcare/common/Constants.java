@@ -3,7 +3,6 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -11,7 +10,7 @@ package com.ideas2it.healthcare.common;
 /**
  * <p>
  * This Constants class contains static final string variable
- * with values .we can access these variable any where in the
+ * with values, we can access these variable any where in the
  * global package by using class name and variable name
  * </p>
  *
@@ -20,6 +19,8 @@ package com.ideas2it.healthcare.common;
  * @since 2022-10-10
  */
 public class Constants {
+
+    public static final String ID = "id";
 
     public static final String ACTIVE = "active";
 
@@ -37,11 +38,39 @@ public class Constants {
 
     public static final String URL_ID = "/{id}";
 
-    public static final String ID = "id";
+    public static final String URL_PAGINATION = "/{pageNumber}/{totalRows}";
 
-    public static final String URL_DOCTOR_ID = "doctorId";
+    public static final String URL_GET_TIMESLOTS = "/{doctorId}/{clinicId}";
 
-    public static final String URL_CLINIC_ID = "clinicId";
+    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patientId}";
+
+    public static final String URL_GET_DOCTORS_BY_CLINIC_ID = "/doctor/{clinicId}/{pageNumber}/{totalRows}";
+
+    public static final String URL_GET_APPOINTMENTS_BY_DOCTOR_ID = "/appointment/{doctorId}/{pageNumber}/{totalRows}";
+
+    public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID = "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
+
+    public static final String URL_PATIENT_APPOINTMENT = "/appointment/{patientId}/{pageNumber}/{totalRows}";
+
+    public static final String URL_APPOINTMENT = "/appointment";
+
+    public static final String URL_CLINIC = "/clinic";
+
+    public static final String URL_LOGIN = "/login";
+
+    public static final String URL_DOCTOR_CLINIC = "/doctor-clinic";
+
+    public static final String URL_DOCTOR = "/doctor";
+
+    public static final String URL_FEEDBACK = "/feedback";
+
+    public static final String URL_PATIENT = "/patient";
+
+    public static final String URL_SPECIALIZATION = "/specialization";
+
+    public static final String URL_TIMESLOT = "/timeslot";
+
+    public static final String URL_VITAL = "/vital";
 
     public static final String PATIENT_ID = "patient_id";
 
@@ -99,23 +128,7 @@ public class Constants {
 
     public static final String TOTAL_ROWS = "totalRows";
 
-    public static final String PAGINATION = "/{pageNumber}/{totalRows}";
-
-    public static final String DOCTOR_ID_CLINIC_ID = "/{doctorId}/{clinicId}";
-
-    public static final String VITAL_PATIENT_ID = "/vital/{patientId}";
-
-    public static final String GET_DOCTOR_BY_CLINIC_ID_PATH = "/doctor/{clinicId}/{pageNumber}/{totalRows}";
-
     public static final String SCHEDULED_ON = "scheduled_on";
-
-    public static final String PATH_APPOINTMENT_ID = "/appointment/{doctorId}/{pageNumber}/{totalRows}";
-
-    public static final String PATH_FEEDBACK_ID = "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
-
-    public static final String PATH_PATIENT_ID = "patientId";
-
-    public static final String PATIENT_APPOINTMENT = "/appointment/{patientId}/{pageNumber}/{totalRows}";
 
     public static final String APPOINTMENT = "appointment";
 
@@ -139,76 +152,14 @@ public class Constants {
 
     public static final String VITAL = "vital";
 
-    public static final String URL_APPOINTMENT = "/appointment";
+    public static final String USER_NAME = "admin";
 
-    public static final String URL_CLINIC = "/clinic";
+    public static final String PASSWORD = "ideas2it";
 
-    public static final String URL_DOCTOR_CLINIC = "/doctor-clinic";
+    public static final String HIGH = "High";
 
-    public static final String URL_DOCTOR = "/doctor";
+    public static final String NORMAL = "Normal";
 
-    public static final String URL_FEEDBACK = "/feedback";
-
-    public static final String URL_PATIENT = "/patient";
-
-    public static final String URL_SPECIALIZATION = "/specialization";
-
-    public static final String URL_TIMESLOT = "/timeslot";
-
-    public static final String URL_VITAL = "/vital";
-
-    public static final String APPOINTMENT_ADDED_SUCCESSFULLY = "Appointment added successfully";
-
-    public static final String APPOINTMENT_RESCHEDULED_SUCCESSFULLY = "Appointment rescheduled successfully";
-
-    public static final String SUCCESSFULLY_RETRIEVED_APPOINTMENT = "Successfully retrieved appointment";
-
-    public static final String CLINIC_ADDED_SUCCESSFULLY = "Clinic added successfully";
-
-    public static final String SPECIALIZATION_ADDED_SUCCESSFULLY = "Specialization added successfully";
-
-    public static final String DOCTOR_ADDED_SUCCESSFULLY = "Doctor added successfully";
-
-    public static final String VITALS_ADDED_SUCCESSFULLY = "Vitals added successfully";
-
-    public static final String VITAL_ADDED_SUCCESSFULLY = "Vital added successfully";
-
-    public static final String FEEDBACK_ADDED_SUCCESSFULLY = "Feedback added successfully";
-
-    public static final String PATIENT_ADDED_SUCCESSFULLY = "Patient added successfully";
-
-    public static final String TIMESLOTS_ADDED_SUCCESSFULLY = "Patient added successfully";
-
-    public static final String CLINIC_UPDATED_SUCCESSFULLY = "Clinic updated successfully";
-
-    public static final String DOCTOR_UPDATED_SUCCESSFULLY = "Doctor updated successfully";
-
-    public static final String SPECIALIZATION_UPDATED_SUCCESSFULLY = "Specialization updated successfully";
-
-    public static final String PATIENT_UPDATED_SUCCESSFULLY = "Doctor updated successfully";
-
-    public static final String SUCCESSFULLY_RETRIEVED_CLINICS = "Successfully retrieved clinics";
-
-    public static final String SUCCESSFULLY_RETRIEVED_TIMESLOTS = "Successfully retrieved timeslots";
-
-    public static final String SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS = "Successfully retrieved specializations";
-
-    public static final String SUCCESSFULLY_RETRIEVED_SPECIALIZATION = "Successfully retrieved specialization";
-
-    public static final String SUCCESSFULLY_RETRIEVED_FEEDBACK_TO_DOCTOR = "Successfully retrieved feedback to doctor";
-
-    public static final String SUCCESSFULLY_RETRIEVED_DOCTORS = "Successfully retrieved doctors";
-
-    public static final String SUCCESSFULLY_RETRIEVED_DOCTOR = "Successfully retrieved doctor";
-
-    public static final String SUCCESSFULLY_RETRIEVED_PATIENT = "Successfully retrieved patient";
-
-    public static final String SUCCESSFULLY_RETRIEVED_CLINIC = "Successfully retrieved clinic";
-
-    public static final String DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY  = "Doctor assigned to clinic successfully";
-
-    public static final String SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS  = "Successfully retrieved all timeslots";
-
-    public static final String SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC  = "Successfully retrieved all doctors in clinic";
+    public static final String LOW = "Low";
 }
 

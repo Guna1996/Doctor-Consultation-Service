@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.response.Response;
 import com.ideas2it.healthcare.service.DoctorClinicService;
@@ -45,11 +46,11 @@ public class DoctorClinicController {
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is details of doctor clinic
-     * @return ResponseEntity<Map<String, Object>>
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> assignDoctorToClinic(@RequestBody DoctorClinicDto doctorClinicDto) {
-        return Response.responseEntity(Constants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
+        return Response.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
                 doctorClinicService.assignDoctorToClinic(doctorClinicDto),
                 HttpStatus.OK);
     }
@@ -61,7 +62,7 @@ public class DoctorClinicController {
      * </p>
      *
      * @param id {@link Integer} id of the doctor object
-     * @return Response<String>
+     * @return {@link Response<String>}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteDoctorFromClinic(@PathVariable(Constants.ID) Integer id) {
@@ -76,12 +77,13 @@ public class DoctorClinicController {
      *
      * @param doctorId {@link Integer} is id of doctor object
      * @param clinicId {@link Integer} is id of clinic object
-     * @return ResponseEntity<Map<String, Object>>
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
-    @GetMapping(Constants.DOCTOR_ID_CLINIC_ID)
-    public ResponseEntity<Map<String, Object>> getTimeslots(@PathVariable(Constants.URL_DOCTOR_ID) Integer doctorId,
-                                                            @PathVariable(Constants.URL_CLINIC_ID) Integer clinicId) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
+    @GetMapping(Constants.URL_GET_TIMESLOTS)
+    public ResponseEntity<Map<String, Object>> getTimeslots(
+            @PathVariable(Constants.DOCTOR_ID) Integer doctorId,
+            @PathVariable(Constants.CLINIC_ID) Integer clinicId) {
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);
     }
@@ -93,16 +95,16 @@ public class DoctorClinicController {
      * </p>
      *
      * @param clinicId {@link Integer}
-     * @param pageNumber {@link Integer}
-     * @param totalRows {@link Integer}
-     * @return ResponseEntity<Map<String, Object>>
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is number of row to be shown
+     * @return {@link ResponseEntity<Map<String, Object>>}
      */
-    @GetMapping(Constants.GET_DOCTOR_BY_CLINIC_ID_PATH)
+    @GetMapping(Constants.URL_GET_DOCTORS_BY_CLINIC_ID)
     public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(
-            @PathVariable(Constants.URL_CLINIC_ID) Integer clinicId,
+            @PathVariable(Constants.CLINIC_ID) Integer clinicId,
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(Constants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
+        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK);
     }

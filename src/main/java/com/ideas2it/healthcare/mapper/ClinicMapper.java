@@ -29,6 +29,7 @@ public class ClinicMapper {
      * Clinic model
      * </p>
      *
+     * @param clinicDto {@link ClinicDto} contains clinic details
      * @return {@link Clinic}
      */
     public static Clinic fromDto(ClinicDto clinicDto) {
@@ -53,6 +54,7 @@ public class ClinicMapper {
      * ClinicDto
      * </p>
      *
+     * @param clinic {@link Clinic} contains clinic details
      * @return {@link ClinicDto}
      */
     public static ClinicDto toDto(Clinic clinic) {

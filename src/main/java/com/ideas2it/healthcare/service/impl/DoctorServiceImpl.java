@@ -53,9 +53,9 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public List<DoctorDto> getAllDoctors(int pageNumber, int totalRows) {
-        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE
-                , PageRequest.of(pageNumber, totalRows)).toList();
+    public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
+        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
+                PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
             throw new NotFoundException(MessageConstants.DOCTORS_NOT_FOUND);
         }
@@ -66,7 +66,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto getDoctorById(int id) {
+    public DoctorDto getDoctorById(Integer id) {
         return doctorRepository
                 .findByIdAndStatus(id, Constants.ACTIVE)
                 .stream()
@@ -87,9 +87,9 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public String deleteDoctorById(int id) {
+    public String deleteDoctorById(Integer id) {
         if (doctorRepository.deleteDoctorById(id) == 1) {
-            return ErrorConstants.DOCTOR_DELETED_SUCCESSFULLY;
+            return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
         }
         return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
     }

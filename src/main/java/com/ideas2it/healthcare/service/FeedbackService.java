@@ -39,16 +39,25 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This abstract method is used to delete feedback
+     * This method is used to delete feedback
      * from the database by feedback id
-     *
      * </p>
      *
-     * @param id {@link int}
+     * @param id {@link Integer}
      * @return {@link String}
      */
-    String deleteFeedback(int id);
+    String deleteFeedback(Integer id);
 
-    List<FeedbackDto> getFeedbackByDoctorId(int doctorId, int pageNumber, int totalRows);
+    /**
+     * <p>
+     * This method is used to get feedback by doctor id
+     * </p>
+     *
+     * @param doctorId {@link Integer} is id of doctor
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is required number of rows to be displayed
+     * @return {@link List<FeedbackDto>}
+     */
+    List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
 
 }

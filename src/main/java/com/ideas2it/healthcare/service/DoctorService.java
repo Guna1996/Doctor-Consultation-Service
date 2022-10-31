@@ -33,7 +33,8 @@ public interface DoctorService {
      * Doctor model with the help of mapper class
      * </p>
      *
-     * @param doctorDto {@link DoctorDto}
+     * @param doctorDto {@link DoctorDto} contains details of doctor
+     * @return {@link DoctorDto}
      */
     DoctorDto saveDoctor(DoctorDto doctorDto);
 
@@ -44,9 +45,11 @@ public interface DoctorService {
      * DoctorDto with the help of mapper class
      * </p>
      *
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows {@link Integer} is required number of rows to be displayed
      * @return {@link List<DoctorDto>}
      */
-    List<DoctorDto> getAllDoctors(int pageNumber, int totalRows);
+    List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows);
 
     /**
      * <p>
@@ -54,10 +57,10 @@ public interface DoctorService {
      * convert it into DoctorDto
      * </p>
      *
-     * @param id {@link int}
+     * @param id {@link Integer} is id of doctor
      * @return {@link DoctorDto}
      */
-    DoctorDto getDoctorById(int id);
+    DoctorDto getDoctorById(Integer id);
 
     /**
      * <p>
@@ -66,7 +69,8 @@ public interface DoctorService {
      * Doctor model with the help of mapper class
      * </p>
      *
-     * @param doctorDto {@link DoctorDto}
+     * @param doctorDto {@link DoctorDto} contains details of doctor
+     * @return {@link DoctorDto}
      */
     DoctorDto updateDoctor(DoctorDto doctorDto);
 
@@ -76,8 +80,8 @@ public interface DoctorService {
      * by making status as inactive
      * </p>
      *
-     * @param id {@link int}
+     * @param id {@link Integer} is id of doctor
      * @return {@link String}
      */
-    String deleteDoctorById(int id);
+    String deleteDoctorById(Integer id);
 }
