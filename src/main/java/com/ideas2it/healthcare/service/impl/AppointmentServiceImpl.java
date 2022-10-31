@@ -79,7 +79,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     @Override
-    public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
+    public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
+                                                           Integer totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
                 patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
@@ -91,9 +92,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     @Override
-    public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows) {
+    public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
+                                                          Integer totalRows) {
         return appointmentRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
+                        totalRows))
                 .toList().stream()
                 .map(AppointmentMapper::toDto)
                 .collect(Collectors.toList());

@@ -60,7 +60,8 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     @Override
-    public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows) {
+    public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
+                                                   Integer totalRows) {
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
                 .of(pageNumber, totalRows)).toList()
                 .stream().map(FeedbackMapper::toDto)

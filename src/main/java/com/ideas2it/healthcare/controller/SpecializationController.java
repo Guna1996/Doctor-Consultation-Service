@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,11 +44,12 @@ public class SpecializationController {
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}is details of specialization
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addSpecialization(@Valid @RequestBody SpecializationDto specializationDto) {
-        return Response.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
+    public ResponseEntity<Map<String, Object>> addSpecialization(
+            @Valid @RequestBody SpecializationDto specializationDto) {
+        return SuccessResponse.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
                 specializationService.saveSpecialization(specializationDto),
                 HttpStatus.OK);
     }
@@ -61,12 +62,13 @@ public class SpecializationController {
      *
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_PAGINATION)
-    public ResponseEntity<Map<String, Object>> getAllSpecializations(@PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
-                                                                     @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
+    public ResponseEntity<Map<String, Object>> getAllSpecializations(
+            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
                 HttpStatus.OK);
     }
@@ -78,11 +80,11 @@ public class SpecializationController {
      * </p>
      *
      * @param id {@link Integer} is id of Specialization
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable Integer id) {
-        return Response.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
+        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
                 specializationService.getSpecializationById(id),
                 HttpStatus.OK);
     }
@@ -94,11 +96,12 @@ public class SpecializationController {
      * </p>
      *
      * @param specializationDto {@link SpecializationDto} is details of SpecializationDto
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateSpecialization(@RequestBody SpecializationDto specializationDto) {
-        return Response.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
+    public ResponseEntity<Map<String, Object>> updateSpecialization(
+            @RequestBody SpecializationDto specializationDto) {
+        return SuccessResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
                 specializationService.updateSpecialization(specializationDto),
                 HttpStatus.OK);
     }
@@ -110,10 +113,11 @@ public class SpecializationController {
      * </p>
      *
      * @param id {@link Integer} is id of Specialization
-     * @return {@link ResponseEntity<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteSpecializationById(@PathVariable Integer id) {
-        return new ResponseEntity<>(specializationService.deleteSpecializationById(id), HttpStatus.OK);
+        return new ResponseEntity<>(specializationService.deleteSpecializationById(id),
+                HttpStatus.OK);
     }
 }

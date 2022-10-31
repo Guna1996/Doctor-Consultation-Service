@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.controller;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.response.Response;
+import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,12 +42,12 @@ public class FeedbackController {
      * from a patient.
      * </p>
      *
-     * @param feedbackDto {@link FeedbackDto} is dto object that contains information
-     * @return {@link ResponseEntity<Map<String,Object>>}
+     * @param feedbackDto {@link FeedbackDto} is contains details of feedback
+     * @return {@link ResponseEntity}
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return Response.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
+        return SuccessResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
@@ -59,7 +59,7 @@ public class FeedbackController {
      * </p>
      *
      * @param id {@link Integer} is an integer that refer id in database
-     * @return {@link ResponseEntity<String>}
+     * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<String> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
@@ -75,7 +75,7 @@ public class FeedbackController {
      * @param doctorId {@link Integer} is id of doctor
      * @param pageNumber {@link Integer} is page number
      * @param totalRows {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity<Map<String, Object>>}
+     * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(

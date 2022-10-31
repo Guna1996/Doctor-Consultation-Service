@@ -62,17 +62,19 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId) {
-        return DoctorClinicMapper.toDto(doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorId
-                        , clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+        return DoctorClinicMapper.toDto(doctorClinicRepository
+                .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+                .orElseThrow(() -> new NotFoundException(
+                        MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber, Integer totalRows) {
-        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE
-                        , PageRequest.of(pageNumber, totalRows)).toList().stream()
+    public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
+                                                      Integer totalRows) {
+        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
+                         PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
     }
 }
