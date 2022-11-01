@@ -9,6 +9,7 @@ package com.ideas2it.healthcare.configuration;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.filters.JwtRequestFilter;
+import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -78,6 +79,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(Constants.URL_LOGIN).permitAll()
+                .antMatchers("/patient/**").permitAll()
+                .antMatchers("/appointment/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

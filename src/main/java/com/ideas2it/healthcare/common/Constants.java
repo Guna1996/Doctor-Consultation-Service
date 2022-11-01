@@ -40,21 +40,21 @@ public class Constants {
 
     public static final String URL_PAGINATION = "/{pageNumber}/{totalRows}";
 
-    public static final String URL_GET_TIMESLOTS = "/{doctorId}/{clinicId}";
+    public static final String URL_GET_TIMESLOTS = "/{doctor_id}/{clinic_id}";
 
-    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patientId}";
+    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patient_id}";
 
     public static final String URL_GET_DOCTORS_BY_CLINIC_ID =
-            "/doctor/{clinicId}/{pageNumber}/{totalRows}";
+            "/doctor/{clinic_id}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_APPOINTMENTS_BY_DOCTOR_ID =
-            "/appointment/{doctorId}/{pageNumber}/{totalRows}";
+            "/doctor/{doctor_id}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID =
-            "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
+            "/feedbacks/{doctor_id}/{pageNumber}/{totalRows}";
 
     public static final String URL_PATIENT_APPOINTMENT =
-            "/appointment/{patientId}/{pageNumber}/{totalRows}";
+            "/patient/{patient_id}/{pageNumber}/{totalRows}";
 
     public static final String URL_APPOINTMENT = "/appointment";
 
