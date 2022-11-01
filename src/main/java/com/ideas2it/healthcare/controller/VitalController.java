@@ -71,6 +71,6 @@ public class VitalController {
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.VITAL_ADDED_SUCCESSFULLY,
                 vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, vitalService.getTotalPages());
     }
 }

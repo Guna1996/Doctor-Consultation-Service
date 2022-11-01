@@ -70,7 +70,7 @@ public class SpecializationController {
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, specializationService.getTotalPages());
     }
 
     /**

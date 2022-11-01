@@ -80,4 +80,8 @@ public interface SpecializationService {
      * @return {@link String}
      */
     String deleteSpecializationById(Integer id);
+
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

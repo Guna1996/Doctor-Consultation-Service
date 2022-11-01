@@ -12,7 +12,7 @@
 	<artifactId>healthcare</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>doctorConsultancyService</name>
-	<description>patient can fix appointment with doctor based on his disease and location</description>
+	<description>Patient can book an appointment with doctor using this web application</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

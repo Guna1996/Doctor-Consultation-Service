@@ -60,4 +60,7 @@ public interface FeedbackService {
      */
     List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
 
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

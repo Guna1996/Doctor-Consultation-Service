@@ -71,7 +71,7 @@ public class DoctorController {
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, doctorService.getTotalPages());
     }
 
     /**

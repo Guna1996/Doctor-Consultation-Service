@@ -42,6 +42,8 @@ import java.util.stream.Collectors;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
+    private Double totalPages = 0.0;
+
     @Autowired
     private AppointmentRepository appointmentRepository;
 
@@ -81,6 +83,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
+        setTotalPages(Math.floor((appointmentRepository
+                .findByPatientIdAndStatus(patientId, Constants.STATUS).size() + 0.0)/ totalRows));
         return appointmentRepository.findByPatientIdAndStatus(
                 patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
@@ -94,6 +98,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                           Integer totalRows) {
+        setTotalPages(Math.floor(appointmentRepository
+                .findByDoctorIdAndStatus(doctorId, Constants.STATUS).size() + 0.0) / totalRows);
         return appointmentRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
@@ -124,5 +130,13 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return AppointmentMapper
                 .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
+    }
+
+    public Double getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Double totalPages) {
+        this.totalPages = totalPages;
     }
 }

@@ -5,7 +5,7 @@ import java.time.Period;
 
 public class DateUtil {
 
-    public static int getDifferenceBetweenDates(LocalDate date) {
+    public static int getDifferenceInYears(LocalDate date) {
         LocalDate currentDate = LocalDate.now();
         return Period.between(date, currentDate).getYears();
     }

@@ -74,4 +74,6 @@ public class DoctorDto {
     private String status = Constants.ACTIVE;
 
     private int consultationFee;
+
+    private Integer total_entries;
 }

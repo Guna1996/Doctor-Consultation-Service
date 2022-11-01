@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorClinicServiceImpl implements DoctorClinicService {
 
+    private Double totalPages = 0.0;
     @Autowired
     private DoctorClinicRepository doctorClinicRepository;
 
@@ -44,7 +45,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        return DoctorClinicMapper.toDto(DoctorClinicMapper.fromDto(doctorClinicDto));
+        return DoctorClinicMapper.toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
     }
 
     /**
@@ -72,9 +73,19 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                       Integer totalRows) {
+        setTotalPages(Math.floor((doctorClinicRepository
+                .findByClinicIdAndStatus(clinicId, Constants.ACTIVE).size() + 0.0/totalRows)));
         return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
                          PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
+    }
+
+    public Double getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Double totalPages) {
+        this.totalPages = totalPages;
     }
 }
 

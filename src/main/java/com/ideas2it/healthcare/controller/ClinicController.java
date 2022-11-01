@@ -67,7 +67,7 @@ public class ClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
-                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK);
+                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, clinicService.getTotalPages());
     }
 
     /**

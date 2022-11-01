@@ -39,6 +39,8 @@ import java.util.stream.Collectors;
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
+    private Double totalPages = 0.0;
+
     @Autowired
     private ClinicRepository clinicRepository;
 
@@ -54,6 +56,7 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public List<ClinicDto> getClinics(Integer pageNumber, Integer totalRows) {
+        setTotalPages(Math.floor((clinicRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0/totalRows)));
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (clinics.isEmpty()) {
@@ -89,6 +92,14 @@ public class ClinicServiceImpl implements ClinicService {
             return MessageConstants.CLINIC_DELETED_SUCCESSFULLY;
         }
         return ErrorConstants.CLINIC_NOT_FOUND;
+    }
+
+    public Double getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Double totalPages) {
+        this.totalPages = totalPages;
     }
 }
 
