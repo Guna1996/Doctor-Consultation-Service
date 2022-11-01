@@ -8,7 +8,7 @@
  * <p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;

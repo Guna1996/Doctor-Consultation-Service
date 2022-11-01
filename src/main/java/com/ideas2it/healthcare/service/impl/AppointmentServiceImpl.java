@@ -15,7 +15,7 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
-import com.ideas2it.healthcare.repo.AppointmentRepository;
+import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

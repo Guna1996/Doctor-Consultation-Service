@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
-import com.ideas2it.healthcare.repo.DoctorClinicRepository;
+import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

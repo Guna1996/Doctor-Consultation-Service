@@ -1,4 +1,4 @@
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Feedback;
 import org.springframework.data.domain.Page;
@@ -29,7 +29,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     /**
      * <p>
-     * This method is used to find active feedback by doctor id
+     * This method is used to find active feedback by doctor id and pagination
      * </p>
      *
      * @param doctorId {@link Integer} is id of the doctor
@@ -52,5 +52,14 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
     @Query("update feedback set status = 'inactive' where id=?1")
     Integer deleteSpecializationById(Integer id);
 
+    /**
+     * <p>
+     * This method is used to find active feedback by doctor id
+     * </p>
+     *
+     * @param doctorId {@link Integer} is id of the doctor
+     * @param status   {@link String} is status of feedback
+     * @return {@link List<Feedback>}
+     */
     List<Feedback> findByDoctorIdAndStatus(Integer doctorId, String status);
 }

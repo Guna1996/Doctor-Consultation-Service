@@ -1,4 +1,4 @@
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Vital;
 import org.springframework.data.domain.Page;
@@ -25,7 +25,7 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
 
     /**
      * <p>
-     * This method is used to find active vitals by patient id
+     * This method is used to find active vitals by patient id and pagination
      * </p>
      *
      * @param patientId {@link Integer} is id of the patient
@@ -35,5 +35,14 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      */
     Page<Vital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
 
+    /**
+     * <p>
+     * This method is used to find active vitals by patient id
+     * </p>
+     *
+     * @param patientId {@link Integer} is id of the patient
+     * @param status    {@link String} is status of vital
+     * @return {@link List<Vital>}
+     */
     List<Vital> findByPatientIdAndStatus(Integer patientId, String status);
 }

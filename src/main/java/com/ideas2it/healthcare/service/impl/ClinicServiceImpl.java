@@ -16,7 +16,7 @@ import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
-import com.ideas2it.healthcare.repo.ClinicRepository;
+import com.ideas2it.healthcare.repository.ClinicRepository;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

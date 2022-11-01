@@ -67,5 +67,35 @@ public class ErrorConstants {
 
     public static final String REGISTRATION_YEAR_SHOULD_NOT_BE_NULL =
             "Registration year should not be null";
+
+    public static final String HEIGHT_SHOULD_NOT_BE_NEGATIVE = "Height shouldn't be negative";
+
+    public static final String WEIGHT_SHOULD_NOT_BE_NEGATIVE = "Weight shouldn't be negative";
+
+    public static final String PULSE_SHOULD_NOT_BE_NEGATIVE = "Pulse shouldn't be negative";
+
+    public static final String DIASTOLIC_SHOULD_NOT_BE_NEGATIVE = "Diastolic shouldn't be negative";
+
+    public static final String SYSTOLIC_SHOULD_NOT_BE_NEGATIVE = "Systolic shouldn't be negative";
+
+    public static final String SUGAR_LEVEL_SHOULD_NOT_BE_NEGATIVE = "Sugar level shouldn't be negative";
+
+    public static final String HEIGHT_SHOULD_NOT_BE_NULL = "Height shouldn't be null";
+
+    public static final String WEIGHT_SHOULD_NOT_BE_NULL = "Weight shouldn't be null";
+
+    public static final String PULSE_SHOULD_NOT_BE_NULL = "Pulse shouldn't be null";
+
+    public static final String DIASTOLIC_SHOULD_NOT_BE_NULL = "Diastolic shouldn't be null";
+
+    public static final String SYSTOLIC_SHOULD_NOT_BE_NULL = "Systolic shouldn't be null";
+
+    public static final String SUGAR_LEVEL_SHOULD_NOT_BE_NULL = "Sugar level shouldn't be null";
+
+    public static final String RATING_SHOULD_NOT_BE_NEGATIVE = "Rating shouldn't be negative" ;
+
+    public static final String RATING_SHOULD_NOT_BE_NULL = "Rating level shouldn't be null";
+
+    public static final String COMMENT_SHOULD_NOT_BE_NULL = "Comment shouldn't be null";
 }
 

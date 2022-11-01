@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
-import com.ideas2it.healthcare.repo.DoctorRepository;
+import com.ideas2it.healthcare.repository.DoctorRepository;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

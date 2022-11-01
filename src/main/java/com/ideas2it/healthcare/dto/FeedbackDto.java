@@ -10,8 +10,12 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -30,8 +34,11 @@ public class FeedbackDto {
 
     private int id;
 
+    @NotNull(message = ErrorConstants.COMMENT_SHOULD_NOT_BE_NULL)
     private String comment;
 
+    @NotNull(message = ErrorConstants.RATING_SHOULD_NOT_BE_NULL)
+    @Min(value = 0, message = ErrorConstants.RATING_SHOULD_NOT_BE_NEGATIVE)
     private float rating;
 
     private DoctorDto doctor;

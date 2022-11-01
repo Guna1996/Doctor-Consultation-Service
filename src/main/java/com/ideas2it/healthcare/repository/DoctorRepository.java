@@ -5,7 +5,7 @@
  * </p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Doctor;
 import org.springframework.data.domain.Page;
@@ -45,7 +45,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     /**
      * <p>
-     * This method is used to find all active doctors
+     * This method is used to find all active doctors by pagination
      * </p>
      *
      * @param status   {@link String} is status of doctor
@@ -67,5 +67,13 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     @Query("update doctor set status = 'inactive' where id=?1 and status ='active'")
     Integer deleteDoctorById(Integer id);
 
+    /**
+     * <p>
+     * This method is used to find all active doctors
+     * </p>
+     *
+     * @param status   {@link String} is status of doctor
+     * @return {@link List<Doctor>}
+     */
     List<Doctor> findAllByStatus(String status);
 }

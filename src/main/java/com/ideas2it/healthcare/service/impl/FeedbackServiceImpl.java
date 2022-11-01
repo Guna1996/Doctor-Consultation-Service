@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
-import com.ideas2it.healthcare.repo.FeedbackRepository;
+import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

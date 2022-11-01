@@ -45,7 +45,7 @@ public class NotFoundExceptionHandler {
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return new ResponseEntity<>(errorMap, HttpStatus.OK);
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -62,6 +62,6 @@ public class NotFoundExceptionHandler {
             NotFoundException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put(ErrorConstants.ERROR_MESSAGE, exception.getMessage());
-        return new ResponseEntity<>(errorMap, HttpStatus.OK);
+        return new ResponseEntity<>(errorMap, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

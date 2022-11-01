@@ -15,7 +15,7 @@ import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.TimeslotMapper;
 import com.ideas2it.healthcare.model.Timeslot;
-import com.ideas2it.healthcare.repo.TimeslotRepository;
+import com.ideas2it.healthcare.repository.TimeslotRepository;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
