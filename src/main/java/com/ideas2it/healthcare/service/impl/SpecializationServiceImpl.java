@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
 import com.ideas2it.healthcare.model.Specialization;
-import com.ideas2it.healthcare.repo.SpecializationRepository;
+import com.ideas2it.healthcare.repository.SpecializationRepository;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

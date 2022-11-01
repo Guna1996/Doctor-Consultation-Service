@@ -16,7 +16,7 @@ import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.PatientMapper;
 import com.ideas2it.healthcare.model.Patient;
-import com.ideas2it.healthcare.repo.PatientRepository;
+import com.ideas2it.healthcare.repository.PatientRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.PatientService;
 import com.ideas2it.healthcare.service.VitalService;

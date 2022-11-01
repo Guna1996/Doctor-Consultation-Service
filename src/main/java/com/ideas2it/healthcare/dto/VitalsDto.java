@@ -10,11 +10,13 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -34,18 +36,28 @@ public class VitalsDto {
 
     private int id;
 
-    @Min(value = 0, message = "Height shouldn't be negative")
+    @NotNull(message = ErrorConstants.HEIGHT_SHOULD_NOT_BE_NULL)
+    @Min(value = 0, message = ErrorConstants.HEIGHT_SHOULD_NOT_BE_NEGATIVE)
     private float height;
 
-
+    @NotNull(message = ErrorConstants.WEIGHT_SHOULD_NOT_BE_NULL)
+    @Min(value = 0, message = ErrorConstants.WEIGHT_SHOULD_NOT_BE_NEGATIVE)
     private float weight;
 
+    @NotNull(message = ErrorConstants.PULSE_SHOULD_NOT_BE_NULL)
+    @Min(value =0, message = ErrorConstants.PULSE_SHOULD_NOT_BE_NEGATIVE)
     private float pulse;
 
+    @NotNull(message = ErrorConstants.DIASTOLIC_SHOULD_NOT_BE_NULL)
+    @Min(value =0, message = ErrorConstants.DIASTOLIC_SHOULD_NOT_BE_NEGATIVE)
     private float diastolic;
 
+    @NotNull(message = ErrorConstants.SYSTOLIC_SHOULD_NOT_BE_NULL)
+    @Min(value =0, message = ErrorConstants.SYSTOLIC_SHOULD_NOT_BE_NEGATIVE)
     private float systolic;
 
+    @NotNull(message = ErrorConstants.SUGAR_LEVEL_SHOULD_NOT_BE_NULL)
+    @Min(value =0, message = ErrorConstants.SUGAR_LEVEL_SHOULD_NOT_BE_NEGATIVE)
     private float sugarLevel;
 
     private PatientDto patient;

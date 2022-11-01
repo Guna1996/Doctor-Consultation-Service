@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ public class SuccessResponse {
 
     public static ResponseEntity<Map<String, Object>> responseEntity
             (String message, Object entity, HttpStatus status) {
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, entity);
         response.put(Constants.ENTITY_LIST, null);
@@ -22,7 +23,7 @@ public class SuccessResponse {
 
     public static ResponseEntity<Map<String, Object>> responseEntity
             (String message, List<?> entityList, HttpStatus status, double totalPages) {
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, null);
         response.put(Constants.ENTITY_LIST, entityList);

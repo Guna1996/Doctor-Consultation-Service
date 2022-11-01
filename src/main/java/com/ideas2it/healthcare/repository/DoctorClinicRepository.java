@@ -8,7 +8,7 @@
  * <p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.DoctorClinic;
 import org.springframework.data.domain.Page;
@@ -36,19 +36,6 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Integer> {
-
-    /**
-     * <p>
-     * This method is used for get all the
-     * active doctor from the DoctorClinic
-     * table
-     * </p>
-     *
-     * @param status   is status of the doctorClinic
-     * @param pageable {@link Pageable} contains page number and number of rows required
-     * @return {@link Page<DoctorClinic>}
-     */
-    Page<DoctorClinic> findAllByStatus(String status, Pageable pageable);
 
     /**
      * <p>
@@ -90,8 +77,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
 
     /**
      * <p>
-     * This method is used to find active doctor clinic
-     * by clinic id
+     * This method is used to find active doctor clinic by pagination
+     * and clinic id
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
@@ -101,9 +88,15 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      */
     Page<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status, Pageable pageable);
 
+    /**
+     * <p>
+     * This method is used to find active doctor clinic
+     * by clinic id
+     * </p>
+     *
+     * @param clinicId {@link Integer} is id of clinic
+     * @param status   {@link String} is status of doctorClinic
+     * @return {@link List<DoctorClinic>}
+     */
     List<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status);
-
-    List<DoctorClinic> findAllByStatus(String status);
-
-
 }

@@ -13,7 +13,7 @@ package com.ideas2it.healthcare.service.impl;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.VitalsDto;
 import com.ideas2it.healthcare.mapper.VitalsMapper;
-import com.ideas2it.healthcare.repo.VitalsRepository;
+import com.ideas2it.healthcare.repository.VitalsRepository;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
