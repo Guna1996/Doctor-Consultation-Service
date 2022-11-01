@@ -61,7 +61,4 @@ public class DoctorClinic {
             joinColumns = @JoinColumn(name = Constants.DOCTOR_CLINIC_ID),
             inverseJoinColumns = @JoinColumn(name = Constants.TIMESLOT_ID))
     private List<Timeslot> timeslots;
-
-    @Transient
-    private Integer total_entries;
 }
