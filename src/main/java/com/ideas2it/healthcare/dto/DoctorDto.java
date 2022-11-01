@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the Dto classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -18,13 +18,13 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 /**
  * <p>
  * This DoctorDto class is a Dto class and this class is used
  * to transfer the object from controller layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair
@@ -57,7 +57,7 @@ public class DoctorDto {
     @Pattern(regexp = Constants.QUALIFICATION_REGEX, message = MessageConstants.ENTER_VALID_QUALIFICATION)
     private String qualification;
 
-    private Set<SpecializationDto> specializations;
+    private List<SpecializationDto> specializations;
 
     @NotNull(message = ErrorConstants.REGISTRATION_YEAR_SHOULD_NOT_BE_NULL)
     @PastOrPresent(message = MessageConstants.ENTER_VALID_REGISTRATION_YEAR)
