@@ -1,3 +1,12 @@
+/**
+ * <p>
+ * This package contains classes are DoctorClinicRepository,
+ * PatientRepository, DoctorRepository, ClinicRepository,
+ * AppointmentRepository, FeedbackRepository, SpecializationRepository,
+ * TimeslotRepository, VitalsRepository.
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Vital;
@@ -9,6 +18,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>
+ * This VitalsRepository interface is a repository interface and this
+ * interface extends JpaRepository which has all the methods for
+ * CRUD operation
+ * </p>
+ *
+ * @author Bala Ashwanth.N
+ * @version 1
+ * @since 2022-10-10
+ */
 @Repository
 public interface VitalsRepository extends JpaRepository<Vital, Integer> {
 

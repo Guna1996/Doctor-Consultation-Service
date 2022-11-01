@@ -67,15 +67,7 @@ public class VitalsDto {
 
     private DoctorDto doctor;
 
-    @Getter(AccessLevel.NONE)
     private String bpRiskLevel;
 
     private LocalDateTime createdAt;
-
-    private Integer total_entries;
-
-    public String getBpRiskLevel() {
-        bpRiskLevel = VitalUtil.getBPRiskLevel(getSystolic(), getDiastolic());
-        return bpRiskLevel;
-    }
 }

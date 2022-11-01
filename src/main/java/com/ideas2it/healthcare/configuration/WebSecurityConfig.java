@@ -81,6 +81,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(Constants.URL_LOGIN).permitAll()
                 .antMatchers("/patient/**").permitAll()
                 .antMatchers("/appointment/**").permitAll()
+                .antMatchers("/vital/vital/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

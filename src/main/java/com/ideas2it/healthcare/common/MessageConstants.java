@@ -99,7 +99,7 @@ public class MessageConstants {
 
     public static final String VITALS_ADDED_SUCCESSFULLY = "Vitals added successfully";
 
-    public static final String VITAL_ADDED_SUCCESSFULLY = "Vital added successfully";
+    public static final String VITAL_RETRIEVED_SUCCESSFULLY = "Vital retrieved successfully";
 
     public static final String TIMESLOT_ADDED_SUCCESSFULLY = "Timeslot added successfully";
 

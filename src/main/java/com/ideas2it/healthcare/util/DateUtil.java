@@ -1,3 +1,10 @@
+/**
+ * <p>
+ * This is the base package for all the util classes
+ * which is for simple calculations
+ * </p>
+ * Copyright 2022 - Ideas2it
+ */
 package com.ideas2it.healthcare.util;
 
 import com.ideas2it.healthcare.dto.ClinicDto;
@@ -8,6 +15,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 
+/**
+ * <p>
+ * DateUtil class is used for date related calculations
+ * </p>
+ *
+ * @author Mohamed Jubair
+ * @version 1
+ * @since 2022-10-10
+ */
 public class DateUtil {
 
     /**

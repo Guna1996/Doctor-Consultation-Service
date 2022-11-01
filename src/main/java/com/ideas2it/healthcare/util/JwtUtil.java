@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the util classes
- * which is for jwt util
+ * which is for simple calculations
  * </p>
  * Copyright 2022 - Ideas2it
  */

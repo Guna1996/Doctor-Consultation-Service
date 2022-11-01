@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.Optional;
  * @version 1
  * @since 2022-10-10
  */
-@Transactional
+@Repository
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
 
     /**
