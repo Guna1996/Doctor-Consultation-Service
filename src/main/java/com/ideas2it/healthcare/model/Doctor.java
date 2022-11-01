@@ -74,7 +74,4 @@ public class Doctor {
 
     @Column(name = Constants.CONSULTATION_FEE)
     private int consultationFee;
-
-    @Transient
-    private Integer total_entries;
 }

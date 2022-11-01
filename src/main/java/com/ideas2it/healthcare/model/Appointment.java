@@ -11,6 +11,7 @@ import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,7 +62,4 @@ public class Appointment {
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
-
-    @Transient
-    private Integer total_entries;
 }

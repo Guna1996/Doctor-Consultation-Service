@@ -59,7 +59,4 @@ public class Clinic {
 
     @Column(name = Constants.STATUS)
     private String status;
-
-    @Transient
-    private Integer total_entries;
 }

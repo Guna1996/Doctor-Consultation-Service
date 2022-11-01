@@ -63,6 +63,4 @@ public class ClinicDto {
     private String contactNumber;
 
     private String status = Constants.ACTIVE;
-
-    private Integer total_entries;
 }

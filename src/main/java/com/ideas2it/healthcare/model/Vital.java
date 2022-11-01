@@ -76,7 +76,4 @@ public class Vital {
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
-
-    @Transient
-    private Integer total_entries;
 }
