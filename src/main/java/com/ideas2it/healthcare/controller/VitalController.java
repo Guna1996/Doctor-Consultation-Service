@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -52,7 +53,7 @@ public class VitalController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addVitals(@RequestBody VitalsDto vitalsDto) {
+    public ResponseEntity<Map<String, Object>> addVitals(@Valid @RequestBody VitalsDto vitalsDto) {
         return SuccessResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
                 vitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
