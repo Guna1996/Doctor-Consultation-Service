@@ -84,4 +84,8 @@ public interface DoctorService {
      * @return {@link String}
      */
     String deleteDoctorById(Integer id);
+
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

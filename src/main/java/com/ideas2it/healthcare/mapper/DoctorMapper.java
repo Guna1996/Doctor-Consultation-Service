@@ -81,7 +81,7 @@ public class DoctorMapper {
         if (null != doctor) {
             doctorDto.setId(doctor.getId());
             doctorDto.setName(doctor.getName());
-            doctorDto.setAge(DateUtil.getDifferenceBetweenDates(doctor.getDateOfBirth()));
+            doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
             doctorDto.setConsultationFee(doctor.getConsultationFee());
@@ -97,7 +97,7 @@ public class DoctorMapper {
                 });
                 doctorDto.setSpecializations(specializationsDto);
             }
-            doctorDto.setExperience(DateUtil.getDifferenceBetweenDates(doctor.getDateOfRegistration()));
+            doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
             doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
             doctorDto.setCity(doctor.getCity());
             doctorDto.setStatus(doctor.getStatus());

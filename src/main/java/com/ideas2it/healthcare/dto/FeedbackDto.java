@@ -39,4 +39,6 @@ public class FeedbackDto {
     private String status = Constants.ACTIVE;
 
     private PatientDto patient;
+
+    private Integer total_entries;
 }

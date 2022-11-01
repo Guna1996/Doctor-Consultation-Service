@@ -11,7 +11,9 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 
 /**
@@ -75,4 +78,7 @@ public class Vital {
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
+
+    @Transient
+    private Integer total_entries;
 }

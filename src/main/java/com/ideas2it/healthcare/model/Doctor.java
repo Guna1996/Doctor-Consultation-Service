@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -74,4 +75,7 @@ public class Doctor {
 
     @Column(name = Constants.CONSULTATION_FEE)
     private int consultationFee;
+
+    @Transient
+    private Integer total_entries;
 }

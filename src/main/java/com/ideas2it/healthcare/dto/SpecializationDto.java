@@ -38,4 +38,6 @@ public class SpecializationDto {
     private String name;
 
     private String status = Constants.ACTIVE;
+
+    private Integer total_entries;
 }

@@ -39,4 +39,6 @@ public class DoctorClinicDto {
     private ClinicDto clinic;
 
     private List<TimeslotDto> timeslots;
+
+    private Integer total_entries;
 }

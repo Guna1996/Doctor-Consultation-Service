@@ -102,7 +102,7 @@ public class AppointmentController {
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
                 appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, appointmentService.getTotalPages());
     }
 
     /**
@@ -123,6 +123,6 @@ public class AppointmentController {
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
                 appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, appointmentService.getTotalPages());
     }
 }

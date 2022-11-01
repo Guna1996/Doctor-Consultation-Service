@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -33,4 +34,6 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      * @return {@link Page<Vital>}
      */
     Page<Vital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
+
+    List<Vital> findByPatientIdAndStatus(Integer patientId, String status);
 }

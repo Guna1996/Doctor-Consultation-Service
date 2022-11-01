@@ -47,17 +47,4 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
      * @return {@link Optional< Patient >}
      */
     Optional<Patient> findByIdAndStatus(Integer id, String status);
-
-    /**
-     * <p>
-     * This method is used to delete patient by id
-     * and set the status as inactive using query
-     * </p>
-     *
-     * @param id {@link Integer} is id of the patient
-     * @return {@link Integer}
-     */
-    @Modifying
-    @Query("update patient set status = 'inactive' where id=?1 and status = 'active'")
-    Integer deletePatientById(Integer id);
 }

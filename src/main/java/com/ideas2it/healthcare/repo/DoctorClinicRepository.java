@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -99,4 +100,10 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @return {@link Page<DoctorClinic>}
      */
     Page<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status, Pageable pageable);
+
+    List<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status);
+
+    List<DoctorClinic> findAllByStatus(String status);
+
+
 }

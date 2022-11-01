@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.LocalTime;
 
 /**
@@ -41,4 +42,7 @@ public class Timeslot {
 
     @Column
     private LocalTime timeslot;
+
+    @Transient
+    private Integer total_entries;
 }

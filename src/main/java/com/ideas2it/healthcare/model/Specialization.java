@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 
 /**
@@ -42,4 +44,7 @@ public class Specialization {
 
     @Column(name = Constants.STATUS)
     private String status;
+
+    @Transient
+    private Integer total_entries;
 }
