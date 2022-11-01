@@ -2,7 +2,7 @@
  * <p>
  * This is the base package for all the mapper classes
  * which is for DoctorMapper, PatientMapper and ClinicMapper
- * classes
+ * classes.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -14,13 +14,13 @@ import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.util.DateUtil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
  * DoctorMapper is used convert Doctor object to
- * DoctorDto and DoctorDto into Doctor
+ * DoctorDto and DoctorDto into Doctor.
  * </p>
  *
  * @author Bala Ashwanth
@@ -32,7 +32,7 @@ public class DoctorMapper {
     /**
      * <p>
      * This method is used to convert DoctorDto to
-     * Doctor model
+     * Doctor model.
      * </p>
      *
      * @param doctorDto {@link DoctorDto} contains doctor details
@@ -46,9 +46,9 @@ public class DoctorMapper {
             doctor.setDateOfBirth(doctorDto.getDateOfBirth());
             doctor.setGender(doctorDto.getGender());
             doctor.setQualification(doctorDto.getQualification());
-            Set<SpecializationDto> specializationsDto = doctorDto.getSpecializations();
+            List<SpecializationDto> specializationsDto = doctorDto.getSpecializations();
             if (null != specializationsDto) {
-                Set<Specialization> specializations = new HashSet<>();
+                List<Specialization> specializations = new ArrayList<>();
                 specializationsDto.forEach(specializationDto -> {
                     Specialization specialization = new Specialization();
                     specialization.setId(specializationDto.getId());
@@ -70,7 +70,7 @@ public class DoctorMapper {
     /**
      * <p>
      * This method is used to convert Doctor model to
-     * DoctorDto
+     * Doctor Dto.
      * </p>
      *
      * @param doctor {@link Doctor} contains doctor details
@@ -81,13 +81,14 @@ public class DoctorMapper {
         if (null != doctor) {
             doctorDto.setId(doctor.getId());
             doctorDto.setName(doctor.getName());
+            doctorDto.setDateOfBirth(doctor.getDateOfBirth());
             doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
             doctorDto.setConsultationFee(doctor.getConsultationFee());
-            Set<Specialization> specializations = doctor.getSpecializations();
+            List<Specialization> specializations = doctor.getSpecializations();
             if (null != specializations) {
-                Set<SpecializationDto> specializationsDto = new HashSet<>();
+                List<SpecializationDto> specializationsDto = new ArrayList<>();
                 specializations.forEach(specialization -> {
                     SpecializationDto specializationDto = new SpecializationDto();
                     specializationDto.setId(specialization.getId());
@@ -97,6 +98,7 @@ public class DoctorMapper {
                 });
                 doctorDto.setSpecializations(specializationsDto);
             }
+            doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
             doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
             doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
             doctorDto.setCity(doctor.getCity());

@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the Dto classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -20,7 +20,7 @@ import javax.validation.constraints.Pattern;
  * <p>
  * This SpecializationDto class is a Dto class and this class is used
  * to transfer the object from controller layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair

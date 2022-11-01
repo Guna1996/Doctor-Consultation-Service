@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the model classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -21,7 +21,7 @@ import javax.persistence.Transient;
  * <p>
  * This Specialization class is a model class and this class is used
  * to transfer the object from dto layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair

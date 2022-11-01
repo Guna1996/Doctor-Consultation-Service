@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the model classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -20,13 +20,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 /**
  * <p>
  * This Doctor class is a model class and this class is used
  * to transfer the object from dto layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair
@@ -58,7 +58,7 @@ public class Doctor {
     @JoinTable(name = Constants.DOCTOR_SPECIALIZATION,
             joinColumns = @JoinColumn(name = Constants.DOCTOR_ID),
             inverseJoinColumns = @JoinColumn(name = Constants.SPECIALIZATION_ID))
-    private Set<Specialization> specializations;
+    private List<Specialization> specializations;
 
     @Column(name = Constants.DATE_OF_REGISTRATION)
     private LocalDate dateOfRegistration;
