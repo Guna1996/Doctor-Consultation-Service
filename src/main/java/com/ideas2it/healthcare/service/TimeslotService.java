@@ -48,7 +48,7 @@ public interface TimeslotService {
      */
     List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }

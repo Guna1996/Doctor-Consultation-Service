@@ -78,7 +78,7 @@ public class Constants {
 
     public static final String PATIENT_ID = "patient_id";
 
-    public static final String DOCTOR_ID = "doctor_id";
+    public static final String DOCTOR_ID = "doctorId";
 
     public static final String CLINIC_ID = "clinic_id";
 
@@ -170,7 +170,7 @@ public class Constants {
 
     public static final String ENTITY = "entity";
 
-    public static final String ENTITY_LIST = "Low";
+    public static final String ENTITY_LIST = "entityList";
 
     public static final String RESPONSE_CODE = "responseCode";
 

@@ -49,7 +49,7 @@ public interface VitalService {
      */
     List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }
