@@ -52,7 +52,7 @@ public class TimeslotController {
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, timeslotService.getTotalPages());
     }
 
     /**

@@ -107,6 +107,6 @@ public class DoctorClinicController {
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
-                HttpStatus.OK);
+                HttpStatus.OK, doctorClinicService.getTotalPages());
     }
 }

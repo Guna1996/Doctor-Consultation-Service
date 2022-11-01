@@ -48,4 +48,8 @@ public interface VitalService {
      * @return {@link List< VitalsDto >}
      */
     List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
+
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

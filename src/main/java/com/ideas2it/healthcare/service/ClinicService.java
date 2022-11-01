@@ -83,4 +83,8 @@ public interface ClinicService {
      * @return {@link String}
      */
     String deleteClinicById(Integer id);
+
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

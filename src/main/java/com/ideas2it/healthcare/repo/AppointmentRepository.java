@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -83,4 +84,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * @return {@link Page<Appointment>}
      */
     Page<Appointment> findByPatientIdAndStatus(Integer id, String status, Pageable pageable);
+
+    List<Appointment> findByDoctorIdAndStatus(Integer id, String status);
+
+    List<Appointment> findByPatientIdAndStatus(Integer id, String status);
 }

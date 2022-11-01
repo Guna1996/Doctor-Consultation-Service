@@ -98,4 +98,8 @@ public interface AppointmentService {
      */
     List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows);
+
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

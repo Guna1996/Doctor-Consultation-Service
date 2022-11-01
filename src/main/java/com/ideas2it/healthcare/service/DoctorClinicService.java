@@ -76,4 +76,8 @@ public interface DoctorClinicService {
      */
     List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                Integer totalRows);
+
+    Double getTotalPages();
+
+    void setTotalPages(Double totalPages);
 }

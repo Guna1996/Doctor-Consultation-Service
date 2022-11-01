@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -37,4 +38,7 @@ public class Specialization {
 
     @Column(name = Constants.STATUS)
     private String status;
+
+    @Transient
+    private Integer total_entries;
 }

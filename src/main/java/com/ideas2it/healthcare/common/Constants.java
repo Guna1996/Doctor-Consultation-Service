@@ -183,5 +183,7 @@ public class Constants {
     public static final String DIASTOLIC = "diastolic";
 
     public static final String SYSTOLIC = "systolic";
+
+    public static final String TOTAL_PAGES = "totalPages";
 }
 

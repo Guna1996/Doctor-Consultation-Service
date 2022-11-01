@@ -32,4 +32,6 @@ public class TimeslotDto {
     private int id;
 
     private LocalTime timeslot;
+
+    private Integer total_entries;
 }
