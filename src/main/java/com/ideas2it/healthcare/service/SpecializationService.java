@@ -81,7 +81,7 @@ public interface SpecializationService {
      */
     String deleteSpecializationById(Integer id);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }

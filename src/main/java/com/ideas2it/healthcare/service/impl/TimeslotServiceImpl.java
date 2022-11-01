@@ -10,6 +10,7 @@
  */
 package com.ideas2it.healthcare.service.impl;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
 @Service
 public class TimeslotServiceImpl implements TimeslotService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
     @Autowired
     private TimeslotRepository timeslotRepository;
 
@@ -53,7 +54,8 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((timeslotRepository.findAll().size() + 0.0 / totalRows)));
+        setTotalPages(Math.round(((timeslotRepository
+                .findAll().size() + 0.0) / totalRows) + 0.4));
         List<Timeslot> timeslots = timeslotRepository
                 .findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (timeslots.isEmpty()) {
@@ -63,11 +65,11 @@ public class TimeslotServiceImpl implements TimeslotService {
                 .collect(Collectors.toList());
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

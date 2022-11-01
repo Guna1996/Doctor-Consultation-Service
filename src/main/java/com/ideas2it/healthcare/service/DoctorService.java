@@ -85,7 +85,7 @@ public interface DoctorService {
      */
     String deleteDoctorById(Integer id);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }

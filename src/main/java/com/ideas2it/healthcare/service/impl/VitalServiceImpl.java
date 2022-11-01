@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @Service
 public class VitalServiceImpl implements VitalService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
     @Autowired
     private VitalsRepository vitalsRepository;
 
@@ -50,8 +50,8 @@ public class VitalServiceImpl implements VitalService {
      * {@inheritDoc}
      */
     public List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((vitalsRepository
-                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0 / totalRows)));
+        setTotalPages(Math.round(((vitalsRepository
+                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return vitalsRepository
                 .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
@@ -59,11 +59,11 @@ public class VitalServiceImpl implements VitalService {
                 .map(VitalsMapper::toDto).collect(Collectors.toList());
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

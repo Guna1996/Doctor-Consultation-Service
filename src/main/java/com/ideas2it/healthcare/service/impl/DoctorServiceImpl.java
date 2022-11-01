@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -54,7 +54,8 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((doctorRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0 / totalRows)));
+        setTotalPages(Math.round(((doctorRepository
+                .findAllByStatus(Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
@@ -95,11 +96,11 @@ public class DoctorServiceImpl implements DoctorService {
         return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

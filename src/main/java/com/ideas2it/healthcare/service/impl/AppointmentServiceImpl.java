@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
 
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -83,8 +83,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
-        setTotalPages(Math.floor((appointmentRepository
-                .findByPatientIdAndStatus(patientId, Constants.STATUS).size() + 0.0) / totalRows));
+        setTotalPages(Math.round(((appointmentRepository
+                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return appointmentRepository.findByPatientIdAndStatus(
                         patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
@@ -98,8 +98,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                           Integer totalRows) {
-        setTotalPages(Math.floor(appointmentRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.STATUS).size() + 0.0) / totalRows);
+        setTotalPages(Math.round(((appointmentRepository
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return appointmentRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
@@ -132,11 +132,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }
