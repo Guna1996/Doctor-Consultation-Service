@@ -84,9 +84,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
         setTotalPages(Math.floor((appointmentRepository
-                .findByPatientIdAndStatus(patientId, Constants.STATUS).size() + 0.0)/ totalRows));
+                .findByPatientIdAndStatus(patientId, Constants.STATUS).size() + 0.0) / totalRows));
         return appointmentRepository.findByPatientIdAndStatus(
-                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+                        patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
                 .map(AppointmentMapper::toDto)
                 .collect(Collectors.toList());

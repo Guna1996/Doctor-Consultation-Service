@@ -51,7 +51,7 @@ public class VitalServiceImpl implements VitalService {
      */
     public List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
         setTotalPages(Math.floor((vitalsRepository
-                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0/totalRows)));
+                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0 / totalRows)));
         return vitalsRepository
                 .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))

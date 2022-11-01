@@ -15,7 +15,13 @@ import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -73,9 +79,9 @@ public class FeedbackController {
      * of a doctor.
      * </p>
      *
-     * @param doctorId {@link Integer} is id of doctor
+     * @param doctorId   {@link Integer} is id of doctor
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is number of row to be shown
+     * @param totalRows  {@link Integer} is number of row to be shown
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)

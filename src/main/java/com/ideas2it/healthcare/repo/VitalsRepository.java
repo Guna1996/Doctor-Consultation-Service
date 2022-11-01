@@ -17,7 +17,7 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      * This method is used to find active vital by vital id
      * </p>
      *
-     * @param id {@link Integer} is id of the vital
+     * @param id     {@link Integer} is id of the vital
      * @param status {@link String} is status of vital
      * @return {@link Optional<Vital>}
      */
@@ -29,8 +29,8 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      * </p>
      *
      * @param patientId {@link Integer} is id of the patient
-     * @param status {@link String} is status of vital
-     * @param pageable {@link Pageable} contains page number and number of rows required
+     * @param status    {@link String} is status of vital
+     * @param pageable  {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Vital>}
      */
     Page<Vital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);

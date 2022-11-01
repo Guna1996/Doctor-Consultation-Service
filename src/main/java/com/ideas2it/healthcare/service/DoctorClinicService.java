@@ -69,9 +69,9 @@ public interface DoctorClinicService {
      * by clinic id
      * </p>
      *
-     * @param clinicId {@link Integer} is id of clinic
+     * @param clinicId   {@link Integer} is id of clinic
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is required number of rows to be displayed
+     * @param totalRows  {@link Integer} is required number of rows to be displayed
      * @return {@link List<DoctorClinicDto>}
      */
     List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,

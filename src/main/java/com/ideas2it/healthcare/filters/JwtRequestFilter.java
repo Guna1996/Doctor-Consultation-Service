@@ -46,9 +46,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
      * passed using header
      * </p>
      *
-     * @parm request
-     * @parm response
-     * @parm chain
+     * @param request {@link HttpServletRequest}
+     * @param response {@link HttpServletResponse}
+     * @param chain {@link FilterChain}
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

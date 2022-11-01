@@ -8,7 +8,6 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -55,10 +54,10 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((specializationRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.floor((specializationRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0 / totalRows)));
         List<Specialization> specializations = specializationRepository
                 .findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
+                        PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
             throw new NotFoundException(MessageConstants.SPECIALIZATIONS_NOT_FOUND);
 

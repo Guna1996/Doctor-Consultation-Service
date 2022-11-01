@@ -45,7 +45,7 @@ public interface ClinicService {
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number
-     * @param totalRows {@link Integer} is number of rows required
+     * @param totalRows  {@link Integer} is number of rows required
      * @return {@link List<ClinicDto>}
      */
     List<ClinicDto> getClinics(Integer pageNumber, Integer totalRows);

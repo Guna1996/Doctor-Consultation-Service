@@ -53,9 +53,9 @@ public interface FeedbackService {
      * This method is used to get feedback by doctor id
      * </p>
      *
-     * @param doctorId {@link Integer} is id of doctor
+     * @param doctorId   {@link Integer} is id of doctor
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is required number of rows to be displayed
+     * @param totalRows  {@link Integer} is required number of rows to be displayed
      * @return {@link List<FeedbackDto>}
      */
     List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);

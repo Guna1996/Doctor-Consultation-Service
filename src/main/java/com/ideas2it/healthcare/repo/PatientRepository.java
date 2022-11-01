@@ -10,13 +10,8 @@
  */
 package com.ideas2it.healthcare.repo;
 
-import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -42,7 +37,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
      * This method is used to find active patient by patient id
      * </p>
      *
-     * @param id {@link Integer} is id of the patient
+     * @param id     {@link Integer} is id of the patient
      * @param status {@link String} is status of patient
      * @return {@link Optional< Patient >}
      */

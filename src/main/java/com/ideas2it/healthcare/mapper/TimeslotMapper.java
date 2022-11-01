@@ -8,7 +8,6 @@
  */
 package com.ideas2it.healthcare.mapper;
 
-import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.model.Timeslot;
 

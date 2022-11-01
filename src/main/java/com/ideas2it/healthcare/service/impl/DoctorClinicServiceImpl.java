@@ -74,9 +74,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                       Integer totalRows) {
         setTotalPages(Math.floor((doctorClinicRepository
-                .findByClinicIdAndStatus(clinicId, Constants.ACTIVE).size() + 0.0/totalRows)));
+                .findByClinicIdAndStatus(clinicId, Constants.ACTIVE).size() + 0.0 / totalRows)));
         return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
-                         PageRequest.of(pageNumber, totalRows)).toList().stream()
+                        PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
     }
 

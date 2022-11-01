@@ -42,7 +42,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
      * This method is used to find active clinic by clinic id
      * </p>
      *
-     * @param id {@link Integer} is id of the clinic
+     * @param id     {@link Integer} is id of the clinic
      * @param status {@link String} is status of clinic table
      * @return {@link Optional<Clinic>}
      */
@@ -66,7 +66,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
      * This method is used to find all active clinics
      * </p>
      *
-     * @param status {@link String} is status of clinic table
+     * @param status   {@link String} is status of clinic table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Clinic>}
      */
