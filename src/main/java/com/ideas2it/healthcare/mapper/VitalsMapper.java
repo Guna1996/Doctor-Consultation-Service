@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.dto.VitalsDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.model.Vital;
+import com.ideas2it.healthcare.util.VitalUtil;
 
 /**
  * <p>
@@ -48,7 +49,7 @@ public class VitalsMapper {
             vital.setSugarLevel(vitalsDto.getSugarLevel());
             vital.setStatus(vitalsDto.getStatus());
             vital.setCreatedAt(vitalsDto.getCreatedAt());
-            vital.setBPRiskLevel(vitalsDto.getBpRiskLevel());
+            vital.setBPRiskLevel(VitalUtil.getBPRiskLevel(vitalsDto.getSystolic(), vitalsDto.getDiastolic()));
             DoctorDto doctorDto = vitalsDto.getDoctor();
             if (null != doctorDto) {
                 Doctor doctor = new Doctor();
@@ -104,7 +105,7 @@ public class VitalsMapper {
             vitalsDto.setDiastolic(vital.getDiastolic());
             vitalsDto.setSugarLevel(vital.getSugarLevel());
             vitalsDto.setStatus(vital.getStatus());
-            vitalsDto.setbPRiskLevel(vital.getBPRiskLevel());
+            vitalsDto.setBpRiskLevel(vital.getBPRiskLevel());
             vitalsDto.setCreatedAt(vital.getCreatedAt());
             Doctor doctor = vital.getDoctor();
             if (null != doctor) {

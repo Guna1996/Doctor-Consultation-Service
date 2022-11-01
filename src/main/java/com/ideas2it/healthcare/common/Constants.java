@@ -42,7 +42,7 @@ public class Constants {
 
     public static final String URL_GET_TIMESLOTS = "/{doctor_id}/{clinic_id}";
 
-    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patient_id}";
+    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patientId}";
 
     public static final String URL_GET_DOCTORS_BY_CLINIC_ID =
             "/doctor/{clinic_id}/{pageNumber}/{totalRows}";
