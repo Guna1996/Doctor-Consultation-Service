@@ -14,7 +14,15 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  * <p>
@@ -23,9 +31,7 @@ import javax.persistence.*;
  * </p>
  *
  * @author Bala Ashwanth.N
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Entity(name = Constants.FEEDBACK)

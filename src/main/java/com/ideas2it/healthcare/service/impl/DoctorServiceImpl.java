@@ -54,7 +54,7 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((doctorRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.floor((doctorRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0 / totalRows)));
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
@@ -80,7 +80,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto updateDoctor(DoctorDto doctorDto){
+    public DoctorDto updateDoctor(DoctorDto doctorDto) {
         return this.saveDoctor(doctorDto);
     }
 

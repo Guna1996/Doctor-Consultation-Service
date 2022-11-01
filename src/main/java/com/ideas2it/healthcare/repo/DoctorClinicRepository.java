@@ -44,7 +44,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * table
      * </p>
      *
-     * @param status is status of the doctorClinic
+     * @param status   is status of the doctorClinic
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<DoctorClinic>}
      */
@@ -56,7 +56,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * by doctorClinic id
      * </p>
      *
-     * @param id {@link Integer} is id of the doctorClinic in DoctorClinic table
+     * @param id     {@link Integer} is id of the doctorClinic in DoctorClinic table
      * @param status {@link String} is status of the doctorClinic
      * @return {@link Optional<DoctorClinic>}
      */
@@ -70,7 +70,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      *
      * @param clinicId {@link Integer} is id of clinic
      * @param doctorId {@link Integer} is id of doctor
-     * @param status {@link String} is status of doctorClinic
+     * @param status   {@link String} is status of doctorClinic
      * @return {@link Optional<DoctorClinic>}
      */
     Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(Integer doctorId, Integer clinicId, String status);
@@ -95,7 +95,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
-     * @param status {@link String} is status of doctorClinic
+     * @param status   {@link String} is status of doctorClinic
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<DoctorClinic>}
      */

@@ -56,7 +56,7 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public List<ClinicDto> getClinics(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((clinicRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.floor((clinicRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0 / totalRows)));
         List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (clinics.isEmpty()) {

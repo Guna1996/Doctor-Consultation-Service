@@ -31,11 +31,11 @@ public class NotFoundExceptionHandler {
 
     /**
      * <p>
-     * This method is used to handle exception occured during validation
+     * This method is used to handle exception occurred during validation
      * of user inputs
      * </p>
      *
-     * @parm exception is caught exception
+     * @param exception is caught exception
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

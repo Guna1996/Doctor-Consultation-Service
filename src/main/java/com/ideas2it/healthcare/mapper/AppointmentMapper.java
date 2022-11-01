@@ -35,8 +35,8 @@ public class AppointmentMapper {
      * Appointment model
      * </p>
      *
-     * @parm appointmentDto {@link AppointmentDto} contains appointment details
      * @return {@link Appointment}
+     * @parm appointmentDto {@link AppointmentDto} contains appointment details
      */
     public static Appointment fromDto(AppointmentDto appointmentDto) {
         Appointment appointment = new Appointment();

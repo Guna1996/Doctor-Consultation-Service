@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
  * <p>
  * Interface AppointmentRepository extends the  JpaRepository
  * and used to retrieve and delete and update
@@ -41,9 +40,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * This method is used to find active appointment by doctor id and scheduled datetime
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id       {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
-     * @param status {@link String} is status of appointment table
+     * @param status   {@link String} is status of appointment table
      * @return {@link Optional<Appointment>}
      */
     Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(Integer id, LocalDateTime dateTime, String status);
@@ -66,8 +65,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * This method is used to find active appointments by doctor id
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
-     * @param status {@link String} is status of appointment table
+     * @param id       {@link Integer} is id of the doctor
+     * @param status   {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
@@ -78,8 +77,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * This method is used to find active appointments by patient id
      * </p>
      *
-     * @param id {@link Integer} is id of the patient
-     * @param status {@link String} is status of appointment table
+     * @param id       {@link Integer} is id of the patient
+     * @param status   {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */

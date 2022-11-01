@@ -64,9 +64,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows) {
         setTotalPages(Math.floor((feedbackRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0/totalRows)));
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0 / totalRows)));
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                .of(pageNumber, totalRows)).toList()
+                        .of(pageNumber, totalRows)).toList()
                 .stream().map(FeedbackMapper::toDto)
                 .collect(Collectors.toList());
     }

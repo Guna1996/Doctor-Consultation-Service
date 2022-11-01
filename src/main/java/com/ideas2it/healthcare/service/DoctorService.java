@@ -46,7 +46,7 @@ public interface DoctorService {
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is required number of rows to be displayed
+     * @param totalRows  {@link Integer} is required number of rows to be displayed
      * @return {@link List<DoctorDto>}
      */
     List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows);

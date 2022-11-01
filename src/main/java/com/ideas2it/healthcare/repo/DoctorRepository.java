@@ -37,7 +37,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
      * This method is used to find active doctor by doctor id
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id     {@link Integer} is id of the doctor
      * @param status {@link String} is status of doctor
      * @return {@link Optional<Doctor>}
      */
@@ -48,7 +48,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
      * This method is used to find all active doctors
      * </p>
      *
-     * @param status {@link String} is status of doctor
+     * @param status   {@link String} is status of doctor
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Doctor>}
      */

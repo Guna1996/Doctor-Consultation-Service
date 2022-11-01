@@ -1,6 +1,5 @@
 package com.ideas2it.healthcare.repo;
 
-import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Feedback;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +21,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
      * This method is used to find active feedback by feedback id
      * </p>
      *
-     * @param id {@link Integer} is id of the feedback
+     * @param id     {@link Integer} is id of the feedback
      * @param status {@link String} is status of feedback
      * @return {@link Optional<Feedback>}
      */
@@ -34,7 +33,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
      * </p>
      *
      * @param doctorId {@link Integer} is id of the doctor
-     * @param status {@link String} is status of feedback
+     * @param status   {@link String} is status of feedback
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Feedback>}
      */

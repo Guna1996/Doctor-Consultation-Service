@@ -46,11 +46,12 @@ public interface AppointmentService {
      * doctor in doctor database
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id       {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
      * @return {@link Boolean}
      */
     Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime);
+
     /**
      * <p>
      * This method is used to reschedule appointment and
@@ -80,7 +81,7 @@ public interface AppointmentService {
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number
-     * @param totalRows {@link Integer} is number of rows required
+     * @param totalRows  {@link Integer} is number of rows required
      * @return {@link List<AppointmentDto>}
      */
     List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
@@ -93,7 +94,7 @@ public interface AppointmentService {
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number
-     * @param totalRows {@link Integer} is number of rows required
+     * @param totalRows  {@link Integer} is number of rows required
      * @return {@link List<AppointmentDto>}
      */
     List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
