@@ -11,6 +11,7 @@ package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.util.VitalUtil;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,20 +68,14 @@ public class VitalsDto {
     private DoctorDto doctor;
 
     @Getter(AccessLevel.NONE)
-    private String BPRiskLevel;
+    private String bpRiskLevel;
 
     private LocalDateTime createdAt;
 
     private Integer total_entries;
 
-    public String getBPRiskLevel() {
-        if (getDiastolic() <= 80 && getSystolic() <= 120) {
-            setBPRiskLevel(Constants.NORMAL);
-        } else if (getSystolic() > 120 || getDiastolic() > 80) {
-            setBPRiskLevel(Constants.HIGH);
-        } else {
-            setBPRiskLevel(Constants.LOW);
-        }
-        return BPRiskLevel;
+    public String getBpRiskLevel() {
+        bpRiskLevel = VitalUtil.getBPRiskLevel(getSystolic(), getDiastolic());
+        return bpRiskLevel;
     }
 }

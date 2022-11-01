@@ -48,13 +48,13 @@ public class Constants {
             "/doctor/{clinic_id}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_APPOINTMENTS_BY_DOCTOR_ID =
-            "/doctor/{doctor_id}/{pageNumber}/{totalRows}";
+            "doctor/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID =
             "/feedbacks/{doctor_id}/{pageNumber}/{totalRows}";
 
     public static final String URL_PATIENT_APPOINTMENT =
-            "/patient/{patient_id}/{pageNumber}/{totalRows}";
+            "patient/{patientId}/{pageNumber}/{totalRows}";
 
     public static final String URL_APPOINTMENT = "/appointment";
 
@@ -76,11 +76,11 @@ public class Constants {
 
     public static final String URL_VITAL = "/vital";
 
-    public static final String PATIENT_ID = "patient_id";
+    public static final String PATIENT_ID = "patientId";
 
     public static final String DOCTOR_ID = "doctorId";
 
-    public static final String CLINIC_ID = "clinic_id";
+    public static final String CLINIC_ID = "clinicId";
 
     public static final String STATUS = "status";
 
@@ -160,11 +160,13 @@ public class Constants {
 
     public static final String PASSWORD = "ideas2it";
 
-    public static final String HIGH = "High";
-
-    public static final String NORMAL = "Normal";
+    public static final String AT_RISK = "At Risk";
 
     public static final String LOW = "Low";
+
+    public static final String HIGH = "High Blood Pressure";
+
+    public static final String NORMAL = "Normal";
 
     public static final String MESSAGE = "message";
 
