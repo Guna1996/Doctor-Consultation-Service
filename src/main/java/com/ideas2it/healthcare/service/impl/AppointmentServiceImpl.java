@@ -17,6 +17,7 @@ import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
+import com.ideas2it.healthcare.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -51,9 +52,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
-        LocalDate currentDate = LocalDate.now();
-        if (0 < Period.between(date, currentDate).getDays()) {
+        if (DateUtil.isDateInvalid(appointmentDto.getScheduledOn())) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
