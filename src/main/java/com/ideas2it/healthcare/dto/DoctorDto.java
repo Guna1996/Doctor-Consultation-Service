@@ -10,6 +10,7 @@ package com.ideas2it.healthcare.dto;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,18 +33,17 @@ import java.util.Set;
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class DoctorDto {
 
     private int id;
 
     @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
+    @Pattern(regexp = Constants.NAME_REGEX, message = ErrorConstants.NAME_FORMAT)
     private String name;
 
     @NotNull(message = ErrorConstants.DATE_OF_BIRTH_SHOULD_NOT_BE_NULL)
-    @Past(message = MessageConstants.ENTER_VALID_DATE_OF_BIRTH)
+    @Past(message = ErrorConstants.ENTER_VALID_DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
     private int age;
@@ -51,25 +51,25 @@ public class DoctorDto {
     private int experience;
 
     @NotNull(message = ErrorConstants.GENDER_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.GENDER_REGEX, message = MessageConstants.ENTER_MALE_OR_FEMALE)
+    @Pattern(regexp = Constants.GENDER_REGEX, message = ErrorConstants.ENTER_MALE_OR_FEMALE)
     private String gender;
 
     @NotNull(message = ErrorConstants.QUALIFICATION_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.QUALIFICATION_REGEX, message = MessageConstants.ENTER_VALID_QUALIFICATION)
+    @Pattern(regexp = Constants.QUALIFICATION_REGEX, message = ErrorConstants.ENTER_VALID_QUALIFICATION)
     private String qualification;
 
     private Set<SpecializationDto> specializations;
 
     @NotNull(message = ErrorConstants.REGISTRATION_YEAR_SHOULD_NOT_BE_NULL)
-    @PastOrPresent(message = MessageConstants.ENTER_VALID_REGISTRATION_YEAR)
+    @PastOrPresent(message = ErrorConstants.ENTER_VALID_REGISTRATION_YEAR)
     private LocalDate dateOfRegistration;
 
     @NotNull(message = ErrorConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = MessageConstants.ENTER_VALID_MOBILE_NUMBER)
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.ENTER_VALID_MOBILE_NUMBER)
     private String mobileNumber;
 
     @NotNull(message = ErrorConstants.CITY_NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_CITY_NAME)
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = ErrorConstants.ENTER_VALID_CITY_NAME)
     private String city;
 
     private String status = Constants.ACTIVE;

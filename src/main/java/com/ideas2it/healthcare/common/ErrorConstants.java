@@ -11,8 +11,9 @@ package com.ideas2it.healthcare.common;
 /**
  * <p>
  * This Constants class contains static final string variable
- * with values .we can access these variable any where in the
- * global package by using class name and variable name
+ * with which are used as error messages in this web application.
+ * we can access these variable any where in the global package by
+ * using class name and variable name
  * </p>
  *
  * @author Ramachandran
@@ -40,6 +41,8 @@ public class ErrorConstants {
     public static final String DOCTORS_NOT_FOUND = "Doctors not found";
 
     public static final String DOCTOR_NOT_FOUND = "Doctor not found";
+
+    public static final String PATIENT_NOT_FOUND = "Patient not found";
 
     public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
 
@@ -117,5 +120,30 @@ public class ErrorConstants {
     public static final String RATING_SHOULD_NOT_BE_NULL = "Rating level shouldn't be null";
 
     public static final String COMMENT_SHOULD_NOT_BE_NULL = "Comment shouldn't be null";
+
+    public static final String NAME_FORMAT =
+            "Enter Your name in proper format(Example: Bala Ashwanth)";
+
+    public static final String ENTER_VALID_STREET_NAME = "Please enter valid street name";
+
+    public static final String ENTER_VALID_CITY_NAME = "Please enter valid city name";
+
+    public static final String ENTER_VALID_STATE_NAME = "Please enter valid state name";
+
+    public static final String ENTER_VALID_PIN_CODE = "Please enter valid pin code";
+
+    public static final String ENTER_VALID_DATE_OF_BIRTH = "Please enter valid date of birth";
+
+    public static final String ENTER_MALE_OR_FEMALE = "Please enter Male or Female";
+
+    public static final String ENTER_VALID_QUALIFICATION = "Please enter valid qualification";
+
+    public static final String ENTER_VALID_REGISTRATION_YEAR =
+            "Please enter valid registration year";
+
+    public static final String ENTER_VALID_MOBILE_NUMBER = "Please enter valid mobile number";
+
+    public static final String ENTER_VALID_EMAIL = "Please enter valid email";
+
 }
 

@@ -32,7 +32,7 @@ public class ClinicDto {
     private int id;
 
     @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
+    @Pattern(regexp = Constants.NAME_REGEX, message = ErrorConstants.NAME_FORMAT)
     private String name;
 
     @Min(value = 1, message = ErrorConstants.DOOR_NUMBER_CANNOT_BE_NEGATIVE_OR_NULL)
@@ -40,24 +40,24 @@ public class ClinicDto {
     private int doorNumber;
 
     @NotNull(message = ErrorConstants.STREET_NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.ENTER_VALID_STREET_NAME)
+    @Pattern(regexp = Constants.NAME_REGEX, message = ErrorConstants.ENTER_VALID_STREET_NAME)
     private String streetName;
 
     @NotNull(message = ErrorConstants.CITY_NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_CITY_NAME)
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = ErrorConstants.ENTER_VALID_CITY_NAME)
     private String city;
 
     @NotNull(message = ErrorConstants.STATE_SHOULD_NOT_NE_NULL)
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_STATE_NAME)
+    @Pattern(regexp = Constants.COUNTRY_REGEX, message = ErrorConstants.ENTER_VALID_STATE_NAME)
     private String state;
 
     @Min(value = 1, message = ErrorConstants.PIN_CODE_CANNOT_BE_NEGATIVE_OR_ZERO)
     @NotNull(message = ErrorConstants.PIN_CODE_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.PIN_CODE_REGEX, message = MessageConstants.ENTER_VALID_PIN_CODE)
+    @Pattern(regexp = Constants.PIN_CODE_REGEX, message = ErrorConstants.ENTER_VALID_PIN_CODE)
     private String pinCode;
 
     @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.MOBILE_NUMBER_MUST_CONTAIN_TEN_NUMBERS_ONLY)
-    @NotNull(message = MessageConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
+    @NotNull(message = ErrorConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
     private String contactNumber;
 
     private String status = Constants.ACTIVE;
