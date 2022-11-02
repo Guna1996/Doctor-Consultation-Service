@@ -15,8 +15,9 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
-import com.ideas2it.healthcare.repo.AppointmentRepository;
+import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
+import com.ideas2it.healthcare.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ import java.util.stream.Collectors;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
 
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -51,9 +52,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
-        LocalDate currentDate = LocalDate.now();
-        if (0 < Period.between(date, currentDate).getDays()) {
+        if (DateUtil.isDateInvalid(appointmentDto.getScheduledOn())) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
@@ -70,7 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public String deleteAppointmentById(Integer id) {
+    public String removeAppointmentById(Integer id) {
         if (1 <= appointmentRepository.deleteAppointmentById(id)) {
             return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
@@ -83,10 +82,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
-        setTotalPages(Math.floor((appointmentRepository
-                .findByPatientIdAndStatus(patientId, Constants.STATUS).size() + 0.0)/ totalRows));
+        setTotalPages(Math.round(((appointmentRepository
+                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return appointmentRepository.findByPatientIdAndStatus(
-                patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+                        patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
                 .map(AppointmentMapper::toDto)
                 .collect(Collectors.toList());
@@ -98,8 +97,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                           Integer totalRows) {
-        setTotalPages(Math.floor(appointmentRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.STATUS).size() + 0.0) / totalRows);
+        setTotalPages(Math.round(((appointmentRepository
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return appointmentRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
@@ -132,11 +131,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

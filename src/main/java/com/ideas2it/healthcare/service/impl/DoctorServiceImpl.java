@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
-import com.ideas2it.healthcare.repo.DoctorRepository;
+import com.ideas2it.healthcare.repository.DoctorRepository;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -54,7 +54,8 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((doctorRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.round(((doctorRepository
+                .findAllByStatus(Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
@@ -80,7 +81,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto updateDoctor(DoctorDto doctorDto){
+    public DoctorDto updateDoctor(DoctorDto doctorDto) {
         return this.saveDoctor(doctorDto);
     }
 
@@ -88,18 +89,18 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public String deleteDoctorById(Integer id) {
+    public String removeDoctorById(Integer id) {
         if (1 <= doctorRepository.deleteDoctorById(id)) {
             return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
         }
         return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

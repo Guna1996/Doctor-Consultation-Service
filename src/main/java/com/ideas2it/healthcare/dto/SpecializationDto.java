@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the Dto classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -10,8 +10,7 @@ package com.ideas2it.healthcare.dto;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -20,15 +19,14 @@ import javax.validation.constraints.Pattern;
  * <p>
  * This SpecializationDto class is a Dto class and this class is used
  * to transfer the object from controller layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class SpecializationDto {
 
     private int id;
@@ -38,6 +36,4 @@ public class SpecializationDto {
     private String name;
 
     private String status = Constants.ACTIVE;
-
-    private Integer total_entries;
 }

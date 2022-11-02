@@ -1,4 +1,4 @@
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Timeslot;
 import org.springframework.data.jpa.repository.JpaRepository;

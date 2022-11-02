@@ -45,7 +45,7 @@ public interface ClinicService {
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number
-     * @param totalRows {@link Integer} is number of rows required
+     * @param totalRows  {@link Integer} is number of rows required
      * @return {@link List<ClinicDto>}
      */
     List<ClinicDto> getClinics(Integer pageNumber, Integer totalRows);
@@ -82,9 +82,9 @@ public interface ClinicService {
      * @param id {@link Integer} id of the clinic
      * @return {@link String}
      */
-    String deleteClinicById(Integer id);
+    String removeClinicById(Integer id);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }

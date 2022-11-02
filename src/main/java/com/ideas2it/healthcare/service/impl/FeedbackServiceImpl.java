@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
-import com.ideas2it.healthcare.repo.FeedbackRepository;
+import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
     @Autowired
     private FeedbackRepository feedbackRepository;
 
@@ -63,19 +63,19 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows) {
-        setTotalPages(Math.floor((feedbackRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.round(((feedbackRepository
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                .of(pageNumber, totalRows)).toList()
+                        .of(pageNumber, totalRows)).toList()
                 .stream().map(FeedbackMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the model classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -10,7 +10,6 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -27,7 +25,7 @@ import java.util.Set;
  * <p>
  * This Doctor class is a model class and this class is used
  * to transfer the object from dto layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair
@@ -55,7 +53,7 @@ public class Doctor {
     @Column(name = Constants.QUALIFICATION)
     private String qualification;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = Constants.DOCTOR_SPECIALIZATION,
             joinColumns = @JoinColumn(name = Constants.DOCTOR_ID),
             inverseJoinColumns = @JoinColumn(name = Constants.SPECIALIZATION_ID))
@@ -75,7 +73,4 @@ public class Doctor {
 
     @Column(name = Constants.CONSULTATION_FEE)
     private int consultationFee;
-
-    @Transient
-    private Integer total_entries;
 }

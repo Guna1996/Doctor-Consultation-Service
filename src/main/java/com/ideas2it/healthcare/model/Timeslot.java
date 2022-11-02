@@ -13,7 +13,6 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,6 @@ import java.time.LocalTime;
  * </p>
  *
  * @author Bala Ashwanth.N
- *
  * @since 2022-10-10
  */
 @Data
@@ -42,7 +40,4 @@ public class Timeslot {
 
     @Column
     private LocalTime timeslot;
-
-    @Transient
-    private Integer total_entries;
 }

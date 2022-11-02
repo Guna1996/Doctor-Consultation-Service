@@ -5,7 +5,7 @@
  * </p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Doctor;
 import org.springframework.data.domain.Page;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.Optional;
  * @version 1
  * @since 2022-10-10
  */
-@Transactional
+@Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     /**
@@ -37,7 +38,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
      * This method is used to find active doctor by doctor id
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id     {@link Integer} is id of the doctor
      * @param status {@link String} is status of doctor
      * @return {@link Optional<Doctor>}
      */
@@ -45,10 +46,10 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     /**
      * <p>
-     * This method is used to find all active doctors
+     * This method is used to find all active doctors by pagination
      * </p>
      *
-     * @param status {@link String} is status of doctor
+     * @param status   {@link String} is status of doctor
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Doctor>}
      */
@@ -67,5 +68,13 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     @Query("update doctor set status = 'inactive' where id=?1 and status ='active'")
     Integer deleteDoctorById(Integer id);
 
+    /**
+     * <p>
+     * This method is used to find all active doctors
+     * </p>
+     *
+     * @param status   {@link String} is status of doctor
+     * @return {@link List<Doctor>}
+     */
     List<Doctor> findAllByStatus(String status);
 }

@@ -11,9 +11,7 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -23,7 +21,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import java.time.LocalDateTime;
 
 /**
@@ -37,7 +34,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity(name = Constants.VITAL)
-public class Vital {
+public class PatientVital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,12 +70,9 @@ public class Vital {
     private Doctor doctor;
 
     @Column(name = Constants.BLOOD_PRESSURE)
-    private String BPRiskLevel;
+    private String bpRiskLevel;
 
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
-
-    @Transient
-    private Integer total_entries;
 }

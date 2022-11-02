@@ -17,8 +17,15 @@ import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -39,6 +46,9 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add the
@@ -49,8 +59,8 @@ public class PatientController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addPatient(@RequestBody PatientDto patientDto) {
-        return SuccessResponse.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
+    public ResponseEntity<Map<String, Object>> addPatient(@Valid @RequestBody PatientDto patientDto) {
+        return successResponse.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
                 patientService.addPatient(patientDto),
                 HttpStatus.OK);
     }
@@ -66,7 +76,7 @@ public class PatientController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
                 patientService.getPatientById(id),
                 HttpStatus.OK);
     }
@@ -82,7 +92,7 @@ public class PatientController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
-        return SuccessResponse.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
                 patientService.updatePatient(patientDto),
                 HttpStatus.OK);
     }

@@ -46,7 +46,7 @@ public interface DoctorService {
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is required number of rows to be displayed
+     * @param totalRows  {@link Integer} is required number of rows to be displayed
      * @return {@link List<DoctorDto>}
      */
     List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows);
@@ -83,9 +83,9 @@ public interface DoctorService {
      * @param id {@link Integer} is id of doctor
      * @return {@link String}
      */
-    String deleteDoctorById(Integer id);
+    String removeDoctorById(Integer id);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }

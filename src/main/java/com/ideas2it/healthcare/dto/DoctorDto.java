@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the Dto classes
- * which is for doctor, patient and clinic
+ * which is for doctor, patient and clinic.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -18,13 +18,14 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 /**
  * <p>
  * This DoctorDto class is a Dto class and this class is used
  * to transfer the object from controller layer to service
- * layer
+ * layer.
  * </p>
  *
  * @author Mohamed Jubair
@@ -74,6 +75,4 @@ public class DoctorDto {
     private String status = Constants.ACTIVE;
 
     private int consultationFee;
-
-    private Integer total_entries;
 }

@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
-import com.ideas2it.healthcare.repo.DoctorClinicRepository;
+import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorClinicServiceImpl implements DoctorClinicService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
     @Autowired
     private DoctorClinicRepository doctorClinicRepository;
 
@@ -51,7 +51,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public String deleteDoctorFromClinic(Integer id) {
+    public String removeDoctorFromClinic(Integer id) {
         if (1 <= doctorClinicRepository.deleteDoctorClinicById(id)) {
             return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
         }
@@ -73,18 +73,18 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                       Integer totalRows) {
-        setTotalPages(Math.floor((doctorClinicRepository
-                .findByClinicIdAndStatus(clinicId, Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.round(((doctorClinicRepository
+                .findByClinicIdAndStatus(clinicId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
-                         PageRequest.of(pageNumber, totalRows)).toList().stream()
+                        PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

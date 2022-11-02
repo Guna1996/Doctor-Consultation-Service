@@ -8,7 +8,7 @@
  * <p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Clinic;
 import org.springframework.data.domain.Page;
@@ -34,7 +34,6 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
-@Transactional
 public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
 
     /**
@@ -42,7 +41,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
      * This method is used to find active clinic by clinic id
      * </p>
      *
-     * @param id {@link Integer} is id of the clinic
+     * @param id     {@link Integer} is id of the clinic
      * @param status {@link String} is status of clinic table
      * @return {@link Optional<Clinic>}
      */
@@ -63,15 +62,23 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
 
     /**
      * <p>
-     * This method is used to find all active clinics
+     * This method is used to find all active clinics by pagination
      * </p>
      *
-     * @param status {@link String} is status of clinic table
+     * @param status   {@link String} is status of clinic table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Clinic>}
      */
     Page<Clinic> findAllByStatus(String status, Pageable pageable);
 
+    /**
+     * <p>
+     * This method is used to find all active clinics
+     * </p>
+     *
+     * @param status   {@link String} is status of clinic
+     * @return {@link List<Clinic>}
+     */
     List<Clinic> findAllByStatus(String status);
 
 }

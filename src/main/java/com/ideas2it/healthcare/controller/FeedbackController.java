@@ -15,7 +15,13 @@ import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -36,6 +42,9 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add a feedback
@@ -47,7 +56,7 @@ public class FeedbackController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return SuccessResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
@@ -62,8 +71,8 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(feedbackService.deleteFeedback(id),
+    public ResponseEntity<Map<String, Object>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
+        return successResponse.responseEntity(feedbackService.deleteFeedback(id),
                 null, HttpStatus.OK);
     }
 
@@ -73,17 +82,17 @@ public class FeedbackController {
      * of a doctor.
      * </p>
      *
-     * @param doctorId {@link Integer} is id of doctor
+     * @param doctorId   {@link Integer} is id of doctor
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is number of row to be shown
+     * @param totalRows  {@link Integer} is number of row to be shown
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(
-            @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
+            @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK, feedbackService.getTotalPages());
     }

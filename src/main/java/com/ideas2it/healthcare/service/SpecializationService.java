@@ -79,9 +79,9 @@ public interface SpecializationService {
      * @param id {@link Integer}
      * @return {@link String}
      */
-    String deleteSpecializationById(Integer id);
+    String removeSpecializationById(Integer id);
 
-    Double getTotalPages();
+    Long getTotalPages();
 
-    void setTotalPages(Double totalPages);
+    void setTotalPages(Long totalPages);
 }

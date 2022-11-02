@@ -31,11 +31,11 @@ public class NotFoundExceptionHandler {
 
     /**
      * <p>
-     * This method is used to handle exception occured during validation
+     * This method is used to handle exception occurred during validation
      * of user inputs
      * </p>
      *
-     * @parm exception is caught exception
+     * @param exception is caught exception
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -45,7 +45,7 @@ public class NotFoundExceptionHandler {
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return new ResponseEntity<>(errorMap, HttpStatus.OK);
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -62,6 +62,6 @@ public class NotFoundExceptionHandler {
             NotFoundException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put(ErrorConstants.ERROR_MESSAGE, exception.getMessage());
-        return new ResponseEntity<>(errorMap, HttpStatus.OK);
+        return new ResponseEntity<>(errorMap, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

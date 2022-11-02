@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
+import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
@@ -53,7 +54,9 @@ public class FeedbackMapper {
                 doctor.setGender(doctorDto.getGender());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                if (null != doctor.getMobileNumber()) {
+                    doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                }
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
                 feedback.setDoctor(doctor);
@@ -64,7 +67,9 @@ public class FeedbackMapper {
                 patient.setId(patient.getId());
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
-                patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
+                if (null != patientDto.getMobileNumber()) {
+                    patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
+                }
                 patient.setGender(patientDto.getGender());
                 patient.setEmail(patientDto.getEmail());
                 patient.setStatus(patientDto.getStatus());
@@ -98,9 +103,13 @@ public class FeedbackMapper {
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setQualification(doctor.getQualification());
-                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                if (null != doctor.getMobileNumber()) {
+                    doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                }
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setStatus(doctor.getStatus());
                 feedbackDto.setDoctor(doctorDto);
@@ -111,7 +120,9 @@ public class FeedbackMapper {
                 patientDto.setId(patient.getId());
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
-                patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
+                if (null != patient.getMobileNumber()) {
+                    patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
+                }
                 patientDto.setGender(patient.getGender());
                 patientDto.setEmail(patient.getEmail());
                 patientDto.setStatus(patient.getStatus());

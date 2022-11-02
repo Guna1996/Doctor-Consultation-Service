@@ -8,15 +8,10 @@
  * <p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
-import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -34,7 +29,6 @@ import java.util.Optional;
  * @since 2022-10-10
  */
 @Repository
-@Transactional
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     /**
@@ -42,7 +36,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
      * This method is used to find active patient by patient id
      * </p>
      *
-     * @param id {@link Integer} is id of the patient
+     * @param id     {@link Integer} is id of the patient
      * @param status {@link String} is status of patient
      * @return {@link Optional< Patient >}
      */

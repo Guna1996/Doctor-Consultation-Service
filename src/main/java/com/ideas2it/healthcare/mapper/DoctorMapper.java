@@ -2,7 +2,7 @@
  * <p>
  * This is the base package for all the mapper classes
  * which is for DoctorMapper, PatientMapper and ClinicMapper
- * classes
+ * classes.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -20,7 +20,7 @@ import java.util.Set;
 /**
  * <p>
  * DoctorMapper is used convert Doctor object to
- * DoctorDto and DoctorDto into Doctor
+ * DoctorDto and DoctorDto into Doctor.
  * </p>
  *
  * @author Bala Ashwanth
@@ -32,7 +32,7 @@ public class DoctorMapper {
     /**
      * <p>
      * This method is used to convert DoctorDto to
-     * Doctor model
+     * Doctor model.
      * </p>
      *
      * @param doctorDto {@link DoctorDto} contains doctor details
@@ -70,7 +70,7 @@ public class DoctorMapper {
     /**
      * <p>
      * This method is used to convert Doctor model to
-     * DoctorDto
+     * Doctor Dto.
      * </p>
      *
      * @param doctor {@link Doctor} contains doctor details
@@ -81,6 +81,7 @@ public class DoctorMapper {
         if (null != doctor) {
             doctorDto.setId(doctor.getId());
             doctorDto.setName(doctor.getName());
+            doctorDto.setDateOfBirth(doctor.getDateOfBirth());
             doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
@@ -97,6 +98,7 @@ public class DoctorMapper {
                 });
                 doctorDto.setSpecializations(specializationsDto);
             }
+            doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
             doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
             doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
             doctorDto.setCity(doctor.getCity());

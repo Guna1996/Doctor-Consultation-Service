@@ -22,8 +22,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
-
 
 /**
  * <p>
@@ -32,13 +30,11 @@ import javax.persistence.Transient;
  * </p>
  *
  * @author Bala Ashwanth.N
- *
  * @version 1
- *
  * @since 2022-10-10
  */
-@Entity(name = Constants.FEEDBACK)
 @Data
+@Entity(name = Constants.FEEDBACK)
 public class Feedback {
 
     @Id
@@ -61,7 +57,4 @@ public class Feedback {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = Constants.PATIENT_ID)
     private Patient patient;
-
-    @Transient
-    private Integer total_entries;
 }

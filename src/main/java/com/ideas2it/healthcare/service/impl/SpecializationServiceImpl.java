@@ -8,13 +8,12 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
 import com.ideas2it.healthcare.model.Specialization;
-import com.ideas2it.healthcare.repo.SpecializationRepository;
+import com.ideas2it.healthcare.repository.SpecializationRepository;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +37,7 @@ import java.util.stream.Collectors;
 @Service
 public class SpecializationServiceImpl implements SpecializationService {
 
-    private Double totalPages = 0.0;
+    private Long totalPages;
 
     @Autowired
     private SpecializationRepository specializationRepository;
@@ -55,10 +54,11 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.floor((specializationRepository.findAllByStatus(Constants.ACTIVE).size() + 0.0/totalRows)));
+        setTotalPages(Math.round(((specializationRepository
+                .findAllByStatus(Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         List<Specialization> specializations = specializationRepository
                 .findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
+                        PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
             throw new NotFoundException(MessageConstants.SPECIALIZATIONS_NOT_FOUND);
 
@@ -89,18 +89,18 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public String deleteSpecializationById(Integer id) {
+    public String removeSpecializationById(Integer id) {
         if (1 <= specializationRepository.deleteSpecializationById(id)) {
             return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
         }
         return MessageConstants.SPECIALIZATION_NOT_FOUND;
     }
 
-    public Double getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(Double totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

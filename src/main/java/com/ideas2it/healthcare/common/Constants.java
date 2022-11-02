@@ -42,19 +42,19 @@ public class Constants {
 
     public static final String URL_GET_TIMESLOTS = "/{doctorId}/{clinicId}";
 
-    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patientId}";
+    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/patient/{patientId}";
 
     public static final String URL_GET_DOCTORS_BY_CLINIC_ID =
             "/doctor/{clinicId}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_APPOINTMENTS_BY_DOCTOR_ID =
-            "/appointment/{doctorId}/{pageNumber}/{totalRows}";
+            "doctor/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID =
-            "/feedbacks/{doctorId}/{pageNumber}/{totalRows}";
+            "/{doctor_id}/{pageNumber}/{totalRows}";
 
-    public static final String URL_PATIENT_APPOINTMENT =
-            "/appointment/{patientId}/{pageNumber}/{totalRows}";
+    public static final String URL_GET_APPOINTMENTS_BY_PATIENT_ID =
+            "patient/{patientId}/{pageNumber}/{totalRows}";
 
     public static final String URL_APPOINTMENT = "/appointment";
 
@@ -74,11 +74,17 @@ public class Constants {
 
     public static final String URL_TIMESLOT = "/timeslot";
 
-    public static final String URL_VITAL = "/vital";
+    public static final String URL_PATIENT_VITAL = "/patientVital";
 
-    public static final String PATIENT_ID = "patient_id";
+    public static final String PATIENT_ID = "patientId";
+
+    public static final String PATIENT_ID_PATH = "patient_id";
+
+    public static final String DOCTOR_ID_PATH = "doctorId";
 
     public static final String DOCTOR_ID = "doctor_id";
+
+    public static final String CLINIC_ID_PATH = "clinicId";
 
     public static final String CLINIC_ID = "clinic_id";
 
@@ -160,17 +166,19 @@ public class Constants {
 
     public static final String PASSWORD = "ideas2it";
 
-    public static final String HIGH = "High";
-
-    public static final String NORMAL = "Normal";
+    public static final String AT_RISK = "At Risk";
 
     public static final String LOW = "Low";
+
+    public static final String HIGH = "High Blood Pressure";
+
+    public static final String NORMAL = "Normal";
 
     public static final String MESSAGE = "message";
 
     public static final String ENTITY = "entity";
 
-    public static final String ENTITY_LIST = "Low";
+    public static final String ENTITY_LIST = "entityList";
 
     public static final String RESPONSE_CODE = "responseCode";
 

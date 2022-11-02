@@ -8,10 +8,8 @@
 package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
-import io.swagger.models.auth.In;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import java.time.LocalDateTime;
 
 /**
@@ -63,7 +60,4 @@ public class Appointment {
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
-
-    @Transient
-    private Integer total_entries;
 }

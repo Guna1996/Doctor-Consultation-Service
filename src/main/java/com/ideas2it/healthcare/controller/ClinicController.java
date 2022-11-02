@@ -15,7 +15,13 @@ import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -36,6 +42,9 @@ public class ClinicController {
 
     @Autowired
     private ClinicService clinicService;
+    
+    @Autowired
+    private SuccessResponse successResponse;
 
     /**
      * <p>
@@ -48,7 +57,7 @@ public class ClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return SuccessResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
                 clinicService.addClinic(clinicDto), HttpStatus.OK);
     }
 
@@ -59,14 +68,14 @@ public class ClinicController {
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
-     * @param totalRows {@link Integer} is number of row to be shown
+     * @param totalRows  {@link Integer} is number of row to be shown
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_PAGINATION)
     public ResponseEntity<Map<String, Object>> getClinics(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, clinicService.getTotalPages());
     }
 
@@ -81,7 +90,7 @@ public class ClinicController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
                 clinicService.getClinicById(id), HttpStatus.OK);
     }
 
@@ -96,7 +105,7 @@ public class ClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return SuccessResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
                 clinicService.updateClinic(clinicDto), HttpStatus.OK);
     }
 
@@ -110,8 +119,8 @@ public class ClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteClinic(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(clinicService.deleteClinicById(id),
+    public ResponseEntity<Map<String, Object>> removeClinic(@PathVariable(Constants.ID) Integer id) {
+        return successResponse.responseEntity(clinicService.removeClinicById(id),
                 null, HttpStatus.OK);
     }
 }

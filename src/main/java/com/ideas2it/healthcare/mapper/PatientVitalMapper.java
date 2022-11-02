@@ -10,10 +10,12 @@ package com.ideas2it.healthcare.mapper;
 
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.dto.VitalsDto;
+import com.ideas2it.healthcare.dto.PatientVitalDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
-import com.ideas2it.healthcare.model.Vital;
+import com.ideas2it.healthcare.model.PatientVital;
+import com.ideas2it.healthcare.util.DateUtil;
+import com.ideas2it.healthcare.util.VitalUtil;
 
 /**
  * <p>
@@ -25,7 +27,7 @@ import com.ideas2it.healthcare.model.Vital;
  * @version 1
  * @since 2022-10-10
  */
-public class VitalsMapper {
+public class PatientVitalMapper {
 
     /**
      * <p>
@@ -33,22 +35,22 @@ public class VitalsMapper {
      * Vital model
      * </p>
      *
-     * @param vitalsDto {@link VitalsDto} contains vitals details
-     * @return {@link Vital}
+     * @param vitalsDto {@link PatientVitalDto} contains vitals details
+     * @return {@link PatientVital}
      */
-    public static Vital fromDto(VitalsDto vitalsDto) {
-        Vital vital = new Vital();
+    public static PatientVital fromDto(PatientVitalDto vitalsDto) {
+        PatientVital patientVital = new PatientVital();
         if (null != vitalsDto) {
-            vital.setId(vitalsDto.getId());
-            vital.setHeight(vitalsDto.getHeight());
-            vital.setWeight(vitalsDto.getWeight());
-            vital.setPulse(vitalsDto.getPulse());
-            vital.setSystolic(vitalsDto.getSystolic());
-            vital.setDiastolic(vitalsDto.getDiastolic());
-            vital.setSugarLevel(vitalsDto.getSugarLevel());
-            vital.setStatus(vitalsDto.getStatus());
-            vital.setCreatedAt(vitalsDto.getCreatedAt());
-            vital.setBPRiskLevel(vitalsDto.getBPRiskLevel());
+            patientVital.setId(vitalsDto.getId());
+            patientVital.setHeight(vitalsDto.getHeight());
+            patientVital.setWeight(vitalsDto.getWeight());
+            patientVital.setPulse(vitalsDto.getPulse());
+            patientVital.setSystolic(vitalsDto.getSystolic());
+            patientVital.setDiastolic(vitalsDto.getDiastolic());
+            patientVital.setSugarLevel(vitalsDto.getSugarLevel());
+            patientVital.setStatus(vitalsDto.getStatus());
+            patientVital.setCreatedAt(vitalsDto.getCreatedAt());
+            patientVital.setBpRiskLevel(VitalUtil.getBPRiskLevel(vitalsDto.getSystolic(), vitalsDto.getDiastolic()));
             DoctorDto doctorDto = vitalsDto.getDoctor();
             if (null != doctorDto) {
                 Doctor doctor = new Doctor();
@@ -59,10 +61,12 @@ public class VitalsMapper {
                 doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                if (null != doctorDto.getMobileNumber()) {
+                    doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                }
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
-                vital.setDoctor(doctor);
+                patientVital.setDoctor(doctor);
             }
             PatientDto patientDto = vitalsDto.getPatient();
             if (null != patientDto) {
@@ -70,14 +74,16 @@ public class VitalsMapper {
                 patient.setId(patientDto.getId());
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
-                patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
+                if (null != patientDto.getMobileNumber()) {
+                    patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
+                }
                 patient.setGender(patientDto.getGender());
                 patient.setEmail(patientDto.getEmail());
                 patient.setStatus(patientDto.getStatus());
-                vital.setPatient(patient);
+                patientVital.setPatient(patient);
             }
         }
-        return vital;
+        return patientVital;
     }
 
     /**
@@ -86,45 +92,51 @@ public class VitalsMapper {
      * VitalDto
      * </p>
      *
-     * @param vital {@link Vital} contains vitals details
-     * @return {@link VitalsDto}
+     * @param patientVital {@link PatientVital} contains vitals details
+     * @return {@link PatientVitalDto}
      */
-    public static VitalsDto toDto(Vital vital) {
-        VitalsDto vitalsDto = new VitalsDto();
-        if (null != vital) {
-            vitalsDto.setId(vital.getId());
-            vitalsDto.setHeight(vital.getHeight());
-            vitalsDto.setWeight(vital.getWeight());
-            vitalsDto.setPulse(vital.getPulse());
-            vitalsDto.setSystolic(vital.getSystolic());
-            vitalsDto.setDiastolic(vital.getDiastolic());
-            vitalsDto.setSugarLevel(vital.getSugarLevel());
-            vitalsDto.setStatus(vital.getStatus());
-            vitalsDto.setBPRiskLevel(vital.getBPRiskLevel());
-            vitalsDto.setCreatedAt(vital.getCreatedAt());
-            Doctor doctor = vital.getDoctor();
+    public static PatientVitalDto toDto(PatientVital patientVital) {
+        PatientVitalDto vitalsDto = new PatientVitalDto();
+        if (null != patientVital) {
+            vitalsDto.setId(patientVital.getId());
+            vitalsDto.setHeight(patientVital.getHeight());
+            vitalsDto.setWeight(patientVital.getWeight());
+            vitalsDto.setPulse(patientVital.getPulse());
+            vitalsDto.setSystolic(patientVital.getSystolic());
+            vitalsDto.setDiastolic(patientVital.getDiastolic());
+            vitalsDto.setSugarLevel(patientVital.getSugarLevel());
+            vitalsDto.setStatus(patientVital.getStatus());
+            vitalsDto.setBpRiskLevel(patientVital.getBpRiskLevel());
+            vitalsDto.setCreatedAt(patientVital.getCreatedAt());
+            Doctor doctor = patientVital.getDoctor();
             if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setQualification(doctor.getQualification());
-                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                if (null != doctor.getMobileNumber()) {
+                    doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                }
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setStatus(doctor.getStatus());
                 vitalsDto.setDoctor(doctorDto);
             }
-            Patient patient = vital.getPatient();
+            Patient patient = patientVital.getPatient();
             if (null != patient) {
                 PatientDto patientDto = new PatientDto();
                 patientDto.setId(patient.getId());
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
-                patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
+                if (null != patient.getMobileNumber()) {
+                    patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
+                }
                 patientDto.setGender(patient.getGender());
                 patientDto.setEmail(patient.getEmail());
                 patientDto.setStatus(patient.getStatus());

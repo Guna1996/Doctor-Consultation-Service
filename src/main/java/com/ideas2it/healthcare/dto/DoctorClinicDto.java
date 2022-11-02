@@ -10,9 +10,9 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -26,19 +26,18 @@ import java.util.List;
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class DoctorClinicDto {
 
     private int id;
 
     private String status = Constants.ACTIVE;
 
+    @NotNull(message = "doctor shouldn't be null")
     private DoctorDto doctor;
 
+    @NotNull(message = "clinic shouldn't be null")
     private ClinicDto clinic;
 
     private List<TimeslotDto> timeslots;
-
-    private Integer total_entries;
 }

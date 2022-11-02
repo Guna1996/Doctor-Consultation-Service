@@ -37,7 +37,6 @@ public class AuthenticationService implements UserDetailsService {
      * This method is used to load default username and password for authentication
      * and authorization.
      * </p>
-     *
      */
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {

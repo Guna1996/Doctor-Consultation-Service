@@ -7,7 +7,7 @@
  * </p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Appointment;
 import org.springframework.data.domain.Page;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -22,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
  * <p>
  * Interface AppointmentRepository extends the  JpaRepository
  * and used to retrieve and delete and update
@@ -33,7 +33,7 @@ import java.util.Optional;
  * @version 1
  * @since 2022-07-18
  */
-@Transactional
+@Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
     /**
@@ -41,9 +41,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * This method is used to find active appointment by doctor id and scheduled datetime
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id       {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
-     * @param status {@link String} is status of appointment table
+     * @param status   {@link String} is status of appointment table
      * @return {@link Optional<Appointment>}
      */
     Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(Integer id, LocalDateTime dateTime, String status);
@@ -63,11 +63,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     /**
      * <p>
-     * This method is used to find active appointments by doctor id
+     * This method is used to find active appointments by doctor id and pagination
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
-     * @param status {@link String} is status of appointment table
+     * @param id       {@link Integer} is id of the doctor
+     * @param status   {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
@@ -75,17 +75,35 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     /**
      * <p>
-     * This method is used to find active appointments by patient id
+     * This method is used to find active appointments by patient id and pagination
      * </p>
      *
-     * @param id {@link Integer} is id of the patient
-     * @param status {@link String} is status of appointment table
+     * @param id       {@link Integer} is id of the patient
+     * @param status   {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
     Page<Appointment> findByPatientIdAndStatus(Integer id, String status, Pageable pageable);
 
+    /**
+     * <p>
+     * This method is used to find active appointments by doctor id
+     * </p>
+     *
+     * @param id       {@link Integer} is id of the doctor
+     * @param status   {@link String} is status of appointment table
+     * @return {@link List<Appointment>}
+     */
     List<Appointment> findByDoctorIdAndStatus(Integer id, String status);
 
+    /**
+     * <p>
+     * This method is used to find active appointments by patient id
+     * </p>
+     *
+     * @param id       {@link Integer} is id of the patient
+     * @param status   {@link String} is status of appointment table
+     * @return {@link List<Appointment>}
+     */
     List<Appointment> findByPatientIdAndStatus(Integer id, String status);
 }

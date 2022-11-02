@@ -22,7 +22,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import java.util.List;
 
 /**
@@ -33,9 +32,7 @@ import java.util.List;
  * </p>
  *
  * @author Ramachandran
- *
  * @version 1
- *
  * @since 2022-10-10
  */
 @Data
@@ -63,7 +60,4 @@ public class DoctorClinic {
             joinColumns = @JoinColumn(name = Constants.DOCTOR_CLINIC_ID),
             inverseJoinColumns = @JoinColumn(name = Constants.TIMESLOT_ID))
     private List<Timeslot> timeslots;
-
-    @Transient
-    private Integer total_entries;
 }

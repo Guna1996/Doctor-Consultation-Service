@@ -12,10 +12,12 @@ import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.PatientDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
+import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
@@ -51,7 +53,9 @@ public class AppointmentMapper {
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
                 patient.setGender(patientDto.getGender());
-                patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
+                if(null != patientDto.getMobileNumber()) {
+                    patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
+                }
                 patient.setEmail(patientDto.getEmail());
                 appointment.setPatient(patient);
             }
@@ -66,7 +70,9 @@ public class AppointmentMapper {
                 doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                if(null != doctorDto.getMobileNumber()) {
+                    doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                }
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
                 appointment.setDoctor(doctor);
@@ -112,7 +118,9 @@ public class AppointmentMapper {
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
                 patientDto.setGender(patient.getGender());
-                patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
+                if(null != patient.getMobileNumber()) {
+                    patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
+                }
                 patientDto.setEmail(patient.getEmail());
                 appointmentDto.setPatient(patientDto);
             }
@@ -123,10 +131,14 @@ public class AppointmentMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
+                if(null != doctor.getMobileNumber()) {
+                    doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                }
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());

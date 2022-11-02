@@ -8,7 +8,7 @@
  * <p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.DoctorClinic;
 import org.springframework.data.domain.Page;
@@ -34,21 +34,7 @@ import java.util.Optional;
  * @since 2022-10-10
  */
 @Repository
-@Transactional
 public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Integer> {
-
-    /**
-     * <p>
-     * This method is used for get all the
-     * active doctor from the DoctorClinic
-     * table
-     * </p>
-     *
-     * @param status is status of the doctorClinic
-     * @param pageable {@link Pageable} contains page number and number of rows required
-     * @return {@link Page<DoctorClinic>}
-     */
-    Page<DoctorClinic> findAllByStatus(String status, Pageable pageable);
 
     /**
      * <p>
@@ -56,7 +42,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * by doctorClinic id
      * </p>
      *
-     * @param id {@link Integer} is id of the doctorClinic in DoctorClinic table
+     * @param id     {@link Integer} is id of the doctorClinic in DoctorClinic table
      * @param status {@link String} is status of the doctorClinic
      * @return {@link Optional<DoctorClinic>}
      */
@@ -70,7 +56,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      *
      * @param clinicId {@link Integer} is id of clinic
      * @param doctorId {@link Integer} is id of doctor
-     * @param status {@link String} is status of doctorClinic
+     * @param status   {@link String} is status of doctorClinic
      * @return {@link Optional<DoctorClinic>}
      */
     Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(Integer doctorId, Integer clinicId, String status);
@@ -90,20 +76,26 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
 
     /**
      * <p>
-     * This method is used to find active doctor clinic
-     * by clinic id
+     * This method is used to find active doctor clinic by pagination
+     * and clinic id
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
-     * @param status {@link String} is status of doctorClinic
+     * @param status   {@link String} is status of doctorClinic
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<DoctorClinic>}
      */
     Page<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status, Pageable pageable);
 
+    /**
+     * <p>
+     * This method is used to find active doctor clinic
+     * by clinic id
+     * </p>
+     *
+     * @param clinicId {@link Integer} is id of clinic
+     * @param status   {@link String} is status of doctorClinic
+     * @return {@link List<DoctorClinic>}
+     */
     List<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status);
-
-    List<DoctorClinic> findAllByStatus(String status);
-
-
 }

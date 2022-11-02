@@ -5,7 +5,7 @@
  * </p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.repo;
+package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.Specialization;
 import org.springframework.data.domain.Page;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.Optional;
  * @version 1
  * @since 2022-10-10
  */
-@Transactional
+@Repository
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
 
     /**
@@ -46,7 +47,7 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
 
     /**
      * <p>
-     * This method is used to find all active specializations
+     * This method is used to find all active specializations by pagination
      * </p>
      *
      * @param status   {@link String} is status of specialization
@@ -68,5 +69,13 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
     @Query("update specialization set status = 'inactive' where id=?1 and status ='active'")
     Integer deleteSpecializationById(Integer id);
 
+    /**
+     * <p>
+     * This method is used to find all active specializations
+     * </p>
+     *
+     * @param status   {@link String} is status of specialization
+     * @return {@link List<Specialization>}
+     */
     List<Specialization> findAllByStatus(String status);
 }
