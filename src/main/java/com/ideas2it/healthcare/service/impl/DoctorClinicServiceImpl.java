@@ -52,7 +52,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String removeDoctorFromClinic(Integer id) {
-        if (1 <= doctorClinicRepository.deleteDoctorClinicById(id)) {
+        if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
             return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
         }
         throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);

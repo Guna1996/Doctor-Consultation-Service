@@ -82,7 +82,7 @@ public class DoctorController {
             @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         int totalPages = doctorService.countOfDoctors();
-        if (totalPages == 0) {
+        if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,

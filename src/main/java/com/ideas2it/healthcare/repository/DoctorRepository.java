@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -67,7 +66,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
      */
     @Modifying
     @Query("update doctor set status = 'inactive' where id=?1 and status ='active'")
-    Integer deleteDoctorById(Integer id);
+    Integer removeDoctorById(Integer id);
 
     /**
      * <p>

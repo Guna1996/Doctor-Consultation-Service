@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,9 +38,9 @@ public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
      * This method is used to find active vital by vital id
      * </p>
      *
-     * @param id     {@link Integer} is id of the vital
+     * @param id {@link Integer} is id of the vital
      * @param status {@link String} is status of vital
-     * @return {@link Optional< PatientVital >}
+     * @return {@link Optional<PatientVital>}
      */
     Optional<PatientVital> findByIdAndStatus(Integer id, String status);
 

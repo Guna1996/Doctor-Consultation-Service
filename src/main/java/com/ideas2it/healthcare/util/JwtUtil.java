@@ -37,7 +37,8 @@ public class JwtUtil {
      * This method is used to extract username
      * </p>
      *
-     * @parm token is token for the session
+     * @param token {@link String} is token for the session
+     * @return {@link String}
      */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -48,7 +49,8 @@ public class JwtUtil {
      * This method is used to extract expiration
      * </p>
      *
-     * @parm token is token for the session
+     * @param token {@link String} is token for the session
+     * @return {@link lombok.Data}
      */
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
@@ -59,7 +61,9 @@ public class JwtUtil {
      * This method is used to extract claim
      * </p>
      *
-     * @parm token is token for the session
+     * @param token {@link String} is token for the session
+     * @param claimsResolver {@link Function>}
+     * @return {@link T}
      */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -71,7 +75,7 @@ public class JwtUtil {
      * This method is used to extract all claims
      * </p>
      *
-     * @parm token is token for the session
+     * @param token {@link String} is token for the session
      */
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
@@ -79,15 +83,23 @@ public class JwtUtil {
 
     /**
      * <p>
-     * This method is used to check wheather token is expired
+     * This method is used to check whether token is expired
      * </p>
      *
-     * @parm token is token for the session
+     * @param token {@link String} is token for the session
      */
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
+    /**
+     * <p>
+     *  This method to generate jwt token using
+     *  user details header, payload and signature.
+     * </p>
+     * @param userDetails {@link UserDetails} it contains username and password
+     * @return {@link String}
+     */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
@@ -95,11 +107,13 @@ public class JwtUtil {
 
     /**
      * <p>
-     * This method is used to create token
+     * This method is used to create token using
+     * claims of payload.
      * </p>
      *
-     * @parm claims
-     * @parm subject
+     * @parm claims {@link Map}
+     * @parm subject {@link String}
+     * @return {@link String}
      */
     private String createToken(Map<String, Object> claims, String subject) {
 
@@ -113,8 +127,8 @@ public class JwtUtil {
      * This method is used to validate token
      * </p>
      *
-     * @parm token is token for the session
-     * @parm userDetails contains username and password of the user
+     * @parm token {@link String} is token for the session
+     * @parm userDetails {@link UserDetails} contains username and password of the user
      */
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);

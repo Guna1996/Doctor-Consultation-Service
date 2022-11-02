@@ -96,7 +96,7 @@ public class FeedbackController {
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = feedbackService.countOfFeedbacksByDoctorId(doctorId);
-        if (totalPages == 0) {
+        if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.FEEDBACKS_NOT_FOUND);
         }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,

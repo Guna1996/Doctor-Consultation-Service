@@ -82,7 +82,7 @@ public class PatientVitalController {
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = patientVitalService.countOfVitalsByPatientId(patientId);
-        if (totalPages == 0) {
+        if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.VITALS_NOT_FOUND);
         }
         return successResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,

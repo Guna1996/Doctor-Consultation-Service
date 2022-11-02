@@ -78,7 +78,7 @@ public class TimeslotController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = timeslotService.countOfTimeslots();
-        if (totalPages == 0) {
+        if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);
         }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,

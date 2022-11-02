@@ -77,7 +77,8 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> removeDoctorFromClinic(@PathVariable(Constants.ID) Integer id) {
+    public ResponseEntity<Map<String, Object>> removeDoctorFromClinic(
+            @PathVariable(Constants.ID) Integer id) {
         return successResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
                 null, HttpStatus.OK);
     }
@@ -118,7 +119,7 @@ public class DoctorClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = doctorClinicService.countOfDoctorsByClinicId(clinicId);
-        if (totalPages == 0) {
+        if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,

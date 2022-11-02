@@ -68,7 +68,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String removeAppointmentById(Integer id) {
-        if (1 <= appointmentRepository.deleteAppointmentById(id)) {
+        if (1 <= appointmentRepository.removeAppointmentById(id)) {
             return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
         throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
@@ -81,7 +81,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                                                            Integer totalRows) {
         return appointmentRepository.findByPatientIdAndStatus(
                         patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
-                .toList().stream()
+                .stream()
                 .map(AppointmentMapper::toDto)
                 .collect(Collectors.toList());
     }
