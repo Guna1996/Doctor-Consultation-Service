@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,8 +35,10 @@ public class DoctorClinicDto {
 
     private String status = Constants.ACTIVE;
 
+    @NotNull(message = "doctor shouldn't be null")
     private DoctorDto doctor;
 
+    @NotNull(message = "clinic shouldn't be null")
     private ClinicDto clinic;
 
     private List<TimeslotDto> timeslots;
