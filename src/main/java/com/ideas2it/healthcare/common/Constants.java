@@ -51,7 +51,7 @@ public class Constants {
             "doctor/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID =
-            "/{doctor_id}/{pageNumber}/{totalRows}";
+            "/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_APPOINTMENTS_BY_PATIENT_ID =
             "patient/{patientId}/{pageNumber}/{totalRows}";

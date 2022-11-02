@@ -34,6 +34,7 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
+@Transactional
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
     /**
