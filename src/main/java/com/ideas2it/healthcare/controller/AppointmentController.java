@@ -104,7 +104,7 @@ public class AppointmentController {
      */
     @GetMapping(Constants.URL_GET_APPOINTMENTS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getAppointmentsByDoctorId(
-            @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
+            @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
@@ -125,7 +125,7 @@ public class AppointmentController {
      */
     @GetMapping(Constants.URL_PATIENT_APPOINTMENT)
     public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(
-            @PathVariable(name = Constants.PATIENT_ID) Integer patientId,
+            @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,

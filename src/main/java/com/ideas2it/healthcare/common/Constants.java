@@ -78,7 +78,11 @@ public class Constants {
 
     public static final String PATIENT_ID = "patientId";
 
-    public static final String DOCTOR_ID = "doctorId";
+    public static final String PATIENT_ID_PATH = "patient_id";
+
+    public static final String DOCTOR_ID_PATH = "doctorId";
+
+    public static final String DOCTOR_ID = "doctor_id";
 
     public static final String CLINIC_ID_PATH = "clinicId";
 
