@@ -64,7 +64,7 @@ public class SuccessResponse {
      * @return {@link ResponseEntity}
      */
     public ResponseEntity<Map<String, Object>> responseEntity
-            (String message, List<?> entityList, HttpStatus status, double totalPages) {
+            (String message, List<?> entityList, HttpStatus status, Integer totalPages) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, null);

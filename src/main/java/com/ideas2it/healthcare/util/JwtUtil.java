@@ -50,7 +50,7 @@ public class JwtUtil {
      * </p>
      *
      * @param token {@link String} is token for the session
-     * @return {@link lombok.Data}
+     * @return {@link Date}
      */
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
@@ -62,7 +62,7 @@ public class JwtUtil {
      * </p>
      *
      * @param token {@link String} is token for the session
-     * @param claimsResolver {@link Function>}
+     * @param claimsResolver {@link Function}
      * @return {@link T}
      */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -76,6 +76,7 @@ public class JwtUtil {
      * </p>
      *
      * @param token {@link String} is token for the session
+     * @return {@link Claims}
      */
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
@@ -87,6 +88,7 @@ public class JwtUtil {
      * </p>
      *
      * @param token {@link String} is token for the session
+     * @return {@link Boolean}
      */
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
@@ -116,7 +118,6 @@ public class JwtUtil {
      * @return {@link String}
      */
     private String createToken(Map<String, Object> claims, String subject) {
-
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
@@ -127,8 +128,9 @@ public class JwtUtil {
      * This method is used to validate token
      * </p>
      *
-     * @parm token {@link String} is token for the session
-     * @parm userDetails {@link UserDetails} contains username and password of the user
+     * @param token {@link String} is token for the session
+     * @param userDetails {@link UserDetails} contains username and password of the user
+     * @return {@link Boolean}
      */
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);

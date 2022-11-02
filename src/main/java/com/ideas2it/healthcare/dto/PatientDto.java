@@ -37,22 +37,22 @@ public class PatientDto {
     private int id;
 
     @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
+    @Pattern(regexp = Constants.NAME_REGEX, message = ErrorConstants.NAME_FORMAT)
     private String name;
 
     @NotNull(message = ErrorConstants.DATE_OF_BIRTH_SHOULD_NOT_BE_NULL)
-    @Past(message = MessageConstants.ENTER_VALID_DATE_OF_BIRTH)
+    @Past(message = ErrorConstants.ENTER_VALID_DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
     @NotNull(message = ErrorConstants.GENDER_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.GENDER_REGEX, message = MessageConstants.ENTER_MALE_OR_FEMALE)
+    @Pattern(regexp = Constants.GENDER_REGEX, message = ErrorConstants.ENTER_MALE_OR_FEMALE)
     private String gender;
 
     @NotNull(message = ErrorConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = MessageConstants.ENTER_VALID_MOBILE_NUMBER)
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.ENTER_VALID_MOBILE_NUMBER)
     private String mobileNumber;
 
-    @Email(message = MessageConstants.ENTER_VALID_EMAIL)
+    @Email(message = ErrorConstants.ENTER_VALID_EMAIL)
     private String email;
 
     private String status = Constants.ACTIVE;

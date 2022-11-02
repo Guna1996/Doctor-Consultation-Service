@@ -32,7 +32,7 @@ public class SpecializationDto {
     private int id;
 
     @NotNull(message = ErrorConstants.NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.NAME_FORMAT)
+    @Pattern(regexp = Constants.NAME_REGEX, message = ErrorConstants.NAME_FORMAT)
     private String name;
 
     private String status = Constants.ACTIVE;
