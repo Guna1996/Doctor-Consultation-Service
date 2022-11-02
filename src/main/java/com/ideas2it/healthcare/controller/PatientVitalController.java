@@ -51,8 +51,8 @@ public class PatientVitalController {
 
     /**
      * <p>
-     * This method is used to add vitals
-     * of a patient.
+     * This method is used to add vitals of a patient by getting details
+     * such as height, weight, pulse, etc from the admin
      * </p>
      *
      * @param vitalsDto {@link PatientVitalDto} is a dto object that contains information
@@ -67,8 +67,8 @@ public class PatientVitalController {
 
     /**
      * <p>
-     * This method is used to get
-     * vitals of a patient.
+     * This method is used to get vitals of a patient along with pagination by
+     * patient id, page number and total rows required
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient
@@ -78,7 +78,7 @@ public class PatientVitalController {
      */
     @GetMapping(Constants.URL_GET_VITALS_BY_PATIENT_ID + Constants.URL_PAGINATION)
     public ResponseEntity<Map<String, Object>> getVitalByPatientId(
-            @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
+            @PathVariable(name = Constants.PATIENT_ID) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = patientVitalService.countOfVitalsByPatientId(patientId);

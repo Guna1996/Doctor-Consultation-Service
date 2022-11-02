@@ -51,8 +51,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to add details
-     * of a Specialization.
+     * This method is used to add details of a Specialization by getting name
+     * from the admin
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}is details of specialization
@@ -91,8 +91,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to get details of a
-     * particular specialization.
+     * This method is used to get details of a particular specialization
+     * by getting specialization id
      * </p>
      *
      * @param id {@link Integer} is id of Specialization
@@ -107,7 +107,7 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to update the details
+     * This method is used to update the details such as name
      * of a Specialization.
      * </p>
      *
@@ -124,8 +124,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to remove the
-     * details of a Specialization.
+     * This method is used to remove the details of a Specialization
+     * by specialization id
      * </p>
      *
      * @param id {@link Integer} is id of Specialization

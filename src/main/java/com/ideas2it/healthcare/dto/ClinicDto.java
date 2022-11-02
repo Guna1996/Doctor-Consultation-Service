@@ -40,7 +40,7 @@ public class ClinicDto {
     private int doorNumber;
 
     @NotNull(message = ErrorConstants.STREET_NAME_SHOULD_NOT_BE_NULL)
-    @Pattern(regexp = Constants.COUNTRY_REGEX, message = MessageConstants.ENTER_VALID_STREET_NAME)
+    @Pattern(regexp = Constants.NAME_REGEX, message = MessageConstants.ENTER_VALID_STREET_NAME)
     private String streetName;
 
     @NotNull(message = ErrorConstants.CITY_NAME_SHOULD_NOT_BE_NULL)
