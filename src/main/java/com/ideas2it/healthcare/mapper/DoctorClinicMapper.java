@@ -113,7 +113,9 @@ public class DoctorClinicMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
-                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
+                if(null != doctor.getDateOfBirth()) {
+                    doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
+                }
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
@@ -121,7 +123,9 @@ public class DoctorClinicMapper {
                 if(null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 }
-                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
+                if(null != doctor.getDateOfRegistration()) {
+                    doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
+                }
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorClinicDto.setDoctor(doctorDto);

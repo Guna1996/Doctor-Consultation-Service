@@ -31,6 +31,7 @@ import java.util.Optional;
  * @since 2022-10-10
  */
 @Repository
+@Transactional
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     /**
