@@ -83,7 +83,7 @@ public interface DoctorService {
      * @param id {@link Integer} is id of doctor
      * @return {@link String}
      */
-    String deleteDoctorById(Integer id);
+    String removeDoctorById(Integer id);
 
     Long getTotalPages();
 

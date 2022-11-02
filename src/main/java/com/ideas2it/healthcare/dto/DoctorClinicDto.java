@@ -10,8 +10,7 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
@@ -26,8 +25,7 @@ import java.util.List;
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class DoctorClinicDto {
 
     private int id;

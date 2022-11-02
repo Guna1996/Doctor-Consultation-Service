@@ -42,6 +42,9 @@ public class ClinicController {
 
     @Autowired
     private ClinicService clinicService;
+    
+    @Autowired
+    private SuccessResponse successResponse;
 
     /**
      * <p>
@@ -54,7 +57,7 @@ public class ClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return SuccessResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
                 clinicService.addClinic(clinicDto), HttpStatus.OK);
     }
 
@@ -72,7 +75,7 @@ public class ClinicController {
     public ResponseEntity<Map<String, Object>> getClinics(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, clinicService.getTotalPages());
     }
 
@@ -87,7 +90,7 @@ public class ClinicController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
                 clinicService.getClinicById(id), HttpStatus.OK);
     }
 
@@ -102,7 +105,7 @@ public class ClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return SuccessResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
                 clinicService.updateClinic(clinicDto), HttpStatus.OK);
     }
 
@@ -116,8 +119,8 @@ public class ClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteClinic(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(clinicService.deleteClinicById(id),
+    public ResponseEntity<Map<String, Object>> removeClinic(@PathVariable(Constants.ID) Integer id) {
+        return successResponse.responseEntity(clinicService.removeClinicById(id),
                 null, HttpStatus.OK);
     }
 }

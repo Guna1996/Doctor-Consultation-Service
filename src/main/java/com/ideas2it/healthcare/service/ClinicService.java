@@ -82,7 +82,7 @@ public interface ClinicService {
      * @param id {@link Integer} id of the clinic
      * @return {@link String}
      */
-    String deleteClinicById(Integer id);
+    String removeClinicById(Integer id);
 
     Long getTotalPages();
 

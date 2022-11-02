@@ -43,6 +43,9 @@ public class SpecializationController {
     @Autowired
     private SpecializationService specializationService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add details
@@ -55,7 +58,7 @@ public class SpecializationController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addSpecialization(
             @Valid @RequestBody SpecializationDto specializationDto) {
-        return SuccessResponse.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
                 specializationService.saveSpecialization(specializationDto),
                 HttpStatus.OK);
     }
@@ -74,7 +77,7 @@ public class SpecializationController {
     public ResponseEntity<Map<String, Object>> getAllSpecializations(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
                 HttpStatus.OK, specializationService.getTotalPages());
     }
@@ -90,7 +93,7 @@ public class SpecializationController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable Integer id) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
                 specializationService.getSpecializationById(id),
                 HttpStatus.OK);
     }
@@ -107,7 +110,7 @@ public class SpecializationController {
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateSpecialization(
             @RequestBody SpecializationDto specializationDto) {
-        return SuccessResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
                 specializationService.updateSpecialization(specializationDto),
                 HttpStatus.OK);
     }
@@ -122,8 +125,8 @@ public class SpecializationController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteSpecializationById(@PathVariable Integer id) {
-        return SuccessResponse.responseEntity(specializationService.deleteSpecializationById(id),
+    public ResponseEntity<Map<String, Object>> removeSpecializationById(@PathVariable Integer id) {
+        return successResponse.responseEntity(specializationService.removeSpecializationById(id),
                 null, HttpStatus.OK);
     }
 }

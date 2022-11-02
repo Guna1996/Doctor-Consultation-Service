@@ -14,8 +14,8 @@ import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.util.DateUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -46,9 +46,9 @@ public class DoctorMapper {
             doctor.setDateOfBirth(doctorDto.getDateOfBirth());
             doctor.setGender(doctorDto.getGender());
             doctor.setQualification(doctorDto.getQualification());
-            List<SpecializationDto> specializationsDto = doctorDto.getSpecializations();
+            Set<SpecializationDto> specializationsDto = doctorDto.getSpecializations();
             if (null != specializationsDto) {
-                List<Specialization> specializations = new ArrayList<>();
+                Set<Specialization> specializations = new HashSet<>();
                 specializationsDto.forEach(specializationDto -> {
                     Specialization specialization = new Specialization();
                     specialization.setId(specializationDto.getId());
@@ -86,9 +86,9 @@ public class DoctorMapper {
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
             doctorDto.setConsultationFee(doctor.getConsultationFee());
-            List<Specialization> specializations = doctor.getSpecializations();
+            Set<Specialization> specializations = doctor.getSpecializations();
             if (null != specializations) {
-                List<SpecializationDto> specializationsDto = new ArrayList<>();
+                Set<SpecializationDto> specializationsDto = new HashSet<>();
                 specializations.forEach(specialization -> {
                     SpecializationDto specializationDto = new SpecializationDto();
                     specializationDto.setId(specialization.getId());

@@ -19,6 +19,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -57,7 +58,7 @@ public class DoctorDto {
     @Pattern(regexp = Constants.QUALIFICATION_REGEX, message = MessageConstants.ENTER_VALID_QUALIFICATION)
     private String qualification;
 
-    private List<SpecializationDto> specializations;
+    private Set<SpecializationDto> specializations;
 
     @NotNull(message = ErrorConstants.REGISTRATION_YEAR_SHOULD_NOT_BE_NULL)
     @PastOrPresent(message = MessageConstants.ENTER_VALID_REGISTRATION_YEAR)

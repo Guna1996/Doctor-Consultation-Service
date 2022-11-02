@@ -12,8 +12,7 @@ package com.ideas2it.healthcare.dto;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -32,8 +31,7 @@ import java.time.LocalDate;
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class PatientDto {
 
     private int id;

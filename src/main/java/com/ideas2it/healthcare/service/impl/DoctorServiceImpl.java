@@ -89,7 +89,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public String deleteDoctorById(Integer id) {
+    public String removeDoctorById(Integer id) {
         if (1 <= doctorRepository.deleteDoctorById(id)) {
             return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
         }

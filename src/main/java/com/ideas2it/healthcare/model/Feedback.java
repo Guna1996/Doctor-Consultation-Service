@@ -33,8 +33,8 @@ import javax.persistence.OneToOne;
  * @version 1
  * @since 2022-10-10
  */
-@Entity(name = Constants.FEEDBACK)
 @Data
+@Entity(name = Constants.FEEDBACK)
 public class Feedback {
 
     @Id

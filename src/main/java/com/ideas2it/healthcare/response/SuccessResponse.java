@@ -11,6 +11,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.model.Doctor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -28,6 +29,8 @@ import java.util.Optional;
  * @version 1
  * @since 2022-10-10
  */
+
+@Component
 public class SuccessResponse {
 
     /**
@@ -41,7 +44,7 @@ public class SuccessResponse {
      * @param status {@link HttpStatus} is http response status
      * @return {@link ResponseEntity<Map<String, Object>>}
      */
-    public static ResponseEntity<Map<String, Object>> responseEntity
+    public ResponseEntity<Map<String, Object>> responseEntity
             (String message, Object entity, HttpStatus status) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
@@ -63,7 +66,7 @@ public class SuccessResponse {
      * @param totalPages {@link Double} is number of pages required
      * @return {@link ResponseEntity<Map<String, Object>>}
      */
-    public static ResponseEntity<Map<String, Object>> responseEntity
+    public ResponseEntity<Map<String, Object>> responseEntity
             (String message, List<?> entityList, HttpStatus status, double totalPages) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);

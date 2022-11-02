@@ -69,7 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public String deleteAppointmentById(Integer id) {
+    public String removeAppointmentById(Integer id) {
         if (1 <= appointmentRepository.deleteAppointmentById(id)) {
             return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
