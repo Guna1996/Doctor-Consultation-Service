@@ -48,8 +48,9 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to add appointment of a
-     * patient.
+     * This method is used to add appointment of a patient
+     * by getting details such as scheduledOn, patientId,
+     * doctorId, clinicId, etc from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is appointment object
@@ -65,8 +66,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to reschedule appointment
-     * of a patient.
+     * This method is used to reschedule appointment of a patient by getting
+     * details such as reschedule date and time from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is details of appointment
@@ -81,8 +82,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to cancel the appointment
-     * of a patient.
+     * This method is used to cancel the appointment of a patient
+     * by getting appointment id from the patient
      * </p>
      *
      * @param id {@link Integer} is appointment id
@@ -96,8 +97,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to get appointments
-     * of a doctor.
+     * This method is used to get appointments of a doctor by doctor id,
+     * page number and total rows required
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor
@@ -117,8 +118,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to get
-     * list of appointments of a patient.
+     * This method is used to get ist of appointments of a patient
+     * by patient id, page number and total rows required
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient

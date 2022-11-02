@@ -48,8 +48,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to add clinic
-     * details.
+     * This method is used to add clinic by getting details
+     * such as name, doorNo, streetName,etc from the admin
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic object
@@ -63,8 +63,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to get all the details
-     * of available clinics.
+     * This method is used to get all the details such as name, doorNo,
+     * streetName, etc of available clinics by admin
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -81,8 +81,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to get a particular
-     * clinic detail.
+     * This method is used to get a particular clinic detail such as
+     * name, doorNo, streetName,etc of active clinic by admin
      * </p>
      *
      * @param id {@link Integer} is clinic id
@@ -96,8 +96,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to correct the recorded
-     * details of a clinic.
+     * This method is used to update the recorded details of a clinic
+     * such as name, doorNo, streetName,etc by admin
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is contains clinic details
@@ -111,8 +111,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to remove the clinic
-     * details of a clinic.
+     * This method is used to help admin to remove the clinic
+     * details by clinic id
      * </p>
      *
      * @param id {@link Integer} is clinic id

@@ -50,8 +50,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to add details of
-     * a doctor.
+     * This method is used to add details of a doctor by getting
+     * details such as name, dateOfBirth, Gender, etc from the admin
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -66,8 +66,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to get All the
-     * details of doctors.
+     * This method is used to get All the details of doctors with pagination
+     * by getting page number and total rows required by admin
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -85,8 +85,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to get details
-     * of a particular doctor.
+     * This method is used to get details of a particular doctor
+     * by doctor id
      * </p>
      *
      * @param id {@link Integer} is id of doctor
@@ -101,8 +101,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to update the
-     * details of doctor.
+     * This method is used to update the details of doctor by getting
+     * details from the admin
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -117,8 +117,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to remove
-     * the details of a doctor.
+     * This method is used to remove the details of a doctor
+     * by getting doctor id from the admin
      * </p>
      *
      * @param id {@link Integer} is id of doctor
