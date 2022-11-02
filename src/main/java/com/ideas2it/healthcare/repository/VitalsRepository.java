@@ -53,7 +53,7 @@ public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
      * @param patientId {@link Integer} is id of the patient
      * @param status    {@link String} is status of vital
      * @param pageable  {@link Pageable} contains page number and number of rows required
-     * @return {@link Page< PatientVital >}
+     * @return {@link Page<PatientVital>}
      */
     Page<PatientVital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
 
@@ -64,7 +64,7 @@ public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
      *
      * @param patientId {@link Integer} is id of the patient
      * @param status    {@link String} is status of vital
-     * @return {@link List<PatientVital>}
+     * @return {@link Integer}
      */
-    List<PatientVital> findByPatientIdAndStatus(Integer patientId, String status);
+    Integer countByPatientIdAndStatus(Integer patientId, String status);
 }

@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
@@ -36,7 +37,6 @@ import java.util.stream.Collectors;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-    private Long totalPages;
     @Autowired
     private FeedbackRepository feedbackRepository;
 
@@ -54,7 +54,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         if (1 <= feedbackRepository.deleteSpecializationById(id)) {
             return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
         }
-        return ErrorConstants.FEEDBACK_NOT_FOUND;
+        throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
     }
 
     /**
@@ -63,19 +63,17 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows) {
-        setTotalPages(Math.round(((feedbackRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
                         .of(pageNumber, totalRows)).toList()
                 .stream().map(FeedbackMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public Long getTotalPages() {
-        return totalPages;
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfFeedbacksByDoctorId(Integer doctorId) {
+        return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
     }
 
-    public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
-    }
 }

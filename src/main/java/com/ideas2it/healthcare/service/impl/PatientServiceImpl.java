@@ -19,7 +19,7 @@ import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.repository.PatientRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.PatientService;
-import com.ideas2it.healthcare.service.VitalService;
+import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class PatientServiceImpl implements PatientService {
     private PatientRepository patientRepository;
 
     @Autowired
-    private VitalService vitalService;
+    private PatientVitalService patientVitalService;
 
     @Autowired
     private AppointmentService appointmentService;

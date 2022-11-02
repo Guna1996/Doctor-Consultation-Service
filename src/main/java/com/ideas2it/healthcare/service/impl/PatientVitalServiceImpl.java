@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
 import com.ideas2it.healthcare.mapper.PatientVitalMapper;
 import com.ideas2it.healthcare.repository.VitalsRepository;
-import com.ideas2it.healthcare.service.VitalService;
+import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -33,9 +33,8 @@ import java.util.stream.Collectors;
  * @since 2022-10-10
  */
 @Service
-public class PatientVitalServiceImpl implements VitalService {
+public class PatientVitalServiceImpl implements PatientVitalService {
 
-    private Long totalPages;
     @Autowired
     private VitalsRepository vitalsRepository;
 
@@ -50,8 +49,6 @@ public class PatientVitalServiceImpl implements VitalService {
      * {@inheritDoc}
      */
     public List<PatientVitalDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.round(((vitalsRepository
-                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return vitalsRepository
                 .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
@@ -59,11 +56,10 @@ public class PatientVitalServiceImpl implements VitalService {
                 .map(PatientVitalMapper::toDto).collect(Collectors.toList());
     }
 
-    public Long getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfVitalsByPatientId(Integer patientId) {
+        return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
     }
 }

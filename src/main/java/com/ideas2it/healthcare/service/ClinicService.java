@@ -84,7 +84,13 @@ public interface ClinicService {
      */
     String removeClinicById(Integer id);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This method is used to get the count of Clinics
+     * from the database
+     * </p>
+     *
+     * @return {@link Integer}
+     */
+    Integer countOfClinics();
 }

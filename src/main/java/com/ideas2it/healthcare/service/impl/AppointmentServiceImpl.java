@@ -43,8 +43,6 @@ import java.util.stream.Collectors;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    private Long totalPages;
-
     @Autowired
     private AppointmentRepository appointmentRepository;
 
@@ -73,17 +71,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (1 <= appointmentRepository.deleteAppointmentById(id)) {
             return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
         }
-        return ErrorConstants.APPOINTMENT_NOT_FOUND;
+        throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
-        setTotalPages(Math.round(((appointmentRepository
-                .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return appointmentRepository.findByPatientIdAndStatus(
                         patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
                 .toList().stream()
@@ -94,17 +89,28 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                           Integer totalRows) {
-        setTotalPages(Math.round(((appointmentRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return appointmentRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
                 .toList().stream()
                 .map(AppointmentMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfAppointmentByPatientId(Integer patientId) {
+        return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfAppointmentByDoctorId(Integer doctorId) {
+        return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
     }
 
     /**
@@ -129,13 +135,5 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return AppointmentMapper
                 .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
-    }
-
-    public Long getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
     }
 }

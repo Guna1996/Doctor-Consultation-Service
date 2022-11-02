@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.AppointmentService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -111,9 +114,14 @@ public class AppointmentController {
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
-                appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
-                HttpStatus.OK, appointmentService.getTotalPages());
+        int totalPages = appointmentService.countOfAppointmentByDoctorId(doctorId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+        }
+        return successResponse.responseEntity(MessageConstants
+                .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
+                .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
+                .OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 
     /**
@@ -132,8 +140,13 @@ public class AppointmentController {
             @PathVariable(name = Constants.PATIENT_ID) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
-                appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK, appointmentService.getTotalPages());
+        int totalPages = appointmentService.countOfAppointmentByPatientId(patientId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+        }
+        return successResponse.responseEntity(MessageConstants
+                .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
+                .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, MathUtil
+                .getExactCount(totalPages, totalRows));
     }
 }

@@ -76,7 +76,7 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
      * </p>
      *
      * @param status   {@link String} is status of specialization
-     * @return {@link List<Specialization>}
+     * @return {@link Integer}
      */
-    List<Specialization> findAllByStatus(String status);
+    Integer countByStatus(String status);
 }

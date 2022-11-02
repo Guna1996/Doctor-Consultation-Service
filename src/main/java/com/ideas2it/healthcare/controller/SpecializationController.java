@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.SpecializationService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,9 +80,13 @@ public class SpecializationController {
     public ResponseEntity<Map<String, Object>> getAllSpecializations(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = specializationService.countOfSpecializations();
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
-                HttpStatus.OK, specializationService.getTotalPages());
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 
     /**
