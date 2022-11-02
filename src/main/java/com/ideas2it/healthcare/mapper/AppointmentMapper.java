@@ -131,11 +131,15 @@ public class AppointmentMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
-                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
+                if(null != doctor.getDateOfBirth()) {
+                    doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
+                }
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
+                if(null != doctor.getDateOfRegistration()) {
+                    doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
+                }
                 if(null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 }

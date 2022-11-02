@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.SpecializationService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +51,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to add details
-     * of a Specialization.
+     * This method is used to add details of a Specialization by getting name
+     * from the admin
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}is details of specialization
@@ -77,15 +80,19 @@ public class SpecializationController {
     public ResponseEntity<Map<String, Object>> getAllSpecializations(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = specializationService.countOfSpecializations();
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
-                HttpStatus.OK, specializationService.getTotalPages());
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 
     /**
      * <p>
-     * This method is used to get details of a
-     * particular specialization.
+     * This method is used to get details of a particular specialization
+     * by getting specialization id
      * </p>
      *
      * @param id {@link Integer} is id of Specialization
@@ -100,7 +107,7 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to update the details
+     * This method is used to update the details such as name
      * of a Specialization.
      * </p>
      *
@@ -117,8 +124,8 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to remove the
-     * details of a Specialization.
+     * This method is used to remove the details of a Specialization
+     * by specialization id
      * </p>
      *
      * @param id {@link Integer} is id of Specialization

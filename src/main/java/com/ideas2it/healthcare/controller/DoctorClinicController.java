@@ -10,10 +10,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.DoctorClinicService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +53,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used to assign doctor to
-     * a clinic.
+     * This method is used to assign doctor to a clinic by getting details
+     * such as doctorId, clinicId, timeslots, etc from the admin
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is details of doctor clinic
@@ -66,8 +69,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used to remove
-     * doctor from a clinic.
+     * This method is used to remove doctor from a clinic
+     * by getting doctorclinic id
      * </p>
      *
      * @param id {@link Integer} id of the doctor object
@@ -81,8 +84,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used get timeslot of a doctor
-     * to the clinics.
+     * This method is used get timeslot of a doctor to the clinics
+     * by getting doctor id and clinic id
      * </p>
      *
      * @param doctorId {@link Integer} is id of doctor object
@@ -100,8 +103,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used get available
-     * doctors in a particular clinic.
+     * This method is used get available doctors in a particular clinic by getting
+     * clinic id, page number and total rows required.
      * </p>
      *
      * @param clinicId   {@link Integer}
@@ -114,8 +117,12 @@ public class DoctorClinicController {
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId,
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = doctorClinicService.countOfDoctorsByClinicId(clinicId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
-                HttpStatus.OK, doctorClinicService.getTotalPages());
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 }

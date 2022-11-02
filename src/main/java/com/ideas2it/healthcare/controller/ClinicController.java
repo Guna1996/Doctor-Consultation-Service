@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.ClinicService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +51,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to add clinic
-     * details.
+     * This method is used to add clinic by getting details
+     * such as name, doorNo, streetName,etc from the admin
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic object
@@ -63,8 +66,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to get all the details
-     * of available clinics.
+     * This method is used to get all the details such as name, doorNo,
+     * streetName, etc of available clinics by admin
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -75,14 +78,19 @@ public class ClinicController {
     public ResponseEntity<Map<String, Object>> getClinics(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = clinicService.countOfClinics();
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.CLINICS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
-                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, clinicService.getTotalPages());
+                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK
+                , MathUtil.getExactCount(totalPages, totalRows));
     }
 
     /**
      * <p>
-     * This method is used to get a particular
-     * clinic detail.
+     * This method is used to get a particular clinic detail such as
+     * name, doorNo, streetName,etc of active clinic by admin
      * </p>
      *
      * @param id {@link Integer} is clinic id
@@ -96,8 +104,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to correct the recorded
-     * details of a clinic.
+     * This method is used to update the recorded details of a clinic
+     * such as name, doorNo, streetName,etc by admin
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is contains clinic details
@@ -111,8 +119,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to remove the clinic
-     * details of a clinic.
+     * This method is used to help admin to remove the clinic
+     * details by clinic id
      * </p>
      *
      * @param id {@link Integer} is clinic id

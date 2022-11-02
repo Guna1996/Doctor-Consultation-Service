@@ -25,11 +25,31 @@ public class ErrorConstants {
 
     public static final String APPOINTMENT_NOT_FOUND = "Appointment not found";
 
+    public static final String VITALS_NOT_FOUND = "Vitals not found";
+
+    public static final String TIMESLOTS_NOT_FOUND = "Timeslots not found";
+
+    public static final String APPOINTMENTS_NOT_FOUND = "Appointments not found";
+
+    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
+
     public static final String CLINIC_NOT_FOUND = "Clinic not found";
+
+    public static final String CLINICS_NOT_FOUND = "Clinics not found";
+
+    public static final String DOCTORS_NOT_FOUND = "Doctors not found";
+
+    public static final String DOCTOR_NOT_FOUND = "Doctor not found";
+
+    public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
+
+    public static final String SPECIALIZATIONS_NOT_FOUND = "Specializations not found";
 
     public static final String ERROR_MESSAGE = "errorMessage";
 
     public static final String FEEDBACK_NOT_FOUND = "Feedback is not found";
+
+    public static final String FEEDBACKS_NOT_FOUND = "Feedbacks is not found";
 
     public static final String APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE =
             "Appointment unavailable for this schedule. kindly choose other schedule";

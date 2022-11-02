@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -37,7 +38,6 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
-    private Long totalPages;
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -54,12 +54,10 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.round(((doctorRepository
-                .findAllByStatus(Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
                 PageRequest.of(pageNumber, totalRows)).toList();
         if (doctors.isEmpty()) {
-            throw new NotFoundException(MessageConstants.DOCTORS_NOT_FOUND);
+            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
     }
@@ -74,7 +72,7 @@ public class DoctorServiceImpl implements DoctorService {
                 .stream()
                 .map(DoctorMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(MessageConstants.DOCTOR_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
     }
 
     /**
@@ -82,7 +80,7 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto updateDoctor(DoctorDto doctorDto) {
-        return this.saveDoctor(doctorDto);
+        return saveDoctor(doctorDto);
     }
 
     /**
@@ -93,14 +91,13 @@ public class DoctorServiceImpl implements DoctorService {
         if (1 <= doctorRepository.deleteDoctorById(id)) {
             return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
         }
-        return MessageConstants.DOCTOR_UNABLE_TO_DELETE;
+        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
     }
 
-    public Long getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfDoctors() {
+        return doctorRepository.countByStatus(Constants.ACTIVE);
     }
 }

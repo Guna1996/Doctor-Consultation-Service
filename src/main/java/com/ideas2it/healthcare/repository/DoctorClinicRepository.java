@@ -34,6 +34,7 @@ import java.util.Optional;
  * @since 2022-10-10
  */
 @Repository
+@Transactional
 public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Integer> {
 
     /**
@@ -89,13 +90,13 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
 
     /**
      * <p>
-     * This method is used to find active doctor clinic
+     * This method is used to find the count of all active doctor clinic
      * by clinic id
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
      * @param status   {@link String} is status of doctorClinic
-     * @return {@link List<DoctorClinic>}
+     * @return {@link Integer}
      */
-    List<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status);
+    Integer countByClinicIdAndStatus(Integer clinicId, String status);
 }

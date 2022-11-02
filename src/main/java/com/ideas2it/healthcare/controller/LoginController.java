@@ -53,7 +53,7 @@ public class LoginController {
      * by username and password. This token can be further used for authorization
      * </p>
      *
-     * @parm authenticationRequest {@link AuthenticationRequest} contains username and password
+     * @param authenticationRequest {@link AuthenticationRequest} contains username and password
      */
     @RequestMapping(value = Constants.URL_LOGIN, method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(

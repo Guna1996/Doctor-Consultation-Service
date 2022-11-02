@@ -100,7 +100,26 @@ public interface AppointmentService {
     List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows);
 
-    Long getTotalPages();
+    /**
+     * <p>
+     * This method is used to get the count of appointments
+     * from the database by patient Id
+     * </p>
+     *
+     * @param patientId {@link Integer} is id of patient
+     * @return {@link Integer}
+     */
+    Integer countOfAppointmentByPatientId(Integer patientId);
 
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This method is used to get the count of appointments
+     * from the database by doctor Id
+     * </p>
+     *
+     * @param doctorId {@link Integer} is id of doctor
+     * @return {@link List<AppointmentDto>}
+     */
+    Integer countOfAppointmentByDoctorId(Integer doctorId);
+
 }

@@ -34,6 +34,7 @@ import java.util.Optional;
  * @since 2022-07-18
  */
 @Repository
+@Transactional
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
     /**
@@ -85,25 +86,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      */
     Page<Appointment> findByPatientIdAndStatus(Integer id, String status, Pageable pageable);
 
-    /**
-     * <p>
-     * This method is used to find active appointments by doctor id
-     * </p>
-     *
-     * @param id       {@link Integer} is id of the doctor
-     * @param status   {@link String} is status of appointment table
-     * @return {@link List<Appointment>}
-     */
-    List<Appointment> findByDoctorIdAndStatus(Integer id, String status);
+    Integer countByDoctorIdAndStatus(Integer id, String status);
 
-    /**
-     * <p>
-     * This method is used to find active appointments by patient id
-     * </p>
-     *
-     * @param id       {@link Integer} is id of the patient
-     * @param status   {@link String} is status of appointment table
-     * @return {@link List<Appointment>}
-     */
-    List<Appointment> findByPatientIdAndStatus(Integer id, String status);
+    Integer countByPatientIdAndStatus(Integer id, String status);
 }

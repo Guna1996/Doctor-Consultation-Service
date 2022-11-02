@@ -36,14 +36,8 @@ public class MessageConstants {
 
     public static final String CLINIC_DELETED_SUCCESSFULLY = "Clinic deleted successfully";
 
-    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
-
     public static final String DOCTOR_ID_CLINIC_ID_NOT_FOUND =
             "Doctor id and clinic id not found";
-
-    public static final String DOCTORS_NOT_FOUND = "Doctors not found";
-
-    public static final String DOCTOR_NOT_FOUND = "Doctor not found";
 
     public static final String TIMESLOT_IS_EMPTY = "Timeslot is empty";
 
@@ -78,9 +72,6 @@ public class MessageConstants {
 
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
 
-    public static final String SPECIALIZATIONS_NOT_FOUND = "Specializations not found";
-
-    public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
 
     public static final String APPOINTMENT_ADDED_SUCCESSFULLY = "Appointment added successfully";
 
@@ -125,7 +116,6 @@ public class MessageConstants {
 
     public static final String SUCCESSFULLY_RETRIEVED_SPECIALIZATION =
             "Successfully retrieved specialization";
-
 
     public static final String SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR =
             "Successfully retrieved feedback for doctor";

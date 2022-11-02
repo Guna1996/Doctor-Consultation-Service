@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.AppointmentService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +51,9 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to add appointment of a
-     * patient.
+     * This method is used to add appointment of a patient
+     * by getting details such as scheduledOn, patientId,
+     * doctorId, clinicId, etc from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is appointment object
@@ -65,8 +69,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to reschedule appointment
-     * of a patient.
+     * This method is used to reschedule appointment of a patient by getting
+     * details such as reschedule date and time from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is details of appointment
@@ -81,8 +85,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to cancel the appointment
-     * of a patient.
+     * This method is used to cancel the appointment of a patient
+     * by getting appointment id from the patient
      * </p>
      *
      * @param id {@link Integer} is appointment id
@@ -96,8 +100,8 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to get appointments
-     * of a doctor.
+     * This method is used to get appointments of a doctor by doctor id,
+     * page number and total rows required
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor
@@ -110,15 +114,20 @@ public class AppointmentController {
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
-                appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
-                HttpStatus.OK, appointmentService.getTotalPages());
+        int totalPages = appointmentService.countOfAppointmentByDoctorId(doctorId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+        }
+        return successResponse.responseEntity(MessageConstants
+                .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
+                .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
+                .OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 
     /**
      * <p>
-     * This method is used to get
-     * list of appointments of a patient.
+     * This method is used to get ist of appointments of a patient
+     * by patient id, page number and total rows required
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient
@@ -128,11 +137,16 @@ public class AppointmentController {
      */
     @GetMapping(Constants.URL_GET_APPOINTMENTS_BY_PATIENT_ID)
     public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(
-            @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
+            @PathVariable(name = Constants.PATIENT_ID) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
-                appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK, appointmentService.getTotalPages());
+        int totalPages = appointmentService.countOfAppointmentByPatientId(patientId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+        }
+        return successResponse.responseEntity(MessageConstants
+                .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
+                .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, MathUtil
+                .getExactCount(totalPages, totalRows));
     }
 }

@@ -81,7 +81,13 @@ public interface SpecializationService {
      */
     String removeSpecializationById(Integer id);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This method is used to get the count of Specialization's record by
+     * getting all Specializations from database
+     * </p>
+     *
+     * @return {@link Integer}
+     */
+    Integer countOfSpecializations();
 }

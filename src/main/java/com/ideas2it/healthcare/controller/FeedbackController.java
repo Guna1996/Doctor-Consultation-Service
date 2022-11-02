@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.FeedbackService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,8 +50,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to add a feedback
-     * from a patient.
+     * This method is used to add a feedback from a patient by getting details
+     * such as comments, rating, doctorId and patientId from the patient
      * </p>
      *
      * @param feedbackDto {@link FeedbackDto} is contains details of feedback
@@ -63,8 +66,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to remove feedback of
-     * a patient.
+     * This method is used to remove feedback of a patient by
+     * getting feedback id from the patient
      * </p>
      *
      * @param id {@link Integer} is an integer that refer id in database
@@ -78,8 +81,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to get feedbacks
-     * of a doctor.
+     * This method is used to get feedbacks along with pagination of a doctor
+     * by getting doctor id, page number and total rows required
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor
@@ -92,8 +95,12 @@ public class FeedbackController {
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = feedbackService.countOfFeedbacksByDoctorId(doctorId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.FEEDBACKS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
-                HttpStatus.OK, feedbackService.getTotalPages());
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 }

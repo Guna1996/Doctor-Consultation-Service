@@ -77,7 +77,14 @@ public interface DoctorClinicService {
     List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                Integer totalRows);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This method is used to get the count Doctors of a particular clinic
+     * by clinic id
+     * </p>
+     *
+     * @param clinicId   {@link Integer} is id of clinic
+     * @return {@link Integer}
+     */
+    Integer countOfDoctorsByClinicId(Integer clinicId);
 }

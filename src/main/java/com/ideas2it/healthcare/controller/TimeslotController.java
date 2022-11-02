@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.TimeslotService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,26 +49,8 @@ public class TimeslotController {
 
     /**
      * <p>
-     * This method is used to get
-     * timeslots.
-     * </p>
-     *
-     * @param pageNumber {@link Integer} is page number
-     * @param totalRows  {@link Integer} is number of row to be shown
-     * @return {@link ResponseEntity}
-     */
-    @GetMapping(Constants.URL_PAGINATION)
-    public ResponseEntity<Map<String, Object>> getAllTimeslots(
-            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
-            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
-                timeslotService.getTimeslots(pageNumber, totalRows),
-                HttpStatus.OK, timeslotService.getTotalPages());
-    }
-
-    /**
-     * <p>
-     * This method is used to add timeslot.
+     * This method is used to add timeslot by getting details
+     * such as timeslot name and status from the admin
      * </p>
      *
      * @param timeslotDto {@link TimeslotDto} is a dto object that contains information
@@ -76,5 +61,28 @@ public class TimeslotController {
         return successResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
                 timeslotService.addTimeslot(timeslotDto),
                 HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method is used to get timeslots along with pagination
+     * by getting page number and total rows required
+     * </p>
+     *
+     * @param pageNumber {@link Integer} is page number
+     * @param totalRows  {@link Integer} is number of row to be shown
+     * @return {@link ResponseEntity}
+     */
+    @GetMapping(Constants.URL_PAGINATION)
+    public ResponseEntity<Map<String, Object>> getAllTimeslots(
+            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
+            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = timeslotService.countOfTimeslots();
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);
+        }
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
+                timeslotService.getTimeslots(pageNumber, totalRows),
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 }

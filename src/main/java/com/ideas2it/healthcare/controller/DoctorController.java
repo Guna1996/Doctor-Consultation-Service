@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.DoctorService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +53,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to add details of
-     * a doctor.
+     * This method is used to add details of a doctor by getting
+     * details such as name, dateOfBirth, Gender, etc from the admin
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -66,8 +69,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to get All the
-     * details of doctors.
+     * This method is used to get All the details of doctors with pagination
+     * by getting page number and total rows required by admin
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -78,15 +81,19 @@ public class DoctorController {
     public ResponseEntity<Map<String, Object>> getAllDoctors(
             @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
+        int totalPages = doctorService.countOfDoctors();
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
-                HttpStatus.OK, doctorService.getTotalPages());
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 
     /**
      * <p>
-     * This method is used to get details
-     * of a particular doctor.
+     * This method is used to get details of a particular doctor
+     * by doctor id
      * </p>
      *
      * @param id {@link Integer} is id of doctor
@@ -101,8 +108,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to update the
-     * details of doctor.
+     * This method is used to update the details of doctor by getting
+     * details from the admin
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -117,8 +124,8 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to remove
-     * the details of a doctor.
+     * This method is used to remove the details of a doctor
+     * by getting doctor id from the admin
      * </p>
      *
      * @param id {@link Integer} is id of doctor
