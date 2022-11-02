@@ -16,6 +16,7 @@ import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
+import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
@@ -129,9 +130,11 @@ public class AppointmentMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 if(null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 }

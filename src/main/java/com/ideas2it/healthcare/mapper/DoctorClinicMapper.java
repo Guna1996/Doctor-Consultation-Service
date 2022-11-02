@@ -16,6 +16,7 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.model.Timeslot;
+import com.ideas2it.healthcare.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +110,12 @@ public class DoctorClinicMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());

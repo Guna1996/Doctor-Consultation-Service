@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
+import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
@@ -102,7 +103,9 @@ public class FeedbackMapper {
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setQualification(doctor.getQualification());
                 if (null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
