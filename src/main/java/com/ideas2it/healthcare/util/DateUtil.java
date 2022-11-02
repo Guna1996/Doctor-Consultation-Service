@@ -41,7 +41,7 @@ public class DateUtil {
 
     /**
      * <p>
-     * This method is used to check wheather the date is future date
+     * This method is used to check whether the date is future date
      * </p>
      *
      * @param localDate {@link LocalDateTime} is date and time
