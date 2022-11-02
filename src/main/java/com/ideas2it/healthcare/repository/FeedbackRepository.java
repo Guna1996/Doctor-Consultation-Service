@@ -73,12 +73,12 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     /**
      * <p>
-     * This method is used to find active feedback by doctor id
+     * This method is used to find active the count of feedback by doctor id
      * </p>
      *
      * @param doctorId {@link Integer} is id of the doctor
      * @param status   {@link String} is status of feedback
-     * @return {@link List<Feedback>}
+     * @return {@link Integer}
      */
-    List<Feedback> findByDoctorIdAndStatus(Integer doctorId, String status);
+    Integer countByDoctorIdAndStatus(Integer doctorId, String status);
 }

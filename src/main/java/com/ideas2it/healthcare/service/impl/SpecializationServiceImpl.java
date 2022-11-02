@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -37,8 +38,6 @@ import java.util.stream.Collectors;
 @Service
 public class SpecializationServiceImpl implements SpecializationService {
 
-    private Long totalPages;
-
     @Autowired
     private SpecializationRepository specializationRepository;
 
@@ -54,13 +53,11 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.round(((specializationRepository
-                .findAllByStatus(Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         List<Specialization> specializations = specializationRepository
                 .findAllByStatus(Constants.ACTIVE,
                         PageRequest.of(pageNumber, totalRows)).toList();
         if (specializations.isEmpty()) {
-            throw new NotFoundException(MessageConstants.SPECIALIZATIONS_NOT_FOUND);
+            throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
 
         }
         return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
@@ -75,7 +72,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                 .stream()
                 .map(SpecializationMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(MessageConstants.SPECIALIZATION_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
     }
 
     /**
@@ -83,7 +80,7 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto updateSpecialization(SpecializationDto specializationDto) {
-        return this.saveSpecialization(specializationDto);
+        return saveSpecialization(specializationDto);
     }
 
     /**
@@ -93,14 +90,13 @@ public class SpecializationServiceImpl implements SpecializationService {
         if (1 <= specializationRepository.deleteSpecializationById(id)) {
             return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
         }
-        return MessageConstants.SPECIALIZATION_NOT_FOUND;
+        throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
     }
 
-    public Long getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfSpecializations() {
+        return specializationRepository.countByStatus(Constants.ACTIVE);
     }
 }

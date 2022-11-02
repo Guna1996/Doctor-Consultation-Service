@@ -60,7 +60,13 @@ public interface FeedbackService {
      */
     List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This method is used to get the count of feedback by doctor id
+     * </p>
+     *
+     * @param doctorId   {@link Integer} is id of doctor
+     * @return {@link Integer}
+     */
+    Integer countOfFeedbacksByDoctorId(Integer doctorId);
 }

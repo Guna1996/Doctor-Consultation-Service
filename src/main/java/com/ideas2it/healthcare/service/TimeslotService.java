@@ -48,7 +48,13 @@ public interface TimeslotService {
      */
     List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This abstract method is used to get the count of timeslots
+     * from the database
+     * </p>
+     *
+     * @return {@link Integer}
+     */
+    Integer countOfTimeslots();
 }

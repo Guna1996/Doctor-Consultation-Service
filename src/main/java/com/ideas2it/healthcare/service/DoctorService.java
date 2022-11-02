@@ -85,7 +85,13 @@ public interface DoctorService {
      */
     String removeDoctorById(Integer id);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This method is used to get the count of Doctor's record
+     * with the status
+     * </p>
+     *
+     * @return {@link Integer}
+     */
+    Integer countOfDoctors();
 }

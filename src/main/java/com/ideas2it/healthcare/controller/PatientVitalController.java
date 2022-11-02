@@ -8,10 +8,13 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.response.SuccessResponse;
-import com.ideas2it.healthcare.service.VitalService;
+import com.ideas2it.healthcare.service.PatientVitalService;
+import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +44,7 @@ import java.util.Map;
 public class PatientVitalController {
 
     @Autowired
-    private VitalService vitalService;
+    private PatientVitalService patientVitalService;
 
     @Autowired
     private SuccessResponse successResponse;
@@ -58,7 +61,7 @@ public class PatientVitalController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addVitals(@Valid @RequestBody PatientVitalDto vitalsDto) {
         return successResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
-                vitalService.addVitals(vitalsDto),
+                patientVitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
     }
 
@@ -78,8 +81,12 @@ public class PatientVitalController {
             @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+        int totalPages = patientVitalService.countOfVitalsByPatientId(patientId);
+        if (totalPages == 0) {
+            throw new NotFoundException(ErrorConstants.VITALS_NOT_FOUND);
+        }
         return successResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
-                vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK, vitalService.getTotalPages());
+                patientVitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
+                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
 }

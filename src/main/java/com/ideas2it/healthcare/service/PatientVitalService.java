@@ -23,7 +23,7 @@ import java.util.List;
  * @author Bala Ashwanth
  * @since 2022-10-10
  */
-public interface VitalService {
+public interface PatientVitalService {
 
     /**
      * <p>
@@ -42,14 +42,21 @@ public interface VitalService {
      * from the database using patient id
      * </p>
      *
-     * @param patientId  {@link int} is id of patient
+     * @param patientId  {@link Integer} is id of patient
      * @param pageNumber {@link Integer} is page number
      * @param totalRows  {@link Integer} is required number of rows to be displayed
-     * @return {@link List<  PatientVitalDto  >}
+     * @return {@link List<PatientVitalDto>}
      */
     List<PatientVitalDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
 
-    Long getTotalPages();
-
-    void setTotalPages(Long totalPages);
+    /**
+     * <p>
+     * This abstract method is used to get the count of vitals
+     * from the database using patient id
+     * </p>
+     *
+     * @param patientId  {@link Integer} is id of patient
+     * @return {@link Integer}
+     */
+    Integer countOfVitalsByPatientId(Integer patientId);
 }

@@ -38,7 +38,6 @@ import java.util.stream.Collectors;
 @Service
 public class TimeslotServiceImpl implements TimeslotService {
 
-    private Long totalPages;
     @Autowired
     private TimeslotRepository timeslotRepository;
 
@@ -54,8 +53,6 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows) {
-        setTotalPages(Math.round(((timeslotRepository
-                .findAll().size() + 0.0) / totalRows) + 0.4));
         List<Timeslot> timeslots = timeslotRepository
                 .findAll(PageRequest.of(pageNumber, totalRows)).toList();
         if (timeslots.isEmpty()) {
@@ -65,11 +62,10 @@ public class TimeslotServiceImpl implements TimeslotService {
                 .collect(Collectors.toList());
     }
 
-    public Long getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
+    /**
+     * {@inheritDoc}
+     */
+    public Integer countOfTimeslots() {
+        return (int) timeslotRepository.count();
     }
 }
