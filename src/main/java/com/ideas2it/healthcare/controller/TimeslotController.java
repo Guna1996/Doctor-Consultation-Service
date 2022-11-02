@@ -46,8 +46,24 @@ public class TimeslotController {
 
     /**
      * <p>
-     * This method is used to get
-     * timeslots.
+     * This method is used to add timeslot by getting details
+     * such as timeslot name and status from the admin
+     * </p>
+     *
+     * @param timeslotDto {@link TimeslotDto} is a dto object that contains information
+     * @return {@link ResponseEntity}
+     */
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {
+        return successResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
+                timeslotService.addTimeslot(timeslotDto),
+                HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method is used to get timeslots along with pagination
+     * by getting page number and total rows required
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -61,20 +77,5 @@ public class TimeslotController {
         return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
                 HttpStatus.OK, timeslotService.getTotalPages());
-    }
-
-    /**
-     * <p>
-     * This method is used to add timeslot.
-     * </p>
-     *
-     * @param timeslotDto {@link TimeslotDto} is a dto object that contains information
-     * @return {@link ResponseEntity}
-     */
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {
-        return successResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
-                timeslotService.addTimeslot(timeslotDto),
-                HttpStatus.OK);
     }
 }

@@ -48,8 +48,8 @@ public class PatientVitalController {
 
     /**
      * <p>
-     * This method is used to add vitals
-     * of a patient.
+     * This method is used to add vitals of a patient by getting details
+     * such as height, weight, pulse, etc from the admin
      * </p>
      *
      * @param vitalsDto {@link PatientVitalDto} is a dto object that contains information
@@ -64,8 +64,8 @@ public class PatientVitalController {
 
     /**
      * <p>
-     * This method is used to get
-     * vitals of a patient.
+     * This method is used to get vitals of a patient along with pagination by
+     * patient id, page number and total rows required
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient

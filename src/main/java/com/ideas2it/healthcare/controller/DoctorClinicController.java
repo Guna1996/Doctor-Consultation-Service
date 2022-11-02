@@ -50,8 +50,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used to assign doctor to
-     * a clinic.
+     * This method is used to assign doctor to a clinic by getting details
+     * such as doctorId, clinicId, timeslots, etc from the admin
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is details of doctor clinic
@@ -66,8 +66,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used to remove
-     * doctor from a clinic.
+     * This method is used to remove doctor from a clinic
+     * by getting doctorclinic id
      * </p>
      *
      * @param id {@link Integer} id of the doctor object
@@ -81,8 +81,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used get timeslot of a doctor
-     * to the clinics.
+     * This method is used get timeslot of a doctor to the clinics
+     * by getting doctor id and clinic id
      * </p>
      *
      * @param doctorId {@link Integer} is id of doctor object
@@ -100,8 +100,8 @@ public class DoctorClinicController {
 
     /**
      * <p>
-     * This method is used get available
-     * doctors in a particular clinic.
+     * This method is used get available doctors in a particular clinic by getting
+     * clinic id, page number and total rows required.
      * </p>
      *
      * @param clinicId   {@link Integer}

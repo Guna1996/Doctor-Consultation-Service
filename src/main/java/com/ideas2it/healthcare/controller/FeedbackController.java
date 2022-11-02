@@ -47,8 +47,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to add a feedback
-     * from a patient.
+     * This method is used to add a feedback from a patient by getting details
+     * such as comments, rating, doctorId and patientId from the patient
      * </p>
      *
      * @param feedbackDto {@link FeedbackDto} is contains details of feedback
@@ -63,8 +63,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to remove feedback of
-     * a patient.
+     * This method is used to remove feedback of a patient by
+     * getting feedback id from the patient
      * </p>
      *
      * @param id {@link Integer} is an integer that refer id in database
@@ -78,8 +78,8 @@ public class FeedbackController {
 
     /**
      * <p>
-     * This method is used to get feedbacks
-     * of a doctor.
+     * This method is used to get feedbacks along with pagination of a doctor
+     * by getting doctor id, page number and total rows required
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor
