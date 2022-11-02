@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.dto.VitalsDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.model.Vital;
+import com.ideas2it.healthcare.util.DateUtil;
 import com.ideas2it.healthcare.util.VitalUtil;
 
 /**
@@ -114,7 +115,9 @@ public class VitalsMapper {
                 doctorDto.setName(doctor.getName());
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setQualification(doctor.getQualification());
                 if (null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
