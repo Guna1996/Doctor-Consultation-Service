@@ -88,7 +88,7 @@ public class DoctorClinicController {
      */
     @GetMapping(Constants.URL_GET_TIMESLOTS)
     public ResponseEntity<Map<String, Object>> getTimeslots(
-            @PathVariable(Constants.DOCTOR_ID) Integer doctorId,
+            @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
