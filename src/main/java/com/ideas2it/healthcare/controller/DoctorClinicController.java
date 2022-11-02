@@ -88,8 +88,8 @@ public class DoctorClinicController {
      */
     @GetMapping(Constants.URL_GET_TIMESLOTS)
     public ResponseEntity<Map<String, Object>> getTimeslots(
-            @PathVariable(Constants.DOCTOR_ID) Integer doctorId,
-            @PathVariable(Constants.CLINIC_ID) Integer clinicId) {
+            @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
+            @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);
@@ -108,7 +108,7 @@ public class DoctorClinicController {
      */
     @GetMapping(Constants.URL_GET_DOCTORS_BY_CLINIC_ID)
     public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(
-            @PathVariable(Constants.CLINIC_ID) Integer clinicId,
+            @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId,
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,

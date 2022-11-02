@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.dto.VitalsDto;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.model.Vital;
+import com.ideas2it.healthcare.util.DateUtil;
 import com.ideas2it.healthcare.util.VitalUtil;
 
 /**
@@ -49,7 +50,7 @@ public class VitalsMapper {
             vital.setSugarLevel(vitalsDto.getSugarLevel());
             vital.setStatus(vitalsDto.getStatus());
             vital.setCreatedAt(vitalsDto.getCreatedAt());
-            vital.setBPRiskLevel(VitalUtil.getBPRiskLevel(vitalsDto.getSystolic(), vitalsDto.getDiastolic()));
+            vital.setBpRiskLevel(VitalUtil.getBPRiskLevel(vitalsDto.getSystolic(), vitalsDto.getDiastolic()));
             DoctorDto doctorDto = vitalsDto.getDoctor();
             if (null != doctorDto) {
                 Doctor doctor = new Doctor();
@@ -105,7 +106,7 @@ public class VitalsMapper {
             vitalsDto.setDiastolic(vital.getDiastolic());
             vitalsDto.setSugarLevel(vital.getSugarLevel());
             vitalsDto.setStatus(vital.getStatus());
-            vitalsDto.setBpRiskLevel(vital.getBPRiskLevel());
+            vitalsDto.setBpRiskLevel(vital.getBpRiskLevel());
             vitalsDto.setCreatedAt(vital.getCreatedAt());
             Doctor doctor = vital.getDoctor();
             if (null != doctor) {
@@ -114,7 +115,9 @@ public class VitalsMapper {
                 doctorDto.setName(doctor.getName());
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setQualification(doctor.getQualification());
                 if (null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));

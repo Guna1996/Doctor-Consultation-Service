@@ -17,6 +17,7 @@ import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.model.Timeslot;
+import com.ideas2it.healthcare.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +113,7 @@ public class DoctorClinicMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
@@ -119,12 +121,11 @@ public class DoctorClinicMapper {
                 if(null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 }
+                doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorClinicDto.setDoctor(doctorDto);
-            } else {
-                throw new NotFoundException("doctor id cannot be null");
-            }
+            } 
             Clinic clinic = doctorClinic.getClinic();
             if (null != clinic) {
                 ClinicDto clinicDto = new ClinicDto();
@@ -137,9 +138,7 @@ public class DoctorClinicMapper {
                 clinicDto.setPinCode(clinic.getPinCode());
                 clinicDto.setContactNumber(clinic.getContactNumber());
                 doctorClinicDto.setClinic(clinicDto);
-            } else {
-                throw new NotFoundException("clinic id cannot be null");
-            }
+            } 
             List<Timeslot> timeslots = doctorClinic.getTimeslots();
             if (null != timeslots) {
                 List<TimeslotDto> timeslotsDto = new ArrayList<>();

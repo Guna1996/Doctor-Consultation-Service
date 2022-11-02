@@ -86,7 +86,7 @@ public class FeedbackController {
      */
     @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)
     public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(
-            @PathVariable(name = Constants.DOCTOR_ID) Integer doctorId,
+            @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,

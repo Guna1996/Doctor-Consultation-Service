@@ -21,7 +21,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import java.time.LocalDateTime;
 
 /**
@@ -71,7 +70,7 @@ public class Vital {
     private Doctor doctor;
 
     @Column(name = Constants.BLOOD_PRESSURE)
-    private String BPRiskLevel;
+    private String bpRiskLevel;
 
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
