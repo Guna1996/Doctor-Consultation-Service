@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.PatientDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;

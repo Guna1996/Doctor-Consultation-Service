@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.TimeslotDto;
+import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
@@ -56,7 +57,9 @@ public class DoctorClinicMapper {
                 doctor.setGender(doctorDto.getGender());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                if(null != doctorDto.getMobileNumber()) {
+                    doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
+                }
                 doctor.setCity(doctorDto.getCity());
                 doctor.setStatus(doctorDto.getStatus());
                 doctorClinic.setDoctor(doctor);
@@ -113,10 +116,14 @@ public class DoctorClinicMapper {
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                if(null != doctor.getMobileNumber()) {
+                    doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
+                }
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorClinicDto.setDoctor(doctorDto);
+            } else {
+                throw new NotFoundException("doctor id cannot be null");
             }
             Clinic clinic = doctorClinic.getClinic();
             if (null != clinic) {
@@ -130,6 +137,8 @@ public class DoctorClinicMapper {
                 clinicDto.setPinCode(clinic.getPinCode());
                 clinicDto.setContactNumber(clinic.getContactNumber());
                 doctorClinicDto.setClinic(clinicDto);
+            } else {
+                throw new NotFoundException("clinic id cannot be null");
             }
             List<Timeslot> timeslots = doctorClinic.getTimeslots();
             if (null != timeslots) {
