@@ -85,7 +85,7 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String removeClinicById(Integer id) {
-        if (1 <= clinicRepository.deleteClinicById(id)) {
+        if (1 <= clinicRepository.removeClinicById(id)) {
             return MessageConstants.CLINIC_DELETED_SUCCESSFULLY;
         }
         throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);

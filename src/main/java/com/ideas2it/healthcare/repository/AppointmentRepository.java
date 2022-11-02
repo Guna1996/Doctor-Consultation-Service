@@ -19,7 +19,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -47,7 +46,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * @param status   {@link String} is status of appointment table
      * @return {@link Optional<Appointment>}
      */
-    Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(Integer id, LocalDateTime dateTime, String status);
+    Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(
+            Integer id, LocalDateTime dateTime, String status);
 
     /**
      * <p>
@@ -60,7 +60,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      */
     @Modifying
     @Query("update appointment set status='inactive' where id=?1 and status = 'active'")
-    Integer deleteAppointmentById(Integer id);
+    Integer removeAppointmentById(Integer id);
 
     /**
      * <p>
@@ -86,7 +86,25 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      */
     Page<Appointment> findByPatientIdAndStatus(Integer id, String status, Pageable pageable);
 
-    Integer countByDoctorIdAndStatus(Integer id, String status);
+    /**
+     * <p>
+     * This method is user to return the total count
+     * of active appointments by doctor id
+     * </p>
+     * @param doctorId {@link Integer} is a id of doctor
+     * @param status {@link String}
+     * @return {@link Integer}
+     */
+    Integer countByDoctorIdAndStatus(Integer doctorId, String status);
 
-    Integer countByPatientIdAndStatus(Integer id, String status);
+    /**
+     * <p>
+     * This method is user to return the total count
+     * of active appointments by patient id
+     * </p>
+     * @param patientId {@link Integer} is a id of patient
+     * @param status {@link String}
+     * @return {@link Integer}
+     */
+    Integer countByPatientIdAndStatus(Integer patientId, String status);
 }

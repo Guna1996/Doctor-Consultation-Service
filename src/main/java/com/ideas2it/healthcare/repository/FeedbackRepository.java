@@ -18,7 +18,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -70,7 +69,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
      */
     @Modifying
     @Query("update feedback set status = 'inactive' where id=?1")
-    Integer deleteSpecializationById(Integer id);
+    Integer removeFeedbackById(Integer id);
 
     /**
      * <p>

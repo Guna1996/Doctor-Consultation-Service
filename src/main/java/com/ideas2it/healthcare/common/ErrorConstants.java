@@ -61,6 +61,12 @@ public class ErrorConstants {
 
     public static final String NAME_SHOULD_NOT_BE_NULL = "Name should not be null";
 
+    public static final String DOCTOR_SHOULD_NOT_BE_NULL = "Doctor should not be null";
+
+    public static final String PATIENT_SHOULD_NOT_BE_NULL = "Patient should not be null";
+
+    public static final String CLINIC_SHOULD_NOT_BE_NULL = "Clinic should not be null";
+
     public static final String DOOR_NUMBER_CANNOT_BE_NEGATIVE_OR_NULL =
             "Door number cannot be negative or zero";
 

@@ -35,7 +35,7 @@ public class NotFoundExceptionHandler {
      * of user inputs
      * </p>
      *
-     * @param exception is caught exception
+     * @param exception {@link HttpStatus} is caught exception
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -54,7 +54,7 @@ public class NotFoundExceptionHandler {
      * CRUD operation in database
      * </p>
      *
-     * @parm exception is caught exception
+     * @param exception {@link HttpStatus} is caught exception
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NotFoundException.class)

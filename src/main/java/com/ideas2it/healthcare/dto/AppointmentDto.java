@@ -8,6 +8,7 @@
 package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -32,13 +33,13 @@ public class AppointmentDto {
 
     private LocalDateTime createdAt;
 
-    @NotNull(message = "patient shouldn't be null")
+    @NotNull(message = ErrorConstants.PATIENT_SHOULD_NOT_BE_NULL)
     private PatientDto patient;
 
-    @NotNull(message = "doctor shouldn't be null")
+    @NotNull(message = ErrorConstants.DOCTOR_SHOULD_NOT_BE_NULL)
     private DoctorDto doctor;
 
-    @NotNull(message = "clinic shouldn't be null")
+    @NotNull(message = ErrorConstants.CLINIC_SHOULD_NOT_BE_NULL)
     private ClinicDto clinic;
 
     private String status = Constants.ACTIVE;

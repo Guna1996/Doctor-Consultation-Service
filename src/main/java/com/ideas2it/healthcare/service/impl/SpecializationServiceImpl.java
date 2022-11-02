@@ -87,7 +87,7 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public String removeSpecializationById(Integer id) {
-        if (1 <= specializationRepository.deleteSpecializationById(id)) {
+        if (1 <= specializationRepository.removeSpecializationById(id)) {
             return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
         }
         throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);

@@ -56,7 +56,8 @@ public class ClinicDto {
     @Pattern(regexp = Constants.PIN_CODE_REGEX, message = ErrorConstants.ENTER_VALID_PIN_CODE)
     private String pinCode;
 
-    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.MOBILE_NUMBER_MUST_CONTAIN_TEN_NUMBERS_ONLY)
+    @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, 
+            message = ErrorConstants.MOBILE_NUMBER_MUST_CONTAIN_TEN_NUMBERS_ONLY)
     @NotNull(message = ErrorConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
     private String contactNumber;
 

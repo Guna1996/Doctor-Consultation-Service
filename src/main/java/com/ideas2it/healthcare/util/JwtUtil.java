@@ -38,6 +38,7 @@ public class JwtUtil {
      * </p>
      *
      * @param token {@link String} is token for the session
+     * @return {@link String}
      */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -61,6 +62,8 @@ public class JwtUtil {
      * </p>
      *
      * @param token {@link String} is token for the session
+     * @param claimsResolver {@link Function}
+     * @return {@link T}
      */
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -91,6 +94,14 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
+    /**
+     * <p>
+     *  This method to generate jwt token using
+     *  user details header, payload and signature.
+     * </p>
+     * @param userDetails {@link UserDetails} it contains username and password
+     * @return {@link String}
+     */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
@@ -98,15 +109,15 @@ public class JwtUtil {
 
     /**
      * <p>
-     * This method is used to create token
+     * This method is used to create token using
+     * claims of payload.
      * </p>
      *
-     * @param claims {@link Map}
-     * @param subject {@link String}
+     * @parm claims {@link Map}
+     * @parm subject {@link String}
      * @return {@link String}
      */
     private String createToken(Map<String, Object> claims, String subject) {
-
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
