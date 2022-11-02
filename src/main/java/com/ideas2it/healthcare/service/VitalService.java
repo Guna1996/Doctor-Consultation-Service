@@ -9,7 +9,7 @@
  */
 package com.ideas2it.healthcare.service;
 
-import com.ideas2it.healthcare.dto.VitalsDto;
+import com.ideas2it.healthcare.dto.PatientVitalDto;
 
 import java.util.List;
 
@@ -31,10 +31,10 @@ public interface VitalService {
      * into the database
      * </p>
      *
-     * @param vitalsDto {@link VitalsDto}
-     * @return {@link VitalsDto}
+     * @param vitalsDto {@link PatientVitalDto}
+     * @return {@link PatientVitalDto}
      */
-    VitalsDto addVitals(VitalsDto vitalsDto);
+    PatientVitalDto addVitals(PatientVitalDto vitalsDto);
 
     /**
      * <p>
@@ -45,9 +45,9 @@ public interface VitalService {
      * @param patientId  {@link int} is id of patient
      * @param pageNumber {@link Integer} is page number
      * @param totalRows  {@link Integer} is required number of rows to be displayed
-     * @return {@link List< VitalsDto >}
+     * @return {@link List<  PatientVitalDto  >}
      */
-    List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
+    List<PatientVitalDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows);
 
     Long getTotalPages();
 

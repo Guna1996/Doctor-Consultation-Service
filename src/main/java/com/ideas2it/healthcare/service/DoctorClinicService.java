@@ -49,7 +49,7 @@ public interface DoctorClinicService {
      * @param id {@link Integer} id of the doctor
      * @return {@link String}
      */
-    String deleteDoctorFromClinic(Integer id);
+    String removeDoctorFromClinic(Integer id);
 
     /**
      * <p>

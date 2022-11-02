@@ -17,9 +17,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -53,11 +53,11 @@ public class Doctor {
     @Column(name = Constants.QUALIFICATION)
     private String qualification;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = Constants.DOCTOR_SPECIALIZATION,
             joinColumns = @JoinColumn(name = Constants.DOCTOR_ID),
             inverseJoinColumns = @JoinColumn(name = Constants.SPECIALIZATION_ID))
-    private List<Specialization> specializations;
+    private Set<Specialization> specializations;
 
     @Column(name = Constants.DATE_OF_REGISTRATION)
     private LocalDate dateOfRegistration;

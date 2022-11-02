@@ -42,6 +42,9 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add a feedback
@@ -53,7 +56,7 @@ public class FeedbackController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return SuccessResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
@@ -68,8 +71,8 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(feedbackService.deleteFeedback(id),
+    public ResponseEntity<Map<String, Object>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
+        return successResponse.responseEntity(feedbackService.deleteFeedback(id),
                 null, HttpStatus.OK);
     }
 
@@ -89,7 +92,7 @@ public class FeedbackController {
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK, feedbackService.getTotalPages());
     }

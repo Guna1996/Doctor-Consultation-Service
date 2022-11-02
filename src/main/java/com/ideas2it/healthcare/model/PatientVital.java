@@ -34,7 +34,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity(name = Constants.VITAL)
-public class Vital {
+public class PatientVital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

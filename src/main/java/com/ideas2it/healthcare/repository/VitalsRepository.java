@@ -9,7 +9,7 @@
  */
 package com.ideas2it.healthcare.repository;
 
-import com.ideas2it.healthcare.model.Vital;
+import com.ideas2it.healthcare.model.PatientVital;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,7 +30,7 @@ import java.util.Optional;
  * @since 2022-10-10
  */
 @Repository
-public interface VitalsRepository extends JpaRepository<Vital, Integer> {
+public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
 
     /**
      * <p>
@@ -39,9 +39,9 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      *
      * @param id     {@link Integer} is id of the vital
      * @param status {@link String} is status of vital
-     * @return {@link Optional<Vital>}
+     * @return {@link Optional< PatientVital >}
      */
-    Optional<Vital> findByIdAndStatus(Integer id, String status);
+    Optional<PatientVital> findByIdAndStatus(Integer id, String status);
 
     /**
      * <p>
@@ -51,9 +51,9 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      * @param patientId {@link Integer} is id of the patient
      * @param status    {@link String} is status of vital
      * @param pageable  {@link Pageable} contains page number and number of rows required
-     * @return {@link Page<Vital>}
+     * @return {@link Page< PatientVital >}
      */
-    Page<Vital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
+    Page<PatientVital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
 
     /**
      * <p>
@@ -62,7 +62,7 @@ public interface VitalsRepository extends JpaRepository<Vital, Integer> {
      *
      * @param patientId {@link Integer} is id of the patient
      * @param status    {@link String} is status of vital
-     * @return {@link List<Vital>}
+     * @return {@link List< PatientVital >}
      */
-    List<Vital> findByPatientIdAndStatus(Integer patientId, String status);
+    List<PatientVital> findByPatientIdAndStatus(Integer patientId, String status);
 }

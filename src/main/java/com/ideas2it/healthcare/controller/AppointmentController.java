@@ -43,6 +43,9 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add appointment of a
@@ -55,7 +58,7 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return SuccessResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
                 appointmentService.addAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -72,7 +75,7 @@ public class AppointmentController {
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return SuccessResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
                 appointmentService.rescheduleAppointment(appointmentDto), HttpStatus.OK);
     }
 
@@ -86,8 +89,8 @@ public class AppointmentController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteAppointment(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(appointmentService.deleteAppointmentById(id),
+    public ResponseEntity<Map<String, Object>> removeAppointment(@PathVariable(Constants.ID) Integer id) {
+        return successResponse.responseEntity(appointmentService.removeAppointmentById(id),
                 null, HttpStatus.OK);
     }
 
@@ -107,7 +110,7 @@ public class AppointmentController {
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
                 appointmentService.getAppointmentsByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK, appointmentService.getTotalPages());
     }
@@ -123,12 +126,12 @@ public class AppointmentController {
      * @param totalRows  {@link Integer} is number of row to be shown
      * @return {@link ResponseEntity}
      */
-    @GetMapping(Constants.URL_PATIENT_APPOINTMENT)
+    @GetMapping(Constants.URL_GET_APPOINTMENTS_BY_PATIENT_ID)
     public ResponseEntity<Map<String, Object>> getAppointmentsByPatientId(
             @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS,
                 appointmentService.getAppointmentsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK, appointmentService.getTotalPages());
     }

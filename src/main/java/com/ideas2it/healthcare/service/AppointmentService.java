@@ -72,7 +72,7 @@ public interface AppointmentService {
      * @param id {@link Integer} is an id for unknown
      * @return {@link String}
      */
-    String deleteAppointmentById(Integer id);
+    String removeAppointmentById(Integer id);
 
     /**
      * <p>

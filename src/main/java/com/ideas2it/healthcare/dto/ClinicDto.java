@@ -10,8 +10,7 @@ package com.ideas2it.healthcare.dto;
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -27,8 +26,7 @@ import javax.validation.constraints.Pattern;
  * @version 1
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class ClinicDto {
 
     private int id;

@@ -11,8 +11,8 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.dto.VitalsDto;
-import com.ideas2it.healthcare.mapper.VitalsMapper;
+import com.ideas2it.healthcare.dto.PatientVitalDto;
+import com.ideas2it.healthcare.mapper.PatientVitalMapper;
 import com.ideas2it.healthcare.repository.VitalsRepository;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @since 2022-10-10
  */
 @Service
-public class VitalServiceImpl implements VitalService {
+public class PatientVitalServiceImpl implements VitalService {
 
     private Long totalPages;
     @Autowired
@@ -42,21 +42,21 @@ public class VitalServiceImpl implements VitalService {
     /**
      * {@inheritDoc}
      */
-    public VitalsDto addVitals(VitalsDto vitalsDto) {
-        return VitalsMapper.toDto(vitalsRepository.save(VitalsMapper.fromDto(vitalsDto)));
+    public PatientVitalDto addVitals(PatientVitalDto vitalsDto) {
+        return PatientVitalMapper.toDto(vitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<VitalsDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
+    public List<PatientVitalDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
         setTotalPages(Math.round(((vitalsRepository
                 .findByPatientIdAndStatus(patientId, Constants.ACTIVE).size() + 0.0) / totalRows) + 0.4));
         return vitalsRepository
                 .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
                         totalRows))
                 .toList().stream()
-                .map(VitalsMapper::toDto).collect(Collectors.toList());
+                .map(PatientVitalMapper::toDto).collect(Collectors.toList());
     }
 
     public Long getTotalPages() {

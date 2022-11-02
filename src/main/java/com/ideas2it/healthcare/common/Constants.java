@@ -42,7 +42,7 @@ public class Constants {
 
     public static final String URL_GET_TIMESLOTS = "/{doctorId}/{clinicId}";
 
-    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/vital/{patientId}";
+    public static final String URL_GET_VITALS_BY_PATIENT_ID = "/patient/{patientId}";
 
     public static final String URL_GET_DOCTORS_BY_CLINIC_ID =
             "/doctor/{clinicId}/{pageNumber}/{totalRows}";
@@ -51,9 +51,9 @@ public class Constants {
             "doctor/{doctorId}/{pageNumber}/{totalRows}";
 
     public static final String URL_GET_FEEDBACKS_BY_DOCTOR_ID =
-            "/feedbacks/{doctor_id}/{pageNumber}/{totalRows}";
+            "/{doctor_id}/{pageNumber}/{totalRows}";
 
-    public static final String URL_PATIENT_APPOINTMENT =
+    public static final String URL_GET_APPOINTMENTS_BY_PATIENT_ID =
             "patient/{patientId}/{pageNumber}/{totalRows}";
 
     public static final String URL_APPOINTMENT = "/appointment";
@@ -74,7 +74,7 @@ public class Constants {
 
     public static final String URL_TIMESLOT = "/timeslot";
 
-    public static final String URL_VITAL = "/vital";
+    public static final String URL_PATIENT_VITAL = "/patientVital";
 
     public static final String PATIENT_ID = "patientId";
 

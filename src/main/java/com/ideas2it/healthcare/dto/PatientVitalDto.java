@@ -11,10 +11,7 @@ package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.util.VitalUtil;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -31,9 +28,8 @@ import java.time.LocalDateTime;
  * @author Bala Ashwanth N
  * @since 2022-10-10
  */
-@Getter
-@Setter
-public class VitalsDto {
+@Data
+public class PatientVitalDto {
 
     private int id;
 

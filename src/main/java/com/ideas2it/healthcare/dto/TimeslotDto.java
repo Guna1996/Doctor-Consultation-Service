@@ -9,8 +9,7 @@
  */
 package com.ideas2it.healthcare.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalTime;
 
@@ -25,8 +24,7 @@ import java.time.LocalTime;
  * @author Bala Ashwanth N
  * @since 2022-10-10
  */
-@Getter
-@Setter
+@Data
 public class TimeslotDto {
 
     private int id;

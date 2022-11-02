@@ -51,7 +51,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public String deleteDoctorFromClinic(Integer id) {
+    public String removeDoctorFromClinic(Integer id) {
         if (1 <= doctorClinicRepository.deleteDoctorClinicById(id)) {
             return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
         }

@@ -46,6 +46,9 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add the
@@ -57,7 +60,7 @@ public class PatientController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addPatient(@Valid @RequestBody PatientDto patientDto) {
-        return SuccessResponse.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
                 patientService.addPatient(patientDto),
                 HttpStatus.OK);
     }
@@ -73,7 +76,7 @@ public class PatientController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
                 patientService.getPatientById(id),
                 HttpStatus.OK);
     }
@@ -89,7 +92,7 @@ public class PatientController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
-        return SuccessResponse.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
                 patientService.updatePatient(patientDto),
                 HttpStatus.OK);
     }

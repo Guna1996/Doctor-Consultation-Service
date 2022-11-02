@@ -44,6 +44,9 @@ public class DoctorClinicController {
 
     @Autowired
     private DoctorClinicService doctorClinicService;
+    
+    @Autowired
+    private SuccessResponse successResponse;
 
     /**
      * <p>
@@ -57,7 +60,7 @@ public class DoctorClinicController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
             @RequestBody DoctorClinicDto doctorClinicDto) {
-        return SuccessResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
                 doctorClinicService.assignDoctorToClinic(doctorClinicDto), HttpStatus.OK);
     }
 
@@ -71,8 +74,8 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteDoctorFromClinic(@PathVariable(Constants.ID) Integer id) {
-        return SuccessResponse.responseEntity(doctorClinicService.deleteDoctorFromClinic(id),
+    public ResponseEntity<Map<String, Object>> removeDoctorFromClinic(@PathVariable(Constants.ID) Integer id) {
+        return successResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
                 null, HttpStatus.OK);
     }
 
@@ -90,7 +93,7 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, Object>> getTimeslots(
             @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);
     }
@@ -111,7 +114,7 @@ public class DoctorClinicController {
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId,
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK, doctorClinicService.getTotalPages());
     }

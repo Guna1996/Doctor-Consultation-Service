@@ -9,7 +9,7 @@ package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
-import com.ideas2it.healthcare.dto.VitalsDto;
+import com.ideas2it.healthcare.dto.PatientVitalDto;
 import com.ideas2it.healthcare.response.SuccessResponse;
 import com.ideas2it.healthcare.service.VitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +37,14 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestController
-@RequestMapping(Constants.URL_VITAL)
-public class VitalController {
+@RequestMapping(Constants.URL_PATIENT_VITAL)
+public class PatientVitalController {
 
     @Autowired
     private VitalService vitalService;
+
+    @Autowired
+    private SuccessResponse successResponse;
 
     /**
      * <p>
@@ -49,12 +52,12 @@ public class VitalController {
      * of a patient.
      * </p>
      *
-     * @param vitalsDto {@link VitalsDto} is a dto object that contains information
+     * @param vitalsDto {@link PatientVitalDto} is a dto object that contains information
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addVitals(@Valid @RequestBody VitalsDto vitalsDto) {
-        return SuccessResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
+    public ResponseEntity<Map<String, Object>> addVitals(@Valid @RequestBody PatientVitalDto vitalsDto) {
+        return successResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
                 vitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
     }
@@ -75,7 +78,7 @@ public class VitalController {
             @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
                 vitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK, vitalService.getTotalPages());
     }

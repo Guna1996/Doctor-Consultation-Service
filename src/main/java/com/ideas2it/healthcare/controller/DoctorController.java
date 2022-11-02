@@ -45,6 +45,9 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+    private SuccessResponse successResponse;
+
     /**
      * <p>
      * This method is used to add details of
@@ -56,7 +59,7 @@ public class DoctorController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return SuccessResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
                 doctorService.saveDoctor(doctorDto),
                 HttpStatus.OK);
     }
@@ -75,7 +78,7 @@ public class DoctorController {
     public ResponseEntity<Map<String, Object>> getAllDoctors(
             @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
                 HttpStatus.OK, doctorService.getTotalPages());
     }
@@ -91,7 +94,7 @@ public class DoctorController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable int id) {
-        return SuccessResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTOR,
+        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTOR,
                 doctorService.getDoctorById(id),
                 HttpStatus.OK);
     }
@@ -107,7 +110,7 @@ public class DoctorController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return SuccessResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
+        return successResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
                 doctorService.updateDoctor(doctorDto),
                 HttpStatus.OK);
     }
@@ -122,8 +125,8 @@ public class DoctorController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> deleteDoctorById(@PathVariable int id) {
-        return SuccessResponse.responseEntity(doctorService.deleteDoctorById(id), null,
+    public ResponseEntity<Map<String, Object>> removeDoctorById(@PathVariable int id) {
+        return successResponse.responseEntity(doctorService.removeDoctorById(id), null,
                 HttpStatus.OK);
     }
 }
