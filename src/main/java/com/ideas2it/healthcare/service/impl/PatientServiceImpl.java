@@ -11,6 +11,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -63,7 +64,7 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream()
                 .map(PatientMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(MessageConstants.PATIENT_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
 
     }
 

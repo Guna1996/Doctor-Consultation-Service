@@ -5,11 +5,10 @@
  * </p>
  * Copyright 2022 - Ideas2it
  */
-package com.ideas2it.healthcare.configuration;
+package com.ideas2it.healthcare.config;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.filters.JwtRequestFilter;
-import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
