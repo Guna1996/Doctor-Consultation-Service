@@ -103,11 +103,11 @@ public class FeedbackMapper {
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
-                if(null != doctor.getDateOfBirth()) {
+                if (null != doctor.getDateOfBirth()) {
                     doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 }
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                if(null != doctor.getDateOfRegistration()) {
+                if (null != doctor.getDateOfRegistration()) {
                     doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 }
                 doctorDto.setQualification(doctor.getQualification());

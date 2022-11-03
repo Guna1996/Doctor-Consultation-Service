@@ -12,7 +12,6 @@ import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
@@ -53,7 +52,7 @@ public class AppointmentMapper {
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
                 patient.setGender(patientDto.getGender());
-                if(null != patientDto.getMobileNumber()) {
+                if (null != patientDto.getMobileNumber()) {
                     patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
                 }
                 patient.setEmail(patientDto.getEmail());
@@ -70,7 +69,7 @@ public class AppointmentMapper {
                 doctor.setConsultationFee(doctorDto.getConsultationFee());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                if(null != doctorDto.getMobileNumber()) {
+                if (null != doctorDto.getMobileNumber()) {
                     doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
                 }
                 doctor.setCity(doctorDto.getCity());

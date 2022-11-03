@@ -6,11 +6,6 @@
  */
 package com.ideas2it.healthcare.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Map;
-
 /**
  * <p>
  * This is an custom exception class and it Extends

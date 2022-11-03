@@ -84,7 +84,7 @@ public class PatientController {
     /**
      * <p>
      * This method is used to update the details such as name, dateOfBirth,
-     * Gender, obileNumber, etc of a patient
+     * Gender, mobileNumber, etc of a patient
      * </p>
      *
      * @param patientDto {@link PatientDto} is detail of patient

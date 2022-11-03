@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -68,7 +67,7 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
      */
     @Modifying
     @Query("update specialization set status = 'inactive' where id=?1 and status ='active'")
-    Integer deleteSpecializationById(Integer id);
+    Integer removeSpecializationById(Integer id);
 
     /**
      * <p>

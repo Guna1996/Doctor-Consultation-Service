@@ -12,7 +12,6 @@ import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.TimeslotDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.DoctorClinic;
@@ -58,7 +57,7 @@ public class DoctorClinicMapper {
                 doctor.setGender(doctorDto.getGender());
                 doctor.setQualification(doctorDto.getQualification());
                 doctor.setDateOfRegistration(doctorDto.getDateOfRegistration());
-                if(null != doctorDto.getMobileNumber()) {
+                if (null != doctorDto.getMobileNumber()) {
                     doctor.setMobileNumber(Long.parseLong(doctorDto.getMobileNumber()));
                 }
                 doctor.setCity(doctorDto.getCity());
@@ -113,17 +112,17 @@ public class DoctorClinicMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
-                if(null != doctor.getDateOfBirth()) {
+                if (null != doctor.getDateOfBirth()) {
                     doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 }
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                if(null != doctor.getMobileNumber()) {
+                if (null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 }
-                if(null != doctor.getDateOfRegistration()) {
+                if (null != doctor.getDateOfRegistration()) {
                     doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 }
                 doctorDto.setCity(doctor.getCity());
