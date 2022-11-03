@@ -168,9 +168,9 @@ public class Constants {
 
     public static final String AT_RISK = "At Risk";
 
-    public static final String LOW = "Low";
+    public static final String LOW = "Low ";
 
-    public static final String HIGH = "High Blood Pressure";
+    public static final String HIGH = "High ";
 
     public static final String NORMAL = "Normal";
 
