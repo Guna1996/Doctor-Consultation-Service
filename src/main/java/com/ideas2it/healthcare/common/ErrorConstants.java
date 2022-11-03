@@ -151,5 +151,7 @@ public class ErrorConstants {
 
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
 
+    public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
+
 }
 

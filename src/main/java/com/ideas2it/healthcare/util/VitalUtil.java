@@ -9,8 +9,6 @@ package com.ideas2it.healthcare.util;
 
 import com.ideas2it.healthcare.common.Constants;
 
-import java.time.LocalDate;
-
 /**
  * <p>
  * VitalUtil class is used for simple vital calculations

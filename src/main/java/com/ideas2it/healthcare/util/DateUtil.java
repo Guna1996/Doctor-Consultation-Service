@@ -7,6 +7,7 @@
  */
 package com.ideas2it.healthcare.util;
 
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 
@@ -52,7 +53,7 @@ public class DateUtil {
         try {
             date = localDate.toLocalDate();
         } catch (Exception exception) {
-            throw new NotFoundException("Please Enter valid schedule time..");
+            throw new NotFoundException(ErrorConstants.ENTER_VALID_SCHEDULE_TIME);
         }
         LocalDate currentDate = LocalDate.now();
         return (0 < Period.between(date, currentDate).getDays());
