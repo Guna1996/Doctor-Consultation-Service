@@ -34,33 +34,35 @@ public class PatientVitalDto {
     private int id;
 
     @NotNull(message = ErrorConstants.HEIGHT_SHOULD_NOT_BE_NULL)
-    @Min(value = 0, message = ErrorConstants.HEIGHT_SHOULD_NOT_BE_NEGATIVE)
+    @Min(value = 1, message = ErrorConstants.HEIGHT_SHOULD_NOT_BE_NEGATIVE)
     private float height;
 
     @NotNull(message = ErrorConstants.WEIGHT_SHOULD_NOT_BE_NULL)
-    @Min(value = 0, message = ErrorConstants.WEIGHT_SHOULD_NOT_BE_NEGATIVE)
+    @Min(value = 1, message = ErrorConstants.WEIGHT_SHOULD_NOT_BE_NEGATIVE)
     private float weight;
 
     @NotNull(message = ErrorConstants.PULSE_SHOULD_NOT_BE_NULL)
-    @Min(value = 0, message = ErrorConstants.PULSE_SHOULD_NOT_BE_NEGATIVE)
+    @Min(value = 1, message = ErrorConstants.PULSE_SHOULD_NOT_BE_NEGATIVE)
     private float pulse;
 
     @NotNull(message = ErrorConstants.DIASTOLIC_SHOULD_NOT_BE_NULL)
-    @Min(value = 0, message = ErrorConstants.DIASTOLIC_SHOULD_NOT_BE_NEGATIVE)
+    @Min(value = 1, message = ErrorConstants.DIASTOLIC_SHOULD_NOT_BE_NEGATIVE)
     private float diastolic;
 
     @NotNull(message = ErrorConstants.SYSTOLIC_SHOULD_NOT_BE_NULL)
-    @Min(value = 0, message = ErrorConstants.SYSTOLIC_SHOULD_NOT_BE_NEGATIVE)
+    @Min(value = 1, message = ErrorConstants.SYSTOLIC_SHOULD_NOT_BE_NEGATIVE)
     private float systolic;
 
     @NotNull(message = ErrorConstants.SUGAR_LEVEL_SHOULD_NOT_BE_NULL)
-    @Min(value = 0, message = ErrorConstants.SUGAR_LEVEL_SHOULD_NOT_BE_NEGATIVE)
+    @Min(value = 1, message = ErrorConstants.SUGAR_LEVEL_SHOULD_NOT_BE_NEGATIVE)
     private float sugarLevel;
 
+    @NotNull(message = ErrorConstants.PATIENT_SHOULD_NOT_BE_NULL)
     private PatientDto patient;
 
     private String status = Constants.ACTIVE;
 
+    @NotNull(message = ErrorConstants.DOCTOR_SHOULD_NOT_BE_NULL)
     private DoctorDto doctor;
 
     private String bpRiskLevel;
