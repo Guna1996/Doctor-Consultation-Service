@@ -76,9 +76,9 @@ public class Constants {
 
     public static final String URL_PATIENT_VITAL = "/patientVital";
 
-    public static final String PATIENT_ID = "patientId";
+    public static final String PATIENT_ID = "patient_id";
 
-    public static final String PATIENT_ID_PATH = "patient_id";
+    public static final String PATIENT_ID_PATH = "patientId";
 
     public static final String DOCTOR_ID_PATH = "doctorId";
 
