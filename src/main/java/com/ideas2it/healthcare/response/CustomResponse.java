@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This SuccessResponse class is used to send response in a
+ * This CustomResponse class is used to send response in a
  * customised format with proper syntax
  * </p>
  *
@@ -28,7 +28,7 @@ import java.util.Map;
  */
 
 @Component
-public class SuccessResponse {
+public class CustomResponse {
 
     /**
      * <p>
@@ -71,6 +71,27 @@ public class SuccessResponse {
         response.put(Constants.ENTITY_LIST, entityList);
         response.put(Constants.RESPONSE_CODE, status.value());
         response.put(Constants.TOTAL_PAGES, totalPages);
+        return new ResponseEntity<>(response, status);
+    }
+
+    /**
+     * <p>
+     * This method is used send  error response in proper syntax for all CRUD operations
+     * in the web application
+     * </p>
+     *
+     * @param message {@link Map} is response message
+     * @param entity {@link Object} is response Dto object
+     * @param status {@link HttpStatus} is http response status
+     * @return {@link ResponseEntity}
+     */
+    public ResponseEntity<Map<String, Object>> responseEntity
+    (Map<String, String> message, Object entity, HttpStatus status) {
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put(Constants.MESSAGE, message);
+        response.put(Constants.ENTITY, entity);
+        response.put(Constants.ENTITY_LIST, null);
+        response.put(Constants.RESPONSE_CODE, status.value());
         return new ResponseEntity<>(response, status);
     }
 }

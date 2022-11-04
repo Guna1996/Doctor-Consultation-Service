@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -62,7 +62,7 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return successResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
                 appointmentService.addAppointment(appointmentDto),
                 HttpStatus.OK);
     }
@@ -79,7 +79,7 @@ public class AppointmentController {
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return successResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
                 appointmentService.rescheduleAppointment(appointmentDto), HttpStatus.OK);
     }
 
@@ -94,7 +94,7 @@ public class AppointmentController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> removeAppointment(@PathVariable(Constants.ID) Integer id) {
-        return successResponse.responseEntity(appointmentService.removeAppointmentById(id),
+        return customResponse.responseEntity(appointmentService.removeAppointmentById(id),
                 null, HttpStatus.OK);
     }
 
@@ -118,7 +118,7 @@ public class AppointmentController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants
+        return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
                 .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
                 .OK, MathUtil.getExactCount(totalPages, totalRows));
@@ -144,7 +144,7 @@ public class AppointmentController {
         if (totalPages == 0) {
             throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants
+        return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
                 .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, MathUtil
                 .getExactCount(totalPages, totalRows));

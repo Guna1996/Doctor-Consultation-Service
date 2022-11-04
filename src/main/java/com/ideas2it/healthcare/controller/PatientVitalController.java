@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class PatientVitalController {
     private PatientVitalService patientVitalService;
 
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -60,7 +60,7 @@ public class PatientVitalController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addVitals(@Valid @RequestBody PatientVitalDto vitalsDto) {
-        return successResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
                 patientVitalService.addVitals(vitalsDto),
                 HttpStatus.OK);
     }
@@ -85,7 +85,7 @@ public class PatientVitalController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.VITALS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
                 patientVitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }

@@ -6,12 +6,12 @@
  */
 package com.ideas2it.healthcare.exception;
 
-import com.ideas2it.healthcare.common.ErrorConstants;
+import com.ideas2it.healthcare.response.CustomResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -29,6 +29,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class NotFoundExceptionHandler {
 
+    @Autowired
+    CustomResponse customResponse;
     /**
      * <p>
      * This method is used to handle exception occurred during validation
@@ -36,32 +38,30 @@ public class NotFoundExceptionHandler {
      * </p>
      *
      * @param exception {@link HttpStatus} is caught exception
+     * @return {@link ResponseEntity}
      */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleInvalidArgument(
+    public ResponseEntity<Map<String, Object>> handleInvalidArgument(
             MethodArgumentNotValidException exception) {
         Map<String, String> errorMap = new HashMap<>();
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+        return customResponse.responseEntity(errorMap, null, HttpStatus.BAD_REQUEST);
     }
 
     /**
      * <p>
-     * This method is used to handle exception occured while performing
+     * This method is used to handle exception occurred while performing
      * CRUD operation in database
      * </p>
      *
      * @param exception {@link HttpStatus} is caught exception
+     * @return {@link ResponseEntity}
      */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleBusinessException(
+    public ResponseEntity<Map<String, Object>> handleBusinessException(
             NotFoundException exception) {
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put(ErrorConstants.ERROR_MESSAGE, exception.getMessage());
-        return new ResponseEntity<>(errorMap, HttpStatus.INTERNAL_SERVER_ERROR);
+        return customResponse.responseEntity(exception.getMessage(), null,  HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
