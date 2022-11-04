@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.TimeslotService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class TimeslotController {
     private TimeslotService timeslotService;
 
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -58,7 +58,7 @@ public class TimeslotController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {
-        return successResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
                 timeslotService.addTimeslot(timeslotDto),
                 HttpStatus.OK);
     }
@@ -81,7 +81,7 @@ public class TimeslotController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }

@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.DoctorService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class DoctorController {
     private DoctorService doctorService;
 
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -62,7 +62,7 @@ public class DoctorController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return successResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
                 doctorService.saveDoctor(doctorDto),
                 HttpStatus.OK);
     }
@@ -85,7 +85,7 @@ public class DoctorController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
@@ -101,7 +101,7 @@ public class DoctorController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable int id) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTOR,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTOR,
                 doctorService.getDoctorById(id),
                 HttpStatus.OK);
     }
@@ -117,7 +117,7 @@ public class DoctorController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return successResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
                 doctorService.updateDoctor(doctorDto),
                 HttpStatus.OK);
     }
@@ -133,7 +133,7 @@ public class DoctorController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> removeDoctorById(@PathVariable int id) {
-        return successResponse.responseEntity(doctorService.removeDoctorById(id), null,
+        return customResponse.responseEntity(doctorService.removeDoctorById(id), null,
                 HttpStatus.OK);
     }
 }
