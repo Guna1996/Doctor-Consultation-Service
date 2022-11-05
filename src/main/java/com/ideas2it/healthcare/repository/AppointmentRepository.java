@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -72,7 +73,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
-    Page<Appointment> findByDoctorIdAndStatus(Integer id, String status, Pageable pageable);
+    Page<Appointment> findByDoctorIdAndStatus(Integer id, String status,
+                                              Pageable pageable);
 
     /**
      * <p>

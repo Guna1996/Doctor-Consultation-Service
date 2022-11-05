@@ -5,13 +5,13 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.PatientVitalMapper;
 import com.ideas2it.healthcare.repository.VitalsRepository;
 import com.ideas2it.healthcare.service.PatientVitalService;
@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,24 +43,37 @@ public class PatientVitalServiceImpl implements PatientVitalService {
      * {@inheritDoc}
      */
     public PatientVitalDto addVitals(PatientVitalDto vitalsDto) {
-        return PatientVitalMapper.toDto(vitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
+        try {
+            return PatientVitalMapper.toDto(vitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<PatientVitalDto> getVitalsByPatientId(Integer patientId, Integer pageNumber, Integer totalRows) {
-        return vitalsRepository
-                .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
-                        totalRows))
-                .toList().stream()
-                .map(PatientVitalMapper::toDto).collect(Collectors.toList());
+    public List<PatientVitalDto> getVitalsByPatientId(
+            Integer patientId, Integer pageNumber, Integer totalRows) {
+        try {
+            return vitalsRepository
+                    .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
+                            totalRows))
+                    .toList().stream()
+                    .map(PatientVitalMapper::toDto).collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfVitalsByPatientId(Integer patientId) {
-        return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
+        try {
+            return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 }

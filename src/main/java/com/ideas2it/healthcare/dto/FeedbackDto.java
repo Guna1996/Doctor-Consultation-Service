@@ -39,9 +39,11 @@ public class FeedbackDto {
     @Min(value = 0, message = ErrorConstants.RATING_SHOULD_NOT_BE_NEGATIVE)
     private float rating;
 
+    @NotNull(message = ErrorConstants.DOCTOR_SHOULD_NOT_BE_NULL)
     private DoctorDto doctor;
 
     private String status = Constants.ACTIVE;
 
+    @NotNull(message = ErrorConstants.PATIENT_SHOULD_NOT_BE_NULL)
     private PatientDto patient;
 }

@@ -2,10 +2,9 @@
  * <p>
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
- * Clinic,DoctorClinic,Appointment,Feedback,Patient,
- * Vital,Timeslot.
+ * Clinic,Doctor clinic,Appointment,Feedback,Patient,
+ * Patient vital,Timeslot.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 
@@ -26,7 +25,7 @@ import javax.persistence.OneToOne;
 /**
  * <p>
  * This Feedback class internally contains getter and setter
- * methods because of using lombok dependency
+ * methods for regarding fields because of using lombok dependency
  * </p>
  *
  * @author Bala Ashwanth.N

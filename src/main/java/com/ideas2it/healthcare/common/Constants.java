@@ -9,7 +9,7 @@ package com.ideas2it.healthcare.common;
 
 /**
  * <p>
- * This Constants class contains static final string variable
+ * This Constants class contains static final variable
  * with values, we can access these variable any where in the
  * global package by using class name and variable name
  * </p>
@@ -193,5 +193,8 @@ public class Constants {
     public static final String SYSTOLIC = "systolic";
 
     public static final String TOTAL_PAGES = "totalPages";
+    public static final String A_M = "am";
+
+    public static final String P_M = "pm";
 }
 

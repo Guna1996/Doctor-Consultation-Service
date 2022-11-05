@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repository.DoctorRepository;
@@ -45,8 +46,13 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto saveDoctor(DoctorDto doctorDto) {
-        return DoctorMapper.toDto(doctorRepository.save(DoctorMapper.fromDto(doctorDto)));
+    public String saveDoctor(DoctorDto doctorDto) {
+        try {
+            doctorRepository.save(DoctorMapper.fromDto(doctorDto));
+            return MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -54,12 +60,16 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
-        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
-        if (doctors.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+        try {
+            List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
+                    PageRequest.of(pageNumber, totalRows)).toList();
+            if (doctors.isEmpty()) {
+                throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+            }
+            return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
-        return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
     }
 
     /**
@@ -67,20 +77,29 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto getDoctorById(Integer id) {
-        return doctorRepository
-                .findByIdAndStatus(id, Constants.ACTIVE)
-                .stream()
-                .map(DoctorMapper::toDto)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
+        try {
+            return doctorRepository
+                    .findByIdAndStatus(id, Constants.ACTIVE)
+                    .stream()
+                    .map(DoctorMapper::toDto)
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public DoctorDto updateDoctor(DoctorDto doctorDto) {
-        return saveDoctor(doctorDto);
+    public String updateDoctor(DoctorDto doctorDto) {
+        try {
+            doctorRepository.save(DoctorMapper.fromDto(doctorDto));
+            return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -88,16 +107,24 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public String removeDoctorById(Integer id) {
-        if (1 <= doctorRepository.removeDoctorById(id)) {
-            return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
+        try {
+            if (1 <= doctorRepository.removeDoctorById(id)) {
+                return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
+            }
+            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
-        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfDoctors() {
-        return doctorRepository.countByStatus(Constants.ACTIVE);
+        try {
+            return doctorRepository.countByStatus(Constants.ACTIVE);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 }

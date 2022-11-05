@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This AppointmentController class is used to fix, reschedule and cancel
+ * This Appointment controller class is used to fix, reschedule and cancel
  * appointment by patient.
  * </p>
  *
@@ -52,8 +52,8 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to add appointment of a patient
-     * by getting details such as scheduledOn, patientId,
-     * doctorId, clinicId, etc from the patient
+     * by getting details such as scheduled on, patient id,
+     * doctor id, clinic id, etc from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is appointment object
@@ -115,13 +115,15 @@ public class AppointmentController {
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = appointmentService.countOfAppointmentByDoctorId(doctorId);
-        if (0 == totalPages) {
+        System.out.println(totalPages);
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
                 .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
-                .OK, MathUtil.getExactCount(totalPages, totalRows));
+                .OK,pages);
     }
 
     /**
@@ -141,12 +143,12 @@ public class AppointmentController {
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = appointmentService.countOfAppointmentByPatientId(patientId);
-        if (totalPages == 0) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
-                .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, MathUtil
-                .getExactCount(totalPages, totalRows));
+                .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, pages);
     }
 }

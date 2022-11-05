@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This ClinicController class is used to add,
+ * This Clinic controller class is used to add,
  * update, delete and get specific clinic.
  * </p>
  *
@@ -52,7 +52,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to add clinic by getting details
-     * such as name, doorNo, streetName,etc from the admin
+     * such as name, door number, street name,etc from the admin
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic object
@@ -66,8 +66,8 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to get all the details such as name, doorNo,
-     * streetName, etc of available clinics by admin
+     * This method is used to get all the details such as name, door number,
+     * street name, etc of available clinics
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -79,18 +79,18 @@ public class ClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = clinicService.countOfClinics();
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.CLINICS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
-                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK
-                , MathUtil.getExactCount(totalPages, totalRows));
+                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, pages);
     }
 
     /**
      * <p>
      * This method is used to get a particular clinic detail such as
-     * name, doorNo, streetName,etc of active clinic by admin
+     * name, door number, street name,etc of active clinic by admin
      * </p>
      *
      * @param id {@link Integer} is clinic id
@@ -105,7 +105,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to update the recorded details of a clinic
-     * such as name, doorNo, streetName,etc by admin
+     * such as name, door number, street name,etc
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is contains clinic details

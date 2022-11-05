@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, PatientMapper and ClinicMapper
  * classes.
  * </p>
  * Copyright 2022 - Ideas2it
@@ -13,8 +13,9 @@ import com.ideas2it.healthcare.model.Specialization;
 
 /**
  * <p>
- * SpecializationMapper is used convert Specialization object to
- * SpecializationDto and SpecializationDto into Specialization.
+ * Specialization mapper class is used convert Specialization object into
+ * Specialization dto and also used to convert Specialization dto into
+ * Specialization model.
  * </p>
  *
  * @author Mohamed Jubair
@@ -25,7 +26,7 @@ public class SpecializationMapper {
 
     /**
      * <p>
-     * This method is used to convert SpecializationDto to
+     * This method is used to convert Specialization dto into
      * Specialization model.
      * </p>
      *
@@ -44,8 +45,8 @@ public class SpecializationMapper {
 
     /**
      * <p>
-     * This method is used to convert Specialization to
-     * SpecializationDto.
+     * This method is used to convert Specialization model into
+     * Specialization dto.
      * </p>
      *
      * @param specialization {@link Specialization} contains specialization details

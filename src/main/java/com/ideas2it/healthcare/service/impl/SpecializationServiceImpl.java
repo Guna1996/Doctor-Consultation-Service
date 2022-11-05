@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
 import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.repository.SpecializationRepository;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,34 +47,46 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
-        return SpecializationMapper.toDto(specializationRepository
-                .save(SpecializationMapper.fromDto(specializationDto)));
+        try {
+            return SpecializationMapper.toDto(specializationRepository
+                    .save(SpecializationMapper.fromDto(specializationDto)));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows) {
-        List<Specialization> specializations = specializationRepository
-                .findAllByStatus(Constants.ACTIVE,
-                        PageRequest.of(pageNumber, totalRows)).toList();
-        if (specializations.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
+        try {
+            List<Specialization> specializations = specializationRepository
+                    .findAllByStatus(Constants.ACTIVE,
+                            PageRequest.of(pageNumber, totalRows)).toList();
+            if (specializations.isEmpty()) {
+                throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
 
+            }
+            return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
+        } catch (SQLException exception) {
+            throw new SqlException(exception.getMessage());
         }
-        return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
     }
 
     /**
      * {@inheritDoc}
      */
     public SpecializationDto getSpecializationById(Integer id) {
-        return specializationRepository
-                .findByIdAndStatus(id, Constants.ACTIVE)
-                .stream()
-                .map(SpecializationMapper::toDto)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
+        try {
+            return specializationRepository
+                    .findByIdAndStatus(id, Constants.ACTIVE)
+                    .stream()
+                    .map(SpecializationMapper::toDto)
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
+        } catch (SQLException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -80,23 +94,36 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto updateSpecialization(SpecializationDto specializationDto) {
-        return saveSpecialization(specializationDto);
+        try {
+            return SpecializationMapper.toDto(specializationRepository
+                    .save(SpecializationMapper.fromDto(specializationDto)));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String removeSpecializationById(Integer id) {
-        if (1 <= specializationRepository.removeSpecializationById(id)) {
-            return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
+        try {
+            if (1 <= specializationRepository.removeSpecializationById(id)) {
+                return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
+            }
+            throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
+        } catch (SQLException exception) {
+            throw new SqlException(exception.getMessage());
         }
-        throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfSpecializations() {
-        return specializationRepository.countByStatus(Constants.ACTIVE);
+        try {
+            return specializationRepository.countByStatus(Constants.ACTIVE);
+        } catch (SQLException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 }

@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -60,18 +62,26 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime) {
-        return appointmentRepository
-                .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isPresent();
+        try {
+            return appointmentRepository
+                    .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String removeAppointmentById(Integer id) {
-        if (1 <= appointmentRepository.removeAppointmentById(id)) {
-            return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
+        try {
+            if (1 <= appointmentRepository.removeAppointmentById(id)) {
+                return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
+            }
+            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
-        throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
     }
 
     /**
@@ -79,11 +89,15 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
-        return appointmentRepository.findByPatientIdAndStatus(
-                        patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
-                .stream()
-                .map(AppointmentMapper::toDto)
-                .collect(Collectors.toList());
+        try {
+            return appointmentRepository.findByPatientIdAndStatus(
+                            patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+                    .stream()
+                    .map(AppointmentMapper::toDto)
+                    .collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -91,26 +105,38 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                           Integer totalRows) {
-        return appointmentRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
-                        totalRows))
-                .toList().stream()
-                .map(AppointmentMapper::toDto)
-                .collect(Collectors.toList());
+        try {
+            return appointmentRepository
+                    .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
+                            totalRows))
+                    .toList().stream()
+                    .map(AppointmentMapper::toDto)
+                    .collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfAppointmentByPatientId(Integer patientId) {
-        return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
+        try {
+            return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfAppointmentByDoctorId(Integer doctorId) {
-        return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
+        try {
+            return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**

@@ -27,12 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
  * <p>
- * This DoctorController class is used to get and store information from a
- * doctor, update and delete doctors and get appointment, feedback of a
+ * This DoctorController class is used to get and store information of a
+ * doctor, update and delete doctors, feedback of a
  * doctor
  * </p>
  *
@@ -54,7 +55,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to add details of a doctor by getting
-     * details such as name, dateOfBirth, Gender, etc from the admin
+     * details such as name, date of birth, Gender, etc
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -62,15 +63,15 @@ public class DoctorController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
-                doctorService.saveDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.saveDoctor(doctorDto),
+                null,
                 HttpStatus.OK);
     }
 
     /**
      * <p>
      * This method is used to get All the details of doctors with pagination
-     * by getting page number and total rows required by admin
+     * by getting page number and total rows required
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -82,12 +83,13 @@ public class DoctorController {
             @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         int totalPages = doctorService.countOfDoctors();
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 
     /**
@@ -109,7 +111,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to update the details of doctor by getting
-     * details from the admin
+     * details
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -117,15 +119,15 @@ public class DoctorController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
-                doctorService.updateDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.updateDoctor(doctorDto),
+                null,
                 HttpStatus.OK);
     }
 
     /**
      * <p>
      * This method is used to remove the details of a doctor
-     * by getting doctor id from the admin
+     * by getting doctor id
      * </p>
      *
      * @param id {@link Integer} is id of doctor

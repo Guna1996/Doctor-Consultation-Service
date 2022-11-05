@@ -1,9 +1,9 @@
 /**
  * <p>
  * This package contains interfaces of DoctorClinicService,
- * PatientService, DoctorService, ClinicService,
- * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalServiceImpl.
+ * Patient service, Doctor service, Clinic service,
+ * Appointment service, Feedback service, Specialization service,
+ * Timeslot service, Patient vital service.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -16,8 +16,8 @@ import java.util.List;
 
 /**
  * <p>
- * AppointmentService interface consists of abstract methods which is used
- * for performing CRUD operation. it is used to transfer objects between
+ * Appointment service interface consists of abstract methods which is used
+ * for performing crud operation. it is used to transfer objects between
  * controller and repository
  * </p>
  *
@@ -46,7 +46,7 @@ public interface AppointmentService {
      * doctor in doctor database
      * </p>
      *
-     * @param id       {@link Integer} is id of the doctor
+     * @param id {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
      * @return {@link Boolean}
      */

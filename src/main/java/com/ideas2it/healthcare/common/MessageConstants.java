@@ -3,14 +3,13 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
 
 /**
  * <p>
- * This Constants class contains static final string variable
+ * This Constants class contains static final variable
  * with which are used as Success messages in this web application.
  * we can access these variable any where in the global package by
  * using class name and variable name
@@ -22,20 +21,20 @@ package com.ideas2it.healthcare.common;
  */
 public class MessageConstants {
 
-    public static final String SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC =
-            "Successfully deleted doctor from clinic";
+    public static final String SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC =
+            "Successfully removed doctor from clinic";
 
-    public static final String DOCTOR_DELETED_SUCCESSFULLY = "Doctor deleted successfully";
+    public static final String DOCTOR_REMOVED_SUCCESSFULLY = "Doctor removed successfully";
 
-    public static final String FEEDBACK_DELETED_SUCCESSFULLY = "Feedback deleted successfully";
+    public static final String FEEDBACK_REMOVED_SUCCESSFULLY = "Feedback removed successfully";
 
-    public static final String SPECIALIZATION_DELETED_SUCCESSFULLY =
-            "Specialization deleted successfully";
+    public static final String SPECIALIZATION_REMOVED_SUCCESSFULLY =
+            "Specialization removed successfully";
 
-    public static final String APPOINTMENT_DELETED_SUCCESSFULLY =
-            "Appointment deleted successfully";
+    public static final String APPOINTMENT_REMOVED_SUCCESSFULLY =
+            "Appointment removed successfully";
 
-    public static final String CLINIC_DELETED_SUCCESSFULLY = "Clinic deleted successfully";
+    public static final String CLINIC_REMOVED_SUCCESSFULLY = "Clinic removed successfully";
 
     public static final String DOCTOR_ID_CLINIC_ID_NOT_FOUND =
             "Doctor id and clinic id not found";

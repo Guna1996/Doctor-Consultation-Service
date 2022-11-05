@@ -15,6 +15,7 @@ import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,27 +52,40 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots().get(0))) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
         }
-        return DoctorClinicMapper.toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+        try {
+            return DoctorClinicMapper
+                    .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String removeDoctorFromClinic(Integer id) {
-        if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
-            return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+        try {
+            if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
+                return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+            }
+            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+        } catch (Exception exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
-        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
     }
 
     /**
      * {@inheritDoc}
      */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId) {
-        return DoctorClinicMapper.toDto(doctorClinicRepository
-                .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(
-                        MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+        try {
+            return DoctorClinicMapper.toDto(doctorClinicRepository
+                    .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+                    .orElseThrow(() -> new NotFoundException(
+                            MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+        } catch (Exception exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 
     /**
@@ -78,9 +93,13 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                       Integer totalRows) {
-        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
-                        PageRequest.of(pageNumber, totalRows)).toList().stream()
-                .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
+        try {
+            return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
+                            PageRequest.of(pageNumber, totalRows)).toList().stream()
+                    .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 
     /**
@@ -106,7 +125,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public Integer countOfDoctorsByClinicId(Integer clinicId) {
-        return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
+        try {
+            return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
+        } catch (Exception exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 }
 

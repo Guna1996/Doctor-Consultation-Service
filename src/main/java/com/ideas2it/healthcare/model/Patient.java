@@ -2,10 +2,9 @@
  * <p>
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
- * Clinic,DoctorClinic,Appointment,Feedback,Patient,
- * Vital,Timeslot.
+ * Clinic,Doctor clinic,Appointment,Feedback,Patient,
+ * Patient vital,Timeslot.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.model;

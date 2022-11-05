@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,17 +46,25 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     public FeedbackDto addFeedback(FeedbackDto feedbackDto) {
-        return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
+        try {
+            return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String deleteFeedback(Integer id) {
-        if (1 <= feedbackRepository.removeFeedbackById(id)) {
-            return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
+        try {
+            if (1 <= feedbackRepository.removeFeedbackById(id)) {
+                return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
+            }
+            throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
-        throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
     }
 
     /**
@@ -63,17 +73,25 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows) {
-        return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                        .of(pageNumber, totalRows)).toList()
-                .stream().map(FeedbackMapper::toDto)
-                .collect(Collectors.toList());
+        try {
+            return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
+                            .of(pageNumber, totalRows)).toList()
+                    .stream().map(FeedbackMapper::toDto)
+                    .collect(Collectors.toList());
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfFeedbacksByDoctorId(Integer doctorId) {
-        return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
+        try {
+            return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
 }

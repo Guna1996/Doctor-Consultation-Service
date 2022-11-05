@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * <p>
  * This VitalController class is used to manage
- * the vitals information of a patient from a
+ * the vitals information of a patient from a ///
  * doctor.
  * </p>
  *
@@ -52,7 +52,7 @@ public class PatientVitalController {
     /**
      * <p>
      * This method is used to add vitals of a patient by getting details
-     * such as height, weight, pulse, etc from the admin
+     * such as height, weight, pulse, etc
      * </p>
      *
      * @param vitalsDto {@link PatientVitalDto} is a dto object that contains information
@@ -82,11 +82,12 @@ public class PatientVitalController {
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = patientVitalService.countOfVitalsByPatientId(patientId);
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.VITALS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
                 patientVitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 }

@@ -3,7 +3,7 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -32,7 +32,7 @@ public class ErrorConstants {
 
     public static final String APPOINTMENTS_NOT_FOUND = "Appointments not found";
 
-    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
+    public static final String DOCTOR_UNABLE_TO_REMOVE = "Doctor unable to remove";
 
     public static final String CLINIC_NOT_FOUND = "Clinic not found";
 
@@ -48,11 +48,14 @@ public class ErrorConstants {
 
     public static final String SPECIALIZATIONS_NOT_FOUND = "Specializations not found";
 
-    public static final String ERROR_MESSAGE = "errorMessage";
+    public static final String DATABASE_NOT_FOUND = "Can't able to connect with database";
+
 
     public static final String FEEDBACK_NOT_FOUND = "Feedback is not found";
 
     public static final String FEEDBACKS_NOT_FOUND = "Feedbacks is not found";
+
+    public static final String INVALID_TIMESLOT ="Invalid Timeslot";
 
     public static final String APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE =
             "Appointment unavailable for this schedule. kindly choose other schedule";
@@ -125,6 +128,10 @@ public class ErrorConstants {
 
     public static final String RATING_SHOULD_NOT_BE_NULL = "Rating level shouldn't be null";
 
+    public static final String TIMESLOT_SHOULD_NOT_BE_EMPTY = "Timeslot should not be empty";
+
+    public static final String TIME_FORMAT_SHOULD_NOT_BE_EMPTY = "Time format should not be empty";
+
     public static final String COMMENT_SHOULD_NOT_BE_NULL = "Comment shouldn't be null";
 
     public static final String NAME_FORMAT =
@@ -152,9 +159,12 @@ public class ErrorConstants {
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
 
     public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
-
+    
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC =
             "Doctor already assigned to this clinic at this timeslot";
+            
     public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
+    
+    public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";
 }
 

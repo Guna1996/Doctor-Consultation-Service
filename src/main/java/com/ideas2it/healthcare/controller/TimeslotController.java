@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -57,7 +58,7 @@ public class TimeslotController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addTimeslot(@RequestBody TimeslotDto timeslotDto) {
+    public ResponseEntity<Map<String, Object>> addTimeslot(@Valid @RequestBody TimeslotDto timeslotDto) {
         return customResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
                 timeslotService.addTimeslot(timeslotDto),
                 HttpStatus.OK);
@@ -78,11 +79,12 @@ public class TimeslotController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = timeslotService.countOfTimeslots();
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 }

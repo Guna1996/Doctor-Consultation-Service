@@ -1,9 +1,9 @@
 /**
  * <p>
  * This package contains classes are DoctorClinicController,
- * PatientController,DoctorController,ClinicController,
- * AppointmentController,FeedbackController,SpecializationController,
- * TimeslotController,VitalController
+ * Patient controller,Doctor controller,Clinic controller,
+ * Appointment controller,Feedback controller,Specialization controller,
+ * Timeslot controller,Vital controller
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -55,15 +55,15 @@ public class DoctorClinicController {
     /**
      * <p>
      * This method is used to assign doctor to a clinic by getting details
-     * such as doctorId, clinicId, timeslots, etc from the admin
+     * such as doctor id, clinic id, timeslots, etc
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is details of doctor clinic
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> assignDoctorToClinic( @Valid
-            @RequestBody DoctorClinicDto doctorClinicDto) {
+    public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
+            @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
         return customResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
                 doctorClinicService.assignDoctorToClinic(doctorClinicDto), HttpStatus.OK);
     }
@@ -71,7 +71,7 @@ public class DoctorClinicController {
     /**
      * <p>
      * This method is used to remove doctor from a clinic
-     * by getting doctorclinic id
+     * by getting doctor clinic id
      * </p>
      *
      * @param id {@link Integer} id of the doctor object
@@ -120,11 +120,12 @@ public class DoctorClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = doctorClinicService.countOfDoctorsByClinicId(clinicId);
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 }
