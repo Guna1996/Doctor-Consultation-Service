@@ -10,7 +10,7 @@ package com.ideas2it.healthcare.common;
 
 /**
  * <p>
- * This Constants class contains static final string variable
+ * This Constants class contains static final variable
  * with which are used as Success messages in this web application.
  * we can access these variable any where in the global package by
  * using class name and variable name
