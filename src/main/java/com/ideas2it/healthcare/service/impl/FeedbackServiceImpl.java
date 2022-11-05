@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,8 +47,8 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     public FeedbackDto addFeedback(FeedbackDto feedbackDto) {
         try {
-        return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
-        } catch (SqlException exception) {
+            return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -61,7 +62,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                 return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -77,7 +78,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                             .of(pageNumber, totalRows)).toList()
                     .stream().map(FeedbackMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -88,7 +89,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public Integer countOfFeedbacksByDoctorId(Integer doctorId) {
         try {
             return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }

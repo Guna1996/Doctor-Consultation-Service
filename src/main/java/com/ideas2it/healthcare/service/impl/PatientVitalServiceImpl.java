@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
     public PatientVitalDto addVitals(PatientVitalDto vitalsDto) {
         try {
             return PatientVitalMapper.toDto(vitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -61,7 +62,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
                             totalRows))
                     .toList().stream()
                     .map(PatientVitalMapper::toDto).collect(Collectors.toList());
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -72,7 +73,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
     public Integer countOfVitalsByPatientId(Integer patientId) {
         try {
             return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }

@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -51,14 +52,10 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        try {
-            if (DateUtil.isDateInvalid(appointmentDto.getScheduledOn())) {
-                throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
-            }
-            return saveAppointment(appointmentDto);
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        if (DateUtil.isDateInvalid(appointmentDto.getScheduledOn())) {
+            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
+        return saveAppointment(appointmentDto);
     }
 
     /**
@@ -68,8 +65,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository
                     .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -82,7 +79,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -98,8 +95,8 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .stream()
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -115,8 +112,8 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .toList().stream()
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -126,8 +123,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Integer countOfAppointmentByPatientId(Integer patientId) {
         try {
             return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -137,8 +134,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Integer countOfAppointmentByDoctorId(Integer doctorId) {
         try {
             return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -158,15 +155,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
-        try {
-            if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
-                    appointmentDto.getScheduledOn())) {
-                throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
-            }
-            return AppointmentMapper
-                    .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+                appointmentDto.getScheduledOn())) {
+            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
         }
+        return AppointmentMapper
+                .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
     }
 }

@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             return TimeslotMapper.toDto(timeslotRepository
                     .save(TimeslotMapper.fromDto(timeslotDto)));
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }

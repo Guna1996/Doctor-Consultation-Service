@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**
@@ -59,7 +60,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @param status   {@link String} is status of doctorClinic
      * @return {@link Optional<DoctorClinic>}
      */
-    Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(Integer doctorId, Integer clinicId, String status);
+    Optional<DoctorClinic> findByDoctorIdAndClinicIdAndStatus(
+            Integer doctorId, Integer clinicId, String status);
 
     /**
      * <p>
@@ -85,7 +87,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<DoctorClinic>}
      */
-    Page<DoctorClinic> findByClinicIdAndStatus(Integer clinicId, String status, Pageable pageable);
+    Page<DoctorClinic> findByClinicIdAndStatus(
+            Integer clinicId, String status, Pageable pageable);
 
     /**
      * <p>
