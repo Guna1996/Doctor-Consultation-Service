@@ -28,13 +28,14 @@ public class MathUtil {
      * @param rows {@link Float}
      * @return {@link Integer}
      */
-    public static Integer getExactCount(float count, float rows) {
+    public static Integer pageCount(float count, float rows) {
         float result =  count/rows;
-        if (Math.floor(result) < result) {
-            return Math.round(result) + 1;
+        int pages = (int) Math.floor(result);
+        if (pages < result) {
+            return pages + 1;
         }
         else {
-            return Math.round(result);
+            return pages;
         }
     }
 }

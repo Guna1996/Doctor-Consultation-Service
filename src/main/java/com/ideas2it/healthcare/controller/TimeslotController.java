@@ -78,11 +78,12 @@ public class TimeslotController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = timeslotService.countOfTimeslots();
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 }

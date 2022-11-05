@@ -70,7 +70,7 @@ public class DoctorClinicController {
     /**
      * <p>
      * This method is used to remove doctor from a clinic
-     * by getting doctorclinic id
+     * by getting doctor-clinic id
      * </p>
      *
      * @param id {@link Integer} id of the doctor object
@@ -119,11 +119,12 @@ public class DoctorClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = doctorClinicService.countOfDoctorsByClinicId(clinicId);
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 }
