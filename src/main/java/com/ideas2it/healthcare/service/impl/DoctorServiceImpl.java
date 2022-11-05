@@ -89,9 +89,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public String removeDoctorById(Integer id) {
         if (1 <= doctorRepository.removeDoctorById(id)) {
-            return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
+            return MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
         }
-        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
     }
 
     /**

@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, Patient mapper and Clinic mapper
  * classes
  * </p>
  * Copyright 2022 - Ideas2it
@@ -13,8 +13,9 @@ import com.ideas2it.healthcare.model.Timeslot;
 
 /**
  * <p>
- * TimeslotMapper is used convert Timeslot object to
- * TimeslotDto and TimeslotDto into Timeslot
+ * Timeslot mapper class is used convert Timeslot object into
+ * Timeslot dto and also used to convert Timeslot dto into
+ * Timeslot model
  * </p>
  *
  * @author Mohamed Jubair
@@ -25,7 +26,7 @@ public class TimeslotMapper {
 
     /**
      * <p>
-     * This method is used to convert TimeslotDto to
+     * This method is used to convert Timeslot dto into
      * Timeslot model
      * </p>
      *
@@ -43,8 +44,8 @@ public class TimeslotMapper {
 
     /**
      * <p>
-     * This method is used to convert Timeslot to
-     * TimeslotDto
+     * This method is used to convert Timeslot model into
+     * Timeslot dto
      * </p>
      *
      * @param timeslot {@link Timeslot} contains timeslot details

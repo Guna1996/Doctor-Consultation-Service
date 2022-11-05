@@ -52,7 +52,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     public String deleteFeedback(Integer id) {
         if (1 <= feedbackRepository.removeFeedbackById(id)) {
-            return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
+            return MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
         }
         throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
     }

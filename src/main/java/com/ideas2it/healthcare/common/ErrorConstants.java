@@ -3,7 +3,7 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -32,7 +32,7 @@ public class ErrorConstants {
 
     public static final String APPOINTMENTS_NOT_FOUND = "Appointments not found";
 
-    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
+    public static final String DOCTOR_UNABLE_TO_REMOVE = "Doctor unable to remove";
 
     public static final String CLINIC_NOT_FOUND = "Clinic not found";
 

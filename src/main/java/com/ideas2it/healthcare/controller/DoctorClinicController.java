@@ -1,9 +1,9 @@
 /**
  * <p>
  * This package contains classes are DoctorClinicController,
- * PatientController,DoctorController,ClinicController,
- * AppointmentController,FeedbackController,SpecializationController,
- * TimeslotController,VitalController
+ * Patient controller,Doctor controller,Clinic controller,
+ * Appointment controller,Feedback controller,Specialization controller,
+ * Timeslot controller,Vital controller
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -54,7 +55,7 @@ public class DoctorClinicController {
     /**
      * <p>
      * This method is used to assign doctor to a clinic by getting details
-     * such as doctorId, clinicId, timeslots, etc from the admin
+     * such as doctor id, clinic id, timeslots, etc
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is details of doctor clinic
@@ -62,7 +63,7 @@ public class DoctorClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
-            @RequestBody DoctorClinicDto doctorClinicDto) {
+            @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
         return customResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
                 doctorClinicService.assignDoctorToClinic(doctorClinicDto), HttpStatus.OK);
     }
@@ -70,7 +71,7 @@ public class DoctorClinicController {
     /**
      * <p>
      * This method is used to remove doctor from a clinic
-     * by getting doctorclinic id
+     * by getting doctor clinic id
      * </p>
      *
      * @param id {@link Integer} id of the doctor object

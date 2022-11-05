@@ -45,7 +45,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        return DoctorClinicMapper.toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+        return DoctorClinicMapper.toDto(doctorClinicRepository.save(DoctorClinicMapper
+                .fromDto(doctorClinicDto)));
     }
 
     /**
@@ -53,9 +54,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public String removeDoctorFromClinic(Integer id) {
         if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
-            return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+            return MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
         }
-        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
     }
 
     /**

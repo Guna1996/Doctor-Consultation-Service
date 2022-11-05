@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, Patient mapper and Clinic mapper
  * classes
  * </p>
  * Copyright 2022 - Ideas2it
@@ -18,8 +18,8 @@ import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
- * FeedbackMapper is used convert Feedback object to
- * FeedbackDto and FeedbackDto into Feedback
+ * Feedback mapper class is used convert Feedback object into
+ * Feedback dto and also used to convert Feedback dto into Feedback model
  * </p>
  *
  * @author Mohamed Jubair
@@ -30,7 +30,7 @@ public class FeedbackMapper {
 
     /**
      * <p>
-     * This method is used to convert FeedbackDto to
+     * This method is used to convert Feedback dto into
      * Feedback model
      * </p>
      *
@@ -81,8 +81,8 @@ public class FeedbackMapper {
 
     /**
      * <p>
-     * This method is used to convert Feedback to
-     * FeedbackDto model
+     * This method is used to convert Feedback model into
+     * Feedback dto
      * </p>
      *
      * @param feedback {@link Feedback} contains feedback details

@@ -5,7 +5,6 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -54,7 +53,6 @@ public class PatientServiceImpl implements PatientService {
      */
     public PatientDto addPatient(PatientDto patientDto) {
         return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
-
     }
 
     /**
@@ -65,7 +63,6 @@ public class PatientServiceImpl implements PatientService {
                 .map(PatientMapper::toDto)
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
-
     }
 
     /**

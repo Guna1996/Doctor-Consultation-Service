@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, Patient mapper and Clinic mapper
  * classes
  * </p>
  * Copyright 2022 - Ideas2it
@@ -13,8 +13,9 @@ import com.ideas2it.healthcare.model.Patient;
 
 /**
  * <p>
- * DoctorClinicMapper is used convert DoctorClinic object to
- * DoctorClinicDto and DoctorClinicDto into DoctorClinic
+ * Patient mapper class is used convert Patient model into
+ * Patient dto and also used to convert Patient dto into
+ * Patient model.
  * </p>
  *
  * @author Ramachandran
@@ -25,7 +26,7 @@ public class PatientMapper {
 
     /**
      * <p>
-     * This method is used to convert PatientDto to
+     * This method is used to convert Patient dto into
      * Patient model
      * </p>
      *
@@ -48,8 +49,8 @@ public class PatientMapper {
 
     /**
      * <p>
-     * This method is used to convert Patient to
-     * PatientDto
+     * This method is used to convert Patient into
+     * Patient dto
      * </p>
      *
      * @param patient {@link Patient} contains patient details

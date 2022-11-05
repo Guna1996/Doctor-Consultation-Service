@@ -69,7 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String removeAppointmentById(Integer id) {
         if (1 <= appointmentRepository.removeAppointmentById(id)) {
-            return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
+            return MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
         }
         throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
     }

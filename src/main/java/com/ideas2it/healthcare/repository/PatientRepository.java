@@ -5,7 +5,6 @@
  * AppointmentRepository, FeedbackRepository, SpecializationRepository,
  * TimeslotRepository, VitalsRepository.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.repository;

@@ -86,7 +86,7 @@ public class ClinicServiceImpl implements ClinicService {
      */
     public String removeClinicById(Integer id) {
         if (1 <= clinicRepository.removeClinicById(id)) {
-            return MessageConstants.CLINIC_DELETED_SUCCESSFULLY;
+            return MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
         }
         throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
     }
