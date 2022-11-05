@@ -8,10 +8,8 @@
 package com.ideas2it.healthcare.util;
 
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;

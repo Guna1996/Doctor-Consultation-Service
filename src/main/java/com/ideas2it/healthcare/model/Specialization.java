@@ -19,8 +19,8 @@ import javax.persistence.Transient;
 
 /**
  * <p>
- * This Specialization class is a model class and this class is used
- * to transfer the object from dto layer to service
+ * This Specialization class internally contains getter and setter
+ * methods for regarding fields because of using lombok dependency
  * layer.
  * </p>
  *

@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This AppointmentController class is used to fix, reschedule and cancel
+ * This Appointment controller class is used to fix, reschedule and cancel
  * appointment by patient.
  * </p>
  *
@@ -52,8 +52,8 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to add appointment of a patient
-     * by getting details such as scheduledOn, patientId,
-     * doctorId, clinicId, etc from the patient
+     * by getting details such as scheduled on, patient id,
+     * doctor id, clinic id, etc from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is appointment object

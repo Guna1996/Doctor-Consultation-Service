@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains interfaces of DoctorClinicService,
- * PatientService, DoctorService, ClinicService,
- * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalServiceImpl.
+ * This package contains interfaces of Doctor clinic service,
+ * Patient service, Doctor service, Clinic service,
+ * Appointment service, Feedback service, Specialization service,
+ * Timeslot service, Patient vital service.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.dto.PatientDto;
 /**
  * <p>
  * PatientService interface consists of abstract methods which is used
- * for performing CRUD operation. it is used to transfer objects between
+ * for performing crud operation. it is used to transfer objects between
  * controller and repository
  * </p>
  *

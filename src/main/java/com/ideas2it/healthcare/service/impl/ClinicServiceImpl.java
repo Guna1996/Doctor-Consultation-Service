@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,8 +51,8 @@ public class ClinicServiceImpl implements ClinicService {
         Clinic clinic = ClinicMapper.fromDto(clinicDto);
         try {
             return ClinicMapper.toDto(clinicRepository.save(clinic));
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -68,7 +69,7 @@ public class ClinicServiceImpl implements ClinicService {
             return clinics.stream()
                     .map(ClinicMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -82,7 +83,7 @@ public class ClinicServiceImpl implements ClinicService {
                     map(ClinicMapper::toDto)
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -93,8 +94,8 @@ public class ClinicServiceImpl implements ClinicService {
     public ClinicDto updateClinic(ClinicDto clinicDto) {
         try {
             return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -107,8 +108,8 @@ public class ClinicServiceImpl implements ClinicService {
                 return MessageConstants.CLINIC_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -118,8 +119,8 @@ public class ClinicServiceImpl implements ClinicService {
     public Integer countOfClinics() {
         try {
             return clinicRepository.countByStatus(Constants.ACTIVE);
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 

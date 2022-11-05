@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**
@@ -54,7 +55,8 @@ public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
      * @param pageable  {@link Pageable} contains page number and number of rows required
      * @return {@link Page<PatientVital>}
      */
-    Page<PatientVital> findByPatientIdAndStatus(Integer patientId, String status, Pageable pageable);
+    Page<PatientVital> findByPatientIdAndStatus(
+            Integer patientId, String status, Pageable pageable);
 
     /**
      * <p>

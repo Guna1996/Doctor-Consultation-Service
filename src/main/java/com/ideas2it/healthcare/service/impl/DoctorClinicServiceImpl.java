@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +50,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         try {
             return DoctorClinicMapper
                     .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
         }
     }
 
@@ -63,7 +64,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
             }
             throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -77,7 +78,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                     .orElseThrow(() -> new NotFoundException(
                             MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -91,7 +92,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
                             PageRequest.of(pageNumber, totalRows)).toList().stream()
                     .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -102,7 +103,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     public Integer countOfDoctorsByClinicId(Integer clinicId) {
         try {
             return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }

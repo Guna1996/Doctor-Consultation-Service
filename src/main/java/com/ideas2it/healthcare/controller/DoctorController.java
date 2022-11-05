@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -54,7 +55,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to add details of a doctor by getting
-     * details such as name, dateOfBirth, Gender, etc from the admin
+     * details such as name, date of birth, Gender, etc
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -62,15 +63,15 @@ public class DoctorController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
-                doctorService.saveDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.saveDoctor(doctorDto),
+                null,
                 HttpStatus.OK);
     }
 
     /**
      * <p>
      * This method is used to get All the details of doctors with pagination
-     * by getting page number and total rows required by admin
+     * by getting page number and total rows required
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
@@ -110,7 +111,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to update the details of doctor by getting
-     * details from the admin
+     * details
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -118,15 +119,15 @@ public class DoctorController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
-                doctorService.updateDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.updateDoctor(doctorDto),
+                null,
                 HttpStatus.OK);
     }
 
     /**
      * <p>
      * This method is used to remove the details of a doctor
-     * by getting doctor id from the admin
+     * by getting doctor id
      * </p>
      *
      * @param id {@link Integer} is id of doctor

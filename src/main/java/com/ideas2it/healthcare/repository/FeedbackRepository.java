@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**
@@ -56,7 +57,8 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Feedback>}
      */
-    Page<Feedback> findByDoctorIdAndStatus(Integer doctorId, String status, Pageable pageable);
+    Page<Feedback> findByDoctorIdAndStatus(
+            Integer doctorId, String status, Pageable pageable);
 
     /**
      * <p>

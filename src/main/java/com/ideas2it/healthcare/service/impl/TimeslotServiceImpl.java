@@ -4,7 +4,6 @@
  * PatientImpl, DoctorImpl, ClinicImpl,
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
- * </p>
  * <p>
  * Copyright 2022 - Ideas2it
  */
@@ -23,8 +22,8 @@ import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalTime;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +53,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             return TimeslotMapper.toDto(timeslotRepository
                     .save(TimeslotMapper.fromDto(timeslotDto)));
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
