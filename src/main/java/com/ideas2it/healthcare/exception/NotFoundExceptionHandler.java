@@ -62,6 +62,22 @@ public class NotFoundExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleBusinessException(
             NotFoundException exception) {
-        return customResponse.responseEntity(exception.getMessage(), null,  HttpStatus.INTERNAL_SERVER_ERROR);
+        return customResponse.responseEntity(exception.getMessage(), null,  HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method is used to handle the sql exception occurred
+     * while running the CRUD operation in database
+     * </p>
+     *
+     * @param exception {@link HttpStatus} is caught exception
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(SqlException.class)
+    public ResponseEntity<Map<String, Object>> handleSqlException(
+            NotFoundException exception) {
+        return customResponse
+                .responseEntity(exception.getMessage(), null,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

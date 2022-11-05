@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.DoctorDto;
+import com.ideas2it.healthcare.exception.SqlException;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public interface DoctorService {
      * @param doctorDto {@link DoctorDto} contains details of doctor
      * @return {@link DoctorDto}
      */
-    DoctorDto saveDoctor(DoctorDto doctorDto);
+    DoctorDto saveDoctor(DoctorDto doctorDto) throws SqlException;
 
     /**
      * <p>

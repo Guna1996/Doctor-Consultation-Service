@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.TimeslotMapper;
 import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.TimeslotRepository;
@@ -45,27 +46,39 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
-        return TimeslotMapper.toDto(timeslotRepository
-                .save(TimeslotMapper.fromDto(timeslotDto)));
+        try {
+            return TimeslotMapper.toDto(timeslotRepository
+                    .save(TimeslotMapper.fromDto(timeslotDto)));
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows) {
-        List<Timeslot> timeslots = timeslotRepository
-                .findAll(PageRequest.of(pageNumber, totalRows)).toList();
-        if (timeslots.isEmpty()) {
-            throw new NotFoundException(MessageConstants.TIMESLOT_IS_EMPTY);
+        try {
+            List<Timeslot> timeslots = timeslotRepository
+                    .findAll(PageRequest.of(pageNumber, totalRows)).toList();
+            if (timeslots.isEmpty()) {
+                throw new NotFoundException(MessageConstants.TIMESLOT_IS_EMPTY);
+            }
+            return timeslots.stream().map(TimeslotMapper::toDto)
+                    .collect(Collectors.toList());
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
         }
-        return timeslots.stream().map(TimeslotMapper::toDto)
-                .collect(Collectors.toList());
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfTimeslots() {
-        return (int) timeslotRepository.count();
+        try {
+            return (int) timeslotRepository.count();
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 }
