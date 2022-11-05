@@ -3,9 +3,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/healthcare
     username: root
-    password: rama
-
-
+    password: Guna@1996
 
   jpa:
     hibernate.ddl-auto: update

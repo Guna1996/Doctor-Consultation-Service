@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -100,4 +101,6 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @return {@link Integer}
      */
     Integer countByClinicIdAndStatus(Integer clinicId, String status);
+
+    DoctorClinic findByDoctorIdAndClinicId(Integer doctorId, int clinicId);
 }

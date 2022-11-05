@@ -40,5 +40,6 @@ public class DoctorClinicDto {
     @NotNull(message = ErrorConstants.CLINIC_SHOULD_NOT_BE_NULL)
     private ClinicDto clinic;
 
+    @NotNull(message = ErrorConstants.TIMESLOT_SHOULD_NOT_BE_NULL)
     private List<TimeslotDto> timeslots;
 }
