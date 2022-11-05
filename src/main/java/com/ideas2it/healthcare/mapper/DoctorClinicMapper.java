@@ -85,6 +85,7 @@ public class DoctorClinicMapper {
                     Timeslot timeslot = new Timeslot();
                     timeslot.setId(timeslotDto.getId());
                     timeslot.setTimeslot(timeslotDto.getTimeslot());
+                    timeslot.setTimeFormat(timeslotDto.getTimeFormat());
                     timeslots.add(timeslot);
                 });
                 doctorClinic.setTimeslots(timeslots);
@@ -149,6 +150,7 @@ public class DoctorClinicMapper {
                 timeslots.forEach(timeslot -> {
                     TimeslotDto timeslotDto = new TimeslotDto();
                     timeslotDto.setId(timeslot.getId());
+                    timeslotDto.setTimeFormat(timeslot.getTimeFormat());
                     timeslotDto.setTimeslot(timeslot.getTimeslot());
                     timeslotsDto.add(timeslotDto);
                 });
