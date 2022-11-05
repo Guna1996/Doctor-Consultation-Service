@@ -5,7 +5,6 @@
  * AppointmentImpl, FeedbackImpl, SpecializationImpl,
  * TimeslotImpl, VitalsImpl
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service.impl;
@@ -59,7 +58,6 @@ public class PatientServiceImpl implements PatientService {
         } catch (SqlException exception) {
             throw new SqlException(exception.getMessage());
         }
-
     }
 
     /**
@@ -74,7 +72,6 @@ public class PatientServiceImpl implements PatientService {
         } catch (SqlException exception) {
             throw new SqlException(exception.getMessage());
         }
-
     }
 
     /**

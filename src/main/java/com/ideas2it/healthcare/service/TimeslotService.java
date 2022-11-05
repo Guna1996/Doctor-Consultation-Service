@@ -1,7 +1,7 @@
 /**
  * <p>
- * This package contains interfaces of DoctorClinicService,
- * PatientService, DoctorService, ClinicService,
+ * This package contains interfaces of Doctor clinic service,
+ * Patient service, Doctor service, ClinicService,
  * AppointmentService, FeedbackService, SpecializationService,
  * TimeslotControllerService, VitalServiceImpl.
  * </p>

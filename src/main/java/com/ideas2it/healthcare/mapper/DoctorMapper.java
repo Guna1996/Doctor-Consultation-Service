@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, Patient mapper and Clinic mapper
  * classes.
  * </p>
  * Copyright 2022 - Ideas2it
@@ -19,8 +19,9 @@ import java.util.Set;
 
 /**
  * <p>
- * DoctorMapper is used convert Doctor object to
- * DoctorDto and DoctorDto into Doctor.
+ * Doctor mapper class is used convert Doctor model into
+ * Doctor dto and also used to convert Doctor dto into
+ * Doctor model.
  * </p>
  *
  * @author Bala Ashwanth
@@ -31,7 +32,7 @@ public class DoctorMapper {
 
     /**
      * <p>
-     * This method is used to convert DoctorDto to
+     * This method is used to convert the Doctor dto to
      * Doctor model.
      * </p>
      *
@@ -70,7 +71,7 @@ public class DoctorMapper {
     /**
      * <p>
      * This method is used to convert Doctor model to
-     * Doctor Dto.
+     * Doctor dto.
      * </p>
      *
      * @param doctor {@link Doctor} contains doctor details

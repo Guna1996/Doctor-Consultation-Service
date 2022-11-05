@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, Patient mapper and Clinic mapper
  * classes
  * </p>
  * Copyright 2022 - Ideas2it
@@ -20,8 +20,8 @@ import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
- * AppointmentMapper is used convert Appointment object to
- * AppointmentDto and AppointmentDto into Appointment
+ * Appointment mapper is used convert Appointment object to
+ * Appointment dto and Appointment dto into Appointment
  * </p>
  *
  * @author Mohamed Jubair
@@ -32,7 +32,7 @@ public class AppointmentMapper {
 
     /**
      * <p>
-     * This method is used to convert AppointmentDto to
+     * This method is used to convert Appointment dto into
      * Appointment model
      * </p>
      *
@@ -96,8 +96,8 @@ public class AppointmentMapper {
 
     /**
      * <p>
-     * This method is used to convert VitalDto to
-     * Vital model
+     * This method is used to convert Appointment model into
+     * Appointment dto
      * </p>
      *
      * @param appointment {@link Appointment} contains appointment details

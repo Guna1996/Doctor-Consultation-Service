@@ -52,7 +52,7 @@ public class PatientVitalController {
     /**
      * <p>
      * This method is used to add vitals of a patient by getting details
-     * such as height, weight, pulse, etc bt the
+     * such as height, weight, pulse, etc
      * </p>
      *
      * @param vitalsDto {@link PatientVitalDto} is a dto object that contains information

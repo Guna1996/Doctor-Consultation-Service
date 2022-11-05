@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the mapper classes
- * which is for DoctorMapper, PatientMapper and ClinicMapper
+ * which is for Doctor mapper, Patient mapper and Clinic mapper
  * classes
  * </p>
  * Copyright 2022 - Ideas2it
@@ -19,8 +19,8 @@ import com.ideas2it.healthcare.util.VitalUtil;
 
 /**
  * <p>
- * VitalMapper is used convert Vital object to
- * VitalDto and VitalDto into Vital
+ * Patient vital mapper is used convert Patient vital object into
+ * Patient vital dto and Patient vital dto into Patient vital model.
  * </p>
  *
  * @author Ramachandran
@@ -31,28 +31,28 @@ public class PatientVitalMapper {
 
     /**
      * <p>
-     * This method is used to convert VitalDto to
-     * Vital model
+     * This method is used to convert Patient vital dto into
+     * Patient vital model
      * </p>
      *
-     * @param vitalsDto {@link PatientVitalDto} contains vitals details
+     * @param patientVitalDto {@link PatientVitalDto} contains vitals details
      * @return {@link PatientVital}
      */
-    public static PatientVital fromDto(PatientVitalDto vitalsDto) {
+    public static PatientVital fromDto(PatientVitalDto patientVitalDto) {
         PatientVital patientVital = new PatientVital();
-        if (null != vitalsDto) {
-            patientVital.setId(vitalsDto.getId());
-            patientVital.setHeight(vitalsDto.getHeight());
-            patientVital.setWeight(vitalsDto.getWeight());
-            patientVital.setPulse(vitalsDto.getPulse());
-            patientVital.setSystolic(vitalsDto.getSystolic());
-            patientVital.setDiastolic(vitalsDto.getDiastolic());
-            patientVital.setSugarLevel(vitalsDto.getSugarLevel());
-            patientVital.setStatus(vitalsDto.getStatus());
-            patientVital.setCreatedAt(vitalsDto.getCreatedAt());
-            patientVital.setBpRiskLevel(VitalUtil.getBPRiskLevel(vitalsDto.getSystolic(),
-                    vitalsDto.getDiastolic()));
-            DoctorDto doctorDto = vitalsDto.getDoctor();
+        if (null != patientVitalDto) {
+            patientVital.setId(patientVitalDto.getId());
+            patientVital.setHeight(patientVitalDto.getHeight());
+            patientVital.setWeight(patientVitalDto.getWeight());
+            patientVital.setPulse(patientVitalDto.getPulse());
+            patientVital.setSystolic(patientVitalDto.getSystolic());
+            patientVital.setDiastolic(patientVitalDto.getDiastolic());
+            patientVital.setSugarLevel(patientVitalDto.getSugarLevel());
+            patientVital.setStatus(patientVitalDto.getStatus());
+            patientVital.setCreatedAt(patientVitalDto.getCreatedAt());
+            patientVital.setBpRiskLevel(VitalUtil.getBPRiskLevel(patientVitalDto.getSystolic(),
+                    patientVitalDto.getDiastolic()));
+            DoctorDto doctorDto = patientVitalDto.getDoctor();
             if (null != doctorDto) {
                 Doctor doctor = new Doctor();
                 doctor.setId(doctorDto.getId());
@@ -69,7 +69,7 @@ public class PatientVitalMapper {
                 doctor.setStatus(doctorDto.getStatus());
                 patientVital.setDoctor(doctor);
             }
-            PatientDto patientDto = vitalsDto.getPatient();
+            PatientDto patientDto = patientVitalDto.getPatient();
             if (null != patientDto) {
                 Patient patient = new Patient();
                 patient.setId(patientDto.getId());
@@ -89,8 +89,8 @@ public class PatientVitalMapper {
 
     /**
      * <p>
-     * This method is used to convert Vital to
-     * VitalDto
+     * This method is used to convert Patient vital model into
+     * Patient vital dto.
      * </p>
      *
      * @param patientVital {@link PatientVital} contains vitals details

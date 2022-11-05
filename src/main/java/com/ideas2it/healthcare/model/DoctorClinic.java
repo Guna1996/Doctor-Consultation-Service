@@ -2,10 +2,9 @@
  * <p>
  * This is the base package for all the model classes and
  * the model package contains classes are Doctor,Specialization,
- * Clinic,DoctorClinic,appointment,Feedback,Patient,
- * Vital,Timeslot.
+ * Clinic,Doctor clinic,appointment,Feedback,Patient,
+ * Patient vital,Timeslot.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.model;
@@ -26,9 +25,9 @@ import java.util.List;
 
 /**
  * <p>
- * This DoctorClinic class internally contains getter and setter
- * methods because of using lombok dependency and by using this class,
- * clinic class can get the doctor availability.
+ * This Doctor clinic class internally contains getter and setter
+ * methods for regarding fields because of using lombok dependency
+ *
  * </p>
  *
  * @author Ramachandran

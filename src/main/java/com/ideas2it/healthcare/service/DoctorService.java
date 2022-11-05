@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains interfaces of DoctorClinicService,
- * PatientService, DoctorService, ClinicService,
- * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalServiceImpl.
+ * This package contains interfaces of Doctor clinic service,
+ * Patient service, Doctor service, Clinic service,
+ * Appointment service, Feedback service, Specialization service,
+ * Timeslot service, Patient vital service.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -16,8 +16,8 @@ import java.util.List;
 
 /**
  * <p>
- * DoctorService interface consists of abstract methods which is used
- * for performing CRUD operation. it is used to transfer objects between
+ * Doctor service interface consists of abstract methods which is used
+ * for performing crud operation. it is used to transfer objects between
  * controller and repository
  * </p>
  *
@@ -30,7 +30,7 @@ public interface DoctorService {
     /**
      * <p>
      * This method is used to create Doctor's record by
-     * getting DoctorDto as an input and convert it in to
+     * getting Doctor dto as an input and convert it in to
      * Doctor model with the help of mapper class
      * </p>
      *
@@ -54,7 +54,7 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to get the Doctor by id and
+     * This method is used to get the Doctor  by id and
      * convert it into DoctorDto
      * </p>
      *

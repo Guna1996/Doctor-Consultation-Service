@@ -9,7 +9,6 @@ package com.ideas2it.healthcare.dto;
 
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.common.MessageConstants;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

@@ -1,11 +1,10 @@
 /**
  * <p>
- * This package contains interfaces are DoctorClinicService,
- * PatientService, DoctorService, ClinicService,
- * AppointmentService, FeedbackService, SpecializationService,
- * TimeslotControllerService, VitalServiceImpl.
+ * This package contains interfaces are Doctor clinic service,
+ * Patient service, Doctor service, Clinic service,
+ * Appointment service, Feedback service, Specialization service,
+ * Timeslot service, Patient vital Service.
  * </p>
- * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.service;
@@ -16,8 +15,8 @@ import java.util.List;
 
 /**
  * <p>
- * ClinicService interface consists of abstract methods which is used
- * for performing CRUD operation. it is used to transfer objects between
+ * Clinic service interface consists of abstract methods which is used
+ * for performing crud operation. it is used to transfer objects between
  * controller and repository
  * </p>
  *

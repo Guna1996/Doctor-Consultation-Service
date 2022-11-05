@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This CustomResponse class is used to send response in a
+ * This Custom response class is used to send response in a
  * customised format with proper syntax
  * </p>
  *

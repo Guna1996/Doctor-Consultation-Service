@@ -1,9 +1,9 @@
 /**
  * <p>
  * This is the package contains classes are DoctorClinicController,
- * PatientController,DoctorController,ClinicController,
- * AppointmentController,FeedbackController,SpecializationController,
- * TimeslotController,VitalController
+ * Patient controller,Doctor controller,Clinic controller,
+ * Appointment controller,Feedback controller,Specialization controller,
+ * Timeslot controller,Vital controller
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -52,7 +52,7 @@ public class PatientController {
     /**
      * <p>
      * This method is used to add the details of a patient by getting details
-     * such as name, dateOfBirth, Gender, mobileNumber, etc from the patient
+     * such as name, date of birth, Gender, mobile number, etc from the patient
      * </p>
      *
      * @param patientDto {@link PatientDto} is patient detail
@@ -67,8 +67,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This method is used to get the details such as name, dateOfBirth, Gender,
-     * mobileNumber, etc of a patient by patient id
+     * This method is used to get the details such as name, date of birth, Gender,
+     * mobile number, etc of a patient by patient id
      * </p>
      *
      * @param id {@link Integer} is patient id
@@ -83,8 +83,8 @@ public class PatientController {
 
     /**
      * <p>
-     * This method is used to update the details such as name, dateOfBirth,
-     * Gender, mobileNumber, etc of a patient
+     * This method is used to update the details such as name, date of birth,
+     * Gender, mobile number, etc of a patient
      * </p>
      *
      * @param patientDto {@link PatientDto} is detail of patient

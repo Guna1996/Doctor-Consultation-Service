@@ -52,7 +52,6 @@ public class SpecializationController {
     /**
      * <p>
      * This method is used to add details of a Specialization by getting name
-     * from the admin///
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}is details of specialization
