@@ -1,7 +1,5 @@
 package com.ideas2it.healthcare.exception;
 
-import java.sql.SQLException;
-
 public class SqlException extends RuntimeException {
 
     /**

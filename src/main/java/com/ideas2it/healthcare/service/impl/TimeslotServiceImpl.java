@@ -11,6 +11,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,9 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
+        if (!isValidTimeslot(timeslotDto)) {
+            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
+        }
         try {
             return TimeslotMapper.toDto(timeslotRepository
                     .save(TimeslotMapper.fromDto(timeslotDto)));
@@ -66,7 +71,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             }
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException exception) {
+        } catch (SqlException    exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -80,5 +85,19 @@ public class TimeslotServiceImpl implements TimeslotService {
         } catch (SqlException exception) {
             throw new SqlException(exception.getMessage());
         }
+    }
+
+    private Boolean isValidTimeslot(TimeslotDto timeslotDto) {
+        if (12 < timeslotDto.getTimeslot().getHour()) {
+            throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
+        }
+        List<Timeslot> timeslots = timeslotRepository.findAll();
+        for (Timeslot timeslot: timeslots) {
+            if (timeslot.getTimeslot() == timeslotDto.getTimeslot() &&
+                    timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

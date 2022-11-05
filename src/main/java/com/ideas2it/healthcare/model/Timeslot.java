@@ -40,4 +40,7 @@ public class Timeslot {
 
     @Column
     private LocalTime timeslot;
+
+    @Column
+    private String timeFormat;
 }
