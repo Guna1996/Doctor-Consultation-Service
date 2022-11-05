@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
+import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
@@ -45,6 +46,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
+        if (isDoctorClinicAssigned(doctorClinicDto.getDoctor().getId(),
+                doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots().get(0))) {
+            throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
+        }
         return DoctorClinicMapper.toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
     }
 
@@ -76,6 +81,25 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
                         PageRequest.of(pageNumber, totalRows)).toList().stream()
                 .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean isDoctorClinicAssigned(Integer doctorId, int clinicId, TimeslotDto timeslot) {
+        List<TimeslotDto> timeslots = null;
+        DoctorClinicDto doctorClinicDto = getDoctorClinicByDoctorIdAndClinicId(doctorId, clinicId);
+        if (null != doctorClinicDto) {
+            timeslots = doctorClinicDto.getTimeslots();
+        }
+        if(timeslots != null)
+        return timeslots.contains(timeslot);
+        return false;
+    }
+
+    private DoctorClinicDto getDoctorClinicByDoctorIdAndClinicId(Integer doctorId, int clinicId) {
+        return DoctorClinicMapper.toDto(doctorClinicRepository
+                .findByDoctorIdAndClinicId(doctorId, clinicId));
     }
 
     /**

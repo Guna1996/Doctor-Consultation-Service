@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -81,9 +82,15 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/patient/**").permitAll()
                 .antMatchers("/appointment/**").permitAll()
                 .antMatchers("/patientVital/patient/**").permitAll()
+                .antMatchers("/swagger-ui.html/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
+//    public void configure(WebSecurity webSecurity) {
+//        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
+//                , "/swagger-ui.html", "/webjars/**");
+//    }
 }

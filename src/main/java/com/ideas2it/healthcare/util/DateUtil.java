@@ -48,7 +48,7 @@ public class DateUtil {
      * @param localDate {@link LocalDateTime} is date and time
      * @return {@link Boolean}
      */
-    public static Boolean isDateInvalid(LocalDateTime localDate) {
+    public static Boolean isDateValid(LocalDateTime localDate) {
         LocalDate date;
         try {
             date = localDate.toLocalDate();
@@ -56,6 +56,6 @@ public class DateUtil {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_SCHEDULE_TIME);
         }
         LocalDate currentDate = LocalDate.now();
-        return (0 < Period.between(date, currentDate).getDays());
+        return (0 > Period.between(currentDate, date).getDays());
     }
 }
