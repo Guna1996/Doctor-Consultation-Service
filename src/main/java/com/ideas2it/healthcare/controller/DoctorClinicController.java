@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class DoctorClinicController {
     private DoctorClinicService doctorClinicService;
     
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -63,7 +63,7 @@ public class DoctorClinicController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
             @RequestBody DoctorClinicDto doctorClinicDto) {
-        return successResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
                 doctorClinicService.assignDoctorToClinic(doctorClinicDto), HttpStatus.OK);
     }
 
@@ -79,7 +79,7 @@ public class DoctorClinicController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> removeDoctorFromClinic(
             @PathVariable(Constants.ID) Integer id) {
-        return successResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
+        return customResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
                 null, HttpStatus.OK);
     }
 
@@ -97,7 +97,7 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, Object>> getTimeslots(
             @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);
     }
@@ -122,7 +122,7 @@ public class DoctorClinicController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }

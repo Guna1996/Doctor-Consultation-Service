@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.FeedbackService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class FeedbackController {
     private FeedbackService feedbackService;
 
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -59,7 +59,7 @@ public class FeedbackController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return successResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
                 feedbackService.addFeedback(feedbackDto),
                 HttpStatus.OK);
     }
@@ -75,7 +75,7 @@ public class FeedbackController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return successResponse.responseEntity(feedbackService.deleteFeedback(id),
+        return customResponse.responseEntity(feedbackService.deleteFeedback(id),
                 null, HttpStatus.OK);
     }
 
@@ -99,7 +99,7 @@ public class FeedbackController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.FEEDBACKS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }

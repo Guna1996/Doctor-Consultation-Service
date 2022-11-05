@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.SpecializationService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class SpecializationController {
     private SpecializationService specializationService;
 
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -61,7 +61,7 @@ public class SpecializationController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addSpecialization(
             @Valid @RequestBody SpecializationDto specializationDto) {
-        return successResponse.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
                 specializationService.saveSpecialization(specializationDto),
                 HttpStatus.OK);
     }
@@ -84,7 +84,7 @@ public class SpecializationController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
     }
@@ -100,7 +100,7 @@ public class SpecializationController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable Integer id) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
                 specializationService.getSpecializationById(id),
                 HttpStatus.OK);
     }
@@ -117,7 +117,7 @@ public class SpecializationController {
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateSpecialization(
             @RequestBody SpecializationDto specializationDto) {
-        return successResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
                 specializationService.updateSpecialization(specializationDto),
                 HttpStatus.OK);
     }
@@ -133,7 +133,7 @@ public class SpecializationController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> removeSpecializationById(@PathVariable Integer id) {
-        return successResponse.responseEntity(specializationService.removeSpecializationById(id),
+        return customResponse.responseEntity(specializationService.removeSpecializationById(id),
                 null, HttpStatus.OK);
     }
 }

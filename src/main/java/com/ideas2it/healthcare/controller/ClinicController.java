@@ -12,7 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.response.SuccessResponse;
+import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class ClinicController {
     private ClinicService clinicService;
     
     @Autowired
-    private SuccessResponse successResponse;
+    private CustomResponse customResponse;
 
     /**
      * <p>
@@ -60,7 +60,7 @@ public class ClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return successResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
                 clinicService.addClinic(clinicDto), HttpStatus.OK);
     }
 
@@ -82,7 +82,7 @@ public class ClinicController {
         if (0 == totalPages) {
             throw new NotFoundException(ErrorConstants.CLINICS_NOT_FOUND);
         }
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK
                 , MathUtil.getExactCount(totalPages, totalRows));
     }
@@ -98,7 +98,7 @@ public class ClinicController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
-        return successResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
+        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
                 clinicService.getClinicById(id), HttpStatus.OK);
     }
 
@@ -113,7 +113,7 @@ public class ClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return successResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
+        return customResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
                 clinicService.updateClinic(clinicDto), HttpStatus.OK);
     }
 
@@ -128,7 +128,7 @@ public class ClinicController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> removeClinic(@PathVariable(Constants.ID) Integer id) {
-        return successResponse.responseEntity(clinicService.removeClinicById(id),
+        return customResponse.responseEntity(clinicService.removeClinicById(id),
                 null, HttpStatus.OK);
     }
 }
