@@ -12,6 +12,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repository.DoctorRepository;
@@ -21,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -46,7 +48,11 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto saveDoctor(DoctorDto doctorDto) {
-        return DoctorMapper.toDto(doctorRepository.save(DoctorMapper.fromDto(doctorDto)));
+        try {
+            return DoctorMapper.toDto(doctorRepository.save(DoctorMapper.fromDto(doctorDto)));
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -54,12 +60,16 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
-        List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
-                PageRequest.of(pageNumber, totalRows)).toList();
-        if (doctors.isEmpty()) {
-            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+        try {
+            List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
+                    PageRequest.of(pageNumber, totalRows)).toList();
+            if (doctors.isEmpty()) {
+                throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+            }
+            return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
         }
-        return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
     }
 
     /**
@@ -67,12 +77,16 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public DoctorDto getDoctorById(Integer id) {
-        return doctorRepository
-                .findByIdAndStatus(id, Constants.ACTIVE)
-                .stream()
-                .map(DoctorMapper::toDto)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
+        try {
+            return doctorRepository
+                    .findByIdAndStatus(id, Constants.ACTIVE)
+                    .stream()
+                    .map(DoctorMapper::toDto)
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -88,16 +102,24 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public String removeDoctorById(Integer id) {
-        if (1 <= doctorRepository.removeDoctorById(id)) {
-            return MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
+        try {
+            if (1 <= doctorRepository.removeDoctorById(id)) {
+                return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
+            }
+            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
         }
-        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfDoctors() {
-        return doctorRepository.countByStatus(Constants.ACTIVE);
+        try {
+            return doctorRepository.countByStatus(Constants.ACTIVE);
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 }

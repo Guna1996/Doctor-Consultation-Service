@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.PatientMapper;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.repository.PatientRepository;
@@ -52,28 +53,40 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public PatientDto addPatient(PatientDto patientDto) {
-        return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
+        try {
+            return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public PatientDto getPatientById(Integer id) {
-        return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream()
-                .map(PatientMapper::toDto)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
+        try {
+            return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream()
+                    .map(PatientMapper::toDto)
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public PatientDto updatePatient(PatientDto patientDto) {
-        Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
-                Constants.ACTIVE);
-        if (patient.isEmpty()) {
-            throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
+        try {
+            Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
+                    Constants.ACTIVE);
+            if (patient.isEmpty()) {
+                throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
+            }
+            return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
+        } catch (SqlException exception) {
+            throw new SqlException(exception.getMessage());
         }
-        return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
     }
 }

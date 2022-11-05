@@ -6,6 +6,7 @@ spring:
     password: rama
 
 
+
   jpa:
     hibernate.ddl-auto: update
     database-platform=org:

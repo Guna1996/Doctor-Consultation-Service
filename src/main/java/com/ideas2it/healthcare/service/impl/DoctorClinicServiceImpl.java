@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
@@ -45,28 +46,40 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        return DoctorClinicMapper.toDto(doctorClinicRepository.save(DoctorClinicMapper
-                .fromDto(doctorClinicDto)));
+        try {
+            return DoctorClinicMapper
+                    .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+        } catch (SqlException exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String removeDoctorFromClinic(Integer id) {
-        if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
-            return MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
+        try {
+            if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
+                return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+            }
+            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+        } catch (SqlException exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
-        throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
     }
 
     /**
      * {@inheritDoc}
      */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId) {
-        return DoctorClinicMapper.toDto(doctorClinicRepository
-                .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                .orElseThrow(() -> new NotFoundException(
-                        MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+        try {
+            return DoctorClinicMapper.toDto(doctorClinicRepository
+                    .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
+                    .orElseThrow(() -> new NotFoundException(
+                            MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+        } catch (SqlException exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 
     /**
@@ -74,16 +87,24 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      */
     public List<DoctorClinicDto> getDoctorsByClinicId(Integer clinicId, Integer pageNumber,
                                                       Integer totalRows) {
-        return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
-                        PageRequest.of(pageNumber, totalRows)).toList().stream()
-                .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
+        try {
+            return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
+                            PageRequest.of(pageNumber, totalRows)).toList().stream()
+                    .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
+        } catch (SqlException exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer countOfDoctorsByClinicId(Integer clinicId) {
-        return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
+        try {
+            return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
+        } catch (SqlException exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 }
 

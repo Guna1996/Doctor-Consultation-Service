@@ -31,8 +31,8 @@ import java.util.Map;
 
 /**
  * <p>
- * This DoctorController class is used to get and store information from a
- * doctor, update and delete doctors and get appointment, feedback of a
+ * This DoctorController class is used to get and store information of a
+ * doctor, update and delete doctors, feedback of a
  * doctor
  * </p>
  *
@@ -82,12 +82,13 @@ public class DoctorController {
             @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
         int totalPages = doctorService.countOfDoctors();
-        if (0 == totalPages) {
+        int pages = MathUtil.pageCount(totalPages, totalRows);
+        if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.getExactCount(totalPages, totalRows));
+                HttpStatus.OK, pages);
     }
 
     /**

@@ -53,7 +53,7 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to get timeslots of a particular doctor and clinic
-     * by doctor and clinic id
+     * by doctor id and clinic id
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
