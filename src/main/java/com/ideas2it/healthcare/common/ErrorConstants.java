@@ -50,6 +50,9 @@ public class ErrorConstants {
 
     public static final String ERROR_MESSAGE = "errorMessage";
 
+    public static final String DATABASE_NOT_FOUND = "Can't able to connect with database";
+
+
     public static final String FEEDBACK_NOT_FOUND = "Feedback is not found";
 
     public static final String FEEDBACKS_NOT_FOUND = "Feedbacks is not found";
