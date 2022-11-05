@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -62,8 +63,8 @@ public class DoctorController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_ADDED_SUCCESSFULLY,
-                doctorService.saveDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.saveDoctor(doctorDto),
+                null,
                 HttpStatus.OK);
     }
 
@@ -118,8 +119,8 @@ public class DoctorController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY,
-                doctorService.updateDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.updateDoctor(doctorDto),
+                null,
                 HttpStatus.OK);
     }
 

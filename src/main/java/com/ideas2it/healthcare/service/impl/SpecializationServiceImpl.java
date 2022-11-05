@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         try {
             return SpecializationMapper.toDto(specializationRepository
                     .save(SpecializationMapper.fromDto(specializationDto)));
-        } catch (SqlException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -67,7 +68,7 @@ public class SpecializationServiceImpl implements SpecializationService {
 
             }
             return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
-        } catch (SqlException exception) {
+        } catch (SQLException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -83,7 +84,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .map(SpecializationMapper::toDto)
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
-        } catch (SqlException exception) {
+        } catch (SQLException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -93,7 +94,12 @@ public class SpecializationServiceImpl implements SpecializationService {
      */
     @Override
     public SpecializationDto updateSpecialization(SpecializationDto specializationDto) {
-        return saveSpecialization(specializationDto);
+        try {
+            return SpecializationMapper.toDto(specializationRepository
+                    .save(SpecializationMapper.fromDto(specializationDto)));
+        } catch (Exception exception) {
+            throw new SqlException(exception.getMessage());
+        }
     }
 
     /**
@@ -105,7 +111,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                 return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
-        } catch (SqlException exception) {
+        } catch (SQLException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -116,7 +122,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public Integer countOfSpecializations() {
         try {
             return specializationRepository.countByStatus(Constants.ACTIVE);
-        } catch (SqlException exception) {
+        } catch (SQLException exception) {
             throw new SqlException(exception.getMessage());
         }
     }

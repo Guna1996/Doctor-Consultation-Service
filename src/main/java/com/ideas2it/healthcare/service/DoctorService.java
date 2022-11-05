@@ -37,7 +37,7 @@ public interface DoctorService {
      * @param doctorDto {@link DoctorDto} contains details of doctor
      * @return {@link DoctorDto}
      */
-    DoctorDto saveDoctor(DoctorDto doctorDto) throws SqlException;
+    String saveDoctor(DoctorDto doctorDto) throws SqlException;
 
     /**
      * <p>
@@ -73,7 +73,7 @@ public interface DoctorService {
      * @param doctorDto {@link DoctorDto} contains details of doctor
      * @return {@link DoctorDto}
      */
-    DoctorDto updateDoctor(DoctorDto doctorDto);
+    String updateDoctor(DoctorDto doctorDto);
 
     /**
      * <p>
