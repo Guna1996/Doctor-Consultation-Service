@@ -81,7 +81,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String removeAppointmentById(Integer id) {
         try {
             if (1 <= appointmentRepository.removeAppointmentById(id)) {
-                return MessageConstants.APPOINTMENT_DELETED_SUCCESSFULLY;
+                return MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
         } catch (DataAccessException exception) {
@@ -136,7 +136,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfAppointmentByDoctorId(Integer doctorId) {
+    public Integer getCountOfAppointmentByDoctorId(Integer doctorId) {
         try {
             return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {

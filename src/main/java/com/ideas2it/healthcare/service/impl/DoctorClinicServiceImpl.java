@@ -17,7 +17,6 @@ import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
-import com.ideas2it.healthcare.mapper.TimeslotMapper;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;

@@ -23,7 +23,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +59,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public String deleteFeedback(Integer id) {
         try {
             if (1 <= feedbackRepository.removeFeedbackById(id)) {
-                return MessageConstants.FEEDBACK_DELETED_SUCCESSFULLY;
+                return MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
         } catch (Exception exception) {
@@ -94,5 +93,4 @@ public class FeedbackServiceImpl implements FeedbackService {
             throw new SqlException(exception.getMessage());
         }
     }
-
 }

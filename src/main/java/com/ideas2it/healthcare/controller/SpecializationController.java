@@ -60,7 +60,7 @@ public class SpecializationController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addSpecialization(
             @Valid @RequestBody SpecializationDto specializationDto) {
-        return customResponse.responseEntity(specializationService.saveSpecialization(specializationDto),
+        return customResponse.responseEntity(specializationService.addSpecialization(specializationDto),
                 null,
                 HttpStatus.OK);
     }

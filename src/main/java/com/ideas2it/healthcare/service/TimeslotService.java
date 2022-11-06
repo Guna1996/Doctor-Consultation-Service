@@ -59,5 +59,14 @@ public interface TimeslotService {
      */
      Integer getTimeslotsCount();
 
+    /**
+     * <p>
+     * This abstract method is used to check whether the timeslot is present
+     * in the list of default timeslots which is in the timeslot master table
+     * </p>
+     *
+     * @param localTime {@link LocalTime} is timeslot
+     * @return {@link boolean}
+     */
     boolean isValidTimeslot(LocalTime localTime);
 }

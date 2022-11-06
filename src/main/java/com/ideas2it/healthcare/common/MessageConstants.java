@@ -106,10 +106,4 @@ public class MessageConstants {
 
     public static final String SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC  =
             "Successfully retrieved all doctors in clinic";
-    public static final String DOCTOR_DELETED_SUCCESSFULLY = "Doctor deleted Successfully";
-    public static final String FEEDBACK_DELETED_SUCCESSFULLY = "Feedback deleted Successfully";
-    public static final String SPECIALIZATION_DELETED_SUCCESSFULLY = "Specialization deleted Successfully";
-    public static final String SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC = "Successfully deleted doctor from clinic";
-    public static final String APPOINTMENT_DELETED_SUCCESSFULLY = "Appointment Deleted Successfully";
-    public static final String CLINIC_DELETED_SUCCESSFULLY = "Clinic deleted Successfully";
 }

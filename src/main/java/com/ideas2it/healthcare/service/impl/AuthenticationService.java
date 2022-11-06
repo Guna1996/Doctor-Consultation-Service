@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * <p>
@@ -39,7 +41,9 @@ public class AuthenticationService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("Admin"));
         return new User(Constants.USER_NAME, Constants.PASSWORD,
-                new ArrayList<>());
+                authorities);
     }
 }

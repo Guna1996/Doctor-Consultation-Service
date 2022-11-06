@@ -120,6 +120,5 @@ public interface AppointmentService {
      * @param doctorId {@link Integer} is id of doctor
      * @return {@link List<AppointmentDto>}
      */
-    Integer countOfAppointmentByDoctorId(Integer doctorId);
-
+    Integer getCountOfAppointmentByDoctorId(Integer doctorId);
 }

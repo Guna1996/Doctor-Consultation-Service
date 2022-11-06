@@ -35,7 +35,7 @@ public interface SpecializationService {
      *
      * @param specializationDto {@link SpecializationDto}
      */
-    String saveSpecialization(SpecializationDto specializationDto);
+    String addSpecialization(SpecializationDto specializationDto);
 
     /**
      * <p>

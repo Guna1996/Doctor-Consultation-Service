@@ -29,6 +29,7 @@ public class AppointmentDto {
 
     private int id;
 
+    @NotNull(message = ErrorConstants.SCHEDULED_ON_SHOULD_NOT_BE_NULL)
     private LocalDateTime scheduledOn;
 
     private LocalDateTime createdAt;

@@ -25,7 +25,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -109,7 +108,7 @@ public class ClinicServiceImpl implements ClinicService {
     public String removeClinicById(Integer id) {
         try {
             if (1 <= clinicRepository.removeClinicById(id)) {
-                return MessageConstants.CLINIC_DELETED_SUCCESSFULLY;
+                return MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         } catch (DataAccessException exception) {
