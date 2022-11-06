@@ -38,6 +38,7 @@ public class TimeslotMapper {
         if (null != timeslotDto) {
             timeslot.setId(timeslotDto.getId());
             timeslot.setTimeslot(timeslotDto.getTimeslot());
+            timeslot.setTimeFormat(timeslotDto.getTimeFormat());
         }
         return timeslot;
     }
@@ -56,6 +57,7 @@ public class TimeslotMapper {
         if (null != timeslot) {
             timeslotDto.setId(timeslot.getId());
             timeslotDto.setTimeslot(timeslot.getTimeslot());
+            timeslotDto.setTimeFormat(timeslot.getTimeFormat());
         }
         return timeslotDto;
     }
