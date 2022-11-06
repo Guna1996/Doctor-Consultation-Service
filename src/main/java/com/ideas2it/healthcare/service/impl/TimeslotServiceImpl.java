@@ -86,15 +86,26 @@ public class TimeslotServiceImpl implements TimeslotService {
         }
     }
 
+    /**
+     * <p>
+     * This method will check the given timeslot is already
+     * available and returns a boolean value
+     * </p>
+     *
+     * @param timeslotDto {@link TimeslotDto}
+     * @return {@link Boolean}
+     */
     private Boolean isValidTimeslot(TimeslotDto timeslotDto) {
         if (12 < timeslotDto.getTimeslot().getHour()) {
             throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
         }
         List<Timeslot> timeslots = timeslotRepository.findAll();
         for (Timeslot timeslot: timeslots) {
-            if (timeslot.getTimeslot() == timeslotDto.getTimeslot() &&
-                    timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat())) {
-                return false;
+            if (timeslot.getTimeslot().getHour() == timeslotDto.getTimeslot().getHour() &&
+               (timeslot.getTimeslot().getMinute() == timeslotDto.getTimeslot().getMinute()) &&
+               (timeslot.getTimeslot().getSecond() == timeslotDto.getTimeslot().getSecond()) &&
+               (timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat()))) {
+                    return false;
             }
         }
         return true;

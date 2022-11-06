@@ -47,12 +47,12 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
-        try {
+//        try {
             return SpecializationMapper.toDto(specializationRepository
                     .save(SpecializationMapper.fromDto(specializationDto)));
-        } catch (Exception exception) {
+/*        } catch ( exception) {
             throw new SqlException(exception.getMessage());
-        }
+        }*/
     }
 
     /**
@@ -68,7 +68,7 @@ public class SpecializationServiceImpl implements SpecializationService {
 
             }
             return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -84,7 +84,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .map(SpecializationMapper::toDto)
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -111,7 +111,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                 return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -122,7 +122,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public Integer countOfSpecializations() {
         try {
             return specializationRepository.countByStatus(Constants.ACTIVE);
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             throw new SqlException(exception.getMessage());
         }
     }

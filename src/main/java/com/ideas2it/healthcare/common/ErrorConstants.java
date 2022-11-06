@@ -166,5 +166,6 @@ public class ErrorConstants {
     public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
     
     public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";
+    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
 }
 
