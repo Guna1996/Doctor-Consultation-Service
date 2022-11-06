@@ -107,23 +107,6 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to update the details such as name
-     * of a Specialization.
-     * </p>
-     *
-     * @param specializationDto {@link SpecializationDto} is details of SpecializationDto
-     * @return {@link ResponseEntity}
-     */
-    @PutMapping
-    public ResponseEntity<Map<String, Object>> updateSpecialization(
-            @RequestBody SpecializationDto specializationDto) {
-        return customResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
-                specializationService.updateSpecialization(specializationDto),
-                HttpStatus.OK);
-    }
-
-    /**
-     * <p>
      * This method is used to remove the details of a Specialization
      * by specialization id
      * </p>
