@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -82,7 +81,7 @@ public class DoctorController {
     public ResponseEntity<Map<String, Object>> getAllDoctors(
             @PathVariable(Constants.PAGE_NUMBER) int pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) int totalRows) {
-        int totalPages = doctorService.countOfDoctors();
+        int totalPages = doctorService.getDoctorsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);

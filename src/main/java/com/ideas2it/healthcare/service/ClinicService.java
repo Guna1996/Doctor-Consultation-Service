@@ -91,5 +91,5 @@ public interface ClinicService {
      *
      * @return {@link Integer}
      */
-    Integer countOfClinics();
+    Integer getCountOfClinics();
 }

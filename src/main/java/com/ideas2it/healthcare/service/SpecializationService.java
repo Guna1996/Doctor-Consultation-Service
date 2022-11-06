@@ -89,5 +89,5 @@ public interface SpecializationService {
      *
      * @return {@link Integer}
      */
-    Integer countOfSpecializations();
+    Integer getSpecializationsCount();
 }

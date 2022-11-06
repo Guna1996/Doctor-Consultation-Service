@@ -142,7 +142,7 @@ public class AppointmentController {
             @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        int totalPages = appointmentService.countOfAppointmentByPatientId(patientId);
+        int totalPages = appointmentService.getCountOfAppointmentByPatientId(patientId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);

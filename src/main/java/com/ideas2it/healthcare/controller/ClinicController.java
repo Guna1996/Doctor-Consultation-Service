@@ -79,7 +79,7 @@ public class ClinicController {
     public ResponseEntity<Map<String, Object>> getClinics(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        int totalPages = clinicService.countOfClinics();
+        int totalPages = clinicService.getCountOfClinics();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.CLINICS_NOT_FOUND);

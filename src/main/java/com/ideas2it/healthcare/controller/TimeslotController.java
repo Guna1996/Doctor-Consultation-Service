@@ -78,7 +78,7 @@ public class TimeslotController {
     public ResponseEntity<Map<String, Object>> getAllTimeslots(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        int totalPages = timeslotService.countOfTimeslots();
+        int totalPages = timeslotService.getTimeslotsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);

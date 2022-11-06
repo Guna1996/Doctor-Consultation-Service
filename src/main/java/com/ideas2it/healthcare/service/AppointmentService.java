@@ -109,7 +109,7 @@ public interface AppointmentService {
      * @param patientId {@link Integer} is id of patient
      * @return {@link Integer}
      */
-    Integer countOfAppointmentByPatientId(Integer patientId);
+    Integer getCountOfAppointmentByPatientId(Integer patientId);
 
     /**
      * <p>

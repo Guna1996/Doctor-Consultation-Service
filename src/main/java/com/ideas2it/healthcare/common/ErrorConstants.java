@@ -169,5 +169,9 @@ public class ErrorConstants {
     public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
 
     public static String SPECIALIZATION_ALREADY_EXISTS = "Specialization already exists";
+
+    public static String DOCTOR_ALREADY_EXISTS = "Doctor already exists";
+
+    public static String CLINIC_ALREADY_EXISTS = "Clinic already exists";
 }
 
