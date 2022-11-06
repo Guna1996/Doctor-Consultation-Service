@@ -83,14 +83,15 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/appointment/**").permitAll()
                 .antMatchers("/patientVital/patient/**").permitAll()
                 .antMatchers("/swagger-ui.html/**").permitAll()
+                .antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**").hasAuthority("Admin")
                 .anyRequest().authenticated().and()
                 .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-//    public void configure(WebSecurity webSecurity) {
-//        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
-//                , "/swagger-ui.html", "/webjars/**");
-//    }
+    public void configure(WebSecurity webSecurity) {
+        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
+                , "/swagger-ui.html", "/webjars/**");
+    }
 }

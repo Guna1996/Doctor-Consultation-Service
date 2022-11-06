@@ -113,7 +113,7 @@ public class DoctorServiceImpl implements DoctorService {
     public String removeDoctorById(Integer id) {
         try {
             if (1 <= doctorRepository.removeDoctorById(id)) {
-                return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
+                return MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
         } catch (DataAccessException exception) {

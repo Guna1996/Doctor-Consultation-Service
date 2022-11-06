@@ -28,5 +28,14 @@ import java.time.LocalTime;
  */
 @Repository
 public interface TimeslotRepository extends JpaRepository<Timeslot, Integer> {
-    Timeslot findByTimeslot(LocalTime localTime);
+
+    /**
+     * <p>
+     * This method is used to find timeslot by timeslot name
+     * </p>
+     *
+     * @param timeslot {@link LocalTime} is time of the timeslot
+     * @return {@link Timeslot}
+     */
+    Timeslot findByTimeslot(LocalTime timeslot);
 }

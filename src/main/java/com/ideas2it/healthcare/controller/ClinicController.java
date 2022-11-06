@@ -53,7 +53,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to add clinic by getting details
-     * such as name, door number, street name,etc from the admin
+     * such as name, door number, street name, etc
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic object
@@ -91,7 +91,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to get a particular clinic detail such as
-     * name, door number, street name,etc of active clinic by admin
+     * name, door number, street name,etc of active clinic
      * </p>
      *
      * @param id {@link Integer} is clinic id
@@ -106,7 +106,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to update the recorded details of a clinic
-     * such as name, door number, street name,etc by admin
+     * such as name, door number, street name,etc
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is contains clinic details

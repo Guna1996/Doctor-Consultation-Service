@@ -47,7 +47,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public String saveSpecialization(SpecializationDto specializationDto) {
+    public String addSpecialization(SpecializationDto specializationDto) {
         try {
             specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
             return MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY;
@@ -112,7 +112,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public String removeSpecializationById(Integer id) {
         try {
             if (1 <= specializationRepository.removeSpecializationById(id)) {
-                return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
+                return MessageConstants.SPECIALIZATION_REMOVED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
         } catch (DataAccessException exception) {

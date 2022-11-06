@@ -166,7 +166,10 @@ public class ErrorConstants {
     public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
     
     public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";
+
     public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
+
+    public static final String SCHEDULED_ON_SHOULD_NOT_BE_NULL = "Scheduled on shouldn't be null";
 
     public static String SPECIALIZATION_ALREADY_EXISTS = "Specialization already exists";
 

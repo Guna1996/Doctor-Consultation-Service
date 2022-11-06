@@ -104,14 +104,13 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
     /**
      * <p>
      * This method is used to find the active Doctor clinic by using
-     * doctor id and clinic id if the status is active it will return
+     * doctor id and if the status is active it will return
+     * the list of corresponding doctor clinic objects
      * </p>
      *
      * @param doctorId {@link Integer} is id of doctor
-     * @param clinicId {@link Integer} is id of clinic
+     * @param status {@link String} is status of doctorClinic
      * @return {@link DoctorClinic}
      */
-    DoctorClinic findByDoctorIdAndClinicId(Integer doctorId, Integer clinicId);
-
-    List<DoctorClinic> findByDoctorIdAndStatus(Integer doctorId, String Status);
+    List<DoctorClinic> findByDoctorIdAndStatus(Integer doctorId, String status);
 }

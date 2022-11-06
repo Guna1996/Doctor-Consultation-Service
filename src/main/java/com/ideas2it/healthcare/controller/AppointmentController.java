@@ -114,7 +114,7 @@ public class AppointmentController {
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        int totalPages = appointmentService.countOfAppointmentByDoctorId(doctorId);
+        int totalPages = appointmentService.getCountOfAppointmentByDoctorId(doctorId);
         System.out.println(totalPages);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
