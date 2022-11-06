@@ -112,7 +112,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             timeslots = doctorClinicDto.getTimeslots();
         }
         if(timeslots != null)
-        return timeslots.contains(timeslot);
+            return timeslots.contains(timeslot);
         return false;
     }
 

@@ -18,6 +18,7 @@ import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.repository.SpecializationRepository;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -47,12 +48,12 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
-//        try {
+        try {
             return SpecializationMapper.toDto(specializationRepository
                     .save(SpecializationMapper.fromDto(specializationDto)));
-/*        } catch ( exception) {
-            throw new SqlException(exception.getMessage());
-        }*/
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
+        }
     }
 
     /**
