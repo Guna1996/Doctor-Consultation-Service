@@ -17,6 +17,9 @@ import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
+import com.ideas2it.healthcare.mapper.TimeslotMapper;
+import com.ideas2it.healthcare.model.DoctorClinic;
+import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +51,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (isDoctorClinicAssigned(doctorClinicDto.getDoctor().getId(),
-                doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots().get(0))) {
+        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(),
+                doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots())) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
         } else {
             try {
@@ -60,6 +62,23 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 throw new SqlException(exception.getMessage());
             }
         }
+    }
+
+    private boolean isDoctorAvailable(int id, int id1, List<TimeslotDto> timeslotsDto) {
+        List<DoctorClinic> doctorClinics = doctorClinicRepository
+                .findByDoctorIdAndStatus(id, Constants.ACTIVE);
+        if (!doctorClinics.isEmpty()) {
+            for (TimeslotDto timeslotDto: timeslotsDto) {
+                for (DoctorClinic doctorClinic : doctorClinics) {
+                    List<Timeslot> timeslots = doctorClinic.getTimeslots();
+                    for (Timeslot timeslot : timeslots) {
+                        if (timeslot.getId() == timeslotDto.getId())
+                            return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -101,32 +120,6 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Boolean isDoctorClinicAssigned(Integer doctorId, int clinicId, TimeslotDto timeslot) {
-        List<TimeslotDto> timeslots = null;
-        DoctorClinicDto doctorClinicDto = getDoctorClinicByDoctorIdAndClinicId(doctorId, clinicId);
-        if (null != doctorClinicDto) {
-            timeslots = doctorClinicDto.getTimeslots();
-        }
-        if(timeslots != null)
-            return timeslots.contains(timeslot);
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    private DoctorClinicDto getDoctorClinicByDoctorIdAndClinicId(Integer doctorId, int clinicId) {
-        try {
-            return DoctorClinicMapper.toDto(doctorClinicRepository
-                    .findByDoctorIdAndClinicId(doctorId, clinicId));
-        } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
         }
     }
 
