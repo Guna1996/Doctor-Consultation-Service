@@ -94,5 +94,5 @@ public interface DoctorService {
      *
      * @return {@link Integer}
      */
-    Integer countOfDoctors();
+    Integer getDoctorsCount();
 }

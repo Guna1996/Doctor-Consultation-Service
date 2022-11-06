@@ -79,7 +79,7 @@ public class SpecializationController {
     public ResponseEntity<Map<String, Object>> getAllSpecializations(
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
-        int totalPages = specializationService.countOfSpecializations();
+        int totalPages = specializationService.getSpecializationsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);

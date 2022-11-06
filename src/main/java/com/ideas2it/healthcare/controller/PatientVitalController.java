@@ -81,7 +81,7 @@ public class PatientVitalController {
             @PathVariable(name = Constants.PATIENT_ID_PATH) Integer patientId,
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
-        int totalPages = patientVitalService.countOfVitalsByPatientId(patientId);
+        int totalPages = patientVitalService.getVitalsCountByPatientId(patientId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (0 >= totalPages) {
             throw new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND);

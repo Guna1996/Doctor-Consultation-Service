@@ -70,7 +70,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfVitalsByPatientId(Integer patientId) {
+    public Integer getVitalsCountByPatientId(Integer patientId) {
         try {
             return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {

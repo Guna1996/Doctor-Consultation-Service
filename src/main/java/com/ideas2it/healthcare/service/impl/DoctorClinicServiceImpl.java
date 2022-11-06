@@ -126,7 +126,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfDoctorsByClinicId(Integer clinicId) {
+    public Integer getCountOfDoctorsByClinicId(Integer clinicId) {
         try {
             return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
         } catch (DataAccessException exception) {

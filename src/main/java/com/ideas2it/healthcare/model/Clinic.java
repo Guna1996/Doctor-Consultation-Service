@@ -53,7 +53,7 @@ public class Clinic {
     @Column(name = Constants.PIN_CODE)
     private String pinCode;
 
-    @Column(name = Constants.CONTACT_NUMBER)
+    @Column(name = Constants.CONTACT_NUMBER, unique = true)
     private String contactNumber;
 
     @Column(name = Constants.STATUS)

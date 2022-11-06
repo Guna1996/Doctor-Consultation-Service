@@ -79,7 +79,7 @@ public class TimeslotServiceImpl implements TimeslotService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfTimeslots() {
+    public Integer getTimeslotsCount() {
         try {
             return (int) timeslotRepository.count();
         } catch (DataAccessException exception) {
