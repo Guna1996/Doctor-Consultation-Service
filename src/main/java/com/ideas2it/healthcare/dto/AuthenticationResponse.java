@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * This AuthenticationResponse class contains jwt token
+ * This Authentication response class contains jwt token
  *
  * @author Gunaseelan K
  * @version 1

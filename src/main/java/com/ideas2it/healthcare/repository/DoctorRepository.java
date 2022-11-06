@@ -21,9 +21,9 @@ import java.util.Optional;
 
 /**
  * <p>
- * This DoctorRepository interface is a repository interface and this
+ * This Doctor repository interface is a repository interface and this
  * interface extends JpaRepository which has all the methods for
- * CRUD operation
+ * crud operation
  * </p>
  *
  * @author Mohamed Jubair

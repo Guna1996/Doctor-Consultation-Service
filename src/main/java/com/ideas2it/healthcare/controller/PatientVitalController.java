@@ -30,8 +30,8 @@ import java.util.Map;
 
 /**
  * <p>
- * This VitalController class is used to manage
- * the vitals information of a patient from a ///
+ * This Patient Vital Controller class is used to manage
+ * the vital information of a patient
  * doctor.
  * </p>
  *

@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicRepository,
- * PatientRepository, DoctorRepository, ClinicRepository,
- * AppointmentRepository, FeedbackRepository, SpecializationRepository,
- * TimeslotRepository, VitalsRepository.
+ * This package contains classes are Doctor clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
+ * Appointment repository, Feedback repository, Specialization repository,
+ * Timeslot repository, Patient vital repository.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -18,9 +18,9 @@ import java.util.Optional;
 
 /**
  * <p>
- * Interface PatientRepository extends he  JpaRepository
+ * Interface Patient repository extends the Jpa repository
  * and used to retrieve and delete and update
- * patient data's from database
+ * patient data's from the database
  * </p>
  *
  * @author Ramachandran
@@ -32,7 +32,10 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     /**
      * <p>
-     * This method is used to find active patient by patient id
+     * This method is used to find active patient by patient id,
+     * here we are passing input as id and status with help of
+     * these input this method will return the active patient
+     * from the database
      * </p>
      *
      * @param id     {@link Integer} is id of the patient

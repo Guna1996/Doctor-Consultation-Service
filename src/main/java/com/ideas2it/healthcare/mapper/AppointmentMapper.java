@@ -20,8 +20,8 @@ import com.ideas2it.healthcare.util.DateUtil;
 
 /**
  * <p>
- * Appointment mapper is used convert Appointment object to
- * Appointment dto and Appointment dto into Appointment
+ * Appointment mapper is used convert Appointment object into
+ * Appointment dto and Appointment dto into Appointment model
  * </p>
  *
  * @author Mohamed Jubair

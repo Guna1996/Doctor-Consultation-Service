@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * This AuthenticationRequest class contains details for login
+ * This Authentication request class contains details for login
  *
  * @author Gunaseelan K
  * @version 1

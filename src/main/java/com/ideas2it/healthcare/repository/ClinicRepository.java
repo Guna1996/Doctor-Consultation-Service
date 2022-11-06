@@ -1,11 +1,11 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicRepository,
- * PatientRepository, DoctorRepository, ClinicRepository,
- * AppointmentRepository, FeedbackRepository, SpecializationRepository,
- * TimeslotRepository, VitalsRepository.
+ * This package contains classes are Doctor clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
+ * Appointment repository, Feedback repository, Specialization repository,
+ * Timeslot repository, Patient vital repository.
  * </p>
- * <p>
+ *
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.repository;
@@ -24,7 +24,7 @@ import java.util.Optional;
 
 /**
  * <p>
- * Interface ClinicRepository extends the  JpaRepository
+ * Interface Clinic repository extends the Jpa repository
  * and used to retrieve and delete and update
  * clinic data's from database
  * </p>

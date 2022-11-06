@@ -30,8 +30,10 @@ import java.util.Map;
 
 /**
  * <p>
- * This FeedbackController class is used to get feedback
- * from the users.
+ * This Feedback controller class is used to add the feedback of
+ * patient given regard the doctor and also we can get the remove the
+ * specific feedback of the doctor and also we can get all the feedbacks
+ * of doctor.
  * </p>
  *
  * @author Bala Ashwanth
@@ -67,7 +69,8 @@ public class FeedbackController {
     /**
      * <p>
      * This method is used to remove feedback of a patient by
-     * getting feedback id from the patient
+     * getting feedback id and it will delete the feedback like
+     * inactive the column of the status
      * </p>
      *
      * @param id {@link Integer} is an integer that refer id in database

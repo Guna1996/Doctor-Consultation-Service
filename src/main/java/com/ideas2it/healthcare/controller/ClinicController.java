@@ -31,8 +31,9 @@ import java.util.Map;
 
 /**
  * <p>
- * This Clinic controller class is used to add,
- * update, delete and get specific clinic.
+ * This Clinic controller class is used to add a clinic details ,
+ * update the clinic details, delete the clinic  and get specific clinic
+ * by admin.
  * </p>
  *
  * @author Gunaseelan K
@@ -105,7 +106,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to update the recorded details of a clinic
-     * such as name, door number, street name,etc
+     * such as name, door number, street name,etc by admin
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is contains clinic details
@@ -120,7 +121,7 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to help admin to remove the clinic
-     * details by clinic id
+     * details by clinic id and it will inactive the column status
      * </p>
      *
      * @param id {@link Integer} is clinic id
