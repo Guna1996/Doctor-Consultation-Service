@@ -32,6 +32,7 @@ public interface TimeslotRepository extends JpaRepository<Timeslot, Integer> {
     /**
      * <p>
      * This method is used to find timeslot by timeslot name
+     * from the database
      * </p>
      *
      * @param timeslot {@link LocalTime} is time of the timeslot

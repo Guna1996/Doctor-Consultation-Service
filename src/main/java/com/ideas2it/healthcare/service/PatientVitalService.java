@@ -38,8 +38,9 @@ public interface PatientVitalService {
 
     /**
      * <p>
-     * This abstract method is used to get all vitals
-     * from the database using patient id
+     * This abstract method is used to get all vitals from the database
+     * using patient id. using pagination which can get only the
+     * required number of rows.
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient

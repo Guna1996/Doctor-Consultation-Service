@@ -65,8 +65,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     /**
      * <p>
-     * This method is used to find active appointments by doctor id and pagination
-     * and status
+     * This method is used to find active appointments by doctor id and status
+     * and using pagination which can get only the required number of rows.
      * </p>
      *
      * @param id {@link Integer} is id of the doctor
@@ -79,8 +79,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     /**
      * <p>
-     * This method is used to find active appointments by patient id and pagination
-     * and status
+     * This method is used to find active appointments by patient id and status
+     * and using pagination which can get only the required number of rows.
      * </p>
      *
      * @param id @link Integer} is id of the patient

@@ -46,7 +46,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     /**
      * <p>
-     * This method is used to find all active doctors by pagination
+     * This method is used to find all active doctors using pagination which can get
+     * only the required number of rows.
      * </p>
      *
      * @param status   {@link String} is status of doctor

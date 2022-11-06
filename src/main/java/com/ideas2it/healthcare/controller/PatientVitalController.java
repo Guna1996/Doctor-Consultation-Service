@@ -68,7 +68,9 @@ public class PatientVitalController {
     /**
      * <p>
      * This method is used to get vitals of a patient along with pagination by
-     * patient id, page number and total rows required
+     * patient id, page number and total rows required. Based on the user input such
+     * as page number and total rows total page is calculated and
+     * displayed using pagination.
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient

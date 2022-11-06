@@ -85,7 +85,9 @@ public class FeedbackController {
     /**
      * <p>
      * This method is used to get feedbacks along with pagination of a doctor
-     * by getting doctor id, page number and total rows required
+     * by getting doctor id, page number and total rows required. Based on the
+     * user input such as page number and total rows total page is calculated
+     * and displayed using pagination.
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor

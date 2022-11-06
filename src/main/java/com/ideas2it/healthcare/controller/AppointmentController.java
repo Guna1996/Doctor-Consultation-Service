@@ -101,7 +101,9 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to get appointments of a doctor by doctor id,
-     * page number and total rows required
+     * page number and total rows required. Based on the user input such
+     * as page number and total rows total page is calculated and
+     * displayed using pagination.
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor
@@ -129,7 +131,9 @@ public class AppointmentController {
     /**
      * <p>
      * This method is used to get ist of appointments of a patient
-     * by patient id, page number and total rows required
+     * by patient id, page number and total rows required. Based on
+     * the user input such as page number and total rows total page
+     * is calculated and displayed using pagination.
      * </p>
      *
      * @param patientId  {@link Integer} is id of patient

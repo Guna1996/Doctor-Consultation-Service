@@ -62,7 +62,8 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
 
     /**
      * <p>
-     * This method is used to find all active clinics by pagination
+     * This method is used to find all active clinics using pagination which can get
+     * only the required number of rows.
      * </p>
      *
      * @param status   {@link String} is status of clinic table

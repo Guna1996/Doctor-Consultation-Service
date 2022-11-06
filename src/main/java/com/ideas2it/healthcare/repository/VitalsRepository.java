@@ -46,7 +46,8 @@ public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
 
     /**
      * <p>
-     * This method is used to find active vitals by patient id and pagination
+     * This method is used to find active vitals by patient id and using
+     * pagination which can get only the required number of rows.
      * </p>
      *
      * @param patientId {@link Integer} is id of the patient

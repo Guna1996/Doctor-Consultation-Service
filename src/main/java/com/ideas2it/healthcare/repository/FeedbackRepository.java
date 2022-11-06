@@ -48,7 +48,8 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     /**
      * <p>
-     * This method is used to find active feedback by doctor id and pagination
+     * This method is used to find active feedback by doctor id and using
+     * pagination which can get only the required number of rows.
      * </p>
      *
      * @param doctorId {@link Integer} is id of the doctor
