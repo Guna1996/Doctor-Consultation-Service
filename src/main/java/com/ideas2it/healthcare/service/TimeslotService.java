@@ -11,6 +11,7 @@ package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.TimeslotDto;
 
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -57,4 +58,6 @@ public interface TimeslotService {
      * @return {@link Integer}
      */
     Integer countOfTimeslots();
+
+    boolean isValidTimeslot(LocalTime localTime);
 }

@@ -22,8 +22,8 @@ import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalTime;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,7 +70,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             }
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException    exception) {
+        } catch (SqlException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -95,19 +95,28 @@ public class TimeslotServiceImpl implements TimeslotService {
      * @param timeslotDto {@link TimeslotDto}
      * @return {@link Boolean}
      */
-    private Boolean isValidTimeslot(TimeslotDto timeslotDto) {
+    public Boolean isValidTimeslot(TimeslotDto timeslotDto) {
         if (12 < timeslotDto.getTimeslot().getHour()) {
             throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
         }
         List<Timeslot> timeslots = timeslotRepository.findAll();
-        for (Timeslot timeslot: timeslots) {
+        for (Timeslot timeslot : timeslots) {
             if (timeslot.getTimeslot().getHour() == timeslotDto.getTimeslot().getHour() &&
-               (timeslot.getTimeslot().getMinute() == timeslotDto.getTimeslot().getMinute()) &&
-               (timeslot.getTimeslot().getSecond() == timeslotDto.getTimeslot().getSecond()) &&
-               (timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat()))) {
-                    return false;
+                    (timeslot.getTimeslot().getMinute() == timeslotDto.getTimeslot().getMinute()) &&
+                    (timeslot.getTimeslot().getSecond() == timeslotDto.getTimeslot().getSecond()) &&
+                    (timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat()))) {
+                return false;
             }
         }
         return true;
+    }
+
+    public boolean isValidTimeslot(LocalTime localTime) {
+        Timeslot timeslot = timeslotRepository.findByTimeslot(localTime);
+        if (timeslot == null) {
+            System.out.println(localTime);
+            return false;
+        }
+        return timeslot.getTimeslot().equals(localTime);
     }
 }

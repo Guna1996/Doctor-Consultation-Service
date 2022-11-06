@@ -13,6 +13,8 @@ import com.ideas2it.healthcare.model.Timeslot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalTime;
+
 /**
  * <p>
  * This  Timeslot repository interface is a repository interface and this
@@ -26,4 +28,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TimeslotRepository extends JpaRepository<Timeslot, Integer> {
+    Timeslot findByTimeslot(LocalTime localTime);
 }
