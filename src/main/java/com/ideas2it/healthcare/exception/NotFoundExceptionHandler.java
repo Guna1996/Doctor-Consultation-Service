@@ -14,6 +14,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,8 +61,7 @@ public class NotFoundExceptionHandler {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleBusinessException(
-            NotFoundException exception) {
+    public ResponseEntity<Map<String, Object>> handleBusinessException(NotFoundException exception) {
         return customResponse.responseEntity(exception.getMessage(), null,  HttpStatus.OK);
     }
 
@@ -75,9 +75,23 @@ public class NotFoundExceptionHandler {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(SqlException.class)
-    public ResponseEntity<Map<String, Object>> handleSqlException(
-            NotFoundException exception) {
+    public ResponseEntity<Map<String, Object>> handleSqlException(SqlException exception) {
         return customResponse
-                .responseEntity(exception.getMessage(), null,HttpStatus.INTERNAL_SERVER_ERROR);
+                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * <p>
+     * This method is used to handle the all the non-customised exception
+     * occurred while running the CRUD operation in database
+     * </p>
+     *
+     * @param exception {@link HttpStatus} is caught exception
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> globalException(Exception exception) {
+        return customResponse
+                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

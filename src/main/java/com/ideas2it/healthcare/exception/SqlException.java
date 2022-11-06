@@ -11,7 +11,7 @@ public class SqlException extends RuntimeException {
      * initialized by a call to the
      * {@link Throwable#initCause(Throwable)} method.
      *
-     * @param reason a description of the exception
+     * @param message a description of the exception
      */
     public SqlException(String message) {
         super(message);
