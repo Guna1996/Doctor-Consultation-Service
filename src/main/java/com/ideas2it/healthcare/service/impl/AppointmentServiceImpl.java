@@ -18,13 +18,13 @@ import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
+import com.ideas2it.healthcare.service.TimeslotService;
 import com.ideas2it.healthcare.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -49,11 +49,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private TimeslotService timeslotService;
+
     /**
      * {@inheritDoc}
      */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn())) {
+        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn()) && !timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime())) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
@@ -158,7 +161,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
         try {
-            if (isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+            if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                     appointmentDto.getScheduledOn())) {
                 throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
             }
