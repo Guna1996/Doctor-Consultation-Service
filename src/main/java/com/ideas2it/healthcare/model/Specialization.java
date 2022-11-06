@@ -37,7 +37,7 @@ public class Specialization {
     @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = Constants.NAME)
+    @Column(name = Constants.NAME, unique = true)
     private String name;
 
     @Column(name = Constants.STATUS)

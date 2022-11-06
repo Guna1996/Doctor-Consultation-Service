@@ -60,8 +60,8 @@ public class SpecializationController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addSpecialization(
             @Valid @RequestBody SpecializationDto specializationDto) {
-        return customResponse.responseEntity(MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY,
-                specializationService.saveSpecialization(specializationDto),
+        return customResponse.responseEntity(specializationService.saveSpecialization(specializationDto),
+                null,
                 HttpStatus.OK);
     }
 
@@ -107,19 +107,17 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to update the details such as name
-     * of a Specialization.
+     * This method is used to update all the details
+     * of a Specialization
      * </p>
      *
-     * @param specializationDto {@link SpecializationDto} is details of SpecializationDto
+     * @param specializationDto {@link SpecializationDto} is id of Specialization
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateSpecialization(
-            @RequestBody SpecializationDto specializationDto) {
-        return customResponse.responseEntity(MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY,
-                specializationService.updateSpecialization(specializationDto),
-                HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> updateSpecialization(SpecializationDto specializationDto) {
+        return customResponse.responseEntity(specializationService.updateSpecialization(specializationDto),
+                null, HttpStatus.OK);
     }
 
     /**

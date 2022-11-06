@@ -18,10 +18,11 @@ import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.repository.SpecializationRepository;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,13 +47,15 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public SpecializationDto saveSpecialization(SpecializationDto specializationDto) {
-//        try {
-            return SpecializationMapper.toDto(specializationRepository
-                    .save(SpecializationMapper.fromDto(specializationDto)));
-/*        } catch ( exception) {
-            throw new SqlException(exception.getMessage());
-        }*/
+    public String saveSpecialization(SpecializationDto specializationDto) {
+        try {
+            specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
+            return MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY;
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
+        } catch (DataAccessException exception) {
+            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+        }
     }
 
     /**
@@ -68,7 +71,7 @@ public class SpecializationServiceImpl implements SpecializationService {
 
             }
             return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -84,7 +87,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .map(SpecializationMapper::toDto)
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -92,12 +95,11 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public SpecializationDto updateSpecialization(SpecializationDto specializationDto) {
+    public String updateSpecialization(SpecializationDto specializationDto) {
         try {
-            return SpecializationMapper.toDto(specializationRepository
-                    .save(SpecializationMapper.fromDto(specializationDto)));
-        } catch (Exception exception) {
+            specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
+            return MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -111,7 +113,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                 return MessageConstants.SPECIALIZATION_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -122,7 +124,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public Integer countOfSpecializations() {
         try {
             return specializationRepository.countByStatus(Constants.ACTIVE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }

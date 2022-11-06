@@ -23,6 +23,7 @@ import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -53,12 +54,13 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(),
                 doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots())) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
-        }
-        try {
-            return DoctorClinicMapper
-                    .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
-        } catch (Exception exception) {
-            throw new SqlException(exception.getMessage());
+        } else {
+            try {
+                return DoctorClinicMapper
+                        .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+            } catch (DataAccessException exception) {
+                throw new SqlException(exception.getMessage());
+            }
         }
     }
 
@@ -88,7 +90,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 return MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
             }
             throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -102,7 +104,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                     .orElseThrow(() -> new NotFoundException(
                             MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -116,7 +118,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             return doctorClinicRepository.findByClinicIdAndStatus(clinicId, Constants.ACTIVE,
                             PageRequest.of(pageNumber, totalRows)).toList().stream()
                     .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }
@@ -127,7 +129,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     public Integer countOfDoctorsByClinicId(Integer clinicId) {
         try {
             return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
     }

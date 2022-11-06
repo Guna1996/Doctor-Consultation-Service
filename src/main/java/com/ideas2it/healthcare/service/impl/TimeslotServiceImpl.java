@@ -20,6 +20,7 @@ import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.TimeslotRepository;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             return TimeslotMapper.toDto(timeslotRepository
                     .save(TimeslotMapper.fromDto(timeslotDto)));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -70,7 +71,11 @@ public class TimeslotServiceImpl implements TimeslotService {
             }
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
+<<<<<<< HEAD
         } catch (SqlException exception) {
+=======
+        } catch (DataAccessException exception) {
+>>>>>>> 0d4583b3b79a25b328354b56d9825d8e75b548aa
             throw new SqlException(exception.getMessage());
         }
     }
@@ -81,7 +86,7 @@ public class TimeslotServiceImpl implements TimeslotService {
     public Integer countOfTimeslots() {
         try {
             return (int) timeslotRepository.count();
-        } catch (SqlException exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }

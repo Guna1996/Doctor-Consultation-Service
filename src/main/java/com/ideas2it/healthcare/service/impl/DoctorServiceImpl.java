@@ -18,6 +18,7 @@ import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repository.DoctorRepository;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class DoctorServiceImpl implements DoctorService {
         try {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
             return MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -67,7 +68,7 @@ public class DoctorServiceImpl implements DoctorService {
                 throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
             }
             return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -84,7 +85,7 @@ public class DoctorServiceImpl implements DoctorService {
                     .map(DoctorMapper::toDto)
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -97,7 +98,7 @@ public class DoctorServiceImpl implements DoctorService {
         try {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
             return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -112,7 +113,7 @@ public class DoctorServiceImpl implements DoctorService {
                 return MessageConstants.DOCTOR_DELETED_SUCCESSFULLY;
             }
             throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -123,7 +124,7 @@ public class DoctorServiceImpl implements DoctorService {
     public Integer countOfDoctors() {
         try {
             return doctorRepository.countByStatus(Constants.ACTIVE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }

@@ -19,6 +19,7 @@ import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -78,7 +79,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                             .of(pageNumber, totalRows)).toList()
                     .stream().map(FeedbackMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -89,7 +90,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public Integer countOfFeedbacksByDoctorId(Integer doctorId) {
         try {
             return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
