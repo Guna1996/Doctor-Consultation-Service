@@ -20,7 +20,7 @@ import java.util.Set;
 
 /**
  * <p>
- * This DoctorDto class is a Dto class and this class is used
+ * This Doctor dto class is a Dto class and this class is used
  * to transfer the object from controller layer to service
  * layer.
  * </p>

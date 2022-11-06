@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicRepository,
- * PatientRepository, DoctorRepository, ClinicRepository,
- * AppointmentRepository, FeedbackRepository, SpecializationRepository,
- * TimeslotRepository, VitalsRepository.
+ * This package contains classes are Doctor clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
+ * Appointment repository, Feedback repository, Specialization repository,
+ * Timeslot repository, Patient vital repository.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -18,13 +18,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
  * <p>
- * Interface AppointmentRepository extends the  JpaRepository
+ * Interface Appointment repository extends the jpa repository
  * and used to retrieve and delete and update
  * appointment data's from database
  * </p>
@@ -39,12 +38,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     /**
      * <p>
-     * This method is used to find active appointment by doctor id and scheduled datetime
+     * This method is used to find active appointment of doctor
+     * by doctor id and scheduled datetime and status
      * </p>
      *
-     * @param id       {@link Integer} is id of the doctor
+     * @param id {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
-     * @param status   {@link String} is status of appointment table
+     * @param status {@link String} is status of appointment table
      * @return {@link Optional<Appointment>}
      */
     Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(
@@ -66,10 +66,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     /**
      * <p>
      * This method is used to find active appointments by doctor id and pagination
+     * and status
      * </p>
      *
-     * @param id       {@link Integer} is id of the doctor
-     * @param status   {@link String} is status of appointment table
+     * @param id {@link Integer} is id of the doctor
+     * @param status {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
@@ -79,10 +80,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     /**
      * <p>
      * This method is used to find active appointments by patient id and pagination
+     * and status
      * </p>
      *
-     * @param id       {@link Integer} is id of the patient
-     * @param status   {@link String} is status of appointment table
+     * @param id @link Integer} is id of the patient
+     * @param status {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
@@ -102,7 +104,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     /**
      * <p>
      * This method is user to return the total count
-     * of active appointments by patient id
+     * of active appointments by patient id and status
      * </p>
      * @param patientId {@link Integer} is a id of patient
      * @param status {@link String}

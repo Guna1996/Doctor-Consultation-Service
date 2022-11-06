@@ -1,7 +1,7 @@
 /**
  * <p>
  * This is the base package for all the Dto classes
- * which is for doctorDto, clinicDto and patientDto
+ * which is for doctor dto, clinic dto and patient dto
  * </p>
  * Copyright 2022 - Ideas2it
  */

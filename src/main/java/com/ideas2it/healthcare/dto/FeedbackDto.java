@@ -1,9 +1,9 @@
 /**
  * <p>
  * This is the base package for all the dto classes and
- * the dto package classes are DoctorDto,SpecializationDto,
- * ClinicDto,DoctorClinicDto,AppointmentDto,FeedbackDto,PatientDto,
- * VitalDto,TimeslotDto.
+ * the dto package classes are Doctor dto,Specialization dto,
+ * Clinic dto,Doctor clinic dto,Appointment dto,Feedback dto,Patient dto,
+ * Patient vital dto,Timeslot dto.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 /**
  * <p>
  * This is a Dto class for Feedback
- * Dto main purpose is to transfer data from from an
+ * dto main purpose is to transfer data from from an
  * entity object to Dto object, inorder to not show the
  * exact data to the user
  * </p>
@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  * @since 2022-10-10
  */
 @Data
-public class FeedbackDto {
+public class  FeedbackDto {
 
     private int id;
 

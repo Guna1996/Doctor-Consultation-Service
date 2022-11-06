@@ -1,9 +1,9 @@
 /**
  * <p>
  * This is the base package for all the dto classes and
- * the dto package classes are DoctorDto,SpecializationDto,
- * ClinicDto,DoctorClinicDto,AppointmentDto,FeedbackDto,PatientDto,
- * VitalDto,TimeslotDto.
+ * the dto package classes are Doctor dto,Specialization dto,
+ * Clinic dto,Doctor clinic dto,Appointment dto,Feedback dto,Patient dto,
+ * Patient vital dto,Timeslot dto.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 
 /**
  * <p>
- * The PatientDto is mainly used for reducing the number of expensive remote calls.
+ * The Patient dto is mainly used for reducing the number of expensive remote calls.
  * In order to convert data between the DTO and any entity objects,
  * the assembler object was defined, but now we are using mappers for converting data.
  * </p>

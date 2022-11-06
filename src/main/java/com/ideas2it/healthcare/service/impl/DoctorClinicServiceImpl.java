@@ -66,9 +66,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     public String removeDoctorFromClinic(Integer id) {
         try {
             if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
-                return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+                return MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
             }
-            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
         } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
@@ -116,6 +116,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     private DoctorClinicDto getDoctorClinicByDoctorIdAndClinicId(Integer doctorId, int clinicId) {
         return DoctorClinicMapper.toDto(doctorClinicRepository
                 .findByDoctorIdAndClinicId(doctorId, clinicId));

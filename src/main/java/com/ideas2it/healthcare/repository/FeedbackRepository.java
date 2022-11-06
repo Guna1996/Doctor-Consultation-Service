@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicRepository,
- * PatientRepository, DoctorRepository, ClinicRepository,
- * AppointmentRepository, FeedbackRepository, SpecializationRepository,
- * TimeslotRepository, VitalsRepository.
+ * This package contains classes are Doctor clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
+ * Appointment repository, Feedback repository, Specialization repository,
+ * Timeslot repository, Patient vital repository.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -23,9 +23,9 @@ import java.util.Optional;
 
 /**
  * <p>
- * This FeedbackRepository interface is a repository interface and this
+ * This Feedback repository interface is a repository interface and this
  * interface extends JpaRepository which has all the methods for
- * CRUD operation
+ * crud operation
  * </p>
  *
  * @author Bala Ashwanth.N
