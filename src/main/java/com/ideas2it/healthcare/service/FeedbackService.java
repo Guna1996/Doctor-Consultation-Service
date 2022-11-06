@@ -68,5 +68,5 @@ public interface FeedbackService {
      * @param doctorId   {@link Integer} is id of doctor
      * @return {@link Integer}
      */
-    Integer countOfFeedbacksByDoctorId(Integer doctorId);
+    Integer getFeedbacksCountByDoctorId(Integer doctorId);
 }

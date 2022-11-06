@@ -99,6 +99,8 @@ public class SpecializationServiceImpl implements SpecializationService {
         try {
             specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
             return MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
@@ -121,7 +123,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfSpecializations() {
+    public Integer getSpecializationsCount() {
         try {
             return specializationRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {

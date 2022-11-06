@@ -21,6 +21,7 @@ import com.ideas2it.healthcare.repository.ClinicRepository;
 import com.ideas2it.healthcare.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,8 @@ public class ClinicServiceImpl implements ClinicService {
         Clinic clinic = ClinicMapper.fromDto(clinicDto);
         try {
             return ClinicMapper.toDto(clinicRepository.save(clinic));
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.CLINIC_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
@@ -117,7 +120,7 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfClinics() {
+    public Integer getCountOfClinics() {
         try {
             return clinicRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {

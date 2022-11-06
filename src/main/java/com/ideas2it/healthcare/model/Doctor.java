@@ -62,7 +62,7 @@ public class Doctor {
     @Column(name = Constants.DATE_OF_REGISTRATION)
     private LocalDate dateOfRegistration;
 
-    @Column(name = Constants.MOBILE_NUMBER)
+    @Column(name = Constants.MOBILE_NUMBER, unique = true)
     private Long mobileNumber;
 
     @Column(name = Constants.CITY)

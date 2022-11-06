@@ -122,7 +122,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfAppointmentByPatientId(Integer patientId) {
+    public Integer getCountOfAppointmentByPatientId(Integer patientId) {
         try {
             return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {

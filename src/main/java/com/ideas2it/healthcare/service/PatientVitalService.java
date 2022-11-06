@@ -58,5 +58,5 @@ public interface PatientVitalService {
      * @param patientId  {@link Integer} is id of patient
      * @return {@link Integer}
      */
-    Integer countOfVitalsByPatientId(Integer patientId);
+    Integer getVitalsCountByPatientId(Integer patientId);
 }

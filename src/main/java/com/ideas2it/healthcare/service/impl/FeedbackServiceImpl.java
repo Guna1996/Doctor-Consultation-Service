@@ -76,9 +76,9 @@ public class FeedbackServiceImpl implements FeedbackService {
                                                    Integer totalRows) {
         try {
             return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                            .of(pageNumber, totalRows)).toList()
-                    .stream().map(FeedbackMapper::toDto)
-                    .collect(Collectors.toList());
+                        .of(pageNumber, totalRows)).toList()
+                        .stream().map(FeedbackMapper::toDto)
+                        .collect(Collectors.toList());
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
@@ -87,7 +87,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfFeedbacksByDoctorId(Integer doctorId) {
+    public Integer getFeedbacksCountByDoctorId(Integer doctorId) {
         try {
             return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {

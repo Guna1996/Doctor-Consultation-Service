@@ -19,6 +19,7 @@ import com.ideas2it.healthcare.repository.DoctorRepository;
 import com.ideas2it.healthcare.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,8 @@ public class DoctorServiceImpl implements DoctorService {
         try {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
             return MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
@@ -121,7 +124,7 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    public Integer countOfDoctors() {
+    public Integer getDoctorsCount() {
         try {
             return doctorRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
