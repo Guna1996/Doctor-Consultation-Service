@@ -81,9 +81,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(Constants.URL_LOGIN).permitAll()
                 .antMatchers("/patient/**").permitAll()
                 .antMatchers("/appointment/**").permitAll()
+                .antMatchers("/feedback/**").permitAll()
                 .antMatchers("/patientVital/patient/**").permitAll()
                 .antMatchers("/swagger-ui.html/**").permitAll()
-                .antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**").hasAuthority("Admin")
+                .antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**",
+                        "/timeslot/**", "/specialization/**").hasAuthority("Admin")
                 .anyRequest().authenticated().and()
                 .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
