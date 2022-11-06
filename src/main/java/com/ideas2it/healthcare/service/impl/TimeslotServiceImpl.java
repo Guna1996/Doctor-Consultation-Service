@@ -71,11 +71,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             }
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
-<<<<<<< HEAD
         } catch (SqlException exception) {
-=======
-        } catch (DataAccessException exception) {
->>>>>>> 0d4583b3b79a25b328354b56d9825d8e75b548aa
             throw new SqlException(exception.getMessage());
         }
     }

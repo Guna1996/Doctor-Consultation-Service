@@ -160,13 +160,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
-<<<<<<< HEAD
-        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
-                appointmentDto.getScheduledOn())) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
-=======
         try {
-            if (isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+            if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                     appointmentDto.getScheduledOn())) {
                 throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
             }
@@ -174,7 +169,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
->>>>>>> 0d4583b3b79a25b328354b56d9825d8e75b548aa
         }
     }
 }
