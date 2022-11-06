@@ -31,8 +31,8 @@ import java.util.Map;
 
 /**
  * <p>
- * This Appointment controller class is used to fix, reschedule and cancel
- * appointment by patient.
+ * This Appointment controller class is used to fix,
+ * reschedule and cancel the appointment by patient.
  * </p>
  *
  * @author Gunaseelan K

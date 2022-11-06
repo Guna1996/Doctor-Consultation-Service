@@ -5,8 +5,6 @@ spring:
     username: root
     password: 098098
 
-
-
   jpa:
     hibernate.ddl-auto: update
     database-platform=org:

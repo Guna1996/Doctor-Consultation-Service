@@ -159,7 +159,12 @@ public class ErrorConstants {
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
 
     public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
-
+    
+    public static final String DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC =
+            "Doctor already assigned to this clinic at this timeslot";
+            
+    public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
+    
     public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";
     public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
 }

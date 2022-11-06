@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
+import com.ideas2it.healthcare.dto.TimeslotDto;
 import com.ideas2it.healthcare.exception.NotFoundException;
 import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
@@ -47,6 +48,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
+        if (isDoctorClinicAssigned(doctorClinicDto.getDoctor().getId(),
+                doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots().get(0))) {
+            throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
+        }
         try {
             return DoctorClinicMapper
                     .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
@@ -61,9 +66,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     public String removeDoctorFromClinic(Integer id) {
         try {
             if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
-                return MessageConstants.SUCCESSFULLY_DELETED_DOCTOR_FROM_CLINIC;
+                return MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
             }
-            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
         } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
@@ -95,6 +100,28 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         } catch (Exception exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean isDoctorClinicAssigned(Integer doctorId, int clinicId, TimeslotDto timeslot) {
+        List<TimeslotDto> timeslots = null;
+        DoctorClinicDto doctorClinicDto = getDoctorClinicByDoctorIdAndClinicId(doctorId, clinicId);
+        if (null != doctorClinicDto) {
+            timeslots = doctorClinicDto.getTimeslots();
+        }
+        if(timeslots != null)
+        return timeslots.contains(timeslot);
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    private DoctorClinicDto getDoctorClinicByDoctorIdAndClinicId(Integer doctorId, int clinicId) {
+        return DoctorClinicMapper.toDto(doctorClinicRepository
+                .findByDoctorIdAndClinicId(doctorId, clinicId));
     }
 
     /**

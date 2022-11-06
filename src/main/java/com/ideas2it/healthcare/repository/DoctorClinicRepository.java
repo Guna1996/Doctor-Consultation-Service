@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicRepository,
- * PatientRepository, DoctorRepository, ClinicRepository,
- * AppointmentRepository, FeedbackRepository, SpecializationRepository,
- * TimeslotRepository, VitalsRepository.
+ * This package contains classes are Doctor clinic repository,
+ * Patientr repository, Doctor repository, Clinic repository,
+ * Appointment repository, Feedback repository, Specialization repository,
+ * Timeslot repository, Patient vital repository.
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -18,14 +18,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.sql.SQLException;
 import java.util.Optional;
 
 /**
  * <p>
- * Interface DoctorClinicRepository extends the JpaRepository
+ * Interface Doctor clinic repository extends the Jpa repository
  * and used to retrieve and delete and update
- * DoctorClinic data's from database
+ * Doctor clinic data's from database
  * </p>
  *
  * @author Ramachandran
@@ -38,11 +39,11 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
 
     /**
      * <p>
-     * This method is used to find active doctorClinic
+     * This method is used to find active doctor clinic
      * by doctorClinic id
      * </p>
      *
-     * @param id     {@link Integer} is id of the doctorClinic in DoctorClinic table
+     * @param id {@link Integer} is id of the doctorClinic in DoctorClinic table
      * @param status {@link String} is status of the doctorClinic
      * @return {@link Optional<DoctorClinic>}
      */
@@ -72,7 +73,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @return {@link Integer}
      */
     @Modifying
-    @Query("update doctor_clinic set status='inactive' where id=?1 and status = 'active'")
+    @Query("update doctor_clinic set status = 'inactive' where id=?1 and status = 'active'")
     Integer removeDoctorClinicById(Integer id);
 
     /**
@@ -82,7 +83,7 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
-     * @param status   {@link String} is status of doctorClinic
+     * @param status {@link String} is status of doctorClinic
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<DoctorClinic>}
      */
@@ -100,4 +101,16 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @return {@link Integer}
      */
     Integer countByClinicIdAndStatus(Integer clinicId, String status);
+
+    /**
+     * <p>
+     * This method is used to find the active Doctor clinic by using
+     * doctor id and clinic id if the status is active it will return
+     * </p>
+     *
+     * @param doctorId {@link Integer} is id of doctor
+     * @param clinicId {@link Integer} is id of clinic
+     * @return {@link DoctorClinic}
+     */
+    DoctorClinic findByDoctorIdAndClinicId(Integer doctorId, Integer clinicId);
 }

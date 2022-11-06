@@ -21,9 +21,9 @@ import java.util.Optional;
 
 /**
  * <p>
- * This SpecializationRepository interface is a repository interface and this
- * interface extends JpaRepository which has all the methods for
- * CRUD operation
+ * This Specialization repository interface is a repository interface and this
+ * interface extends Jpa repository which has all the methods for
+ * crud operation
  * </p>
  *
  * @author Mohamed Jubair

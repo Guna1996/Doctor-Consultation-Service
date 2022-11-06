@@ -16,7 +16,7 @@ import javax.validation.constraints.Pattern;
 
 /**
  * <p>
- * This SpecializationDto class is a Dto class and this class is used
+ * This Specialization dto class is a Dto class and this class is used
  * to transfer the object from controller layer to service
  * layer.
  * </p>

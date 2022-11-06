@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * This AppointmentDto class contains details for doctors appointment with patient
+ * This Appointment dto class contains details for doctors appointment with patient
  * validates appointment details
  * </p>
  *

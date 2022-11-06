@@ -12,6 +12,7 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

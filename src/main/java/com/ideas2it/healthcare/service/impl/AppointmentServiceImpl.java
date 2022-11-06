@@ -52,7 +52,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        if (DateUtil.isDateInvalid(appointmentDto.getScheduledOn())) {
+        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn())) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
@@ -155,7 +155,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
-        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+        if (isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                 appointmentDto.getScheduledOn())) {
             throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
         }
