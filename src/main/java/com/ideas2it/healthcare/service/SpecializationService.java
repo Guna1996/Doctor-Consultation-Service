@@ -35,7 +35,7 @@ public interface SpecializationService {
      *
      * @param specializationDto {@link SpecializationDto}
      */
-    SpecializationDto saveSpecialization(SpecializationDto specializationDto);
+    String saveSpecialization(SpecializationDto specializationDto);
 
     /**
      * <p>
@@ -68,7 +68,7 @@ public interface SpecializationService {
      *
      * @param specializationDto {@link SpecializationDto}
      */
-    SpecializationDto updateSpecialization(SpecializationDto specializationDto);
+    String updateSpecialization(SpecializationDto specializationDto);
 
     /**
      * <p>

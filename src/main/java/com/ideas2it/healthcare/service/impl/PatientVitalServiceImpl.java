@@ -16,6 +16,7 @@ import com.ideas2it.healthcare.mapper.PatientVitalMapper;
 import com.ideas2it.healthcare.repository.VitalsRepository;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
     public PatientVitalDto addVitals(PatientVitalDto vitalsDto) {
         try {
             return PatientVitalMapper.toDto(vitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -61,7 +62,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
                             totalRows))
                     .toList().stream()
                     .map(PatientVitalMapper::toDto).collect(Collectors.toList());
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -72,7 +73,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
     public Integer countOfVitalsByPatientId(Integer patientId) {
         try {
             return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
