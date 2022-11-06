@@ -67,8 +67,9 @@ public class SpecializationController {
 
     /**
      * <p>
-     * This method is used to get all the details
-     * of Specialization.
+     * This method is used to get all the details of Specialization.
+     * Based on the user input such as page number and total rows
+     * total page is calculated and displayed using pagination.
      * </p>
      *
      * @param pageNumber {@link Integer} is page number

@@ -65,7 +65,8 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to get Doctors of a particular clinic
-     * by clinic id
+     * by clinic id using pagination which can get only the
+     * required number of rows.
      * </p>
      *
      * @param clinicId   {@link Integer} is id of clinic

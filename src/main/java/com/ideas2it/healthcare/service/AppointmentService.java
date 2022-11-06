@@ -76,8 +76,9 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This method is used to get appointments
-     * from the database by patient Id
+     * This method is used to get appointments from the database
+     * by patient Id using pagination which can get only the
+     * required number of rows.
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number
@@ -89,8 +90,9 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This method is used to get appointments
-     * from the database by doctor Id
+     * This method is used to get appointments from the database
+     * by doctor Id using pagination which can get only the
+     * required number of rows.
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number

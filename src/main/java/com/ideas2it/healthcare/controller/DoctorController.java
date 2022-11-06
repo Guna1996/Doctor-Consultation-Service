@@ -69,8 +69,10 @@ public class DoctorController {
 
     /**
      * <p>
-     * This method is used to get All the details of doctors with pagination
-     * by getting page number and total rows required
+     * This method is used to get All the details of doctors with pagination by
+     * getting page number and total rows required. Based on the user input such
+     * as page number and total rows total page is calculated and displayed
+     * using pagination.
      * </p>
      *
      * @param pageNumber {@link Integer} is page number

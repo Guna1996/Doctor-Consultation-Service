@@ -36,7 +36,7 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
     /**
      * <p>
      * This method is used to find active specialization
-     * by specialization id
+     * by specialization id from the database
      * </p>
      *
      * @param id     {@link Integer} is id of the specialization
@@ -47,7 +47,8 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
 
     /**
      * <p>
-     * This method is used to find all active specializations by pagination
+     * This method is used to find all active specializations using
+     * pagination which can get only the required number of rows.
      * </p>
      *
      * @param status   {@link String} is status of specialization

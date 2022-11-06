@@ -67,7 +67,9 @@ public class TimeslotController {
     /**
      * <p>
      * This method is used to get timeslots along with pagination
-     * by getting page number and total rows required
+     * by getting page number and total rows required. Based on
+     * the user input such as page number and total rows total
+     * page is calculated and displayed using pagination.
      * </p>
      *
      * @param pageNumber {@link Integer} is page number

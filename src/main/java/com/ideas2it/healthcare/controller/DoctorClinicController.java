@@ -106,7 +106,9 @@ public class DoctorClinicController {
     /**
      * <p>
      * This method is used get available doctors in a particular clinic by getting
-     * clinic id, page number and total rows required.
+     * clinic id, page number and total rows required. Based on the user input such
+     * as page number and total rows total page is calculated and displayed
+     * using pagination.
      * </p>
      *
      * @param clinicId   {@link Integer}

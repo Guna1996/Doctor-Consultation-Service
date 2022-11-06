@@ -68,7 +68,9 @@ public class ClinicController {
     /**
      * <p>
      * This method is used to get all the details such as name, door number,
-     * street name, etc of available clinics
+     * street name, etc of available clinics. Based on the user input such
+     * as page number and total rows total page is calculated and
+     * displayed using pagination.
      * </p>
      *
      * @param pageNumber {@link Integer} is page number

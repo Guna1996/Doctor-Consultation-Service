@@ -40,7 +40,8 @@ public interface ClinicService {
     /**
      * <p>
      * This method is used to get all the Clinic details
-     * from the database
+     * from the database using pagination which can get
+     * only the required number of rows.
      * </p>
      *
      * @param pageNumber {@link Integer} is Page number

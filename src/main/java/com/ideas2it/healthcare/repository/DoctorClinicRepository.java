@@ -77,8 +77,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
 
     /**
      * <p>
-     * This method is used to find active doctor clinic by pagination
-     * and clinic id
+     * This method is used to find active doctor clinic by clinic id
+     * and using pagination which can get only the required number of rows.
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic

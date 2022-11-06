@@ -43,7 +43,8 @@ public interface DoctorService {
      * <p>
      * This method is used to get all Doctor's record by
      * getting all Doctors from database and convert it in to
-     * DoctorDto with the help of mapper class
+     * DoctorDto with the help of mapper class using pagination
+     * which can get only the required number of rows.
      * </p>
      *
      * @param pageNumber {@link Integer} is page number
