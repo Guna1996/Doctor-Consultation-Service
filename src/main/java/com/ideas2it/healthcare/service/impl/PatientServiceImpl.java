@@ -22,6 +22,7 @@ import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.PatientService;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -56,7 +57,7 @@ public class PatientServiceImpl implements PatientService {
     public PatientDto addPatient(PatientDto patientDto) {
         try {
             return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -70,7 +71,7 @@ public class PatientServiceImpl implements PatientService {
                     .map(PatientMapper::toDto)
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
@@ -86,7 +87,7 @@ public class PatientServiceImpl implements PatientService {
                 throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
             }
             return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
-        } catch (Exception exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
     }
