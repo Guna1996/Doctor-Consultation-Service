@@ -86,11 +86,13 @@ public class TimeslotServiceImpl implements TimeslotService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isValidTimeslot(LocalTime localTime) {
         try {
             Timeslot timeslot = timeslotRepository.findByTimeslot(localTime);
-            if (timeslot == null) {
-                System.out.println(localTime);
+            if (null == timeslot) {
                 return false;
             }
             return timeslot.getTimeslot().equals(localTime);

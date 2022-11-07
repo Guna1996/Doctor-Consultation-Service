@@ -68,7 +68,6 @@ public class SpecializationServiceImpl implements SpecializationService {
                             PageRequest.of(pageNumber, totalRows)).toList();
             if (specializations.isEmpty()) {
                 throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
-
             }
             return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {

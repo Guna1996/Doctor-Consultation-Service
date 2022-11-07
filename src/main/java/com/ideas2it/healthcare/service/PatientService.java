@@ -32,7 +32,7 @@ public interface PatientService {
      * </p>
      *
      * @param patientDto {@link PatientDto} contains patient details
-     * @return {@link PatientDto}
+     * @return {@link String}
      */
     String addPatient(PatientDto patientDto);
 
@@ -54,7 +54,7 @@ public interface PatientService {
      * </p>
      *
      * @param patientDto {@link PatientDto} patient detail
-     * @return {@link PatientDto}
+     * @return {@link String}
      */
     String updatePatient(PatientDto patientDto);
 }

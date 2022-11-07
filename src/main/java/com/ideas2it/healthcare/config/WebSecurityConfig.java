@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * <p>
- * This WebSecurityConfig class is a configuration class and this
+ * This WebSecurity Config class is a configuration class and this
  * class is used to manage access the urls
  * </p>
  *

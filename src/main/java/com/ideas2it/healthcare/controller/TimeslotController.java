@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the controller classes
- * which is for doctor, patient and clinic
+ * This is the package contains classes are Doctor clinic controller,
+ * Patient controller, Doctor controller, Clinic controller,
+ * Appointment controller, Feedback controller, Specialization controller,
+ * Timeslot controller, Patient Vital controller
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -30,7 +32,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This TimeslotController class is used to manage
+ * This Timeslot Controller class is used to manage
  * all the timeslots of clinics and doctors.
  * </p>
  *

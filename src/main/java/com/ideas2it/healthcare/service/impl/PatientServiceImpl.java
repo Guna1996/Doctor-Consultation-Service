@@ -18,9 +18,7 @@ import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.PatientMapper;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.repository.PatientRepository;
-import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.PatientService;
-import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -43,12 +41,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;
-
-    @Autowired
-    private PatientVitalService patientVitalService;
-
-    @Autowired
-    private AppointmentService appointmentService;
 
     /**
      * {@inheritDoc}

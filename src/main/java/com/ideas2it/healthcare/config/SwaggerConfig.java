@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * <p>
- * This SwaggerConfig class is a configuration class and this
+ * This Swagger Config class is a configuration class and this
  * class is used to document process of the project
  * </p>
  *
