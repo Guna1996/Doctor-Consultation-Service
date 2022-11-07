@@ -88,9 +88,9 @@ public class NotFoundExceptionHandler {
      * @param exception {@link HttpStatus} is caught exception
      * @return {@link ResponseEntity}
      */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> globalException(Exception exception) {
-        return customResponse
-                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Map<String, Object>> globalException(Exception exception) {
+//        return customResponse
+//                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

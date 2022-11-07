@@ -51,6 +51,7 @@ public class PatientDto {
     @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.ENTER_VALID_MOBILE_NUMBER)
     private String mobileNumber;
 
+    @NotNull(message = ErrorConstants.EMAIL_SHOULD_NOT_BE_NULL)
     @Email(message = ErrorConstants.ENTER_VALID_EMAIL)
     private String email;
 

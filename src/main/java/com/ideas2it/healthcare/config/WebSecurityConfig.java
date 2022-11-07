@@ -92,8 +92,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    public void configure(WebSecurity webSecurity) {
-        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
-                , "/swagger-ui.html", "/webjars/**");
-    }
+//    public void configure(WebSecurity webSecurity) {
+//        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
+//                , "/swagger-ui.html", "/webjars/**");
+//    }
 }
