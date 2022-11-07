@@ -9,7 +9,6 @@
  */
 package com.ideas2it.healthcare.service.impl;
 
-import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
@@ -21,6 +20,7 @@ import com.ideas2it.healthcare.repository.TimeslotRepository;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -48,12 +48,11 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
-        if (!isValidTimeslot(timeslotDto)) {
-            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
-        }
         try {
             return TimeslotMapper.toDto(timeslotRepository
                     .save(TimeslotMapper.fromDto(timeslotDto)));
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
@@ -85,31 +84,6 @@ public class TimeslotServiceImpl implements TimeslotService {
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
-    }
-
-    /**
-     * <p>
-     * This method will check the given timeslot is already
-     * available and returns a boolean value
-     * </p>
-     *
-     * @param timeslotDto {@link TimeslotDto}
-     * @return {@link Boolean}
-     */
-    public Boolean isValidTimeslot(TimeslotDto timeslotDto) {
-        if (12 < timeslotDto.getTimeslot().getHour()) {
-            throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
-        }
-        List<Timeslot> timeslots = timeslotRepository.findAll();
-        for (Timeslot timeslot : timeslots) {
-            if (timeslot.getTimeslot().getHour() == timeslotDto.getTimeslot().getHour() &&
-                    (timeslot.getTimeslot().getMinute() == timeslotDto.getTimeslot().getMinute()) &&
-                    (timeslot.getTimeslot().getSecond() == timeslotDto.getTimeslot().getSecond()) &&
-                    (timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat()))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public boolean isValidTimeslot(LocalTime localTime) {

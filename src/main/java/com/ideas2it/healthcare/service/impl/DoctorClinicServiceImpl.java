@@ -23,6 +23,7 @@ import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -50,22 +51,18 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())
-                && isDoctorClinicAssigned(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId())) {
+        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
         } else {
             try {
                 return DoctorClinicMapper
                         .toDto(doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto)));
+            }catch (DataIntegrityViolationException exception) {
+                throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
             } catch (DataAccessException exception) {
                 throw new SqlException(exception.getMessage());
             }
         }
-    }
-
-    private boolean isDoctorClinicAssigned(int doctorId, int clinicId) {
-        return doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(
-                doctorId, clinicId, Constants.ACTIVE).stream().findFirst().isPresent();
     }
 
     /**
@@ -107,14 +104,14 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId) {
-//        try {
+        try {
             return DoctorClinicMapper.toDto(doctorClinicRepository
                     .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                     .orElseThrow(() -> new NotFoundException(
                             MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
-/*        } catch (DataAccessException exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
-        }*/
+        }
     }
 
     /**
@@ -135,11 +132,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public Integer getCountOfDoctorsByClinicId(Integer clinicId) {
-//        try {
+        try {
             return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
-/*        } catch (DataAccessException exception) {
+        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
-        }*/
+        }
     }
 }
 
