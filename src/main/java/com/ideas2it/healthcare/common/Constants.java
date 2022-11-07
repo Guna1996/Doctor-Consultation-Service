@@ -36,6 +36,8 @@ public class Constants {
 
     public static final String GENDER_REGEX = "^male$|^female$";
 
+    public static final String TIME_FORMAT_REGEX = "^am$|^pm$";
+
     public static final String URL_ID = "/{id}";
 
     public static final String URL_PAGINATION = "/{pageNumber}/{totalRows}";
