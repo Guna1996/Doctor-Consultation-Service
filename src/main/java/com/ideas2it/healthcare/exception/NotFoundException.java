@@ -27,17 +27,5 @@ public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {
         super(message);
     }
-
-    /**
-     * <p>
-     * This method is used to throw customized error message and caught error
-     * </p>
-     *
-     * @param message {@link String} is error message
-     * @param error {@link Throwable} is caught error
-     */
-    public NotFoundException(String message, Throwable error) {
-        super(message, error);
-    }
 }
 
