@@ -54,6 +54,6 @@ public class DateUtil {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_SCHEDULE_TIME);
         }
         LocalDate currentDate = LocalDate.now();
-        return (0 > Period.between(currentDate, date).getDays());
+        return (0 < Period.between(currentDate, date).getDays());
     }
 }
