@@ -38,5 +38,5 @@ public interface TimeslotRepository extends JpaRepository<Timeslot, Integer> {
      * @param timeslot {@link LocalTime} is time of the timeslot
      * @return {@link Timeslot}
      */
-    Timeslot findByTimeslot(LocalTime timeslot);
+    Timeslot findByTimeslotAndTimeFormat(LocalTime timeslot, String timeFormat);
 }
