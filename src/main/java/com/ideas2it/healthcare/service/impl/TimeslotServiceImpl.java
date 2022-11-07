@@ -9,7 +9,6 @@
  */
 package com.ideas2it.healthcare.service.impl;
 
-import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
@@ -21,6 +20,7 @@ import com.ideas2it.healthcare.repository.TimeslotRepository;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +51,8 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
             return MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }

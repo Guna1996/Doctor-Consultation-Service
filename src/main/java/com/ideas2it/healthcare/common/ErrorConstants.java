@@ -146,6 +146,8 @@ public class ErrorConstants {
 
     public static final String ENTER_MALE_OR_FEMALE = "Please enter Male or Female";
 
+    public static final String ENTER_AM_OR_PM = "Please enter am or pm";
+
     public static final String ENTER_VALID_QUALIFICATION = "Please enter valid qualification";
 
     public static final String ENTER_VALID_REGISTRATION_YEAR =
@@ -158,7 +160,7 @@ public class ErrorConstants {
     public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
     
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC =
-            "This Doctor is assigned to this clinic at this timeslot";
+            "This Doctor is already assigned to this clinic";
 
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC =
             "This Doctor is assigned to some other clinic at this timeslot";

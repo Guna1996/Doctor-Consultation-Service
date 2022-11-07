@@ -23,6 +23,7 @@ import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +51,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())
-                && isDoctorClinicAssigned(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId())) {
+        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
         } else {
             try {
@@ -61,21 +61,6 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
             }
         }
-    }
-
-    /**
-     * <p>
-     * This method is used to check whether a
-     * clinic is assigned to doctor and return
-     * boolean
-     * </p>
-     * @param doctorId {@link Integer}
-     * @param clinicId {@link Integer}
-     * @return {@link Boolean}
-     */
-    private boolean isDoctorClinicAssigned(Integer doctorId, Integer clinicId) {
-        return doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(
-                doctorId, clinicId, Constants.ACTIVE).stream().findFirst().isPresent();
     }
 
     /**
