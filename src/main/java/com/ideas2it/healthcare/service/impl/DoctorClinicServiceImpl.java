@@ -75,7 +75,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * @return {@link Boolean}
      */
 
-    private boolean isDoctorAvailable(Integer doctorId, List<TimeslotDto> timeslotsDto) {
+    private boolean isDoctorAvailable(Integer doctorId, Integer clinicId, List<TimeslotDto> timeslotsDto) {
         List<DoctorClinic> doctorClinics = doctorClinicRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         if (!doctorClinics.isEmpty()) {
