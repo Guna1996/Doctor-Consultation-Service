@@ -89,9 +89,9 @@ public class TimeslotServiceImpl implements TimeslotService {
     /**
      * {@inheritDoc}
      */
-    public boolean isValidTimeslot(LocalTime localTime) {
+    public boolean isValidTimeslot(LocalTime localTime, String timeFormat) {
         try {
-            Timeslot timeslot = timeslotRepository.findByTimeslot(localTime);
+            Timeslot timeslot = timeslotRepository.findByTimeslotAndTimeFormat(localTime, timeFormat);
             if (null == timeslot) {
                 return false;
             }

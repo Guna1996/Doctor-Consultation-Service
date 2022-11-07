@@ -69,5 +69,5 @@ public interface TimeslotService {
      * @param localTime {@link LocalTime} is timeslot
      * @return {@link boolean}
      */
-    boolean isValidTimeslot(LocalTime localTime);
+    boolean isValidTimeslot(LocalTime localTime, String timeFormat);
 }
