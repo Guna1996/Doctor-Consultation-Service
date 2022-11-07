@@ -21,6 +21,7 @@ import com.ideas2it.healthcare.repository.PatientRepository;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -49,6 +50,8 @@ public class PatientServiceImpl implements PatientService {
         try {
             patientRepository.save(PatientMapper.fromDto(patientDto));
             return MessageConstants.PATIENT_ADDED_SUCCESSFULLY;
+        } catch (DataIntegrityViolationException exception) {
+            throw new NotFoundException(ErrorConstants.PATIENT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
