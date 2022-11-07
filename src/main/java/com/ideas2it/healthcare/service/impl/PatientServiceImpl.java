@@ -53,11 +53,12 @@ public class PatientServiceImpl implements PatientService {
     /**
      * {@inheritDoc}
      */
-    public PatientDto addPatient(PatientDto patientDto) {
+    public String addPatient(PatientDto patientDto) {
         try {
-            return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
+            patientRepository.save(PatientMapper.fromDto(patientDto));
+            return MessageConstants.PATIENT_ADDED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -71,23 +72,24 @@ public class PatientServiceImpl implements PatientService {
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public PatientDto updatePatient(PatientDto patientDto) {
+    public String updatePatient(PatientDto patientDto) {
         try {
             Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                     Constants.ACTIVE);
             if (patient.isEmpty()) {
                 throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
             }
-            return PatientMapper.toDto(patientRepository.save(PatientMapper.fromDto(patientDto)));
+            patientRepository.save(PatientMapper.fromDto(patientDto));
+            return MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

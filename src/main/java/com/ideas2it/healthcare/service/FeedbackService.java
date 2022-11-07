@@ -35,7 +35,7 @@ public interface FeedbackService {
      * @param feedbackDto {@link FeedbackDto}
      * @return {@link FeedbackDto}
      */
-    FeedbackDto addFeedback(FeedbackDto feedbackDto);
+    String addFeedback(FeedbackDto feedbackDto);
 
     /**
      * <p>

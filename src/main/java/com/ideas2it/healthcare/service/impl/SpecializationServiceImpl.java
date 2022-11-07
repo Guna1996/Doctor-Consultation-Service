@@ -54,7 +54,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -72,7 +72,7 @@ public class SpecializationServiceImpl implements SpecializationService {
             }
             return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -88,7 +88,7 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -96,14 +96,8 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public String updateSpecialization(SpecializationDto specializationDto) {
-        try {
-            specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
-            return MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
-        } catch (DataIntegrityViolationException exception) {
-            throw new NotFoundException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
-        } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
-        }
+        addSpecialization(specializationDto);
+        return MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
     }
 
     /**
@@ -116,7 +110,7 @@ public class SpecializationServiceImpl implements SpecializationService {
             }
             throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -127,7 +121,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         try {
             return specializationRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

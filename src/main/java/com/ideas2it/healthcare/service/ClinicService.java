@@ -35,7 +35,7 @@ public interface ClinicService {
      * @param clinicDto {@link ClinicDto} is clinic details
      * @return {@link ClinicDto}
      */
-    ClinicDto addClinic(ClinicDto clinicDto);
+    String addClinic(ClinicDto clinicDto);
 
     /**
      * <p>
@@ -71,7 +71,7 @@ public interface ClinicService {
      * @param clinicDto {@link ClinicDto} clinic detail
      * @return {@link ClinicDto}
      */
-    ClinicDto updateClinic(ClinicDto clinicDto);
+    String updateClinic(ClinicDto clinicDto);
 
     /**
      * <p>

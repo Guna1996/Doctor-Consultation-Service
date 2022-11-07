@@ -60,8 +60,8 @@ public class PatientController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addPatient(@Valid @RequestBody PatientDto patientDto) {
-        return customResponse.responseEntity(MessageConstants.PATIENT_ADDED_SUCCESSFULLY,
-                patientService.addPatient(patientDto),
+        return customResponse.responseEntity(patientService.addPatient(patientDto),
+                null,
                 HttpStatus.OK);
     }
 
@@ -92,8 +92,8 @@ public class PatientController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
-        return customResponse.responseEntity(MessageConstants.PATIENT_UPDATED_SUCCESSFULLY,
-                patientService.updatePatient(patientDto),
+        return customResponse.responseEntity(patientService.updatePatient(patientDto),
+                null,
                 HttpStatus.OK);
     }
 }
