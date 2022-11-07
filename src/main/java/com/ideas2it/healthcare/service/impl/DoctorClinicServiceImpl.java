@@ -51,7 +51,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
+        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId(),
+                doctorClinicDto.getTimeslots())) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
         } else {
             try {
@@ -73,17 +74,20 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * @param timeslotsDto {@link List<TimeslotDto>}
      * @return {@link Boolean}
      */
+
     private boolean isDoctorAvailable(Integer doctorId, List<TimeslotDto> timeslotsDto) {
         List<DoctorClinic> doctorClinics = doctorClinicRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         if (!doctorClinics.isEmpty()) {
             for (TimeslotDto timeslotDto: timeslotsDto) {
                 for (DoctorClinic doctorClinic : doctorClinics) {
-                    List<Timeslot> timeslots = doctorClinic.getTimeslots();
-                    for (Timeslot timeslot : timeslots) {
-                        if (timeslot.getId() == timeslotDto.getId())
-                            throw new NotFoundException(
-                                    ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC);
+                    if(doctorClinic.getClinic().getId() != clinicId) {
+                        List<Timeslot> timeslots = doctorClinic.getTimeslots();
+                        for (Timeslot timeslot : timeslots) {
+                            if (timeslot.getId() == timeslotDto.getId())
+                                throw new NotFoundException(
+                                        ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC);
+                        }
                     }
                 }
             }
