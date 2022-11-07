@@ -17,8 +17,8 @@ import java.time.LocalTime;
 
 /**
  * <p>
- * This is a Dto class for Timeslot
- * Dto main purpose is to transfer data from from an
+ * This is Timeslot Dto class for Timeslot
+ * Dto main purpose is to transfer data  from an
  * entity object to Dto object, inorder to not show the
  * exact data to the user
  * </p>

@@ -32,7 +32,7 @@ public interface PatientVitalService {
      * </p>
      *
      * @param vitalsDto {@link PatientVitalDto}
-     * @return {@link PatientVitalDto}
+     * @return {@link String}
      */
     String addVitals(PatientVitalDto vitalsDto);
 

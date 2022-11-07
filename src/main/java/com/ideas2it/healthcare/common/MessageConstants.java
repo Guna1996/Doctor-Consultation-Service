@@ -101,6 +101,9 @@ public class MessageConstants {
     public static final String DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY  =
             "Doctor assigned to clinic successfully";
 
+    public static final String DOCTOR_UPDATED_TO_CLINIC_SUCCESSFULLY  =
+            "Doctor updated to clinic successfully";
+
     public static final String SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS  =
             "Successfully retrieved all timeslots";
 

@@ -34,8 +34,6 @@ public class MathUtil {
         if (pages < result) {
             return pages + 1;
         }
-        else {
-            return pages;
-        }
+        return pages;
     }
 }

@@ -1,7 +1,9 @@
 /**
  * <p>
- * This is the base package for all the repository classes
- * which is for doctor, patient and clinic
+ * This package contains classes are Doctor clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
+ * Appointment repository, Feedback repository, Specialization repository,
+ * Timeslot repository, Patient vital repository.
  * </p>
  * Copyright 2022 - Ideas2it
  */

@@ -1,9 +1,9 @@
 /**
  * <p>
- * This is the package contains classes are DoctorClinicController,
- * Patient controller,Doctor controller,Clinic controller,
- * Appointment controller,Feedback controller,Specialization controller,
- * Timeslot controller,Vital controller
+ * This is the package contains classes are Doctor clinic controller,
+ * Patient controller, Doctor controller, Clinic controller,
+ * Appointment controller, Feedback controller, Specialization controller,
+ * Timeslot controller, Patient Vital controller
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * <p>
- * This PatientController class is used to get and update
+ * This Patient Controller class is used to get and update
  * information from the patient and also used to get
  * their vitals and appointments.
  * </p>

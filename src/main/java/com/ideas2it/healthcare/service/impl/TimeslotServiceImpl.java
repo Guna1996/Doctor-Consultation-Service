@@ -48,9 +48,6 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
-        if (!isValidTimeslot(timeslotDto)) {
-            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
-        }
         try {
             timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
             return MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
@@ -88,39 +85,12 @@ public class TimeslotServiceImpl implements TimeslotService {
     }
 
     /**
-     * <p>
-     * This method will check the given timeslot is already
-     * available and returns a boolean value
-     * </p>
-     *
-     * @param timeslotDto {@link TimeslotDto}
-     * @return {@link Boolean}
+     * {@inheritDoc}
      */
-    public Boolean isValidTimeslot(TimeslotDto timeslotDto) {
-        if (12 < timeslotDto.getTimeslot().getHour()) {
-            throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
-        }
-        try {
-            List<Timeslot> timeslots = timeslotRepository.findAll();
-            for (Timeslot timeslot : timeslots) {
-                if (timeslot.getTimeslot().getHour() == timeslotDto.getTimeslot().getHour() &&
-                        (timeslot.getTimeslot().getMinute() == timeslotDto.getTimeslot().getMinute()) &&
-                        (timeslot.getTimeslot().getSecond() == timeslotDto.getTimeslot().getSecond()) &&
-                        (timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat()))) {
-                    return false;
-                }
-            }
-            return true;
-        } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
-        }
-    }
-
     public boolean isValidTimeslot(LocalTime localTime) {
         try {
             Timeslot timeslot = timeslotRepository.findByTimeslot(localTime);
-            if (timeslot == null) {
-                System.out.println(localTime);
+            if (null == timeslot) {
                 return false;
             }
             return timeslot.getTimeslot().equals(localTime);

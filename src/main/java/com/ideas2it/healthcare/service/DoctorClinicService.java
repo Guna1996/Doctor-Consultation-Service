@@ -29,12 +29,12 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to assign doctor into clinic
-     * table by getting doctor and clinic id
+     * table by getting doctor id and clinic id
      * from the user
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
-     * @return {@link DoctorClinicDto}
+     * @return {@link String}
      */
     String assignDoctorToClinic(DoctorClinicDto doctorClinicDto);
 
@@ -87,4 +87,16 @@ public interface DoctorClinicService {
      * @return {@link Integer}
      */
     Integer getCountOfDoctorsByClinicId(Integer clinicId);
+
+    /**
+     * <p>
+     * This method is used to update doctor into clinic
+     * table by getting doctor id and clinic id
+     * from the user
+     * </p>
+     *
+     * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
+     * @return {@link String}
+     */
+    String updateDoctorClinic(DoctorClinicDto doctorClinicDto);
 }

@@ -47,7 +47,6 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public String addDoctor(DoctorDto doctorDto) {
         try {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
@@ -62,7 +61,6 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public List<DoctorDto> getAllDoctors(Integer pageNumber, Integer totalRows) {
         try {
             List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
@@ -79,7 +77,6 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public DoctorDto getDoctorById(Integer id) {
         try {
             return doctorRepository
@@ -96,7 +93,6 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public String updateDoctor(DoctorDto doctorDto) {
             addDoctor(doctorDto);
             return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
@@ -105,7 +101,6 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    @Override
     public String removeDoctorById(Integer id) {
         try {
             if (1 <= doctorRepository.removeDoctorById(id)) {

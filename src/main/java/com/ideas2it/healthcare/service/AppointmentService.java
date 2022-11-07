@@ -35,7 +35,7 @@ public interface AppointmentService {
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} contains appointment details
-     * @return {@link AppointmentDto}
+     * @return {@link String}
      */
     String addAppointment(AppointmentDto appointmentDto);
 
@@ -59,7 +59,7 @@ public interface AppointmentService {
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is appointment detail
-     * @return {@link AppointmentDto}
+     * @return {@link String}
      */
     String rescheduleAppointment(AppointmentDto appointmentDto);
 

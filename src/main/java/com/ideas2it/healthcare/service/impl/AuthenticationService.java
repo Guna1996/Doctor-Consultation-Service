@@ -39,7 +39,6 @@ public class AuthenticationService implements UserDetailsService {
      * and authorization.
      * </p>
      */
-    @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("Admin"));
