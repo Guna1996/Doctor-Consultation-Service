@@ -44,6 +44,8 @@ public class ErrorConstants {
 
     public static final String PATIENT_NOT_FOUND = "Patient not found";
 
+    public static final String PATIENT_ALREADY_EXISTS = "Patient already exists";
+
     public static final String SPECIALIZATION_NOT_FOUND = "Specialization not found";
 
     public static final String SPECIALIZATIONS_NOT_FOUND = "Specializations not found";
@@ -79,6 +81,8 @@ public class ErrorConstants {
     public static final String STATE_SHOULD_NOT_NE_NULL = "State should not be null";
 
     public static final String MOBILE_NUMBER_SHOULD_NOT_BE_NULL = "Mobile Number should not be null";
+
+    public static final String EMAIL_SHOULD_NOT_BE_NULL = "Email should not be null";
 
     public static final String PIN_CODE_CANNOT_BE_NEGATIVE_OR_ZERO =
             "Pin code cannot be negative or zero";

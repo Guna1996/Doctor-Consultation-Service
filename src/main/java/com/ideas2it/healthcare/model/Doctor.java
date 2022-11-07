@@ -49,6 +49,9 @@ public class Doctor {
     @Column(name = Constants.DATE_OF_BIRTH)
     private LocalDate dateOfBirth;
 
+    @Column(name = Constants.EMAIL, unique = true)
+    private String email;
+
     @Column(name = Constants.GENDER)
     private String gender;
 

@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
@@ -61,6 +62,10 @@ public class DoctorDto {
     @NotNull(message = ErrorConstants.REGISTRATION_YEAR_SHOULD_NOT_BE_NULL)
     @PastOrPresent(message = ErrorConstants.ENTER_VALID_REGISTRATION_YEAR)
     private LocalDate dateOfRegistration;
+
+    @NotNull(message = ErrorConstants.EMAIL_SHOULD_NOT_BE_NULL)
+    @Email(message = ErrorConstants.ENTER_VALID_EMAIL)
+    private String email;
 
     @NotNull(message = ErrorConstants.MOBILE_NUMBER_SHOULD_NOT_BE_NULL)
     @Pattern(regexp = Constants.MOBILE_NUMBER_REGEX, message = ErrorConstants.ENTER_VALID_MOBILE_NUMBER)
