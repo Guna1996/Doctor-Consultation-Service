@@ -161,7 +161,10 @@ public class ErrorConstants {
     public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
     
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC =
-            "Doctor already assigned to this clinic at this timeslot";
+            "This Doctor is assigned to this clinic at this timeslot";
+
+    public static final String DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC =
+            "This Doctor is assigned to some other clinic at this timeslot";
             
     public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
     

@@ -50,8 +50,8 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(),
-                doctorClinicDto.getClinic().getId(), doctorClinicDto.getTimeslots())) {
+        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())
+                && isDoctorClinicAssigned(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId())) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
         } else {
             try {
@@ -63,16 +63,25 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         }
     }
 
-    private boolean isDoctorAvailable(int id, int id1, List<TimeslotDto> timeslotsDto) {
+    private boolean isDoctorClinicAssigned(int doctorId, int clinicId) {
+        return doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(
+                doctorId, clinicId, Constants.ACTIVE).stream().findFirst().isPresent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    private boolean isDoctorAvailable(int doctorId, List<TimeslotDto> timeslotsDto) {
         List<DoctorClinic> doctorClinics = doctorClinicRepository
-                .findByDoctorIdAndStatus(id, Constants.ACTIVE);
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         if (!doctorClinics.isEmpty()) {
             for (TimeslotDto timeslotDto: timeslotsDto) {
                 for (DoctorClinic doctorClinic : doctorClinics) {
                     List<Timeslot> timeslots = doctorClinic.getTimeslots();
                     for (Timeslot timeslot : timeslots) {
                         if (timeslot.getId() == timeslotDto.getId())
-                            return false;
+                            throw new NotFoundException(
+                                    ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC);
                     }
                 }
             }
@@ -98,14 +107,14 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public DoctorClinicDto getTimeslotsByDoctorIdAndClinicId(Integer doctorId, Integer clinicId) {
-        try {
+//        try {
             return DoctorClinicMapper.toDto(doctorClinicRepository
                     .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                     .orElseThrow(() -> new NotFoundException(
                             MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
-        } catch (DataAccessException exception) {
+/*        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
-        }
+        }*/
     }
 
     /**
@@ -126,11 +135,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public Integer getCountOfDoctorsByClinicId(Integer clinicId) {
-        try {
+//        try {
             return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
-        } catch (DataAccessException exception) {
+/*        } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
-        }
+        }*/
     }
 }
 
