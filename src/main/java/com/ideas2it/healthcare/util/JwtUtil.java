@@ -63,7 +63,7 @@ public class JwtUtil {
      * This method is used to extract claim
      * </p>
      *
-     * @param token {@link String} is token for the session
+     * @param token          {@link String} is token for the session
      * @param claimsResolver {@link Function}
      * @return {@link T}
      */
@@ -98,9 +98,10 @@ public class JwtUtil {
 
     /**
      * <p>
-     *  This method to generate jwt token using
-     *  user details header, payload and signature.
+     * This method to generate jwt token using
+     * user details header, payload and signature.
      * </p>
+     *
      * @param userDetails {@link UserDetails} it contains username and password
      * @return {@link String}
      */
@@ -115,9 +116,9 @@ public class JwtUtil {
      * claims of payload.
      * </p>
      *
+     * @return {@link String}
      * @parm claims {@link Map}
      * @parm subject {@link String}
-     * @return {@link String}
      */
     private String createToken(Map<String, Object> claims, String subject, UserDetails userDetails) {
         claims.put("roles", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
@@ -133,7 +134,7 @@ public class JwtUtil {
      * This method is used to validate token
      * </p>
      *
-     * @param token {@link String} is token for the session
+     * @param token       {@link String} is token for the session
      * @param userDetails {@link UserDetails} contains username and password of the user
      * @return {@link Boolean}
      */

@@ -34,7 +34,6 @@ public class SwaggerConfig {
      * This method is used to generate the REST API documents for restful web services.
      * It provides a user interface to access our restful web services via the web browser.
      * </p>
-     *
      */
     @Bean
     public Docket api() {

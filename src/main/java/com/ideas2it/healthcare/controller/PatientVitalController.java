@@ -89,8 +89,7 @@ public class PatientVitalController {
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (0 >= totalPages) {
             throw new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND);
-        }
-        else if (pages <= pageNumber) {
+        } else if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.VITALS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,

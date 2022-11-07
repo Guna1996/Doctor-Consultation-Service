@@ -120,7 +120,7 @@ public class PatientVitalMapper {
                     doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 }
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                if(null != doctor.getDateOfRegistration()) {
+                if (null != doctor.getDateOfRegistration()) {
                     doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 }
                 doctorDto.setQualification(doctor.getQualification());

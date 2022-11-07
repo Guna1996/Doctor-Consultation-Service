@@ -127,7 +127,7 @@ public class AppointmentController {
         return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
                 .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
-                .OK,pages);
+                .OK, pages);
     }
 
     /**

@@ -23,6 +23,7 @@ import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -50,17 +51,21 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId(),
+/*        if (!isDoctorAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId(),
                 doctorClinicDto.getTimeslots())) {
+            throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);*/
+//        } else {
+        checkDoctorTimeslot(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId(),
+                doctorClinicDto.getTimeslots());
+        try {
+            doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto));
+            return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
+        } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
-        } else {
-            try {
-                doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto));
-                return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
-            } catch (DataAccessException exception) {
-                throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
-            }
+        } catch (DataAccessException exception) {
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        //}
     }
 
     /**
@@ -69,29 +74,27 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * doctor is assigned to different clinic in the
      * same timeslot and return boolean
      * </p>
-     * @param doctorId {@link Integer}
+     *
+     * @param doctorId     {@link Integer}
      * @param timeslotsDto {@link List<TimeslotDto>}
-     * @return {@link Boolean}
      */
-
-    private boolean isDoctorAvailable(Integer doctorId, Integer clinicId, List<TimeslotDto> timeslotsDto) {
+    private void checkDoctorTimeslot(Integer doctorId, Integer clinicId, List<TimeslotDto> timeslotsDto) {
         List<DoctorClinic> doctorClinics = doctorClinicRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         if (!doctorClinics.isEmpty()) {
-            for (TimeslotDto timeslotDto: timeslotsDto) {
+            for (TimeslotDto timeslotDto : timeslotsDto) {
                 for (DoctorClinic doctorClinic : doctorClinics) {
-                    if(doctorClinic.getClinic().getId() != clinicId) {
+                    if (doctorClinic.getClinic().getId() != clinicId) {
                         List<Timeslot> timeslots = doctorClinic.getTimeslots();
                         for (Timeslot timeslot : timeslots) {
                             if (timeslot.getId() == timeslotDto.getId())
                                 throw new NotFoundException(
-                                        ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC);
+                                        ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT);
                         }
                     }
                 }
             }
         }
-        return true;
     }
 
     /**

@@ -83,7 +83,7 @@ public interface DoctorClinicService {
      * by clinic id
      * </p>
      *
-     * @param clinicId   {@link Integer} is id of clinic
+     * @param clinicId {@link Integer} is id of clinic
      * @return {@link Integer}
      */
     Integer getCountOfDoctorsByClinicId(Integer clinicId);

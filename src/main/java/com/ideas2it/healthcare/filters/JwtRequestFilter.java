@@ -46,9 +46,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
      * passed using header
      * </p>
      *
-     * @param request {@link HttpServletRequest}
+     * @param request  {@link HttpServletRequest}
      * @param response {@link HttpServletResponse}
-     * @param chain {@link FilterChain}
+     * @param chain    {@link FilterChain}
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -58,7 +58,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String authorizationHeader = request.getHeader("Authorization");
         String username = null;
         String jwt = null;
-        if (null != authorizationHeader  && authorizationHeader.startsWith("ideas2it ")) {
+        if (null != authorizationHeader && authorizationHeader.startsWith("ideas2it ")) {
             jwt = authorizationHeader.substring(9);
             username = jwtUtil.extractUsername(jwt);
         }
@@ -67,7 +67,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if (jwtUtil.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+                                userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

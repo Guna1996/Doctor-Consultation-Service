@@ -76,7 +76,7 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
      * This method is used to find count of all active clinics
      * </p>
      *
-     * @param status   {@link String} is status of clinic
+     * @param status {@link String} is status of clinic
      * @return {@link Integer}
      */
     Integer countByStatus(String status);

@@ -98,15 +98,15 @@ public class MessageConstants {
 
     public static final String SUCCESSFULLY_RETRIEVED_CLINIC = "Successfully retrieved clinic";
 
-    public static final String DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY  =
+    public static final String DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY =
             "Doctor assigned to clinic successfully";
 
-    public static final String DOCTOR_UPDATED_TO_CLINIC_SUCCESSFULLY  =
+    public static final String DOCTOR_UPDATED_TO_CLINIC_SUCCESSFULLY =
             "Doctor updated to clinic successfully";
 
-    public static final String SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS  =
+    public static final String SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS =
             "Successfully retrieved all timeslots";
 
-    public static final String SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC  =
+    public static final String SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC =
             "Successfully retrieved all doctors in clinic";
 }

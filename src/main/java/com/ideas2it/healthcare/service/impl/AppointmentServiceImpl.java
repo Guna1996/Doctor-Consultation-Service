@@ -56,11 +56,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String addAppointment(AppointmentDto appointmentDto) {
-        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && !timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
-            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
+        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+            return saveAppointment(appointmentDto);
         }
-        return saveAppointment(appointmentDto);
+        throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
     }
 
     /**
@@ -150,11 +150,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        if (0 < Period.between(date, currentDate).getDays()) {
-            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
+        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+            saveAppointment(appointmentDto);
+            return MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }
-        saveAppointment(appointmentDto);
-        return MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
+        throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
     }
 
     /**

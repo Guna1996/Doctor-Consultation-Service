@@ -56,7 +56,7 @@ public interface PatientVitalService {
      * from the database using patient id
      * </p>
      *
-     * @param patientId  {@link Integer} is id of patient
+     * @param patientId {@link Integer} is id of patient
      * @return {@link Integer}
      */
     Integer getVitalsCountByPatientId(Integer patientId);

@@ -76,9 +76,9 @@ public class FeedbackServiceImpl implements FeedbackService {
                                                    Integer totalRows) {
         try {
             return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                        .of(pageNumber, totalRows)).toList()
-                        .stream().map(FeedbackMapper::toDto)
-                        .collect(Collectors.toList());
+                            .of(pageNumber, totalRows)).toList()
+                    .stream().map(FeedbackMapper::toDto)
+                    .collect(Collectors.toList());
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }

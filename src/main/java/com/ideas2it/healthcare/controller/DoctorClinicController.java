@@ -48,7 +48,7 @@ public class DoctorClinicController {
 
     @Autowired
     private DoctorClinicService doctorClinicService;
-    
+
     @Autowired
     private CustomResponse customResponse;
 
@@ -78,7 +78,7 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(DoctorClinicDto doctorClinicDto){
+    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(DoctorClinicDto doctorClinicDto) {
         return customResponse.responseEntity(doctorClinicService.updateDoctorClinic(doctorClinicDto),
                 null, HttpStatus.OK);
     }

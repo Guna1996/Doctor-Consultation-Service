@@ -10,7 +10,6 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.exception.SqlException;
 
 import java.util.List;
 

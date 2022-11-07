@@ -48,7 +48,7 @@ public class ClinicController {
 
     @Autowired
     private ClinicService clinicService;
-    
+
     @Autowired
     private CustomResponse customResponse;
 

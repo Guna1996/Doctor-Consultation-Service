@@ -46,7 +46,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * This method is used to create bean for authentication using
      * Authentication Manager
      * </p>
-     *
      */
     @Override
     @Bean
@@ -59,7 +58,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * This method is used to create bean for password encoding using
      * password Encoder
      * </p>
-     *
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -92,8 +90,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-//    public void configure(WebSecurity webSecurity) {
-//        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
-//                , "/swagger-ui.html", "/webjars/**");
-//    }
+    public void configure(WebSecurity webSecurity) {
+        webSecurity.ignoring().antMatchers("/clinic/**", "/doctor/**", "/doctor-clinic/**", "/appointment/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security"
+                , "/swagger-ui.html", "/webjars/**");
+    }
 }

@@ -49,7 +49,7 @@ public class TimeslotServiceImpl implements TimeslotService {
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
         try {
-            if (timeslotDto.getTimeslot().getHour() >=13) {
+            if (timeslotDto.getTimeslot().getHour() >= 13) {
                 throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
             }
             timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
