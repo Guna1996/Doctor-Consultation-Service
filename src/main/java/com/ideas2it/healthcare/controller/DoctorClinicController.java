@@ -64,8 +64,8 @@ public class DoctorClinicController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
             @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return customResponse.responseEntity(MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY,
-                doctorClinicService.assignDoctorToClinic(doctorClinicDto), HttpStatus.OK);
+        return customResponse.responseEntity(doctorClinicService.assignDoctorToClinic(doctorClinicDto),
+                null, HttpStatus.OK);
     }
 
     /**

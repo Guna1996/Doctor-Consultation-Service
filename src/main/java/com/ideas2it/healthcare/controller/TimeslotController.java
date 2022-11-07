@@ -59,8 +59,8 @@ public class TimeslotController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addTimeslot(@Valid @RequestBody TimeslotDto timeslotDto) {
-        return customResponse.responseEntity(MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY,
-                timeslotService.addTimeslot(timeslotDto),
+        return customResponse.responseEntity(timeslotService.addTimeslot(timeslotDto),
+                null,
                 HttpStatus.OK);
     }
 

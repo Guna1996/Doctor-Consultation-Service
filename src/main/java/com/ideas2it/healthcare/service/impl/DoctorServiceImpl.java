@@ -48,14 +48,14 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     @Override
-    public String saveDoctor(DoctorDto doctorDto) {
+    public String addDoctor(DoctorDto doctorDto) {
         try {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
             return MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -72,7 +72,7 @@ public class DoctorServiceImpl implements DoctorService {
             }
             return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -89,7 +89,7 @@ public class DoctorServiceImpl implements DoctorService {
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -98,12 +98,8 @@ public class DoctorServiceImpl implements DoctorService {
      */
     @Override
     public String updateDoctor(DoctorDto doctorDto) {
-        try {
-            doctorRepository.save(DoctorMapper.fromDto(doctorDto));
+            addDoctor(doctorDto);
             return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
-        } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
-        }
     }
 
     /**
@@ -117,7 +113,7 @@ public class DoctorServiceImpl implements DoctorService {
             }
             throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -128,7 +124,7 @@ public class DoctorServiceImpl implements DoctorService {
         try {
             return doctorRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

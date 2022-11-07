@@ -55,12 +55,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     /**
      * {@inheritDoc}
      */
-    public AppointmentDto addAppointment(AppointmentDto appointmentDto) {
-        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn()) && !timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime())) {
+    public String addAppointment(AppointmentDto appointmentDto) {
+        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn())
+                && !timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime())) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
         return saveAppointment(appointmentDto);
-
     }
 
     /**
@@ -71,7 +71,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             return appointmentRepository
                     .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -85,7 +85,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -95,13 +95,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
         try {
-            return appointmentRepository.findByPatientIdAndStatus(
-                            patientId, Constants.ACTIVE, PageRequest.of(pageNumber, totalRows))
+            return appointmentRepository.findByPatientIdAndStatus(patientId, Constants.ACTIVE,
+                            PageRequest.of(pageNumber, totalRows))
                     .stream()
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -118,7 +118,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -129,7 +129,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -140,35 +140,36 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public AppointmentDto rescheduleAppointment(AppointmentDto appointmentDto) {
+    public String rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
         if (0 < Period.between(date, currentDate).getDays()) {
             throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
         }
-        return saveAppointment(appointmentDto);
+        saveAppointment(appointmentDto);
+        return MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
     }
 
     /**
      * {@inheritDoc}
      */
-    public AppointmentDto saveAppointment(AppointmentDto appointmentDto) {
+    public String saveAppointment(AppointmentDto appointmentDto) {
         try {
             if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                     appointmentDto.getScheduledOn())) {
                 throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
             }
-            return AppointmentMapper
-                    .toDto(appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto)));
+            appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
+            return MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

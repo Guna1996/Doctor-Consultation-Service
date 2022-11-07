@@ -62,8 +62,8 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return customResponse.responseEntity(MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY,
-                appointmentService.addAppointment(appointmentDto),
+        return customResponse.responseEntity(appointmentService.addAppointment(appointmentDto),
+                null,
                 HttpStatus.OK);
     }
 
@@ -79,8 +79,8 @@ public class AppointmentController {
     @PutMapping
     public ResponseEntity<Map<String, Object>> rescheduleAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return customResponse.responseEntity(MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY,
-                appointmentService.rescheduleAppointment(appointmentDto), HttpStatus.OK);
+        return customResponse.responseEntity(appointmentService.rescheduleAppointment(appointmentDto),
+                null, HttpStatus.OK);
     }
 
     /**
