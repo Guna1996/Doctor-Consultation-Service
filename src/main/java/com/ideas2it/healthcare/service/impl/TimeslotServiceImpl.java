@@ -47,14 +47,24 @@ public class TimeslotServiceImpl implements TimeslotService {
     /**
      * {@inheritDoc}
      */
+<<<<<<< HEAD
     public TimeslotDto addTimeslot(TimeslotDto timeslotDto) {
         try {
             return TimeslotMapper.toDto(timeslotRepository
                     .save(TimeslotMapper.fromDto(timeslotDto)));
         } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
+=======
+    public String addTimeslot(TimeslotDto timeslotDto) {
+        if (!isValidTimeslot(timeslotDto)) {
+            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
+        }
+        try {
+            timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
+            return MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
+>>>>>>> 16dc93d789ad296bb0e22acfc28fd2d2afc46186
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -71,7 +81,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
         } catch (SqlException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -82,16 +92,52 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             return (int) timeslotRepository.count();
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
-    public boolean isValidTimeslot(LocalTime localTime) {
-        Timeslot timeslot = timeslotRepository.findByTimeslot(localTime);
-        if (timeslot == null) {
-            System.out.println(localTime);
-            return false;
+<<<<<<< HEAD
+=======
+    /**
+     * <p>
+     * This method will check the given timeslot is already
+     * available and returns a boolean value
+     * </p>
+     *
+     * @param timeslotDto {@link TimeslotDto}
+     * @return {@link Boolean}
+     */
+    public Boolean isValidTimeslot(TimeslotDto timeslotDto) {
+        if (12 < timeslotDto.getTimeslot().getHour()) {
+            throw new NotFoundException(ErrorConstants.INVALID_TIMESLOT);
         }
-        return timeslot.getTimeslot().equals(localTime);
+        try {
+            List<Timeslot> timeslots = timeslotRepository.findAll();
+            for (Timeslot timeslot : timeslots) {
+                if (timeslot.getTimeslot().getHour() == timeslotDto.getTimeslot().getHour() &&
+                        (timeslot.getTimeslot().getMinute() == timeslotDto.getTimeslot().getMinute()) &&
+                        (timeslot.getTimeslot().getSecond() == timeslotDto.getTimeslot().getSecond()) &&
+                        (timeslot.getTimeFormat().equals(timeslotDto.getTimeFormat()))) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (DataAccessException exception) {
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+        }
+    }
+
+>>>>>>> 16dc93d789ad296bb0e22acfc28fd2d2afc46186
+    public boolean isValidTimeslot(LocalTime localTime) {
+        try {
+            Timeslot timeslot = timeslotRepository.findByTimeslot(localTime);
+            if (timeslot == null) {
+                System.out.println(localTime);
+                return false;
+            }
+            return timeslot.getTimeslot().equals(localTime);
+        } catch (DataAccessException exception) {
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+        }
     }
 }

@@ -61,8 +61,8 @@ public class ClinicController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return customResponse.responseEntity(MessageConstants.CLINIC_ADDED_SUCCESSFULLY,
-                clinicService.addClinic(clinicDto), HttpStatus.OK);
+        return customResponse.responseEntity(clinicService.addClinic(clinicDto),
+                null, HttpStatus.OK);
     }
 
     /**
@@ -116,8 +116,8 @@ public class ClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
-        return customResponse.responseEntity(MessageConstants.CLINIC_UPDATED_SUCCESSFULLY,
-                clinicService.updateClinic(clinicDto), HttpStatus.OK);
+        return customResponse.responseEntity(clinicService.updateClinic(clinicDto),
+                null, HttpStatus.OK);
     }
 
     /**

@@ -45,11 +45,12 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * {@inheritDoc}
      */
-    public FeedbackDto addFeedback(FeedbackDto feedbackDto) {
+    public String addFeedback(FeedbackDto feedbackDto) {
         try {
-            return FeedbackMapper.toDto(feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto)));
+            feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto));
+            return MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY;
         } catch (Exception exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -63,7 +64,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             }
             throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
         } catch (Exception exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -79,7 +80,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                         .stream().map(FeedbackMapper::toDto)
                         .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -90,7 +91,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         try {
             return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

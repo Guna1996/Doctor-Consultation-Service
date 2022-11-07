@@ -48,14 +48,15 @@ public class ClinicServiceImpl implements ClinicService {
     /**
      * {@inheritDoc}
      */
-    public ClinicDto addClinic(ClinicDto clinicDto) {
+    public String addClinic(ClinicDto clinicDto) {
         Clinic clinic = ClinicMapper.fromDto(clinicDto);
         try {
-            return ClinicMapper.toDto(clinicRepository.save(clinic));
+            clinicRepository.save(clinic);
+            return MessageConstants.CLINIC_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.CLINIC_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -73,7 +74,7 @@ public class ClinicServiceImpl implements ClinicService {
                     .map(ClinicMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -87,18 +88,19 @@ public class ClinicServiceImpl implements ClinicService {
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.DATABASE_NOT_FOUND);
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public ClinicDto updateClinic(ClinicDto clinicDto) {
+    public String updateClinic(ClinicDto clinicDto) {
         try {
-            return ClinicMapper.toDto(clinicRepository.save(ClinicMapper.fromDto(clinicDto)));
+            clinicRepository.save(ClinicMapper.fromDto(clinicDto));
+            return MessageConstants.CLINIC_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -112,7 +114,7 @@ public class ClinicServiceImpl implements ClinicService {
             }
             throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -123,7 +125,7 @@ public class ClinicServiceImpl implements ClinicService {
         try {
             return clinicRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(exception.getMessage());
+            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 

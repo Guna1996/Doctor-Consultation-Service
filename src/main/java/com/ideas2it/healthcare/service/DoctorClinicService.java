@@ -36,7 +36,7 @@ public interface DoctorClinicService {
      * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
      * @return {@link DoctorClinicDto}
      */
-    DoctorClinicDto assignDoctorToClinic(DoctorClinicDto doctorClinicDto);
+    String assignDoctorToClinic(DoctorClinicDto doctorClinicDto);
 
     /**
      * <p>

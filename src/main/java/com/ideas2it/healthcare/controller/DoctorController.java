@@ -62,7 +62,7 @@ public class DoctorController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
-        return customResponse.responseEntity(doctorService.saveDoctor(doctorDto),
+        return customResponse.responseEntity(doctorService.addDoctor(doctorDto),
                 null,
                 HttpStatus.OK);
     }
