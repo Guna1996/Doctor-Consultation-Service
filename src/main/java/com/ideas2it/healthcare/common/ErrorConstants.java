@@ -48,9 +48,6 @@ public class ErrorConstants {
 
     public static final String SPECIALIZATIONS_NOT_FOUND = "Specializations not found";
 
-    public static final String DATABASE_NOT_FOUND = "Can't able to connect with database";
-
-
     public static final String FEEDBACK_NOT_FOUND = "Feedback is not found";
 
     public static final String FEEDBACKS_NOT_FOUND = "Feedbacks is not found";
@@ -176,5 +173,7 @@ public class ErrorConstants {
     public static String DOCTOR_ALREADY_EXISTS = "Doctor already exists";
 
     public static String CLINIC_ALREADY_EXISTS = "Clinic already exists";
+
+    public static String CANNOT_ACCESS_DATABASE = "Can't able to access database";
 }
 

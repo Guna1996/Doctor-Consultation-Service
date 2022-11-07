@@ -34,7 +34,7 @@ public interface PatientVitalService {
      * @param vitalsDto {@link PatientVitalDto}
      * @return {@link PatientVitalDto}
      */
-    PatientVitalDto addVitals(PatientVitalDto vitalsDto);
+    String addVitals(PatientVitalDto vitalsDto);
 
     /**
      * <p>

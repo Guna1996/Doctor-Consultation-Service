@@ -61,8 +61,8 @@ public class FeedbackController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return customResponse.responseEntity(MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY,
-                feedbackService.addFeedback(feedbackDto),
+        return customResponse.responseEntity(feedbackService.addFeedback(feedbackDto),
+                null,
                 HttpStatus.OK);
     }
 

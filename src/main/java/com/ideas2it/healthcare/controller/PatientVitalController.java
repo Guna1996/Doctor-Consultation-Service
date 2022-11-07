@@ -60,8 +60,8 @@ public class PatientVitalController {
      */
     @PostMapping
     public ResponseEntity<Map<String, Object>> addVitals(@Valid @RequestBody PatientVitalDto vitalsDto) {
-        return customResponse.responseEntity(MessageConstants.VITALS_ADDED_SUCCESSFULLY,
-                patientVitalService.addVitals(vitalsDto),
+        return customResponse.responseEntity(patientVitalService.addVitals(vitalsDto),
+                null,
                 HttpStatus.OK);
     }
 
