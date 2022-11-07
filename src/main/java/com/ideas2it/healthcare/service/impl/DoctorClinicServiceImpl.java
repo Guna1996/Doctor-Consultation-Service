@@ -65,9 +65,17 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     }
 
     /**
-     * {@inheritDoc}
+     * <p>
+     * This method is used to check whether a
+     * doctor is assigned to different clinic in the
+     * same timeslot and return boolean
+     * </p>
+     * @param doctorId {@link Integer}
+     * @param timeslotsDto {@link List<TimeslotDto>}
+     * @return {@link Boolean}
      */
-    private boolean isDoctorAvailable(int doctorId, int clinicId, List<TimeslotDto> timeslotsDto) {
+
+    private boolean isDoctorAvailable(Integer doctorId, List<TimeslotDto> timeslotsDto) {
         List<DoctorClinic> doctorClinics = doctorClinicRepository
                 .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         if (!doctorClinics.isEmpty()) {
@@ -138,6 +146,14 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
+        assignDoctorToClinic(doctorClinicDto);
+        return MessageConstants.DOCTOR_UPDATED_TO_CLINIC_SUCCESSFULLY;
     }
 }
 

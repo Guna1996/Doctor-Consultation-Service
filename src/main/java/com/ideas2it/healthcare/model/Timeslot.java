@@ -1,9 +1,9 @@
 /**
  * <p>
  * This is the base package for all the model classes and
- * the model package contains classes are Doctor,Specialization,
- * Clinic,Doctor clinic,Appointment,Feedback,Patient,
- * Vital,Timeslot.
+ * the model package contains classes are Doctor, Specialization,
+ * Clinic, Doctor clinic, Appointment, Feedback, Patient,
+ * Patient Vital,Timeslot.
  * </p>
  * Copyright 2022 - Ideas2it
  */

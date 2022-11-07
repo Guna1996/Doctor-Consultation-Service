@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicController,
- * Patient controller,Doctor controller,Clinic controller,
- * Appointment controller,Feedback controller,Specialization controller,
- * Timeslot controller,Vital controller
+ * This is the package contains classes are Doctor clinic controller,
+ * Patient controller, Doctor controller, Clinic controller,
+ * Appointment controller, Feedback controller, Specialization controller,
+ * Timeslot controller, Patient Vital controller
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -65,6 +65,21 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
             @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
         return customResponse.responseEntity(doctorClinicService.assignDoctorToClinic(doctorClinicDto),
+                null, HttpStatus.OK);
+    }
+
+    /**
+     * <p>
+     * This method is used to update doctor to a clinic by getting details
+     * such as doctor id, clinic id, timeslots, etc
+     * </p>
+     *
+     * @param doctorClinicDto {@link DoctorClinicDto} id of the doctor object
+     * @return {@link ResponseEntity}
+     */
+    @PutMapping
+    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(DoctorClinicDto doctorClinicDto){
+        return customResponse.responseEntity(doctorClinicService.updateDoctorClinic(doctorClinicDto),
                 null, HttpStatus.OK);
     }
 

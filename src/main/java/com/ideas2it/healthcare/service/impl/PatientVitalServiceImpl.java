@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * This Vital Service Impl class is a service class this class implements
+ * This Patient Vital Service Impl class is a service class this class implements
  * Patient Vital Service which is an interface and get information from
  * the repository
  * </p>

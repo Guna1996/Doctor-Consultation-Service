@@ -1,7 +1,7 @@
 /**
  * <p>
  * This package contains classes are Doctor clinic repository,
- * Patientr repository, Doctor repository, Clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
  * Appointment repository, Feedback repository, Specialization repository,
  * Timeslot repository, Patient vital repository.
  * </p>

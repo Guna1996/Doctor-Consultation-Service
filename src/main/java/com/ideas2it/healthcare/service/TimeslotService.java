@@ -33,7 +33,7 @@ public interface TimeslotService {
      * </p>
      *
      * @param timeslotDto {@link TimeslotDto} contains timeslots
-     * @return {@link TimeslotDto}
+     * @return {@link String}
      */
     String addTimeslot(TimeslotDto timeslotDto);
 

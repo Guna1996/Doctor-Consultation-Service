@@ -1,7 +1,7 @@
 /**
  * <p>
- * This package contains classes are DoctorClinic repository,
- * Patient repository, Doctor repository, Clinicr epository,
+ * This package contains classes are Doctor clinic repository,
+ * Patient repository, Doctor repository, Clinic repository,
  * Appointment repository, Feedback repository, Specialization repository,
  * Timeslot repository, Patient vital repository.
  * </p>
@@ -17,7 +17,7 @@ import java.time.LocalTime;
 
 /**
  * <p>
- * This  Timeslot repository interface is a repository interface and this
+ * This Timeslot repository interface is a repository interface and this
  * interface extends Jpa repository which has all the methods for
  * crud operation
  * </p>

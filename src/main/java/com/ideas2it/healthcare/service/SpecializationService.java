@@ -34,6 +34,7 @@ public interface SpecializationService {
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}
+     * @return {@link String}
      */
     String addSpecialization(SpecializationDto specializationDto);
 
@@ -44,7 +45,7 @@ public interface SpecializationService {
      * SpecializationDto with the help of mapper class
      * </p>
      *
-     * @return {@link List <SpecializationDto>}
+     * @return {@link List<SpecializationDto>}
      */
     List<SpecializationDto> getAllSpecializations(Integer pageNumber, Integer totalRows);
 
@@ -67,6 +68,7 @@ public interface SpecializationService {
      * </p>
      *
      * @param specializationDto {@link SpecializationDto}
+     * @return {@link String}
      */
     String updateSpecialization(SpecializationDto specializationDto);
 
