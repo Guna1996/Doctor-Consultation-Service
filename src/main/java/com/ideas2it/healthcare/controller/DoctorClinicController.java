@@ -122,6 +122,7 @@ public class DoctorClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = doctorClinicService.getCountOfDoctorsByClinicId(clinicId);
+        System.out.println(totalPages);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
