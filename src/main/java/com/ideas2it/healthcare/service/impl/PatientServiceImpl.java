@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicImpl,
- * PatientImpl, DoctorImpl, ClinicImpl,
- * AppointmentImpl, FeedbackImpl, SpecializationImpl,
- * TimeslotImpl, VitalsImpl
+ * This package contains classes are Doctor Clinic Impl,
+ * Patient Impl, Doctor Impl, Clinic Impl,
+ * Appointment Impl, Feedback Impl, Specialization Impl,
+ * Timeslot Impl, Patient Vital Impl
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -29,9 +29,9 @@ import java.util.Optional;
 
 /**
  * <p>
- * PatientServiceImpl class implements PatientService
+ * Patient Service Impl class implements Patient Service
  * and it contains methods and with helps of passing object to
- * PatientRepository interface
+ * Patient Repository interface
  * </p>
  *
  * @author Ramachandran

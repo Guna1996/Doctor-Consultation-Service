@@ -28,10 +28,10 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * This SpecializationServiceImpl class is a service class this class implements
- * SpecializationService which is an interface and get information from
+ * This Specialization Service Impl class is a service class this class implements
+ * Specialization Service which is an interface and get information from
  * the repository and provided to controller through
- * DoctorDto
+ * Doctor Dto
  * </p>
  *
  * @author Mohamed Jubair
