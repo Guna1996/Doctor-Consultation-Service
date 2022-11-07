@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicImpl,
- * PatientImpl, DoctorImpl, ClinicImpl,
- * AppointmentImpl, FeedbackImpl, SpecializationImpl,
- * TimeslotImpl, VitalsImpl
+ * This package contains classes are Doctor Clinic Impl,
+ * Patient Impl, Doctor Impl, Clinic Impl,
+ * Appointment Impl, Feedback Impl, Specialization Impl,
+ * Timeslot Impl, Patoent Vital Impl
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -22,7 +22,7 @@ import java.util.Collection;
 
 /**
  * <p>
- * AuthenticationService class implements UserDetailsService
+ * Authentication Service class implements User Details Service
  * and it contains method which is used to authenticate user by loading his details
  * </p>
  *

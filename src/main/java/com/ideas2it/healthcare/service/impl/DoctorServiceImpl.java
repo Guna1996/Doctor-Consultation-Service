@@ -28,8 +28,8 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * This DoctorServiceImpl class is a service class this class implements
- * DoctorService which is an interface and get information from
+ * This Doctor Service Impl class is a service class this class implements
+ * Doctor Service which is an interface and get information from
  * the repository and provided to controller through
  * DoctorDto
  * </p>

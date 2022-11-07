@@ -31,7 +31,7 @@ import java.util.Optional;
  */
 @Repository
 @Transactional
-public interface VitalsRepository extends JpaRepository<PatientVital, Integer> {
+public interface PatientVitalRepository extends JpaRepository<PatientVital, Integer> {
 
     /**
      * <p>

@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicImpl,
- * PatientImpl, DoctorImpl, ClinicImpl,
- * AppointmentImpl, FeedbackImpl, SpecializationImpl,
- * TimeslotImpl, VitalsImpl
+ * This package contains classes are Doctor Clinic Impl,
+ * Patient Impl, Doctor Impl, Clinic Impl,
+ * Appointment Impl, Feedback Impl, Specialization Impl,
+ * Timeslot Impl, Patient Vital Impl
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
 import com.ideas2it.healthcare.exception.SqlException;
 import com.ideas2it.healthcare.mapper.PatientVitalMapper;
-import com.ideas2it.healthcare.repository.VitalsRepository;
+import com.ideas2it.healthcare.repository.PatientVitalRepository;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * This VitalServiceImpl class is a service class this class implements
- * VitalService which is an interface and get information from
+ * This Vital Service Impl class is a service class this class implements
+ * Patient Vital Service which is an interface and get information from
  * the repository
  * </p>
  *
@@ -37,14 +37,14 @@ import java.util.stream.Collectors;
 public class PatientVitalServiceImpl implements PatientVitalService {
 
     @Autowired
-    private VitalsRepository vitalsRepository;
+    private PatientVitalRepository patientVitalsRepository;
 
     /**
      * {@inheritDoc}
      */
     public PatientVitalDto addVitals(PatientVitalDto vitalsDto) {
         try {
-            return PatientVitalMapper.toDto(vitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
+            return PatientVitalMapper.toDto(patientVitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto)));
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }
@@ -56,7 +56,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
     public List<PatientVitalDto> getVitalsByPatientId(
             Integer patientId, Integer pageNumber, Integer totalRows) {
         try {
-            return vitalsRepository
+            return patientVitalsRepository
                     .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
                             totalRows))
                     .toList().stream()
@@ -71,7 +71,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
      */
     public Integer getVitalsCountByPatientId(Integer patientId) {
         try {
-            return vitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
+            return patientVitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
             throw new SqlException(exception.getMessage());
         }

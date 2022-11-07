@@ -1,9 +1,9 @@
 /**
  * <p>
- * This package contains classes are DoctorClinicImpl,
- * PatientImpl, DoctorImpl, ClinicImpl,
- * AppointmentImpl, FeedbackImpl, SpecializationImpl,
- * TimeslotImpl, VitalsImpl
+ * This package contains classes are Doctor Clinic Impl,
+ * Patient Impl, Doctor Impl, Clinic Impl,
+ * Appointment Impl, Feedback Impl, Specialization Impl,
+ * Timeslot Impl, Patient Vital Impl
  * </p>
  * Copyright 2022 - Ideas2it
  */
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * Clinic serviceImpl class implements Clinic service
+ * Clinic service Impl class implements Clinic service
  * and it contains methods and with helps of passing object to
  * ClinicRepository interface
  * </p>
