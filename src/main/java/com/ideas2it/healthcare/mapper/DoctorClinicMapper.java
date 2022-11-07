@@ -130,7 +130,7 @@ public class DoctorClinicMapper {
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setStatus(doctor.getStatus());
                 doctorClinicDto.setDoctor(doctorDto);
-            } 
+            }
             Clinic clinic = doctorClinic.getClinic();
             if (null != clinic) {
                 ClinicDto clinicDto = new ClinicDto();
@@ -143,7 +143,7 @@ public class DoctorClinicMapper {
                 clinicDto.setPinCode(clinic.getPinCode());
                 clinicDto.setContactNumber(clinic.getContactNumber());
                 doctorClinicDto.setClinic(clinicDto);
-            } 
+            }
             List<Timeslot> timeslots = doctorClinic.getTimeslots();
             if (null != timeslots) {
                 List<TimeslotDto> timeslotsDto = new ArrayList<>();

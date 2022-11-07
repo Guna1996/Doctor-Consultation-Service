@@ -31,6 +31,7 @@ public class NotFoundExceptionHandler {
 
     @Autowired
     CustomResponse customResponse;
+
     /**
      * <p>
      * This method is used to handle exception occurred during validation
@@ -61,7 +62,7 @@ public class NotFoundExceptionHandler {
      */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleBusinessException(NotFoundException exception) {
-        return customResponse.responseEntity(exception.getMessage(), null,  HttpStatus.OK);
+        return customResponse.responseEntity(exception.getMessage(), null, HttpStatus.OK);
     }
 
     /**

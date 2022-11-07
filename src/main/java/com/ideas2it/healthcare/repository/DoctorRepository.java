@@ -76,7 +76,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
      * This method is used to find all active doctors
      * </p>
      *
-     * @param status   {@link String} is status of doctor
+     * @param status {@link String} is status of doctor
      * @return {@link Integer}
      */
     Integer countByStatus(String status);

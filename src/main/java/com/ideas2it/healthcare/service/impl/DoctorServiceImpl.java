@@ -94,8 +94,8 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     public String updateDoctor(DoctorDto doctorDto) {
-            addDoctor(doctorDto);
-            return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
+        addDoctor(doctorDto);
+        return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
     }
 
     /**

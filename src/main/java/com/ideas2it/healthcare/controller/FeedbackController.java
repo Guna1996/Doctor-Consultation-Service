@@ -106,8 +106,7 @@ public class FeedbackController {
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (0 >= totalPages) {
             throw new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND);
-        }
-        else if (pages <= pageNumber) {
+        } else if (pages <= pageNumber) {
             throw new NotFoundException(ErrorConstants.FEEDBACKS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,

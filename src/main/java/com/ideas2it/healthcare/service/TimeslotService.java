@@ -58,7 +58,7 @@ public interface TimeslotService {
      *
      * @return {@link Integer}
      */
-     Integer getTimeslotsCount();
+    Integer getTimeslotsCount();
 
     /**
      * <p>
