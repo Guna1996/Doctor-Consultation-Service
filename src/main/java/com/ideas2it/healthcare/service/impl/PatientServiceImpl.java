@@ -65,7 +65,8 @@ public class PatientServiceImpl implements PatientService {
             return patientRepository.findByIdAndStatus(id, Constants.ACTIVE).stream()
                     .map(PatientMapper::toDto)
                     .findFirst()
-                    .orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
+                    .orElse(null);
+                    //.orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
@@ -75,16 +76,18 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String updatePatient(PatientDto patientDto) {
+        String response;
         try {
             Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                     Constants.ACTIVE);
             if (patient.isEmpty()) {
-                throw new NotFoundException(MessageConstants.PATIENT_UNABLE_TO_UPDATE);
+                response = MessageConstants.PATIENT_UNABLE_TO_UPDATE;
             }
             patientRepository.save(PatientMapper.fromDto(patientDto));
-            return MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
+            response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 }

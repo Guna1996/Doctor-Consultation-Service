@@ -49,9 +49,8 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String addClinic(ClinicDto clinicDto) {
-        Clinic clinic = ClinicMapper.fromDto(clinicDto);
         try {
-            clinicRepository.save(clinic);
+            clinicRepository.save(ClinicMapper.fromDto(clinicDto));
             return MessageConstants.CLINIC_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.CLINIC_ALREADY_EXISTS);
@@ -67,9 +66,6 @@ public class ClinicServiceImpl implements ClinicService {
         try {
             List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                     PageRequest.of(pageNumber, totalRows)).toList();
-            if (clinics.isEmpty()) {
-                throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
-            }
             return clinics.stream()
                     .map(ClinicMapper::toDto)
                     .collect(Collectors.toList());
@@ -86,7 +82,8 @@ public class ClinicServiceImpl implements ClinicService {
             return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                     map(ClinicMapper::toDto)
                     .findFirst()
-                    .orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
+                    .orElse(null);
+                    //.orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
@@ -108,14 +105,16 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String removeClinicById(Integer id) {
+        String response;
         try {
             if (1 <= clinicRepository.removeClinicById(id)) {
-                return MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
+                response =  MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
+            response = ErrorConstants.CLINIC_NOT_FOUND;
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**

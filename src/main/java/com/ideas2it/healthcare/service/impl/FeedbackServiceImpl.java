@@ -58,14 +58,16 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     public String deleteFeedback(Integer id) {
+        String response;
         try {
             if (1 <= feedbackRepository.removeFeedbackById(id)) {
-                return MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
+                response = MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.FEEDBACK_NOT_FOUND);
+            response = ErrorConstants.FEEDBACK_NOT_FOUND;
         } catch (Exception exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**

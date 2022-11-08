@@ -10,7 +10,6 @@
 package com.ideas2it.healthcare.service;
 
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.exception.SqlException;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to create Doctor's record by
+     * This method is used to create  and update Doctor's record by
      * getting Doctor dto as an input and convert it in to
      * Doctor model with the help of mapper class
      * </p>
@@ -37,7 +36,7 @@ public interface DoctorService {
      * @param doctorDto {@link DoctorDto} contains details of doctor
      * @return {@link String}
      */
-    String addDoctor(DoctorDto doctorDto);
+    String addOrUpdateDoctor(DoctorDto doctorDto);
 
     /**
      * <p>
@@ -63,18 +62,6 @@ public interface DoctorService {
      * @return {@link DoctorDto}
      */
     DoctorDto getDoctorById(Integer id);
-
-    /**
-     * <p>
-     * This method is used to update Doctor's record by
-     * getting DoctorDto as an input and convert it in to
-     * Doctor model with the help of mapper class
-     * </p>
-     *
-     * @param doctorDto {@link DoctorDto} contains details of doctor
-     * @return {@link String}
-     */
-    String updateDoctor(DoctorDto doctorDto);
 
     /**
      * <p>

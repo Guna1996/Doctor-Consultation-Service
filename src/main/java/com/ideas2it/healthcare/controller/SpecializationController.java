@@ -62,7 +62,8 @@ public class SpecializationController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> addSpecialization(
             @Valid @RequestBody SpecializationDto specializationDto) {
-        return customResponse.responseEntity(specializationService.addSpecialization(specializationDto),
+        return customResponse.responseEntity(
+                specializationService.addOrUpdateSpecialization(specializationDto),
                 null,
                 HttpStatus.OK);
     }
@@ -103,9 +104,12 @@ public class SpecializationController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getSpecializationById(@PathVariable Integer id) {
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION,
-                specializationService.getSpecializationById(id),
-                HttpStatus.OK);
+        SpecializationDto specializationDto = specializationService.getSpecializationById(id);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATION;
+        if (null == specializationDto) {
+            message = ErrorConstants.SPECIALIZATION_NOT_FOUND;
+        }
+        return customResponse.responseEntity(message, specializationDto, HttpStatus.OK);
     }
 
     /**
@@ -119,7 +123,8 @@ public class SpecializationController {
      */
     @PutMapping
     public ResponseEntity<Map<String, Object>> updateSpecialization(SpecializationDto specializationDto) {
-        return customResponse.responseEntity(specializationService.updateSpecialization(specializationDto),
+        return customResponse.responseEntity(
+                specializationService.addOrUpdateSpecialization(specializationDto),
                 null, HttpStatus.OK);
     }
 

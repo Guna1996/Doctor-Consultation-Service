@@ -85,10 +85,11 @@ public class ClinicController {
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = clinicService.getCountOfClinics();
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS;
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.CLINICS_NOT_FOUND);
+            message = ErrorConstants.CLINICS_NOT_FOUND;
         }
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
+        return customResponse.responseEntity(message,
                 clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, pages);
     }
 
@@ -103,8 +104,13 @@ public class ClinicController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getClinicById(@PathVariable(Constants.ID) Integer id) {
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC,
-                clinicService.getClinicById(id), HttpStatus.OK);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_CLINIC;
+        ClinicDto clinicDto = clinicService.getClinicById(id);
+        if (null == clinicDto) {
+            message = ErrorConstants.CLINIC_NOT_FOUND;
+        }
+        return customResponse.responseEntity(message,
+                clinicDto, HttpStatus.OK);
     }
 
     /**

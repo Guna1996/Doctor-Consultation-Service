@@ -119,13 +119,12 @@ public class AppointmentController {
             @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = appointmentService.getCountOfAppointmentByDoctorId(doctorId);
-        System.out.println(totalPages);
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS;
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+            message = ErrorConstants.APPOINTMENTS_NOT_FOUND;
         }
-        return customResponse.responseEntity(MessageConstants
-                .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
+        return customResponse.responseEntity(message, appointmentService
                 .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
                 .OK,pages);
     }
@@ -150,11 +149,11 @@ public class AppointmentController {
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = appointmentService.getCountOfAppointmentByPatientId(patientId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_APPOINTMENTS;
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+            message = ErrorConstants.APPOINTMENTS_NOT_FOUND;
         }
-        return customResponse.responseEntity(MessageConstants
-                .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
+        return customResponse.responseEntity(message, appointmentService
                 .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, pages);
     }
 }

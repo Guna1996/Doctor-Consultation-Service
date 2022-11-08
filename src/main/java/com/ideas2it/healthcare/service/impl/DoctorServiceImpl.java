@@ -24,6 +24,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -47,15 +48,20 @@ public class DoctorServiceImpl implements DoctorService {
     /**
      * {@inheritDoc}
      */
-    public String addDoctor(DoctorDto doctorDto) {
+    public String addOrUpdateDoctor(DoctorDto doctorDto) {
+        String response;
         try {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
-            return MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
+            if (0 == doctorDto.getId()) {
+                response =  MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
+            }
+            response = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
             throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**
@@ -65,9 +71,6 @@ public class DoctorServiceImpl implements DoctorService {
         try {
             List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
                     PageRequest.of(pageNumber, totalRows)).toList();
-            if (doctors.isEmpty()) {
-                throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
-            }
             return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
@@ -84,32 +87,27 @@ public class DoctorServiceImpl implements DoctorService {
                     .stream()
                     .map(DoctorMapper::toDto)
                     .findFirst()
-                    .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
+                    .orElse(null);
+                    //.orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String updateDoctor(DoctorDto doctorDto) {
-            addDoctor(doctorDto);
-            return MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
     }
 
     /**
      * {@inheritDoc}
      */
     public String removeDoctorById(Integer id) {
+        String response;
         try {
             if (1 <= doctorRepository.removeDoctorById(id)) {
-                return MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
+                response =  MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+            response = ErrorConstants.DOCTOR_UNABLE_TO_DELETE;
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**

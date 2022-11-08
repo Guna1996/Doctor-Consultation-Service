@@ -58,7 +58,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String addAppointment(AppointmentDto appointmentDto) {
         if (!DateUtil.isDateValid(appointmentDto.getScheduledOn())
                 && !timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
-            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
+            return ErrorConstants.ENTER_VALID_DATE_TIME;
         }
         return saveAppointment(appointmentDto);
     }
@@ -79,14 +79,16 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String removeAppointmentById(Integer id) {
+        String response;
         try {
             if (1 <= appointmentRepository.removeAppointmentById(id)) {
-                return MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
+                response = MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_FOUND);
+            response = ErrorConstants.APPOINTMENT_NOT_FOUND;
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**
@@ -150,26 +152,30 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
+        String response;
         if (0 < Period.between(date, currentDate).getDays()) {
-            throw new NotFoundException(ErrorConstants.ENTER_VALID_DATE_TIME);
+            response = ErrorConstants.ENTER_VALID_DATE_TIME;
         }
         saveAppointment(appointmentDto);
-        return MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
+        response = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
+        return response;
     }
 
     /**
      * {@inheritDoc}
      */
     public String saveAppointment(AppointmentDto appointmentDto) {
+        String response;
         try {
             if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                     appointmentDto.getScheduledOn())) {
-                throw new NotFoundException(ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE);
+                response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
             }
             appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
-            return MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
+            response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
             throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 }
