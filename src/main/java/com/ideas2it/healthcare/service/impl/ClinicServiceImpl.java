@@ -55,7 +55,7 @@ public class ClinicServiceImpl implements ClinicService {
         } catch (DataIntegrityViolationException exception) {
             throw new CustomException(ErrorConstants.CLINIC_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -70,7 +70,7 @@ public class ClinicServiceImpl implements ClinicService {
                     .map(ClinicMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -84,7 +84,7 @@ public class ClinicServiceImpl implements ClinicService {
                     .findFirst()
                     .orElse(null);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -96,7 +96,7 @@ public class ClinicServiceImpl implements ClinicService {
             clinicRepository.save(ClinicMapper.fromDto(clinicDto));
             return MessageConstants.CLINIC_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -107,10 +107,10 @@ public class ClinicServiceImpl implements ClinicService {
         String response = ErrorConstants.CLINIC_NOT_FOUND;
         try {
             if (1 <= clinicRepository.removeClinicById(id)) {
-                response =  MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
+                response = MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
             }
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
         return response;
     }
@@ -122,7 +122,7 @@ public class ClinicServiceImpl implements ClinicService {
         try {
             return clinicRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 

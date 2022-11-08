@@ -57,7 +57,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         } catch (DataIntegrityViolationException exception) {
             throw new CustomException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
         return response;
     }
@@ -72,7 +72,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataBaseException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -83,7 +83,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             return (int) timeslotRepository.count();
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -98,7 +98,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             }
             return timeslot.getTimeslot().equals(localTime);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 }

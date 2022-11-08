@@ -13,7 +13,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
-import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.DoctorClinicService;

@@ -99,7 +99,7 @@ public class PatientController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updatePatient(@RequestBody PatientDto patientDto) {
+    public ResponseEntity<Map<String, Object>> updatePatient(@Valid @RequestBody PatientDto patientDto) {
         return customResponse.responseEntity(patientService.updatePatient(patientDto),
                 null,
                 HttpStatus.OK);

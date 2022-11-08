@@ -39,8 +39,6 @@ public class MessageConstants {
     public static final String DOCTOR_ID_CLINIC_ID_NOT_FOUND =
             "Doctor id and clinic id not found";
 
-    public static final String TIMESLOT_IS_EMPTY = "Timeslot is empty";
-
     public static final String PATIENT_UNABLE_TO_UPDATE = "Patient unable to update";
 
     public static final String APPOINTMENT_ADDED_SUCCESSFULLY = "Appointment added successfully";
@@ -100,9 +98,6 @@ public class MessageConstants {
 
     public static final String DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY =
             "Doctor assigned to clinic successfully";
-
-    public static final String DOCTOR_UPDATED_TO_CLINIC_SUCCESSFULLY =
-            "Doctor updated to clinic successfully";
 
     public static final String SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS =
             "Successfully retrieved all timeslots";

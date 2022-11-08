@@ -108,7 +108,7 @@ public class DoctorController {
     public ResponseEntity<Map<String, Object>> getDoctorById(@PathVariable Integer id) {
         DoctorDto doctorDto = doctorService.getDoctorById(id);
         String message = MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTOR;
-        if (null == doctorDto){
+        if (null == doctorDto) {
             message = ErrorConstants.DOCTOR_NOT_FOUND;
         }
         return customResponse.responseEntity(message, doctorDto, HttpStatus.OK);

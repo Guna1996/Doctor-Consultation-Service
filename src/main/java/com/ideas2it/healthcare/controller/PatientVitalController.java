@@ -13,7 +13,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
-import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -90,8 +89,7 @@ public class PatientVitalController {
         String message = MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY;
         if (0 >= totalPages) {
             message = ErrorConstants.PATIENT_NOT_FOUND;
-        }
-        else if (pages <= pageNumber) {
+        } else if (pages <= pageNumber) {
             message = ErrorConstants.VITALS_NOT_FOUND;
         }
         return customResponse.responseEntity(message,
