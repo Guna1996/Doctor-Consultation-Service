@@ -53,7 +53,8 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to get timeslots of a particular doctor and clinic
-     * by doctor id and clinic id
+     * by doctor id and clinic id and sent the object to the repository layer
+     * for read operation
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
@@ -83,8 +84,8 @@ public interface DoctorClinicService {
      * by clinic id
      * </p>
      *
-     * @param clinicId   {@link Integer} is id of clinic
-     * @return {@link Integer}
+     * @param clinicId {@link Integer} is id of clinic
+     * @return {@link Integer} count of doctors
      */
     Integer getCountOfDoctorsByClinicId(Integer clinicId);
 
