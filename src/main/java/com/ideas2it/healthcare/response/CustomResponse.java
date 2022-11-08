@@ -37,12 +37,12 @@ public class CustomResponse {
      * </p>
      *
      * @param message {@link String} is response message
-     * @param entity {@link Object} is response Dto object
-     * @param status {@link HttpStatus} is http response status
+     * @param entity  {@link Object} is response Dto object
+     * @param status  {@link HttpStatus} is http response status
      * @return {@link ResponseEntity}
      */
     public ResponseEntity<Map<String, Object>> responseEntity
-            (String message, Object entity, HttpStatus status) {
+    (String message, Object entity, HttpStatus status) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, entity);
@@ -57,14 +57,14 @@ public class CustomResponse {
      * in the web application with pagination
      * </p>
      *
-     * @param message {@link String} is response message
+     * @param message    {@link String} is response message
      * @param entityList {@link List<?>} is response Dto List
-     * @param status {@link HttpStatus} is http response status
+     * @param status     {@link HttpStatus} is http response status
      * @param totalPages {@link Double} is number of pages required
      * @return {@link ResponseEntity}
      */
     public ResponseEntity<Map<String, Object>> responseEntity
-            (String message, List<?> entityList, HttpStatus status, Integer totalPages) {
+    (String message, List<?> entityList, HttpStatus status, Integer totalPages) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, null);
@@ -81,8 +81,8 @@ public class CustomResponse {
      * </p>
      *
      * @param message {@link Map} is response message
-     * @param entity {@link Object} is response Dto object
-     * @param status {@link HttpStatus} is http response status
+     * @param entity  {@link Object} is response Dto object
+     * @param status  {@link HttpStatus} is http response status
      * @return {@link ResponseEntity}
      */
     public ResponseEntity<Map<String, Object>> responseEntity

@@ -13,7 +13,8 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -48,9 +49,12 @@ public class DoctorClinicController {
 
     @Autowired
     private DoctorClinicService doctorClinicService;
-    
+
     @Autowired
     private CustomResponse customResponse;
+
+    @Autowired
+    private DoctorClinicRepository doctorClinicRepository;
 
     /**
      * <p>
@@ -78,7 +82,7 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(DoctorClinicDto doctorClinicDto){
+    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(DoctorClinicDto doctorClinicDto) {
         return customResponse.responseEntity(doctorClinicService.updateDoctorClinic(doctorClinicDto),
                 null, HttpStatus.OK);
     }
@@ -113,6 +117,7 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, Object>> getTimeslots(
             @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
+        System.out.println(doctorClinicRepository.getTimeslots());
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);
@@ -140,10 +145,11 @@ public class DoctorClinicController {
         System.out.println(totalPages);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK, pages);
     }
+
 }

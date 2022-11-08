@@ -26,19 +26,18 @@ public class VitalUtil {
      * diastolic values
      * </p>
      *
-     * @param systolic {@link Float} is systolic of patient
+     * @param systolic  {@link Float} is systolic of patient
      * @param diastolic {@link Float} is diastolic of patient
      * @return {@link String}
      */
     public static String getBPRiskLevel(Float systolic, Float diastolic) {
-        if ((systolic >= 120 & systolic <= 139) && (diastolic >= 80 && diastolic <= 89)){
+        if ((systolic >= 120 & systolic <= 139) && (diastolic >= 80 && diastolic <= 89)) {
             return (Constants.AT_RISK);
-        } else if (systolic >= 140 && diastolic >= 90 )  {
+        } else if (systolic >= 140 && diastolic >= 90) {
             return (Constants.HIGH);
-        } else if (systolic < 120 && diastolic < 80 ) {
+        } else if (systolic < 120 && diastolic < 80) {
             return (Constants.NORMAL);
-        }
-        else {
+        } else {
             return Constants.LOW;
         }
     }

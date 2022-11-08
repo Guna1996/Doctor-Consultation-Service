@@ -3,7 +3,7 @@
  * This package contains classes are constants
  * and error constants  and user constants.
  * </p>
- *
+ * <p>
  * Copyright 2022 - Ideas2it
  */
 package com.ideas2it.healthcare.common;
@@ -54,7 +54,7 @@ public class ErrorConstants {
 
     public static final String FEEDBACKS_NOT_FOUND = "Feedbacks is not found";
 
-    public static final String INVALID_TIMESLOT ="Invalid Timeslot";
+    public static final String INVALID_TIMESLOT = "Invalid Timeslot";
 
     public static final String APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE =
             "Appointment unavailable for this schedule. kindly choose other schedule";
@@ -125,7 +125,7 @@ public class ErrorConstants {
 
     public static final String SUGAR_LEVEL_SHOULD_NOT_BE_NULL = "Sugar level shouldn't be null";
 
-    public static final String RATING_SHOULD_NOT_BE_NEGATIVE = "Rating shouldn't be negative" ;
+    public static final String RATING_SHOULD_NOT_BE_NEGATIVE = "Rating shouldn't be negative";
 
     public static final String RATING_SHOULD_NOT_BE_NULL = "Rating level shouldn't be null";
 
@@ -162,15 +162,15 @@ public class ErrorConstants {
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
 
     public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
-    
+
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC =
             "This Doctor is already assigned to this clinic";
 
-    public static final String DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC =
+    public static final String DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT =
             "This Doctor is assigned to some other clinic at this timeslot";
-            
+
     public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
-    
+
     public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";
 
     public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";

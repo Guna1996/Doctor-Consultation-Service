@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.TimeslotService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -85,7 +85,7 @@ public class TimeslotController {
         int totalPages = timeslotService.getTimeslotsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.TIMESLOTS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.TIMESLOTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS,
                 timeslotService.getTimeslots(pageNumber, totalRows),

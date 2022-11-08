@@ -36,8 +36,8 @@ public class AppointmentMapper {
      * Appointment model
      * </p>
      *
-     * @parm appointmentDto {@link AppointmentDto} contains appointment details
      * @return {@link Appointment}
+     * @param appointmentDto {@link AppointmentDto} contains appointment details
      */
     public static Appointment fromDto(AppointmentDto appointmentDto) {
         Appointment appointment = new Appointment();
@@ -117,7 +117,7 @@ public class AppointmentMapper {
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
                 patientDto.setGender(patient.getGender());
-                if(null != patient.getMobileNumber()) {
+                if (null != patient.getMobileNumber()) {
                     patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
                 }
                 patientDto.setEmail(patient.getEmail());
@@ -130,16 +130,16 @@ public class AppointmentMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
-                if(null != doctor.getDateOfBirth()) {
+                if (null != doctor.getDateOfBirth()) {
                     doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 }
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setQualification(doctor.getQualification());
                 doctorDto.setDateOfRegistration(doctor.getDateOfRegistration());
-                if(null != doctor.getDateOfRegistration()) {
+                if (null != doctor.getDateOfRegistration()) {
                     doctorDto.setExperience(DateUtil.getDifferenceInYears(doctor.getDateOfRegistration()));
                 }
-                if(null != doctor.getMobileNumber()) {
+                if (null != doctor.getMobileNumber()) {
                     doctorDto.setMobileNumber(Long.toString(doctor.getMobileNumber()));
                 }
                 doctorDto.setCity(doctor.getCity());

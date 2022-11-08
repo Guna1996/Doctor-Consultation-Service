@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -122,12 +122,12 @@ public class AppointmentController {
         System.out.println(totalPages);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService
                 .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
-                .OK,pages);
+                .OK, pages);
     }
 
     /**
@@ -151,7 +151,7 @@ public class AppointmentController {
         int totalPages = appointmentService.getCountOfAppointmentByPatientId(patientId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.APPOINTMENTS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants
                 .SUCCESSFULLY_RETRIEVED_APPOINTMENTS, appointmentService

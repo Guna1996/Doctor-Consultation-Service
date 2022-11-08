@@ -13,8 +13,8 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repository.ClinicRepository;
@@ -54,9 +54,9 @@ public class ClinicServiceImpl implements ClinicService {
             clinicRepository.save(clinic);
             return MessageConstants.CLINIC_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
-            throw new NotFoundException(ErrorConstants.CLINIC_ALREADY_EXISTS);
+            throw new CustomException(ErrorConstants.CLINIC_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -68,13 +68,13 @@ public class ClinicServiceImpl implements ClinicService {
             List<Clinic> clinics = clinicRepository.findAllByStatus(Constants.ACTIVE,
                     PageRequest.of(pageNumber, totalRows)).toList();
             if (clinics.isEmpty()) {
-                throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
+                throw new CustomException(ErrorConstants.CLINIC_NOT_FOUND);
             }
             return clinics.stream()
                     .map(ClinicMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -86,9 +86,9 @@ public class ClinicServiceImpl implements ClinicService {
             return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                     map(ClinicMapper::toDto)
                     .findFirst()
-                    .orElseThrow(() -> new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND));
+                    .orElseThrow(() -> new CustomException(ErrorConstants.CLINIC_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -100,7 +100,7 @@ public class ClinicServiceImpl implements ClinicService {
             clinicRepository.save(ClinicMapper.fromDto(clinicDto));
             return MessageConstants.CLINIC_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -112,9 +112,9 @@ public class ClinicServiceImpl implements ClinicService {
             if (1 <= clinicRepository.removeClinicById(id)) {
                 return MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.CLINIC_NOT_FOUND);
+            throw new CustomException(ErrorConstants.CLINIC_NOT_FOUND);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -125,7 +125,7 @@ public class ClinicServiceImpl implements ClinicService {
         try {
             return clinicRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 

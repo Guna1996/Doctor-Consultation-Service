@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.FeedbackService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -105,10 +105,9 @@ public class FeedbackController {
         int totalPages = feedbackService.getFeedbacksCountByDoctorId(doctorId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (0 >= totalPages) {
-            throw new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND);
-        }
-        else if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.FEEDBACKS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.DOCTOR_NOT_FOUND);
+        } else if (pages <= pageNumber) {
+            throw new CustomException(ErrorConstants.FEEDBACKS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
