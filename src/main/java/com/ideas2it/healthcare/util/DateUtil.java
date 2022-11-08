@@ -8,7 +8,7 @@
 package com.ideas2it.healthcare.util;
 
 import com.ideas2it.healthcare.common.ErrorConstants;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,7 +51,7 @@ public class DateUtil {
         try {
             date = localDate.toLocalDate();
         } catch (Exception exception) {
-            throw new NotFoundException(ErrorConstants.ENTER_VALID_SCHEDULE_TIME);
+            throw new CustomException(ErrorConstants.ENTER_VALID_SCHEDULE_TIME);
         }
         LocalDate currentDate = LocalDate.now();
         return (0 < Period.between(currentDate, date).getDays());

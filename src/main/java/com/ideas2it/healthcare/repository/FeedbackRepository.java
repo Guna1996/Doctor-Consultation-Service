@@ -70,7 +70,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
      * @return {@link Integer}
      */
     @Modifying
-    @Query("update feedback set status = 'inactive' where id=?1")
+    @Query("update feedback set status = 'inactive' where id=?1 and status = 'active'")
     Integer removeFeedbackById(Integer id);
 
     /**

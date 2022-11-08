@@ -15,7 +15,7 @@ package com.ideas2it.healthcare.exception;
  * @author Mohamed Jubair S
  * @since 2022-10-10
  */
-public class SqlException extends RuntimeException {
+public class DataBaseException extends RuntimeException {
 
     /**
      * Constructs a {@code SQLException} object with a given
@@ -28,7 +28,7 @@ public class SqlException extends RuntimeException {
      *
      * @param message a description of the exception
      */
-    public SqlException(String message) {
+    public DataBaseException(String message) {
         super(message);
     }
 }

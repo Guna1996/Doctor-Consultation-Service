@@ -11,8 +11,8 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.DoctorMapper;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.repository.DoctorRepository;
@@ -52,9 +52,9 @@ public class DoctorServiceImpl implements DoctorService {
             doctorRepository.save(DoctorMapper.fromDto(doctorDto));
             return MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
-            throw new NotFoundException(ErrorConstants.DOCTOR_ALREADY_EXISTS);
+            throw new CustomException(ErrorConstants.DOCTOR_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -66,11 +66,11 @@ public class DoctorServiceImpl implements DoctorService {
             List<Doctor> doctors = doctorRepository.findAllByStatus(Constants.ACTIVE,
                     PageRequest.of(pageNumber, totalRows)).toList();
             if (doctors.isEmpty()) {
-                throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+                throw new CustomException(ErrorConstants.DOCTORS_NOT_FOUND);
             }
             return doctors.stream().map(DoctorMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -84,9 +84,9 @@ public class DoctorServiceImpl implements DoctorService {
                     .stream()
                     .map(DoctorMapper::toDto)
                     .findFirst()
-                    .orElseThrow(() -> new NotFoundException(ErrorConstants.DOCTOR_NOT_FOUND));
+                    .orElseThrow(() -> new CustomException(ErrorConstants.DOCTOR_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -106,9 +106,9 @@ public class DoctorServiceImpl implements DoctorService {
             if (1 <= doctorRepository.removeDoctorById(id)) {
                 return MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
+            throw new CustomException(ErrorConstants.DOCTOR_UNABLE_TO_DELETE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -119,7 +119,7 @@ public class DoctorServiceImpl implements DoctorService {
         try {
             return doctorRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }
