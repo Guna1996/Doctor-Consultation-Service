@@ -13,8 +13,8 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
@@ -50,7 +50,7 @@ public class FeedbackServiceImpl implements FeedbackService {
             feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto));
             return MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY;
         } catch (Exception exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -64,8 +64,8 @@ public class FeedbackServiceImpl implements FeedbackService {
                 response = MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
             }
             response = ErrorConstants.FEEDBACK_NOT_FOUND;
-        } catch (Exception exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+        } catch (DataAccessException exception) {
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
         return response;
     }
@@ -78,11 +78,11 @@ public class FeedbackServiceImpl implements FeedbackService {
                                                    Integer totalRows) {
         try {
             return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                        .of(pageNumber, totalRows)).toList()
-                        .stream().map(FeedbackMapper::toDto)
-                        .collect(Collectors.toList());
+                            .of(pageNumber, totalRows)).toList()
+                    .stream().map(FeedbackMapper::toDto)
+                    .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -93,7 +93,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         try {
             return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

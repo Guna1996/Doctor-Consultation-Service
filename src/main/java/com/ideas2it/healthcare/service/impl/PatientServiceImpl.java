@@ -13,8 +13,8 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.PatientMapper;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.repository.PatientRepository;
@@ -51,9 +51,9 @@ public class PatientServiceImpl implements PatientService {
             patientRepository.save(PatientMapper.fromDto(patientDto));
             return MessageConstants.PATIENT_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
-            throw new NotFoundException(ErrorConstants.PATIENT_ALREADY_EXISTS);
+            throw new CustomException(ErrorConstants.PATIENT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -66,9 +66,8 @@ public class PatientServiceImpl implements PatientService {
                     .map(PatientMapper::toDto)
                     .findFirst()
                     .orElse(null);
-                    //.orElseThrow(() -> new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -86,7 +85,7 @@ public class PatientServiceImpl implements PatientService {
             patientRepository.save(PatientMapper.fromDto(patientDto));
             response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
         return response;
     }

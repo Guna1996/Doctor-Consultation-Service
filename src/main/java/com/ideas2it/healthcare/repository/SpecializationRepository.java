@@ -77,7 +77,7 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
      * This method is used to find all active specializations
      * </p>
      *
-     * @param status   {@link String} is status of specialization
+     * @param status {@link String} is status of specialization
      * @return {@link Integer}
      */
     Integer countByStatus(String status);

@@ -38,7 +38,7 @@ public interface PatientVitalRepository extends JpaRepository<PatientVital, Inte
      * This method is used to find active vital by vital id
      * </p>
      *
-     * @param id {@link Integer} is id of the vital
+     * @param id     {@link Integer} is id of the vital
      * @param status {@link String} is status of vital
      * @return {@link Optional<PatientVital>}
      */

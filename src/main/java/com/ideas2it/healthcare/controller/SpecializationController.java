@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.SpecializationService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -86,7 +86,7 @@ public class SpecializationController {
         int totalPages = specializationService.getSpecializationsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
@@ -122,9 +122,9 @@ public class SpecializationController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateSpecialization(SpecializationDto specializationDto) {
-        return customResponse.responseEntity(
-                specializationService.addOrUpdateSpecialization(specializationDto),
+    public ResponseEntity<Map<String, Object>> updateSpecialization(
+            @Valid @RequestBody SpecializationDto specializationDto) {
+        return customResponse.responseEntity(specializationService.addOrUpdateSpecialization(specializationDto),
                 null, HttpStatus.OK);
     }
 

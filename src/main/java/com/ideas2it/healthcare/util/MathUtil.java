@@ -24,12 +24,13 @@ public class MathUtil {
      * This method is used to get round of
      * value of two numbers.
      * </p>
+     *
      * @param count {@link Float}
-     * @param rows {@link Float}
+     * @param rows  {@link Float}
      * @return {@link Integer}
      */
     public static Integer pageCount(float count, float rows) {
-        float result =  count/rows;
+        float result = count / rows;
         int pages = (int) Math.floor(result);
         if (pages < result) {
             return pages + 1;

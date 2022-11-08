@@ -13,8 +13,8 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
@@ -27,7 +27,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,11 +55,12 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String addAppointment(AppointmentDto appointmentDto) {
-        if (!DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && !timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
-            return ErrorConstants.ENTER_VALID_DATE_TIME;
+        String response = ErrorConstants.ENTER_VALID_DATE_TIME;
+        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+            response = saveAppointment(appointmentDto);
         }
-        return saveAppointment(appointmentDto);
+        return response;
     }
 
     /**
@@ -71,7 +71,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             return appointmentRepository
                     .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -86,7 +86,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             response = ErrorConstants.APPOINTMENT_NOT_FOUND;
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
         return response;
     }
@@ -103,7 +103,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -120,7 +120,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -131,7 +131,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -142,7 +142,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -152,29 +152,28 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        String response;
-        if (0 < Period.between(date, currentDate).getDays()) {
-            response = ErrorConstants.ENTER_VALID_DATE_TIME;
+        String response  = ErrorConstants.ENTER_VALID_DATE_TIME;
+        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+            saveAppointment(appointmentDto);
+            response  = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }
-        saveAppointment(appointmentDto);
-        response = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
-        return response;
+        return reponse;
     }
 
     /**
      * {@inheritDoc}
      */
     public String saveAppointment(AppointmentDto appointmentDto) {
-        String response;
+        String response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
         try {
             if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                     appointmentDto.getScheduledOn())) {
                 response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
             }
             appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
-            response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
         return response;
     }

@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  * @since 2022-10-10
  */
 @Data
-public class  FeedbackDto {
+public class FeedbackDto {
 
     private int id;
 

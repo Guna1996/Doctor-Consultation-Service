@@ -6,6 +6,7 @@ spring:
     password: Jubair@1999
 
   jpa:
+    show-sql: true
     hibernate.ddl-auto: update
     database-platform=org:
       hibernate:

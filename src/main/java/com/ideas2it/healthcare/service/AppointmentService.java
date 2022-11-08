@@ -46,7 +46,7 @@ public interface AppointmentService {
      * doctor in doctor database
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id       {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
      * @return {@link Boolean}
      */

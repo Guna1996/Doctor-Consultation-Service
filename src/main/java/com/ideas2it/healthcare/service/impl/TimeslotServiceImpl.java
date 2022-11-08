@@ -12,8 +12,8 @@ package com.ideas2it.healthcare.service.impl;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.TimeslotMapper;
 import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.TimeslotRepository;
@@ -49,12 +49,15 @@ public class TimeslotServiceImpl implements TimeslotService {
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
         try {
+            if (timeslotDto.getTimeslot().getHour() >= 13) {
+                throw new CustomException(ErrorConstants.INVALID_TIMESLOT);
+            }
             timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
             return MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
-            throw new NotFoundException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
+            throw new CustomException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -67,8 +70,8 @@ public class TimeslotServiceImpl implements TimeslotService {
                     .findAll(PageRequest.of(pageNumber, totalRows)).toList();
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (SqlException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+        } catch (DataBaseException exception) {
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -79,7 +82,7 @@ public class TimeslotServiceImpl implements TimeslotService {
         try {
             return (int) timeslotRepository.count();
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -94,7 +97,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             }
             return timeslot.getTimeslot().equals(localTime);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

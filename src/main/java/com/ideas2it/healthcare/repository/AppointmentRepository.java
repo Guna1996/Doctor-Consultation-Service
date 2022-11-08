@@ -42,9 +42,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * by doctor id and scheduled datetime and status
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
+     * @param id       {@link Integer} is id of the doctor
      * @param dateTime {@link LocalDateTime} is date and time of appointment
-     * @param status {@link String} is status of appointment table
+     * @param status   {@link String} is status of appointment table
      * @return {@link Optional<Appointment>}
      */
     Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(
@@ -69,8 +69,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * and using pagination which can get only the required number of rows.
      * </p>
      *
-     * @param id {@link Integer} is id of the doctor
-     * @param status {@link String} is status of appointment table
+     * @param id       {@link Integer} is id of the doctor
+     * @param status   {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
@@ -83,8 +83,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * and using pagination which can get only the required number of rows.
      * </p>
      *
-     * @param id @link Integer} is id of the patient
-     * @param status {@link String} is status of appointment table
+     * @param id       @link Integer} is id of the patient
+     * @param status   {@link String} is status of appointment table
      * @param pageable {@link Pageable} contains page number and number of rows required
      * @return {@link Page<Appointment>}
      */
@@ -95,8 +95,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * This method is user to return the total count
      * of active appointments by doctor id
      * </p>
+     *
      * @param doctorId {@link Integer} is a id of doctor
-     * @param status {@link String}
+     * @param status   {@link String}
      * @return {@link Integer}
      */
     Integer countByDoctorIdAndStatus(Integer doctorId, String status);
@@ -106,8 +107,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * This method is user to return the total count
      * of active appointments by patient id and status
      * </p>
+     *
      * @param patientId {@link Integer} is a id of patient
-     * @param status {@link String}
+     * @param status    {@link String}
      * @return {@link Integer}
      */
     Integer countByPatientIdAndStatus(Integer patientId, String status);

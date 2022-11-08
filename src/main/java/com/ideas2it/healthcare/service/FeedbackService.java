@@ -65,7 +65,7 @@ public interface FeedbackService {
      * This method is used to get the count of feedback by doctor id
      * </p>
      *
-     * @param doctorId   {@link Integer} is id of doctor
+     * @param doctorId {@link Integer} is id of doctor
      * @return {@link Integer}
      */
     Integer getFeedbacksCountByDoctorId(Integer doctorId);

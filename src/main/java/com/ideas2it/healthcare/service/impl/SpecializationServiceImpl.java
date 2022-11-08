@@ -11,15 +11,15 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
 import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.repository.SpecializationRepository;
 import com.ideas2it.healthcare.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -56,9 +56,9 @@ public class SpecializationServiceImpl implements SpecializationService {
             }
             response = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
-            throw new NotFoundException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
+            throw new CustomException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
         return response;
     }
@@ -72,11 +72,11 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .findAllByStatus(Constants.ACTIVE,
                             PageRequest.of(pageNumber, totalRows)).toList();
             if (specializations.isEmpty()) {
-                throw new NotFoundException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
+                throw new CustomException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
             }
             return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -91,9 +91,8 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .map(SpecializationMapper::toDto)
                     .findFirst()
                     .orElse(null);
-                    //.orElseThrow(() -> new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -105,9 +104,9 @@ public class SpecializationServiceImpl implements SpecializationService {
             if (1 <= specializationRepository.removeSpecializationById(id)) {
                 return MessageConstants.SPECIALIZATION_REMOVED_SUCCESSFULLY;
             }
-            throw new NotFoundException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
+            throw new CustomException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -118,7 +117,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         try {
             return specializationRepository.countByStatus(Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

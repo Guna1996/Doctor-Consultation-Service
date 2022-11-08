@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -48,7 +48,7 @@ public class ClinicController {
 
     @Autowired
     private ClinicService clinicService;
-    
+
     @Autowired
     private CustomResponse customResponse;
 

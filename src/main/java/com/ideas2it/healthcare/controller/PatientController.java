@@ -54,6 +54,8 @@ public class PatientController {
      * <p>
      * This method is used to add the details of a patient by getting details
      * such as name, date of birth, Gender, mobile number, etc from the patient
+     * and sent the Patient dto object into the Patient service layer to
+     * add the patient details.
      * </p>
      *
      * @param patientDto {@link PatientDto} is patient detail
@@ -68,8 +70,9 @@ public class PatientController {
 
     /**
      * <p>
-     * This method is used to get the details such as name, date of birth, Gender,
-     * mobile number, etc of a patient by patient id
+     * This method is used to get the particular patient which is
+     * present in the database details such as name, date of birth,
+     * Gender, mobile number, etc of a patient by patient id
      * </p>
      *
      * @param id {@link Integer} is patient id
@@ -87,8 +90,9 @@ public class PatientController {
 
     /**
      * <p>
-     * This method is used to update the details such as name, date of birth,
-     * Gender, mobile number, etc of a patient
+     * This method is used to update the Patient details such as name,
+     * date of birth, Gender, mobile number, etc of a patient
+     *
      * </p>
      *
      * @param patientDto {@link PatientDto} is detail of patient
