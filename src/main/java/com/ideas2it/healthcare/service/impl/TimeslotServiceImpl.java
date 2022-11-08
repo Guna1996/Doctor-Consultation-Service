@@ -48,17 +48,18 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
+        String response = MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
         try {
             if (timeslotDto.getTimeslot().getHour() >= 13) {
-                throw new CustomException(ErrorConstants.INVALID_TIMESLOT);
+                response = ErrorConstants.INVALID_TIMESLOT;
             }
             timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
-            return MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
             throw new CustomException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**

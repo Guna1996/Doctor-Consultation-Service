@@ -104,12 +104,11 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String removeClinicById(Integer id) {
-        String response;
+        String response = ErrorConstants.CLINIC_NOT_FOUND;
         try {
             if (1 <= clinicRepository.removeClinicById(id)) {
                 response =  MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
             }
-            response = ErrorConstants.CLINIC_NOT_FOUND;
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }

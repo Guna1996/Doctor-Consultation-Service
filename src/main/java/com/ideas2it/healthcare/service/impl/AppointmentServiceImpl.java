@@ -79,12 +79,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String removeAppointmentById(Integer id) {
-        String response;
+        String response = ErrorConstants.APPOINTMENT_NOT_FOUND;
         try {
             if (1 <= appointmentRepository.removeAppointmentById(id)) {
                 response = MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
             }
-            response = ErrorConstants.APPOINTMENT_NOT_FOUND;
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
@@ -158,7 +157,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             saveAppointment(appointmentDto);
             response  = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }
-        return reponse;
+        return response;
     }
 
     /**

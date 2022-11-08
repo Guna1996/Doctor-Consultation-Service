@@ -120,6 +120,16 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      */
     List<DoctorClinic> findByDoctorIdAndStatus(Integer doctorId, String status);
 
+    /**
+     * <p>
+     * This method is used to get timeslots of particular doctor
+     * by doctor id, this method will return list of timeslot
+     * of a doctor while it's present in a clinic.
+     * </p>
+     *
+     * @param doctor_id {@link Integer} id of doctor
+     * @return {@link Integer}
+     */
     @Query(value = "select timeslot_id from doctor_clinic_timeslot " +
             "where doctor_clinic_id IN (select id from doctor_clinic " +
             "where doctor_id = ?);", nativeQuery = true)
