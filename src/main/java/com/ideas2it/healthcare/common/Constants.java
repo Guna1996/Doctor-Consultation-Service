@@ -195,9 +195,5 @@ public class Constants {
     public static final String SYSTOLIC = "systolic";
 
     public static final String TOTAL_PAGES = "totalPages";
-
-    public static final String A_M = "am";
-
-    public static final String P_M = "pm";
 }
 

@@ -49,7 +49,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
             patientVitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto));
             return MessageConstants.VITALS_ADDED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -65,7 +65,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
                     .toList().stream()
                     .map(PatientVitalMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -76,7 +76,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
         try {
             return patientVitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 }

@@ -7,7 +7,6 @@
 package com.ideas2it.healthcare.exception;
 
 
-
 import com.ideas2it.healthcare.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

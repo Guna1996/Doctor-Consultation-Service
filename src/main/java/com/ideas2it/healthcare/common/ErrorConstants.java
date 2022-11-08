@@ -174,8 +174,6 @@ public class ErrorConstants {
 
     public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";
 
-    public static final String DOCTOR_UNABLE_TO_DELETE = "Doctor unable to delete";
-
     public static final String SCHEDULED_ON_SHOULD_NOT_BE_NULL = "Scheduled on shouldn't be null";
 
     public static String SPECIALIZATION_ALREADY_EXISTS = "Specialization already exists";
@@ -184,6 +182,6 @@ public class ErrorConstants {
 
     public static String CLINIC_ALREADY_EXISTS = "Clinic already exists";
 
-    public static String CANNOT_ACCESS_DATABASE = "Can't able to access database";
+    public static String DATABASE_NOT_ACCESSIBLE = "Database not accessible";
 }
 

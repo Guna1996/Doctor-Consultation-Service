@@ -13,7 +13,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.repository.AppointmentRepository;
@@ -71,7 +70,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             return appointmentRepository
                     .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -85,7 +84,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 response = MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
             }
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
         return response;
     }
@@ -102,7 +101,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -119,7 +118,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .map(AppointmentMapper::toDto)
                     .collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -130,7 +129,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -141,7 +140,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -151,11 +150,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        String response  = ErrorConstants.ENTER_VALID_DATE_TIME;
+        String response = ErrorConstants.ENTER_VALID_DATE_TIME;
         if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
                 && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
             saveAppointment(appointmentDto);
-            response  = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
+            response = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }
         return response;
     }
@@ -172,7 +171,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
         return response;
     }

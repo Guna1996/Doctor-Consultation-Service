@@ -27,7 +27,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -61,7 +60,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             } catch (DataIntegrityViolationException exception) {
                 throw new CustomException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
             } catch (DataAccessException exception) {
-                throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+                throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
             }
         }
         return response;
@@ -99,7 +98,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                 response = MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
             }
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
         return response;
     }
@@ -113,7 +112,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                     .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
                     .orElse(null));
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -127,7 +126,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
                             PageRequest.of(pageNumber, totalRows)).toList().stream()
                     .map(DoctorClinicMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -138,7 +137,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         try {
             return doctorClinicRepository.countByClinicIdAndStatus(clinicId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -157,7 +156,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
             doctorClinicRepository.save(doctorClinic);
             return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 }

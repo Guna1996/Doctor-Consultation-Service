@@ -53,7 +53,7 @@ public class PatientServiceImpl implements PatientService {
         } catch (DataIntegrityViolationException exception) {
             throw new CustomException(ErrorConstants.PATIENT_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -67,7 +67,7 @@ public class PatientServiceImpl implements PatientService {
                     .findFirst()
                     .orElse(null);
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
 
@@ -75,7 +75,8 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String updatePatient(PatientDto patientDto) {
-        String response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;;
+        String response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
+        ;
         try {
             Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                     Constants.ACTIVE);
@@ -84,7 +85,7 @@ public class PatientServiceImpl implements PatientService {
             }
             patientRepository.save(PatientMapper.fromDto(patientDto));
         } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
         return response;
     }
