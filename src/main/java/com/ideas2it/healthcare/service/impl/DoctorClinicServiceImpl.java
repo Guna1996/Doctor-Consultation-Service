@@ -51,17 +51,20 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
+        String response = = MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
         if (!isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
-            return ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
+            response = ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
+        } else {
+            try {
+                doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto));
+           
+            } catch (DataIntegrityViolationException exception) {
+                throw new CustomException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
+            } catch (DataAccessException exception) {
+                throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            }
         }
-        try {
-            doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto));
-            return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
-        } catch (DataIntegrityViolationException exception) {
-            throw new CustomException(ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
-        }
+        return response;
     }
 
     /**
@@ -90,14 +93,16 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String removeDoctorFromClinic(Integer id) {
+        String response;
         try {
             if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
-                return MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
+                response = MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
             }
-            throw new CustomException(ErrorConstants.DOCTOR_UNABLE_TO_REMOVE);
+            response = ErrorConstants.DOCTOR_UNABLE_TO_REMOVE;
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**
@@ -107,8 +112,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         try {
             return DoctorClinicMapper.toDto(doctorClinicRepository
                     .findByDoctorIdAndClinicIdAndStatus(doctorId, clinicId, Constants.ACTIVE)
-                    .orElseThrow(() -> new CustomException(
-                            MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND)));
+                    .orElse(null));
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }

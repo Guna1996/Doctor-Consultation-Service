@@ -104,12 +104,14 @@ public class FeedbackController {
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = feedbackService.getFeedbacksCountByDoctorId(doctorId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR;
         if (0 >= totalPages) {
-            throw new CustomException(ErrorConstants.DOCTOR_NOT_FOUND);
-        } else if (pages <= pageNumber) {
-            throw new CustomException(ErrorConstants.FEEDBACKS_NOT_FOUND);
+            message = ErrorConstants.DOCTOR_NOT_FOUND;
         }
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR,
+        else if (pages <= pageNumber) {
+            message = ErrorConstants.FEEDBACKS_NOT_FOUND;
+        }
+        return customResponse.responseEntity(message,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.pageCount(totalPages, totalRows));
     }

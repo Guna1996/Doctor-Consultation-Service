@@ -47,15 +47,20 @@ public class SpecializationServiceImpl implements SpecializationService {
     /**
      * {@inheritDoc}
      */
-    public String addSpecialization(SpecializationDto specializationDto) {
+    public String addOrUpdateSpecialization(SpecializationDto specializationDto) {
+        String response;
         try {
             specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
-            return MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY;
+            if (0 == specializationDto.getId()) {
+                response = MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY;
+            }
+            response = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         } catch (DataIntegrityViolationException exception) {
             throw new CustomException(ErrorConstants.SPECIALIZATION_ALREADY_EXISTS);
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**
@@ -85,18 +90,10 @@ public class SpecializationServiceImpl implements SpecializationService {
                     .stream()
                     .map(SpecializationMapper::toDto)
                     .findFirst()
-                    .orElseThrow(() -> new CustomException(ErrorConstants.SPECIALIZATION_NOT_FOUND));
+                    .orElse(null);
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String updateSpecialization(SpecializationDto specializationDto) {
-        addSpecialization(specializationDto);
-        return MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
     }
 
     /**

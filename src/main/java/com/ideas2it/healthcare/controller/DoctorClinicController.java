@@ -117,10 +117,13 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, Object>> getTimeslots(
             @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
-//        System.out.println(doctorClinicRepository.getTimeslots(doctorId));
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
-                doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
-                HttpStatus.OK);
+        DoctorClinicDto doctorClinicDto =
+                doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS;
+        if (null == doctorClinicDto) {
+            message = MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND;
+        }
+        return customResponse.responseEntity(message, doctorClinicDto, HttpStatus.OK);
     }
 
     /**
@@ -142,12 +145,12 @@ public class DoctorClinicController {
             @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
             @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = doctorClinicService.getCountOfDoctorsByClinicId(clinicId);
-        System.out.println(totalPages);
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC;
         if (pages <= pageNumber) {
-            throw new CustomException(ErrorConstants.DOCTORS_NOT_FOUND);
+            message = ErrorConstants.DOCTORS_NOT_FOUND;
         }
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC,
+        return customResponse.responseEntity(message,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK, pages);
     }

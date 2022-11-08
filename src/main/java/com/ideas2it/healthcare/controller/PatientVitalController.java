@@ -87,12 +87,14 @@ public class PatientVitalController {
             @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = patientVitalService.getVitalsCountByPatientId(patientId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY;
         if (0 >= totalPages) {
-            throw new CustomException(ErrorConstants.PATIENT_NOT_FOUND);
-        } else if (pages <= pageNumber) {
-            throw new CustomException(ErrorConstants.VITALS_NOT_FOUND);
+            message = ErrorConstants.PATIENT_NOT_FOUND;
         }
-        return customResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
+        else if (pages <= pageNumber) {
+            message = ErrorConstants.VITALS_NOT_FOUND;
+        }
+        return customResponse.responseEntity(message,
                 patientVitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
                 HttpStatus.OK, pages);
     }

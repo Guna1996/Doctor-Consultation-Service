@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.controller;
 
 import com.ideas2it.healthcare.common.Constants;
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.response.CustomResponse;
@@ -79,9 +80,12 @@ public class PatientController {
      */
     @GetMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
-        return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT,
-                patientService.getPatientById(id),
-                HttpStatus.OK);
+        PatientDto patientDto = patientService.getPatientById(id);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT;
+        if (null == patientDto) {
+            message = ErrorConstants.PATIENT_NOT_FOUND;
+        }
+        return customResponse.responseEntity(message, patientDto, HttpStatus.OK);
     }
 
     /**

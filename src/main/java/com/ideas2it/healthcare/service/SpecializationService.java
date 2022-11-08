@@ -28,7 +28,7 @@ public interface SpecializationService {
 
     /**
      * <p>
-     * This method is used to create Specialization's record by
+     * This method is used to create and update Specialization's record by
      * getting SpecializationDto as an input and convert it into
      * Specialization model with the help of mapper class
      * </p>
@@ -36,7 +36,7 @@ public interface SpecializationService {
      * @param specializationDto {@link SpecializationDto}
      * @return {@link String}
      */
-    String addSpecialization(SpecializationDto specializationDto);
+    String addOrUpdateSpecialization(SpecializationDto specializationDto);
 
     /**
      * <p>
@@ -59,18 +59,6 @@ public interface SpecializationService {
      * @return {@link SpecializationDto}
      */
     SpecializationDto getSpecializationById(Integer id);
-
-    /**
-     * <p>
-     * This method is used to update Specialization's record by
-     * getting SpecializationDto as an input and convert it into
-     * Specialization model with the help of mapper class
-     * </p>
-     *
-     * @param specializationDto {@link SpecializationDto}
-     * @return {@link String}
-     */
-    String updateSpecialization(SpecializationDto specializationDto);
 
     /**
      * <p>
