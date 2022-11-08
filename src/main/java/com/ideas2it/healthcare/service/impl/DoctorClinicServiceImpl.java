@@ -18,7 +18,6 @@ import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
 import com.ideas2it.healthcare.model.DoctorClinic;
-import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -51,9 +51,9 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-
-        checkDoctorTimeslot(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getClinic().getId(),
-                doctorClinicDto.getTimeslots());
+        if (!isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
+            return ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
+        }
         try {
             doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto));
             return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
@@ -74,23 +74,16 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * @param doctorId     {@link Integer}
      * @param timeslotsDto {@link List<TimeslotDto>}
      */
-    private void checkDoctorTimeslot(Integer doctorId, Integer clinicId, List<TimeslotDto> timeslotsDto) {
-        List<DoctorClinic> doctorClinics = doctorClinicRepository
-                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
-        if (!doctorClinics.isEmpty()) {
+    private Boolean isDoctorTimeslotAvailable(Integer doctorId, List<TimeslotDto> timeslotsDto) {
+        List<Integer> allTimeslotsOfDoctor = doctorClinicRepository.getTimeslots(doctorId);
+        if (!allTimeslotsOfDoctor.isEmpty()) {
             for (TimeslotDto timeslotDto : timeslotsDto) {
-                for (DoctorClinic doctorClinic : doctorClinics) {
-                    if (doctorClinic.getClinic().getId() != clinicId) {
-                        List<Timeslot> timeslots = doctorClinic.getTimeslots();
-                        for (Timeslot timeslot : timeslots) {
-                            if (timeslot.getId() == timeslotDto.getId())
-                                throw new CustomException(
-                                        ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT);
-                        }
-                    }
+                if (allTimeslotsOfDoctor.contains(timeslotDto.getId())) {
+                    return false;
                 }
             }
         }
+        return true;
     }
 
     /**
@@ -149,9 +142,20 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public String updateDoctorClinic(DoctorClinicDto doctorClinicDto) {
-        assignDoctorToClinic(doctorClinicDto);
-        return MessageConstants.DOCTOR_UPDATED_TO_CLINIC_SUCCESSFULLY;
+    public String updateDoctorTimeslotsInThatClinic(DoctorClinicDto doctorClinicDto) {
+        if (!isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
+            return ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
+        }
+        try {
+            DoctorClinic doctorClinic = doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorClinicDto.getDoctor().getId(),
+                    doctorClinicDto.getClinic().getId(), Constants.ACTIVE).orElseThrow(()
+                    -> new CustomException(ErrorConstants.DOCTOR_IS_NOT_PRESENT_IN_THIS_CLINIC));
+            doctorClinic.getTimeslots().addAll(DoctorClinicMapper.fromDto(doctorClinicDto).getTimeslots());
+            doctorClinicRepository.save(doctorClinic);
+            return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
+        } catch (DataAccessException exception) {
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+        }
     }
 }
 

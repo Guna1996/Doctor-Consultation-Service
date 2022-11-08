@@ -167,8 +167,9 @@ public class ErrorConstants {
             "This Doctor is already assigned to this clinic";
 
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT =
-            "This Doctor is assigned to some other clinic at this timeslot";
+            "This Doctor is already assigned to some other clinic at this timeslot";
 
+    public static final String DOCTOR_IS_NOT_PRESENT_IN_THIS_CLINIC = "Doctor is not present in this clinic";
     public static final String TIMESLOT_SHOULD_NOT_BE_NULL = "Timeslot shouldn't be null";
 
     public static final String TIMESLOT_ALREADY_EXISTS = "Timeslot already exists";

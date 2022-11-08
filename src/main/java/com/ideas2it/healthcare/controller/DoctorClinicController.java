@@ -82,8 +82,8 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        return customResponse.responseEntity(doctorClinicService.updateDoctorClinic(doctorClinicDto),
+    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
+        return customResponse.responseEntity(doctorClinicService.updateDoctorTimeslotsInThatClinic(doctorClinicDto),
                 null, HttpStatus.OK);
     }
 
@@ -117,7 +117,7 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, Object>> getTimeslots(
             @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
-        System.out.println(doctorClinicRepository.getTimeslots());
+//        System.out.println(doctorClinicRepository.getTimeslots(doctorId));
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_ALL_TIMESLOTS,
                 doctorClinicService.getTimeslotsByDoctorIdAndClinicId(doctorId, clinicId),
                 HttpStatus.OK);

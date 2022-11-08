@@ -120,7 +120,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      */
     List<DoctorClinic> findByDoctorIdAndStatus(Integer doctorId, String status);
 
-     @Query("select dc.timeslots from doctor_clinic as dc where dc.doctor = 1 and dc.timeslots.id in (1,2)")
-    //@Query(value = "select timeslot_id from doctor_clinic_timeslot where doctor_clinic_id IN (select id from doctor_clinic where doctor_id = 1);", nativeQuery = true)
-    List<Integer> getTimeslots();
+    @Query(value = "select timeslot_id from doctor_clinic_timeslot " +
+            "where doctor_clinic_id IN (select id from doctor_clinic " +
+            "where doctor_id = ?);", nativeQuery = true)
+    List<Integer> getTimeslots(int doctor_id);
 }
