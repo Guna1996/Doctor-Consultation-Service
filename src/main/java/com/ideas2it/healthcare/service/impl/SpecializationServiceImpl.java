@@ -100,14 +100,15 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public String removeSpecializationById(Integer id) {
+        String response = ErrorConstants.SPECIALIZATION_NOT_FOUND;
         try {
             if (1 <= specializationRepository.removeSpecializationById(id)) {
-                return MessageConstants.SPECIALIZATION_REMOVED_SUCCESSFULLY;
+                response = MessageConstants.SPECIALIZATION_REMOVED_SUCCESSFULLY;
             }
-            throw new CustomException(ErrorConstants.SPECIALIZATION_NOT_FOUND);
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
+        return response;
     }
 
     /**

@@ -75,7 +75,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String updatePatient(PatientDto patientDto) {
-        String response;
+        String response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;;
         try {
             Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                     Constants.ACTIVE);
@@ -83,7 +83,6 @@ public class PatientServiceImpl implements PatientService {
                 response = MessageConstants.PATIENT_UNABLE_TO_UPDATE;
             }
             patientRepository.save(PatientMapper.fromDto(patientDto));
-            response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }

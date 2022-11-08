@@ -97,12 +97,11 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     public String removeDoctorById(Integer id) {
-        String response;
+        String response = ErrorConstants.DOCTOR_NOT_FOUND;
         try {
             if (1 <= doctorRepository.removeDoctorById(id)) {
                 response =  MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
             }
-            response = ErrorConstants.DOCTOR_UNABLE_TO_DELETE;
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }

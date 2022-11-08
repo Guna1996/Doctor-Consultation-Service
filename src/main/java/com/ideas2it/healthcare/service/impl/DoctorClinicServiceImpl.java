@@ -51,7 +51,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        String response = = MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
+        String response = MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
         if (!isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
             response = ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
         } else {
@@ -93,12 +93,11 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String removeDoctorFromClinic(Integer id) {
-        String response;
+        String response = ErrorConstants.DOCTOR_UNABLE_TO_REMOVE;
         try {
             if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
                 response = MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
             }
-            response = ErrorConstants.DOCTOR_UNABLE_TO_REMOVE;
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
