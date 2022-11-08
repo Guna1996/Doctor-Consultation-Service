@@ -98,5 +98,5 @@ public interface DoctorClinicService {
      * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
      * @return {@link String}
      */
-    String updateDoctorClinic(DoctorClinicDto doctorClinicDto);
+    String updateDoctorTimeslotsInThatClinic(DoctorClinicDto doctorClinicDto);
 }
