@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
-import com.ideas2it.healthcare.exception.SqlException;
+import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.PatientVitalMapper;
 import com.ideas2it.healthcare.repository.PatientVitalRepository;
 import com.ideas2it.healthcare.service.PatientVitalService;
@@ -49,7 +49,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
             patientVitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto));
             return MessageConstants.VITALS_ADDED_SUCCESSFULLY;
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -65,7 +65,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
                     .toList().stream()
                     .map(PatientVitalMapper::toDto).collect(Collectors.toList());
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 
@@ -76,7 +76,7 @@ public class PatientVitalServiceImpl implements PatientVitalService {
         try {
             return patientVitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
         } catch (DataAccessException exception) {
-            throw new SqlException(ErrorConstants.CANNOT_ACCESS_DATABASE);
+            throw new DataBaseException(ErrorConstants.CANNOT_ACCESS_DATABASE);
         }
     }
 }

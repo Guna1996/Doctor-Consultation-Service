@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.ClinicService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -86,7 +86,7 @@ public class ClinicController {
         int totalPages = clinicService.getCountOfClinics();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.CLINICS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.CLINICS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_CLINICS,
                 clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, pages);

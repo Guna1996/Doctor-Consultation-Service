@@ -15,7 +15,7 @@ package com.ideas2it.healthcare.exception;
  * @author Gunaseelan k
  * @since 2022-10-10
  */
-public class NotFoundException extends RuntimeException {
+public class CustomException extends RuntimeException {
 
     /**
      * <p>
@@ -24,7 +24,7 @@ public class NotFoundException extends RuntimeException {
      *
      * @param message {@link String} is error message
      */
-    public NotFoundException(String message) {
+    public CustomException(String message) {
         super(message);
     }
 }

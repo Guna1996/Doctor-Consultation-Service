@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.DoctorService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -88,7 +88,7 @@ public class DoctorController {
         int totalPages = doctorService.getDoctorsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.DOCTORS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.DOCTORS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS,
                 doctorService.getAllDoctors(pageNumber, totalRows),

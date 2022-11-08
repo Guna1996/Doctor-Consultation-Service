@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
-import com.ideas2it.healthcare.exception.NotFoundException;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.response.CustomResponse;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import com.ideas2it.healthcare.util.MathUtil;
@@ -88,9 +88,9 @@ public class PatientVitalController {
         int totalPages = patientVitalService.getVitalsCountByPatientId(patientId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         if (0 >= totalPages) {
-            throw new NotFoundException(ErrorConstants.PATIENT_NOT_FOUND);
+            throw new CustomException(ErrorConstants.PATIENT_NOT_FOUND);
         } else if (pages <= pageNumber) {
-            throw new NotFoundException(ErrorConstants.VITALS_NOT_FOUND);
+            throw new CustomException(ErrorConstants.VITALS_NOT_FOUND);
         }
         return customResponse.responseEntity(MessageConstants.VITAL_RETRIEVED_SUCCESSFULLY,
                 patientVitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),

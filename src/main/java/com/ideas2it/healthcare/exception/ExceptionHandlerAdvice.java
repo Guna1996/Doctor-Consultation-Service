@@ -6,6 +6,8 @@
  */
 package com.ideas2it.healthcare.exception;
 
+
+
 import com.ideas2it.healthcare.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +29,7 @@ import java.util.Map;
  * @since 2022-10-10
  */
 @RestControllerAdvice
-public class NotFoundExceptionHandler {
+public class ExceptionHandlerAdvice {
 
     @Autowired
     CustomResponse customResponse;
@@ -60,8 +62,8 @@ public class NotFoundExceptionHandler {
      * @param exception {@link HttpStatus} is caught exception
      * @return {@link ResponseEntity}
      */
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleBusinessException(NotFoundException exception) {
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<Map<String, Object>> handleBusinessException(CustomException exception) {
         return customResponse.responseEntity(exception.getMessage(), null, HttpStatus.OK);
     }
 
@@ -74,8 +76,8 @@ public class NotFoundExceptionHandler {
      * @param exception {@link HttpStatus} is caught exception
      * @return {@link ResponseEntity}
      */
-    @ExceptionHandler(SqlException.class)
-    public ResponseEntity<Map<String, Object>> handleSqlException(SqlException exception) {
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<Map<String, Object>> handleSqlException(DataBaseException exception) {
         return customResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -89,9 +91,9 @@ public class NotFoundExceptionHandler {
      * @param exception {@link HttpStatus} is caught exception
      * @return {@link ResponseEntity}
      */
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<Map<String, Object>> globalException(Exception exception) {
-//        return customResponse
-//                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGlobalException(Exception exception) {
+        return customResponse
+                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

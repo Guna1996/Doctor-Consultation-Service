@@ -10,6 +10,7 @@
 package com.ideas2it.healthcare.repository;
 
 import com.ideas2it.healthcare.model.DoctorClinic;
+import com.ideas2it.healthcare.model.Timeslot;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -113,4 +114,8 @@ public interface DoctorClinicRepository extends JpaRepository<DoctorClinic, Inte
      * @return {@link DoctorClinic}
      */
     List<DoctorClinic> findByDoctorIdAndStatus(Integer doctorId, String status);
+
+     @Query("select dc.timeslots from doctor_clinic as dc where dc.doctor = 1 and dc.timeslots.id in (1,2)")
+    //@Query(value = "select timeslot_id from doctor_clinic_timeslot where doctor_clinic_id IN (select id from doctor_clinic where doctor_id = 1);", nativeQuery = true)
+    List<Integer> getTimeslots();
 }
