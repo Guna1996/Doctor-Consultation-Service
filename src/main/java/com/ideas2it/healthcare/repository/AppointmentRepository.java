@@ -47,7 +47,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
      * @param status   {@link String} is status of appointment table
      * @return {@link Optional<Appointment>}
      */
-    Optional<Appointment> findByDoctorIdAndScheduledOnAndStatus(
+    Optional<Appointment> findByDoctorIdAndScheduledAtAndStatus(
             Integer id, LocalDateTime dateTime, String status);
 
     /**

@@ -41,8 +41,8 @@ public class Appointment {
     @Column(name = Constants.ID)
     private int id;
 
-    @Column(name = Constants.SCHEDULED_ON)
-    private LocalDateTime scheduledOn;
+    @Column(name = Constants.SCHEDULED_AT)
+    private LocalDateTime scheduledAt;
 
     @Column
     private String timeFormat;

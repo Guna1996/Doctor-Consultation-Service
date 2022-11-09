@@ -53,8 +53,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String addAppointment(AppointmentDto appointmentDto) {
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
-        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(),
+        if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(),
                 appointmentDto.getTimeFormat())) {
             response = saveAppointment(appointmentDto);
         }
@@ -123,11 +123,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
-        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
+        LocalDate date = appointmentDto.getScheduledAt().toLocalDate();
         LocalDate currentDate = LocalDate.now();
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
-        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+        if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), appointmentDto.getTimeFormat())) {
             saveAppointment(appointmentDto);
             response = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }
