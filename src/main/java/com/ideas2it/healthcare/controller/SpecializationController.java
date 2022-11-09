@@ -86,10 +86,11 @@ public class SpecializationController {
             @RequestParam(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = specializationService.getSpecializationsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
+        String message = MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS;
         if (pages <= pageNumber) {
-            throw new CustomException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
+            message = ErrorConstants.SPECIALIZATIONS_NOT_FOUND;
         }
-        return userResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
+        return userResponse.responseEntity(message,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
                 HttpStatus.PARTIAL_CONTENT, pages);
     }

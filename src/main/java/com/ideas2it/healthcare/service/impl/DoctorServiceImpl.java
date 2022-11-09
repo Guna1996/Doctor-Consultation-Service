@@ -44,12 +44,13 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     public String addOrUpdateDoctor(DoctorDto doctorDto) {
-        String response = null;
+        String response;
         doctorRepository.save(DoctorMapper.fromDto(doctorDto));
         if (0 == doctorDto.getId()) {
             response = MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
+        } else {
+            response = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         }
-        response = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         return response;
     }
 

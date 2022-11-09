@@ -80,8 +80,11 @@ public class FeedbackController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return userResponse.responseEntity(feedbackService.deleteFeedback(id),
-                null, HttpStatus.NO_CONTENT);
+        String message = feedbackService.deleteFeedback(id);
+        if (null == message) {
+            message = ErrorConstants.FEEDBACK_NOT_FOUND;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -111,7 +114,7 @@ public class FeedbackController {
             message = ErrorConstants.FEEDBACKS_NOT_FOUND;
         }
         return userResponse.responseEntity(message,
-                feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
+                feedbackService.getFeedbacksByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.PARTIAL_CONTENT, MathUtil.pageCount(totalPages, totalRows));
     }
 }

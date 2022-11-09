@@ -51,7 +51,7 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     public String deleteFeedback(Integer id) {
-        String response = ErrorConstants.FEEDBACK_NOT_FOUND;
+        String response = null;
         if (1 <= feedbackRepository.removeFeedbackById(id)) {
             response = MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
         }
@@ -62,8 +62,8 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     @Override
-    public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
-                                                   Integer totalRows) {
+    public List<FeedbackDto> getFeedbacksByDoctorId(Integer doctorId, Integer pageNumber,
+                                                    Integer totalRows) {
         return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
                         .of(pageNumber, totalRows)).toList()
                 .stream().map(FeedbackMapper::toDto)

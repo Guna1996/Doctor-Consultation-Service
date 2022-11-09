@@ -54,8 +54,9 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to add clinic by getting details
-     * such as name, door number, street name, etc
+     * This method is used to add clinic detail by getting
+     * details of a clinic such as name, door number,
+     * street name, pin code, contact number etc
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic object
@@ -95,8 +96,9 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to get a particular clinic detail such as
-     * name, door number, street name,etc of active clinic
+     * This method is used to get a particular clinic details such as
+     * name, door number, street name, pin code, contact number etc
+     * of an active clinic
      * </p>
      *
      * @param id {@link Integer} is clinic id
@@ -115,8 +117,9 @@ public class ClinicController {
 
     /**
      * <p>
-     * This method is used to update the recorded details of a clinic
-     * such as name, door number, street name,etc
+     * This method is used to update all the recorded details of a clinic
+     * such as name, door number, street name, pin code and contact number
+     * etc of a clinic
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is contains clinic details
@@ -139,7 +142,10 @@ public class ClinicController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeClinic(@PathVariable(Constants.ID) Integer id) {
-        return userResponse.responseEntity(clinicService.removeClinicById(id),
-                null, HttpStatus.NO_CONTENT);
+        String message = clinicService.removeClinicById(id);
+        if (null == message) {
+            message = ErrorConstants.CLINIC_NOT_FOUND;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 }

@@ -62,7 +62,7 @@ public interface FeedbackService {
      * @param totalRows  {@link Integer} is required number of rows to be displayed
      * @return {@link List<FeedbackDto>}
      */
-    List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
+    List<FeedbackDto> getFeedbacksByDoctorId(Integer doctorId, Integer pageNumber, Integer totalRows);
 
     /**
      * <p>

@@ -60,26 +60,13 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     public String updatePatient(PatientDto patientDto) {
-        String response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
-<<<<<<< Updated upstream
+        String response = null;
         Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                 Constants.ACTIVE);
-        if (patient.isEmpty()) {
-            response = MessageConstants.PATIENT_UNABLE_TO_UPDATE;
-=======
-
-        try {
-            Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
-                    Constants.ACTIVE);
-            if (patient.isEmpty()) {
-                response = MessageConstants.PATIENT_UNABLE_TO_UPDATE;
-            }
+        if (patient.isPresent()) {
             patientRepository.save(PatientMapper.fromDto(patientDto));
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
->>>>>>> Stashed changes
+            response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
         }
-        patientRepository.save(PatientMapper.fromDto(patientDto));
         return response;
     }
 }
