@@ -46,4 +46,7 @@ public class FeedbackDto {
 
     @NotNull(message = ErrorConstants.PATIENT_SHOULD_NOT_BE_NULL)
     private PatientDto patient;
+
+    @NotNull(message = ErrorConstants.APPOINTMENT_SHOULD_NOT_BE_EMPTY)
+    private AppointmentDto appointment;
 }
