@@ -68,4 +68,7 @@ public class PatientVitalDto {
     private String bpRiskLevel;
 
     private LocalDateTime createdAt;
+
+    @NotNull(message = ErrorConstants.APPOINTMENT_SHOULD_NOT_BE_EMPTY)
+    private AppointmentDto appointment;
 }

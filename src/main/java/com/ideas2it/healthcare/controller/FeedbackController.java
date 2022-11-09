@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -62,7 +63,7 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, ?>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
+    public ResponseEntity<Map<String, ?>> addFeedback(@Valid @RequestBody FeedbackDto feedbackDto) {
         return userResponse.responseEntity(feedbackService.addFeedback(feedbackDto),
                 null,
                 HttpStatus.OK);

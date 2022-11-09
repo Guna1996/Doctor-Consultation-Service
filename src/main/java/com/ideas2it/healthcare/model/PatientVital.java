@@ -74,4 +74,8 @@ public class PatientVital {
     @CreationTimestamp
     @Column(name = Constants.CREATED_AT)
     private LocalDateTime createdAt;
+
+    @OneToOne
+    @JoinColumn(name = Constants.APPOINTMENT, unique = true)
+    private Appointment appointment;
 }
