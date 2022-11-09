@@ -12,15 +12,11 @@ package com.ideas2it.healthcare.service.impl;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
-import com.ideas2it.healthcare.exception.CustomException;
-import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.TimeslotMapper;
 import com.ideas2it.healthcare.model.Timeslot;
 import com.ideas2it.healthcare.repository.TimeslotRepository;
 import com.ideas2it.healthcare.service.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -49,16 +45,10 @@ public class TimeslotServiceImpl implements TimeslotService {
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
         String response = MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
-        try {
             if (timeslotDto.getTimeslot().getHour() >= 13) {
                 response = ErrorConstants.INVALID_TIMESLOT;
             }
             timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
-        } catch (DataIntegrityViolationException exception) {
-            throw new CustomException(ErrorConstants.TIMESLOT_ALREADY_EXISTS);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
         return response;
     }
 
@@ -66,39 +56,27 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public List<TimeslotDto> getTimeslots(Integer pageNumber, Integer totalRows) {
-        try {
             List<Timeslot> timeslots = timeslotRepository
                     .findAll(PageRequest.of(pageNumber, totalRows)).toList();
             return timeslots.stream().map(TimeslotMapper::toDto)
                     .collect(Collectors.toList());
-        } catch (DataBaseException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer getTimeslotsCount() {
-        try {
             return (int) timeslotRepository.count();
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
     }
 
     /**
      * {@inheritDoc}
      */
     public boolean isValidTimeslot(LocalTime localTime, String timeFormat) {
-        try {
             Timeslot timeslot = timeslotRepository.findByTimeslotAndTimeFormat(localTime, timeFormat);
             if (null == timeslot) {
                 return false;
             }
             return timeslot.getTimeslot().equals(localTime);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
     }
 }

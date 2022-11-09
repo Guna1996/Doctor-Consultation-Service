@@ -33,6 +33,7 @@ public class AppointmentDto {
     private int id;
 
     @NotNull(message = ErrorConstants.SCHEDULED_ON_SHOULD_NOT_BE_NULL)
+//    @Pattern(regexp = Constants.SCHEDULED_At_REGEX, message = ErrorConstants.ENTER_VALID_SCHEDULE)
     private LocalDateTime scheduledOn;
 
     @NotNull(message = ErrorConstants.TIME_FORMAT_SHOULD_NOT_BE_EMPTY)
