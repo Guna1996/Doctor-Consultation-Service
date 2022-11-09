@@ -56,7 +56,7 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to add details of a doctor by getting
-     * details such as name, date of birth, Gender, etc
+     * details of a doctor such as name, date of birth, Gender, etc
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -66,7 +66,7 @@ public class DoctorController {
     public ResponseEntity<Map<String, ?>> addDoctor(@Valid @RequestBody DoctorDto doctorDto) {
         return userResponse.responseEntity(doctorService.addOrUpdateDoctor(doctorDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -93,7 +93,7 @@ public class DoctorController {
         }
         return userResponse.responseEntity(message,
                 doctorService.getAllDoctors(pageNumber, totalRows),
-                HttpStatus.OK, pages);
+                HttpStatus.PARTIAL_CONTENT, pages);
     }
 
     /**
@@ -118,7 +118,8 @@ public class DoctorController {
     /**
      * <p>
      * This method is used to update the details of doctor by getting
-     * details
+     * their updates details form the doctor. Here we can update
+     * all the field's of a doctor
      * </p>
      *
      * @param doctorDto {@link DoctorDto} is details of doctor
@@ -126,9 +127,13 @@ public class DoctorController {
      */
     @PutMapping
     public ResponseEntity<Map<String, ?>> updateDoctor(@Valid @RequestBody DoctorDto doctorDto) {
+        String message = doctorService.addOrUpdateDoctor(doctorDto);
+        if (null == message) {
+            message = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
+        }
         return userResponse.responseEntity(doctorService.addOrUpdateDoctor(doctorDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -142,7 +147,11 @@ public class DoctorController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeDoctorById(@PathVariable Integer id) {
-        return userResponse.responseEntity(doctorService.removeDoctorById(id), null,
-                HttpStatus.OK);
+        String message = doctorService.removeDoctorById(id);
+        if (null == message) {
+            message = ErrorConstants.DOCTOR_NOT_FOUND;
+        }
+        return userResponse.responseEntity(message, null,
+                HttpStatus.NO_CONTENT);
     }
 }

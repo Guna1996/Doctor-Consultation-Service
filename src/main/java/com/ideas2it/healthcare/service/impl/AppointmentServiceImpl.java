@@ -54,7 +54,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String addAppointment(AppointmentDto appointmentDto) {
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
         if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(),
+                appointmentDto.getTimeFormat())) {
             response = saveAppointment(appointmentDto);
         }
         return response;

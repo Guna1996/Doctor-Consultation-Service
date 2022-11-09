@@ -64,7 +64,7 @@ public class PatientVitalController {
     public ResponseEntity<Map<String, ?>> addVitals(@Valid @RequestBody PatientVitalDto vitalsDto) {
         return userResponse.responseEntity(patientVitalService.addVitals(vitalsDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -95,6 +95,6 @@ public class PatientVitalController {
         }
         return userResponse.responseEntity(message,
                 patientVitalService.getVitalsByPatientId(patientId, pageNumber, totalRows),
-                HttpStatus.OK, pages);
+                HttpStatus.PARTIAL_CONTENT, pages);
     }
 }

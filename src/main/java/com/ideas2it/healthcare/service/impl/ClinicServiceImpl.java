@@ -13,6 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
+import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repository.ClinicRepository;
@@ -67,7 +68,7 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(ClinicMapper::toDto)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new CustomException(ErrorConstants.CLINIC_NOT_FOUND));
     }
 
     /**

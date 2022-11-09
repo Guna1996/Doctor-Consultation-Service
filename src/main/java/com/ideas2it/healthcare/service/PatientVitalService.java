@@ -27,7 +27,8 @@ public interface PatientVitalService {
 
     /**
      * <p>
-     * This abstract method is used to add vital details
+     * This method is used to add vital details such as
+     * height, weight, systolic, diastolic, etc of a patient
      * into the database
      * </p>
      *
@@ -38,7 +39,7 @@ public interface PatientVitalService {
 
     /**
      * <p>
-     * This abstract method is used to get all vitals from the database
+     * This method is used to get all vitals from the database
      * using patient id. using pagination which can get only the
      * required number of rows.
      * </p>
@@ -52,8 +53,10 @@ public interface PatientVitalService {
 
     /**
      * <p>
-     * This abstract method is used to get the count of vitals
-     * from the database using patient id
+     * This method is used to get the count of vitals
+     * which is in active status in the database it will
+     * considered to count for this method and it will
+     * return the count of vitals as integer.
      * </p>
      *
      * @param patientId {@link Integer} is id of patient

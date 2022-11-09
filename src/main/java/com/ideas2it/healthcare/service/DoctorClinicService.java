@@ -30,7 +30,8 @@ public interface DoctorClinicService {
      * <p>
      * This method is used to assign doctor into clinic
      * table by getting doctor id and clinic id
-     * from the user
+     * from this method we can know how many doctors are
+     * assigned in particular clinic
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
@@ -40,8 +41,8 @@ public interface DoctorClinicService {
 
     /**
      * <p>
-     * This method is used to delete doctor id on the
-     * doctor clinic table which is it will InActive the status
+     * This method is used to delete doctor in a clinic by
+     * getting id and it will InActive the status
      * column in doctor clinic table in the database
      * </p>
      *
@@ -81,7 +82,8 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to get the count Doctors of a particular clinic
-     * by clinic id
+     * which mean active doctors are counted by this method and it will return
+     * the count of active doctors
      * </p>
      *
      * @param clinicId {@link Integer} is id of clinic
@@ -92,12 +94,12 @@ public interface DoctorClinicService {
     /**
      * <p>
      * This method is used to update doctor into clinic
-     * table by getting doctor id and clinic id
-     * from the user
+     * table by getting details such as doctor id and clinic id
+     * from the user to update
      * </p>
      *
      * @param doctorClinicDto {@link DoctorClinicDto} is a dto class of doctor clinic
      * @return {@link String}
      */
-    String updateDoctorTimeslotsInThatClinic(DoctorClinicDto doctorClinicDto);
+    String updateDoctorTimeslotsInClinic(DoctorClinicDto doctorClinicDto);
 }

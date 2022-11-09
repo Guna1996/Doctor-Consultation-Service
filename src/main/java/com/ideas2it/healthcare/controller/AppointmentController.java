@@ -66,7 +66,7 @@ public class AppointmentController {
             @Valid @RequestBody AppointmentDto appointmentDto) {
         return userResponse.responseEntity(appointmentService.addAppointment(appointmentDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -82,7 +82,7 @@ public class AppointmentController {
     public ResponseEntity<Map<String, ?>> rescheduleAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
         return userResponse.responseEntity(appointmentService.rescheduleAppointment(appointmentDto),
-                null, HttpStatus.OK);
+                null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -97,7 +97,7 @@ public class AppointmentController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeAppointment(@PathVariable(Constants.ID) Integer id) {
         return userResponse.responseEntity(appointmentService.removeAppointmentById(id),
-                null, HttpStatus.OK);
+                null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -126,7 +126,7 @@ public class AppointmentController {
         }
         return userResponse.responseEntity(message, appointmentService
                 .getAppointmentsByDoctorId(doctorId, pageNumber, totalRows), HttpStatus
-                .OK, pages);
+                .PARTIAL_CONTENT, pages);
     }
 
     /**
@@ -154,6 +154,7 @@ public class AppointmentController {
             message = ErrorConstants.APPOINTMENTS_NOT_FOUND;
         }
         return userResponse.responseEntity(message, appointmentService
-                .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.OK, pages);
+                .getAppointmentsByPatientId(patientId, pageNumber, totalRows), HttpStatus.PARTIAL_CONTENT,
+                pages);
     }
 }

@@ -118,7 +118,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
     /**
      * {@inheritDoc}
      */
-    public String updateDoctorTimeslotsInThatClinic(DoctorClinicDto doctorClinicDto) {
+    public String updateDoctorTimeslotsInClinic(DoctorClinicDto doctorClinicDto) {
         if (!isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
             return ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
         }
