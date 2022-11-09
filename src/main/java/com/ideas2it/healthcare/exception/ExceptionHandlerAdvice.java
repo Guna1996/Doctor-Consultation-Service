@@ -6,7 +6,6 @@
  */
 package com.ideas2it.healthcare.exception;
 
-
 import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ import java.util.Map;
 public class ExceptionHandlerAdvice {
 
     @Autowired
-    CustomResponse customResponse;
+    UserResponse userResponse;
 
     /**
      * <p>
@@ -46,13 +45,13 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleInvalidArgument(
+    public ResponseEntity<Map<String, ?>> handleInvalidArgument(
             MethodArgumentNotValidException exception) {
         Map<String, String> errorMap = new HashMap<>();
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return customResponse.responseEntity(errorMap, null, HttpStatus.BAD_REQUEST);
+        return userResponse.responseEntity(errorMap, null, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -79,8 +78,8 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(DataBaseException.class)
-    public ResponseEntity<Map<String, Object>> handleSqlException(DataBaseException exception) {
-        return customResponse
+    public ResponseEntity<Map<String, ?>> handleSqlException(DataBaseException exception) {
+        return userResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -94,8 +93,8 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGlobalException(Exception exception) {
-        return customResponse
+    public ResponseEntity<Map<String, ?>> handleGlobalException(Exception exception) {
+        return userResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

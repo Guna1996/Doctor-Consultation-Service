@@ -28,7 +28,7 @@ import java.util.Map;
  */
 
 @Component
-public class CustomResponse {
+public class UserResponse {
 
     /**
      * <p>
@@ -41,8 +41,8 @@ public class CustomResponse {
      * @param status  {@link HttpStatus} is http response status
      * @return {@link ResponseEntity}
      */
-    public ResponseEntity<Map<String, Object>> responseEntity
-    (String message, Object entity, HttpStatus status) {
+    public <T> ResponseEntity<Map<String, ?>> responseEntity
+    (String message, T entity, HttpStatus status) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, entity);
@@ -63,7 +63,7 @@ public class CustomResponse {
      * @param totalPages {@link Double} is number of pages required
      * @return {@link ResponseEntity}
      */
-    public ResponseEntity<Map<String, Object>> responseEntity
+    public ResponseEntity<Map<String, ?>> responseEntity
     (String message, List<?> entityList, HttpStatus status, Integer totalPages) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
@@ -85,8 +85,8 @@ public class CustomResponse {
      * @param status  {@link HttpStatus} is http response status
      * @return {@link ResponseEntity}
      */
-    public ResponseEntity<Map<String, Object>> responseEntity
-    (Map<String, String> message, Object entity, HttpStatus status) {
+    public <T> ResponseEntity<Map<String, ?>> responseEntity
+    (Map<String, String> message, T entity, HttpStatus status) {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put(Constants.MESSAGE, message);
         response.put(Constants.ENTITY, entity);

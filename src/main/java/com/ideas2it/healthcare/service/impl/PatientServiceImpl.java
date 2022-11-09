@@ -61,7 +61,6 @@ public class PatientServiceImpl implements PatientService {
      */
     public String updatePatient(PatientDto patientDto) {
         String response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
-        ;
         Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                 Constants.ACTIVE);
         if (patient.isEmpty()) {
