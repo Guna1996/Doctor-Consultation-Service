@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientDto;
-import com.ideas2it.healthcare.response.CustomResponse;
+import com.ideas2it.healthcare.response.UserResponse;
 import com.ideas2it.healthcare.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class PatientController {
     private PatientService patientService;
 
     @Autowired
-    private CustomResponse customResponse;
+    private UserResponse userResponse;
 
     /**
      * <p>
@@ -62,8 +62,8 @@ public class PatientController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addPatient(@Valid @RequestBody PatientDto patientDto) {
-        return customResponse.responseEntity(patientService.addPatient(patientDto),
+    public ResponseEntity<Map<String, ?>> addPatient(@Valid @RequestBody PatientDto patientDto) {
+        return userResponse.responseEntity(patientService.addPatient(patientDto),
                 null,
                 HttpStatus.OK);
     }
@@ -79,13 +79,13 @@ public class PatientController {
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> getPatientById(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, ?>> getPatientById(@PathVariable Integer id) {
         PatientDto patientDto = patientService.getPatientById(id);
         String message = MessageConstants.SUCCESSFULLY_RETRIEVED_PATIENT;
         if (null == patientDto) {
             message = ErrorConstants.PATIENT_NOT_FOUND;
         }
-        return customResponse.responseEntity(message, patientDto, HttpStatus.OK);
+        return userResponse.responseEntity(message, patientDto, HttpStatus.OK);
     }
 
     /**
@@ -99,8 +99,8 @@ public class PatientController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updatePatient(@Valid @RequestBody PatientDto patientDto) {
-        return customResponse.responseEntity(patientService.updatePatient(patientDto),
+    public ResponseEntity<Map<String, ?>> updatePatient(@Valid @RequestBody PatientDto patientDto) {
+        return userResponse.responseEntity(patientService.updatePatient(patientDto),
                 null,
                 HttpStatus.OK);
     }

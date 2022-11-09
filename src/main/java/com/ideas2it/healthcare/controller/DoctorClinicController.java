@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
-import com.ideas2it.healthcare.response.CustomResponse;
+import com.ideas2it.healthcare.response.UserResponse;
 import com.ideas2it.healthcare.service.DoctorClinicService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -50,7 +51,7 @@ public class DoctorClinicController {
     private DoctorClinicService doctorClinicService;
 
     @Autowired
-    private CustomResponse customResponse;
+    private UserResponse userResponse;
 
     @Autowired
     private DoctorClinicRepository doctorClinicRepository;
@@ -65,9 +66,9 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> assignDoctorToClinic(
+    public ResponseEntity<Map<String, ?>> assignDoctorToClinic(
             @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return customResponse.responseEntity(doctorClinicService.assignDoctorToClinic(doctorClinicDto),
+        return userResponse.responseEntity(doctorClinicService.assignDoctorToClinic(doctorClinicDto),
                 null, HttpStatus.OK);
     }
 
@@ -81,8 +82,8 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping
-    public ResponseEntity<Map<String, Object>> updateDoctorToClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return customResponse.responseEntity(doctorClinicService.updateDoctorTimeslotsInThatClinic(doctorClinicDto),
+    public ResponseEntity<Map<String, ?>> updateDoctorToClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
+        return userResponse.responseEntity(doctorClinicService.updateDoctorTimeslotsInThatClinic(doctorClinicDto),
                 null, HttpStatus.OK);
     }
 
@@ -96,9 +97,9 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> removeDoctorFromClinic(
+    public ResponseEntity<Map<String, ?>> removeDoctorFromClinic(
             @PathVariable(Constants.ID) Integer id) {
-        return customResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
+        return userResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
                 null, HttpStatus.OK);
     }
 
@@ -113,7 +114,7 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_TIMESLOTS)
-    public ResponseEntity<Map<String, Object>> getTimeslots(
+    public ResponseEntity<Map<String, ?>> getTimeslots(
             @PathVariable(Constants.DOCTOR_ID_PATH) Integer doctorId,
             @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId) {
         DoctorClinicDto doctorClinicDto =
@@ -122,7 +123,7 @@ public class DoctorClinicController {
         if (null == doctorClinicDto) {
             message = MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND;
         }
-        return customResponse.responseEntity(message, doctorClinicDto, HttpStatus.OK);
+        return userResponse.responseEntity(message, doctorClinicDto, HttpStatus.OK);
     }
 
     /**
@@ -139,17 +140,17 @@ public class DoctorClinicController {
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_DOCTORS_BY_CLINIC_ID)
-    public ResponseEntity<Map<String, Object>> getDoctorsByClinicId(
-            @PathVariable(Constants.CLINIC_ID_PATH) Integer clinicId,
-            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
-            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+    public ResponseEntity<Map<String, ?>> getDoctorsByClinicId(
+            @PathVariable(name = Constants.CLINIC_ID_PATH) Integer clinicId,
+            @RequestParam(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = doctorClinicService.getCountOfDoctorsByClinicId(clinicId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         String message = MessageConstants.SUCCESSFULLY_RETRIEVED_DOCTORS_IN_CLINIC;
         if (pages <= pageNumber) {
             message = ErrorConstants.DOCTORS_NOT_FOUND;
         }
-        return customResponse.responseEntity(message,
+        return userResponse.responseEntity(message,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
                 HttpStatus.OK, pages);
     }

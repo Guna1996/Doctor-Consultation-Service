@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.response.CustomResponse;
+import com.ideas2it.healthcare.response.UserResponse;
 import com.ideas2it.healthcare.service.FeedbackService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -49,7 +50,7 @@ public class FeedbackController {
     private FeedbackService feedbackService;
 
     @Autowired
-    private CustomResponse customResponse;
+    private UserResponse userResponse;
 
     /**
      * <p>
@@ -61,8 +62,8 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
-        return customResponse.responseEntity(feedbackService.addFeedback(feedbackDto),
+    public ResponseEntity<Map<String, ?>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
+        return userResponse.responseEntity(feedbackService.addFeedback(feedbackDto),
                 null,
                 HttpStatus.OK);
     }
@@ -78,8 +79,8 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @PutMapping(Constants.URL_ID)
-    public ResponseEntity<Map<String, Object>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
-        return customResponse.responseEntity(feedbackService.deleteFeedback(id),
+    public ResponseEntity<Map<String, ?>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
+        return userResponse.responseEntity(feedbackService.deleteFeedback(id),
                 null, HttpStatus.OK);
     }
 
@@ -97,10 +98,10 @@ public class FeedbackController {
      * @return {@link ResponseEntity}
      */
     @GetMapping(Constants.URL_GET_FEEDBACKS_BY_DOCTOR_ID)
-    public ResponseEntity<Map<String, Object>> getFeedbacksByDoctorId(
+    public ResponseEntity<Map<String, ?>> getFeedbacksByDoctorId(
             @PathVariable(name = Constants.DOCTOR_ID_PATH) Integer doctorId,
-            @PathVariable(name = Constants.PAGE_NUMBER) Integer pageNumber,
-            @PathVariable(name = Constants.TOTAL_ROWS) Integer totalRows) {
+            @RequestParam(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = feedbackService.getFeedbacksCountByDoctorId(doctorId);
         int pages = MathUtil.pageCount(totalPages, totalRows);
         String message = MessageConstants.SUCCESSFULLY_RETRIEVED_FEEDBACK_FOR_DOCTOR;
@@ -109,7 +110,7 @@ public class FeedbackController {
         } else if (pages <= pageNumber) {
             message = ErrorConstants.FEEDBACKS_NOT_FOUND;
         }
-        return customResponse.responseEntity(message,
+        return userResponse.responseEntity(message,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
                 HttpStatus.OK, MathUtil.pageCount(totalPages, totalRows));
     }

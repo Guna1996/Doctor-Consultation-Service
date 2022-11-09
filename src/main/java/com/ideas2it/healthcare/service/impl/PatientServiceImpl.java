@@ -76,12 +76,12 @@ public class PatientServiceImpl implements PatientService {
      */
     public String updatePatient(PatientDto patientDto) {
         String response = MessageConstants.PATIENT_UPDATED_SUCCESSFULLY;
-        ;
+
         try {
             Optional<Patient> patient = patientRepository.findByIdAndStatus(patientDto.getId(),
                     Constants.ACTIVE);
             if (patient.isEmpty()) {
-                response = MessageConstants.PATIENT_UNABLE_TO_UPDATE;
+                response = ErrorConstants.PATIENT_NOT_FOUND;
             }
             patientRepository.save(PatientMapper.fromDto(patientDto));
         } catch (DataAccessException exception) {
