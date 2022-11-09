@@ -91,7 +91,7 @@ public class PatientVitalMapper {
                 appointment.setStatus(appointmentDto.getStatus());
                 appointment.setCreatedAt(appointmentDto.getCreatedAt());
                 appointment.setId(appointmentDto.getId());
-                appointment.setScheduledOn(appointmentDto.getScheduledOn());
+                appointment.setScheduledAt(appointmentDto.getScheduledAt());
                 appointment.setTimeFormat(appointmentDto.getTimeFormat());
                 patientVital.setAppointment(appointment);
             }
@@ -165,7 +165,7 @@ public class PatientVitalMapper {
                 appointmentDto.setStatus(appointment.getStatus());
                 appointmentDto.setCreatedAt(appointment.getCreatedAt());
                 appointmentDto.setId(appointment.getId());
-                appointmentDto.setScheduledOn(appointment.getScheduledOn());
+                appointmentDto.setScheduledAt(appointment.getScheduledAt());
                 appointmentDto.setTimeFormat(appointment.getTimeFormat());
                 patientVitalDto.setAppointment(appointmentDto);
             }

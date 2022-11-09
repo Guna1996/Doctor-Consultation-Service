@@ -72,6 +72,7 @@ public class FeedbackMapper {
                 if (null != patientDto.getMobileNumber()) {
                     patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
                 }
+
                 patient.setGender(patientDto.getGender());
                 patient.setEmail(patientDto.getEmail());
                 patient.setStatus(patientDto.getStatus());
@@ -83,7 +84,7 @@ public class FeedbackMapper {
                 appointment.setStatus(appointmentDto.getStatus());
                 appointment.setCreatedAt(appointmentDto.getCreatedAt());
                 appointment.setId(appointmentDto.getId());
-                appointment.setScheduledOn(appointmentDto.getScheduledOn());
+                appointment.setScheduledAt(appointmentDto.getScheduledAt());
                 appointment.setTimeFormat(appointmentDto.getTimeFormat());
                 feedback.setAppointment(appointment);
             }
@@ -150,7 +151,7 @@ public class FeedbackMapper {
                 appointmentDto.setStatus(appointment.getStatus());
                 appointmentDto.setCreatedAt(appointment.getCreatedAt());
                 appointmentDto.setId(appointment.getId());
-                appointmentDto.setScheduledOn(appointment.getScheduledOn());
+                appointmentDto.setScheduledAt(appointment.getScheduledAt());
                 appointmentDto.setTimeFormat(appointment.getTimeFormat());
                 feedbackDto.setAppointment(appointmentDto);
             }

@@ -55,8 +55,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String addAppointment(AppointmentDto appointmentDto) {
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
-        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+        if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), appointmentDto.getTimeFormat())) {
             response = saveAppointment(appointmentDto);
         }
         return response;
@@ -68,7 +68,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime) {
         try {
             return appointmentRepository
-                    .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
+                    .findByDoctorIdAndScheduledAtAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
         } catch (DataAccessException exception) {
             throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
@@ -148,11 +148,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
-        LocalDate date = appointmentDto.getScheduledOn().toLocalDate();
+        LocalDate date = appointmentDto.getScheduledAt().toLocalDate();
         LocalDate currentDate = LocalDate.now();
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
-        if (DateUtil.isDateValid(appointmentDto.getScheduledOn())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledOn().toLocalTime(), appointmentDto.getTimeFormat())) {
+        if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), appointmentDto.getTimeFormat())) {
             saveAppointment(appointmentDto);
             response = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }
@@ -166,7 +166,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         String response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
         try {
             if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
-                    appointmentDto.getScheduledOn())) {
+                    appointmentDto.getScheduledAt())) {
                 response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
             }
             appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));

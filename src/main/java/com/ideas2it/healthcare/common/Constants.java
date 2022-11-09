@@ -137,7 +137,7 @@ public class Constants {
 
     public static final String TOTAL_ROWS = "totalRows";
 
-    public static final String SCHEDULED_ON = "scheduled_on";
+    public static final String SCHEDULED_AT = "scheduled_at";
 
     public static final String APPOINTMENT = "appointment";
 
