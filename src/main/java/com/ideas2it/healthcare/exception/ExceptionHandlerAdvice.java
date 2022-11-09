@@ -7,8 +7,11 @@
 package com.ideas2it.healthcare.exception;
 
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -63,7 +66,7 @@ public class ExceptionHandlerAdvice {
      */
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<Map<String, Object>> handleBusinessException(CustomException exception) {
-        return customResponse.responseEntity(exception.getMessage(), null, HttpStatus.OK);
+        return customResponse.responseEntity(exception.getMessage(), null, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -92,6 +95,36 @@ public class ExceptionHandlerAdvice {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGlobalException(Exception exception) {
+        return customResponse
+                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * <p>
+     * This method is used to handle the errors occurring when
+     * the duplicate details are added into database
+     * </p>
+     *
+     * @param exception {@link HttpStatus} is caught exception
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, Object>> handleDataIntegrityException(DataIntegrityViolationException exception) {
+        return customResponse
+                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * <p>
+     * This method is used to handle the errors occurring when
+     * the details of the database access API in use, such as JDBC
+     * </p>
+     *
+     * @param exception {@link HttpStatus} is caught exception
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<Map<String, Object>> handleDataAccessException(DataAccessException exception) {
         return customResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }

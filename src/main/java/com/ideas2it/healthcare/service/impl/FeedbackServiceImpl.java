@@ -13,12 +13,10 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.FeedbackDto;
-import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.FeedbackMapper;
 import com.ideas2it.healthcare.repository.FeedbackRepository;
 import com.ideas2it.healthcare.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -45,12 +43,8 @@ public class FeedbackServiceImpl implements FeedbackService {
      * {@inheritDoc}
      */
     public String addFeedback(FeedbackDto feedbackDto) {
-        try {
-            feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto));
-            return MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY;
-        } catch (Exception exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        feedbackRepository.save(FeedbackMapper.fromDto(feedbackDto));
+        return MessageConstants.FEEDBACK_ADDED_SUCCESSFULLY;
     }
 
     /**
@@ -58,12 +52,8 @@ public class FeedbackServiceImpl implements FeedbackService {
      */
     public String deleteFeedback(Integer id) {
         String response = ErrorConstants.FEEDBACK_NOT_FOUND;
-        try {
-            if (1 <= feedbackRepository.removeFeedbackById(id)) {
-                response = MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
-            }
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
+        if (1 <= feedbackRepository.removeFeedbackById(id)) {
+            response = MessageConstants.FEEDBACK_REMOVED_SUCCESSFULLY;
         }
         return response;
     }
@@ -74,24 +64,16 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDto> getFeedbackByDoctorId(Integer doctorId, Integer pageNumber,
                                                    Integer totalRows) {
-        try {
-            return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
-                            .of(pageNumber, totalRows)).toList()
-                    .stream().map(FeedbackMapper::toDto)
-                    .collect(Collectors.toList());
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return feedbackRepository.findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest
+                        .of(pageNumber, totalRows)).toList()
+                .stream().map(FeedbackMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer getFeedbacksCountByDoctorId(Integer doctorId) {
-        try {
-            return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return feedbackRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
     }
 }

@@ -161,6 +161,8 @@ public class ErrorConstants {
 
     public static final String ENTER_VALID_EMAIL = "Please enter valid email";
 
+    public static final String ENTER_VALID_SCHEDULE = "Please enter valid schedule.";
+
     public static final String ENTER_VALID_SCHEDULE_TIME = "Please enter valid schedule time..";
 
     public static final String DOCTOR_ALREADY_ASSIGNED_TO_THIS_CLINIC =
