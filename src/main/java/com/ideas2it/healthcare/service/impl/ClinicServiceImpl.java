@@ -13,7 +13,6 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.ClinicDto;
-import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.mapper.ClinicMapper;
 import com.ideas2it.healthcare.model.Clinic;
 import com.ideas2it.healthcare.repository.ClinicRepository;
@@ -68,7 +67,7 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.findByIdAndStatus(id, Constants.ACTIVE).stream().
                 map(ClinicMapper::toDto)
                 .findFirst()
-                .orElseThrow(() -> new CustomException(ErrorConstants.CLINIC_NOT_FOUND));
+                .orElse(null);
     }
 
     /**
@@ -83,7 +82,7 @@ public class ClinicServiceImpl implements ClinicService {
      * {@inheritDoc}
      */
     public String removeClinicById(Integer id) {
-        String response = ErrorConstants.CLINIC_NOT_FOUND;
+        String response = null;
         if (1 <= clinicRepository.removeClinicById(id)) {
             response = MessageConstants.CLINIC_REMOVED_SUCCESSFULLY;
         }

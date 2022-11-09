@@ -68,8 +68,11 @@ public class DoctorClinicController {
     @PostMapping
     public ResponseEntity<Map<String, ?>> assignDoctorToClinic(
             @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return userResponse.responseEntity(doctorClinicService.assignDoctorToClinic(doctorClinicDto),
-                null, HttpStatus.CREATED);
+        String message = doctorClinicService.assignDoctorToClinic(doctorClinicDto);
+        if (null == message) {
+            message = ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.CREATED);
     }
 
     /**
@@ -99,8 +102,11 @@ public class DoctorClinicController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeDoctorFromClinic(
             @PathVariable(Constants.ID) Integer id) {
-        return userResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
-                null, HttpStatus.NO_CONTENT);
+        String message = doctorClinicService.removeDoctorFromClinic(id);
+        if (null == message) {
+            message = ErrorConstants.DOCTOR_UNABLE_TO_REMOVE;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 
     /**

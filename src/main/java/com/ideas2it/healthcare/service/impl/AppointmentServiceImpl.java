@@ -73,7 +73,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String removeAppointmentById(Integer id) {
-        String response = ErrorConstants.APPOINTMENT_NOT_FOUND;
+        String response = null;
         if (1 <= appointmentRepository.removeAppointmentById(id)) {
             response = MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
         }
@@ -127,7 +127,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         LocalDate currentDate = LocalDate.now();
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
         if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), appointmentDto.getTimeFormat())) {
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), 
+                appointmentDto.getTimeFormat())) {
             saveAppointment(appointmentDto);
             response = MessageConstants.APPOINTMENT_RESCHEDULED_SUCCESSFULLY;
         }

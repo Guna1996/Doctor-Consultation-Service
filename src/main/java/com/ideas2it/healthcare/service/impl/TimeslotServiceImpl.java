@@ -44,11 +44,11 @@ public class TimeslotServiceImpl implements TimeslotService {
      * {@inheritDoc}
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
-        String response = MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
-            if (timeslotDto.getTimeslot().getHour() >= 13) {
-                response = ErrorConstants.INVALID_TIMESLOT;
+        String response = null;
+            if (timeslotDto.getTimeslot().getHour() <= 13) {
+                timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
+                response = MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
             }
-            timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
         return response;
     }
 

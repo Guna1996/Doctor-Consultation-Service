@@ -45,12 +45,13 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public String addOrUpdateSpecialization(SpecializationDto specializationDto) {
-        String response = null;
+        String response;
         specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
         if (0 == specializationDto.getId()) {
             response = MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY;
+        } else {
+            response = MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
         }
-        response = MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
         return response;
     }
 
@@ -61,9 +62,6 @@ public class SpecializationServiceImpl implements SpecializationService {
         List<Specialization> specializations = specializationRepository
                 .findAllByStatus(Constants.ACTIVE,
                         PageRequest.of(pageNumber, totalRows)).toList();
-        if (specializations.isEmpty()) {
-            throw new CustomException(ErrorConstants.SPECIALIZATIONS_NOT_FOUND);
-        }
         return specializations.stream().map(SpecializationMapper::toDto).collect(Collectors.toList());
     }
 

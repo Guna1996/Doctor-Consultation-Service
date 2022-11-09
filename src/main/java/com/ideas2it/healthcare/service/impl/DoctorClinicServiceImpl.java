@@ -47,11 +47,10 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String assignDoctorToClinic(DoctorClinicDto doctorClinicDto) {
-        String response = MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
-        if (!isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
-            response = ErrorConstants.DOCTOR_ALREADY_ASSIGNED_TO_SOME_OTHER_CLINIC_AT_THIS_TIMESLOT;
-        } else {
+        String response = null;
+        if (isDoctorTimeslotAvailable(doctorClinicDto.getDoctor().getId(), doctorClinicDto.getTimeslots())) {
             doctorClinicRepository.save(DoctorClinicMapper.fromDto(doctorClinicDto));
+            response = MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;
         }
         return response;
     }
@@ -82,7 +81,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
      * {@inheritDoc}
      */
     public String removeDoctorFromClinic(Integer id) {
-        String response = ErrorConstants.DOCTOR_UNABLE_TO_REMOVE;
+        String response = null;
         if (1 <= doctorClinicRepository.removeDoctorClinicById(id)) {
             response = MessageConstants.SUCCESSFULLY_REMOVED_DOCTOR_FROM_CLINIC;
         }

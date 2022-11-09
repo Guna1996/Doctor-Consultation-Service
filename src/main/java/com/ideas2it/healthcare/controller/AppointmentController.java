@@ -71,8 +71,9 @@ public class AppointmentController {
 
     /**
      * <p>
-     * This method is used to reschedule appointment of a patient by getting
-     * details such as reschedule date and time from the patient
+     * This method is used to reschedule appointment of a patient
+     * by getting details such as reschedule date and time
+     * for the appointment from the patient
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is details of appointment
@@ -81,14 +82,18 @@ public class AppointmentController {
     @PutMapping
     public ResponseEntity<Map<String, ?>> rescheduleAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return userResponse.responseEntity(appointmentService.rescheduleAppointment(appointmentDto),
-                null, HttpStatus.NO_CONTENT);
+        String message = appointmentService.rescheduleAppointment(appointmentDto);
+        if (null == message) {
+            message = ErrorConstants.ENTER_VALID_DATE_TIME;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 
     /**
      * <p>
      * This method is used to cancel the appointment of a patient
-     * by getting appointment id from the patient
+     * from the appointment list by getting appointment id
+     * from the patient
      * </p>
      *
      * @param id {@link Integer} is appointment id
@@ -96,7 +101,11 @@ public class AppointmentController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeAppointment(@PathVariable(Constants.ID) Integer id) {
-        return userResponse.responseEntity(appointmentService.removeAppointmentById(id),
+        String message = appointmentService.removeAppointmentById(id);
+        if (null == message) {
+            message = ErrorConstants.APPOINTMENT_NOT_FOUND;
+        }
+        return userResponse.responseEntity(message,
                 null, HttpStatus.NO_CONTENT);
     }
 
