@@ -8,9 +8,11 @@
  */
 package com.ideas2it.healthcare.mapper;
 
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.PatientDto;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
+import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Patient;
 import com.ideas2it.healthcare.model.PatientVital;
@@ -83,6 +85,16 @@ public class PatientVitalMapper {
                 patient.setStatus(patientDto.getStatus());
                 patientVital.setPatient(patient);
             }
+            Appointment appointment = new Appointment();
+            AppointmentDto appointmentDto = patientVitalDto.getAppointment();
+            if (null != appointmentDto) {
+                appointment.setStatus(appointmentDto.getStatus());
+                appointment.setCreatedAt(appointmentDto.getCreatedAt());
+                appointment.setId(appointmentDto.getId());
+                appointment.setScheduledAt(appointmentDto.getScheduledAt());
+                appointment.setTimeFormat(appointmentDto.getTimeFormat());
+                patientVital.setAppointment(appointment);
+            }
         }
         return patientVital;
     }
@@ -97,18 +109,18 @@ public class PatientVitalMapper {
      * @return {@link PatientVitalDto}
      */
     public static PatientVitalDto toDto(PatientVital patientVital) {
-        PatientVitalDto vitalsDto = new PatientVitalDto();
+        PatientVitalDto patientVitalDto = new PatientVitalDto();
         if (null != patientVital) {
-            vitalsDto.setId(patientVital.getId());
-            vitalsDto.setHeight(patientVital.getHeight());
-            vitalsDto.setWeight(patientVital.getWeight());
-            vitalsDto.setPulse(patientVital.getPulse());
-            vitalsDto.setSystolic(patientVital.getSystolic());
-            vitalsDto.setDiastolic(patientVital.getDiastolic());
-            vitalsDto.setSugarLevel(patientVital.getSugarLevel());
-            vitalsDto.setStatus(patientVital.getStatus());
-            vitalsDto.setBpRiskLevel(patientVital.getBpRiskLevel());
-            vitalsDto.setCreatedAt(patientVital.getCreatedAt());
+            patientVitalDto.setId(patientVital.getId());
+            patientVitalDto.setHeight(patientVital.getHeight());
+            patientVitalDto.setWeight(patientVital.getWeight());
+            patientVitalDto.setPulse(patientVital.getPulse());
+            patientVitalDto.setSystolic(patientVital.getSystolic());
+            patientVitalDto.setDiastolic(patientVital.getDiastolic());
+            patientVitalDto.setSugarLevel(patientVital.getSugarLevel());
+            patientVitalDto.setStatus(patientVital.getStatus());
+            patientVitalDto.setBpRiskLevel(patientVital.getBpRiskLevel());
+            patientVitalDto.setCreatedAt(patientVital.getCreatedAt());
             Doctor doctor = patientVital.getDoctor();
             if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
@@ -131,7 +143,7 @@ public class PatientVitalMapper {
                 doctorDto.setCity(doctor.getCity());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setStatus(doctor.getStatus());
-                vitalsDto.setDoctor(doctorDto);
+                patientVitalDto.setDoctor(doctorDto);
             }
             Patient patient = patientVital.getPatient();
             if (null != patient) {
@@ -145,9 +157,19 @@ public class PatientVitalMapper {
                 patientDto.setGender(patient.getGender());
                 patientDto.setEmail(patient.getEmail());
                 patientDto.setStatus(patient.getStatus());
-                vitalsDto.setPatient(patientDto);
+                patientVitalDto.setPatient(patientDto);
+            }
+            Appointment appointment = patientVital.getAppointment();
+            AppointmentDto appointmentDto = new AppointmentDto();
+            if (null != appointment) {
+                appointmentDto.setStatus(appointment.getStatus());
+                appointmentDto.setCreatedAt(appointment.getCreatedAt());
+                appointmentDto.setId(appointment.getId());
+                appointmentDto.setScheduledAt(appointment.getScheduledAt());
+                appointmentDto.setTimeFormat(appointment.getTimeFormat());
+                patientVitalDto.setAppointment(appointmentDto);
             }
         }
-        return vitalsDto;
+        return patientVitalDto;
     }
 }

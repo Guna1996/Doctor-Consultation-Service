@@ -32,6 +32,8 @@ public class ErrorConstants {
 
     public static final String APPOINTMENTS_NOT_FOUND = "Appointments not found";
 
+    public static final String APPOINTMENT_SHOULD_NOT_BE_EMPTY = "Appointment should not be empty";
+
     public static final String DOCTOR_UNABLE_TO_REMOVE = "Doctor unable to remove";
 
     public static final String CLINIC_NOT_FOUND = "Clinic not found";
@@ -150,7 +152,7 @@ public class ErrorConstants {
 
     public static final String ENTER_MALE_OR_FEMALE = "Please enter Male or Female";
 
-    public static final String ENTER_AM_OR_PM = "Please enter am or pm";
+    public static final String ENTER_AM_OR_PM = "Please enter AM or PM";
 
     public static final String ENTER_VALID_QUALIFICATION = "Please enter valid qualification";
 

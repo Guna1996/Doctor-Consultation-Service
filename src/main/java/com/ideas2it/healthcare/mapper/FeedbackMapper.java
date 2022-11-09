@@ -8,9 +8,11 @@
  */
 package com.ideas2it.healthcare.mapper;
 
+import com.ideas2it.healthcare.dto.AppointmentDto;
 import com.ideas2it.healthcare.dto.DoctorDto;
 import com.ideas2it.healthcare.dto.FeedbackDto;
 import com.ideas2it.healthcare.dto.PatientDto;
+import com.ideas2it.healthcare.model.Appointment;
 import com.ideas2it.healthcare.model.Doctor;
 import com.ideas2it.healthcare.model.Feedback;
 import com.ideas2it.healthcare.model.Patient;
@@ -64,16 +66,27 @@ public class FeedbackMapper {
             PatientDto patientDto = feedbackDto.getPatient();
             if (null != patientDto) {
                 Patient patient = new Patient();
-                patient.setId(patient.getId());
+                patient.setId(patientDto.getId());
                 patient.setName(patientDto.getName());
                 patient.setDateOfBirth(patientDto.getDateOfBirth());
                 if (null != patientDto.getMobileNumber()) {
                     patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
                 }
+
                 patient.setGender(patientDto.getGender());
                 patient.setEmail(patientDto.getEmail());
                 patient.setStatus(patientDto.getStatus());
                 feedback.setPatient(patient);
+            }
+            Appointment appointment = new Appointment();
+            AppointmentDto appointmentDto = feedbackDto.getAppointment();
+            if (null != appointmentDto) {
+                appointment.setStatus(appointmentDto.getStatus());
+                appointment.setCreatedAt(appointmentDto.getCreatedAt());
+                appointment.setId(appointmentDto.getId());
+                appointment.setScheduledAt(appointmentDto.getScheduledAt());
+                appointment.setTimeFormat(appointmentDto.getTimeFormat());
+                feedback.setAppointment(appointment);
             }
         }
         return feedback;
@@ -131,6 +144,16 @@ public class FeedbackMapper {
                 patientDto.setEmail(patient.getEmail());
                 patientDto.setStatus(patient.getStatus());
                 feedbackDto.setPatient(patientDto);
+            }
+            Appointment appointment = feedback.getAppointment();
+            AppointmentDto appointmentDto = new AppointmentDto();
+            if (null != appointment) {
+                appointmentDto.setStatus(appointment.getStatus());
+                appointmentDto.setCreatedAt(appointment.getCreatedAt());
+                appointmentDto.setId(appointment.getId());
+                appointmentDto.setScheduledAt(appointment.getScheduledAt());
+                appointmentDto.setTimeFormat(appointment.getTimeFormat());
+                feedbackDto.setAppointment(appointmentDto);
             }
         }
         return feedbackDto;

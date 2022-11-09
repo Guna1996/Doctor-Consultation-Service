@@ -36,7 +36,7 @@ public class Constants {
 
     public static final String GENDER_REGEX = "^male$|^female$";
 
-    public static final String TIME_FORMAT_REGEX = "^am$|^pm$";
+    public static final String TIME_FORMAT_REGEX = "^AM$|^PM$";
 
     public static final String URL_ID = "/{id}";
 
@@ -137,7 +137,7 @@ public class Constants {
 
     public static final String TOTAL_ROWS = "totalRows";
 
-    public static final String SCHEDULED_ON = "scheduled_on";
+    public static final String SCHEDULED_AT = "scheduled_at";
 
     public static final String APPOINTMENT = "appointment";
 

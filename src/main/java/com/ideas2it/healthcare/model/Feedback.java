@@ -55,4 +55,8 @@ public class Feedback {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = Constants.PATIENT_ID)
     private Patient patient;
+
+    @OneToOne
+    @JoinColumn(name = Constants.APPOINTMENT, unique = true)
+    private Appointment appointment;
 }
