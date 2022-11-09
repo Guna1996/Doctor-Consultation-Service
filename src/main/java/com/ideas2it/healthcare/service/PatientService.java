@@ -27,8 +27,9 @@ public interface PatientService {
 
     /**
      * <p>
-     * This method is used to add patient details
-     * into data base by getting details from the user
+     * This method is used to add patient details such as
+     * name, date of birth, mobile number, gender, etc
+     * into data base by getting details from the patient
      * </p>
      *
      * @param patientDto {@link PatientDto} contains patient details
@@ -38,8 +39,9 @@ public interface PatientService {
 
     /**
      * <p>
-     * This method is used to get patient
-     * details from the database by patient id
+     * This method is used to get patient details
+     * such as name, date of birth, gender, email, etc
+     * from the database by getting patient id
      * </p>
      *
      * @param id {@link Integer} id of the patient
@@ -50,7 +52,8 @@ public interface PatientService {
     /**
      * <p>
      * This method is used to update Patient
-     * all details into the database
+     * details such as name, mobile number, email, gender, etc
+     * to update into the database
      * </p>
      *
      * @param patientDto {@link PatientDto} patient detail

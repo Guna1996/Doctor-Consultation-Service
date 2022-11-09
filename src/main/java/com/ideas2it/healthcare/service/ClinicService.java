@@ -25,11 +25,12 @@ import java.util.List;
  * @since 2022-10-10
  */
 public interface ClinicService {
+
     /**
      * <p>
-     * This method is used to add appointment details
-     * into data base by getting details from the
-     * user
+     * This method is used to add clinic details such as clinic name,
+     * street name, pin code, city name, state name, contact number, etc
+     * into data base by getting details.
      * </p>
      *
      * @param clinicDto {@link ClinicDto} is clinic details
@@ -39,7 +40,7 @@ public interface ClinicService {
 
     /**
      * <p>
-     * This method is used to get all the Clinic details
+     * This method is used to get all the active Clinic details
      * from the database using pagination which can get
      * only the required number of rows.
      * </p>
@@ -52,9 +53,9 @@ public interface ClinicService {
 
     /**
      * <p>
-     * This abstract method is used to get client
+     * This method is used to get active clinic
      * details from the database by getting the id and status
-     * from the user to display
+     * from the admin to display the clinic details.
      * </p>
      *
      * @param id {@link Integer} id of the clinic
@@ -64,8 +65,9 @@ public interface ClinicService {
 
     /**
      * <p>
-     * This method is used to update clinic
-     * all details into the database
+     * This method is used to update clinic all details into the
+     * database such as clinic name, street name, city, state,
+     * contact number to update into database.
      * </p>
      *
      * @param clinicDto {@link ClinicDto} clinic detail
@@ -76,7 +78,9 @@ public interface ClinicService {
     /**
      * <p>
      * This method is used to delete clinic details
-     * by getting id from the user
+     * from the database which means the action is
+     * inactive the status column of clinic table
+     * by getting clinic id
      * </p>
      *
      * @param id {@link Integer} id of the clinic
@@ -87,7 +91,9 @@ public interface ClinicService {
     /**
      * <p>
      * This method is used to get the count of Clinics
-     * from the database
+     * if the clinic status is active it will count otherwise
+     * this method will not get count, finally it will
+     * return all the clinics count as integer
      * </p>
      *
      * @return {@link Integer}

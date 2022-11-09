@@ -63,7 +63,7 @@ public class TimeslotController {
     public ResponseEntity<Map<String, ?>> addTimeslot(@Valid @RequestBody TimeslotDto timeslotDto) {
         return userResponse.responseEntity(timeslotService.addTimeslot(timeslotDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -90,6 +90,6 @@ public class TimeslotController {
         }
         return userResponse.responseEntity(message,
                 timeslotService.getTimeslots(pageNumber, totalRows),
-                HttpStatus.OK, pages);
+                HttpStatus.PARTIAL_CONTENT, pages);
     }
 }

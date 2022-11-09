@@ -52,7 +52,8 @@ public interface SpecializationService {
     /**
      * <p>
      * This method is used to get the Specialization from the
-     * database by specialization id
+     * database which is in active status in the database of specialization
+     * table by specialization id
      * </p>
      *
      * @param id {@link int}
@@ -63,7 +64,9 @@ public interface SpecializationService {
     /**
      * <p>
      * This method is used to delete the Specialization by id
-     * by making status as inactive
+     * and before that once the specialization is present in the
+     * table we can remove otherwise if we try to remove it will
+     * showing error message for this action.
      * </p>
      *
      * @param id {@link Integer}
@@ -73,8 +76,9 @@ public interface SpecializationService {
 
     /**
      * <p>
-     * This method is used to get the count of Specialization's record by
-     * getting all Specializations from database
+     * This method is used to get the count of Specialization's
+     * this method will considered only active status specialization
+     * for count and will return the count of specialization as an integer
      * </p>
      *
      * @return {@link Integer}

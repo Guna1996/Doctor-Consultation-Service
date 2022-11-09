@@ -65,7 +65,7 @@ public class FeedbackController {
     public ResponseEntity<Map<String, ?>> addFeedback(@RequestBody FeedbackDto feedbackDto) {
         return userResponse.responseEntity(feedbackService.addFeedback(feedbackDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -81,7 +81,7 @@ public class FeedbackController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeFeedbackById(@PathVariable(Constants.ID) Integer id) {
         return userResponse.responseEntity(feedbackService.deleteFeedback(id),
-                null, HttpStatus.OK);
+                null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -112,6 +112,6 @@ public class FeedbackController {
         }
         return userResponse.responseEntity(message,
                 feedbackService.getFeedbackByDoctorId(doctorId, pageNumber, totalRows),
-                HttpStatus.OK, MathUtil.pageCount(totalPages, totalRows));
+                HttpStatus.PARTIAL_CONTENT, MathUtil.pageCount(totalPages, totalRows));
     }
 }

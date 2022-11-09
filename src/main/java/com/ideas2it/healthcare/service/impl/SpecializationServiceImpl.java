@@ -45,7 +45,7 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public String addOrUpdateSpecialization(SpecializationDto specializationDto) {
-        String response;
+        String response = null;
         specializationRepository.save(SpecializationMapper.fromDto(specializationDto));
         if (0 == specializationDto.getId()) {
             response = MessageConstants.SPECIALIZATION_ADDED_SUCCESSFULLY;
@@ -83,7 +83,7 @@ public class SpecializationServiceImpl implements SpecializationService {
      * {@inheritDoc}
      */
     public String removeSpecializationById(Integer id) {
-        String response = ErrorConstants.SPECIALIZATION_NOT_FOUND;
+        String response = null;
         if (1 <= specializationRepository.removeSpecializationById(id)) {
             response = MessageConstants.SPECIALIZATION_REMOVED_SUCCESSFULLY;
         }

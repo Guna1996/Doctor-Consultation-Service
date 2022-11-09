@@ -44,7 +44,7 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     public String addOrUpdateDoctor(DoctorDto doctorDto) {
-        String response;
+        String response = null;
         doctorRepository.save(DoctorMapper.fromDto(doctorDto));
         if (0 == doctorDto.getId()) {
             response = MessageConstants.DOCTOR_ADDED_SUCCESSFULLY;
@@ -78,17 +78,18 @@ public class DoctorServiceImpl implements DoctorService {
      * {@inheritDoc}
      */
     public String removeDoctorById(Integer id) {
-        String response = ErrorConstants.DOCTOR_NOT_FOUND;
+        String response = null;
         if (1 <= doctorRepository.removeDoctorById(id)) {
             response = MessageConstants.DOCTOR_REMOVED_SUCCESSFULLY;
         }
         return response;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public Integer getDoctorsCount() {
-        return doctorRepository.countByStatus(Constants.ACTIVE);
+        /**
+         * {@inheritDoc}
+         */
+        public Integer getDoctorsCount () {
+            return doctorRepository.countByStatus(Constants.ACTIVE);
+        }
     }
-}
+
