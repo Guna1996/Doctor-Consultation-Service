@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
-import com.ideas2it.healthcare.response.CustomResponse;
+import com.ideas2it.healthcare.response.UserResponse;
 import com.ideas2it.healthcare.service.TimeslotService;
 import com.ideas2it.healthcare.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -47,7 +48,7 @@ public class TimeslotController {
     private TimeslotService timeslotService;
 
     @Autowired
-    private CustomResponse customResponse;
+    private UserResponse userResponse;
 
     /**
      * <p>
@@ -59,8 +60,8 @@ public class TimeslotController {
      * @return {@link ResponseEntity}
      */
     @PostMapping
-    public ResponseEntity<Map<String, Object>> addTimeslot(@Valid @RequestBody TimeslotDto timeslotDto) {
-        return customResponse.responseEntity(timeslotService.addTimeslot(timeslotDto),
+    public ResponseEntity<Map<String, ?>> addTimeslot(@Valid @RequestBody TimeslotDto timeslotDto) {
+        return userResponse.responseEntity(timeslotService.addTimeslot(timeslotDto),
                 null,
                 HttpStatus.OK);
     }
@@ -77,17 +78,17 @@ public class TimeslotController {
      * @param totalRows  {@link Integer} is number of row to be shown
      * @return {@link ResponseEntity}
      */
-    @GetMapping(Constants.URL_PAGINATION)
-    public ResponseEntity<Map<String, Object>> getAllTimeslots(
-            @PathVariable(Constants.PAGE_NUMBER) Integer pageNumber,
-            @PathVariable(Constants.TOTAL_ROWS) Integer totalRows) {
+    @GetMapping
+    public ResponseEntity<Map<String, ?>> getAllTimeslots(
+            @RequestParam(name = Constants.PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(name = Constants.TOTAL_ROWS) Integer totalRows) {
         int totalPages = timeslotService.getTimeslotsCount();
         int pages = MathUtil.pageCount(totalPages, totalRows);
         String message = MessageConstants.SUCCESSFULLY_RETRIEVED_TIMESLOTS;
         if (pages <= pageNumber) {
             message = ErrorConstants.TIMESLOTS_NOT_FOUND;
         }
-        return customResponse.responseEntity(message,
+        return userResponse.responseEntity(message,
                 timeslotService.getTimeslots(pageNumber, totalRows),
                 HttpStatus.OK, pages);
     }

@@ -125,6 +125,5 @@ public class ClinicServiceImpl implements ClinicService {
             throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
         }
     }
-
 }
 
