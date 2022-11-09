@@ -6,8 +6,7 @@
  */
 package com.ideas2it.healthcare.exception;
 
-import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.response.CustomResponse;
+import com.ideas2it.healthcare.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -64,8 +63,8 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<Map<String, Object>> handleBusinessException(CustomException exception) {
-        return customResponse.responseEntity(exception.getMessage(), null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, ?>> handleBusinessException(CustomException exception) {
+        return userResponse.responseEntity(exception.getMessage(), null, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -108,8 +107,8 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String, Object>> handleDataIntegrityException(DataIntegrityViolationException exception) {
-        return customResponse
+    public ResponseEntity<Map<String, ?>> handleDataIntegrityException(DataIntegrityViolationException exception) {
+        return userResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -123,8 +122,8 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<Map<String, Object>> handleDataAccessException(DataAccessException exception) {
-        return customResponse
+    public ResponseEntity<Map<String, ?>> handleDataAccessException(DataAccessException exception) {
+        return userResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
