@@ -13,14 +13,12 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.AppointmentDto;
-import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.AppointmentMapper;
 import com.ideas2it.healthcare.repository.AppointmentRepository;
 import com.ideas2it.healthcare.service.AppointmentService;
 import com.ideas2it.healthcare.service.TimeslotService;
 import com.ideas2it.healthcare.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +54,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String addAppointment(AppointmentDto appointmentDto) {
         String response = ErrorConstants.ENTER_VALID_DATE_TIME;
         if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
-                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), appointmentDto.getTimeFormat())) {
+                && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(),
+                appointmentDto.getTimeFormat())) {
             response = saveAppointment(appointmentDto);
         }
         return response;
@@ -66,12 +65,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime) {
-        try {
-            return appointmentRepository
-                    .findByDoctorIdAndScheduledAtAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return appointmentRepository
+                .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
     /**
@@ -79,12 +74,8 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String removeAppointmentById(Integer id) {
         String response = ErrorConstants.APPOINTMENT_NOT_FOUND;
-        try {
-            if (1 <= appointmentRepository.removeAppointmentById(id)) {
-                response = MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
-            }
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
+        if (1 <= appointmentRepository.removeAppointmentById(id)) {
+            response = MessageConstants.APPOINTMENT_REMOVED_SUCCESSFULLY;
         }
         return response;
     }
@@ -94,15 +85,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId, Integer pageNumber,
                                                            Integer totalRows) {
-        try {
-            return appointmentRepository.findByPatientIdAndStatus(patientId, Constants.ACTIVE,
-                            PageRequest.of(pageNumber, totalRows))
-                    .stream()
-                    .map(AppointmentMapper::toDto)
-                    .collect(Collectors.toList());
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return appointmentRepository.findByPatientIdAndStatus(patientId, Constants.ACTIVE,
+                        PageRequest.of(pageNumber, totalRows))
+                .stream()
+                .map(AppointmentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -110,38 +97,26 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId, Integer pageNumber,
                                                           Integer totalRows) {
-        try {
-            return appointmentRepository
-                    .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
-                            totalRows))
-                    .toList().stream()
-                    .map(AppointmentMapper::toDto)
-                    .collect(Collectors.toList());
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return appointmentRepository
+                .findByDoctorIdAndStatus(doctorId, Constants.ACTIVE, PageRequest.of(pageNumber,
+                        totalRows))
+                .toList().stream()
+                .map(AppointmentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer getCountOfAppointmentByPatientId(Integer patientId) {
-        try {
-            return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return appointmentRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer getCountOfAppointmentByDoctorId(Integer doctorId) {
-        try {
-            return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return appointmentRepository.countByDoctorIdAndStatus(doctorId, Constants.ACTIVE);
     }
 
     /**
@@ -164,15 +139,11 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public String saveAppointment(AppointmentDto appointmentDto) {
         String response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
-        try {
-            if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
-                    appointmentDto.getScheduledAt())) {
-                response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
-            }
-            appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
+        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+                appointmentDto.getScheduledOn())) {
+            response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
         }
+        appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
         return response;
     }
 }

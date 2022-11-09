@@ -28,8 +28,10 @@ public interface TimeslotService {
 
     /**
      * <p>
-     * This abstract method is used to add timeslot
-     * to the database
+     * This method is used to add an timeslot
+     * for a doctor by getting details such as
+     * time format, time slot to allocate a doctor in a
+     * particular clinic.
      * </p>
      *
      * @param timeslotDto {@link TimeslotDto} contains timeslots
@@ -39,7 +41,7 @@ public interface TimeslotService {
 
     /**
      * <p>
-     * This abstract method is used to get timeslots
+     * This method is used to get timeslots
      * from the database using pagination which can get
      * only the required number of rows.
      * </p>
@@ -52,8 +54,9 @@ public interface TimeslotService {
 
     /**
      * <p>
-     * This abstract method is used to get the count of timeslots
-     * from the database
+     * This method is used to get the count of timeslots
+     * which is present in the active status in the database
+     * and it will return the count of timeslots as an integer.
      * </p>
      *
      * @return {@link Integer}
@@ -62,8 +65,9 @@ public interface TimeslotService {
 
     /**
      * <p>
-     * This abstract method is used to check whether the timeslot is present
+     * This method is used to check whether the timeslot is present
      * in the list of default timeslots which is in the timeslot master table
+     * otherwise it will given error message.
      * </p>
      *
      * @param localTime {@link LocalTime} is timeslot

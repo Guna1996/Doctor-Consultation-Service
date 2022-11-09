@@ -27,9 +27,10 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This abstract method is used to add feedback
-     * of user to the database
-     *
+     * This method is used to add feedback
+     * of doctor, patient given feedback details
+     * such as comments, ratings for the doctor
+     * these details are added into the database
      * </p>
      *
      * @param feedbackDto {@link FeedbackDto}
@@ -39,8 +40,9 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This method is used to delete feedback
-     * from the database by feedback id
+     * This method is used to delete feedback which means
+     * inactive the status column in database by
+     * getting feedback id from admin or patient.
      * </p>
      *
      * @param id {@link Integer}
@@ -50,7 +52,9 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This method is used to get feedback by doctor id
+     * This method is used to get feedback details such as
+     * comments, ratings of a doctor by getting doctor id,
+     * this method will return the feedback object.
      * </p>
      *
      * @param doctorId   {@link Integer} is id of doctor
@@ -62,7 +66,10 @@ public interface FeedbackService {
 
     /**
      * <p>
-     * This method is used to get the count of feedback by doctor id
+     * This method is used to get the count of feedback
+     * which means active feedback only considered for count
+     * and it will return count of feedback as integer
+     * by getting doctor id
      * </p>
      *
      * @param doctorId {@link Integer} is id of doctor

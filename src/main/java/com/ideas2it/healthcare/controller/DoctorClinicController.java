@@ -69,7 +69,7 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, ?>> assignDoctorToClinic(
             @Valid @RequestBody DoctorClinicDto doctorClinicDto) {
         return userResponse.responseEntity(doctorClinicService.assignDoctorToClinic(doctorClinicDto),
-                null, HttpStatus.OK);
+                null, HttpStatus.CREATED);
     }
 
     /**
@@ -83,8 +83,8 @@ public class DoctorClinicController {
      */
     @PutMapping
     public ResponseEntity<Map<String, ?>> updateDoctorToClinic(@Valid @RequestBody DoctorClinicDto doctorClinicDto) {
-        return userResponse.responseEntity(doctorClinicService.updateDoctorTimeslotsInThatClinic(doctorClinicDto),
-                null, HttpStatus.OK);
+        return userResponse.responseEntity(doctorClinicService.updateDoctorTimeslotsInClinic(doctorClinicDto),
+                null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -100,7 +100,7 @@ public class DoctorClinicController {
     public ResponseEntity<Map<String, ?>> removeDoctorFromClinic(
             @PathVariable(Constants.ID) Integer id) {
         return userResponse.responseEntity(doctorClinicService.removeDoctorFromClinic(id),
-                null, HttpStatus.OK);
+                null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -123,7 +123,7 @@ public class DoctorClinicController {
         if (null == doctorClinicDto) {
             message = MessageConstants.DOCTOR_ID_CLINIC_ID_NOT_FOUND;
         }
-        return userResponse.responseEntity(message, doctorClinicDto, HttpStatus.OK);
+        return userResponse.responseEntity(message, doctorClinicDto, HttpStatus.PARTIAL_CONTENT);
     }
 
     /**
@@ -152,7 +152,7 @@ public class DoctorClinicController {
         }
         return userResponse.responseEntity(message,
                 doctorClinicService.getDoctorsByClinicId(clinicId, pageNumber, totalRows),
-                HttpStatus.OK, pages);
+                HttpStatus.PARTIAL_CONTENT, pages);
     }
 
 }

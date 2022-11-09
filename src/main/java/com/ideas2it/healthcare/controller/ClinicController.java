@@ -64,7 +64,7 @@ public class ClinicController {
     @PostMapping
     public ResponseEntity<Map<String, ?>> addClinic(@Valid @RequestBody ClinicDto clinicDto) {
         return userResponse.responseEntity(clinicService.addClinic(clinicDto),
-                null, HttpStatus.OK);
+                null, HttpStatus.CREATED);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ClinicController {
             message = ErrorConstants.CLINICS_NOT_FOUND;
         }
         return userResponse.responseEntity(message,
-                clinicService.getClinics(pageNumber, totalRows), HttpStatus.OK, pages);
+                clinicService.getClinics(pageNumber, totalRows), HttpStatus.PARTIAL_CONTENT, pages);
     }
 
     /**
@@ -125,7 +125,7 @@ public class ClinicController {
     @PutMapping
     public ResponseEntity<Map<String, ?>> updateClinic(@Valid @RequestBody ClinicDto clinicDto) {
         return userResponse.responseEntity(clinicService.updateClinic(clinicDto),
-                null, HttpStatus.OK);
+                null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -140,6 +140,6 @@ public class ClinicController {
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeClinic(@PathVariable(Constants.ID) Integer id) {
         return userResponse.responseEntity(clinicService.removeClinicById(id),
-                null, HttpStatus.OK);
+                null, HttpStatus.NO_CONTENT);
     }
 }

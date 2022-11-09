@@ -54,8 +54,9 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to get the Doctor  by id and
-     * convert it into DoctorDto
+     * This method is used to get particular Doctor details such as
+     * name, mobile number, city, street name,date of birth, etc
+     * by id and convert it into DoctorDto.
      * </p>
      *
      * @param id {@link Integer} is id of doctor
@@ -65,8 +66,9 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to delete the Doctor by id
-     * by making status as inactive
+     * This method is used to remove the Doctor which means
+     * status of a doctor will be changed into inactive by getting id
+     * to remove the doctor.
      * </p>
      *
      * @param id {@link Integer} is id of doctor
@@ -76,8 +78,9 @@ public interface DoctorService {
 
     /**
      * <p>
-     * This method is used to get the count of Doctor's record
-     * with the status
+     * This method is used to get the count of Doctor's
+     * which are active status in the database, it will
+     * return the count of doctor as integer
      * </p>
      *
      * @return {@link Integer}

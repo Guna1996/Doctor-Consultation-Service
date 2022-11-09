@@ -10,15 +10,12 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.PatientVitalDto;
-import com.ideas2it.healthcare.exception.DataBaseException;
 import com.ideas2it.healthcare.mapper.PatientVitalMapper;
 import com.ideas2it.healthcare.repository.PatientVitalRepository;
 import com.ideas2it.healthcare.service.PatientVitalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -45,12 +42,8 @@ public class PatientVitalServiceImpl implements PatientVitalService {
      * {@inheritDoc}
      */
     public String addVitals(PatientVitalDto vitalsDto) {
-        try {
-            patientVitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto));
-            return MessageConstants.VITALS_ADDED_SUCCESSFULLY;
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        patientVitalsRepository.save(PatientVitalMapper.fromDto(vitalsDto));
+        return MessageConstants.VITALS_ADDED_SUCCESSFULLY;
     }
 
     /**
@@ -58,25 +51,18 @@ public class PatientVitalServiceImpl implements PatientVitalService {
      */
     public List<PatientVitalDto> getVitalsByPatientId(
             Integer patientId, Integer pageNumber, Integer totalRows) {
-        try {
-            return patientVitalsRepository
-                    .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
-                            totalRows))
-                    .toList().stream()
-                    .map(PatientVitalMapper::toDto).collect(Collectors.toList());
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return patientVitalsRepository
+                .findByPatientIdAndStatus(patientId, Constants.ACTIVE, PageRequest.of(pageNumber,
+                        totalRows))
+                .toList().stream()
+                .map(PatientVitalMapper::toDto).collect(Collectors.toList());
+
     }
 
     /**
      * {@inheritDoc}
      */
     public Integer getVitalsCountByPatientId(Integer patientId) {
-        try {
-            return patientVitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
-        } catch (DataAccessException exception) {
-            throw new DataBaseException(ErrorConstants.DATABASE_NOT_ACCESSIBLE);
-        }
+        return patientVitalsRepository.countByPatientIdAndStatus(patientId, Constants.ACTIVE);
     }
 }

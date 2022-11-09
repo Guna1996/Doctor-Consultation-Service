@@ -66,7 +66,7 @@ public class SpecializationController {
         return userResponse.responseEntity(
                 specializationService.addOrUpdateSpecialization(specializationDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -91,7 +91,7 @@ public class SpecializationController {
         }
         return userResponse.responseEntity(MessageConstants.SUCCESSFULLY_RETRIEVED_SPECIALIZATIONS,
                 specializationService.getAllSpecializations(pageNumber, totalRows),
-                HttpStatus.OK, pages);
+                HttpStatus.PARTIAL_CONTENT, pages);
     }
 
     /**
@@ -125,8 +125,11 @@ public class SpecializationController {
     @PutMapping
     public ResponseEntity<Map<String, ?>> updateSpecialization(
             @Valid @RequestBody SpecializationDto specializationDto) {
-        return userResponse.responseEntity(specializationService.addOrUpdateSpecialization(specializationDto),
-                null, HttpStatus.OK);
+        String message = specializationService.addOrUpdateSpecialization(specializationDto);
+        if (null == message) {
+            message = MessageConstants.SPECIALIZATION_UPDATED_SUCCESSFULLY;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -140,7 +143,10 @@ public class SpecializationController {
      */
     @PutMapping(Constants.URL_ID)
     public ResponseEntity<Map<String, ?>> removeSpecializationById(@PathVariable Integer id) {
-        return userResponse.responseEntity(specializationService.removeSpecializationById(id),
-                null, HttpStatus.OK);
+        String message = specializationService.removeSpecializationById(id);
+        if (null == message) {
+            message = ErrorConstants.SPECIALIZATION_NOT_FOUND;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 }

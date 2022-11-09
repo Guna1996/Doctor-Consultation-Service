@@ -65,7 +65,7 @@ public class PatientController {
     public ResponseEntity<Map<String, ?>> addPatient(@Valid @RequestBody PatientDto patientDto) {
         return userResponse.responseEntity(patientService.addPatient(patientDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     /**
@@ -86,6 +86,7 @@ public class PatientController {
             message = ErrorConstants.PATIENT_NOT_FOUND;
         }
         return userResponse.responseEntity(message, patientDto, HttpStatus.OK);
+
     }
 
     /**
@@ -102,6 +103,6 @@ public class PatientController {
     public ResponseEntity<Map<String, ?>> updatePatient(@Valid @RequestBody PatientDto patientDto) {
         return userResponse.responseEntity(patientService.updatePatient(patientDto),
                 null,
-                HttpStatus.OK);
+                HttpStatus.NO_CONTENT);
     }
 }

@@ -30,8 +30,9 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This method is used to add appointment details
-     * into data base by getting details from the user
+     * This method is used to add appointment details such as
+     * patient id, doctor id, clinic id and time to add
+     * into data base by getting these details from the user.
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} contains appointment details
@@ -43,7 +44,7 @@ public interface AppointmentService {
      * <p>
      * This method is used to check whether a appointment
      * is available or not based on the appointment for
-     * doctor in doctor database
+     * doctor in doctor database.
      * </p>
      *
      * @param id       {@link Integer} is id of the doctor
@@ -55,7 +56,8 @@ public interface AppointmentService {
     /**
      * <p>
      * This method is used to reschedule appointment and
-     * all details into the database
+     * getting details such as clinic id, doctor id, patient id, etc
+     * for reschedule appointment into the database.
      * </p>
      *
      * @param appointmentDto {@link AppointmentDto} is appointment detail
@@ -65,13 +67,15 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This method is used to reschedule appointment and
-     * all details into the database
+     * This method is used to cancel the appointment
+     * if you fixed appointment for visit doctor, you can
+     * cancel the appointment by getting appointment id.
      * </p>
      *
      * @param id {@link Integer} is an id for unknown
      * @return {@link String}
      */
+
     String removeAppointmentById(Integer id);
 
     /**
@@ -105,7 +109,8 @@ public interface AppointmentService {
     /**
      * <p>
      * This method is used to get the count of appointments
-     * from the database by patient Id
+     * of a doctor,patient booked appointment for visiting doctor,
+     * we can get the count of appointment of a doctor by patient id
      * </p>
      *
      * @param patientId {@link Integer} is id of patient
@@ -115,8 +120,10 @@ public interface AppointmentService {
 
     /**
      * <p>
-     * This method is used to get the count of appointments
-     * from the database by doctor Id
+     * This method is used to get the count of appointments,
+     * how many appointments are booked to the corresponding
+     * doctor, this method will return the count of appointment
+     * of a doctor by doctor id
      * </p>
      *
      * @param doctorId {@link Integer} is id of doctor
