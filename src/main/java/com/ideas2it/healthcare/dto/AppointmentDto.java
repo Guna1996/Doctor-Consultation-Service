@@ -39,8 +39,6 @@ public class AppointmentDto {
     @Pattern(regexp = Constants.TIME_FORMAT_REGEX, message = ErrorConstants.ENTER_AM_OR_PM)
     private String timeFormat;
 
-    private LocalDateTime createdAt;
-
     @NotNull(message = ErrorConstants.PATIENT_SHOULD_NOT_BE_NULL)
     private PatientDto patient;
 
@@ -51,4 +49,8 @@ public class AppointmentDto {
     private ClinicDto clinic;
 
     private String status = Constants.ACTIVE;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

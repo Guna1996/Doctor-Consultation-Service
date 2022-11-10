@@ -12,6 +12,7 @@ package com.ideas2it.healthcare.model;
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -78,4 +79,8 @@ public class PatientVital {
     @OneToOne
     @JoinColumn(name = Constants.APPOINTMENT, unique = true)
     private Appointment appointment;
+
+    @UpdateTimestamp
+    @Column(name = Constants.UPDATED_AT)
+    private LocalDateTime updatedAt;
 }
