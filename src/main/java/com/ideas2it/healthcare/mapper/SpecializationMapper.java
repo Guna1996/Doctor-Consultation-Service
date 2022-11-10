@@ -39,6 +39,8 @@ public class SpecializationMapper {
             specialization.setId(specializationDto.getId());
             specialization.setName(specializationDto.getName());
             specialization.setStatus(specializationDto.getStatus());
+            specialization.setCreatedAt(specialization.getCreatedAt());
+            specialization.setUpdatedAt(specialization.getUpdatedAt());
         }
         return specialization;
     }
@@ -58,6 +60,8 @@ public class SpecializationMapper {
             specializationDto.setId(specialization.getId());
             specializationDto.setName(specialization.getName());
             specializationDto.setStatus(specialization.getStatus());
+            specializationDto.setCreatedAt(specialization.getCreatedAt());
+            specializationDto.setUpdatedAt(specialization.getUpdatedAt());
         }
         return specializationDto;
     }

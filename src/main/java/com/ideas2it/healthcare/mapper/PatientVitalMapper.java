@@ -52,6 +52,8 @@ public class PatientVitalMapper {
             patientVital.setSugarLevel(patientVitalDto.getSugarLevel());
             patientVital.setStatus(patientVitalDto.getStatus());
             patientVital.setCreatedAt(patientVitalDto.getCreatedAt());
+            patientVital.setCreatedAt(patientVitalDto.getCreatedAt());
+            patientVital.setUpdatedAt(patientVitalDto.getUpdatedAt());
             patientVital.setBpRiskLevel(VitalUtil.getBPRiskLevel(patientVitalDto.getSystolic(),
                     patientVitalDto.getDiastolic()));
             DoctorDto doctorDto = patientVitalDto.getDoctor();

@@ -87,6 +87,8 @@ public class DoctorMapper {
             doctorDto.setGender(doctor.getGender());
             doctorDto.setQualification(doctor.getQualification());
             doctorDto.setConsultationFee(doctor.getConsultationFee());
+            doctorDto.setCreatedAt(doctor.getCreatedAt());
+            doctorDto.setUpdatedAt(doctor.getUpdatedAt());
             Set<Specialization> specializations = doctor.getSpecializations();
             if (null != specializations) {
                 Set<SpecializationDto> specializationsDto = new HashSet<>();
@@ -95,6 +97,8 @@ public class DoctorMapper {
                     specializationDto.setId(specialization.getId());
                     specializationDto.setName(specialization.getName());
                     specializationDto.setStatus(specialization.getStatus());
+                    specializationDto.setCreatedAt(specialization.getCreatedAt());
+                    specializationDto.setUpdatedAt(specialization.getUpdatedAt());
                     specializationsDto.add(specializationDto);
                 });
                 doctorDto.setSpecializations(specializationsDto);

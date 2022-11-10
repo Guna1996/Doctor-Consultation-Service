@@ -71,4 +71,6 @@ public class PatientVitalDto {
 
     @NotNull(message = ErrorConstants.APPOINTMENT_SHOULD_NOT_BE_EMPTY)
     private AppointmentDto appointment;
+
+    private LocalDateTime updatedAt;
 }

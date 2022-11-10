@@ -15,6 +15,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -49,4 +50,8 @@ public class FeedbackDto {
 
     @NotNull(message = ErrorConstants.APPOINTMENT_SHOULD_NOT_BE_EMPTY)
     private AppointmentDto appointment;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

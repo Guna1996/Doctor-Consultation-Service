@@ -15,6 +15,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -39,4 +40,8 @@ public class TimeslotDto {
     @NotNull(message = ErrorConstants.TIME_FORMAT_SHOULD_NOT_BE_EMPTY)
     @Pattern(regexp = Constants.TIME_FORMAT_REGEX, message = ErrorConstants.ENTER_AM_OR_PM)
     private String timeFormat;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

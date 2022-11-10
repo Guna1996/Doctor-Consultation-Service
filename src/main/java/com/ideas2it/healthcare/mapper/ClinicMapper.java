@@ -68,6 +68,8 @@ public class ClinicMapper {
             clinicDto.setState(clinic.getState());
             clinicDto.setPinCode(clinic.getPinCode());
             clinicDto.setContactNumber(clinic.getContactNumber());
+            clinicDto.setUpdatedAt(clinic.getUpdatedAt());
+            clinicDto.setCreatedAt(clinic.getCreatedAt());
             clinicDto.setStatus(clinic.getStatus());
         }
         return clinicDto;

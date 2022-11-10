@@ -11,6 +11,8 @@ package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -78,4 +81,12 @@ public class Doctor {
 
     @Column(name = Constants.CONSULTATION_FEE)
     private int consultationFee;
+
+    @CreationTimestamp
+    @Column(name = Constants.CREATED_AT)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = Constants.UPDATED_AT)
+    private LocalDateTime updatedAt;
 }

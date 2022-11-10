@@ -43,6 +43,8 @@ public class PatientMapper {
             patient.setMobileNumber(Long.parseLong(patientDto.getMobileNumber()));
             patient.setEmail(patientDto.getEmail());
             patient.setStatus(patientDto.getStatus());
+            patient.setCreatedAt(patientDto.getCreatedAt());
+            patient.setUpdatedAt(patientDto.getUpdatedAt());
         }
         return patient;
     }
@@ -66,6 +68,8 @@ public class PatientMapper {
             patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
             patientDto.setEmail(patient.getEmail());
             patientDto.setStatus(patient.getStatus());
+            patientDto.setCreatedAt(patient.getUpdatedAt());
+            patientDto.setUpdatedAt(patient.getUpdatedAt());
         }
         return patientDto;
     }

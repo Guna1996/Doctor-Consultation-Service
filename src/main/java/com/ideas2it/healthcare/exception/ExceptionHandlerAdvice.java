@@ -54,7 +54,7 @@ public class ExceptionHandlerAdvice {
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return userResponse.responseEntity(exception.getMessage(), null, HttpStatus.BAD_REQUEST);
+        return userResponse.responseEntity(errorMap, null, HttpStatus.BAD_REQUEST);
     }
 
     /**

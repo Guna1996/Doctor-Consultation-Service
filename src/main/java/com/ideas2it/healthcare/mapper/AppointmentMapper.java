@@ -112,6 +112,7 @@ public class AppointmentMapper {
             appointmentDto.setCreatedAt(appointment.getCreatedAt());
             appointmentDto.setStatus(appointment.getStatus());
             appointmentDto.setTimeFormat(appointment.getTimeFormat());
+            appointmentDto.setUpdatedAt(appointment.getUpdatedAt());
             Patient patient = appointment.getPatient();
             if (null != patient) {
                 PatientDto patientDto = new PatientDto();
@@ -119,6 +120,8 @@ public class AppointmentMapper {
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
                 patientDto.setGender(patient.getGender());
+                patientDto.setCreatedAt(patient.getCreatedAt());
+                patientDto.setUpdatedAt(patient.getUpdatedAt());
                 if (null != patient.getMobileNumber()) {
                     patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
                 }
@@ -132,6 +135,8 @@ public class AppointmentMapper {
                 doctorDto.setId(doctor.getId());
                 doctorDto.setName(doctor.getName());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setCreatedAt(doctor.getUpdatedAt());
+                doctorDto.setUpdatedAt(doctor.getUpdatedAt());
                 if (null != doctor.getDateOfBirth()) {
                     doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 }
@@ -161,6 +166,8 @@ public class AppointmentMapper {
                 clinicDto.setState(clinic.getState());
                 clinicDto.setPinCode(clinic.getPinCode());
                 clinicDto.setContactNumber(clinic.getContactNumber());
+                clinicDto.setCreatedAt(clinic.getCreatedAt());
+                clinicDto.setUpdatedAt(clinic.getUpdatedAt());
                 appointmentDto.setClinic(clinicDto);
             }
         }

@@ -14,6 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -42,4 +43,8 @@ public class DoctorClinicDto {
 
     @NotNull(message = ErrorConstants.TIMESLOT_SHOULD_NOT_BE_NULL)
     private List<TimeslotDto> timeslots;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

@@ -108,6 +108,8 @@ public class DoctorClinicMapper {
         if (null != doctorClinic) {
             doctorClinicDto.setId(doctorClinic.getId());
             doctorClinicDto.setStatus(doctorClinic.getStatus());
+            doctorClinicDto.setCreatedAt(doctorClinic.getCreatedAt());
+            doctorClinicDto.setUpdatedAt(doctorClinic.getUpdatedAt());
             Doctor doctor = doctorClinic.getDoctor();
             if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
@@ -142,6 +144,8 @@ public class DoctorClinicMapper {
                 clinicDto.setState(clinic.getState());
                 clinicDto.setPinCode(clinic.getPinCode());
                 clinicDto.setContactNumber(clinic.getContactNumber());
+                clinicDto.setCreatedAt(clinic.getCreatedAt());
+                clinicDto.setUpdatedAt(clinic.getUpdatedAt());
                 doctorClinicDto.setClinic(clinicDto);
             }
             List<Timeslot> timeslots = doctorClinic.getTimeslots();
@@ -152,6 +156,8 @@ public class DoctorClinicMapper {
                     timeslotDto.setId(timeslot.getId());
                     timeslotDto.setTimeFormat(timeslot.getTimeFormat());
                     timeslotDto.setTimeslot(timeslot.getTimeslot());
+                    timeslotDto.setCreatedAt(timeslot.getCreatedAt());
+                    timeslotDto.setUpdatedAt(timeslot.getUpdatedAt());
                     timeslotsDto.add(timeslotDto);
                 });
                 doctorClinicDto.setTimeslots(timeslotsDto);

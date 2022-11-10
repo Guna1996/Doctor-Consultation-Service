@@ -11,12 +11,15 @@ package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -41,4 +44,12 @@ public class Timeslot {
 
     @Column
     private String timeFormat;
+
+    @CreationTimestamp
+    @Column(name = Constants.CREATED_AT)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = Constants.UPDATED_AT)
+    private LocalDateTime updatedAt;
 }

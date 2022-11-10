@@ -19,6 +19,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -78,4 +79,8 @@ public class DoctorDto {
     private String status = Constants.ACTIVE;
 
     private int consultationFee;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

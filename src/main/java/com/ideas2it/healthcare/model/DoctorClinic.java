@@ -11,6 +11,8 @@ package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -59,4 +62,12 @@ public class DoctorClinic {
             joinColumns = @JoinColumn(name = Constants.DOCTOR_CLINIC_ID),
             inverseJoinColumns = @JoinColumn(name = Constants.TIMESLOT_ID))
     private List<Timeslot> timeslots;
+
+    @CreationTimestamp
+    @Column(name = Constants.CREATED_AT)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = Constants.UPDATED_AT)
+    private LocalDateTime updatedAt;
 }

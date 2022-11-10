@@ -108,6 +108,8 @@ public class FeedbackMapper {
             feedbackDto.setComment(feedback.getComment());
             feedbackDto.setRating(feedback.getRating());
             feedbackDto.setStatus(feedback.getStatus());
+            feedbackDto.setCreatedAt(feedback.getCreatedAt());
+            feedbackDto.setUpdatedAt(feedback.getUpdatedAt());
             Doctor doctor = feedback.getDoctor();
             if (null != doctor) {
                 DoctorDto doctorDto = new DoctorDto();
@@ -116,6 +118,8 @@ public class FeedbackMapper {
                 doctorDto.setGender(doctor.getGender());
                 doctorDto.setConsultationFee(doctor.getConsultationFee());
                 doctorDto.setDateOfBirth(doctor.getDateOfBirth());
+                doctorDto.setCreatedAt(doctor.getCreatedAt());
+                doctorDto.setUpdatedAt(doctor.getUpdatedAt());
                 if (null != doctor.getDateOfBirth()) {
                     doctorDto.setAge(DateUtil.getDifferenceInYears(doctor.getDateOfBirth()));
                 }
@@ -137,6 +141,8 @@ public class FeedbackMapper {
                 patientDto.setId(patient.getId());
                 patientDto.setName(patient.getName());
                 patientDto.setDateOfBirth(patient.getDateOfBirth());
+                patientDto.setCreatedAt(patient.getCreatedAt());
+                patientDto.setUpdatedAt(patient.getUpdatedAt());
                 if (null != patient.getMobileNumber()) {
                     patientDto.setMobileNumber(Long.toString(patient.getMobileNumber()));
                 }
@@ -153,6 +159,8 @@ public class FeedbackMapper {
                 appointmentDto.setId(appointment.getId());
                 appointmentDto.setScheduledAt(appointment.getScheduledAt());
                 appointmentDto.setTimeFormat(appointment.getTimeFormat());
+                appointmentDto.setCreatedAt(appointment.getCreatedAt());
+                appointmentDto.setUpdatedAt(appointment.getUpdatedAt());
                 feedbackDto.setAppointment(appointmentDto);
             }
         }

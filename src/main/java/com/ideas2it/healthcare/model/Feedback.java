@@ -11,6 +11,8 @@ package com.ideas2it.healthcare.model;
 
 import com.ideas2it.healthcare.common.Constants;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +22,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -59,4 +62,12 @@ public class Feedback {
     @OneToOne
     @JoinColumn(name = Constants.APPOINTMENT, unique = true)
     private Appointment appointment;
+
+    @CreationTimestamp
+    @Column(name = Constants.CREATED_AT)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = Constants.UPDATED_AT)
+    private LocalDateTime updatedAt;
 }
