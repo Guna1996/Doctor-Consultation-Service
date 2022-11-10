@@ -194,5 +194,7 @@ public class Constants {
     public static final String TOTAL_PAGES = "totalPages";
 
     public static final String SCHEDULED_At_REGEX = "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d(?:\\.\\d+)?Z?";
+
+    public static final int THIRTEEN = 13;
 }
 

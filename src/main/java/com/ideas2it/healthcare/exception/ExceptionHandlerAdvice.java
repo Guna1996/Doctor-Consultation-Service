@@ -17,6 +17,8 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +113,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Map<String, ?>> handleDataIntegrityException(DataIntegrityViolationException exception) {
         return userResponse
-                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+                .responseEntity(exception.getMessage(), null, HttpStatus.CONFLICT);
     }
 
     /**
@@ -126,7 +128,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Map<String, ?>> handleDataAccessException(DataAccessException exception) {
         return userResponse
-                .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+                .responseEntity(exception.getMessage(), null, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
     /**
@@ -139,7 +141,8 @@ public class ExceptionHandlerAdvice {
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Map<String, ?>> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
+    public ResponseEntity<Map<String, ?>> handleInvalidInputException(HttpMessageNotReadableException exception) {
+        ServletUriComponentsBuilder request = ServletUriComponentsBuilder.fromCurrentRequestUri();
         return userResponse
                 .responseEntity(ErrorConstants.INVALID_INPUT, null, HttpStatus.BAD_REQUEST);
     }
