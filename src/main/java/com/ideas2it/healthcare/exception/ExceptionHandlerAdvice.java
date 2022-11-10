@@ -6,12 +6,14 @@
  */
 package com.ideas2it.healthcare.exception;
 
+import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -40,7 +42,7 @@ public class ExceptionHandlerAdvice {
      * of user inputs
      * </p>
      *
-     * @param exception {@link HttpStatus} is caught exception
+     * @param exception {@link MethodArgumentNotValidException} is caught exception
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -50,7 +52,7 @@ public class ExceptionHandlerAdvice {
         exception.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return userResponse.responseEntity(errorMap, null, HttpStatus.BAD_REQUEST);
+        return userResponse.responseEntity(exception.getMessage(), null, HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -59,11 +61,11 @@ public class ExceptionHandlerAdvice {
      * CRUD operation in database
      * </p>
      *
-     * @param exception {@link HttpStatus} is caught exception
+     * @param exception {@link NotAccessibleException} is caught exception
      * @return {@link ResponseEntity}
      */
-    @ExceptionHandler(CustomException.class)
-    public ResponseEntity<Map<String, ?>> handleBusinessException(CustomException exception) {
+    @ExceptionHandler(NotAccessibleException.class)
+    public ResponseEntity<Map<String, ?>> handleBusinessException(NotAccessibleException exception) {
         return userResponse.responseEntity(exception.getMessage(), null, HttpStatus.NOT_FOUND);
     }
 
@@ -73,7 +75,7 @@ public class ExceptionHandlerAdvice {
      * while running the CRUD operation in database
      * </p>
      *
-     * @param exception {@link HttpStatus} is caught exception
+     * @param exception {@link DataBaseException} is caught exception
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(DataBaseException.class)
@@ -88,7 +90,7 @@ public class ExceptionHandlerAdvice {
      * occurred while running the CRUD operation in database
      * </p>
      *
-     * @param exception {@link HttpStatus} is caught exception
+     * @param exception {@link Exception} is caught exception
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(Exception.class)
@@ -118,12 +120,27 @@ public class ExceptionHandlerAdvice {
      * the details of the database access API in use, such as JDBC
      * </p>
      *
-     * @param exception {@link HttpStatus} is caught exception
+     * @param exception {@link DataAccessException} is caught exception
      * @return {@link ResponseEntity}
      */
     @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Map<String, ?>> handleDataAccessException(DataAccessException exception) {
         return userResponse
                 .responseEntity(exception.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * <p>
+     * This method is used to handle the invalid input of the user
+     * during the http request
+     * </p>
+     *
+     * @param exception {@link HttpMessageNotReadableException} is caught exception
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, ?>> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
+        return userResponse
+                .responseEntity(ErrorConstants.INVALID_INPUT, null, HttpStatus.BAD_REQUEST);
     }
 }

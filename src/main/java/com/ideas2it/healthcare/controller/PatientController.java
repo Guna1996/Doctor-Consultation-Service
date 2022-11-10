@@ -103,7 +103,7 @@ public class PatientController {
     public ResponseEntity<Map<String, ?>> updatePatient(@Valid @RequestBody PatientDto patientDto) {
         String message = patientService.updatePatient(patientDto);
         if (null == message) {
-            message = MessageConstants.PATIENT_UNABLE_TO_UPDATE;
+            message = ErrorConstants.PATIENT_NOT_FOUND;
         }
         return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }

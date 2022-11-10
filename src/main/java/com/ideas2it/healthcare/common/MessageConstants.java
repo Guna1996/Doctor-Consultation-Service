@@ -39,8 +39,6 @@ public class MessageConstants {
     public static final String DOCTOR_ID_CLINIC_ID_NOT_FOUND =
             "Doctor id and clinic id not found";
 
-    public static final String PATIENT_UNABLE_TO_UPDATE = "Patient unable to update";
-
     public static final String APPOINTMENT_ADDED_SUCCESSFULLY = "Appointment added successfully";
 
     public static final String APPOINTMENT_RESCHEDULED_SUCCESSFULLY =

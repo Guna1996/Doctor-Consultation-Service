@@ -15,7 +15,7 @@ package com.ideas2it.healthcare.exception;
  * @author Gunaseelan k
  * @since 2022-10-10
  */
-public class CustomException extends RuntimeException {
+public class NotAccessibleException extends RuntimeException {
 
     /**
      * <p>
@@ -24,7 +24,7 @@ public class CustomException extends RuntimeException {
      *
      * @param message {@link String} is error message
      */
-    public CustomException(String message) {
+    public NotAccessibleException(String message) {
         super(message);
     }
 }
