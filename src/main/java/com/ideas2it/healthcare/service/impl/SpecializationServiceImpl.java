@@ -8,10 +8,8 @@
 package com.ideas2it.healthcare.service.impl;
 
 import com.ideas2it.healthcare.common.Constants;
-import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.SpecializationDto;
-import com.ideas2it.healthcare.exception.CustomException;
 import com.ideas2it.healthcare.mapper.SpecializationMapper;
 import com.ideas2it.healthcare.model.Specialization;
 import com.ideas2it.healthcare.repository.SpecializationRepository;

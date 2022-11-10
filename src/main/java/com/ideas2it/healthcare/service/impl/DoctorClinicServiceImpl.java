@@ -14,7 +14,7 @@ import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.DoctorClinicDto;
 import com.ideas2it.healthcare.dto.TimeslotDto;
-import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.NotAccessibleException;
 import com.ideas2it.healthcare.mapper.DoctorClinicMapper;
 import com.ideas2it.healthcare.model.DoctorClinic;
 import com.ideas2it.healthcare.repository.DoctorClinicRepository;
@@ -123,7 +123,7 @@ public class DoctorClinicServiceImpl implements DoctorClinicService {
         }
         DoctorClinic doctorClinic = doctorClinicRepository.findByDoctorIdAndClinicIdAndStatus(doctorClinicDto.getDoctor().getId(),
                 doctorClinicDto.getClinic().getId(), Constants.ACTIVE).orElseThrow(()
-                -> new CustomException(ErrorConstants.DOCTOR_IS_NOT_PRESENT_IN_THIS_CLINIC));
+                -> new NotAccessibleException(ErrorConstants.DOCTOR_IS_NOT_PRESENT_IN_THIS_CLINIC));
         doctorClinic.getTimeslots().addAll(DoctorClinicMapper.fromDto(doctorClinicDto).getTimeslots());
         doctorClinicRepository.save(doctorClinic);
         return MessageConstants.DOCTOR_ASSIGNED_TO_CLINIC_SUCCESSFULLY;

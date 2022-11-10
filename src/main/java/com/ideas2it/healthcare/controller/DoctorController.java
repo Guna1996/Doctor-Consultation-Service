@@ -131,9 +131,7 @@ public class DoctorController {
         if (null == message) {
             message = MessageConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         }
-        return userResponse.responseEntity(doctorService.addOrUpdateDoctor(doctorDto),
-                null,
-                HttpStatus.NO_CONTENT);
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -151,7 +149,6 @@ public class DoctorController {
         if (null == message) {
             message = ErrorConstants.DOCTOR_NOT_FOUND;
         }
-        return userResponse.responseEntity(message, null,
-                HttpStatus.NO_CONTENT);
+        return userResponse.responseEntity(message, null, HttpStatus.NO_CONTENT);
     }
 }

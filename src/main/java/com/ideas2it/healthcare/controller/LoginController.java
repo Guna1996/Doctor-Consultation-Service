@@ -13,7 +13,7 @@ import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.dto.AuthenticationRequest;
 import com.ideas2it.healthcare.dto.AuthenticationResponse;
-import com.ideas2it.healthcare.exception.CustomException;
+import com.ideas2it.healthcare.exception.NotAccessibleException;
 import com.ideas2it.healthcare.service.impl.AuthenticationService;
 import com.ideas2it.healthcare.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +67,7 @@ public class LoginController {
                             authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException badCredentialsException) {
-            throw new CustomException(ErrorConstants.INCORRECT_USERNAME_OR_PASSWORD);
+            throw new NotAccessibleException(ErrorConstants.INCORRECT_USERNAME_OR_PASSWORD);
         }
         final UserDetails userDetails = authenticationService
                 .loadUserByUsername(authenticationRequest.getUsername());

@@ -8,6 +8,8 @@
  */
 package com.ideas2it.healthcare.common;
 
+import java.util.Map;
+
 /**
  * <p>
  * This Constants class contains static final string variable
@@ -180,12 +182,14 @@ public class ErrorConstants {
 
     public static final String SCHEDULED_ON_SHOULD_NOT_BE_NULL = "Scheduled on shouldn't be null";
 
-    public static String SPECIALIZATION_ALREADY_EXISTS = "Specialization already exists";
+    public static final String INVALID_INPUT = "Invalid Input" ;
 
-    public static String DOCTOR_ALREADY_EXISTS = "Doctor already exists";
+    public static final String SPECIALIZATION_ALREADY_EXISTS = "Specialization already exists";
 
-    public static String CLINIC_ALREADY_EXISTS = "Clinic already exists";
+    public static final String DOCTOR_ALREADY_EXISTS = "Doctor already exists";
 
-    public static String DATABASE_NOT_ACCESSIBLE = "Database not accessible";
+    public static final String CLINIC_ALREADY_EXISTS = "Clinic already exists";
+
+    public static final String DATABASE_NOT_ACCESSIBLE = "Database not accessible";
 }
 

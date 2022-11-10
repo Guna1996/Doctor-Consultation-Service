@@ -66,7 +66,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      */
     public Boolean isAppointmentAvailable(Integer id, LocalDateTime dateTime) {
         return appointmentRepository
-                .findByDoctorIdAndScheduledOnAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
+                .findByDoctorIdAndScheduledAtAndStatus(id, dateTime, Constants.ACTIVE).isEmpty();
     }
 
     /**
@@ -141,7 +141,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String saveAppointment(AppointmentDto appointmentDto) {
         String response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
         if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
-                appointmentDto.getScheduledOn())) {
+                appointmentDto.getScheduledAt())) {
             response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
         }
         appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
