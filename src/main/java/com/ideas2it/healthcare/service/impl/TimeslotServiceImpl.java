@@ -9,6 +9,7 @@
  */
 package com.ideas2it.healthcare.service.impl;
 
+import com.ideas2it.healthcare.common.Constants;
 import com.ideas2it.healthcare.common.ErrorConstants;
 import com.ideas2it.healthcare.common.MessageConstants;
 import com.ideas2it.healthcare.dto.TimeslotDto;
@@ -45,7 +46,7 @@ public class TimeslotServiceImpl implements TimeslotService {
      */
     public String addTimeslot(TimeslotDto timeslotDto) {
         String response = null;
-            if (timeslotDto.getTimeslot().getHour() <= 13) {
+            if (Constants.THIRTEEN >= timeslotDto.getTimeslot().getHour()) {
                 timeslotRepository.save(TimeslotMapper.fromDto(timeslotDto));
                 response = MessageConstants.TIMESLOT_ADDED_SUCCESSFULLY;
             }
