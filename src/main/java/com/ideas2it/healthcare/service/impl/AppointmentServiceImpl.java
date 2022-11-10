@@ -52,7 +52,7 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String addAppointment(AppointmentDto appointmentDto) {
-        String response = ErrorConstants.ENTER_VALID_DATE_TIME;
+        String response = null;
         if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
                 && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(),
                 appointmentDto.getTimeFormat())) {
@@ -125,7 +125,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String rescheduleAppointment(AppointmentDto appointmentDto) {
         LocalDate date = appointmentDto.getScheduledAt().toLocalDate();
         LocalDate currentDate = LocalDate.now();
-        String response = ErrorConstants.ENTER_VALID_DATE_TIME;
+        String response = null;
         if (DateUtil.isDateValid(appointmentDto.getScheduledAt())
                 && timeslotService.isValidTimeslot(appointmentDto.getScheduledAt().toLocalTime(), 
                 appointmentDto.getTimeFormat())) {
@@ -139,12 +139,14 @@ public class AppointmentServiceImpl implements AppointmentService {
      * {@inheritDoc}
      */
     public String saveAppointment(AppointmentDto appointmentDto) {
-        String response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
-        if (!isAppointmentAvailable(appointmentDto.getDoctor().getId(),
+        String response = null;
+        if (isAppointmentAvailable(appointmentDto.getDoctor().getId(),
                 appointmentDto.getScheduledAt())) {
+            appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
+            response = MessageConstants.APPOINTMENT_ADDED_SUCCESSFULLY;
+        } else {
             response = ErrorConstants.APPOINTMENT_NOT_AVAILABLE_FOR_THIS_SCHEDULE;
         }
-        appointmentRepository.save(AppointmentMapper.fromDto(appointmentDto));
         return response;
     }
 }
