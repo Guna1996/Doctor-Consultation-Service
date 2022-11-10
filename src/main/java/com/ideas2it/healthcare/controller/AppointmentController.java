@@ -64,9 +64,11 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<Map<String, ?>> addAppointment(
             @Valid @RequestBody AppointmentDto appointmentDto) {
-        return userResponse.responseEntity(appointmentService.addAppointment(appointmentDto),
-                null,
-                HttpStatus.CREATED);
+        String message = appointmentService.addAppointment(appointmentDto);
+        if (null == message) {
+            message = ErrorConstants.ENTER_VALID_DATE_TIME;
+        }
+        return userResponse.responseEntity(message, null, HttpStatus.CREATED);
     }
 
     /**
